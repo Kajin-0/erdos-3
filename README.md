@@ -36,6 +36,7 @@ sum `4.43975`.
 - `src/dfa_ap_cert.py` — exact 4-AP certifier for LSD-first regular digit languages.
 - `src/dfa_growth_score.py` — growth-rate and truncated shifted-harmonic triage for DFA languages.
 - `src/random_dfa_search.py` — random small-DFA candidate generator with exact AP certification.
+- `src/dfa_canonicalize.py` — DFA minimization/canonicalization and SHA256 signatures.
 - `examples/dfa/base11_digit_set.json` — two-state DFA encoding Walker's base-11 digit set.
 - `examples/dfa/all_digits_base3.json` — positive-control DFA that contains 4-APs.
 - `data/public_benchmarks.csv` — known public benchmarks and provenance links.
@@ -54,6 +55,7 @@ sum `4.43975`.
 - `docs/regular-language-certifier.md` — DFA model, AP certificate, examples, and next search target.
 - `docs/dfa-growth-triage.md` — DFA growth exponent and truncated shifted harmonic triage.
 - `docs/random-dfa-search.md` — random small-DFA search workflow and acceptance gates.
+- `docs/dfa-canonicalization.md` — DFA minimization/canonicalization workflow.
 
 ## Reproduce first modular run
 
@@ -242,3 +244,14 @@ python src/random_dfa_search.py \
 
 Every reported candidate is exactly certified 4-AP-free, then ranked by truncated shifted harmonic
 sum.  This is a discovery tool, not an optimality proof.
+
+## Canonicalize a DFA candidate
+
+```bash
+python src/dfa_canonicalize.py \
+  --dfa candidates/dfa/example.json \
+  --output candidates/dfa/example.canonical.json
+```
+
+This minimizes the DFA, canonically renames states, and prints a SHA256 signature for deduplicating
+random-search candidates.

@@ -34,6 +34,7 @@ sum `4.43975`.
 - `src/score_pb_solution.py` — parses external PB/MaxSAT assignments, re-certifies, and scores them.
 - `src/pb_experiment_matrix.py` — generates reproducible PB/MaxSAT experiment matrices.
 - `src/dfa_ap_cert.py` — exact 4-AP certifier for LSD-first regular digit languages.
+- `src/dfa_growth_score.py` — growth-rate and truncated shifted-harmonic triage for DFA languages.
 - `examples/dfa/base11_digit_set.json` — two-state DFA encoding Walker's base-11 digit set.
 - `examples/dfa/all_digits_base3.json` — positive-control DFA that contains 4-APs.
 - `data/public_benchmarks.csv` — known public benchmarks and provenance links.
@@ -50,6 +51,7 @@ sum `4.43975`.
 - `docs/harmonic-search-status.md` — harmonic-aware scoring gate and local rigidity result.
 - `docs/pb-solver-workflow.md` — end-to-end PB/MaxSAT workflow.
 - `docs/regular-language-certifier.md` — DFA model, AP certificate, examples, and next search target.
+- `docs/dfa-growth-triage.md` — DFA growth exponent and truncated shifted harmonic triage.
 
 ## Reproduce first modular run
 
@@ -211,3 +213,14 @@ python src/dfa_ap_cert.py --dfa examples/dfa/all_digits_base3.json --witness
 ```
 
 Expected result: the all-digits base-3 DFA contains a nontrivial 4-AP and returns a witness.
+
+## Triage a regular digit language
+
+```bash
+python src/dfa_growth_score.py \
+  --dfa examples/dfa/base11_digit_set.json \
+  --max-digits 6
+```
+
+This reports the DFA transition spectral radius, growth exponent, accepted counts by digit length,
+and truncated shifted reciprocal sum over `n < b^M`.

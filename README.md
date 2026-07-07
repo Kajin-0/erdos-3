@@ -14,7 +14,8 @@ plain modular digit-set search.  The repo now pivots toward:
 
 1. a machine-readable benchmark pack;
 2. pseudo-Boolean / MaxSAT encoding for cyclic digit templates;
-3. future carry-state automata and harmonic scoring.
+3. shifted Kempner harmonic scoring;
+4. future carry-state automata.
 
 The public `k=4` benchmark to beat is Walker's base-55 shifted Kempner example with harmonic
 sum `4.43975`.
@@ -26,8 +27,10 @@ sum `4.43975`.
 - `src/periodic_exhaustive_search.py` — exact period-2 threshold search engine.
 - `src/periodic_stochastic_search.py` — stochastic witness-guided periodic search with exact certification.
 - `src/benchmark_report.py` — validates public benchmark metadata and modular certificates.
+- `src/shifted_kempner_sum.py` — scores shifted Kempner harmonic sums `K(D,b)+1`.
 - `src/cyclic_pb_encoder.py` — emits OPB pseudo-Boolean models for cyclic AP-free templates.
 - `data/public_benchmarks.csv` — known public benchmarks and provenance links.
+- `data/benchmark_scores_2026-07-07.csv` — reproduction of Walker's public k=4 shifted sums.
 - `data/small_base_run_2026-07-07.csv` — first reproducible small-base modular run.
 - `data/period2_threshold_run_2026-07-07.csv` — exhaustive period-2 threshold run for bases 11–13.
 - `data/stochastic_periodic_run_2026-07-07.csv` — first period-2/3 stochastic high-water-mark run.
@@ -101,7 +104,24 @@ python src/benchmark_report.py --benchmarks data/public_benchmarks.csv
 ```
 
 This checks one-layer digit benchmarks for modular `k`-AP-freeness and recomputes density
-exponents. It does not recompute harmonic sums.
+exponents.
+
+## Reproduce shifted harmonic sums
+
+```bash
+python src/shifted_kempner_sum.py --benchmarks data/public_benchmarks.csv
+```
+
+The shifted convention is
+
+```math
+H_{shift}(D,b)=\sum_{n\in K(D,b)}\frac{1}{n+1}.
+```
+
+This reproduces Walker's public k=4 values to the reported 5-decimal precision:
+
+- base 11: computed `4.4217475324`, reported `4.42175`;
+- base 55: computed `4.4397533693`, reported `4.43975`.
 
 ## Generate a cyclic PB model
 
@@ -115,4 +135,4 @@ python src/cyclic_pb_encoder.py \
 ```
 
 The resulting OPB file can be passed to an external pseudo-Boolean optimizer.  Any solver output
-must still be checked by the exact modular checker and then scored by harmonic post-processing.
+must still be checked by the exact modular checker and then scored by `shifted_kempner_sum.py`.

@@ -40,6 +40,20 @@ src/benchmark_report.py
 validates the modular certificate for one-layer digit benchmarks and recomputes the density
 exponent.
 
+The script
+
+```text
+src/shifted_kempner_sum.py
+```
+
+scores the shifted convention
+
+```math
+H_{shift}(D,b)=\sum_{n\in K(D,b)}\frac{1}{n+1},
+```
+
+and reproduces Walker's public `k=4` benchmark values to the reported 5-decimal precision.
+
 ## Directions now classified as low priority
 
 ### 1. Plain modular digit-set branch-and-bound
@@ -67,7 +81,7 @@ may miss lower-exponent but higher-harmonic candidates.
 
 ### Track A: cyclic pseudo-Boolean / MaxSAT search
 
-The first implemented pivot is
+The first implemented solver pivot is
 
 ```text
 src/cyclic_pb_encoder.py
@@ -89,11 +103,13 @@ and each cyclic AP residue mask `M`, it writes the hard constraint
 This provides a standard interface to external PB/MaxSAT solvers.  The objective is currently a
 screening proxy, not an exact harmonic score.
 
-### Track B: harmonic scoring backend
+### Track B: shifted harmonic scoring backend
 
-The next missing infrastructure is a Python-side harmonic scorer that can at least reproduce
-Walker's public `k=4` values from digit sets.  Longer term, this should become an automaton-aware
-transfer-operator backend.
+The shifted harmonic scorer is now implemented.  It makes candidate evaluation possible without
+waiting for a Mathematica/Baillie-Schmelzer workflow.
+
+Current limitation: this scorer handles one-layer digit sets `K(D,b)+1`.  The later automaton
+track needs an analogous regular-language / transfer-operator scorer.
 
 ### Track C: small carry-state automata
 
@@ -110,7 +126,7 @@ over base-`b` digits with exact 4-AP certification by product/carry automaton.
 2. Use an external PB solver to maximize the harmonic-proxy objective with size constraints around
    `|D|=21`.
 3. Validate every solver output with the exact modular checker.
-4. Run harmonic post-processing only on candidates that beat or match the public benchmark proxy.
+4. Score each candidate with `src/shifted_kempner_sum.py`.
 5. Implement automaton-aware harmonic scoring only after the cyclic PB route is reproducible.
 
 ## Success criterion

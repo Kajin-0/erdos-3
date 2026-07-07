@@ -150,12 +150,49 @@ not treat them as a plausible route to a full counterexample.
 
 ---
 
+## CL-006: Positive logarithmic density is enough
+
+**Status:** proved, using dyadic decomposition and Szemerédi.
+
+**Certainty:** high.
+
+**Statement.** If
+
+```math
+\limsup_{N\to\infty}\frac{1}{\log N}\sum_{\substack{n\le N\\n\in A}}\frac1n>0,
+```
+
+then `A` contains arithmetic progressions of every finite length.
+
+**Proof sketch.** With dyadic densities
+
+```math
+\delta_j=|A\cap[2^j,2^{j+1})|/2^j,
+```
+
+positive logarithmic density implies that the averages `J^{-1} sum_{j <= J} delta_j` have positive
+limsup.  Hence some fixed positive density occurs in infinitely many dyadic blocks.  Szemerédi's
+theorem inside those blocks gives arbitrarily long APs.
+
+**Consequence.** A genuine counterexample must have divergent reciprocal sum but zero logarithmic
+density:
+
+```math
+\sum_{n\in A}\frac1n=\infty,
+\qquad
+\frac{1}{\log N}\sum_{\substack{n\le N\\n\in A}}\frac1n\to0.
+```
+
+Equivalently, it must have `sum_j delta_j = infinity` but `(1/J) sum_{j <= J} delta_j -> 0`.
+
+---
+
 ## Open bottleneck OB-001: Cross-block arithmetic constraints
 
-The remaining hard case has dyadic densities `delta_j -> 0` but `sum_j delta_j = infinity`.
-Blockwise Szemerédi/extremal bounds are insufficient for `k >= 4`.  The likely missing ingredient is
-a theorem showing that AP-free sets with divergent dyadic harmonic mass must create cross-block
-additive configurations.
+The remaining hard case has dyadic densities `delta_j -> 0`, `sum_j delta_j = infinity`, and zero
+logarithmic density.  Blockwise Szemerédi/extremal bounds are insufficient for `k >= 4`.  The likely
+missing ingredient is a theorem showing that AP-free sets with divergent dyadic harmonic mass must
+create cross-block additive configurations.
 
 A useful target would be a result of the form:
 

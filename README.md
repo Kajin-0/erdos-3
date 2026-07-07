@@ -12,10 +12,13 @@ search for large reciprocal-sum, 4-AP-free digit-restricted sets.
 - `src/modular_kempner_search.py` — branch-and-bound search for modular 4-free digit sets.
 - `src/periodic_digit_ap.py` — finite automaton checker for one periodic digit system.
 - `src/periodic_exhaustive_search.py` — exact period-2 threshold search engine.
+- `src/periodic_stochastic_search.py` — stochastic witness-guided periodic search with exact certification.
 - `data/small_base_run_2026-07-07.csv` — first reproducible small-base modular run.
 - `data/period2_threshold_run_2026-07-07.csv` — exhaustive period-2 threshold run for bases 11–13.
+- `data/stochastic_periodic_run_2026-07-07.csv` — first period-2/3 stochastic high-water-mark run.
 - `docs/research-note.md` — current mathematical target, first observations, and next milestone.
 - `docs/periodic-search-goal.md` — Walker base-55 benchmark target and first period-2 result.
+- `docs/stochastic-search.md` — stochastic search algorithm, first results, and next SAT-style target.
 
 ## Reproduce first modular run
 
@@ -59,3 +62,18 @@ This exhaustively checks all period-2 size profiles with
 
 Current result: no period-2 candidate beating the Walker base-55 density exponent was found
 for bases 11, 12, or 13.
+
+## Run stochastic period search
+
+```bash
+python src/periodic_stochastic_search.py \
+  --b-min 14 \
+  --b-max 18 \
+  --periods 2 3 \
+  --trials 20 \
+  --csv data/stochastic_periodic_run.csv
+```
+
+Current result: the stochastic run did not beat the Walker base-55 exponent. The best candidate
+in the recorded run was a period-3 base-11 system with exponent `log(6)/log(11) ≈ 0.74722`,
+still below `log(21)/log(55) ≈ 0.75974`.

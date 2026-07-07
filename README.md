@@ -15,7 +15,7 @@ plain modular digit-set search.  The repo now pivots toward:
 1. a machine-readable benchmark pack;
 2. pseudo-Boolean / MaxSAT encoding for cyclic digit templates;
 3. shifted Kempner harmonic scoring;
-4. future carry-state automata.
+4. finite-state digit languages and carry-state automata.
 
 The public `k=4` benchmark to beat is Walker's base-55 shifted Kempner example with harmonic
 sum `4.43975`.
@@ -33,6 +33,9 @@ sum `4.43975`.
 - `src/cyclic_pb_encoder.py` — emits OPB pseudo-Boolean models for cyclic AP-free templates.
 - `src/score_pb_solution.py` — parses external PB/MaxSAT assignments, re-certifies, and scores them.
 - `src/pb_experiment_matrix.py` — generates reproducible PB/MaxSAT experiment matrices.
+- `src/dfa_ap_cert.py` — exact 4-AP certifier for LSD-first regular digit languages.
+- `examples/dfa/base11_digit_set.json` — two-state DFA encoding Walker's base-11 digit set.
+- `examples/dfa/all_digits_base3.json` — positive-control DFA that contains 4-APs.
 - `data/public_benchmarks.csv` — known public benchmarks and provenance links.
 - `data/benchmark_scores_2026-07-07.csv` — reproduction of Walker's public k=4 shifted sums.
 - `data/walker55_neighborhood_scan_2026-07-07.csv` — radius-1/2 neighborhood scan of Walker's base-55 set.
@@ -46,6 +49,7 @@ sum `4.43975`.
 - `docs/literature-audit-action-plan.md` — post-audit route and experiment queue.
 - `docs/harmonic-search-status.md` — harmonic-aware scoring gate and local rigidity result.
 - `docs/pb-solver-workflow.md` — end-to-end PB/MaxSAT workflow.
+- `docs/regular-language-certifier.md` — DFA model, AP certificate, examples, and next search target.
 
 ## Reproduce first modular run
 
@@ -193,3 +197,17 @@ python src/pb_experiment_matrix.py \
 ```
 
 A focused recorded matrix is stored in `data/pb_experiment_matrix_2026-07-07.csv`.
+
+## Certify a regular digit language
+
+```bash
+python src/dfa_ap_cert.py --dfa examples/dfa/base11_digit_set.json
+```
+
+Expected result: Walker's base-11 digit-set DFA is certified 4-AP-free.
+
+```bash
+python src/dfa_ap_cert.py --dfa examples/dfa/all_digits_base3.json --witness
+```
+
+Expected result: the all-digits base-3 DFA contains a nontrivial 4-AP and returns a witness.

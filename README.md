@@ -31,9 +31,12 @@ sum `4.43975`.
 - `src/candidate_score.py` — certifies and scores a single proposed one-layer candidate.
 - `src/cyclic_neighborhood_scan.py` — scans fixed-size digit-substitution neighborhoods.
 - `src/cyclic_pb_encoder.py` — emits OPB pseudo-Boolean models for cyclic AP-free templates.
+- `src/score_pb_solution.py` — parses external PB/MaxSAT assignments, re-certifies, and scores them.
+- `src/pb_experiment_matrix.py` — generates reproducible PB/MaxSAT experiment matrices.
 - `data/public_benchmarks.csv` — known public benchmarks and provenance links.
 - `data/benchmark_scores_2026-07-07.csv` — reproduction of Walker's public k=4 shifted sums.
 - `data/walker55_neighborhood_scan_2026-07-07.csv` — radius-1/2 neighborhood scan of Walker's base-55 set.
+- `data/pb_experiment_matrix_2026-07-07.csv` — focused PB experiment commands around Walker-scale bases.
 - `data/small_base_run_2026-07-07.csv` — first reproducible small-base modular run.
 - `data/period2_threshold_run_2026-07-07.csv` — exhaustive period-2 threshold run for bases 11–13.
 - `data/stochastic_periodic_run_2026-07-07.csv` — first period-2/3 stochastic high-water-mark run.
@@ -42,6 +45,7 @@ sum `4.43975`.
 - `docs/stochastic-search.md` — stochastic search algorithm, first results, and next SAT-style target.
 - `docs/literature-audit-action-plan.md` — post-audit route and experiment queue.
 - `docs/harmonic-search-status.md` — harmonic-aware scoring gate and local rigidity result.
+- `docs/pb-solver-workflow.md` — end-to-end PB/MaxSAT workflow.
 
 ## Reproduce first modular run
 
@@ -160,9 +164,32 @@ python src/cyclic_pb_encoder.py \
   --base 55 \
   --k 4 \
   --min-size 21 \
+  --max-size 21 \
   --objective harmonic_proxy \
-  --output models/cyclic_b55_k4_min21.opb
+  --output models/cyclic_b55_k4_s21_harmonic_proxy.opb
 ```
 
-The resulting OPB file can be passed to an external pseudo-Boolean optimizer.  Any solver output
-must still be checked by the exact modular checker and then scored by `candidate_score.py`.
+## Score an external PB solver solution
+
+```bash
+python src/score_pb_solution.py \
+  --base 55 \
+  --k 4 \
+  --solution solver_outputs/cyclic_b55_k4_s21_harmonic_proxy.sol \
+  --target 4.43975
+```
+
+This parses common solver assignment formats, rechecks cyclic modular `k`-AP-freeness, computes
+the shifted harmonic score, and reports whether the solver output beats the target.
+
+## Generate a PB experiment matrix
+
+```bash
+python src/pb_experiment_matrix.py \
+  --b-min 45 \
+  --b-max 65 \
+  --size-delta 1 \
+  --csv data/pb_experiment_matrix.csv
+```
+
+A focused recorded matrix is stored in `data/pb_experiment_matrix_2026-07-07.csv`.

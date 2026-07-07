@@ -7,18 +7,41 @@ This repository contains a concrete partial-progress attack on Erdős Problem #3
 The full problem is open. The working target here is narrower: certified computational
 search for large reciprocal-sum, 4-AP-free digit-restricted sets.
 
+## Current pivot after literature audit
+
+The audit changed the priority.  Alexander Walker's public work already covers the obvious
+plain modular digit-set search.  The repo now pivots toward:
+
+1. a machine-readable benchmark pack;
+2. pseudo-Boolean / MaxSAT encoding for cyclic digit templates;
+3. shifted Kempner harmonic scoring;
+4. future carry-state automata.
+
+The public `k=4` benchmark to beat is Walker's base-55 shifted Kempner example with harmonic
+sum `4.43975`.
+
 ## Contents
 
 - `src/modular_kempner_search.py` — branch-and-bound search for modular 4-free digit sets.
 - `src/periodic_digit_ap.py` — finite automaton checker for one periodic digit system.
 - `src/periodic_exhaustive_search.py` — exact period-2 threshold search engine.
 - `src/periodic_stochastic_search.py` — stochastic witness-guided periodic search with exact certification.
+- `src/benchmark_report.py` — validates public benchmark metadata and modular certificates.
+- `src/shifted_kempner_sum.py` — scores shifted Kempner harmonic sums `K(D,b)+1`.
+- `src/candidate_score.py` — certifies and scores a single proposed one-layer candidate.
+- `src/cyclic_neighborhood_scan.py` — scans fixed-size digit-substitution neighborhoods.
+- `src/cyclic_pb_encoder.py` — emits OPB pseudo-Boolean models for cyclic AP-free templates.
+- `data/public_benchmarks.csv` — known public benchmarks and provenance links.
+- `data/benchmark_scores_2026-07-07.csv` — reproduction of Walker's public k=4 shifted sums.
+- `data/walker55_neighborhood_scan_2026-07-07.csv` — radius-1/2 neighborhood scan of Walker's base-55 set.
 - `data/small_base_run_2026-07-07.csv` — first reproducible small-base modular run.
 - `data/period2_threshold_run_2026-07-07.csv` — exhaustive period-2 threshold run for bases 11–13.
 - `data/stochastic_periodic_run_2026-07-07.csv` — first period-2/3 stochastic high-water-mark run.
 - `docs/research-note.md` — current mathematical target, first observations, and next milestone.
 - `docs/periodic-search-goal.md` — Walker base-55 benchmark target and first period-2 result.
 - `docs/stochastic-search.md` — stochastic search algorithm, first results, and next SAT-style target.
+- `docs/literature-audit-action-plan.md` — post-audit route and experiment queue.
+- `docs/harmonic-search-status.md` — harmonic-aware scoring gate and local rigidity result.
 
 ## Reproduce first modular run
 
@@ -77,3 +100,69 @@ python src/periodic_stochastic_search.py \
 Current result: the stochastic run did not beat the Walker base-55 exponent. The best candidate
 in the recorded run was a period-3 base-11 system with exponent `log(6)/log(11) ≈ 0.74722`,
 still below `log(21)/log(55) ≈ 0.75974`.
+
+## Validate benchmark metadata
+
+```bash
+python src/benchmark_report.py --benchmarks data/public_benchmarks.csv
+```
+
+This checks one-layer digit benchmarks for modular `k`-AP-freeness and recomputes density
+exponents.
+
+## Reproduce shifted harmonic sums
+
+```bash
+python src/shifted_kempner_sum.py --benchmarks data/public_benchmarks.csv
+```
+
+The shifted convention is
+
+```math
+H_{shift}(D,b)=\sum_{n\in K(D,b)}\frac{1}{n+1}.
+```
+
+This reproduces Walker's public k=4 values to the reported 5-decimal precision:
+
+- base 11: computed `4.4217475324`, reported `4.42175`;
+- base 55: computed `4.4397533693`, reported `4.43975`.
+
+## Score a proposed one-layer candidate
+
+```bash
+python src/candidate_score.py \
+  --base 55 \
+  --k 4 \
+  --digits "0 1 2 4 5 9 10 11 14 16 17 18 21 24 30 37 39 41 42 45 47"
+```
+
+This checks cyclic modular `k`-AP-freeness, computes the shifted harmonic sum, and reports whether
+the candidate beats `4.43975`.
+
+## Scan Walker base-55 local neighborhood
+
+```bash
+python src/cyclic_neighborhood_scan.py \
+  --base 55 \
+  --k 4 \
+  --digits "0 1 2 4 5 9 10 11 14 16 17 18 21 24 30 37 39 41 42 45 47" \
+  --max-radius 2 \
+  --csv data/walker55_neighborhood_scan.csv
+```
+
+Current result: the Walker base-55 set has no AP-free radius-1 or radius-2 same-size digit-substitution
+neighbors.  The known benchmark is locally rigid under these small substitutions.
+
+## Generate a cyclic PB model
+
+```bash
+python src/cyclic_pb_encoder.py \
+  --base 55 \
+  --k 4 \
+  --min-size 21 \
+  --objective harmonic_proxy \
+  --output models/cyclic_b55_k4_min21.opb
+```
+
+The resulting OPB file can be passed to an external pseudo-Boolean optimizer.  Any solver output
+must still be checked by the exact modular checker and then scored by `candidate_score.py`.

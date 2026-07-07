@@ -1,0 +1,4 @@
+id,k,base,period,kind,digits_or_layers,harmonic_sum,alpha,source,notes
+walker_4_base11,4,11,1,shifted_kempner_digit_set,"0 1 2 4 5 7",4.42175,0.7472217363,https://arxiv.org/html/2203.06045v2,"Walker k=4 base-11 comparator; digit set also used as local benchmark in this repo."
+walker_4_base55,4,55,1,shifted_kempner_digit_set,"0 1 2 4 5 9 10 11 14 16 17 18 21 24 30 37 39 41 42 45 47",4.43975,0.7596560793,https://arxiv.org/html/2203.06045v2,"Best public k=4 shifted Kempner benchmark identified in the audit."
+bailey_3_certified_2026,3,,,,,3.0084928720,,https://zenodo.org/records/19722202,"Certified computational lower bound for f(3); included as reproducibility/certification model, not as a k=4 target."

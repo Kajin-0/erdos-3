@@ -35,6 +35,7 @@ sum `4.43975`.
 - `src/pb_experiment_matrix.py` — generates reproducible PB/MaxSAT experiment matrices.
 - `src/dfa_ap_cert.py` — exact 4-AP certifier for LSD-first regular digit languages.
 - `src/dfa_growth_score.py` — growth-rate and truncated shifted-harmonic triage for DFA languages.
+- `src/random_dfa_search.py` — random small-DFA candidate generator with exact AP certification.
 - `examples/dfa/base11_digit_set.json` — two-state DFA encoding Walker's base-11 digit set.
 - `examples/dfa/all_digits_base3.json` — positive-control DFA that contains 4-APs.
 - `data/public_benchmarks.csv` — known public benchmarks and provenance links.
@@ -52,6 +53,7 @@ sum `4.43975`.
 - `docs/pb-solver-workflow.md` — end-to-end PB/MaxSAT workflow.
 - `docs/regular-language-certifier.md` — DFA model, AP certificate, examples, and next search target.
 - `docs/dfa-growth-triage.md` — DFA growth exponent and truncated shifted harmonic triage.
+- `docs/random-dfa-search.md` — random small-DFA search workflow and acceptance gates.
 
 ## Reproduce first modular run
 
@@ -224,3 +226,19 @@ python src/dfa_growth_score.py \
 
 This reports the DFA transition spectral radius, growth exponent, accepted counts by digit length,
 and truncated shifted reciprocal sum over `n < b^M`.
+
+## Randomly search small regular digit languages
+
+```bash
+python src/random_dfa_search.py \
+  --base 5 \
+  --states 3 \
+  --trials 1000 \
+  --max-digits 6 \
+  --keep 10 \
+  --csv data/random_dfa_search.csv \
+  --save-dir candidates/dfa
+```
+
+Every reported candidate is exactly certified 4-AP-free, then ranked by truncated shifted harmonic
+sum.  This is a discovery tool, not an optimality proof.

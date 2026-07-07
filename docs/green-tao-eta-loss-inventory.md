@@ -4,22 +4,32 @@
 
 Working proof-audit note.  This records where the hidden `eta^{-O(1)}` cost in Green--Tao Theorem 3.1 should be traced.  It does not claim an improvement.
 
+## Correction: thickness sign
+
+The useful thickness form is
+
+```math
+P(r=0) << exp(eta^{-O(1)})/p,
+```
+
+not a negative exponential.  This is the form needed to recover a polylogarithmic bound.  The gamma diagnostic is unchanged.
+
 ## Source facts from the paper
 
 Green--Tao Part III proves Theorem 3.1, which supplies random variables `a,r` satisfying:
 
 ```math
-\mathbb E f(a)=\mathbb E_x f(x)+O(\eta),
+E f(a)=E_x f(x)+O(eta),
 ```
 
 ```math
-\Lambda_{a,r}(f)\ge (\mathbb E f(a))^4-O(\eta),
+Lambda_{a,r}(f)>= (E f(a))^4-O(eta),
 ```
 
 and
 
 ```math
-\mathbb P(r=0)\ll \exp(-\eta^{-O(1)})/p.
+P(r=0)<< exp(eta^{-O(1)})/p.
 ```
 
 The paper says the thickness condition is crucial to the quantitative bound, and that the proof uses non-independent random variables, factor-like decomposition, and regular probability distributions to smooth Bohr-set boundary issues.
@@ -29,25 +39,25 @@ The paper says the thickness condition is crucial to the quantitative bound, and
 For a 4AP-free set `A` of density `alpha`, applying Theorem 3.1 to `f=1_A` gives the schematic inequality
 
 ```math
-\alpha^4 \lesssim \eta + \mathbb P(r=0).
+alpha^4 <= O(eta) + P(r=0).
 ```
 
 Taking `eta ~ alpha^4` reduces the problem to the thickness estimate.  If the hidden estimate is made explicit as
 
 ```math
-\mathbb P(r=0)\ll \exp(-c\eta^{-\gamma})/p,
+P(r=0)<< exp(C eta^{-gamma})/p,
 ```
 
 then the argument yields
 
 ```math
-p \gg \exp(C\alpha^{-4\gamma})
+p >> exp(C alpha^{-4 gamma})
 ```
 
 and hence
 
 ```math
-r_4(N)\ll N(\log N)^{-1/(4\gamma)}.
+r_4(N)<< N(log N)^{-1/(4 gamma)}.
 ```
 
 The reciprocal-sum threshold requires `gamma < 1/4`.
@@ -74,10 +84,10 @@ The paper introduces regular probability distributions to avoid Bohr-set boundar
 
 ### 5. Zero-step thickness
 
-The final bottleneck is the quantitative lower avoidance of `r=0`.  The reciprocal-sum route needs this thickness cost to behave effectively better than
+The final bottleneck is the quantitative upper bound for `r=0`.  The reciprocal-sum route needs this thickness cost to behave effectively better than
 
 ```math
-\exp(-c\eta^{-1/4})/p.
+exp(C eta^{-1/4})/p.
 ```
 
 ## Audit target
@@ -85,7 +95,7 @@ The final bottleneck is the quantitative lower avoidance of `r=0`.  The reciproc
 Extract from the proof of Theorem 3.1 a chain of the form
 
 ```math
-\eta \mapsto \eta^{a_1}\mapsto \eta^{a_2}\mapsto \cdots \mapsto \exp(-\eta^{-\gamma})/p.
+eta -> eta^{a_1} -> eta^{a_2} -> ... -> exp(eta^{-gamma})/p.
 ```
 
 The key question is whether the final exponent `gamma` is structurally forced to be `>=1/4`, or whether one of the loss-producing steps is quantitatively wasteful.

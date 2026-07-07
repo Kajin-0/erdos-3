@@ -223,6 +223,33 @@ rich-tail / AP-poor dichotomy plus an overlap-control argument.
 
 ---
 
+## CL-008: AP tails are scale-local even when the whole AP is not
+
+**Status:** proved elementary observation.
+
+**Certainty:** high.
+
+**Statement.** A `k`-term AP
+
+```math
+x, x+d, \ldots, x+(k-1)d
+```
+
+need not lie in a fixed multiplicative window relative to its first term `x`; if `d >> x`, the ratio
+`(x+(k-1)d)/x` can be arbitrarily large.  However, the final `k-1` terms are always scale-local:
+
+```math
+\frac{x+(k-1)d}{x+d} \le k-1.
+```
+
+Thus the final `k-1` terms occupy only `O_k(1)` dyadic scales.
+
+**Consequence.** Cross-block attacks should focus on local tails and their potentially long-range
+predecessor shadows.  It is false to treat the entire AP as confined to a bounded-width logarithmic
+window; only the tail has that property.
+
+---
+
 ## Open bottleneck OB-001: Cross-block arithmetic constraints
 
 The remaining hard case has dyadic densities `delta_j -> 0`, `sum_j delta_j = infinity`, and zero

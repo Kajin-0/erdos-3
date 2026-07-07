@@ -4,18 +4,24 @@
 
 Initial workbench for tracking the parameter losses in Green--Tao Theorem 3.1.
 
-## Target
+## Correction: thickness sign
 
-Theorem 3.1 has a thickness term of the form
+The useful thickness form is
 
 ```math
-P(r=0) << exp(-eta^{-O(1)})/p.
+P(r=0) << exp(eta^{-O(1)})/p,
 ```
 
-If this were sharpened to
+not a negative exponential.  This is consistent with the extracted corollary row
 
 ```math
-P(r=0) << exp(-c eta^{-gamma})/p,
+P(r_v=0) << exp(eta^{-C5^2})/p.
+```
+
+The gamma diagnostic is unchanged: if
+
+```math
+P(r=0) << exp(c eta^{-gamma})/p,
 ```
 
 then the application to 4AP-free sets gives approximately
@@ -37,7 +43,7 @@ gamma < 1/4.
 | Cauchy--Schwarz | eta | eta^2 | squaring | Each use can double exponent pressure. |
 | Popularity | eta | probability >= eta/(2C) | polynomial | Converts average lower bound to pointwise event. |
 | Recurrence theorem | eta | recurrence error O(eta) | error budget | In the 4AP-free application, choose eta about alpha^4. |
-| Thickness theorem | eta | exp(-eta^{-O(1)})/p | exponential | Main hidden exponent to extract. |
+| Thickness theorem | eta | exp(eta^{-O(1)})/p | exponential-over-p | Main hidden exponent to extract. |
 | 4AP-free application | alpha | alpha^4 <= O(eta)+P(r=0) | counting | Multiplies the thickness exponent by 4. |
 
 ## Rows still needing line-by-line extraction

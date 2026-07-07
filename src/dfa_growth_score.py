@@ -30,7 +30,6 @@ import argparse
 from dataclasses import dataclass
 from math import log
 from pathlib import Path
-from typing import Dict, List, Tuple
 
 from dfa_ap_cert import DFA, load_dfa
 
@@ -111,17 +110,19 @@ def accepted_counts_by_length(dfa: DFA, max_digits: int) -> tuple[int, ...]:
     return tuple(counts)
 
 
-def accepts_number(dfa: DFA, n: int, width: int) -> bool:
+def accepts_number(dfa: DFA, n: int, width: int, pad_zeros: int = 8) -> bool:
     state = dfa.start
     x = n
     for _ in range(width):
         digit = x % dfa.base
         x //= dfa.base
         state = dfa.next(state, digit)
-    # One additional zero-padding check makes the convention explicit.
-    while state not in dfa.accept and width < width + 8:
+    # A bounded zero-padding check makes the convention explicit without risking
+    # a nonterminating loop for DFAs that never reach an accepting state by zeros.
+    for _ in range(pad_zeros):
+        if state in dfa.accept:
+            return True
         state = dfa.next(state, 0)
-        width += 1
     return state in dfa.accept
 
 

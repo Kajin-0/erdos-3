@@ -1,0 +1,13 @@
+{
+  "base": 3,
+  "states": ["all"],
+  "start": "all",
+  "accept": ["all"],
+  "transitions": {
+    "all": {
+      "0": "all",
+      "1": "all",
+      "2": "all"
+    }
+  }
+}

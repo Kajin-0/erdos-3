@@ -1,0 +1,34 @@
+{
+  "base": 11,
+  "states": ["ok", "dead"],
+  "start": "ok",
+  "accept": ["ok"],
+  "transitions": {
+    "ok": {
+      "0": "ok",
+      "1": "ok",
+      "2": "ok",
+      "3": "dead",
+      "4": "ok",
+      "5": "ok",
+      "6": "dead",
+      "7": "ok",
+      "8": "dead",
+      "9": "dead",
+      "10": "dead"
+    },
+    "dead": {
+      "0": "dead",
+      "1": "dead",
+      "2": "dead",
+      "3": "dead",
+      "4": "dead",
+      "5": "dead",
+      "6": "dead",
+      "7": "dead",
+      "8": "dead",
+      "9": "dead",
+      "10": "dead"
+    }
+  }
+}

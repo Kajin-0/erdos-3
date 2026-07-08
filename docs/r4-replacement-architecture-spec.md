@@ -32,6 +32,22 @@ gamma < 1/4.
 
 The extracted GT31 parameter rows show a much larger effective exponent because the proof uses polynomially many refinements and exponential radius/thickness losses.
 
+### Sign convention
+
+The useful zero-step term is written with a positive exponential numerator:
+
+```math
+P(r=0) << exp(+C eta^{-gamma})/p.
+```
+
+This is a small probability only after choosing
+
+```math
+p >> exp(C eta^{-gamma}).
+```
+
+A form such as `exp(-C eta^{-gamma})/p` would have the wrong interpretation for the thickness-loss bookkeeping in this audit.
+
 ## Required replacement theorem
 
 A successful replacement recurrence theorem should retain the two useful features of GT31:

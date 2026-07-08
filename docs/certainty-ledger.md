@@ -83,9 +83,9 @@ The mass must be a slowly divergent logarithmic-scale dust, not persistent dense
 
 ---
 
-## CL-003: Blockwise extremal bounds reduce the problem to summability of r_k bounds
+## CL-003: Blockwise extremal bounds give the sufficient dyadic summability direction
 
-**Status:** standard reduction.
+**Status:** standard reduction; superseded as a complete bottleneck statement by CL-010.
 
 **Certainty:** high.
 
@@ -112,8 +112,10 @@ roughly
 r_k(N) \ll \frac{N}{(\log N)(\log\log N)^{1+\epsilon}}.
 ```
 
-**Current bottleneck.** Known general `k >= 4` bounds are not strong enough for this summability.
-A successful proof likely needs cross-block constraints, not only independent dyadic-block bounds.
+**Update.** CL-010 proves the converse for fixed `k>=4`: if the dyadic series diverges, one can
+build a global `k`-AP-free set with divergent reciprocal sum by isolating extremal blocks on widely
+separated dyadic scales.  Therefore cross-block constraints cannot be the universal missing
+ingredient for the unrestricted fixed-`k>=4` problem.
 
 ---
 
@@ -217,9 +219,9 @@ bound `N` is enough.  Thus `T_3(B) <= N |P(B)|`.  If `p` were also in `A`, then
 large set of possible earlier elements.  This is a concrete cross-block mechanism not captured by
 blockwise extremal bounds alone.
 
-**Caveat.** The lemma alone does not prove summability because different shadows can overlap heavily,
-and AP-poor blocks may evade the shadow lower bound.  The next needed ingredient is a useful
-rich-tail / AP-poor dichotomy plus an overlap-control argument.
+**Caveat.** By CL-010, this cannot be the universal missing ingredient for the unrestricted fixed-`k`
+problem.  It remains useful for natural multi-scale constructions, structured model classes, or
+side lemmas, but not as the central bottleneck.
 
 ---
 
@@ -248,21 +250,88 @@ Thus the final `k-1` terms occupy only `O_k(1)` dyadic scales.
 predecessor shadows.  It is false to treat the entire AP as confined to a bounded-width logarithmic
 window; only the tail has that property.
 
+**Caveat.** As in CL-007, this observation remains correct but is no longer the universal route to
+the fixed-`k>=4` problem after CL-010.
+
 ---
 
-## Open bottleneck OB-001: Cross-block arithmetic constraints
+## CL-009: Exact dilation triples are not forced by divergent harmonic mass
 
-The remaining hard case has dyadic densities `delta_j -> 0`, `sum_j delta_j = infinity`, and zero
-logarithmic density.  Blockwise Szemerédi/extremal bounds are insufficient for `k >= 4`.  The likely
-missing ingredient is a theorem showing that AP-free sets with divergent dyadic harmonic mass must
-create cross-block additive configurations.
+**Status:** proved obstruction to an attempted proof route.
 
-A useful target would be a result of the form:
+**Certainty:** high.
+
+**Pointer:** `docs/dilation-triple-failure-mode.md`.
+
+**Statement.** Divergent reciprocal sum, even with zero logarithmic density, does not by itself force
+exact triples of the form `d,2d,3d`.
+
+**Consequence.** A proof cannot rely on showing that divergent harmonic mass alone creates exact
+dilation triples.  Any viable long-range tail-shadow argument must use shifted tails, local
+AP-rich/AP-poor structure, or a different mechanism.
+
+---
+
+## CL-010: Dyadic summability is equivalent to the fixed-k reciprocal-sum problem for k >= 4
+
+**Status:** proved structural reduction.
+
+**Certainty:** high.
+
+**Pointer:** `docs/dyadic-summability-equivalence.md`.
+
+**Statement.** For every fixed `k >= 4`, the reciprocal-sum Erdős problem for avoiding `k`-term
+arithmetic progressions is equivalent to the dyadic summability condition
 
 ```math
-\sum_j \delta_j=\infty
-\quad\Longrightarrow\quad
-\text{some multi-scale density configuration forces a }k\text{-AP}.
+\sum_{j\ge 1}\frac{r_k(2^j)}{2^j}<\infty,
 ```
 
-This is the main proof direction to attack next.
+where `r_k(N)` is the largest size of a `k`-AP-free subset of `[1,N]`.
+
+**Reason.** The sufficient direction is the standard dyadic-block bound.  Conversely, if the dyadic
+series diverges, one can choose a sufficiently separated residue class of dyadic scales, place
+extremal `k`-AP-free subsets inside those blocks only, and obtain a global `k`-AP-free set with
+divergent reciprocal sum.
+
+**Consequence.** For fixed `k >= 4`, cross-block constraints cannot be the universal missing
+ingredient.  If dyadic extremal densities are not summable, widely separated extremal blocks
+eliminate cross-block APs while preserving divergent reciprocal mass.
+
+---
+
+## OB-001: Superseded cross-block bottleneck
+
+**Status:** superseded as the universal bottleneck by CL-010.
+
+The earlier working bottleneck was: AP-free sets with divergent dyadic harmonic mass should create
+cross-block additive configurations.  CL-010 shows this cannot solve the unrestricted fixed-`k>=4`
+problem in full generality, because separated extremal dyadic blocks eliminate cross-block APs while
+preserving divergent reciprocal mass whenever the dyadic extremal series diverges.
+
+Cross-block mechanisms remain useful in restricted model classes, natural constructions, and
+local-tail shadow arguments, but they should not be listed as the main proof direction.
+
+---
+
+## OB-002: Updated central bottleneck
+
+The universal fixed-`k>=4` problem is now reduced to improving bounds for `r_k(N)` enough to make
+
+```math
+\sum_j r_k(2^j)/2^j
+```
+
+converge.
+
+For `k=4`, a sufficient bound would be approximately
+
+```math
+r_4(N) \ll \frac{N}{(\log N)^{1+\epsilon}}
+```
+
+for some `epsilon > 0`, or any stronger summable decay along dyadic `N`.
+
+The main active proof-audit track is therefore to identify a replacement for the existing
+localization/refinement architecture that can produce a genuine exponent gain beyond the logarithmic
+barrier.

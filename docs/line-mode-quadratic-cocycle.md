@@ -1,16 +1,10 @@
-# Line-mode quadratic cocycle target
+# Line-mode quadratic-chirp target
 
 ## Status
 
-Proof-audit target.  This note explains why the spectral line modes forced by the pure four-balanced obstruction have the right algebraic shape to assemble into a quadratic phase/factor.
+Proof-audit correction and target.  This note corrects a previous oversimplification: a quadratic spectral phase does not usually make the paired line function `H_{w,r}(t)` linear in `t`.  It makes it a quadratic chirp.  The shift autocorrelation of that chirp has linear phase.
 
-The goal is to convert line-mode data
-
-```math
-(w,r,m)
-```
-
-into a quadratic-cocycle condition rather than treating it as unstructured Fourier oscillation.
+This distinction matters for the proof search.  The line-mode data should not be forced prematurely into an affine slope map.  The correct object is a quadratic-chirp/cocycle structure on spectral lines.
 
 ## Setup
 
@@ -42,175 +36,183 @@ H_{w,r}(t)=h_w(r+tw)
 =c_{r+tw}c_{w-r-tw}.
 ```
 
-Negative pure obstruction forces substantial nonzero one-dimensional Fourier modes of these functions.
+The pure obstruction forces negative autocorrelation in these line functions after summing over `(w,r)`:
 
-## Quadratic phases produce linear line modes
+```math
+\sum_{w\ne0,r}\sum_t H_{w,r}(t)\overline{H_{w,r}(t+2)}\le -c\alpha^4.
+```
 
-Suppose, heuristically, that on some spectral support the Fourier coefficients have phase modeled by
+## Correct quadratic model
+
+Suppose heuristically that on some spectral support the Fourier coefficients have phase modeled by
 
 ```math
 c_\zeta \approx A(\zeta)e_p(q(\zeta)),
 ```
 
-where `q` is a quadratic form and `A(\zeta)` is a slowly varying amplitude.
+where
 
-Then along a paired line,
+```math
+q(\zeta)=Q(\zeta)+\ell(\zeta)+c_0
+```
+
+with `Q` homogeneous quadratic and associated symmetric bilinear form `B_Q`.
+
+Then
 
 ```math
 q(r+tw)+q(w-r-tw)
 ```
 
-is a polynomial in `t` of degree at most two.  The quadratic terms cancel because the two arguments move in opposite directions.
+is a quadratic polynomial in `t`, not generally a linear polynomial.
 
-Indeed, if `B_q` is the symmetric bilinear form associated to `q`, then
+More precisely,
 
 ```math
 q(r+tw)+q(w-r-tw)
-=\text{constant}+t\,B_q(w,2r-w)
+= C(w,r)+2Q(w)t^2+B_Q(w,2r-w)t.
 ```
 
-up to the convention-dependent linear part.
+The linear part `ell` contributes only to the constant term because the paired arguments sum to `w`.
 
-Thus a quadratic phase naturally gives a linear mode in `t` for `H_{w,r}`.
-
-This explains why the line-mode obstruction is a quadratic signature.
-
-## Cocycle interpretation
-
-If `H_{w,r}` has a large Fourier mode `m`, then morally
+Therefore a quadratic phase naturally makes
 
 ```math
-c_{r+tw}c_{w-r-tw}
+H_{w,r}(t)
 ```
 
-has phase close to
+look like a quadratic chirp
 
 ```math
-e_p(mt+\theta_{w,r})
+A_{w,r}(t)e_p(2Q(w)t^2+B_Q(w,2r-w)t+C(w,r)),
 ```
 
-on a significant portion of the line.
+not a pure linear mode.
 
-Equivalently, writing `\phi(\zeta)` for the phase of `c_\zeta`, the relation is
+## Shift autocorrelation of a quadratic chirp
+
+If
 
 ```math
-\phi(r+tw)+\phi(w-r-tw)\approx mt+\theta_{w,r}.
+\psi_{w,r}(t)=2Q(w)t^2+B_Q(w,2r-w)t+C(w,r),
 ```
 
-For a genuine quadratic phase, the slope `m` should be controlled by a bilinear form:
+then
 
 ```math
-m=m(w,r)\approx B(w,2r-w)+\ell(w)
+\psi_{w,r}(t)-\psi_{w,r}(t+2)
+=-8Q(w)t-8Q(w)-2B_Q(w,2r-w).
 ```
 
-for some symmetric bilinear form `B` and possible linear correction `\ell`.
+Thus the *shift autocorrelation* of a quadratic chirp has linear phase in `t`.
 
-Therefore the data `(w,r,m)` should satisfy compatibility relations as `(w,r)` varies.
+This is the corrected bridge:
 
-## First compatibility test
+- line Fourier modes of `H_{w,r}` detect oscillation of the chirp itself;
+- the autocorrelation `H_{w,r}(t)\overline{H_{w,r}(t+2)}` detects the derivative of the quadratic phase along the line.
 
-For fixed `w`, if `r` is replaced by
+## Consequence for the previous slope-map idea
+
+The earlier target
 
 ```math
-r'=r+sw,
+m(w,r)=B(w,2r-w)+\ell(w)
 ```
 
-then the same spectral line is being reparametrized.  The corresponding mode should transform only by the reparametrization of `t`, not define a new independent slope.
+is too naive as a direct description of modes of `H_{w,r}`.
 
-Thus line-mode data must first be quotient-consistent on
+A correct extraction must allow a quadratic coefficient depending only on `w`:
 
 ```math
-G/\langle w\rangle.
+H_{w,r}(t)\approx A_{w,r}(t)e_p(a(w)t^2+b(w,r)t+C(w,r)),
 ```
 
-This is already built into the choice of representatives, but any extraction theorem must avoid counting the same line multiple times.
-
-## Second compatibility test: parallelogram consistency
-
-A bilinear model predicts that the slope function in `r` has linear increments:
+with the quadratic model predicting
 
 ```math
-m(w,r+s)-m(w,r)\approx 2B(w,s).
-```
-
-Thus for fixed `w`, the map
-
-```math
-r\mapsto m(w,r)
-```
-
-should be approximately affine on the quotient `G/<w>`.
-
-If it is not, then the line-mode mass is not organized by one quadratic factor and may instead yield additive-energy structure or a density increment.
-
-## Third compatibility test: symmetry in the paired variables
-
-The pair
-
-```math
-u=r+tw,
+a(w)=2Q(w),
 \qquad
-w-\nu=w-r-tw
+b(w,r)=B_Q(w,2r-w).
 ```
 
-is symmetric under swapping `u` and `w-u`, which corresponds to `t` being replaced by an affine function of `t` depending on `r,w`.
+The affine-in-`r` condition applies to `b(w,r)` after the quadratic coefficient `a(w)` is accounted for.
 
-A coherent quadratic model should give compatible modes under this involution.  Failure of this compatibility is another possible source of structured increment.
+## Isotropic special case
 
-## Candidate quadratic-cocycle lemma
+If
+
+```math
+Q(w)=0,
+```
+
+then the quadratic chirp degenerates to a linear mode along the `w`-line:
+
+```math
+H_{w,r}(t)\approx A_{w,r}(t)e_p(B_Q(w,2r-w)t+C(w,r)).
+```
+
+This is exactly the isotropic-direction condition that also appears in high-rank quadratic-level 4AP geometry.
+
+Therefore the spectral line-mode obstruction and the high-rank quadratic-level branch are not separate accidents: both naturally single out directions `w` with special behavior under a quadratic form.
+
+## Compatibility tests for a quadratic-chirp model
+
+A coherent quadratic model should satisfy:
+
+1. **Quadratic coefficient consistency.**  The `t^2` coefficient depends only on `w`, not on the line representative `r`:
+
+```math
+a(w)\approx 2Q(w).
+```
+
+2. **Affine slope consistency.**  After removing `a(w)t^2`, the linear coefficient in `t` is affine in `r`:
+
+```math
+b(w,r+s)-b(w,r)\approx 2B_Q(w,s).
+```
+
+3. **Symmetry.**  Swapping the paired variables `u` and `w-u` corresponds to an affine reparametrization of `t`; the extracted coefficients must transform compatibly.
+
+Failure of these consistency conditions should yield additive spectral concentration or a density increment.  Success should produce a quadratic form/factor.
+
+## Candidate corrected cocycle lemma
 
 A useful theorem would be:
 
-> Suppose the pure obstruction forces many large line modes
+> Suppose the pure obstruction forces many line functions `H_{w,r}` to have substantial oscillatory autocorrelation, while no Fourier coefficient satisfies
 >
 > ```math
-> |\widehat H_{w,r}(m)|
+> |c_\zeta|\ge \alpha^{2-\epsilon}
 > ```
 >
-> while `|c_\zeta|<alpha^{2-epsilon}` for all nonzero `\zeta` and the marginal fourth moment is small.
+> and the marginal fourth moment is small.  Then either:
 >
-> Then either:
->
-> 1. the extracted slopes `m(w,r)` fail affine/parallelogram consistency, yielding a density increment or additive spectral concentration; or
-> 2. they agree on a large substructure with
+> 1. the extracted line data fail quadratic-chirp compatibility, giving an affine density increment or additive spectral concentration; or
+> 2. on a large substructure there exist functions `a(w)` and `b(w,r)` with
 >
 > ```math
-> m(w,r)=B(w,2r-w)+\ell(w)
+> a(w)=2Q(w),
+> \qquad
+> b(w,r)=B_Q(w,2r-w),
 > ```
 >
-> for a bilinear form `B`, producing a quadratic factor.
+> for some quadratic form `Q`, producing a quadratic factor.
 
 ## Low-rank / high-rank split
 
-Once a bilinear form `B` is extracted, the existing rank split applies:
+Once a quadratic form `Q` or bilinear form `B_Q` is extracted, the existing rank split applies:
 
-1. if `B` has low rank, quadratic-level sets decompose into affine structure and should give a density increment;
-2. if `B` has high rank, the obstruction belongs in the high-rank relative-host recurrence branch.
+1. low rank gives affine/quadratic-level structure and should lead to a density increment;
+2. high rank sends the obstruction to the high-rank relative-host recurrence branch.
 
-Thus the line-mode cocycle is a bridge from spectral shear cancellation to the quadratic rank program.
-
-## Why this is progress
-
-The previous formulation said only that there is nonzero line-mode mass.  This note identifies the consistency relations that must hold if the line modes really come from a quadratic obstruction.
-
-The proof search can now try to show:
-
-```math
-\text{large inconsistent line-mode mass} \Rightarrow \text{density increment},
-```
-
-while
-
-```math
-\text{large consistent line-mode mass} \Rightarrow \text{quadratic factor}.
-```
+The correction does not weaken the quadratic route; it makes the target algebraically accurate.
 
 ## Next research question
 
-Can a Balog--Szemeredi--Gowers-type extraction on the set of large line modes produce an approximately affine slope map
+Can the line autocorrelation data be converted into a robust quadratic-chirp model
 
 ```math
-(w,r)\mapsto m(w,r),
+H_{w,r}(t)\approx A_{w,r}(t)e_p(a(w)t^2+b(w,r)t+C(w,r))
 ```
 
-or else force a large Fourier atom/density increment?
+on a large substructure, or else force a large Fourier atom/density increment?

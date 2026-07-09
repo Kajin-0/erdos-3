@@ -172,7 +172,7 @@ If
 ```math
 \mathcal E_{\mathrm{align}}
 \lesssim
-\frac{	au^4}{N}\sum_e\deg^-(e)^2,
+\frac{\tau^4}{N}\sum_e\deg^-(e)^2,
 ```
 
 then common-neighbor fibers overlap like random sets after translation.  In this branch, graph DRC does not supply additive structure: the basepoint labels are incoherent.

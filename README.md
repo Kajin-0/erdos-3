@@ -50,6 +50,7 @@ sum `4.43975`.
 - `src/cyclic_pb_encoder.py` — emits OPB pseudo-Boolean models for cyclic AP-free templates.
 - `src/score_pb_solution.py` — parses external PB/MaxSAT assignments, re-certifies, and scores them.
 - `src/pb_experiment_matrix.py` — generates reproducible PB/MaxSAT experiment matrices.
+- `src/pb_manifest.py` — hashes PB artifacts and generates independently checked experiment manifests.
 - `src/dfa_ap_cert.py` — exact 4-AP certifier for LSD-first regular digit languages.
 - `src/dfa_growth_score.py` — growth-rate and truncated shifted-harmonic triage for DFA languages.
 - `src/random_dfa_search.py` — random small-DFA candidate generator with exact AP certification.
@@ -69,6 +70,7 @@ sum `4.43975`.
 - `docs/literature-audit-action-plan.md` — post-audit route and experiment queue.
 - `docs/harmonic-search-status.md` — harmonic-aware scoring gate and local rigidity result.
 - `docs/pb-solver-workflow.md` — end-to-end PB/MaxSAT workflow.
+- `docs/pb-reproducibility-manifest.md` — machine-readable provenance and independent-check workflow.
 - `docs/regular-language-certifier.md` — DFA model, AP certificate, examples, and next search target.
 - `docs/dfa-growth-triage.md` — DFA growth exponent and truncated shifted harmonic triage.
 - `docs/random-dfa-search.md` — random small-DFA search workflow and acceptance gates.

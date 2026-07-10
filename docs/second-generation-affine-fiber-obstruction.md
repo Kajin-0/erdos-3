@@ -4,7 +4,7 @@
 
 Exact inherited structure for concentrated three-AP extension fibers.
 
-The cross-scale extension-load construction produces fibers
+The cross-scale extension-load construction produces
 
 ```math
 D_{j,p}
@@ -12,18 +12,18 @@ D_{j,p}
 \{d\ge1:p+d,p+2d,p+3d\in A\cap[N,2N)\}.
 ```
 
-Such a fiber is more constrained than an arbitrary 4-AP-free subset of `[1,N/2]`:
+Such a fiber is more rigid than an arbitrary 4-AP-free subset of `[1,N/2]`:
 
-1. the union of its first three dilates is itself 4-AP-free;
-2. in particular, the fiber is disjoint from its double;
-3. a three-AP inside the fiber is forbidden for several explicit predecessor-to-step ratios;
-4. the resulting three-dilate class is hereditary under further predecessor-fiber extraction.
+1. its first three dilates have a 4-AP-free union;
+2. it is disjoint from its double;
+3. several explicit second-generation affine grids are forbidden;
+4. the three-dilate class is hereditary under further predecessor-fiber extraction.
 
-The final point corrects an initially tempting but false interpretation: recursion does not automatically create a strictly decreasing hierarchy of new extremal classes.  It keeps producing members of the same hereditary class.  The quantity that grows under recursion is affine-tree multiplicity.
+The final point corrects a tempting but false interpretation: recursion does not automatically create a strictly decreasing hierarchy of extremal classes.  It stays inside one hereditary class.  What grows is affine-tree multiplicity.
 
-## First-generation affine union
+## Three-dilate inheritance
 
-Let `A subset Z` be 4-AP-free.  Suppose
+Let `A subset Z` be 4-AP-free and suppose
 
 ```math
 p+D,
@@ -34,7 +34,7 @@ p+3D
 \subseteq A
 ```
 
-for a finite set of positive integers `D`.
+for a finite positive-integer set `D`.
 
 Define
 
@@ -45,16 +45,16 @@ Define
 Then
 
 ```math
-p+\mathcal U_3(D)\subseteq A.
+p+\mathcal U_3(D)\subseteq A,
 ```
 
-Translation preserves arithmetic progressions, so
+so translation invariance gives
 
 ```math
 \boxed{\mathcal U_3(D)\text{ is 4-AP-free}.}
 ```
 
-This contains the earlier fact that `D` itself is 4-AP-free, but is strictly stronger.
+In particular, `D` itself is 4-AP-free.
 
 ## No-doubling lemma
 
@@ -64,42 +64,15 @@ One has
 \boxed{D\cap2D=\varnothing.}
 ```
 
-### Proof
-
-Suppose `d in D` and `2d in D`.  Since `d in D`,
+Indeed, if `d,2d in D`, then `d in D` gives
 
 ```math
-p+d,
-\quad
-p+2d,
-\quad
-p+3d
-\in A.
+p+d,\ p+2d,\ p+3d\in A,
 ```
 
-Since `2d in D`,
+while `2d in D` gives `p+4d in A`.  These four points form a 4-AP.
 
-```math
-p+4d\in A.
-```
-
-Therefore
-
-```math
-p+d,
-\quad
-p+2d,
-\quad
-p+3d,
-\quad
-p+4d
-```
-
-is a nontrivial four-term arithmetic progression in `A`, contradiction.
-
-Equivalently, the two dilates `D` and `2D` are disjoint subsets of the 4-AP-free set `mathcal U_3(D)`.
-
-## Immediate extremal bound
+## The three-dilate extremal function
 
 For `M>=1`, define
 
@@ -113,31 +86,19 @@ D\subseteq[1,M],
 \right\}.
 ```
 
-Because `D cap 2D` is empty,
+Since `D` and `2D` are disjoint,
 
 ```math
-|D\cup2D\cup3D|
-\ge
-|D\cup2D|
-=
-2|D|.
+|D\cup2D\cup3D|\ge2|D|.
 ```
 
-Also
+The union lies in `[1,3M]`, hence
 
 ```math
-D\cup2D\cup3D\subseteq[1,3M].
+2|D|\le r_4(3M).
 ```
 
-Hence
-
-```math
-2|D|
-\le
-r_4(3M),
-```
-
-and therefore
+Therefore
 
 ```math
 \boxed{
@@ -147,11 +108,11 @@ s_4^{(3)}(M)
 }
 ```
 
-This only improves the ordinary `r_4` bound by a constant factor, but it identifies the correct inherited class for concentrated extension fibers.
+This is only a constant-factor improvement over a generic `r_4` estimate, but it identifies the correct inherited class for concentrated fibers.
 
-## Second-generation grid
+## Second-generation affine grid
 
-Assume now that the fiber `D` itself contains a three-term progression
+Suppose the fiber `D` contains
 
 ```math
 q+d,
@@ -163,35 +124,33 @@ q+3d
 \qquad d>0.
 ```
 
-Since each of these three directions belongs to `D`, the original set `A` contains the nine-point affine grid
+Then the original set contains the nine-point grid
 
 ```math
 \boxed{
 p+i(q+jd)\in A
-\qquad
-(i,j\in\{1,2,3\}).
+\qquad(i,j\in\{1,2,3\}).
 }
 ```
 
-After subtracting `p` and dividing by `d`, the grid is
+After subtracting `p` and dividing by `d`, this becomes
 
 ```math
 \{i(t+j):i,j\in\{1,2,3\}\},
-\qquad
-t=\frac qd.
+\qquad t=q/d.
 ```
 
-Whenever this normalized grid contains a four-term arithmetic progression, the assumed three-AP in `D` is impossible.
+Whenever this normalized grid contains a 4-AP, the assumed three-AP in `D` is impossible.
 
 ## Seven explicit forbidden integer ratios
 
-For every integer
+For every
 
 ```math
 c\in\{0,1,2,3,4,5,6\},
 ```
 
-the fiber `D` cannot contain
+the set `D` cannot contain
 
 ```math
 (c+1)d,
@@ -201,141 +160,56 @@ the fiber `D` cannot contain
 (c+3)d.
 ```
 
-Equivalently, `D` contains no three consecutive multiples of a common step beginning at any of the first seven positions.
+The corresponding 4-APs in the normalized grid are:
 
-### Ratio `c=0`
+| `c` | forbidden 4-AP in `U_3(D)` |
+|---:|---|
+| 0 | `1,2,3,4` |
+| 1 | `2,4,6,8` |
+| 2 | `3,4,5,6` |
+| 3 | `4,6,8,10` |
+| 4 | `6,10,14,18` |
+| 5 | `6,12,18,24` |
+| 6 | `18,21,24,27` |
 
-The normalized grid contains
-
-```math
-1,\ 2,\ 3,\ 4,
-```
-
-using cells
-
-```math
-(1,1),\ (1,2),\ (1,3),\ (2,2).
-```
-
-### Ratio `c=1`
-
-The normalized grid contains
+For example, when `c=0`, the cells
 
 ```math
-2,\ 4,\ 6,\ 8,
+(1,1),\ (1,2),\ (1,3),\ (2,2)
 ```
 
-using cells
+give `1,2,3,4`.  When `c=6`, the cells
 
 ```math
-(1,1),\ (1,3),\ (2,2),\ (2,3).
+(2,3),\ (3,1),\ (3,2),\ (3,3)
 ```
 
-### Ratio `c=2`
+give `18,21,24,27`.  The other rows follow by the same direct substitution.
 
-The normalized grid contains
-
-```math
-3,\ 4,\ 5,\ 6,
-```
-
-using cells
-
-```math
-(1,1),\ (1,2),\ (1,3),\ (2,1).
-```
-
-### Ratio `c=3`
-
-The normalized grid contains
-
-```math
-4,\ 6,\ 8,\ 10,
-```
-
-using cells
-
-```math
-(1,1),\ (1,3),\ (2,1),\ (2,2).
-```
-
-### Ratio `c=4`
-
-The normalized grid contains
-
-```math
-6,\ 10,\ 14,\ 18,
-```
-
-using cells
-
-```math
-(1,2),\ (2,1),\ (2,3),\ (3,2).
-```
-
-### Ratio `c=5`
-
-The normalized grid contains
-
-```math
-6,\ 12,\ 18,\ 24,
-```
-
-using cells
-
-```math
-(1,1),\ (2,1),\ (3,1),\ (3,3).
-```
-
-### Ratio `c=6`
-
-The normalized grid contains
-
-```math
-18,\ 21,\ 24,\ 27,
-```
-
-using cells
-
-```math
-(2,3),\ (3,1),\ (3,2),\ (3,3).
-```
-
-In every case, multiplying by `d` and adding `p` produces a nontrivial four-term progression in `A`.  Thus
+Thus
 
 ```math
 \boxed{
 \{(c+1)d,(c+2)d,(c+3)d\}
 \not\subseteq D
-\quad
-(c=0,1,\dots,6).
+\quad(c=0,1,\dots,6).
 }
 ```
 
-These exclusions are consequences of the single condition that `mathcal U_3(D)` is 4-AP-free.  They are not evidence of a new depth-two extremal class.
+These are consequences of the single condition that `U_3(D)` is 4-AP-free.  They do not define a new depth-two class.
 
-## Application to extension fibers
+## Application to dyadic extension fibers
 
-For the dyadic block
+Let
 
 ```math
-B=A\cap[N,2N),
+B=A\cap[N,2N)
 ```
 
-define
+and
 
 ```math
-F_j(p)
-=
-|D_{j,p}|,
-```
-
-where
-
-```math
-D_{j,p}
-=
-\{d:p+d,p+2d,p+3d\in B\}.
+F_j(p)=|D_{j,p}|.
 ```
 
 Since `D_{j,p} subseteq [1,N/2]` and its first three dilates have a common translate inside `A`,
@@ -346,19 +220,9 @@ F_j(p)
 \le
 s_4^{(3)}(N/2)
 \le
-\frac12 r_4(3N/2).
+\frac12r_4(3N/2).
 }
 ```
-
-This replaces the earlier generic bound
-
-```math
-F_j(p)\le r_4(N/2)
-```
-
-by a bound in the correct inherited class.
-
-## Forced-predecessor support bound
 
 Let
 
@@ -370,43 +234,26 @@ The extension-load identity and deletion bound give
 
 ```math
 \sum_pF_j(p)
-=
-T_3(B)
+=T_3(B)
 \ge
 |B|-r_3(N).
 ```
 
-Since every nonzero fiber is bounded by `s_4^{(3)}(N/2)`,
-
-```math
-|S_j|s_4^{(3)}(N/2)
-\ge
-|B|-r_3(N).
-```
-
-Therefore
+Consequently,
 
 ```math
 \boxed{
 |S_j|
 \ge
-\frac{|B|-r_3(N)}{s_4^{(3)}(N/2)}.
-}
-```
-
-Using the crude comparison with `r_4`,
-
-```math
-\boxed{
-|S_j|
+\frac{|B|-r_3(N)}{s_4^{(3)}(N/2)}
 \ge
 \frac{2\bigl(|B|-r_3(N)\bigr)}{r_4(3N/2)}.
 }
 ```
 
-Thus every dense block either creates many distinct forbidden predecessors or produces a fiber near the extremal size of the three-dilate class.
+Thus a block with substantial linear extension mass either creates many distinct forbidden predecessors or contains a fiber close to the extremal size of the three-dilate class.
 
-## Hereditary closure under predecessor fibers
+## Hereditary closure
 
 Let `D subseteq [1,M]` satisfy
 
@@ -415,7 +262,7 @@ D\cup2D\cup3D
 \text{ is 4-AP-free}.
 ```
 
-For an integer `q`, define the predecessor fiber inside `D` by
+For an integer `q`, define
 
 ```math
 E_q(D)
@@ -434,14 +281,14 @@ q+3E_q(D)
 \subseteq D.
 ```
 
-Hence
+Therefore
 
 ```math
 q+\bigl(E_q(D)\cup2E_q(D)\cup3E_q(D)\bigr)
 \subseteq D.
 ```
 
-Since `D` is itself a subset of the 4-AP-free set `D union 2D union 3D`, it is 4-AP-free.  Translation therefore gives
+Since `D` is 4-AP-free, translation gives
 
 ```math
 \boxed{
@@ -450,27 +297,23 @@ E_q(D)\cup2E_q(D)\cup3E_q(D)
 }
 ```
 
-Thus the three-dilate class is closed under recursive predecessor-fiber extraction.
+Hence the three-dilate class is closed under recursive predecessor-fiber extraction.
 
 ## Recursive normalized-mass identity
 
 Let
 
 ```math
-T_3(D)
-=
-\sum_q|E_q(D)|.
+T_3(D)=\sum_q|E_q(D)|.
 ```
 
-The same deletion argument gives
+The deletion argument gives
 
 ```math
-T_3(D)
-\ge
-|D|-r_3(M).
+T_3(D)\ge|D|-r_3(M).
 ```
 
-Every child fiber lies in an interval of length at most `M/2`.  Therefore the sum of the child densities relative to their natural ambient scale satisfies
+Every child fiber lies in an interval of length at most `M/2`.  Thus the sum of child densities at their natural scale satisfies
 
 ```math
 \sum_q\frac{|E_q(D)|}{M/2}
@@ -478,7 +321,8 @@ Every child fiber lies in an interval of length at most `M/2`.  Therefore the su
 \frac{2T_3(D)}M
 \ge
 2\left(
-\frac{|D|}M-rac{r_3(M)}M
+\frac{|D|}M-
+\frac{r_3(M)}M
 \right).
 ```
 
@@ -486,37 +330,28 @@ Equivalently,
 
 ```math
 \boxed{
-\sum_q \operatorname{dens}(E_q(D))
+\sum_q\operatorname{dens}(E_q(D))
 \ge
 2\bigl(\operatorname{dens}(D)-r_3(M)/M\bigr).
 }
 ```
 
-Once `D` is above the Roth error scale, the total normalized mass of all recursive children is nearly twice the normalized mass of the parent.
+Above the Roth error scale, the total normalized mass of all children is nearly twice that of the parent.
 
 ## The actual recursion obstruction
 
-The preceding inequality counts children with multiplicity.  Different predecessor fibers can overlap heavily, and the same direction can appear along many affine-tree paths.
+The preceding inequality counts fibers with multiplicity.  Different children can overlap heavily, and the same direction can occur along many affine-tree paths.
 
-Therefore the nearly doubling recursive mass does not yet contradict finite ambient size.  The central unresolved quantity is the overlap multiplicity of the affine-fiber tree.
+Therefore the formal near-doubling of recursive mass does not contradict finite ambient size.  Recursion remains inside the same hereditary class; it does not automatically produce a chain of strictly smaller extremal classes.
 
-The recursion does **not** automatically produce a chain
-
-```math
-s_4^{(3)}
-\supsetneq
-s_4^{(3,2)}
-\supsetneq\cdots.
-```
-
-Instead, every generation remains inside the same hereditary three-dilate class while the number of affine representations grows.
+The unresolved object is the overlap multiplicity of the affine-fiber tree.
 
 ## Immediate next task
 
-Prove one of the following multiplicity statements:
+Prove one of the following:
 
-1. **bounded-overlap extraction:** from the recursive children, select a large subfamily whose direction sets have controlled overlap, so the near-doubling of normalized mass becomes physical rather than formal;
-2. **high-multiplicity contradiction:** show that a direction appearing in too many depth-`h` affine-fiber paths forces a four-term progression in the original set;
-3. **tree-energy inequality:** bound the total depth-`h` path multiplicity by a quantity that grows more slowly than the lower bound produced by repeated linear extension mass.
+1. **bounded-overlap extraction:** select a large family of children with controlled overlap, converting formal mass growth into physical mass growth;
+2. **high-multiplicity contradiction:** show that a direction represented by too many depth-`h` affine paths forces a 4-AP;
+3. **tree-energy inequality:** upper-bound total depth-`h` path multiplicity by a quantity growing more slowly than the repeated lower bound from linear extension mass.
 
 This multiplicity problem, not a new extremal hierarchy, is the precise bottleneck in the concentrated extension branch.

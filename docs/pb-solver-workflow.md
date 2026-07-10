@@ -54,6 +54,7 @@ python src/score_pb_solution.py \
   --base 55 \
   --k 4 \
   --solution solver_outputs/cyclic_b55_k4_s21_harmonic_proxy.sol \
+  --expected-size 21 \
   --target 4.43975
 ```
 
@@ -65,6 +66,69 @@ x0=1 x1=0 x2=1
 x0 1
 x1 0
 ```
+
+By default, the parser now requires every model variable
+
+```text
+x0, x1, ..., x{b-1}
+```
+
+to appear explicitly as true or false.  Omitted variables are not silently treated as false.
+For legacy solver outputs, use
+
+```bash
+--allow-partial-assignment
+```
+
+but do not treat such a result as a publishable optimal certificate unless the omitted variables are
+justified independently.
+
+When the OPB model contains cardinality constraints, mirror them in the scorer with one of:
+
+```bash
+--expected-size 21
+--min-size 20 --max-size 22
+```
+
+This catches assignments that may satisfy the parser but not the intended experiment profile.
+
+## Reproducibility manifest
+
+Every solver-backed claim should be accompanied by a manifest containing at least:
+
+```yaml
+experiment_id: cyclic_b55_k4_s21_harmonic_proxy
+repo_commit: <git commit sha>
+model_path: models/cyclic_b55_k4_s21_harmonic_proxy.opb
+model_sha256: <sha256 of OPB model>
+solution_path: solver_outputs/cyclic_b55_k4_s21_harmonic_proxy.sol
+solution_sha256: <sha256 of solver output>
+solver:
+  name: <solver name>
+  version: <solver version>
+  command: <exact command line>
+  wall_time_seconds: <wall time>
+  cpu_time_seconds: <cpu time if known>
+  status: <OPTIMUM | SATISFIABLE | UNSATISFIABLE | UNKNOWN>
+  objective_value: <reported objective if present>
+  objective_bound: <reported bound if present>
+  optimality_gap: <gap if present>
+model:
+  base: 55
+  k: 4
+  objective: harmonic_proxy
+  require_zero: true
+  min_size: 21
+  max_size: 21
+independent_check:
+  complete_assignment: true
+  expected_size: 21
+  modular_k_free: true
+  shifted_sum: <computed shifted sum>
+  beats_target_4_43975: <true | false>
+```
+
+Without this metadata, an external PB result should be treated as a candidate, not a certificate.
 
 ## Generate a focused experiment matrix
 
@@ -87,11 +151,14 @@ near the exponent implied by `log(21)/log(55)`.
 
 ## Acceptance rule
 
-A solver candidate is not interesting unless all three conditions hold:
+A solver candidate is not interesting unless all conditions hold:
 
-1. `modular_k_free=1` from `score_pb_solution.py`;
-2. `shifted_sum > 4.43975`;
-3. the digit set is not a trivial restatement of an already recorded public benchmark.
+1. `score_pb_solution.py` parses a complete assignment, unless partial assignment is explicitly justified;
+2. requested size constraints are mirrored with `--expected-size` or `--min-size`/`--max-size`;
+3. `modular_k_free=1` from `score_pb_solution.py`;
+4. `shifted_sum > 4.43975`;
+5. the digit set is not a trivial restatement of an already recorded public benchmark.
 
-A negative result is also useful if the solver can certify unsatisfiability or optimality for a
-specific base, size, and objective profile.
+A negative result is also useful only if the solver can certify unsatisfiability or optimality for a
+specific base, size, and objective profile and the manifest records the solver status, objective
+bound, and model hash.

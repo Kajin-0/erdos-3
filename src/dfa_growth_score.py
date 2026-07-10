@@ -4,18 +4,19 @@
 This is not a full transfer-operator harmonic scorer.  It is a practical triage
 layer for regular-language candidates:
 
-1. estimate the exponential growth exponent from the digit-transition matrix;
+1. estimate the exponential growth exponent from the accepted-language transition graph;
 2. compute exact accepted counts by digit length;
 3. enumerate accepted integers up to a bounded digit length;
 4. compute a truncated shifted harmonic sum over that bounded prefix.
 
 The growth exponent is
 
-    alpha = log(rho(A)) / log(b),
+    alpha = log(rho(A_lang)) / log(b),
 
-where A[i,j] is the number of base-b digits taking state i to state j and rho(A)
-is the Perron spectral radius.  If alpha < 1, the full shifted reciprocal sum is
-expected to converge for regular languages with the usual zero-padding closure.
+where A_lang is the digit-transition matrix induced on productive DFA states:
+states reachable from the start state and capable of reaching an accepting state.
+Rejecting sinks and other non-coaccessible components are excluded.  This is the
+exponential growth rate of accepted words, not of the complete DFA presentation.
 
 The truncated shifted sum is
 
@@ -27,6 +28,7 @@ zero-padding closed.
 from __future__ import annotations
 
 import argparse
+from collections import deque
 from dataclasses import dataclass
 from math import log
 from pathlib import Path
@@ -39,6 +41,7 @@ class GrowthScore:
     base: int
     states: int
     accepting_states: int
+    productive_states: int
     spectral_radius: float
     alpha: float
     max_digits: int
@@ -46,16 +49,68 @@ class GrowthScore:
     accepted_counts: tuple[int, ...]
 
 
-def transition_matrix(dfa: DFA) -> list[list[int]]:
-    index = {state: i for i, state in enumerate(dfa.states)}
-    n = len(dfa.states)
+def transition_matrix(dfa: DFA, states: tuple[str, ...] | None = None) -> list[list[int]]:
+    """Return the digit-transition count matrix on the requested state set.
+
+    When ``states`` is supplied, this is the induced productive-language matrix:
+    only transitions whose source and target are both in ``states`` are counted.
+    Transitions leaving the set cannot contribute to accepted words when ``states``
+    is the reachable/coaccessible productive subgraph.
+    """
+    use_states = tuple(dfa.states) if states is None else tuple(states)
+    keep = set(use_states)
+    index = {state: i for i, state in enumerate(use_states)}
+    n = len(use_states)
     matrix = [[0 for _ in range(n)] for _ in range(n)]
-    for state in dfa.states:
+    for state in use_states:
         i = index[state]
         for digit in range(dfa.base):
-            j = index[dfa.next(state, digit)]
-            matrix[i][j] += 1
+            nxt = dfa.next(state, digit)
+            if nxt in keep:
+                j = index[nxt]
+                matrix[i][j] += 1
     return matrix
+
+
+def reachable_states(dfa: DFA) -> frozenset[str]:
+    seen = {dfa.start}
+    queue = deque([dfa.start])
+    while queue:
+        state = queue.popleft()
+        for digit in range(dfa.base):
+            nxt = dfa.next(state, digit)
+            if nxt not in seen:
+                seen.add(nxt)
+                queue.append(nxt)
+    return frozenset(seen)
+
+
+def coaccessible_states(dfa: DFA) -> frozenset[str]:
+    reverse: dict[str, list[str]] = {state: [] for state in dfa.states}
+    for state in dfa.states:
+        for digit in range(dfa.base):
+            reverse[dfa.next(state, digit)].append(state)
+
+    seen = set(dfa.accept)
+    queue = deque(dfa.accept)
+    while queue:
+        state = queue.popleft()
+        for prev in reverse[state]:
+            if prev not in seen:
+                seen.add(prev)
+                queue.append(prev)
+    return frozenset(seen)
+
+
+def productive_states(dfa: DFA) -> tuple[str, ...]:
+    """States that can occur along some accepted word from the start state."""
+    productive = reachable_states(dfa) & coaccessible_states(dfa)
+    return tuple(state for state in dfa.states if state in productive)
+
+
+def accepted_language_transition_matrix(dfa: DFA) -> tuple[list[list[int]], tuple[str, ...]]:
+    states = productive_states(dfa)
+    return transition_matrix(dfa, states), states
 
 
 def mat_vec(matrix: list[list[int]], vec: list[float]) -> list[float]:
@@ -136,7 +191,7 @@ def truncated_shifted_sum(dfa: DFA, max_digits: int) -> float:
 
 
 def score_dfa(dfa: DFA, max_digits: int, power_iterations: int) -> GrowthScore:
-    matrix = transition_matrix(dfa)
+    matrix, prod_states = accepted_language_transition_matrix(dfa)
     rho = spectral_radius_power(matrix, power_iterations)
     alpha = log(rho) / log(dfa.base) if rho > 0 else float("-inf")
     counts = accepted_counts_by_length(dfa, max_digits)
@@ -145,6 +200,7 @@ def score_dfa(dfa: DFA, max_digits: int, power_iterations: int) -> GrowthScore:
         base=dfa.base,
         states=len(dfa.states),
         accepting_states=len(dfa.accept),
+        productive_states=len(prod_states),
         spectral_radius=rho,
         alpha=alpha,
         max_digits=max_digits,
@@ -165,6 +221,7 @@ def main() -> None:
     print(f"base={score.base}")
     print(f"states={score.states}")
     print(f"accepting_states={score.accepting_states}")
+    print(f"productive_states={score.productive_states}")
     print(f"spectral_radius={score.spectral_radius:.12f}")
     print(f"alpha={score.alpha:.12f}")
     print(f"max_digits={score.max_digits}")

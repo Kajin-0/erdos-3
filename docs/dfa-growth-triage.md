@@ -25,19 +25,44 @@ scorer, but it gives a cheap way to rank finite-state candidates before deeper a
 
 ## Growth exponent
 
-For a base-`b` DFA, define the digit-transition matrix `A` by
+For a base-`b` DFA, first restrict to the productive states:
+
+1. states reachable from the start state; and
+2. states from which some accepting state is reachable.
+
+Rejecting sinks and other non-coaccessible components are excluded.  This matters because a complete
+DFA presentation may contain a rejecting sink whose transition matrix has Perron root `b`, even
+though that sink contributes no accepted words.
+
+On the productive state set, define the induced digit-transition matrix `A_lang` by
 
 ```math
-A_{ij}=\#\{d\in\{0,\dots,b-1\}: q_i \xrightarrow{d} q_j\}.
+(A_{\mathrm{lang}})_{ij}
+=
+\#\{d\in\{0,\dots,b-1\}: q_i \xrightarrow{d} q_j\},
 ```
 
-The exponential language-growth exponent is estimated as
+counting only transitions whose source and target are both productive.
+
+The exponential accepted-language growth exponent is estimated as
 
 ```math
-\alpha=\frac{\log \rho(A)}{\log b},
+\alpha=\frac{\log \rho(A_{\mathrm{lang}})}{\log b},
 ```
 
-where `rho(A)` is the Perron spectral radius.
+where `rho(A_lang)` is the Perron spectral radius.
+
+For the base-11 Walker digit-set DFA, the productive subgraph contains only the accepting `ok` state,
+with six allowed self-loop digits.  Therefore
+
+```math
+\rho(A_{\mathrm{lang}})=6,
+\qquad
+\alpha=\frac{\log 6}{\log 11}=0.7472217363\ldots.
+```
+
+Using the complete presentation matrix would incorrectly include the rejecting `dead` sink and return
+`rho=11`, `alpha=1`.
 
 A high-value regular-language candidate should have large `alpha`, but alpha alone is not the
 objective.  The actual target remains shifted harmonic mass.

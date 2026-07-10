@@ -111,7 +111,7 @@ Combining both cases:
 |L_{\rm side}(T)\cup L_{\rm mid}(T)|
 \ge
 3|T|
-\quad	ext{for every }T\subseteq C\cap M.
+\quad\text{for every }T\subseteq C\cap M.
 }
 ```
 
@@ -156,7 +156,7 @@ The paired expansion therefore implies
 3R H(T).
 ```
 
-up to the harmless endpoint convention in the shell inequalities.  More precisely, using `H(T)<=|T|/R`,
+Using `H(T)<=|T|/R`, this becomes the exact bound
 
 ```math
 \boxed{

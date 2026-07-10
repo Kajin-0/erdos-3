@@ -16,8 +16,10 @@ Such a fiber is more constrained than an arbitrary 4-AP-free subset of `[1,N/2]`
 
 1. the union of its first three dilates is itself 4-AP-free;
 2. in particular, the fiber is disjoint from its double;
-3. a second-generation three-AP inside the fiber is forbidden for several explicit predecessor-to-step ratios;
-4. this defines a stricter extremal function that controls concentration and the number of distinct forbidden predecessors.
+3. a three-AP inside the fiber is forbidden for several explicit predecessor-to-step ratios;
+4. the resulting three-dilate class is hereditary under further predecessor-fiber extraction.
+
+The final point corrects an initially tempting but false interpretation: recursion does not automatically create a strictly decreasing hierarchy of new extremal classes.  It keeps producing members of the same hereditary class.  The quantity that grows under recursion is affine-tree multiplicity.
 
 ## First-generation affine union
 
@@ -145,7 +147,7 @@ s_4^{(3)}(M)
 }
 ```
 
-This only improves the ordinary `r_4` bound by a constant factor, but it identifies the correct stricter extremal class for recursive concentration.
+This only improves the ordinary `r_4` bound by a constant factor, but it identifies the correct inherited class for concentrated extension fibers.
 
 ## Second-generation grid
 
@@ -179,7 +181,7 @@ After subtracting `p` and dividing by `d`, the grid is
 t=\frac qd.
 ```
 
-Whenever this normalized grid contains a four-term arithmetic progression, the assumed second-generation three-AP in `D` is impossible.
+Whenever this normalized grid contains a four-term arithmetic progression, the assumed three-AP in `D` is impossible.
 
 ## Seven explicit forbidden integer ratios
 
@@ -310,7 +312,7 @@ In every case, multiplying by `d` and adding `p` produces a nontrivial four-term
 }
 ```
 
-The first case includes the no-doubling obstruction in a stronger three-point form.
+These exclusions are consequences of the single condition that `mathcal U_3(D)` is 4-AP-free.  They are not evidence of a new depth-two extremal class.
 
 ## Application to extension fibers
 
@@ -402,43 +404,119 @@ Using the crude comparison with `r_4`,
 }
 ```
 
-Thus every dense block either creates many distinct forbidden predecessors or produces a fiber near the extremal size of the stricter three-dilate class.
+Thus every dense block either creates many distinct forbidden predecessors or produces a fiber near the extremal size of the three-dilate class.
 
-## Why the new extremal function matters
+## Hereditary closure under predecessor fibers
 
-The full conjecture will not follow merely from the constant-factor estimate
-
-```math
-s_4^{(3)}(M)\le\frac12r_4(3M).
-```
-
-The possible gain is recursive:
-
-- arbitrary 4-AP-free sets are controlled by `r_4`;
-- first-generation concentrated fibers are controlled by `s_4^{(3)}`;
-- second-generation concentrated fibers must also avoid the explicit affine-grid ratios above;
-- deeper generations inherit increasingly many affine-grid exclusions.
-
-This suggests a hierarchy
+Let `D subseteq [1,M]` satisfy
 
 ```math
-r_4(M)
-\supseteq
-s_4^{(3)}(M)
-\supseteq
-s_4^{(3,2)}(M)
-\supseteq\cdots
+D\cup2D\cup3D
+\text{ is 4-AP-free}.
 ```
 
-of progressively more rigid recursive fiber classes.
+For an integer `q`, define the predecessor fiber inside `D` by
 
-A useful theorem would show that the extremal density decays uniformly with generation depth.  Such a decay could convert repeated concentration into a contradiction while the spread branch accounts for the linear extension mass.
+```math
+E_q(D)
+=
+\{d:q+d,q+2d,q+3d\in D\}.
+```
+
+Then
+
+```math
+q+E_q(D),
+\qquad
+q+2E_q(D),
+\qquad
+q+3E_q(D)
+\subseteq D.
+```
+
+Hence
+
+```math
+q+\bigl(E_q(D)\cup2E_q(D)\cup3E_q(D)\bigr)
+\subseteq D.
+```
+
+Since `D` is itself a subset of the 4-AP-free set `D union 2D union 3D`, it is 4-AP-free.  Translation therefore gives
+
+```math
+\boxed{
+E_q(D)\cup2E_q(D)\cup3E_q(D)
+\text{ is 4-AP-free}.
+}
+```
+
+Thus the three-dilate class is closed under recursive predecessor-fiber extraction.
+
+## Recursive normalized-mass identity
+
+Let
+
+```math
+T_3(D)
+=
+\sum_q|E_q(D)|.
+```
+
+The same deletion argument gives
+
+```math
+T_3(D)
+\ge
+|D|-r_3(M).
+```
+
+Every child fiber lies in an interval of length at most `M/2`.  Therefore the sum of the child densities relative to their natural ambient scale satisfies
+
+```math
+\sum_q\frac{|E_q(D)|}{M/2}
+=
+\frac{2T_3(D)}M
+\ge
+2\left(
+\frac{|D|}M-rac{r_3(M)}M
+\right).
+```
+
+Equivalently,
+
+```math
+\boxed{
+\sum_q \operatorname{dens}(E_q(D))
+\ge
+2\bigl(\operatorname{dens}(D)-r_3(M)/M\bigr).
+}
+```
+
+Once `D` is above the Roth error scale, the total normalized mass of all recursive children is nearly twice the normalized mass of the parent.
+
+## The actual recursion obstruction
+
+The preceding inequality counts children with multiplicity.  Different predecessor fibers can overlap heavily, and the same direction can appear along many affine-tree paths.
+
+Therefore the nearly doubling recursive mass does not yet contradict finite ambient size.  The central unresolved quantity is the overlap multiplicity of the affine-fiber tree.
+
+The recursion does **not** automatically produce a chain
+
+```math
+s_4^{(3)}
+\supsetneq
+s_4^{(3,2)}
+\supsetneq\cdots.
+```
+
+Instead, every generation remains inside the same hereditary three-dilate class while the number of affine representations grows.
 
 ## Immediate next task
 
-Define the depth-`h` affine-fiber class precisely and prove either:
+Prove one of the following multiplicity statements:
 
-1. a uniform density loss at each generation; or
-2. a finite depth `h` for which every sufficiently large depth-`h` fiber necessarily contains a four-term progression.
+1. **bounded-overlap extraction:** from the recursive children, select a large subfamily whose direction sets have controlled overlap, so the near-doubling of normalized mass becomes physical rather than formal;
+2. **high-multiplicity contradiction:** show that a direction appearing in too many depth-`h` affine-fiber paths forces a four-term progression in the original set;
+3. **tree-energy inequality:** bound the total depth-`h` path multiplicity by a quantity that grows more slowly than the lower bound produced by repeated linear extension mass.
 
-The second-generation grid calculation above is the first nontrivial inherited obstruction in that hierarchy.
+This multiplicity problem, not a new extremal hierarchy, is the precise bottleneck in the concentrated extension branch.

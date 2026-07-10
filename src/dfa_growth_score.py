@@ -4,17 +4,19 @@
 This is not a full transfer-operator harmonic scorer.  It is a practical triage
 layer for regular-language candidates:
 
-1. estimate the exponential growth exponent from the digit-transition matrix;
+1. estimate the exponential growth exponent from the productive transition graph;
 2. compute exact accepted counts by digit length;
 3. enumerate accepted integers up to a bounded digit length;
 4. compute a truncated shifted harmonic sum over that bounded prefix.
 
 The growth exponent is
 
-    alpha = log(rho(A)) / log(b),
+    alpha = log(rho(A_prod)) / log(b),
 
-where A[i,j] is the number of base-b digits taking state i to state j and rho(A)
-is the Perron spectral radius.  If alpha < 1, the full shifted reciprocal sum is
+where A_prod is the digit-transition matrix induced on states that are both
+reachable from the start and capable of reaching an accepting state.  Rejecting
+sink components must be excluded: they can have spectral radius b while
+contributing no accepted words.  If alpha < 1, the full shifted reciprocal sum is
 expected to converge for regular languages with the usual zero-padding closure.
 
 The truncated shifted sum is
@@ -30,6 +32,7 @@ import argparse
 from dataclasses import dataclass
 from math import log
 from pathlib import Path
+from typing import Sequence
 
 from dfa_ap_cert import DFA, load_dfa
 
@@ -46,15 +49,65 @@ class GrowthScore:
     accepted_counts: tuple[int, ...]
 
 
-def transition_matrix(dfa: DFA) -> list[list[int]]:
-    index = {state: i for i, state in enumerate(dfa.states)}
-    n = len(dfa.states)
-    matrix = [[0 for _ in range(n)] for _ in range(n)]
+def productive_states(dfa: DFA) -> tuple[str, ...]:
+    """Return states lying on some start-to-accepting path.
+
+    The accepted-language growth rate is controlled by the subgraph of states
+    that are both reachable from ``dfa.start`` and coaccessible to an accepting
+    state.  Reachable rejecting sinks are deliberately excluded.
+    """
+    reachable: set[str] = set()
+    stack = [dfa.start]
+    while stack:
+        state = stack.pop()
+        if state in reachable:
+            continue
+        reachable.add(state)
+        for digit in range(dfa.base):
+            stack.append(dfa.next(state, digit))
+
+    reverse: dict[str, set[str]] = {state: set() for state in dfa.states}
     for state in dfa.states:
+        for digit in range(dfa.base):
+            reverse[dfa.next(state, digit)].add(state)
+
+    coaccessible: set[str] = set()
+    stack = list(dfa.accept)
+    while stack:
+        state = stack.pop()
+        if state in coaccessible:
+            continue
+        coaccessible.add(state)
+        stack.extend(reverse[state])
+
+    return tuple(
+        state
+        for state in dfa.states
+        if state in reachable and state in coaccessible
+    )
+
+
+def transition_matrix(
+    dfa: DFA,
+    states: Sequence[str] | None = None,
+) -> list[list[int]]:
+    """Build the digit-transition matrix induced on ``states``.
+
+    Transitions leaving the selected state set are omitted.  With ``states=None``
+    the complete DFA transition matrix is returned, which is still required for
+    exact accepted-word counts.
+    """
+    selected = tuple(dfa.states if states is None else states)
+    index = {state: i for i, state in enumerate(selected)}
+    n = len(selected)
+    matrix = [[0 for _ in range(n)] for _ in range(n)]
+    for state in selected:
         i = index[state]
         for digit in range(dfa.base):
-            j = index[dfa.next(state, digit)]
-            matrix[i][j] += 1
+            target = dfa.next(state, digit)
+            j = index.get(target)
+            if j is not None:
+                matrix[i][j] += 1
     return matrix
 
 
@@ -136,7 +189,8 @@ def truncated_shifted_sum(dfa: DFA, max_digits: int) -> float:
 
 
 def score_dfa(dfa: DFA, max_digits: int, power_iterations: int) -> GrowthScore:
-    matrix = transition_matrix(dfa)
+    growth_states = productive_states(dfa)
+    matrix = transition_matrix(dfa, growth_states)
     rho = spectral_radius_power(matrix, power_iterations)
     alpha = log(rho) / log(dfa.base) if rho > 0 else float("-inf")
     counts = accepted_counts_by_length(dfa, max_digits)
@@ -165,6 +219,7 @@ def main() -> None:
     print(f"base={score.base}")
     print(f"states={score.states}")
     print(f"accepting_states={score.accepting_states}")
+    print(f"productive_states={len(productive_states(dfa))}")
     print(f"spectral_radius={score.spectral_radius:.12f}")
     print(f"alpha={score.alpha:.12f}")
     print(f"max_digits={score.max_digits}")

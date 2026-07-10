@@ -12,17 +12,18 @@ C\cap2C=\varnothing,
 2C\cap3C=\varnothing.
 ```
 
-It allowed path components of logarithmic length.  The coordinated valuation construction supplies two additional global constraints:
+The coordinated valuation construction supplies two additional global constraints:
 
-1. all steps of a retained side child have one fixed value of `v_2(s) mod 2`;
-2. all steps of the selected middle child have one fixed value of
+1. all steps of a retained side child have one fixed color
    ```math
-   \chi(t)=v_2(t)-v_3(t)\pmod 3.
+   \epsilon(s)=v_2(s)\pmod2;
+   ```
+2. all steps of the selected middle child have one fixed color
+   ```math
+   \chi(t)=v_2(t)-v_3(t)\pmod3.
    ```
 
-Together these constraints collapse every absorption path to at most three left vertices.
-
-The main conclusion is:
+Together these constraints imply
 
 ```math
 \boxed{
@@ -34,7 +35,9 @@ Consequently, if `e` nonbase side sources are completely absorbed, then they req
 
 ```math
 \boxed{
-|N(E)|\ge e+\left\lceil\frac e3\right\rceil
+|N(E)|
+\ge
+e+\left\lceil\frac e3\right\rceil
 \ge\frac43e
 }
 ```
@@ -43,25 +46,17 @@ distinct middle-step witnesses.
 
 ## Coordinated setup
 
-Let `C` be a retained side child and let `q in C` be the base step of a duplicated side-middle pair.  Assume:
+Let `C` be a retained side child and let `q\in C` be the base step of a duplicated side-middle pair. Assume
 
 ```math
 C,\qquad2C,\qquad3C
 ```
 
-are pairwise disjoint, and all elements of `C` have the same parity color
+are pairwise disjoint and `epsilon` is constant on `C`.
 
-```math
-\epsilon(s)=v_2(s)\pmod2.
-```
+Let `T` be the selected middle child, so `chi` is constant on `T`.
 
-Let `T` be the selected middle child.  Thus all `t in T` have one common color
-
-```math
-\chi(t)=v_2(t)-v_3(t)\pmod3.
-```
-
-For a nonbase source `s in C setminus {q}`, complete absorption means
+For a nonbase source `s\in C\setminus\{q\}`, complete absorption means
 
 ```math
 s,\quad2s
@@ -75,7 +70,7 @@ The bipartite absorption graph has:
 
 - left vertices: completely absorbed sources;
 - right vertices: their middle-step witnesses;
-- one edge for each representation
+- an edge for each relation
   ```math
   cs=q\pm t,
   \qquad c\in\{1,2\}.
@@ -85,25 +80,13 @@ The absorption-forest theorem shows that every component is a path, every left v
 
 ## Coefficient word of a four-source path
 
-Suppose, for contradiction, that one component contains four consecutive left sources
+Suppose one component contains four consecutive sources
 
 ```math
 s_1,s_2,s_3,s_4.
 ```
 
-Let
-
-```math
-r_i\in\{1,2\}
-```
-
-be the coefficient used by the edge leaving `s_i` to the right.  The edge entering `s_i` from the left then uses coefficient
-
-```math
-3-r_i,
-```
-
-because every absorbed source uses coefficient `1` once and coefficient `2` once.
+Let `r_i\in\{1,2\}` be the coefficient used by the edge leaving `s_i` to the right. The edge entering `s_i` uses coefficient `3-r_i`, because every absorbed source uses coefficient `1` once and coefficient `2` once.
 
 Let the five consecutive right witnesses be
 
@@ -111,7 +94,7 @@ Let the five consecutive right witnesses be
 t_0,t_1,t_2,t_3,t_4.
 ```
 
-At an internal shared witness, the signs of the two affine representations are opposite.  Hence
+At an internal shared witness, the two affine representations have opposite signs. Hence
 
 ```math
 r_i s_i+(3-r_{i+1})s_{i+1}=2q
@@ -124,15 +107,7 @@ The four-bit word
 r_1r_2r_3r_4
 ```
 
-has only sixteen possibilities.
-
-All five witnesses `t_j` belong to the same selected middle child, so
-
-```math
-\chi(t_0)=\chi(t_1)=\cdots=\chi(t_4).
-```
-
-All four sources and `q` belong to one retained side child, so
+has sixteen possibilities. All five witnesses have the same `chi`-color, and
 
 ```math
 v_2(s_i)\equiv v_2(q)\pmod2
@@ -141,7 +116,7 @@ v_2(s_i)\equiv v_2(q)\pmod2
 
 ## Seven words force a factor-two witness collision
 
-Direct substitution in the affine recurrences shows that each word in
+Direct substitution shows that each word in
 
 ```math
 1211,
@@ -153,22 +128,20 @@ Direct substitution in the affine recurrences shows that each word in
 \quad2221
 ```
 
-forces two distinct right witnesses to satisfy
+forces
 
 ```math
 |t_i|=2|t_j|
 ```
 
-for some `i ne j`.
+for two right witnesses. More specifically:
 
-For example:
-
-- `1211` gives `|t_1|=2|t_4|`;
-- `1221` gives `|t_4|=2|t_1|`;
-- `2111` and `2112` give `|t_0|=2|t_3|`;
-- `2211` gives both `|t_3|=2|t_0|` and `|t_1|=2|t_4|`;
-- `2212` gives `|t_3|=2|t_0|`;
-- `2221` gives `|t_4|=2|t_1|`.
+- `1211`: `|t_1|=2|t_4|`;
+- `1221`: `|t_4|=2|t_1|`;
+- `2111`, `2112`: `|t_0|=2|t_3|`;
+- `2211`: both `|t_3|=2|t_0|` and `|t_1|=2|t_4|`;
+- `2212`: `|t_3|=2|t_0|`;
+- `2221`: `|t_4|=2|t_1|`.
 
 But
 
@@ -176,7 +149,7 @@ But
 \chi(2t)=\chi(t)+1\pmod3,
 ```
 
-so two witnesses in ratio `2` cannot have the same middle color.  These seven words are impossible.
+so two witnesses in ratio `2` cannot have the same middle color.
 
 ## Four words force a nonpositive source
 
@@ -201,20 +174,9 @@ s_4=-s_1,
 s_4=-2s_1.
 ```
 
-Since all sources are positive, these four words are impossible.
+They are impossible for positive sources.
 
 ## Four words violate the side parity color
-
-It remains to eliminate
-
-```math
-1111,
-\quad1112,
-\quad1222,
-\quad2222,
-```
-
-before treating the final word `1212`.
 
 ### Prefix `111`
 
@@ -222,11 +184,7 @@ For a word beginning with `111`,
 
 ```math
 s_2=q-\frac{s_1}{2},
-```
-
-and
-
-```math
+\qquad
 s_3=\frac q2+\frac{s_1}{4}.
 ```
 
@@ -234,16 +192,15 @@ Put
 
 ```math
 a=v_2(q),
-\qquad
-b=v_2(s_1),
+\qquad b=v_2(s_1),
 ```
 
-with `a congruent b mod 2`.
+with `a\equiv b\pmod2`.
 
-- If `b<=a`, then the term `s_1/2` has smaller 2-adic valuation than `q`, so `s_2` has parity color opposite to `q`.
-- If `b>a`, then parity forces `b>=a+2`.  In that case `v_2(s_2)=a`, while `s_2/2` has valuation `a-1`; hence `v_2(s_3)=a-1`, again the opposite color.
+- If `b\le a`, then `s_1/2` has lower 2-adic valuation than `q`, so `s_2` has the opposite parity color.
+- If `b>a`, then `b\ge a+2`; hence `v_2(s_2)=a`, while `v_2(s_3)=a-1`.
 
-Therefore no word beginning with `111` is possible.  This eliminates `1111` and `1112`.
+Thus `1111` and `1112` are impossible.
 
 ### Word `2222`
 
@@ -251,31 +208,27 @@ The first two recurrences are
 
 ```math
 s_2=2(q-s_1),
-```
-
-and
-
-```math
+\qquad
 s_3=2(q-s_2).
 ```
 
-If `v_2(s_1) ne v_2(q)`, then `s_2` immediately has the opposite parity color.  If the valuations are equal, retaining the correct color for `s_2` forces
+If `v_2(s_1)\ne v_2(q)`, then `s_2` has the opposite parity color. If the valuations are equal, keeping `s_2` in the correct color forces
 
 ```math
-v_2(s_2)\ge v_2(q)+2.
+v_2(s_2)\ge v_2(q)+2,
 ```
 
-Then `q` dominates `q-s_2`, and
+and then
 
 ```math
-v_2(s_3)=v_2(q)+1,
+v_2(s_3)=v_2(q)+1.
 ```
 
-again the opposite color.  Thus `2222` is impossible.
+So `2222` is impossible.
 
 ### Word `1222`
 
-Positivity allows the parametrization
+Positivity gives
 
 ```math
 s_1=q+y,
@@ -287,29 +240,17 @@ s_3=2y,
 s_4=2q-4y,
 ```
 
-with
+with `0<y<q/2`. Put `a=v_2(q)` and `b=v_2(y)`.
 
-```math
-0<y<\frac q2.
-```
-
-Put `a=v_2(q)` and `b=v_2(y)`.
-
-- If `b<a`, then `q plus or minus y` has valuation `b`, while `2y` has valuation `b+1`; the colors differ.
-- If `b>a`, then keeping `2y` in the color of `q` forces `b+1 congruent a mod 2`, but `2(q-2y)` then has valuation `a+1`, the opposite color.
+- If `b<a`, then `q\pm y` has valuation `b`, while `2y` has valuation `b+1`.
+- If `b>a`, retaining `2y` in the color of `q` forces `b+1\equiv a\pmod2`, but `2(q-2y)` has valuation `a+1`.
 - If `b=a`, one of `q+y` and `q-y` has valuation exactly `a+1`.
 
-Hence `1222` is impossible.
+Thus `1222` is impossible.
 
 ## The final word `1212`
 
-The only remaining coefficient word is
-
-```math
-1212.
-```
-
-Its sources have the form
+The sources have the form
 
 ```math
 s_1=q+y,
@@ -321,76 +262,53 @@ s_3=y,
 s_4=2q-y,
 ```
 
-with
-
-```math
-0<y<q.
-```
+with `0<y<q`.
 
 Let
 
 ```math
 a=v_2(q),
-\qquad
-b=v_2(y).
+\qquad b=v_2(y).
 ```
 
-Since `y=s_3` is a side source,
+Since `y=s_3` is a side source, `b\equiv a\pmod2`.
 
-```math
-b\equiv a\pmod2.
-```
+- If `b>a`, then `2q-y` has valuation `a+1`.
+- If `b=a`, one of `q+y` and `q-y` has valuation exactly `a+1`.
 
-If `b>a`, then `2q-y` has valuation `a+1`, the wrong parity.  If `b=a`, one of `q+y` and `q-y` has valuation exactly `a+1`.  Therefore necessarily
+Hence necessarily
 
 ```math
 b<a,
-\qquad
-a-b\ge2.
+\qquad a-b\ge2.
 ```
 
-The five right-witness magnitudes are
+The first four right-witness magnitudes are
 
 ```math
 t_0=q+2y,
-```
-
-```math
+\qquad
 t_1=y,
-```
-
-```math
+\qquad
 t_2=|q-2y|,
+\qquad
+t_3=q-y.
 ```
 
-```math
-t_3=q-y,
-```
-
-and
+Their 2-adic valuations are
 
 ```math
-t_4=3q-2y.
-```
-
-Their 2-adic valuations begin
-
-```math
-v_2(t_0)=b+1,
-\quad
-v_2(t_1)=b,
-\quad
-v_2(t_2)=b+1,
-\quad
-v_2(t_3)=b.
+b+1,
+\quad b,
+\quad b+1,
+\quad b.
 ```
 
 Set
 
 ```math
 u=y,
-\qquad
-v=q-y.
+\qquad v=q-y.
 ```
 
 Then
@@ -405,7 +323,7 @@ t_2=|v-u|,
 t_0=v+3u.
 ```
 
-Assume all witnesses have the same `chi`-color.  Since `t_1` and `t_3` have equal 2-adic valuations,
+Assume all witnesses have the same `chi`-color. Since `t_1` and `t_3` have equal 2-adic valuations,
 
 ```math
 v_3(v)\equiv v_3(u)\pmod3.
@@ -417,77 +335,81 @@ Since `t_2` has 2-adic valuation one larger,
 v_3(v-u)\equiv v_3(u)+1\pmod3.
 ```
 
-If `v_3(v) ne v_3(u)`, the ultrametric identity gives
+If `v_3(v)\ne v_3(u)`, then
 
 ```math
 v_3(v-u)=\min\{v_3(v),v_3(u)\},
 ```
 
-whose residue is `v_3(u) mod 3`, contradiction.  Hence
+whose residue is `v_3(u)\pmod3`, contradiction. Therefore
 
 ```math
 v_3(v)=v_3(u)=:h.
 ```
 
-The required color of `v-u` then forces
+The color condition on `v-u` forces `v_3(v-u)>h`. Dividing by `3^h`, the resulting units are congruent modulo `3`. But then
 
 ```math
-v_3(v-u)>h.
+v_3(v+3u)=h,
 ```
 
-After dividing by `3^h`, the two resulting 3-adic units are congruent modulo `3`.  But
+whereas the one-step increase in `v_2(t_0)` would require its 3-adic valuation to be congruent to `h+1\pmod3`. Contradiction.
 
-```math
-v+3u
-```
-
-then has 3-adic valuation exactly `h`.  This contradicts the fact that `t_0=v+3u` has 2-adic valuation `b+1` and must have the same `chi`-color as `t_1=u`.
-
-Thus `1212` is also impossible.
+Thus `1212` is impossible.
 
 ## Component-size theorem
 
-All sixteen coefficient words have been eliminated.  Therefore an absorption path cannot contain four consecutive left sources.
+All sixteen words are eliminated. Therefore
 
 ```math
 \boxed{
-\text{Every coordinated monochromatic absorption component has at most three left vertices.}
+\text{every coordinated monochromatic absorption component has at most three left vertices.}
 }
 ```
 
-The bound is sharp at the level of the stated hypotheses.  For example, one can realize a three-source path with
+The value `3` is attainable even with a 4-AP-free parent. Take
 
 ```math
-q=7,
+q=43,
 \qquad
-C\supseteq\{1,12,13\},
+C=\{7,36,43,79\},
 ```
 
-and right witnesses
+and
 
 ```math
-5,6,17,19,
+T=\{7,29,36,43,115\}.
 ```
 
-all having the same `chi`-color.
+All elements of `C` have the same `epsilon`-color, all elements of `T` have the same `chi`-color, and `C,2C,3C` are pairwise disjoint. The three nonbase sources
+
+```math
+79,\quad7,\quad36
+```
+
+form a path with right witnesses
+
+```math
+115,\quad36,\quad29,\quad7.
+```
+
+The associated translated parent set is
+
+```math
+\{-72,0,7,14,36,43,50,72,79,86,158\},
+```
+
+which contains no nontrivial four-term arithmetic progression.
 
 ## Witness-expansion corollary
 
-Let
-
-```math
-e=|E|
-```
-
-be the number of nonbase completely absorbed sources and let `c` be the number of nonempty absorption components.
-
-The forest identity gives
+Let `e=|E|` and let `c` be the number of nonempty components. The forest identity gives
 
 ```math
 |N(E)|=e+c.
 ```
 
-Since each component contains at most three left vertices,
+Since every component has at most three left vertices,
 
 ```math
 c\ge\left\lceil\frac e3\right\rceil.
@@ -500,8 +422,7 @@ Consequently
 |N(E)|
 \ge
 e+\left\lceil\frac e3\right\rceil
-\ge
-\frac43e.
+\ge\frac43e.
 }
 ```
 
@@ -516,25 +437,15 @@ Thus coordinated complete absorption has a strict constant-factor witness cost, 
 
 ## General packing consequence
 
-Let
-
-```math
-S\subseteq C,
-\qquad
-m=|S|,
-\qquad
-n=|T|,
-```
-
-and let `e` sources of `S` be completely absorbed by the middle lift.  The general unabsorbed-source estimate gives
+Let `S\subseteq C`, put `m=|S|`, `n=|T|`, and suppose `e` sources of `S` are completely absorbed. The general estimate
 
 ```math
 |A(S)\cup M_q(T)|
 \ge
-1+m+2n-e.
+1+m+2n-e
 ```
 
-Using `e<=3n/4`,
+combined with `e\le3n/4` gives
 
 ```math
 \boxed{
@@ -559,7 +470,7 @@ m+\frac54n
 }
 ```
 
-For `m=n`, this gives
+For `m=n`,
 
 ```math
 |A(S)\cup M_q(T)|
@@ -567,20 +478,15 @@ For `m=n`, this gives
 1+\frac94m.
 ```
 
-This does not yet reach the target leading constant `8/3`, but it replaces the previous logarithmic comparable-scale control by a uniform constant.
+This does not yet reach the target leading constant `8/3`, but it replaces logarithmic comparable-scale control by a uniform constant.
 
 ## Revised remaining gap
 
-The overlap problem is now quantitatively narrower.
+The overlap problem is now narrower:
 
 - common descendant mass has ternary paired expansion;
 - far-scale unmatched mass has the sharp piecewise packing theorem;
-- comparable-scale complete absorption uses components of size at most three and costs at least `4/3` middle witnesses per absorbed source.
+- global comparable-scale absorption has components of size at most three;
+- after dyadic shelling, the separate shell theorem improves this to two.
 
-The remaining gap is the interaction between:
-
-1. partially absorbed side sources;
-2. middle steps not used by complete absorption;
-3. endpoint reflections that land on branch points of those partially absorbed sources.
-
-A finite component analysis of the three possible absorption-path sizes may sharpen the `9/4` equal-size constant toward `8/3`.  Unlike the earlier endpoint-charge problem, this is now a bounded local classification problem rather than an unbounded path problem.
+The remaining task is a bounded local classification of endpoint reflections, partially absorbed sources, and unused middle steps.

@@ -6,13 +6,14 @@ This repository develops a partial-progress attack on Erdős Problem #3:
 
 The full problem remains open.
 
-The active program studies four-term-progression-free sets using a multiscale **side-anchor deletion DAG**. The current best theorem constructs a binary genealogy of lower-scale four-term-progression-free child occurrences with harmonic branching factor `4/3`. The central unresolved step is converting occurrence mass into harmonic mass of distinct integers.
+The active program studies four-term-progression-free sets using a multiscale **side-anchor deletion DAG**. The current best theorem constructs a binary genealogy of lower-scale four-term-progression-free child occurrences with harmonic branching factor `16/9`. The central unresolved step is converting occurrence mass into harmonic mass of distinct integers.
 
 ## Start here
 
 - `docs/current-proof-program.md` — authoritative theorem chain, dependency graph, false targets, and closing gaps.
 - `docs/certainty-ledger.md` — claims classified by status, confidence, and audit state.
-- `docs/spanning-forest-binary-four-thirds-recursion.md` — current best binary occurrence theorem.
+- `docs/color-aware-binary-sixteen-ninths-recursion.md` — current best binary occurrence theorem.
+- `docs/spanning-forest-binary-four-thirds-recursion.md` — superseded intermediate binary theorem.
 - `docs/deletion-dag-merge-difference-recursion.md` — indegree excess and merge-difference children.
 - `docs/side-anchor-deletion-dag.md` — affine deletion-DAG construction.
 
@@ -77,23 +78,27 @@ The two structural families therefore satisfy the exact balance
 }
 ```
 
-### Binary four-thirds thinning
+### Color-aware binary thinning
 
-After retaining at most one structural occurrence per parent element, at least `2K/3` structural occurrences remain. Selected coordinated middle children contribute harmonic mass at least `2K/(3N)`.
+For each deleted sponsor, let `ell(a) in {0,1,2,3}` be the number of associated structural occurrences. Choose the middle color jointly with the structural allocation:
 
-Thus every parent element creates at most two retained child occurrences and
+- sponsors in the chosen middle color retain their middle occurrence and at most one structural occurrence;
+- sponsors outside the chosen color retain at most two structural occurrences;
+- residual parents retain their structural occurrence.
+
+Every parent element creates at most two retained child occurrences. Averaging over the three middle colors gives
 
 ```math
 \boxed{
 \sum H(\text{binary child occurrences})
 \ge
-\frac43H(D)
+\frac{16}{9}H(D)
 -
-\frac43\frac{r_3(N)}N.
+\frac{16}{9}\frac{r_3(N)}N.
 }
 ```
 
-This supersedes the previous best binary factor `7/6`.
+This supersedes the previous binary factors `7/6` and `4/3`.
 
 ## Central gap
 
@@ -125,9 +130,9 @@ The unresolved task is to control
 
 The current approved closing targets are:
 
-1. a weighted multiplicity rate strictly below `4/3`;
+1. a weighted multiplicity rate strictly below `16/9`;
 2. a bounded multiscale potential;
-3. structural control of triple-loaded sponsors;
+3. structural exclusion of the abstract extremal load pattern `ell=0` on one third of sponsors and `ell=3` on two thirds;
 4. scalable computational counterexamples that persist over multiple generations.
 
 ## Supporting results

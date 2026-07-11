@@ -38,7 +38,7 @@ A four-term-progression-free divergent candidate must have `alpha_j -> 0`.
 
 **Audit state:** awaiting independent review.
 
-For a four-term-progression-free block `D subseteq[N,2N)`, repeated coordinated side-anchor deletion removes
+For a four-term-progression-free block `D subseteq[N,2N)`, coordinated side-anchor deletion removes
 
 ```math
 K=|D|-s
@@ -52,11 +52,6 @@ s\le r_3(N).
 
 Every deleted sponsor creates one selected middle-step occurrence `q<=N/2`.
 
-**Primary notes:**
-
-- `docs/side-anchor-sponsored-middle-recursion.md`
-- `docs/side-anchor-deletion-dag.md`
-
 ---
 
 ## CL-003: Minimum-translation backbone
@@ -67,37 +62,18 @@ Every deleted sponsor creates one selected middle-step occurrence `q<=N/2`.
 
 **Audit state:** awaiting independent review.
 
-For
-
-```math
-m=\min D,
-```
-
-define
+For `m=min D`,
 
 ```math
 \mathcal B(D)
 =
-\{d-m:d\in D,\ d>m\}.
+\{d-m:d\in D,\ d>m\}
 ```
 
-Then
+is four-term-progression-free, lies in `[1,N)`, has size `|D|-1`, and every associated label satisfies
 
 ```math
-\mathcal B(D)\subseteq[1,N),
-```
-
-`B(D)` is four-term-progression-free, and
-
-```math
-\boxed{|
-\mathcal B(D)|=|D|-1.}
-```
-
-Every backbone output associated with parent `d` satisfies
-
-```math
-0<d-m\le d/2.
+d-m\le d/2.
 ```
 
 **Primary note:** `docs/minimum-translation-backbone-recursion.md`.
@@ -112,7 +88,7 @@ Every backbone output associated with parent `d` satisfies
 
 **Audit state:** awaiting independent review.
 
-The full middle family and minimum-translation backbone form a binary occurrence genealogy satisfying
+The full middle family and minimum-translation backbone give
 
 ```math
 \boxed{
@@ -128,11 +104,9 @@ H(\mathcal B(D))
 }
 ```
 
-**Caveat:** equal numerical terminal labels are counted repeatedly.
+**Caveat:** equal numerical labels are counted repeatedly.
 
-**Consequence:** the previous raw factors `7/6`, `4/3`, `16/9`, and `8/3` are superseded.
-
-**Primary note:** `docs/minimum-translation-backbone-recursion.md`.
+**Consequence:** raw factors `7/6`, `4/3`, `16/9`, and `8/3` are superseded.
 
 ---
 
@@ -144,7 +118,7 @@ H(\mathcal B(D))
 
 **Audit state:** awaiting independent review.
 
-Let `Q` be the distinct selected steps and `Xi_q` the corresponding center-difference children. Then
+For distinct selected steps `Q` and center-difference children `Xi_q`,
 
 ```math
 \boxed{
@@ -156,8 +130,6 @@ Let `Q` be the distinct selected steps and `Xi_q` the corresponding center-diffe
 
 Every additional copy of a selected middle step becomes a lower-scale four-term-progression-free child.
 
-**Primary note:** `docs/middle-multiplicity-fiber-five-thirds-recursion.md`.
-
 ---
 
 ## CL-006: Binary multiplicity-resolving factor two
@@ -168,7 +140,7 @@ Every additional copy of a selected middle step becomes a lower-scale four-term-
 
 **Audit state:** awaiting independent review.
 
-Combining the exact middle multiplicity fibers with the minimum-translation backbone gives
+Combining the exact middle fibers with the backbone gives
 
 ```math
 \boxed{
@@ -190,19 +162,17 @@ The genealogy remains binary.
 
 **Consequence:** the previous multiplicity-resolving factor `5/3` is superseded.
 
-**Primary note:** `docs/minimum-translation-backbone-recursion.md`.
-
 ---
 
 ## CL-007: Half-contraction and positive moments
 
 **Status:** proved in repository.
 
-**Certainty:** medium-high for the one-step inequality; medium for the multigeneration use.
+**Certainty:** medium-high for one step; medium for the full multigeneration use.
 
 **Audit state:** awaiting independent review.
 
-Every retained output associated with parent `a` is at most `a/2`, and every parent creates at most two outputs. Therefore
+Every parent creates at most two outputs, each at most half its label. Therefore
 
 ```math
 \boxed{
@@ -213,7 +183,7 @@ Every retained output associated with parent `a` is at most `a/2`, and every par
 }
 ```
 
-If `mu(q)` is total terminal multiplicity across all generations, then
+If `mu(q)` is total terminal multiplicity, then
 
 ```math
 \boxed{
@@ -226,19 +196,15 @@ If `mu(q)` is total terminal multiplicity across all generations, then
 
 Recursive depth is logarithmic.
 
-**Primary note:** `docs/half-contraction-multiscale-label-potential.md`.
-
 ---
 
-## CL-008: Recursive children must be shell-resolved
+## CL-008: Shell resolution is mandatory
 
 **Status:** required interface condition.
 
 **Certainty:** high.
 
-A recursive child in `[1,N)` must be partitioned into standard dyadic shells before side-anchor deletion is reapplied. A progression crossing shell boundaries is not a recursive terminal event.
-
-**Consequence:** every multigeneration overlap theorem or counterexample must be checked after shell decomposition.
+Every child in `[1,N)` must be partitioned into standard dyadic shells before deletion is reapplied. A progression crossing shell boundaries is not a recursive terminal event.
 
 ---
 
@@ -250,14 +216,7 @@ A recursive child in `[1,N)` must be partitioned into standard dyadic shells bef
 
 **Audit state:** awaiting independent review.
 
-Every recursive state has the form
-
-```math
-S=B-t,
-\qquad B\subseteq D_{\mathrm{root}}.
-```
-
-Let `nu_q(x)` count terminal occurrences of step `q` lifting to center `x`. Put
+Let `nu_q(x)` count terminal copies of step `q` lifting to center `x`. Define
 
 ```math
 L(q)=\max_x\nu_q(x)
@@ -269,7 +228,7 @@ and
 X_{q,k}=\{x:\nu_q(x)\ge k\}.
 ```
 
-Translating each nonempty layer gives four-term-progression-free children `Omega_{q,k}` satisfying
+Translating each nonempty center layer gives four-term-progression-free children `Omega_{q,k}` satisfying
 
 ```math
 \boxed{
@@ -281,9 +240,7 @@ L(q)
 }
 ```
 
-**Consequence:** every repeated terminal label occurring at a different lifted center is exported.
-
-**Primary note:** `docs/global-lifted-center-layer-resolution.md`.
+**Consequence:** every repeated label occurring at a different lifted center is exported.
 
 ---
 
@@ -295,7 +252,7 @@ L(q)
 
 **Audit state:** awaiting independent review.
 
-Every nonroot recursive state has a root anchor `t in D_root`. For one exact lifted progression, let `lambda_{x,q}(t)` count copies produced in states with anchor `t`. Define
+Let `lambda_{x,q}(t)` count copies of one exact lifted progression produced in states with root anchor `t`. Put
 
 ```math
 M_{x,q}
@@ -303,7 +260,7 @@ M_{x,q}
 \max_{t\in D}\lambda_{x,q}(t).
 ```
 
-Nested anchor layers translate to lower-scale four-term-progression-free children `Gamma_{x,q,k}` with
+Nested anchor layers give four-term-progression-free children `Gamma_{x,q,k}` with
 
 ```math
 \boxed{
@@ -315,9 +272,7 @@ M_{x,q}
 }
 ```
 
-**Consequence:** every exact-progression copy occurring with a different root translation anchor is exported.
-
-**Primary note:** `docs/state-anchor-layer-and-antichain-budget.md`.
+**Consequence:** every exact-progression copy occurring with a different root anchor is exported.
 
 ---
 
@@ -329,30 +284,12 @@ M_{x,q}
 
 **Audit state:** awaiting independent review.
 
-Let
-
-```math
-a=x-\sigma(q)q
-```
-
-be the root sponsor of an exact lifted progression. In a state anchored at `t`, its local sponsor label is `a-t`.
-
-Copies with the same anchor have equal positive label `a-t` and form an antichain in the half-contracting occurrence tree. Therefore
+Let `a=x-sigma(q)q` be the root sponsor. Copies produced in states with one anchor `t` have equal local sponsor label `a-t` and form an antichain. Therefore
 
 ```math
 \boxed{
 \lambda_{x,q}(t)(a-t)
 \le a.
-}
-```
-
-Hence
-
-```math
-\boxed{
-\lambda_{x,q}(t)
-\le
-\left\lfloor\frac{a}{a-t}\right\rfloor.
 }
 ```
 
@@ -364,37 +301,65 @@ High multiplicity implies
  t\ge a\left(1-\frac1m\right).
 ```
 
-If
-
-```math
-T_m(x,q)
-=
-\{t\in D:\lambda_{x,q}(t)\ge m\},
-```
-
-then
-
-```math
-\boxed{
-|T_m(x,q)|
-\le
-r_4\!\left(\left\lceil a/m\right\rceil+1\right).
-}
-```
-
-**Consequence:** unresolved same-anchor persistence is concentrated in a short interval immediately below the sponsor.
-
-**Primary note:** `docs/state-anchor-layer-and-antichain-budget.md`.
+Thus unresolved persistence is concentrated in a short interval immediately below the sponsor.
 
 ---
 
-## CL-012: Sharp aligned middle-backbone diamond
+## CL-012: Predecessor-anchor layer decomposition
+
+**Status:** proved in repository.
+
+**Certainty:** medium-high.
+
+**Audit state:** awaiting independent review.
+
+For one target anchor `t`, let `c_{x,q,t}(p)` count copies whose immediate parent state has anchor `p`. Define
+
+```math
+C_{x,q}(t)
+=
+\max_{p\in D}c_{x,q,t}(p).
+```
+
+Nested predecessor layers produce four-term-progression-free children `Lambda_{x,q,t,k}` satisfying
+
+```math
+\boxed{
+\sum_{p\in D}c_{x,q,t}(p)
+=
+C_{x,q}(t)
++
+\sum_{k=1}^{C_{x,q}(t)}|\Lambda_{x,q,t,k}|.
+}
+```
+
+Predecessor anchors satisfy
+
+```math
+p\le2t-a<t,
+```
+
+and one fixed transition obeys
+
+```math
+\boxed{
+c_{x,q,t}(p)(a-p)\le a.
+}
+```
+
+The construction iterates backward through the complete anchor history.
+
+**Primary note:** `docs/predecessor-anchor-layer-resolution.md`.
+
+---
+
+## CL-013: Sharp one-step aligned diamond
 
 **Status:** proved in repository and computationally verified.
 
 **Certainty:** high for the finite certificate.
 
-For every `N>=32`, the block
+For every `N>=32`,
 
 ```math
 D_N
@@ -405,15 +370,15 @@ N+
 
 is four-term-progression-free.
 
-Four selected step-one progressions produce
+The middle multiplicity fiber and minimum-translation backbone both produce the progression
 
 ```math
-\Xi_1=\{16,21,26\},
+16,21,26
 ```
 
-while the minimum-translation backbone shell contains the same progression. Both children have root anchor `N`.
+with the same root anchor.
 
-**Consequence:** one parent can create two copies of the same local progression with the same anchor. The one-parent bound `2` is sharp; a universal one-copy-per-anchor claim is false.
+**Consequence:** one parent can create two identical local copies; the one-parent bound `2` is sharp.
 
 **Primary note:** `docs/minimum-backbone-aligned-diamond-counterexample.md`.
 
@@ -421,7 +386,53 @@ while the minimum-translation backbone shell contains the same progression. Both
 
 ---
 
-## CL-013: Supporting deletion-DAG structural balance
+## CL-014: Self-replicating aligned diamonds
+
+**Status:** proved in repository.
+
+**Certainty:** medium-high for the recursive construction; depth-two certificate computationally verified.
+
+**Audit state:** awaiting independent review.
+
+There are four-term-progression-free states `S_h` producing
+
+```math
+\boxed{2^h}
+```
+
+terminal copies of the same exact local progression with the same complete anchor history.
+
+Their cardinalities are
+
+```math
+\boxed{
+|S_h|
+=
+\frac{9\cdot3^h-3}{2}.
+}
+```
+
+Therefore
+
+```math
+\boxed{
+\text{identical-history persistence}
+\asymp
+|S_h|^{\log_3 2}.
+}
+```
+
+The construction uses a no-carry union of three widely separated translates and duplicates the previous gadget simultaneously in a middle multiplicity fiber and a backbone shell.
+
+**Consequence:** absolute, logarithmic, polylogarithmic, and subpower bounds below exponent `log_3 2` are false in terms of parent cardinality.
+
+**Primary note:** `docs/self-replicating-aligned-diamond.md`.
+
+**Verifier:** `src/verify_self_replicating_aligned-diamond-depth2.py`.
+
+---
+
+## CL-015: Supporting deletion-DAG structural balance
 
 **Status:** proved in repository.
 
@@ -429,7 +440,7 @@ while the minimum-translation backbone shell contains the same progression. Both
 
 **Audit state:** awaiting independent review.
 
-Merge-difference and spanning-component children satisfy
+Merge and spanning-component children satisfy
 
 ```math
 \sum_v|\Delta_v|=K-s+\rho,
@@ -442,36 +453,13 @@ Merge-difference and spanning-component children satisfy
 and
 
 ```math
-\boxed{
 \sum_v|\Delta_v|
 +
 \sum_j|\Theta_j|
 =2K.
-}
 ```
 
-These results are no longer needed for the strongest one-generation constants, but remain supporting overlap geometry.
-
-**Primary notes:**
-
-- `docs/deletion-dag-merge-difference-recursion.md`
-- `docs/spanning-forest-binary-four-thirds-recursion.md`
-
----
-
-## CL-014: Shell-compatible spanning-component sharpness
-
-**Status:** proved in repository and computationally verified.
-
-**Certainty:** high for the finite certificate.
-
-A 34-element four-term-progression-free root block produces the same terminal label `234` in a middle-fiber shell and a spanning-component shell.
-
-**Consequence:** universal one-layer sibling collapse is false for the older component recursion even after shell resolution.
-
-**Primary note:** `docs/dyadic-shell-compatible-sibling-sharpness.md`.
-
-**Verifier:** `src/verify_dyadic_shell_sibling_sharpness.py`.
+These results remain supporting overlap geometry but are no longer required for the strongest one-generation constants.
 
 ---
 
@@ -504,36 +492,32 @@ Do not use the following without new hypotheses:
 3. naive recursive density increment in the inherited three-dilate class;
 4. universal one-layer sibling collapse;
 5. universal one-copy-per-anchor persistence;
-6. the original 31-element overlap as a shell-resolved recursive terminal example.
+6. bounded or polylogarithmic identical-anchor-history persistence;
+7. a subpower persistence bound with exponent below `log_3 2` in terms of parent cardinality;
+8. the original 31-element overlap as a shell-resolved recursive terminal example.
 
 ---
 
-# Open bottleneck OB-001: Same-anchor predecessor convergence
+# Open bottleneck OB-001: Density-sensitive aligned replication
 
-After CL-005, CL-009, and CL-010, the unresolved multiplicity is
+CL-014 shows that four-term-progression-freeness alone allows polynomially growing exact persistence.
+
+The construction remains sparse in its ambient interval. Its point count grows like `3^h`, while the scale required for `h` replication levels grows faster.
+
+The active closing target is
 
 ```math
 \boxed{
-\text{one identical local progression repeated across incomparable states with the same root anchor.}
+\text{prove that blocks with substantial reciprocal mass cannot sustain aligned-diamond replication efficiently across scales.}
 }
 ```
 
-CL-011 gives
-
-```math
-\lambda(a-t)\le a,
-```
-
-and local multiplicity two is realizable by CL-012.
-
-Multiplicity larger than two requires several parent states to converge to the same new anchor and preserve the same local progression.
-
 Approved targets:
 
-1. export predecessor-anchor convergence diamonds to additional lower-scale difference children;
-2. prove that repeated aligned convergence forces a forbidden affine configuration;
-3. combine the short-anchor-interval tail with parent density;
-4. construct a stopping-time potential for one local progression;
-5. search for shell-compatible self-replicating aligned diamonds.
+1. prove a lower bound on ambient scale required for `h` replication levels;
+2. establish a tradeoff between persistence and dyadic density;
+3. build a potential coupling reciprocal mass to the `3`-for-`2` replication law;
+4. classify constructions approaching minimum scale growth;
+5. show that nonsummable dyadic density is incompatible with indefinite efficient replication.
 
 No current theorem closes this gap.

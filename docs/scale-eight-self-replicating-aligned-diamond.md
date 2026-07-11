@@ -30,6 +30,14 @@ Consequently
 
 The previous general no-carry construction only gave `L_h=O(20^h)`. The new family uses alternating base-eight separations and is certified as four-term-progression-free by a 34-state digit automaton and an exact product/carry search.
 
+Two companion elementary notes prove that this construction is quantitatively sharp inside the exact standard-dyadic three-translate model:
+
+- `docs/three-translate-dyadic-scale-barrier.md` proves `L' >= 8L` at every exact replication step;
+- `docs/exact-three-translate-weighted-density-theorem.md` proves the sharp decay
+  ```math
+  P\alpha(P)\ll P^{\log_2 3-2}.
+  ```
+
 All theorem-style conclusions remain awaiting independent expert review.
 
 ---
@@ -197,6 +205,8 @@ The scale recurrence is exact:
 \boxed{L_{h+1}=8L_h.}
 ```
 
+The companion scale-barrier theorem shows that no smaller standard-dyadic jump is possible for an exact three-translate replication step with uncontaminated backbone reproduction.
+
 ---
 
 ## 4. Two identical recursive children
@@ -219,36 +229,27 @@ a\in A_h.
 
 Since `v_2(R_h)` is even, the coordinated sponsor is the left endpoint. The sponsor, center, and endpoint layers are disjoint because `R_h>max S_h`.
 
-### Middle multiplicity fiber
-
-The selected centers are
+The selected middle centers are
 
 ```math
-L_{h+1}+a+R_h,
-\qquad a\in A_h.
+L_{h+1}+R_h+a,
+\qquad
+a\in A_h.
 ```
 
-The representative center corresponds to `a=0`. Translating all other centers by that representative gives exactly
+The center-difference multiplicity fiber obtained by subtracting the center corresponding to `a=0` is exactly
 
 ```math
 S_h.
 ```
 
-### Minimum-translation backbone
-
-The minimum of `S_{h+1}` is `L_{h+1}`. Translating by this minimum gives
+The minimum-translation backbone is
 
 ```math
 G_{h+1}\setminus\{0\}.
 ```
 
-The standard shell
-
-```math
-[L_h,2L_h)
-```
-
-contains exactly the unshifted copy `S_h`, because
+Its standard dyadic shell `[L_h,2L_h)` contains exactly the unshifted copy `S_h`, because
 
 ```math
 R_h>2L_h.
@@ -340,6 +341,14 @@ where
 
 Thus this efficient replication family still spends a geometrically summable amount of multiplicity-weighted dyadic density.
 
+The exact-model weighted-density theorem shows that the same exponent is an upper bound for every exact standard-dyadic three-translate genealogy, and that
+
+```math
+\sum_hP_h\alpha_h<\infty
+```
+
+with an explicit root-dependent bound.
+
 ---
 
 ## 6. Exact finite-state certificate
@@ -421,44 +430,28 @@ to
 }
 ```
 
-Therefore any universal ambient-scale persistence theorem must allow at least order `L^(1/3)` along an infinite sequence of dyadic scales.
+The companion barrier theorem proves that `1/3` is also the matching upper exponent inside the exact standard-dyadic three-translate model.
 
-Likewise, a density-sensitive theorem cannot claim decay stronger than the construction permits without additional hypotheses. Along this family,
-
-```math
-\alpha(P)
-\asymp
-P^{\log_2 3-3}
-```
-
-and
-
-```math
-P\alpha(P)
-\asymp
-P^{\log_2 3-2}.
-```
-
-The construction remains compatible with the desired closing mechanism because the exponent `log_2 3-2` is negative. It supplies a concrete benchmark for a future density-sensitive persistence theorem:
+Likewise, the companion weighted-density theorem proves sharply within that model that
 
 ```math
 \boxed{
-\text{prove that every persistent family has multiplicity-weighted density decay, with the scale-eight family as a lower benchmark.}
+P\alpha(P)
+\ll
+P^{\log_2 3-2}
 }
 ```
 
----
+and that the total weighted density along one exact genealogy is summable.
 
-## Proposed certainty-ledger entry
+Therefore the canonical exact obstruction is now quantitatively classified. A full theorem must control mechanisms outside the exact model: overlapping or approximate replication, several interacting parent states, nonuniform branching, or persistence distributed across several dyadic shells.
 
-**Scale-eight aligned-diamond family.** There is a computer-assisted exact family of four-term-progression-free blocks `S_h subseteq[L_h,2L_h)` with
+The scale-eight family does not produce a divergent reciprocal-sum counterexample. Its densities decay geometrically:
 
 ```math
-L_h=8^{h+1},
-\qquad
-|S_h|=\frac{9\cdot3^h-3}{2},
-\qquad
-\text{persistence}=2^h=\frac12L_h^{1/3}.
+\alpha_h
+\asymp
+\left(\frac38\right)^h.
 ```
 
-The infinite union is certified four-term-progression-free by a 34-state base-eight DFA and a 17,238-state product/carry reachability computation. The result improves the previous ambient-scale exponent from `log_20(2)` to `1/3` and provides a quantitative lower benchmark for any density-sensitive persistence theorem.
+The construction is instead a sharp test case for any proposed density-sensitive persistence theorem.

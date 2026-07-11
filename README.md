@@ -151,12 +151,12 @@ After iterating through the anchor history, the residual consists of identical l
 
 That final residual can grow polynomially.
 
-The base state
+The scale-eight base state
 
 ```math
 S_1
 =
-32+
+64+
 \{0,1,2,16,17,18,21,22,23,26,27,28\}
 ```
 
@@ -168,7 +168,7 @@ is four-term-progression-free and produces two copies of the terminal progressio
 
 with step `5` and the same root anchor.
 
-A recursive three-translate construction doubles the number of identical-history copies at every level. There are four-term-progression-free blocks `S_h` with
+An alternating base-eight three-translate construction doubles the number of identical-history copies at every level. There are computer-certified four-term-progression-free blocks `S_h` with
 
 ```math
 \boxed{
@@ -186,42 +186,142 @@ and
 }
 ```
 
+The ambient scale is exact:
+
+```math
+\boxed{
+S_h\subseteq[L_h,2L_h),
+\qquad
+L_h=8^{h+1}.
+}
+```
+
 Therefore
 
 ```math
 \boxed{
 \text{persistence}
-\asymp
-|S_h|^{\log_3 2}.
+=
+2^h
+=
+\frac12L_h^{1/3}.
 }
 ```
 
-Absolute, logarithmic, polylogarithmic, and sufficiently small subpower persistence bounds are false without additional hypotheses.
+The full infinite family is certified four-term-progression-free by a 34-state base-eight automaton and a 17,238-state product/carry search. Absolute, logarithmic, polylogarithmic, and sufficiently small subpower persistence bounds are false without additional hypotheses.
 
-The depth-two 39-point instance produces four terminal copies with the same complete anchor history. It is verified by
+The certificate is reproduced by
 
 ```text
-src/verify_self_replicating_aligned_diamond_depth2.py
+src/verify_scale_eight_aligned_diamond.py
 ```
 
-## Current bottleneck
+and documented in
 
-The remaining theorem must be density-sensitive.
+```text
+docs/scale-eight-self-replicating-aligned-diamond.md
+```
 
-The self-replicating construction is sparse in its ambient interval, so it does not yield a divergent reciprocal-sum counterexample. The active target is now
+### Sharp exact-model theorems
+
+The canonical equal-translate obstruction is now quantitatively classified.
+
+If one exact replication step has
+
+```math
+S\subseteq[L,2L),
+\qquad
+A=\{0\}\cup S,
+```
+
+```math
+G=A\cup(A+R)\cup(A+2R),
+```
+
+and is translated into a standard dyadic shell
+
+```math
+L'+G\subseteq[L',2L'),
+```
+
+then uncontaminated backbone reproduction requires `R>=2L`. Since `2R in G`, one has `L'>4L`; because `L'/L` is a power of two,
+
+```math
+\boxed{L'\ge8L.}
+```
+
+Also, four equal translate layers are impossible because `0,R,2R,3R` would be a four-term progression. Thus three layers are maximal. Since the occurrence genealogy is binary, two persistent children are maximal. The canonical architecture therefore has the extremal one-step efficiency
 
 ```math
 \boxed{
-\text{prove that blocks carrying substantial reciprocal mass cannot sustain aligned-diamond replication efficiently across scales.}
+\rho_{\mathrm{exact}}
+=
+\frac{2\cdot3}{8}
+=
+\frac34.
 }
 ```
 
-Useful forms would include:
+After `h` exact generations,
 
-1. a tradeoff between persistence multiplicity and block density;
-2. a lower bound on ambient scale required for `h` replication levels;
-3. a potential coupling reciprocal mass to the `3`-for-`2` size growth of the gadget;
-4. a theorem showing that near-extremal replication consumes a summable amount of dyadic density.
+```math
+\boxed{
+P_h\le\left(\frac{L_h}{L_0}\right)^{1/3}.
+}
+```
+
+The exact cardinality recurrence is
+
+```math
+n_{h+1}=3(n_h+1),
+```
+
+so every exact equal-translate genealogy satisfies
+
+```math
+\boxed{
+P_h\alpha_h
+\le
+C_0P_h^{\log_2 3-2}
+}
+```
+
+and
+
+```math
+\boxed{
+\sum_hP_h\alpha_h
+\le
+4C_0,
+\qquad
+C_0=\frac{n_0+3/2}{L_0}.
+}
+```
+
+The scale-eight family attains the exponents `1/3` and `2-log_2(3)`.
+
+## Current bottleneck
+
+The remaining theorem must control persistence outside the exact equal-translate model.
+
+The exact obstruction already has summable multiplicity-weighted density, so any unresolved mechanism must involve at least one genuinely different feature:
+
+1. overlapping or only partially resolved translate layers;
+2. several parent states feeding one terminal history;
+3. nonuniform branching or child counts;
+4. approximate rather than exact recurrence;
+5. persistence distributed across multiple dyadic shells;
+6. many genealogies whose charges cannot be separated.
+
+The active target is therefore
+
+```math
+\boxed{
+\text{decompose general persistence into exact or near-exact genealogies plus a quantitatively cheaper error class.}
+}
+```
+
+A useful next theorem would define a general local efficiency ratio and prove that every segment either stays structurally close to the exact `3/4` architecture or contracts by a uniformly stronger factor.
 
 ## Supporting deletion-DAG theory
 
@@ -253,8 +353,12 @@ They are no longer needed for the strongest one-generation constants, but remain
 - `docs/global-lifted-center-layer-resolution.md` — different-center compression.
 - `docs/state-anchor-layer-and-antichain-budget.md` — different-anchor compression and same-anchor budget.
 - `docs/predecessor-anchor-layer-resolution.md` — predecessor and anchor-history compression.
-- `docs/self-replicating-aligned-diamond.md` — arbitrary-depth persistence construction.
-- `src/verify_self_replicating_aligned_diamond_depth2.py` — depth-two verifier.
+- `docs/self-replicating-aligned-diamond.md` — original arbitrary-depth persistence construction.
+- `docs/scale-eight-self-replicating-aligned-diamond.md` — exact scale-eight refinement and density benchmark.
+- `docs/three-translate-dyadic-scale-barrier.md` — sharp `L' >= 8L` theorem for exact replication.
+- `docs/exact-three-translate-weighted-density-theorem.md` — sharp weighted-density decay and summability in the exact model.
+- `src/verify_scale_eight_aligned_diamond.py` — infinite-family automaton certificate.
+- `src/verify_self_replicating_aligned_diamond_depth2.py` — original depth-two verifier.
 - `docs/half-contraction-multiscale-label-potential.md` — all-generation moment potential.
 - `docs/side-anchor-deletion-dag.md` — supporting affine deletion DAG.
 

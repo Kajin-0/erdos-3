@@ -6,15 +6,15 @@ This repository develops a partial-progress attack on Erdős Problem #3:
 
 The full problem remains open.
 
-The active program studies four-term-progression-free sets through a multiscale **side-anchor deletion DAG**. The main current objective is to convert supercritical harmonic growth of descendant occurrences into growth of distinct integers, or to prove that repeated scale contraction must terminate.
+The active program studies four-term-progression-free sets using a multiscale **side-anchor deletion DAG**. The current best theorem constructs a binary genealogy of lower-scale four-term-progression-free child occurrences with harmonic branching factor `4/3`. The central unresolved step is converting occurrence mass into harmonic mass of distinct integers.
 
 ## Start here
 
 - `docs/current-proof-program.md` — authoritative theorem chain, dependency graph, false targets, and closing gaps.
-- `docs/certainty-ledger.md` — claims classified by status and confidence.
-- `docs/deletion-dag-merge-difference-recursion.md` — exact indegree-excess identity and lower-scale merge children.
-- `docs/deletion-dag-root-depth-dichotomy.md` — root-rich harmonic gain versus long valuation-directed paths.
-- `docs/side-anchor-deletion-dag.md` — construction of the affine deletion DAG.
+- `docs/certainty-ledger.md` — claims classified by status, confidence, and audit state.
+- `docs/spanning-forest-binary-four-thirds-recursion.md` — current best binary occurrence theorem.
+- `docs/deletion-dag-merge-difference-recursion.md` — indegree excess and merge-difference children.
+- `docs/side-anchor-deletion-dag.md` — affine deletion-DAG construction.
 
 ## Active theorem chain
 
@@ -24,11 +24,23 @@ For a four-term-progression-free block
 D\subseteq[N,2N),
 ```
 
-run side-anchor deletion until a three-term-progression-free residual of size `s<=r_3(N)` remains.
+run side-anchor deletion until a three-term-progression-free residual of size
+
+```math
+s\le r_3(N)
+```
+
+remains. Put
+
+```math
+K=|D|-s.
+```
 
 The selected progressions define an acyclic graph in which every deleted sponsor points to the two surviving points of its selected three-term progression.
 
-If `K=|D|-s` and `rho` is the number of indegree-zero vertices, then the exact indegree excess is
+### Merge-difference children
+
+If `rho` is the number of indegree-zero vertices, the exact indegree excess is
 
 ```math
 \boxed{
@@ -40,114 +52,110 @@ K-s+\rho.
 }
 ```
 
-For each target vertex `v`, translating its incoming sponsors by the smallest sponsor produces a four-term-progression-free lower-scale child `Delta_v subseteq [1,N)`. These children satisfy
+Translating the incoming sponsors at each target gives lower-scale four-term-progression-free children `Delta_v` with
 
 ```math
-\boxed{
-\sum_vH(\Delta_v)
-\ge
-H(D)-2\frac{r_3(N)}N.
-}
+\sum_v|\Delta_v|=K-s+\rho.
 ```
 
-Combining them with selected coordinated middle children gives occurrence-level branching
+### Spanning-forest children
+
+Choose one incoming edge for every nonroot DAG vertex. Translating each resulting forest component by its smallest element gives lower-scale four-term-progression-free children `Theta_j` with
+
+```math
+\sum_j|\Theta_j|=K+s-\rho.
+```
+
+The two structural families therefore satisfy the exact balance
 
 ```math
 \boxed{
-\sum_vH(\Delta_v)
+\sum_v|\Delta_v|
 +
-\sum_xH(M_x^*)
-\ge
-\frac53H(D)
--
-\frac83\frac{r_3(N)}N.
+\sum_j|\Theta_j|
+=2K.
 }
 ```
 
-After binary thinning, every sponsor creates at most two child occurrences while retaining
+### Binary four-thirds thinning
+
+After retaining at most one structural occurrence per parent element, at least `2K/3` structural occurrences remain. Selected coordinated middle children contribute harmonic mass at least `2K/(3N)`.
+
+Thus every parent element creates at most two retained child occurrences and
 
 ```math
 \boxed{
-\sum_vH(\Delta_v')
-+
-\sum_xH(M_x^*)
+\sum H(\text{binary child occurrences})
 \ge
-\frac76H(D)
+\frac43H(D)
 -
-\frac53\frac{r_3(N)}N.
+\frac43\frac{r_3(N)}N.
 }
 ```
 
-These inequalities count harmonic mass **with multiplicity**. The central unsolved step is to control repeated numerical labels and rapid scale contraction.
+This supersedes the previous best binary factor `7/6`.
 
-## Current dichotomy
+## Central gap
 
-Let `rho` be the number of roots of the deletion DAG.
+The theorem controls
 
-- If `rho` is a positive proportion of `|D|`, the merge-difference recursion has a strict harmonic gain.
-- If roots are sparse, the DAG contains a long path whose increments have the form
+```math
+\sum_d\frac{m(d)}d,
+```
 
-  ```math
-  x_{j+1}-x_j
-  =
-  \sigma(q_j)c_jq_j,
-  \qquad c_j\in\{1,2\},
-  ```
+where `m(d)` counts occurrences of the numerical label `d`.
 
-  where the direction `sigma(q_j)` is determined by `v_2(q_j) mod 2`.
+The original problem concerns
 
-A closing theorem must control weighted multiplicity, construct a bounded multiscale potential, or show that root-poor valuation-directed paths cannot persist.
+```math
+\sum_{d:m(d)>0}\frac1d.
+```
+
+The unresolved task is to control
+
+```math
+\boxed{
+\text{multiplicity},
+\quad
+\text{scale contraction},
+\quad
+\text{genealogical overlap}.
+}
+```
+
+The current approved closing targets are:
+
+1. a weighted multiplicity rate strictly below `4/3`;
+2. a bounded multiscale potential;
+3. structural control of triple-loaded sponsors;
+4. scalable computational counterexamples that persist over multiple generations.
+
+## Supporting results
+
+The repository also contains:
+
+- a root-rich versus long valuation-directed path dichotomy;
+- componentwise scale-compensated side-middle packing;
+- exact counterexamples to bounded affine-lift overlap;
+- an exact counterexample to uncorrected local `8/3` packing;
+- popular-direction, high-interaction, and affine-tree supporting lemmas.
+
+See `docs/current-proof-program.md` for dependency and status classification.
 
 ## Research discipline
 
-The project previously generated many overlapping theorem notes. The current policy is:
+The active policy is:
 
-- no new broad proof language unless it proves or falsifies an explicit closing target in `docs/current-proof-program.md`;
-- recent exact lemmas are marked as proved in the repository but awaiting independent audit;
-- counterexamples and superseded routes remain documented so false approaches are not revived;
-- the README and certainty ledger are the authoritative entry points.
-
-## Supporting local packing results
-
-The coordinated side-middle analysis proves a scale-compensated inequality. For a side shell `S subseteq [R,2R)` and a paired middle subset `T`,
-
-```math
-\boxed{
-|A(S)\cup M_q(T)|
-+
-R H(T\cap[1,R))
-\ge
-2+
-\frac43(|S|+|T|)-\eta,
-}
-```
-
-where `0<=eta<=2` records anchor coincidences.
-
-This explains why efficient local overlap exports harmonic potential to a lower scale. It is currently a supporting ingredient rather than the shortest active proof chain.
-
-Primary notes:
-
-- `docs/full-component-scale-export.md`
-- `docs/unequal-cardinality-scale-compensated-packing.md`
-- `docs/seven-thirds-local-packing-counterexample.md`
-
-## Explicitly falsified targets
-
-The repository contains exact counterexamples or corrections showing that the following statements cannot be used as originally proposed:
-
-- uniformly bounded depth-two affine-lift overlap;
-- universal uncorrected local `8/3` side-middle packing;
-- naive recursive density increment;
-- creation of genuine off-diagonal discrepancy by fixed-size sampling.
-
-See `docs/current-proof-program.md` for the precise classification.
+- no new broad proof language unless it proves or falsifies an explicit closing target;
+- recent theorem-style lemmas are marked as proved in the repository but awaiting independent audit;
+- counterexamples and superseded routes remain documented;
+- occurrence mass and distinct mass must be reported separately.
 
 ## Earlier computational program
 
-The repository also contains PB/MaxSAT, modular digit-set, shifted Kempner, and DFA search tools. These remain useful for finite extremizer exploration and reproducible computation, but automatic or regular-language constructions cannot produce a divergent reciprocal-sum counterexample.
+The repository also contains PB/MaxSAT, modular digit-set, shifted Kempner, and DFA search tools. These remain useful for finite extremizer exploration and reproducible computation, but finite-state constructions cannot produce a divergent reciprocal-sum counterexample.
 
-Relevant directories and files include:
+Relevant files include:
 
 - `src/modular_kempner_search.py`
 - `src/cyclic_pb_encoder.py`
@@ -156,7 +164,7 @@ Relevant directories and files include:
 - `data/public_benchmarks.csv`
 - `examples/dfa/`
 
-These tools are now classified as legacy/supporting rather than the active route to the full problem.
+These tools are supporting or legacy work rather than the active route to the full problem.
 
 ## Verification status
 
@@ -165,7 +173,7 @@ The repository distinguishes:
 - standard or literature-dependent reductions;
 - symbolic proofs developed in the repository;
 - computationally verified finite claims;
-- conjectural targets;
+- conjectural closing targets;
 - explicitly false statements.
 
 No recent deletion-DAG theorem has yet received independent expert review. The full Erdős problem remains unresolved.

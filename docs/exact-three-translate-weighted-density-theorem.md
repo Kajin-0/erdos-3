@@ -60,7 +60,40 @@ P_j=2^j.
 
 ---
 
-## 2. Exact cardinality growth
+## 2. Why three translate layers are maximal
+
+More generally, suppose an equal-translate construction contains
+
+```math
+A,
+A+R,
+\ldots,
+A+(r-1)R
+```
+
+with `0 in A`. Then the raw state contains
+
+```math
+0,R,2R,\ldots,(r-1)R.
+```
+
+If `r>=4`, the first four of these points form a nontrivial four-term arithmetic progression. Therefore every four-term-progression-free equal-translate architecture satisfies
+
+```math
+\boxed{r\le3.}
+```
+
+The repository's occurrence genealogy is binary, so one parent creates at most two persistent outputs. The three-layer architecture realizes the maximal relevant pair
+
+```math
+(r,b)=(3,2),
+```
+
+where `r` is the number of disjoint translate layers and `b` is the number of identical persistent children. Thus the `3`-for-`2` law is not an arbitrary feature of the example: it is the extremal equal-translate architecture compatible with four-term-progression-freeness and binary persistence.
+
+---
+
+## 3. Exact cardinality growth
 
 Because the three translate layers are disjoint and
 
@@ -104,7 +137,7 @@ n_j
 
 ---
 
-## 3. Scale growth
+## 4. Scale growth
 
 The dyadic scale barrier proves at every exact replication step that
 
@@ -122,7 +155,7 @@ L_j\ge8^jL_0.
 
 ---
 
-## 4. Density decay
+## 5. Density decay
 
 Combining the cardinality and scale estimates,
 
@@ -165,7 +198,7 @@ C_0P_j^{\log_2 3-3}.
 
 ---
 
-## 5. Multiplicity-weighted density
+## 6. Multiplicity-weighted density
 
 Multiplying by `P_j=2^j`,
 
@@ -213,9 +246,21 @@ Thus the exact model satisfies the desired weighted-density estimate with
 0.4150374993.
 ```
 
+At the one-step level, the extremal equal-translate efficiency ratio is
+
+```math
+\frac{b r}{c}
+\le
+\frac{2\cdot3}{8}
+=
+\frac34,
+```
+
+where `c=L_{j+1}/L_j`. This is the source of the geometric contraction.
+
 ---
 
-## 6. Summability across replication depth
+## 7. Summability across replication depth
 
 The geometric form gives more than pointwise decay:
 
@@ -241,7 +286,7 @@ This is an exact-model aggregate charging theorem: one complete exact replicatio
 
 ---
 
-## 7. Sharpness
+## 8. Sharpness
 
 The scale-eight family has equality in the scale recurrence
 
@@ -271,17 +316,20 @@ P_j\alpha_j
 P_j^{\log_2 3-2}.
 ```
 
-Consequently the exponents in the theorem are optimal inside the exact standard-dyadic three-translate model.
+Consequently the exponents in the theorem are optimal inside the exact standard-dyadic equal-translate model.
 
 ---
 
-## 8. Consequence for the full proof program
+## 9. Consequence for the full proof program
 
 The canonical exact aligned-diamond obstruction is now quantitatively controlled:
 
-1. persistence is at most order `L^(1/3)`;
-2. multiplicity-weighted density decays with the sharp exponent `2-log_2(3)`;
-3. the weighted density is summable along one exact genealogy.
+1. four-term-progression-freeness permits at most three equal translate layers;
+2. binary persistence permits at most two persistent children;
+3. the dyadic shell jump is at least eight;
+4. persistence is at most order `L^(1/3)`;
+5. multiplicity-weighted density decays with the sharp exponent `2-log_2(3)`;
+6. the weighted density is summable along one exact genealogy.
 
 Therefore any remaining obstruction to the full proof must exploit behavior outside this exact model, such as:
 

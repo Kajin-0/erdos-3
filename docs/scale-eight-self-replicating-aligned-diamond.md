@@ -30,7 +30,7 @@ Consequently
 
 The previous general no-carry construction only gave `L_h=O(20^h)`. The new family uses alternating base-eight separations and is certified as four-term-progression-free by a 34-state digit automaton and an exact product/carry search.
 
-Two companion elementary notes prove that this construction is quantitatively sharp inside the exact standard-dyadic three-translate model:
+Two companion elementary notes prove that this construction is quantitatively sharp inside the exact standard-dyadic equal-translate model:
 
 - `docs/three-translate-dyadic-scale-barrier.md` proves `L' >= 8L` at every exact replication step;
 - `docs/exact-three-translate-weighted-density-theorem.md` proves the sharp decay
@@ -341,7 +341,19 @@ where
 
 Thus this efficient replication family still spends a geometrically summable amount of multiplicity-weighted dyadic density.
 
-The exact-model weighted-density theorem shows that the same exponent is an upper bound for every exact standard-dyadic three-translate genealogy, and that
+The exact equal-translate architecture has three support layers, two persistent children, and scale factor eight. Its one-step efficiency is therefore
+
+```math
+\boxed{
+\rho_{\mathrm{exact}}
+=
+\frac{2\cdot3}{8}
+=
+\frac34.
+}
+```
+
+The companion weighted-density theorem proves that this gives the sharp upper contraction factor for every exact standard-dyadic equal-translate genealogy and that
 
 ```math
 \sum_hP_h\alpha_h<\infty
@@ -430,7 +442,7 @@ to
 }
 ```
 
-The companion barrier theorem proves that `1/3` is also the matching upper exponent inside the exact standard-dyadic three-translate model.
+The companion barrier theorem proves that `1/3` is also the matching upper exponent inside the exact standard-dyadic equal-translate model.
 
 Likewise, the companion weighted-density theorem proves sharply within that model that
 

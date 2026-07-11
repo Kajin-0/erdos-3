@@ -1,8 +1,8 @@
 # Certainty ledger
 
-This file records claims that should survive chat-context loss. Each entry separates:
+This file records claims that should survive context loss. Each entry separates:
 
-- **status**: standard / proved in repository / computationally verified / conjectural / false / open bottleneck;
+- **status**: standard / proved in repository / computationally verified / conjectural / false / superseded / open bottleneck;
 - **certainty**: how strongly the project should rely on the claim;
 - **audit state**: whether the claim has received independent review;
 - **consequence**: what the claim proves, rules out, or redirects.
@@ -25,7 +25,7 @@ docs/current-proof-program.md
 
 **Audit state:** not independently checked in this project; likely standard or folklore.
 
-**Statement.** Fix `b>=2`. If `A subseteq N` is base-`b` automatic and
+**Statement.** If `A subseteq N` is base-`b` automatic and
 
 ```math
 \sum_{n\in A}\frac1n=\infty,
@@ -33,7 +33,7 @@ docs/current-proof-program.md
 
 then `A` has positive upper asymptotic density and therefore contains arithmetic progressions of every finite length.
 
-**Consequence.** No fixed finite automaton, regular digit language, or automatic-set construction can produce a divergent reciprocal-sum counterexample.
+**Consequence.** No fixed finite automaton or regular digit language can produce a divergent reciprocal-sum counterexample.
 
 ---
 
@@ -67,7 +67,7 @@ a divergent reciprocal sum requires
 \sum_j\alpha_j=\infty.
 ```
 
-**Consequence.** The hard case is slowly divergent logarithmic-scale dust, not persistent dense blocks.
+**Consequence.** The hard case is slowly divergent logarithmic-scale dust.
 
 ---
 
@@ -87,7 +87,7 @@ a divergent reciprocal sum requires
 
 then every `k`-AP-free subset of `N` has convergent reciprocal sum.
 
-**Consequence.** Known general `r_k(N)` bounds for `k>=4` are insufficient; a successful proof likely needs cross-scale arithmetic information.
+**Consequence.** Known general `r_k(N)` bounds for `k>=4` are insufficient; cross-scale information is needed.
 
 ---
 
@@ -99,7 +99,7 @@ then every `k`-AP-free subset of `N` has convergent reciprocal sum.
 
 **Audit state:** reproducible within the repository.
 
-**Statement.** Walker's public base-55 shifted Kempner digit set has no AP-free same-size digit-substitution neighbor at radius one or two in the repository's cyclic modular model.
+**Statement.** Walker's public base-55 shifted Kempner digit set has no AP-free same-size digit-substitution neighbor at radius one or two in the implemented cyclic modular model.
 
 **Consequence.** Small perturbations in that finite model are unlikely to improve the benchmark.
 
@@ -143,7 +143,7 @@ Writing each selected progression as
 a_i+c_i=2b_i,
 ```
 
-with `a_i` deleted, the directed edges
+with `a_i` deleted, the edges
 
 ```math
 a_i\to b_i,
@@ -151,7 +151,7 @@ a_i\to b_i,
 a_i\to c_i
 ```
 
-form an acyclic graph. Every deleted vertex has outdegree two; every residual vertex has outdegree zero.
+form an acyclic graph. Every deleted vertex has outdegree two and every residual vertex has outdegree zero.
 
 If `K` vertices are deleted and `s` remain, then
 
@@ -161,9 +161,7 @@ K=|D|-s,
 s\le r_3(N).
 ```
 
-**Dependencies:** side-anchor deletion rule; deletion-time ordering; Roth residual bound.
-
-**Consequence.** The overlap problem can be studied through a concrete geometric DAG rather than an abstract role tree.
+**Consequence.** The overlap problem becomes a concrete geometric DAG.
 
 **Primary note:** `docs/side-anchor-deletion-dag.md`.
 
@@ -177,7 +175,7 @@ s\le r_3(N).
 
 **Audit state:** central claim awaiting independent review.
 
-**Statement.** Let `rho` be the number of indegree-zero vertices of the deletion DAG. Then
+**Statement.** Let `rho` be the number of indegree-zero DAG vertices. Then
 
 ```math
 \boxed{
@@ -189,21 +187,13 @@ K-s+\rho.
 }
 ```
 
-For each vertex `v`, let `I_v` be its incoming sponsors, choose `p_v=min I_v`, and define
+For each target `v`, translate its incoming sponsors by the smallest sponsor to obtain
 
 ```math
-\Delta_v
-=
-\{a-p_v:a\in I_v,\ a>p_v\}.
+\Delta_v\subseteq[1,N).
 ```
 
-Then:
-
-```math
-\Delta_v\subseteq[1,N),
-```
-
-`Delta_v` is four-term-progression-free, and
+Each `Delta_v` is four-term-progression-free and
 
 ```math
 \boxed{
@@ -221,15 +211,56 @@ H(D)-2\frac{r_3(N)}N.
 }
 ```
 
-**Dependencies:** CL-006.
-
-**Consequence.** Indegree merging generates a canonical family of lower-scale four-term-progression-free children preserving parent harmonic mass with multiplicity.
+**Critical caveat.** Harmonic mass is counted with multiplicity across child states.
 
 **Primary note:** `docs/deletion-dag-merge-difference-recursion.md`.
 
 ---
 
-## CL-008: Merge-plus-middle occurrence branching
+## CL-008: Spanning-forest component children
+
+**Status:** proved in repository.
+
+**Certainty:** medium-high.
+
+**Audit state:** awaiting independent review.
+
+**Statement.** Choose one incoming edge for every nonroot deletion-DAG vertex. The chosen edges form a spanning forest with `rho` components `C_j`.
+
+Translating each component by its numerical minimum gives a four-term-progression-free child
+
+```math
+\Theta_j\subseteq[1,N)
+```
+
+with
+
+```math
+\boxed{
+\sum_j|\Theta_j|
+=|D|-\rho
+=K+s-\rho.
+}
+```
+
+Combining with CL-007 gives the exact structural balance
+
+```math
+\boxed{
+\sum_v|\Delta_v|
++
+\sum_j|\Theta_j|
+=2K.
+}
+```
+
+**Consequence.** The root and residual terms cancel exactly before thinning.
+
+**Primary note:** `docs/spanning-forest-binary-four-thirds-recursion.md`.
+
+---
+
+## CL-009: Selected middle children
 
 **Status:** proved in repository.
 
@@ -243,53 +274,62 @@ H(D)-2\frac{r_3(N)}N.
 \chi(q)=v_2(q)-v_3(q)\pmod3
 ```
 
-produces middle children `M_x^*` satisfying
-
-```math
-\sum_xH(M_x^*)\ge\frac{2K}{3N}.
-```
-
-Together with CL-007,
+and grouping by middle point produces four-term-progression-free children `M_x^*` satisfying
 
 ```math
 \boxed{
-\sum_vH(\Delta_v)
-+
 \sum_xH(M_x^*)
 \ge
-\frac53H(D)
--
-\frac83\frac{r_3(N)}N.
+\frac{2K}{3N}.
 }
 ```
 
-After retaining at most one merge occurrence per sponsor,
+Each deleted sponsor creates at most one selected middle occurrence.
 
-```math
-\boxed{
-\sum_vH(\Delta_v')
-+
-\sum_xH(M_x^*)
-\ge
-\frac76H(D)
--
-\frac53\frac{r_3(N)}N.
-}
-```
+**Primary notes:**
 
-and each sponsor generates at most two child occurrences.
-
-**Critical caveat.** These are occurrence-multiset inequalities. They do not establish growth in the harmonic mass of distinct integers.
-
-**Dependencies:** CL-006 and CL-007.
-
-**Consequence.** A canonical binary occurrence genealogy has a supercritical harmonic lower bound, but multiplicity and scale contraction remain uncontrolled.
-
-**Primary note:** `docs/deletion-dag-merge-difference-recursion.md`.
+- `docs/sponsored-three-ap-binary-recursion.md`
+- `docs/deletion-dag-merge-difference-recursion.md`
 
 ---
 
-## CL-009: Root-rich versus long-path dichotomy
+## CL-010: Binary four-thirds occurrence recursion
+
+**Status:** proved in repository.
+
+**Certainty:** medium.
+
+**Audit state:** current central theorem awaiting independent review.
+
+**Statement.** Associate each component occurrence with its parent element and each merge occurrence with its nonminimal sponsor. A residual parent carries at most one structural occurrence; a deleted parent carries at most three.
+
+Since the two structural families contain exactly `2K` occurrences, selecting at most one structural occurrence per parent retains at least
+
+```math
+\frac{2K}{3}
+```
+
+structural occurrences. Retaining also the selected middle occurrence gives a genealogy in which every parent creates at most two children and
+
+```math
+\boxed{
+\sum H(\text{binary child occurrences})
+\ge
+\frac43H(D)
+-
+\frac43\frac{r_3(N)}N.
+}
+```
+
+**Critical caveat.** This is an occurrence-multiset inequality. It does not establish `4/3` growth in harmonic mass of distinct integers.
+
+**Consequence.** The required multiplicity-growth threshold is now strictly below `4/3`, improving the previous `7/6` target.
+
+**Primary note:** `docs/spanning-forest-binary-four-thirds-recursion.md`.
+
+---
+
+## CL-011: Root-rich versus long-path dichotomy
 
 **Status:** proved in repository.
 
@@ -297,57 +337,48 @@ and each sponsor generates at most two child occurrences.
 
 **Audit state:** awaiting independent review.
 
-**Statement.** If the deletion DAG has
+**Statement.** If
 
 ```math
 \rho\ge\delta|D|,
 ```
 
-then
+then the merge family alone satisfies
 
 ```math
-\boxed{
 \sum_vH(\Delta_v)
 \ge
 (1+\delta)H(D)
 -
 2\frac{r_3(N)}N.
-}
 ```
 
-If roots are sparse, the maximum directed path length satisfies
+If roots are sparse, the maximum directed path length obeys
 
 ```math
-\boxed{
 L
 \ge
 \left\lceil
 \log_2\left(\frac{|D|}{\rho}+1\right)
 \right\rceil-1.
-}
 ```
 
-Along such a path,
+Path increments have valuation-directed form
 
 ```math
 x_{j+1}-x_j
 =
 \sigma(q_j)c_jq_j,
-\qquad
-c_j\in\{1,2\},
+\qquad c_j\in\{1,2\}.
 ```
 
-where the sign `sigma(q_j)` is determined by `v_2(q_j) mod 2`.
-
-**Dependencies:** CL-006 and CL-007.
-
-**Consequence.** Near-critical merge recursion can occur only in root-poor DAGs containing long valuation-directed affine paths.
+**Consequence.** This remains a supporting multiplicity/path tool, but it is no longer needed merely to obtain a supercritical binary occurrence factor.
 
 **Primary note:** `docs/deletion-dag-root-depth-dichotomy.md`.
 
 ---
 
-## CL-010: Componentwise scale-compensated side-middle packing
+## CL-012: Componentwise scale-compensated side-middle packing
 
 **Status:** proved in repository through finite case classification.
 
@@ -361,7 +392,7 @@ where the sign `sigma(q_j)` is determined by `v_2(q_j) mod 2`.
 S\subseteq[R,2R)
 ```
 
-be a coordinated side shell and `T` an arbitrary subset of its paired middle child. Then
+be a coordinated side shell and `T` a paired middle subset. Then
 
 ```math
 \boxed{
@@ -376,40 +407,12 @@ R H(T\cap[1,R))
 
 where `0<=eta<=2` records anchor coincidences.
 
-If `T subseteq [R,2R)`, the lower-scale correction vanishes.
-
-**Dependencies:** coordinated valuation compression; full intersection forest; finite component classification.
-
-**Consequence.** Efficient local overlap cannot destroy the relevant capacity; it exports it to lower scale. This is supporting theory, not yet the closing global multiplicity theorem.
+**Consequence.** Efficient local overlap exports capacity to lower scale. This is supporting theory, not the closing global multiplicity theorem.
 
 **Primary notes:**
 
 - `docs/full-component-scale-export.md`
 - `docs/unequal-cardinality-scale-compensated-packing.md`
-
----
-
-## CL-011: Sponsored sparse recursion removes global child matching
-
-**Status:** proved in repository.
-
-**Certainty:** medium.
-
-**Audit state:** awaiting independent review.
-
-**Statement.** The deletion proof can select at least
-
-```math
-|D|-r_3(N)
-```
-
-three-term progressions with distinct sponsor elements. Each sponsor creates exactly one side occurrence and at most one selected middle occurrence.
-
-**Consequence.** The global child-state matching problem can be replaced by a canonical occurrence-level binary sponsorship map.
-
-**Caveat.** This does not solve multiplicity; labels can contract rapidly.
-
-**Primary note:** `docs/sponsored-three-ap-binary-recursion.md`.
 
 ---
 
@@ -421,7 +424,7 @@ three-term progressions with distinct sponsor elements. Each sponsor creates exa
 
 **Certainty:** high; explicit finite-avoidance construction.
 
-**Statement ruled out.** A fixed root point and terminal direction do not support only boundedly many depth-two affine lifts in a four-term-progression-free set.
+A fixed root point and terminal direction can support arbitrarily many depth-two affine lifts in a four-term-progression-free set.
 
 **Primary note:** `docs/depth-two-overlap-counterexample.md`.
 
@@ -433,14 +436,6 @@ three-term progressions with distinct sponsor elements. Each sponsor creates exa
 
 **Certainty:** high; explicit computationally checkable example.
 
-**Statement ruled out.** One cannot universally prove
-
-```math
-|A(S)\cup M_q(T)|\ge\frac83|S|-O(1)
-```
-
-without a lower-scale correction.
-
 A coordinated four-term-progression-free example has
 
 ```math
@@ -449,100 +444,75 @@ A coordinated four-term-progression-free example has
 |A(S)\cup M_q(T)|=107<120.
 ```
 
+The corrected theorem requires lower-scale credit.
+
 **Primary note:** `docs/seven-thirds-local-packing-counterexample.md`.
 
 ---
 
 ## FL-003: Naive recursive density increment
 
-**Status:** false as a general mechanism in the inherited three-dilate class.
+**Status:** false as a general mechanism.
 
 **Certainty:** high internally.
 
-**Statement ruled out.** Passing to predecessor children does not automatically increase normalized density; disjoint affine copies give a nonincrease bound.
-
-**Primary note:** `docs/affine-tree-multiplicity-lower-bound.md`.
+Passing to predecessor children does not automatically increase normalized density.
 
 ---
 
-## FL-004: Fixed-size sampling creates genuine off-diagonal discrepancy
+## FL-004: Fixed-size sampling creates off-diagonal discrepancy
 
 **Status:** false.
 
 **Certainty:** high internally.
 
-**Statement ruled out.** Fixed-size sampling scales the corrected off-diagonal discrepancy by the expected combinatorial factor; it does not create or amplify it.
+After correcting for the missing diagonal, fixed-size sampling preserves the off-diagonal discrepancy in expectation.
 
 **Primary note:** `docs/offdiagonal-correction-direction-energy.md`.
 
 ---
 
-# Open bottlenecks
+## SP-001: Binary factor `7/6`
 
-## OB-001: Cross-block arithmetic constraints
+**Status:** valid but superseded as the best quantitative bound.
 
-**Status:** broad original bottleneck; retained but refined.
-
-A divergent AP-free candidate would satisfy
+The earlier merge-plus-middle thinning gives
 
 ```math
-\alpha_j\to0,
-\qquad
-\sum_j\alpha_j=\infty.
+\frac76H(D)-\frac53\frac{r_3(N)}N.
 ```
 
-Independent blockwise extremal estimates are insufficient.
+CL-010 improves the binary occurrence factor to
 
-**Refinement:** OB-002 is the current precise form pursued by the deletion-DAG program.
+```math
+\frac43H(D)-\frac43\frac{r_3(N)}N.
+```
 
 ---
 
-## OB-002: Multiplicity versus scale contraction
+# Open bottleneck OB-001: Multiplicity versus scale
 
-**Status:** authoritative current bottleneck.
-
-The project controls occurrence harmonic mass
+The active recursion controls
 
 ```math
-\sum_d\frac{m(d)}d
+\sum_d\frac{m(d)}d,
 ```
 
-but the original set problem concerns distinct mass
+where `m(d)` is occurrence multiplicity. Erdős Problem #3 concerns
 
 ```math
 \sum_{d:m(d)>0}\frac1d.
 ```
 
-The missing theorem must jointly control:
+No current theorem converts binary `4/3` occurrence branching into supercritical distinct harmonic growth.
 
-```math
-\boxed{
-\text{multiplicity},
-\quad
-\text{scale contraction},
-\quad
-\text{valuation-directed path geometry}.
-}
-```
+The approved closing targets are:
 
-Acceptable closing results include:
+1. a weighted multiplicity rate strictly below `4/3`;
+2. a bounded multiscale potential;
+3. structural control of triple-loaded sponsors;
+4. scalable multigeneration falsification experiments.
 
-1. a weighted multiplicity inequality beating the binary factor `7/6`;
-2. a bounded multiscale potential that grows under recursion;
-3. a stopping theorem showing root-poor valuation-directed paths cannot persist;
-4. a computationally discovered scalable family falsifying the route.
+A one-generation high-multiplicity example is insufficient if it terminates immediately or exports much smaller labels that compensate its overlap.
 
-No current result closes OB-002.
-
----
-
-# Repository policy
-
-A new theorem note should be added only if it:
-
-1. proves or falsifies a stated closing target in `docs/current-proof-program.md`;
-2. repairs a concrete dependency gap;
-3. supplies a reproducible counterexample;
-4. consolidates or independently audits an existing claim.
-
-Recent deletion-DAG claims are safe to use as **internal lemmas under review**, not as established literature results or a solution of Erdős Problem #3.
+The full Erdős problem remains unresolved.

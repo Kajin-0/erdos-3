@@ -1,0 +1,17 @@
+verified: base aligned diamond
+verified: every generated state is 4-AP-free
+verified: every outer deletion schedule is feasible
+verified: every middle fiber is the previous state
+verified: every contaminated backbone contains the previous state
+depth=5
+scale_factors=4,8,4,4
+separations=61,303,1597,8195
+state_sizes=12,39,120,363,1092
+contamination=4,1,33,1
+weighted_density=3/8,39/64,15/32,363/512,273/256
+weighted_density_growth=91/32
+state_1_sha256=272061e4e2d7ea7f0ea4298c69e437c87631407baea59084fc5d81e62ca5c978
+state_2_sha256=cff7a986bfeb8def36b5597655a585f261f8a58facdb1ee9339d72a9eaa78e37
+state_3_sha256=5c0b2483d958e061fdad7c963ada9b3f942286fa27e29b106fdfcba621827783
+state_4_sha256=14c7479efe245b72430a0505b0983be1080166fb13108228159f02b2759dd093
+state_5_sha256=a315deca0997d946ca9bb5058d2a04bfe3e585332d4db5260e7d9edc9142f841

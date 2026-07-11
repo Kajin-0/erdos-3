@@ -1,4 +1,4 @@
-# Current proof program: deletion DAG and exact-progression persistence
+# Current proof program: backbone recursion and same-anchor persistence
 
 ## Status
 
@@ -42,7 +42,7 @@ A divergent four-term-progression-free candidate must satisfy
 
 ---
 
-# 2. Side-anchor deletion DAG
+# 2. Sponsored side-anchor deletion
 
 Fix a four-term-progression-free block
 
@@ -62,116 +62,148 @@ Let
 K=|D|-s.
 ```
 
-Writing the selected progressions as
+Every deleted sponsor creates one selected middle-step occurrence `q<=N/2`.
 
-```math
-(a_i,b_i,c_i),
-\qquad
-a_i+c_i=2b_i,
-```
+The selected progressions also define an affine deletion DAG, but the strongest one-generation constants no longer require the DAG structural children.
 
-add edges
+**Primary notes:**
 
-```math
-a_i\to b_i,
-\qquad
-a_i\to c_i.
-```
-
-Deletion time increases along every edge, so this is an acyclic graph. Every deleted vertex has outdegree two; every residual vertex has outdegree zero.
-
-**Primary note:** `docs/side-anchor-deletion-dag.md`.
+- `docs/side-anchor-sponsored-middle-recursion.md`
+- `docs/side-anchor-deletion-dag.md`
 
 ---
 
-# 3. Structural children
+# 3. Minimum-translation backbone
 
-Let `rho` be the number of indegree-zero vertices.
+Let
 
-## Merge-difference children
+```math
+m=\min D
+```
 
-For each target `v`, translate its incoming sponsors by their minimum. The resulting children `Delta_v` are four-term-progression-free, lie in `[1,N)`, and satisfy
+and define
+
+```math
+\mathcal B(D)
+=
+\{d-m:d\in D,\ d>m\}.
+```
+
+Then
+
+```math
+\mathcal B(D)\subseteq[1,N),
+```
+
+`B(D)` is four-term-progression-free, and
 
 ```math
 \boxed{
-\sum_v|\Delta_v|=K-s+\rho.
+|\mathcal B(D)|=|D|-1.
 }
 ```
 
-## Spanning-component children
-
-Choose one incoming edge for every nonroot vertex. Translating each forest component by its numerical minimum gives children `Theta_j` that are four-term-progression-free, lie in `[1,N)`, and satisfy
+Associate `d-m` with parent element `d`. Since `m>=N` and `d<2N`,
 
 ```math
 \boxed{
-\sum_j|\Theta_j|=K+s-\rho.
+0<d-m\le d-N\le d/2.
 }
+```
+
+The minimum point creates no backbone output.
+
+The child has root translation anchor `m`, which belongs to the lifted parent set. Thus every recursive state retains the inherited form
+
+```math
+S=B-t,
+\qquad
+B\subseteq D_{\mathrm{root}},
+\qquad
+t\in\{0\}\cup D_{\mathrm{root}}.
+```
+
+**Primary note:** `docs/minimum-translation-backbone-recursion.md`.
+
+---
+
+# 4. Raw binary factor three
+
+For each center `x`, let
+
+```math
+M_x=\{q_i:b_i=x\}
+```
+
+be the full selected middle child. Every `M_x` is four-term-progression-free, and
+
+```math
+\sum_xH(M_x)
+\ge
+\frac{2K}{N}.
+```
+
+The backbone satisfies
+
+```math
+H(\mathcal B(D))
+>
+\frac{|D|-1}{N}.
+```
+
+Every deleted nonminimum sponsor creates one middle occurrence and one backbone occurrence. Every other parent creates at most one backbone occurrence. Hence the genealogy is binary.
+
+Combining the two families gives
+
+```math
+\begin{aligned}
+H(\mathcal B(D))
++
+\sum_xH(M_x)
+&\ge
+\frac{|D|-1+2K}{N}\\
+&=
+\frac{3|D|-2s-1}{N}.
+\end{aligned}
 ```
 
 Therefore
 
 ```math
 \boxed{
-\sum_v|\Delta_v|+\sum_j|\Theta_j|=2K.
-}
-```
-
-After associating occurrences with parent elements and retaining at most one structural occurrence per parent, at least
-
-```math
-\frac{2K}{3}
-```
-
-structural occurrences remain. Their harmonic mass is at least
-
-```math
-\frac{2K}{3N}.
-```
-
-**Primary notes:**
-
-- `docs/deletion-dag-merge-difference-recursion.md`
-- `docs/spanning-forest-binary-four-thirds-recursion.md`
-
----
-
-# 4. Full middle children and raw occurrence growth
-
-For every center `x`, define
-
-```math
-M_x=\{q_i:b_i=x\}.
-```
-
-A four-term progression among the steps in `M_x` would translate to one in `D`, so every `M_x` is four-term-progression-free.
-
-Every selected step satisfies `q_i<=N/2`, hence
-
-```math
-\sum_xH(M_x)\ge\frac{2K}{N}.
-```
-
-Keeping every middle occurrence and at most one structural occurrence per parent gives a binary occurrence genealogy satisfying
-
-```math
-\boxed{
-\sum H(\text{children})
+H(\mathcal B(D))
++
+\sum_xH(M_x)
 \ge
-\frac83H(D)
+3H(D)
 -
-\frac83\frac{r_3(N)}N.
+2\frac{r_3(N)}N
+-
+\frac1N.
 }
 ```
 
 This is the strongest raw occurrence theorem. It counts equal numerical labels repeatedly.
 
-**Primary note:** `docs/full-middle-binary-eight-thirds-recursion.md`.
+**Primary note:** `docs/minimum-translation-backbone-recursion.md`.
 
 ---
 
-# 5. Within-node multiplicity resolution
+# 5. Exact within-state middle multiplicity fibers
 
-Let `Q` be the set of distinct selected steps. For each `q in Q`, let `X_q` be its selected centers and define
+Let
+
+```math
+Q=\{q_i:1\le i\le K\}
+```
+
+be the set of distinct selected steps. For each `q in Q`, let
+
+```math
+X_q=\{b_i:q_i=q\}
+```
+
+be its selected centers. Define
 
 ```math
 \Xi_q
@@ -179,17 +211,68 @@ Let `Q` be the set of distinct selected steps. For each `q in Q`, let `X_q` be i
 \{x-\min X_q:x\in X_q,\ x>\min X_q\}.
 ```
 
-Each `Xi_q` is four-term-progression-free and lies in `[1,N)`. The exact identity is
+Every `Xi_q` is four-term-progression-free and lies in `[1,N)`. If `m(q)=|X_q|`, then
+
+```math
+|\Xi_q|=m(q)-1.
+```
+
+Since `sum_q m(q)=K`,
 
 ```math
 \boxed{
-|Q|+\sum_q|\Xi_q|=K.
+|Q|+
+\sum_{q\in Q}|\Xi_q|
+=K.
 }
 ```
 
-Thus one copy of every distinct step becomes terminal mass, while every additional copy becomes a lower-scale recursive child.
+Thus one copy of every distinct middle step becomes terminal mass, while every additional copy becomes a recursive lower-scale child.
 
-Adding the retained structural family gives
+The corresponding harmonic lower bound is
+
+```math
+H(Q)
++
+\sum_qH(\Xi_q)
+\ge
+\frac{K}{N}.
+```
+
+**Primary note:** `docs/middle-multiplicity-fiber-five-thirds-recursion.md`.
+
+---
+
+# 6. Binary multiplicity-resolving factor two
+
+Combine the exact middle multiplicity resolution with the backbone child.
+
+Every deleted nonminimum sponsor creates:
+
+1. exactly one terminal representative or multiplicity-fiber occurrence;
+2. exactly one backbone occurrence.
+
+Every other parent creates at most one backbone occurrence. Hence the genealogy remains binary.
+
+The harmonic output satisfies
+
+```math
+\begin{aligned}
+&H(Q)
++
+\sum_qH(\Xi_q)
++
+H(\mathcal B(D))\\
+&\qquad\ge
+\frac{K}{N}
++
+\frac{|D|-1}{N}\\
+&\qquad=
+\frac{2|D|-s-1}{N}.
+\end{aligned}
+```
+
+Therefore
 
 ```math
 \boxed{
@@ -197,49 +280,43 @@ H(Q)
 +
 \sum_qH(\Xi_q)
 +
-\sum H(\text{structural children})
+H(\mathcal B(D))
 \ge
-\frac53H(D)
+2H(D)
 -
-\frac53\frac{r_3(N)}N.
+\frac{r_3(N)}N
+-
+\frac1N.
 }
 ```
 
-**Primary note:** `docs/middle-multiplicity-fiber-five-thirds-recursion.md`.
+This is the active one-generation bridge from parent harmonic mass toward terminal distinct mass.
+
+**Primary note:** `docs/minimum-translation-backbone-recursion.md`.
 
 ---
 
-# 6. Shell interface
+# 7. Shell interface
 
-The children above generally lie in `[1,N)` rather than one ratio-two interval. Before applying the deletion theorem recursively, partition every child into standard dyadic shells
+Every recursive child in `[1,N)` must be partitioned into standard dyadic shells
 
 ```math
-[2^j,2^{j+1}).
+[2^j,2^{j+1})
 ```
 
-Harmonic mass is additive across this partition.
+before the deletion theorem is reapplied. Harmonic mass is additive across this partition.
 
-Therefore a claimed repeated terminal progression must survive inside a shell. An arithmetic progression present only in the unshelled child is not enough.
+A repeated progression is relevant only if it survives inside one shell. This interface invalidated the original use of the 31-element sibling gadget as a recursive terminal example. The corrected 34-element construction proves shell-compatible two-layer overlap for the older spanning-component recursion.
 
-The original 31-element sibling example proved an algebraic child overlap but did not by itself survive this interface. The corrected 34-element construction in
-
-```text
-docs/dyadic-shell-compatible-sibling-sharpness.md
-```
-
-produces the same terminal label in a middle-fiber shell and a spanning-component shell. The verifier is
-
-```text
-src/verify_dyadic_shell_sibling_sharpness.py
-```
-
-Hence the sibling two-layer theorem is genuinely sharp after standard dyadic shelling.
+**Primary note:** `docs/dyadic-shell-compatible-sibling-sharpness.md`.
 
 ---
 
-# 7. Half-contraction and positive-moment potential
+# 8. Half-contraction and positive moments
 
-Every retained output associated with parent label `a` is at most `a/2`, and each parent produces at most two outputs. Hence, for every real `p>=1`,
+Every retained backbone output associated with parent `d` is at most `d/2`. Every terminal representative and multiplicity-fiber output associated with a deleted sponsor is also at most half that sponsor.
+
+Thus every parent creates at most two outputs and, for every real `p>=1`,
 
 ```math
 \boxed{
@@ -249,7 +326,7 @@ Every retained output associated with parent label `a` is at most `a/2`, and eac
 }
 ```
 
-Across all generations, if `mu(q)` is total terminal multiplicity, then
+Across the full recursive tree, if `mu(q)` denotes total terminal multiplicity, then
 
 ```math
 \boxed{
@@ -274,16 +351,14 @@ Every recursive path has logarithmic depth.
 
 ---
 
-# 8. Global lifted-center layers
+# 9. Global lifted-center layers
 
 Every recursive state has the form
 
 ```math
 S=B-t,
-\qquad B\subseteq D,
+\qquad B\subseteq D_{\mathrm{root}}.
 ```
-
-for the original root block `D`.
 
 A terminal step `q` in `S` lifts to
 
@@ -293,27 +368,21 @@ x-q,
 \quad x+q
 ```
 
-inside `D`.
+inside the root block.
 
-Let
-
-```math
-\nu_q(x)
-```
-
-be the number of terminal occurrences of `q` lifting to center `x`, and define
+Let `nu_q(x)` count terminal occurrences lifting to center `x`. Define
 
 ```math
-L(q)=\max_x\nu_q(x).
+L(q)=\max_x\nu_q(x)
 ```
 
-For `k>=1`, put
+and the nested layers
 
 ```math
 X_{q,k}=\{x:\nu_q(x)\ge k\}.
 ```
 
-Every `X_{q,k}` is a subset of `D` and is therefore four-term-progression-free. Translating every nonempty layer by its minimum gives lower-scale four-term-progression-free children `Omega_{q,k}` and the exact identity
+Each layer is a subset of the root four-term-progression-free set. Translating each nonempty layer by its minimum gives lower-scale four-term-progression-free children `Omega_{q,k}` with
 
 ```math
 \boxed{
@@ -325,96 +394,248 @@ L(q)
 }
 ```
 
-Thus all cross-state repetition occurring at different lifted centers is exported to lower-scale children.
+Thus all cross-state repetition occurring at different lifted centers is exported.
 
 **Primary note:** `docs/global-lifted-center-layer-resolution.md`.
 
 ---
 
-# 9. Correct interpretation of amplified gadgets
+# 10. Root-anchor layers
 
-The shell-compatible sharpness gadget can be translated many times inside a larger four-term-progression-free block. This gives raw fixed-label multiplicity
+Fix one exact lifted progression `P(x,q)`. Every recursive state has a root translation anchor
 
 ```math
-\mu(234)\ge cN^{1/2}
+t\in\{0\}\cup D_{\mathrm{root}}.
 ```
 
-for infinitely many block sizes `N`.
+Let `lambda_{x,q}(t)` count terminal copies of `P(x,q)` produced in states with anchor `t`.
 
-However, different translated copies have different lifted centers. The global center layers export those copies into lower-scale difference children.
+For nonroot anchors define
 
-Therefore the amplification rules out bounded raw fixed-label multiplicity, but it does not obstruct the reduced persistence target.
+```math
+A_{x,q}^{(k)}
+=
+\{t\in D:\lambda_{x,q}(t)\ge k\}.
+```
 
-**Primary note:** `docs/cross-state-fixed-label-amplification.md`.
-
----
-
-# 10. Current unresolved quantity
-
-After within-node fibers and global lifted-center layers, the remaining multiplicity is
+Each anchor layer is a subset of the root four-term-progression-free set. Translating each nonempty layer by its minimum gives lower-scale four-term-progression-free anchor-difference children `Gamma_{x,q,k}` and the exact identity
 
 ```math
 \boxed{
-L(q)=\max_x\nu_q(x).
+\sum_{t\in D}\lambda_{x,q}(t)
+=
+M_{x,q}
++
+\sum_{k=1}^{M_{x,q}}|\Gamma_{x,q,k}|,
 }
 ```
 
-This counts how many recursive states reuse one exact lifted progression
+where
 
 ```math
-x-q,
-\quad x,
-\quad x+q.
+M_{x,q}
+=
+\max_{t\in D}\lambda_{x,q}(t).
 ```
 
-A crude bound is
+Thus every exact-progression copy occurring with a different root anchor is exported.
 
-```math
-L(q)\ll\frac Nq,
-```
-
-from binary branching and logarithmic depth, or from the localized linear-label budget.
-
-This is far too weak for reciprocal summability.
-
-The active closing target is:
-
-```math
-\boxed{
-\text{prove an exact-progression persistence theorem.}
-}
-```
-
-Useful forms would include:
-
-1. a sublinear bound on `L(q)` that is strong when the parent density is large;
-2. a charge from every repeated persistence event to a new root point or smaller difference;
-3. a theorem showing that long persistence forces a large affine grid or forbidden configuration;
-4. a stopping-time potential for one fixed lifted progression.
+**Primary note:** `docs/state-anchor-layer-and-antichain-budget.md`.
 
 ---
 
-# 11. False, corrected, and superseded statements
+# 11. Same-anchor antichain budget
 
-Do not use the following without additional hypotheses:
+The coordinated orientation determines the root sponsor
 
-1. uniformly bounded depth-two affine-lift overlap;
-2. universal uncorrected local `8/3` packing;
-3. naive recursive density increment in the inherited three-dilate class;
-4. universal one-layer sibling collapse.
+```math
+a=x-\sigma(q)q.
+```
 
-The original 31-element sibling file is now classified as an algebraic precursor, not a shell-resolved recursive example.
+In a state anchored at `t`, the local sponsor label is
 
-The binary factors
+```math
+s=a-t.
+```
+
+All terminal copies counted by `lambda_{x,q}(t)` have the same positive label `s`. Since labels strictly halve along recursive edges, two such occurrences cannot be ancestor and descendant. They form an antichain in the descendant tree of root sponsor `a`.
+
+The conserved linear-label flow gives
+
+```math
+\boxed{
+\lambda_{x,q}(t)(a-t)
+\le a.
+}
+```
+
+Therefore
+
+```math
+\boxed{
+\lambda_{x,q}(t)
+\le
+\left\lfloor\frac{a}{a-t}\right\rfloor.
+}
+```
+
+Since a terminal step satisfies `q<=(a-t)/2`,
+
+```math
+\lambda_{x,q}(t)
+\le
+\left\lfloor\frac{a}{2q}\right\rfloor.
+```
+
+A useful geometric form is
+
+```math
+\lambda_{x,q}(t)\ge m
+\quad\Longrightarrow\quad
+ t\ge a\left(1-\frac1m\right).
+```
+
+High same-anchor persistence is therefore concentrated in a short interval immediately below the root sponsor.
+
+For
+
+```math
+T_m(x,q)
+=
+\{t\in D:\lambda_{x,q}(t)\ge m\},
+```
+
+one has
+
+```math
+\boxed{
+|T_m(x,q)|
+\le
+r_4\!\left(\left\lceil a/m\right\rceil+1\right).
+}
+```
+
+**Primary note:** `docs/state-anchor-layer-and-antichain-budget.md`.
+
+---
+
+# 12. Sharp anchor-aligned diamond
+
+The universal claim
+
+```math
+M_{x,q}=1
+```
+
+is false.
+
+For `N>=32`, the 12-point block
+
+```math
+D_N
+=
+N+
+\{0,1,2,16,17,18,21,22,23,26,27,28\}
+```
+
+is four-term-progression-free.
+
+Four valid selected progressions of step `1` produce the middle multiplicity-fiber child
+
+```math
+\Xi_1=\{16,21,26\}.
+```
+
+The minimum-translation backbone shell also contains
+
+```math
+16,21,26.
+```
+
+Both children have the same root anchor `N`. Hence one parent can create two copies of the same local progression with the same anchor.
+
+The one-parent same-anchor multiplicity bound `2` is sharp.
+
+This gadget does not self-replicate: once the anchor `N` is removed, descendants cannot use it again. Large same-anchor multiplicity therefore requires convergence from several different parent states.
+
+**Primary note:** `docs/minimum-backbone-aligned-diamond-counterexample.md`.
+
+**Verifier:** `src/verify_minimum_backbone_aligned_diamond.py`.
+
+---
+
+# 13. Supporting deletion-DAG structure
+
+The following exact results remain valid:
+
+```math
+\sum_v|\Delta_v|=K-s+\rho,
+```
+
+```math
+\sum_j|\Theta_j|=K+s-\rho,
+```
+
+and
+
+```math
+\sum_v|\Delta_v|
++
+\sum_j|\Theta_j|
+=2K.
+```
+
+They are no longer needed for the strongest one-generation branching constants, but they expose merge geometry, scale export, and component overlap that may be useful for the remaining convergence problem.
+
+The older raw factors
 
 ```math
 \frac76,
 \qquad
 \frac43,
 \qquad
-\frac{16}{9}
+\frac{16}{9},
+\qquad
+\frac83
 ```
 
-remain valid but are superseded as raw occurrence bounds by `8/3`.
+are superseded by the backbone raw factor `3`.
 
-No current theorem closes the exact-progression persistence gap. The full Erdős problem remains unresolved.
+The older multiplicity-resolving factor `5/3` is superseded by the backbone hybrid factor `2`.
+
+---
+
+# 14. Current unresolved object
+
+After within-state middle fibers, global lifted-center layers, and root-anchor layers, the remaining multiplicity consists of
+
+```math
+\boxed{
+\text{one identical local progression repeated across incomparable states with the same root anchor.}
+}
+```
+
+Every such family satisfies
+
+```math
+\lambda(a-t)\le a.
+```
+
+The sharp aligned diamond shows that multiplicity two can occur in one parent step. Larger multiplicity requires predecessor-anchor convergence: several parent states must independently create child states with the same new anchor and preserve the same local progression.
+
+The active closing target is therefore
+
+```math
+\boxed{
+\text{a density-sensitive predecessor-anchor convergence theorem.}
+}
+```
+
+Useful forms would include:
+
+1. exporting every convergence diamond to an additional lower-scale difference child;
+2. showing that repeated aligned convergence forces a forbidden affine configuration;
+3. bounding the multiplicity tail using the short anchor interval and root density;
+4. constructing a stopping-time potential for one fixed local progression.
+
+No current theorem closes this gap. The full Erdős problem remains unresolved.

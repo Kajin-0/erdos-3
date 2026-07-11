@@ -348,6 +348,7 @@ They are no longer needed for the strongest one-generation constants, but remain
 
 - `docs/current-proof-program.md` — authoritative theorem chain and current gap.
 - `docs/certainty-ledger.md` — claim status, confidence, and audit state.
+- `docs/research-decision-history.md` — audited PR history, superseded routes, permanent stop list, and documentation protocol.
 - `docs/minimum-translation-backbone-recursion.md` — raw factor `3` and hybrid factor `2`.
 - `docs/middle-multiplicity-fiber-five-thirds-recursion.md` — exact within-state middle multiplicity fibers.
 - `docs/global-lifted-center-layer-resolution.md` — different-center compression.

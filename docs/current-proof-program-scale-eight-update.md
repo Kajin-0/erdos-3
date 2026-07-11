@@ -131,7 +131,7 @@ C_0=\frac{n_0+3/2}{L_0}.
 }
 ```
 
-The one-step exact efficiency ratio is therefore
+The one-step exact efficiency ratio is
 
 ```math
 \boxed{
@@ -149,7 +149,7 @@ The one-step exact efficiency ratio is therefore
 }
 ```
 
-The scale-eight family attains the exponent. Thus ambient persistence, density decay, and aggregate weighted-density charge are sharp inside the exact model.
+The scale-eight family attains the exponents. Thus ambient persistence, density decay, and aggregate weighted-density charge are sharp inside the exact model.
 
 This is not a universal upper bound for arbitrary persistence mechanisms in the full recursion.
 

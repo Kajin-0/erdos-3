@@ -21,7 +21,7 @@ in two sibling layers. This note proves that arbitrarily many translated copies 
 Consequently, fixed-label cross-state terminal multiplicity is not bounded. Quantitatively, one can obtain multiplicity at least
 
 ```math
-cN^{1/4}
+cN^{1/2}
 ```
 
 inside a block of diameter `N`.
@@ -176,7 +176,7 @@ In particular, no absolute or polylogarithmic bound on fixed-label cross-state m
 
 ---
 
-## 4. Polynomial diameter bound
+## 4. Quadratic diameter bound
 
 The induction can be made quantitative.
 
@@ -186,24 +186,46 @@ Suppose `U_m` contains `m` copies, so
 |U_m|=m|G|.
 ```
 
-For a fixed mixed membership pattern, the number of point assignments in the four progression positions is at most
+Fix a nonconstant membership pattern
 
 ```math
-(|U_m|+|G|)^4.
+\varepsilon\in\{0,1\}^4
 ```
 
-There are only 14 nonconstant binary membership patterns. Adding the disjointness exclusions, the total number of forbidden shifts at stage `m` is
+and fix the gadget offsets in every position with `epsilon_i=1`.
+
+If exactly one progression point lies in `G+L`, then three positions lie in `U_m`. The two progression equations have rank two in the three old values and `L`. After choosing any two old values, the remaining old value and `L` are determined. Thus these patterns forbid at most
 
 ```math
-O(m^4),
+O(|U_m|^2)
 ```
 
-where the implied constant depends only on `G`.
+shifts.
+
+If exactly two progression points lie in `G+L`, there are only two old values, so the number of assignments is already
+
+```math
+O(|U_m|^2).
+```
+
+If exactly three progression points lie in `G+L`, there is one old value, giving only
+
+```math
+O(|U_m|)
+```
+
+possibilities.
+
+The gadget `G` and the 14 nonconstant membership patterns are fixed. Adding the disjointness exclusions, the total number of forbidden shifts at stage `m` is therefore
+
+```math
+O(m^2).
+```
 
 Choose `L_{m+1}` among the first one more than the number of forbidden nonnegative integers. Inductively, all `k` shifts can be chosen in an interval of length
 
 ```math
-O(k^4).
+O(k^2).
 ```
 
 After one final common translation, the union lies in a dyadic interval
@@ -215,13 +237,13 @@ After one final common translation, the union lies in a dyadic interval
 with
 
 ```math
-N=O(k^4).
+N=O(k^2).
 ```
 
 Since `mu(18)>=2k`, this gives
 
 ```math
-\boxed{\mu(18)\ge cN^{1/4}}
+\boxed{\mu(18)\ge cN^{1/2}}
 ```
 
 for an absolute constant `c>0` and infinitely many `N`.
@@ -242,7 +264,7 @@ Therefore the remaining multiplicity theorem cannot assert any of the following 
 The correct target must charge repeated fixed-label events to the amount or scale distribution of the parent set. The finite-avoidance construction has density only
 
 ```math
-O(N^{-3/4}),
+O(N^{-1/2}),
 ```
 
 so it does not approach a divergent reciprocal-sum counterexample. It does, however, show that the missing theorem must be genuinely quantitative and density-sensitive.

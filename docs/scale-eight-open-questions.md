@@ -31,7 +31,7 @@ and
 \sum_hP_h\alpha_h<\infty.
 ```
 
-Four-term-progression-freeness permits at most three equal translate layers, while the occurrence genealogy permits at most two persistent children. The maximal exact one-step efficiency is therefore
+Four-term-progression-freeness permits at most three equal translate layers, while the occurrence genealogy permits at most two persistent children. The maximal exact one-step efficiency is
 
 ```math
 \rho_{\mathrm{exact}}

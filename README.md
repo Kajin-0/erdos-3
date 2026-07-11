@@ -151,12 +151,12 @@ After iterating through the anchor history, the residual consists of identical l
 
 That final residual can grow polynomially.
 
-The base state
+The scale-eight base state
 
 ```math
 S_1
 =
-32+
+64+
 \{0,1,2,16,17,18,21,22,23,26,27,28\}
 ```
 
@@ -168,7 +168,7 @@ is four-term-progression-free and produces two copies of the terminal progressio
 
 with step `5` and the same root anchor.
 
-A recursive three-translate construction doubles the number of identical-history copies at every level. There are four-term-progression-free blocks `S_h` with
+An alternating base-eight three-translate construction doubles the number of identical-history copies at every level. There are computer-certified four-term-progression-free blocks `S_h` with
 
 ```math
 \boxed{
@@ -186,22 +186,40 @@ and
 }
 ```
 
+The ambient scale is now exact:
+
+```math
+\boxed{
+S_h\subseteq[L_h,2L_h),
+\qquad
+L_h=8^{h+1}.
+}
+```
+
 Therefore
 
 ```math
 \boxed{
 \text{persistence}
-\asymp
-|S_h|^{\log_3 2}.
+=
+2^h
+=
+\frac12L_h^{1/3}.
 }
 ```
 
-Absolute, logarithmic, polylogarithmic, and sufficiently small subpower persistence bounds are false without additional hypotheses.
+The full infinite family is certified four-term-progression-free by a 34-state base-eight automaton and a 17,238-state product/carry search. Absolute, logarithmic, polylogarithmic, and sufficiently small subpower persistence bounds are false without additional hypotheses.
 
-The depth-two 39-point instance produces four terminal copies with the same complete anchor history. It is verified by
+The certificate is reproduced by
 
 ```text
-src/verify_self_replicating_aligned_diamond_depth2.py
+src/verify_scale_eight_aligned_diamond.py
+```
+
+and documented in
+
+```text
+docs/scale-eight-self-replicating-aligned-diamond.md
 ```
 
 ## Current bottleneck
@@ -222,6 +240,20 @@ Useful forms would include:
 2. a lower bound on ambient scale required for `h` replication levels;
 3. a potential coupling reciprocal mass to the `3`-for-`2` size growth of the gadget;
 4. a theorem showing that near-extremal replication consumes a summable amount of dyadic density.
+
+The scale-eight family gives the current lower benchmark:
+
+```math
+\alpha(P)
+\asymp
+P^{\log_2 3-3},
+\qquad
+P\alpha(P)
+\asymp
+P^{\log_2 3-2}.
+```
+
+Since `log_2(3)-2<0`, multiplicity-weighted density still decays along the known efficient replication family.
 
 ## Supporting deletion-DAG theory
 
@@ -253,8 +285,10 @@ They are no longer needed for the strongest one-generation constants, but remain
 - `docs/global-lifted-center-layer-resolution.md` — different-center compression.
 - `docs/state-anchor-layer-and-antichain-budget.md` — different-anchor compression and same-anchor budget.
 - `docs/predecessor-anchor-layer-resolution.md` — predecessor and anchor-history compression.
-- `docs/self-replicating-aligned-diamond.md` — arbitrary-depth persistence construction.
-- `src/verify_self_replicating_aligned_diamond_depth2.py` — depth-two verifier.
+- `docs/self-replicating-aligned-diamond.md` — original arbitrary-depth persistence construction.
+- `docs/scale-eight-self-replicating-aligned-diamond.md` — exact scale-eight refinement and density benchmark.
+- `src/verify_scale_eight_aligned_diamond.py` — infinite-family automaton certificate.
+- `src/verify_self_replicating_aligned_diamond_depth2.py` — original depth-two verifier.
 - `docs/half-contraction-multiscale-label-potential.md` — all-generation moment potential.
 - `docs/side-anchor-deletion-dag.md` — supporting affine deletion DAG.
 

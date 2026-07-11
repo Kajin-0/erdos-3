@@ -1,25 +1,25 @@
-# Current proof program: deletion DAG and merge-difference recursion
+# Current proof program: deletion DAG and binary four-thirds recursion
 
 ## Purpose and status
 
-This is the authoritative overview of the active mathematical program for Erdős Problem #3.
+This is the authoritative overview of the active mathematical program for Erdős Problem #3:
 
 > If `A subseteq N` and `sum_{n in A} 1/n = infinity`, must `A` contain arbitrarily long arithmetic progressions?
 
-The full problem remains open. The current project focuses on the case of a four-term-progression-free set and seeks to prove that its reciprocal sum must converge.
+The full problem remains open. The current project focuses on proving that every four-term-progression-free set has convergent reciprocal sum.
 
-This document has four purposes:
+This document:
 
-1. state the active definitions and theorem chain in dependency order;
-2. separate proved-in-repository lemmas from computational checks, heuristics, false targets, and open gaps;
-3. identify which older notes are supporting, superseded, or falsified;
-4. prevent further theory expansion unless it directly proves or falsifies a stated closing target.
+1. states the active theorem chain in dependency order;
+2. separates proved-in-repository lemmas from standard facts, computations, false targets, and open gaps;
+3. identifies the shortest active route;
+4. prevents new proof languages unless they prove or falsify an explicit closing target.
 
-All recent theorem-style claims below should be regarded as **proved in the repository but not yet independently audited**, unless a stronger status is stated.
+All recent theorem-style claims are **proved in the repository but not yet independently audited**, unless stated otherwise.
 
 ---
 
-# 1. Global reduction
+# 1. Global dyadic reduction
 
 Let
 
@@ -29,23 +29,15 @@ A_j=A\cap[2^j,2^{j+1}),
 \alpha_j=\frac{|A_j|}{2^j}.
 ```
 
-For every `n in A_j`,
-
-```math
-2^{-j-1}<\frac1n\le2^{-j}.
-```
-
-Hence
+Then, up to absolute constants,
 
 ```math
 \sum_{n\in A}\frac1n=\infty
 \quad\Longleftrightarrow\quad
-\sum_j\alpha_j=\infty
+\sum_j\alpha_j=\infty.
 ```
 
-up to absolute constant factors.
-
-A four-term-progression-free divergent set must therefore have
+A four-term-progression-free divergent set must satisfy
 
 ```math
 \alpha_j\to0,
@@ -53,13 +45,13 @@ A four-term-progression-free divergent set must therefore have
 \sum_j\alpha_j=\infty.
 ```
 
-The project seeks a cross-scale mechanism showing that such slowly divergent dyadic mass cannot remain four-term-progression-free.
+The project seeks a cross-scale contradiction for this slowly divergent dyadic mass.
 
 **Status:** standard reduction; high confidence.
 
 ---
 
-# 2. Side-anchor deletion inside one dyadic block
+# 2. Side-anchor deletion inside one block
 
 Fix a finite four-term-progression-free block
 
@@ -84,39 +76,37 @@ y+2q,&v_2(q)\equiv1\pmod2.
 \end{cases}
 ```
 
-Stop when the residual set is three-term-progression-free.
-
-Write
+Stop when the residual set is three-term-progression-free. Write
 
 ```math
 K=|D|-s
 ```
 
-for the number of deletions, where
+for the number of deletions. Quantitative Roth gives
 
 ```math
 s\le r_3(N).
 ```
 
-The chosen common differences satisfy
+Every selected common difference satisfies
 
 ```math
 q\le N/2.
 ```
 
-The selected weighted step load therefore obeys
+Hence the selected reciprocal step load
 
 ```math
-\mathcal L_*(D)
-=
-\sum_{i=1}^K\frac1{q_i}
-\ge
-\frac{2K}{N}.
+\mathcal L_*(D)=\sum_{i=1}^K\frac1{q_i}
 ```
 
-**Dependencies:** quantitative Roth only through the residual bound `s<=r_3(N)`.
+obeys
 
-**Status:** proved in repository; medium-high confidence pending external audit.
+```math
+\boxed{\mathcal L_*(D)\ge\frac{2K}{N}.}
+```
+
+**Status:** proved in repository; medium-high confidence pending audit.
 
 Primary notes:
 
@@ -128,7 +118,7 @@ Primary notes:
 
 # 3. Affine deletion DAG
 
-For each selected progression write
+Write each selected progression as
 
 ```math
 (a_i,b_i,c_i),
@@ -136,9 +126,7 @@ For each selected progression write
 a_i+c_i=2b_i,
 ```
 
-where `a_i` is the deleted side anchor and `b_i,c_i` remain at the moment of deletion.
-
-Add directed edges
+where `a_i` is the deleted side anchor. Add edges
 
 ```math
 a_i\longrightarrow b_i,
@@ -146,23 +134,21 @@ a_i\longrightarrow b_i,
 a_i\longrightarrow c_i.
 ```
 
-Deletion time strictly increases along every edge, so the graph is acyclic.
+Deletion time increases along every edge, so the graph is acyclic. Every deleted vertex has outdegree two; every residual vertex has outdegree zero.
 
-Each deleted vertex has outdegree exactly two. Each residual vertex has outdegree zero. Therefore the DAG has
-
-```math
-2K
-```
-
-directed edges on
+The DAG has
 
 ```math
 K+s=|D|
 ```
 
-vertices.
+vertices and
 
-Let
+```math
+2K
+```
+
+edges. Let
 
 ```math
 \rho
@@ -170,7 +156,7 @@ Let
 
 be the number of indegree-zero vertices.
 
-**Status:** proved in repository; medium-high confidence pending external audit.
+**Status:** proved in repository; medium-high confidence pending audit.
 
 Primary note:
 
@@ -178,59 +164,27 @@ Primary note:
 
 ---
 
-# 4. Exact indegree-excess identity
+# 4. Merge-difference children
 
-Let `d^-(v)` denote indegree and define
+Let `d^-(v)` be indegree. The exact indegree excess is
 
 ```math
 M
 =
-\sum_v\max\{d^-(v)-1,0\}.
+\sum_v\max\{d^-(v)-1,0\}
+=
+K-s+\rho.
 ```
 
-Since
+For each vertex `v`, let
 
 ```math
-\sum_vd^-(v)=2K
+I_v=\{a_i:a_i\to v\},
+\qquad
+p_v=\min I_v,
 ```
 
-and exactly `K+s-rho` vertices have positive indegree,
-
-```math
-\boxed{M=K-s+\rho.}
-```
-
-Equivalently,
-
-```math
-M=|D|-2s+\rho.
-```
-
-This is an exact identity, not an asymptotic estimate.
-
-**Status:** proved in repository; high internal confidence.
-
-Primary note:
-
-- `docs/deletion-dag-merge-difference-recursion.md`
-
----
-
-# 5. Merge-difference children
-
-For a vertex `v`, define its incoming sponsor set
-
-```math
-I_v=\{a_i:a_i\to v\}.
-```
-
-When `I_v` is nonempty, put
-
-```math
-p_v=\min I_v
-```
-
-and
+and define
 
 ```math
 \Delta_v
@@ -241,48 +195,40 @@ and
 Then
 
 ```math
-|\Delta_v|=d^-(v)-1,
+\Delta_v\subseteq[1,N),
 ```
 
-so
+`Delta_v` is four-term-progression-free, and
 
 ```math
 \boxed{
-\sum_v|\Delta_v|=M=K-s+\rho.
+\sum_v|\Delta_v|=K-s+\rho.
 }
 ```
 
-Because all sponsors lie in `[N,2N)`,
+Therefore
 
 ```math
-\Delta_v\subseteq[1,N).
-```
-
-Each `Delta_v` is four-term-progression-free: translating a four-term progression in `Delta_v` by `p_v` would produce one among the incoming sponsors in `D`.
-
-Every element of `Delta_v` is below `N`, so
-
-```math
+\boxed{
 \sum_vH(\Delta_v)
 \ge
 \frac{K-s+\rho}{N}
 =
 \frac{|D|-2s+\rho}{N}.
-```
-
-Consequently,
-
-```math
-\boxed{
-\sum_vH(\Delta_v)
-\ge
-H(D)-2\frac{r_3(N)}N.
 }
 ```
 
-Thus the merge-difference children preserve the parent harmonic mass, with multiplicity, up to the summable Roth error.
+In particular,
 
-**Status:** proved in repository; central current lemma; medium confidence pending independent review.
+```math
+\sum_vH(\Delta_v)
+\ge
+H(D)-2\frac{r_3(N)}N.
+```
+
+**Critical qualification:** this is harmonic mass with multiplicity across child states.
+
+**Status:** proved in repository; central lemma; medium confidence pending independent review.
 
 Primary note:
 
@@ -290,90 +236,194 @@ Primary note:
 
 ---
 
-# 6. Selected middle children
+# 5. Spanning-forest component children
 
-Partition the selected steps by
+Choose one incoming edge for every nonroot vertex of the deletion DAG. The chosen edges form a directed spanning forest with `rho` components
+
+```math
+C_1,\ldots,C_\rho.
+```
+
+For each component let
+
+```math
+m_j=\min C_j
+```
+
+and define
+
+```math
+\Theta_j
+=
+\{x-m_j:x\in C_j,\ x>m_j\}.
+```
+
+Then
+
+```math
+\Theta_j\subseteq[1,N),
+```
+
+`Theta_j` is four-term-progression-free, and
+
+```math
+\boxed{
+\sum_j|\Theta_j|
+=|D|-\rho
+=K+s-\rho.
+}
+```
+
+Thus
+
+```math
+\boxed{
+\sum_jH(\Theta_j)
+\ge
+\frac{|D|-\rho}{N}.
+}
+```
+
+**Status:** proved in repository; medium-high confidence pending audit.
+
+Primary note:
+
+- `docs/spanning-forest-binary-four-thirds-recursion.md`
+
+---
+
+# 6. Exact structural balance
+
+The merge and component families are complementary:
+
+```math
+\begin{aligned}
+\sum_v|\Delta_v|+
+\sum_j|\Theta_j|
+&=(K-s+\rho)+(K+s-\rho)\\
+&=2K.
+\end{aligned}
+```
+
+Therefore
+
+```math
+\boxed{
+\sum_vH(\Delta_v)
++
+\sum_jH(\Theta_j)
+\ge
+\frac{2K}{N}.
+}
+```
+
+The residual term `s` and root term `rho` cancel exactly.
+
+This is the central structural identity behind the current best binary recursion.
+
+---
+
+# 7. Selected middle children
+
+Partition selected steps by
 
 ```math
 \chi(q)=v_2(q)-v_3(q)\pmod3.
 ```
 
-Choose the color carrying maximal selected reciprocal load. Group the selected steps of that color by their middle point.
-
-The resulting middle children `M_x^*` are four-term-progression-free, lie at scale at most `N/2`, and satisfy
+Choose the color carrying maximal reciprocal load and group those steps by their middle point. The resulting children `M_x^*` are four-term-progression-free and satisfy
 
 ```math
+\boxed{
 \sum_xH(M_x^*)
 \ge
 \frac13\mathcal L_*(D)
 \ge
 \frac{2K}{3N}.
-```
-
-Combining with the merge-difference family gives
-
-```math
-\boxed{
-\sum_vH(\Delta_v)
-+
-\sum_xH(M_x^*)
-\ge
-\frac53H(D)
--
-\frac83\frac{r_3(N)}N.
 }
 ```
 
-This is a supercritical branching inequality for a **multiset of child occurrences**.
+Each deleted sponsor creates at most one selected middle occurrence.
 
-**Critical qualification:** it does not imply a `5/3` increase in the harmonic mass of distinct integers.
+**Status:** proved in repository; medium confidence pending audit.
 
-**Status:** proved in repository; medium confidence pending external audit.
+Primary notes:
 
-Primary note:
-
+- `docs/sponsored-three-ap-binary-recursion.md`
 - `docs/deletion-dag-merge-difference-recursion.md`
 
 ---
 
-# 7. Binary thinning
+# 8. Binary four-thirds thinning
 
-A deleted sponsor has two outgoing DAG edges, so it can be nonminimal in at most two incoming-sponsor sets. Retain at most one merge-difference occurrence per sponsor.
+Associate each component occurrence `x-m_j` with the parent element `x`. Each parent carries at most one such occurrence.
 
-At least half the merge cardinality survives. The thinned merge family `Delta_v'`, together with the selected middle family, satisfies
+Associate each merge occurrence `a-p_v` with its nonminimal sponsor `a`. A deleted sponsor has two outgoing DAG edges, so it carries at most two merge occurrences.
+
+Thus:
+
+- a residual parent carries at most one structural occurrence;
+- a deleted parent carries at most three structural occurrences: one component occurrence and at most two merge occurrences.
+
+The two structural families contain exactly `2K` occurrences. Selecting at most one structural occurrence per parent retains at least
+
+```math
+\frac{2K}{3}
+```
+
+structural occurrences. Since every retained structural label is below `N`,
 
 ```math
 \boxed{
-\sum_vH(\Delta_v')
-+
-\sum_xH(M_x^*)
+\sum H(\text{retained structural children})
 \ge
-\frac76H(D)
--
-\frac53\frac{r_3(N)}N.
+\frac{2K}{3N}.
 }
 ```
 
-Each parent sponsor now creates at most two child occurrences:
+Retain also the selected middle occurrence associated with each sponsor. Every parent now creates at most two child occurrences, and
 
-1. one thinned merge-difference occurrence;
-2. one selected middle occurrence.
+```math
+\boxed{
+\sum H(\text{binary children})
+\ge
+\frac{4K}{3N}.
+}
+```
 
-This yields a canonical binary occurrence genealogy with a harmonic branching factor greater than one.
+Since `K=|D|-s`,
 
-**Critical qualification:** rapid label contraction can still support reciprocal-mass growth in a binary occurrence tree.
+```math
+\boxed{
+\sum H(\text{binary children})
+\ge
+\frac43H(D)
+-
+\frac43\frac{r_3(N)}N.
+}
+```
 
-**Status:** proved in repository; medium confidence pending external audit.
+This supersedes the previous best binary bound
+
+```math
+\frac76H(D)-\frac53\frac{r_3(N)}N.
+```
+
+The old `7/6` thinning remains correct but is no longer the active quantitative bound.
+
+**Critical qualification:** the `4/3` theorem still counts numerical labels with multiplicity.
+
+**Status:** proved in repository; current best binary occurrence theorem; medium confidence pending independent audit.
 
 Primary note:
 
-- `docs/deletion-dag-merge-difference-recursion.md`
+- `docs/spanning-forest-binary-four-thirds-recursion.md`
 
 ---
 
-# 8. Root-depth dichotomy
+# 9. Supporting root-depth dichotomy
 
-The exact merge estimate contains the root term `rho/N`.
+The merge estimate alone contains the root term `rho/N`.
 
 If
 
@@ -384,25 +434,21 @@ If
 then
 
 ```math
-\boxed{
 \sum_vH(\Delta_v)
 \ge
 (1+\delta)H(D)
 -
 2\frac{r_3(N)}N.
-}
 ```
 
-If roots are sparse, every vertex is reachable from a root, while each vertex has outdegree at most two. Therefore the maximum directed path length `L` obeys
+If roots are sparse, the maximum directed path length satisfies
 
 ```math
-\boxed{
 L
 \ge
 \left\lceil
 \log_2\left(\frac{|D|}{\rho}+1\right)
 \right\rceil-1.
-}
 ```
 
 Along a directed path,
@@ -411,8 +457,7 @@ Along a directed path,
 x_{j+1}-x_j
 =
 \sigma(q_j)c_jq_j,
-\qquad
-c_j\in\{1,2\},
+\qquad c_j\in\{1,2\},
 ```
 
 where
@@ -426,17 +471,9 @@ where
 \end{cases}
 ```
 
-All path vertices remain in `[N,2N)`, so every subpath satisfies
+This dichotomy is now supporting rather than necessary for obtaining a supercritical binary occurrence factor. It may still help control multiplicity or triple-loaded sponsors.
 
-```math
-\left|
-\sum_{j=u}^{v-1}\sigma(q_j)c_jq_j
-\right|<N.
-```
-
-Thus a root-poor generation forces a long affine path with valuation-prescribed signs and substantial cancellation.
-
-**Status:** proved in repository; medium confidence pending external audit.
+**Status:** proved in repository; medium confidence pending audit.
 
 Primary note:
 
@@ -444,17 +481,15 @@ Primary note:
 
 ---
 
-# 9. Supporting local packing theory
+# 10. Supporting local packing theory
 
-A separate line of work analyzes overlap between a coordinated side child and its paired middle child.
-
-The strongest consolidated statement is the unequal-cardinality scale-compensated inequality. For
+For a coordinated side shell
 
 ```math
 S\subseteq[R,2R)
 ```
 
-and an arbitrary paired middle subset `T`, one has
+and paired middle subset `T`, the componentwise scale-export theory gives
 
 ```math
 \boxed{
@@ -469,22 +504,9 @@ R H(T\cap[1,R))
 
 where `0<=eta<=2` records anchor coincidences.
 
-When `T subseteq [R,2R)`, the correction vanishes:
+When `T subseteq[R,2R)`, the lower-scale correction vanishes.
 
-```math
-\boxed{
-|A(S)\cup M_q(T)|
-\ge
-2+
-\frac43(|S|+|T|)-\eta.
-}
-```
-
-This theory proves that local overlap can transfer capacity downward in scale but cannot destroy it.
-
-**Current role:** supporting evidence and a possible ingredient in a future multiplicity potential. It is not currently part of the shortest deletion-DAG proof chain.
-
-**Status:** proved in repository through a finite component classification; medium confidence pending independent audit.
+This shows that efficient local overlap transfers capacity downward in scale. It is supporting theory and is not part of the shortest current proof chain.
 
 Primary notes:
 
@@ -495,7 +517,7 @@ Primary notes:
 
 ---
 
-# 10. Dependency graph
+# 11. Active dependency graph
 
 ```text
 Dyadic harmonic reduction
@@ -504,39 +526,41 @@ Dyadic harmonic reduction
 Side-anchor 3AP deletion
         |
         v
-Affine deletion DAG -----> selected middle children
+Affine deletion DAG ----------------> selected middle children
         |
-        v
-Exact indegree excess
-        |
-        v
-Merge-difference children
-        |
-        +-----------------------------+
-        |                             |
-        v                             v
-5/3 occurrence branching       root-depth dichotomy
-        |
-        v
-binary thinning: 7/6
-        |
-        v
-OPEN: multiplicity-versus-scale control
+        +-------------------------------+
+        |                               |
+        v                               v
+merge-difference children      spanning-forest children
+        |                               |
+        +---------------+---------------+
+                        |
+                        v
+             exact structural total 2K
+                        |
+                        v
+          per-parent structural thinning
+                        |
+                        +---- selected middle occurrence
+                        |
+                        v
+             binary occurrence factor 4/3
+                        |
+                        v
+        OPEN: multiplicity-versus-scale control
 ```
-
-The local side-middle packing theory is currently a supporting branch feeding potential future control of the final open step.
 
 ---
 
-# 11. Central unresolved gap
+# 12. Central unresolved gap
 
-The project controls harmonic mass with multiplicity:
+The recursion controls harmonic mass with multiplicity:
 
 ```math
 \sum_d\frac{m(d)}d,
 ```
 
-where `m(d)` is the number of descendant occurrences of the numerical value `d`.
+where `m(d)` is the number of retained descendant occurrences of the numerical label `d`.
 
 The original problem concerns distinct mass:
 
@@ -544,7 +568,9 @@ The original problem concerns distinct mass:
 \sum_{d:m(d)>0}\frac1d.
 ```
 
-The missing theorem must control the interaction among:
+No current result converts the binary `4/3` occurrence branching into supercritical growth of distinct integers.
+
+The missing theorem must control the joint behavior of
 
 ```math
 \boxed{
@@ -552,145 +578,135 @@ The missing theorem must control the interaction among:
 \quad
 \text{scale contraction},
 \quad
-\text{valuation-directed path geometry}.
+\text{genealogical overlap}.
 }
 ```
 
-No current repository result converts the supercritical occurrence branching into supercritical growth of distinct integers.
-
-This is the authoritative main gap.
-
 ---
 
-# 12. Permitted closing targets
+# 13. Explicit closing targets
 
-Until one of the following is proved or falsified, no new broad proof language should be introduced.
+New mathematical work must prove or falsify one of the following.
 
-## Target A: weighted multiplicity inequality
+## Target A: weighted multiplicity
 
-Prove, for the thinned binary recursion, an estimate of the form
+Prove an upper bound for the retained binary genealogy whose exponential multiplicity rate is strictly below
+
+```math
+\frac43.
+```
+
+A representative form is
 
 ```math
 \sum_d\frac{m_h(d)}d
 \le
-C^h
-\sum_{d\in D_0}\frac1d
-+
-\text{summable error},
+C\lambda^h
+\sum_{d:m_h(d)>0}\frac1d,
+\qquad
+\lambda<\frac43.
 ```
 
-with
+## Target B: bounded multiscale potential
 
-```math
-C<\frac76.
-```
-
-A scale-dependent or stopping-time version is acceptable.
-
-## Target B: bounded global potential
-
-Construct a potential `Phi` on labeled occurrence multisets such that
+Construct a potential `Phi` satisfying both:
 
 ```math
 \Phi(\text{children})
 \ge
 (1+\delta)\Phi(\text{parent})
 -
-\text{Roth error}
+\text{summable Roth error},
 ```
 
-for some `delta>0`, while
+and a uniform upper bound in terms of the root set.
+
+## Target C: triple-loaded sponsor structure
+
+A deleted sponsor may carry all three unthinned structural occurrences:
+
+1. one component occurrence;
+2. two merge occurrences.
+
+Prove that such sponsors are sparse, force an additional lower-scale label, or can be thinned more efficiently. Any fixed improvement above the current retained structural fraction `1/3` improves the binary factor beyond `4/3`.
+
+## Target D: aggressive falsification
+
+Search for scalable examples having simultaneously:
+
+- small unique descendant harmonic mass;
+- high occurrence multiplicity;
+- rapid scale contraction;
+- persistence across multiple generations.
+
+A one-generation multiplicity example is not enough if its repeated labels terminate immediately or are compensated by much smaller labels.
+
+---
+
+# 14. Explicitly false or superseded routes
+
+The following cannot be used as originally proposed.
+
+## False: uniformly bounded depth-two lift overlap
+
+A fixed root point and terminal direction can support arbitrarily many depth-two affine lifts inside a four-term-progression-free set.
+
+Primary note:
+
+- `docs/depth-two-overlap-counterexample.md`
+
+## False: universal uncorrected local `8/3` packing
+
+A coordinated four-term-progression-free example has
 
 ```math
-\Phi(\text{all descendants})
-\le
-C\Phi(\text{root})
-```
-
-uniformly.
-
-## Target C: root-poor stopping theorem
-
-Prove that a sequence of root-poor generations cannot persist. A sufficient theorem would bound the weighted frequency, length, or scale distribution of paths satisfying
-
-```math
-x_{j+1}-x_j
-=
-\sigma(q_j)c_jq_j,
+|S|=|T|=45,
 \qquad
-c_j\in\{1,2\}.
+|A(S)\cup M_q(T)|=107<120.
 ```
 
-The theorem must be strong enough to make the accumulated exceptional generations summable.
+The corrected theorem requires lower-scale harmonic credit.
 
-## Target D: computational falsification
+Primary note:
 
-Search for scalable examples simultaneously exhibiting:
+- `docs/seven-thirds-local-packing-counterexample.md`
 
-1. small root density;
-2. long valuation-directed paths;
-3. high descendant multiplicity;
-4. low distinct harmonic gain.
+## False: naive recursive density increment
 
-A scalable family would seriously damage the current route. Small examples should be tested across multiple deletion policies, not only one arbitrary order.
+Passing to predecessor children does not automatically increase normalized density.
 
----
+## False: fixed-size sampling creates off-diagonal discrepancy
 
-# 13. Status of earlier routes
+Sampling preserves the corrected off-diagonal interaction in expectation; it does not generate the needed discrepancy.
 
-## Retained as foundational or supporting
+## Superseded as best binary bound: `7/6`
 
-- dyadic harmonic reduction;
-- cross-scale 3AP extension load;
-- three-dilate inherited fiber class;
-- strict third-dilate expansion and primitive extraction;
-- coordinated valuation compression;
-- componentwise scale export;
-- sponsored sparse recursion;
-- deletion DAG and merge-difference recursion.
-
-## Superseded as the active proof language
-
-- pseudo-Boolean and MaxSAT digit-template search;
-- DFA and regular-language counterexample search;
-- generic affine-tree multiplicity without sponsorship;
-- unconsolidated role-tree overlap formulations.
-
-These remain useful computational or historical material but are not the active route to the full problem.
-
-## Explicitly falsified targets
-
-1. **Bounded depth-two affine-lift overlap.**
-   Arbitrarily many depth-two lifts can share a root point and terminal direction inside a finite four-term-progression-free set.
-
-2. **Universal uncorrected local `8/3` side-middle packing.**
-   A finite coordinated four-term-progression-free example has `|S|=|T|=45` and parent union `107<120`.
-
-3. **Naive recursive density increment.**
-   Predecessor children cannot exceed parent normalized density under the primitive dilation constraints.
-
-4. **Sampling creates genuine off-diagonal discrepancy.**
-   Fixed-size sampling preserves off-diagonal discrepancy only by the expected combinatorial factor.
-
-These routes should not be revived without a materially new hypothesis.
+The earlier merge-plus-middle thinning remains valid, but the spanning-forest construction improves the binary occurrence factor to `4/3` with a smaller Roth-error coefficient.
 
 ---
 
-# 14. Verification policy
+# 15. Research discipline
 
-A new theorem note should be added only when it does at least one of the following:
+Do not create another standalone theorem note unless it:
 
-1. proves or falsifies Target A, B, C, or D;
-2. repairs a concrete gap in the dependency chain above;
-3. supplies an independently checkable counterexample to a stated lemma;
-4. consolidates or externally audits an existing claim.
+1. proves or falsifies Targets A–D;
+2. corrects a material error in the active chain; or
+3. supplies an independently checkable audit of a central lemma.
 
-Every future exact claim should record:
+Computational work should measure both occurrence and distinct quantities, including
 
-- hypotheses;
-- dependencies;
-- whether the proof is symbolic, computational, or mixed;
-- whether it has been independently reviewed;
-- whether it affects the central multiplicity-versus-scale gap.
+```math
+R_{\mathrm{mult}}
+=
+\frac{\sum H(\text{child occurrences})}{H(D)},
+```
 
-The project should prefer fewer authoritative documents over many overlapping theorem notes.
+```math
+R_{\mathrm{unique}}
+=
+\frac{H(\text{distinct child labels})}{H(D)},
+```
+
+multiplicity by scale, residual fraction, and persistence over multiple generations.
+
+The full Erdős problem remains unresolved.

@@ -1,0 +1,13 @@
+command:
+python src/verify_scale_eight_aligned_diamond.py --depth 5
+
+output:
+verified: recursive shells match the automaton
+verified: every checked finite shell is 4-AP-free
+verified: v2(R_h) is even at every checked replication level
+verified: the full automaton language is 4-AP-free
+depth_checked=5
+dfa_states=34
+accepting_states=6
+product_states=17238
+dfa_signature=e08c121adfee8cfa635ccb11d65c8519604611865ba504237f84896f908d757d

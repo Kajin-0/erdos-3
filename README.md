@@ -186,7 +186,7 @@ and
 }
 ```
 
-The ambient scale is now exact:
+The ambient scale is exact:
 
 ```math
 \boxed{
@@ -222,26 +222,96 @@ and documented in
 docs/scale-eight-self-replicating-aligned-diamond.md
 ```
 
-## Current bottleneck
+### Sharp exact-model theorems
 
-The remaining theorem must be density-sensitive.
+The canonical three-translate obstruction is now quantitatively classified.
 
-The self-replicating construction is sparse in its ambient interval, so it does not yield a divergent reciprocal-sum counterexample. The active target is now
+If one exact replication step has
+
+```math
+S\subseteq[L,2L),
+\qquad
+A=\{0\}\cup S,
+```
+
+```math
+G=A\cup(A+R)\cup(A+2R),
+```
+
+and is translated into a standard dyadic shell
+
+```math
+L'+G\subseteq[L',2L'),
+```
+
+then uncontaminated backbone reproduction requires `R>=2L`. Since `2R in G`, one has `L'>4L`; because `L'/L` is a power of two,
+
+```math
+\boxed{L'\ge8L.}
+```
+
+Thus after `h` exact generations,
 
 ```math
 \boxed{
-\text{prove that blocks carrying substantial reciprocal mass cannot sustain aligned-diamond replication efficiently across scales.}
+P_h\le\left(\frac{L_h}{L_0}\right)^{1/3}.
 }
 ```
 
-Useful forms would include:
+The scale-eight family attains the exponent `1/3`.
 
-1. a tradeoff between persistence multiplicity and block density;
-2. a lower bound on ambient scale required for `h` replication levels;
-3. a potential coupling reciprocal mass to the `3`-for-`2` size growth of the gadget;
-4. a theorem showing that near-extremal replication consumes a summable amount of dyadic density.
+The exact cardinality recurrence is
 
-The scale-eight family gives the current lower benchmark:
+```math
+n_{h+1}=3(n_h+1),
+```
+
+so every exact three-translate genealogy satisfies
+
+```math
+\boxed{
+P_h\alpha_h
+\le
+C_0P_h^{\log_2 3-2}
+}
+```
+
+and
+
+```math
+\boxed{
+\sum_hP_h\alpha_h
+\le
+4C_0,
+\qquad
+C_0=\frac{n_0+3/2}{L_0}.
+}
+```
+
+The exponent `2-log_2(3)` is sharp in this model.
+
+## Current bottleneck
+
+The remaining theorem must control persistence outside the exact three-translate model.
+
+The exact obstruction now has summable multiplicity-weighted density, so any unresolved mechanism must involve at least one genuinely different feature:
+
+1. overlapping or only partially resolved translate layers;
+2. several parent states feeding one terminal history;
+3. nonuniform branching or child counts;
+4. approximate rather than exact recurrence;
+5. persistence distributed across multiple dyadic shells;
+6. many genealogies whose charges cannot be separated.
+
+The active target is therefore
+
+```math
+\boxed{
+\text{decompose general persistence into controlled exact or near-exact genealogies plus a quantitatively cheaper error class.}
+}
+```
+
+The scale-eight family gives the sharp exact-model benchmark:
 
 ```math
 \alpha(P)
@@ -252,8 +322,6 @@ P\alpha(P)
 \asymp
 P^{\log_2 3-2}.
 ```
-
-Since `log_2(3)-2<0`, multiplicity-weighted density still decays along the known efficient replication family.
 
 ## Supporting deletion-DAG theory
 
@@ -287,6 +355,8 @@ They are no longer needed for the strongest one-generation constants, but remain
 - `docs/predecessor-anchor-layer-resolution.md` — predecessor and anchor-history compression.
 - `docs/self-replicating-aligned-diamond.md` — original arbitrary-depth persistence construction.
 - `docs/scale-eight-self-replicating-aligned-diamond.md` — exact scale-eight refinement and density benchmark.
+- `docs/three-translate-dyadic-scale-barrier.md` — sharp `L' >= 8L` theorem for exact replication.
+- `docs/exact-three-translate-weighted-density-theorem.md` — sharp weighted-density decay and summability in the exact model.
 - `src/verify_scale_eight_aligned_diamond.py` — infinite-family automaton certificate.
 - `src/verify_self_replicating_aligned_diamond_depth2.py` — original depth-two verifier.
 - `docs/half-contraction-multiscale-label-potential.md` — all-generation moment potential.

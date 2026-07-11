@@ -31,7 +31,7 @@ and
 \sum_hP_h\alpha_h<\infty.
 ```
 
-The scale-eight construction attains the exponents. Thus ambient scale, persistence, density decay, and aggregate weighted-density charge are sharp within the exact three-translate model.
+Four-term-progression-freeness also permits at most three equal translate layers, while the occurrence genealogy permits at most two persistent children. The scale-eight construction attains all resulting exponents. Thus ambient scale, persistence, density decay, and aggregate weighted-density charge are sharp within the exact equal-translate model.
 
 ## Remaining questions
 
@@ -61,15 +61,35 @@ The scale-eight construction attains the exponents. Thus ambient scale, persiste
 
 3. **Near-extremal classification.** Does persistence near `L^(1/3)` force an approximate alternating base-eight translate structure, or at least an approximate equal-translate architecture with local efficiency near `3/4`?
 
-4. **Beyond equal translates.** Four-term-progression-freeness permits at most three equal translate layers, and the binary genealogy permits at most two persistent children. Can a genuinely non-equal, overlapping, or cross-parent construction produce a larger effective branching-density ratio?
+4. **Beyond equal translates.** Can a genuinely non-equal, overlapping, or cross-parent construction produce a larger effective branching-density ratio than `3/4`?
 
 5. **Pure proof of the automaton certificate.** Can the 34-state product/carry computation be compressed into a short invariant or hand-checkable state quotient?
 
-## Active target
+## Active quantitative target
 
-The next theorem should define and control a quantitative defect from exact replication. A useful result would show that every persistence genealogy either:
+For a recursive segment, define its effective weighted-density ratio schematically as
 
-1. contains a long exact or near-exact segment, to which the sharp `3/4` contraction applies; or
-2. pays a uniform additional loss in multiplicity-weighted density.
+```math
+\rho
+=
+\frac{
+\text{persistent-child multiplicity factor}
+\times
+\text{support-cardinality factor}
+}{
+\text{dyadic-scale factor}
+}.
+```
 
-This would reduce the full bottleneck to packing and overlap control among near-exact segments.
+The exact equal-translate segment has
+
+```math
+\rho=\frac{2\cdot3}{8}=\frac34.
+```
+
+The next theorem should define this defect rigorously for general recursive segments and prove a dichotomy:
+
+1. **near-exact case:** `rho` is close to `3/4`, forcing structural proximity to the exact three-translate architecture;
+2. **defective case:** `rho` is bounded below `3/4` by a uniform amount, yielding stronger geometric contraction.
+
+After that, the remaining task would be packing and overlap control among near-exact segments.

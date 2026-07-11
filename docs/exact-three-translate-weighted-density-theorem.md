@@ -89,7 +89,7 @@ The repository's occurrence genealogy is binary, so one parent creates at most t
 (r,b)=(3,2),
 ```
 
-where `r` is the number of disjoint translate layers and `b` is the number of identical persistent children. Thus the `3`-for-`2` law is not an arbitrary feature of the example: it is the extremal equal-translate architecture compatible with four-term-progression-freeness and binary persistence.
+where `r` is the number of disjoint translate layers and `b` is the number of identical persistent children. Thus the `3`-for-`2` law is the extremal equal-translate architecture compatible with four-term-progression-freeness and binary persistence.
 
 ---
 
@@ -249,11 +249,15 @@ Thus the exact model satisfies the desired weighted-density estimate with
 At the one-step level, the extremal equal-translate efficiency ratio is
 
 ```math
+\boxed{
+\rho_{\mathrm{exact}}
+=
 \frac{b r}{c}
 \le
 \frac{2\cdot3}{8}
 =
 \frac34,
+}
 ```
 
 where `c=L_{j+1}/L_j`. This is the source of the geometric contraction.

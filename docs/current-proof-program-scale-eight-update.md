@@ -63,7 +63,7 @@ Hence
 \boxed{r\le3.}
 ```
 
-The occurrence genealogy is binary, so the maximal exact architecture is the observed `3`-for-`2` law.
+The occurrence genealogy is binary, so the maximal exact architecture has three support layers and two persistent children.
 
 ### Scale barrier
 
@@ -131,17 +131,31 @@ C_0=\frac{n_0+3/2}{L_0}.
 }
 ```
 
+The one-step exact efficiency ratio is therefore
+
+```math
+\boxed{
+\rho_{\mathrm{exact}}
+=
+\frac{
+2\text{ persistent children}
+\times
+3\text{ support layers}
+}{
+8\text{ scale expansion}
+}
+=
+\frac34.
+}
+```
+
 The scale-eight family attains the exponent. Thus ambient persistence, density decay, and aggregate weighted-density charge are sharp inside the exact model.
 
 This is not a universal upper bound for arbitrary persistence mechanisms in the full recursion.
 
 ## Change to the active bottleneck
 
-The canonical exact obstruction is no longer the unresolved case. It already has a sharp geometric contraction factor
-
-```math
-\frac{2\cdot3}{8}=\frac34.
-```
+The canonical exact obstruction is no longer the unresolved case. It already has a sharp geometric contraction factor `3/4`.
 
 The remaining theorem must control behavior outside that model:
 
@@ -160,7 +174,10 @@ The active target is now:
 }
 ```
 
-A useful theorem would show that every persistence genealogy either contains a long near-exact segment, where the sharp `3/4` contraction applies, or pays a uniform additional weighted-density loss.
+A useful theorem would define a rigorous local efficiency ratio `rho` for general recursive segments and prove a dichotomy:
+
+1. `rho` close to `3/4` forces structural proximity to the exact equal-translate architecture;
+2. otherwise `rho<=3/4-delta` for some uniform `delta>0`.
 
 ## Research priority
 

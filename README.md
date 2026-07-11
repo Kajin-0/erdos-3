@@ -6,7 +6,7 @@ This repository develops partial progress on Erdős Problem #3:
 
 The full problem remains open. The active project studies the four-term-progression-free case.
 
-## Current shortest recursion
+## Strongest one-generation recursion
 
 Fix a four-term-progression-free block
 
@@ -26,15 +26,13 @@ remains, and put
 K=|D|-s.
 ```
 
-### Minimum-translation backbone
-
 Let
 
 ```math
 m=\min D
 ```
 
-and define
+and define the minimum-translation backbone
 
 ```math
 \mathcal B(D)
@@ -42,27 +40,15 @@ and define
 \{d-m:d\in D,\ d>m\}.
 ```
 
-Then
-
-```math
-\mathcal B(D)\subseteq[1,N),
-```
-
-`B(D)` is four-term-progression-free, and
-
-```math
-|\mathcal B(D)|=|D|-1.
-```
-
-Each backbone label associated with parent `d` satisfies
+Then `B(D)` is four-term-progression-free, lies in `[1,N)`, has size `|D|-1`, and every associated output satisfies
 
 ```math
 d-m\le d/2.
 ```
 
-### Raw full-middle factor three
+### Raw occurrence factor three
 
-Every selected progression contributes one middle-step occurrence `q<=N/2`. Keeping every middle occurrence and the backbone child gives a binary occurrence genealogy satisfying
+Keeping every selected middle occurrence and the backbone gives a binary genealogy with
 
 ```math
 \boxed{
@@ -78,11 +64,11 @@ H(\mathcal B(D))
 }
 ```
 
-This is the strongest raw occurrence theorem. Equal numerical labels are counted repeatedly.
+Equal numerical labels are counted repeatedly.
 
 ### Multiplicity-resolving factor two
 
-Let `Q` be the set of distinct selected steps. For every `q in Q`, translate the other selected centers by the minimum center to obtain a lower-scale four-term-progression-free child `Xi_q`. Then
+Let `Q` be the set of distinct selected middle steps. Repeated copies of each `q in Q` are converted exactly into lower-scale center-difference children `Xi_q` satisfying
 
 ```math
 \boxed{
@@ -92,7 +78,7 @@ Let `Q` be the set of distinct selected steps. For every `q in Q`, translate the
 }
 ```
 
-One copy of each distinct step becomes terminal harmonic mass, and every additional copy becomes a recursive child. Combining this exact resolution with the backbone gives
+Combining these fibers with the backbone gives
 
 ```math
 \boxed{
@@ -131,13 +117,13 @@ Across all generations,
 \sum_q\mu(q)q^p
 \le
 2^{1-p}
-\sum_{a\text{ root}}a^p,
+\sum_{a\text{ root}}a^p.
 }
 ```
 
-where `mu(q)` is total terminal multiplicity. Recursive depth is logarithmic.
+Recursive depth is logarithmic.
 
-## Multiplicity compression
+## Exact multiplicity compression
 
 Every recursive state has the form
 
@@ -149,95 +135,97 @@ B\subseteq D_{\mathrm{root}},
 t\in\{0\}\cup D_{\mathrm{root}}.
 ```
 
-### Different lifted centers
+Repeated terminal copies are compressed in stages:
 
-For fixed terminal step `q`, group occurrences by their lifted center `x` in the root block. Nested center layers export every repeated copy occurring at a different center to lower-scale four-term-progression-free difference children.
+1. Different lifted centers are exported by center-difference layers.
+2. For one exact lifted progression, different root anchors are exported by anchor-difference layers.
+3. Different predecessor anchors are exported by predecessor-difference layers.
+4. Same-anchor copies obey the antichain budget
+   ```math
+   \lambda_{x,q}(t)(a-t)\le a.
+   ```
 
-### Different root anchors
+After iterating through the anchor history, the residual consists of identical local progressions produced by state occurrences with the same complete anchor history.
 
-For one exact lifted progression, group copies by the root translation anchor `t`. Nested anchor layers export every repeated copy occurring with a different anchor.
+## Self-replicating aligned diamonds
 
-The remaining copies have the same:
+That final residual can grow polynomially.
 
-- terminal step;
-- lifted center;
-- root sponsor;
-- root translation anchor;
-- local sponsor label.
-
-### Same-anchor antichain budget
-
-Let
+The base state
 
 ```math
-a=x-\sigma(q)q
+S_1
+=
+32+
+\{0,1,2,16,17,18,21,22,23,26,27,28\}
 ```
 
-be the root sponsor. In a state anchored at `t`, the local sponsor label is
-
-```math
-s=a-t.
-```
-
-Copies with the same anchor all have label `s` and form an antichain in the half-contracting occurrence tree. Therefore
-
-```math
-\boxed{
-\lambda_{x,q}(t)(a-t)\le a.
-}
-```
-
-Equivalently,
-
-```math
-\lambda_{x,q}(t)
-\le
-\left\lfloor\frac{a}{a-t}\right\rfloor.
-```
-
-High same-anchor multiplicity can occur only when `t` lies very close to `a`.
-
-## Sharp aligned diamond
-
-A 12-point four-term-progression-free block shows that the same local progression can occur in both
-
-1. a middle multiplicity-fiber child;
-2. the minimum-translation backbone child;
-
-with the same root anchor.
-
-The duplicated progression is
+is four-term-progression-free and produces two copies of the terminal progression
 
 ```math
 16,21,26
 ```
 
-with terminal step `5`. Thus a universal one-copy-per-anchor theorem is false. One parent can create two aligned copies, and this local bound is sharp.
+with step `5` and the same root anchor.
 
-See:
-
-- `docs/minimum-backbone-aligned-diamond-counterexample.md`
-- `src/verify_minimum_backbone_aligned_diamond.py`
-
-## Current bottleneck
-
-The unresolved object is now precise:
+A recursive three-translate construction doubles the number of identical-history copies at every level. There are four-term-progression-free blocks `S_h` with
 
 ```math
 \boxed{
-\text{one identical local progression repeated across incomparable recursive states with the same anchor.}
+\text{identical-history terminal multiplicity}=2^h
 }
 ```
 
-The next target is predecessor-anchor convergence. A closing theorem must either
+and
 
-1. export convergence diamonds to additional lower-scale difference structure;
-2. show that repeated aligned convergence forces a forbidden affine configuration;
-3. construct a density-sensitive potential that controls the residual same-anchor multiplicity.
+```math
+\boxed{
+|S_h|
+=
+\frac{9\cdot3^h-3}{2}.
+}
+```
+
+Therefore
+
+```math
+\boxed{
+\text{persistence}
+\asymp
+|S_h|^{\log_3 2}.
+}
+```
+
+Absolute, logarithmic, polylogarithmic, and sufficiently small subpower persistence bounds are false without additional hypotheses.
+
+The depth-two 39-point instance produces four terminal copies with the same complete anchor history. It is verified by
+
+```text
+src/verify_self_replicating_aligned_diamond_depth2.py
+```
+
+## Current bottleneck
+
+The remaining theorem must be density-sensitive.
+
+The self-replicating construction is sparse in its ambient interval, so it does not yield a divergent reciprocal-sum counterexample. The active target is now
+
+```math
+\boxed{
+\text{prove that blocks carrying substantial reciprocal mass cannot sustain aligned-diamond replication efficiently across scales.}
+}
+```
+
+Useful forms would include:
+
+1. a tradeoff between persistence multiplicity and block density;
+2. a lower bound on ambient scale required for `h` replication levels;
+3. a potential coupling reciprocal mass to the `3`-for-`2` size growth of the gadget;
+4. a theorem showing that near-extremal replication consumes a summable amount of dyadic density.
 
 ## Supporting deletion-DAG theory
 
-The deletion-DAG merge and spanning-component results remain valid and useful for overlap geometry:
+The deletion-DAG merge and spanning-component identities remain valid:
 
 ```math
 \sum_v|\Delta_v|=K-s+\rho,
@@ -254,7 +242,7 @@ and
 \sum_j|\Theta_j|=2K.
 ```
 
-They are no longer needed for the strongest one-generation constants, but remain possible ingredients in a convergence-diamond theorem.
+They are no longer needed for the strongest one-generation constants, but remain possible ingredients in a density-sensitive replication theorem.
 
 ## Start here
 
@@ -264,8 +252,10 @@ They are no longer needed for the strongest one-generation constants, but remain
 - `docs/middle-multiplicity-fiber-five-thirds-recursion.md` — exact within-state middle multiplicity fibers.
 - `docs/global-lifted-center-layer-resolution.md` — different-center compression.
 - `docs/state-anchor-layer-and-antichain-budget.md` — different-anchor compression and same-anchor budget.
+- `docs/predecessor-anchor-layer-resolution.md` — predecessor and anchor-history compression.
+- `docs/self-replicating-aligned-diamond.md` — arbitrary-depth persistence construction.
+- `src/verify_self_replicating_aligned_diamond_depth2.py` — depth-two verifier.
 - `docs/half-contraction-multiscale-label-potential.md` — all-generation moment potential.
-- `docs/minimum-backbone-aligned-diamond-counterexample.md` — sharp same-anchor sibling event.
 - `docs/side-anchor-deletion-dag.md` — supporting affine deletion DAG.
 
 All recent theorem-style claims are proved internally but await independent expert review.

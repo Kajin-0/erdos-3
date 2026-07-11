@@ -1,19 +1,8 @@
 # Certainty ledger
 
-This file records claims that should survive context loss. Each entry separates:
+This file records claims that should survive context loss. Each entry states status, confidence, audit state, and consequence.
 
-- **status**: standard / proved in repository / computationally verified / conjectural / false / superseded / open bottleneck;
-- **certainty**: how strongly the project should rely on the claim;
-- **audit state**: whether the claim has received independent review;
-- **consequence**: what the claim proves, rules out, or redirects.
-
-The full Erdős reciprocal-sum problem remains open.
-
-The authoritative dependency order is maintained in:
-
-```text
-docs/current-proof-program.md
-```
+The full Erdős reciprocal-sum problem remains open. The authoritative dependency order is in `docs/current-proof-program.md`.
 
 ---
 
@@ -23,7 +12,7 @@ docs/current-proof-program.md
 
 **Certainty:** high.
 
-**Audit state:** likely standard or folklore; not independently checked in this project.
+**Audit state:** likely standard or folklore; not independently checked here.
 
 **Consequence:** fixed finite automata and regular digit languages cannot produce a divergent reciprocal-sum counterexample.
 
@@ -35,14 +24,6 @@ docs/current-proof-program.md
 
 **Certainty:** high.
 
-**Audit state:** standard.
-
-**Statement.** If `A` is `k`-AP-free for fixed `k>=3`, then for every fixed `lambda>1`,
-
-```math
-\frac{|A\cap[N,\lambda N]|}{N}\to0.
-```
-
 For dyadic densities
 
 ```math
@@ -51,7 +32,7 @@ For dyadic densities
 \frac{|A\cap[2^j,2^{j+1})|}{2^j},
 ```
 
-a divergent reciprocal sum requires
+a divergent AP-free candidate must satisfy
 
 ```math
 \alpha_j\to0,
@@ -67,41 +48,29 @@ a divergent reciprocal sum requires
 
 **Certainty:** high.
 
-**Audit state:** standard.
-
-**Statement.** If
+If
 
 ```math
 \sum_j\frac{r_k(2^j)}{2^j}<\infty,
 ```
 
-then every `k`-AP-free subset of the natural numbers has convergent reciprocal sum.
+then every `k`-AP-free set has convergent reciprocal sum.
 
-**Consequence:** known general bounds for `k>=4` are insufficient; cross-scale information is required.
-
----
-
-## CL-004: Walker base-55 benchmark is locally rigid in the implemented model
-
-**Status:** computationally verified.
-
-**Certainty:** high for the finite computation; no global optimality claim.
-
-**Audit state:** reproducible within the repository.
+**Consequence:** known general bounds for `k>=4` are insufficient; cross-scale structure is needed.
 
 ---
 
-## CL-005: Finite-state search is not a full counterexample route
+## CL-004: Earlier finite-state search is supporting work only
 
-**Status:** consequence of CL-001.
+**Status:** computationally verified and consequence of CL-001.
 
-**Certainty:** high.
+**Certainty:** high for the implemented finite checks.
 
-**Consequence:** PB/MaxSAT and DFA tools are supporting or legacy work, not the active proof route.
+**Consequence:** PB/MaxSAT, shifted Kempner, modular digit, and DFA tools are not the active proof route.
 
 ---
 
-## CL-006: Side-anchor deletion produces an affine DAG
+## CL-005: Side-anchor deletion produces an affine DAG
 
 **Status:** proved in repository.
 
@@ -109,43 +78,19 @@ then every `k`-AP-free subset of the natural numbers has convergent reciprocal s
 
 **Audit state:** awaiting independent review.
 
-**Statement.** For a four-term-progression-free block
+For a four-term-progression-free block
 
 ```math
 D\subseteq[N,2N),
 ```
 
-repeatedly delete the coordinated side anchor of a selected three-term progression until a three-term-progression-free residual remains. Writing each selected progression as
-
-```math
-(a_i,b_i,c_i),
-\qquad
-a_i+c_i=2b_i,
-```
-
-the edges
-
-```math
-a_i\to b_i,
-\qquad
-a_i\to c_i
-```
-
-form an acyclic graph. Every deleted vertex has outdegree two and every residual vertex has outdegree zero.
-
-If `K` vertices are deleted and `s` remain, then
-
-```math
-K=|D|-s,
-\qquad
-s\le r_3(N).
-```
+run side-anchor deletion until a three-term-progression-free residual of size `s<=r_3(N)` remains. If `K=|D|-s`, the selected progressions define an acyclic graph in which every deleted vertex has outdegree two and every residual vertex has outdegree zero.
 
 **Primary note:** `docs/side-anchor-deletion-dag.md`.
 
 ---
 
-## CL-007: Exact indegree excess and merge-difference children
+## CL-006: Exact indegree excess and merge-difference children
 
 **Status:** proved in repository.
 
@@ -153,25 +98,15 @@ s\le r_3(N).
 
 **Audit state:** central claim awaiting independent review.
 
-**Statement.** Let `rho` be the number of indegree-zero vertices. Then
+If `rho` is the number of indegree-zero vertices, then
 
 ```math
 \boxed{
-M
-=
-\sum_v\max\{d^-(v)-1,0\}
-=
-K-s+\rho.
+\sum_v\max\{d^-(v)-1,0\}=K-s+\rho.
 }
 ```
 
-For each target `v`, translating its incoming sponsors by their minimum gives a four-term-progression-free child
-
-```math
-\Delta_v\subseteq[1,N)
-```
-
-with
+Translating incoming sponsors at each target gives four-term-progression-free children `Delta_v subseteq[1,N)` satisfying
 
 ```math
 \boxed{
@@ -183,7 +118,7 @@ with
 
 ---
 
-## CL-008: Spanning-forest component translations
+## CL-007: Spanning-forest component translations
 
 **Status:** proved in repository.
 
@@ -191,13 +126,7 @@ with
 
 **Audit state:** awaiting independent review.
 
-**Statement.** Choose one incoming edge for every nonroot DAG vertex. Translating each forest component by its numerical minimum gives four-term-progression-free children
-
-```math
-\Theta_j\subseteq[1,N)
-```
-
-with
+Choosing one incoming edge for every nonroot DAG vertex and translating each resulting component by its numerical minimum gives four-term-progression-free children `Theta_j subseteq[1,N)` with
 
 ```math
 \boxed{
@@ -205,14 +134,11 @@ with
 }
 ```
 
-Together with CL-007,
+Together with CL-006,
 
 ```math
 \boxed{
-\sum_j|\Theta_j|
-+
-\sum_v|\Delta_v|
-=2K.
+\sum_j|\Theta_j|+\sum_v|\Delta_v|=2K.
 }
 ```
 
@@ -220,7 +146,7 @@ Together with CL-007,
 
 ---
 
-## CL-009: One structural occurrence per parent retains at least `2K/3`
+## CL-008: One structural occurrence per parent retains at least `2K/3`
 
 **Status:** proved in repository.
 
@@ -228,31 +154,23 @@ Together with CL-007,
 
 **Audit state:** awaiting independent review.
 
-**Statement.** Associate component occurrences with their translated parent and merge occurrences with their nonminimal sponsor. A residual parent carries at most one structural occurrence and a deleted sponsor at most three.
-
-Retaining at most one structural occurrence per parent preserves at least
+A residual parent carries at most one structural occurrence. A deleted sponsor carries at most one component occurrence and at most two merge occurrences. Retaining at most one structural occurrence per parent preserves at least
 
 ```math
-\boxed{
 \frac{2K}{3}
-}
 ```
 
-structural occurrences. Since every structural label is below `N`,
+structural occurrences and harmonic mass at least
 
 ```math
 \boxed{
-\sum H(\text{retained structural children})
-\ge
 \frac{2K}{3N}.
 }
 ```
 
-**Primary note:** `docs/full-middle-binary-eight-thirds-recursion.md`.
-
 ---
 
-## CL-010: Full middle children are four-term-progression-free
+## CL-009: Full middle children are four-term-progression-free
 
 **Status:** proved in repository.
 
@@ -260,31 +178,27 @@ structural occurrences. Since every structural label is below `N`,
 
 **Audit state:** awaiting independent review.
 
-**Statement.** For each center `x`, let
+For each center `x`, define
 
 ```math
 M_x=\{q_i:b_i=x\}.
 ```
 
-If four steps in `M_x` formed a four-term progression, then the corresponding points `x+q` would form a four-term progression in `D`. Therefore every `M_x` is four-term-progression-free.
-
-Every selected step satisfies `q_i<=N/2`, and each selected progression contributes exactly one middle occurrence. Hence
+Each `M_x` is four-term-progression-free. Every selected step satisfies `q_i<=N/2`, so
 
 ```math
 \boxed{
-\sum_xH(M_x)
-\ge
-\frac{2K}{N}.
+\sum_xH(M_x)\ge\frac{2K}{N}.
 }
 ```
 
-**Consequence:** the valuation-color restriction from the older side-middle packing branch is unnecessary for deletion-DAG recursion.
+**Consequence:** the old one-third valuation-color loss is unnecessary for deletion-DAG recursion.
 
 **Primary note:** `docs/full-middle-binary-eight-thirds-recursion.md`.
 
 ---
 
-## CL-011: Binary full-middle eight-thirds recursion
+## CL-010: Binary full-middle eight-thirds occurrence recursion
 
 **Status:** proved in repository.
 
@@ -292,23 +206,11 @@ Every selected step satisfies `q_i<=N/2`, and each selected progression contribu
 
 **Audit state:** awaiting independent review.
 
-**Statement.** Retain every full-middle occurrence and at most one structural occurrence per parent element. Every deleted sponsor creates at most two children: one middle and one structural. Every residual parent creates at most one structural child.
-
-The total retained harmonic occurrence mass satisfies
+Retaining every full-middle occurrence and at most one structural occurrence per parent gives a binary genealogy satisfying
 
 ```math
 \boxed{
-\sum H(\text{retained binary child occurrences})
-\ge
-\frac{8K}{3N}.
-}
-```
-
-Therefore
-
-```math
-\boxed{
-\sum H(\text{retained binary child occurrences})
+\sum H(\text{binary child occurrences})
 \ge
 \frac83H(D)
 -
@@ -316,15 +218,13 @@ Therefore
 }
 ```
 
-**Critical caveat:** this is an occurrence-multiset inequality. It does not establish growth in the harmonic mass of distinct integers.
-
-**Consequence:** the current best binary branching factor is `8/3`.
+**Critical caveat:** this counts repeated numerical labels separately.
 
 **Primary note:** `docs/full-middle-binary-eight-thirds-recursion.md`.
 
 ---
 
-## CL-012: Root-rich versus long-path dichotomy
+## CL-011: Exact middle multiplicity fibers
 
 **Status:** proved in repository.
 
@@ -332,25 +232,89 @@ Therefore
 
 **Audit state:** awaiting independent review.
 
-**Statement.** Root-rich deletion DAGs give strict merge-difference harmonic gain. Root-poor DAGs contain a long path whose increments are
+Let
 
 ```math
-x_{j+1}-x_j
-=
-\sigma(q_j)c_jq_j,
-\qquad
-c_j\in\{1,2\},
+Q=\{q_i:1\le i\le K\}
 ```
 
-with direction determined by `v_2(q_j) mod 2`.
+be the distinct selected steps. For each `q in Q`, let
 
-**Current role:** supporting theory, not part of the shortest binary `8/3` proof.
+```math
+X_q=\{b_i:q_i=q\}
+```
+
+and define
+
+```math
+\Xi_q
+=
+\{x-\min X_q:x\in X_q,\ x>\min X_q\}.
+```
+
+Each `Xi_q` is four-term-progression-free and lies in `[1,N)`. The exact identity is
+
+```math
+\boxed{
+|Q|+\sum_{q\in Q}|\Xi_q|=K.
+}
+```
+
+**Consequence:** every additional occurrence of a middle label is converted into a lower-scale four-term-progression-free center-difference occurrence. Within-node middle multiplicity is resolved exactly.
+
+**Primary note:** `docs/middle-multiplicity-fiber-five-thirds-recursion.md`.
+
+---
+
+## CL-012: Binary multiplicity-resolving five-thirds recursion
+
+**Status:** proved in repository.
+
+**Certainty:** medium.
+
+**Audit state:** awaiting independent review.
+
+Choose one representative center for each distinct step `q`. Its sponsor produces terminal distinct label `q`. Every nonrepresentative sponsor produces the corresponding `Xi_q` occurrence. Thus each deleted sponsor produces exactly one multiplicity-resolved middle output.
+
+Together with at most one structural output per parent, the genealogy is binary and
+
+```math
+\boxed{
+H(Q)
++
+\sum_qH(\Xi_q)
++
+\sum H(\text{retained structural children})
+\ge
+\frac53H(D)
+-
+\frac53\frac{r_3(N)}N.
+}
+```
+
+**Interpretation:** `H(Q)` is terminal distinct harmonic mass inside one parent node; the `Xi_q` children encode all additional copies recursively.
+
+**Primary note:** `docs/middle-multiplicity-fiber-five-thirds-recursion.md`.
+
+---
+
+## CL-013: Root-rich versus long-path dichotomy
+
+**Status:** proved in repository.
+
+**Certainty:** medium.
+
+**Audit state:** awaiting independent review.
+
+Root-rich deletion DAGs give strict merge-difference harmonic gain. Root-poor DAGs contain long valuation-directed affine paths.
+
+**Current role:** supporting theory.
 
 **Primary note:** `docs/deletion-dag-root-depth-dichotomy.md`.
 
 ---
 
-## CL-013: Componentwise scale-compensated side-middle packing
+## CL-014: Componentwise scale-compensated side-middle packing
 
 **Status:** proved in repository through finite case classification.
 
@@ -358,87 +322,70 @@ with direction determined by `v_2(q_j) mod 2`.
 
 **Audit state:** awaiting independent symbolic review.
 
-**Statement.** For a coordinated side shell `S subseteq [R,2R)` and paired middle subset `T`,
+**Current role:** supporting theory for possible future multiplicity potentials.
 
-```math
-|A(S)\cup M_q(T)|
-+
-R H(T\cap[1,R))
-\ge
-2+
-\frac43(|S|+|T|)-\eta.
-```
+**Primary notes:**
 
-**Current role:** supporting theory rather than the shortest active proof chain.
+- `docs/full-component-scale-export.md`
+- `docs/unequal-cardinality-scale-compensated-packing.md`
 
 ---
 
 # Superseded quantitative results
 
-## SP-001: Binary seven-sixths thinning
+The binary factors
 
-**Status:** valid but superseded by CL-011.
+```math
+\frac76,
+\qquad
+\frac43,
+\qquad
+\frac{16}{9}
+```
 
-## SP-002: Binary four-thirds spanning-forest thinning
-
-**Status:** valid but superseded by CL-011.
-
-## SP-003: Color-aware binary sixteen-ninths recursion
-
-**Status:** valid but superseded by CL-011.
-
-**Reason:** its one-third middle-color loss was unnecessary for recursive descent. Pairwise-disjoint first three dilates were needed only in the older local packing branch, not for four-term-progression-free child recursion.
+remain valid but are superseded as raw occurrence bounds by CL-010.
 
 ---
 
 # Explicitly false targets
 
-## FL-001: Uniformly bounded depth-two affine-lift overlap
+The following are false and must not be reused without additional hypotheses:
 
-**Status:** false.
+1. uniformly bounded depth-two affine-lift overlap;
+2. universal uncorrected local `8/3` packing;
+3. naive recursive density increment in the inherited three-dilate class;
+4. creation of genuine off-diagonal discrepancy by fixed-size sampling.
 
-**Primary note:** `docs/depth-two-overlap-counterexample.md`.
-
-## FL-002: Universal uncorrected local eight-thirds packing
-
-**Status:** false.
-
-**Primary note:** `docs/seven-thirds-local-packing-counterexample.md`.
-
-## FL-003: Naive recursive density increment
-
-**Status:** false as a general mechanism in the inherited three-dilate class.
-
-## FL-004: Fixed-size sampling creates genuine off-diagonal discrepancy
-
-**Status:** false.
-
-**Primary note:** `docs/offdiagonal-correction-direction-energy.md`.
+Primary counterexample notes remain in `docs/`.
 
 ---
 
-# Open bottleneck OB-001: Multiplicity versus scale contraction
+# Open bottleneck OB-001: Cross-state multiplicity and scale contraction
 
-The current theorem controls
-
-```math
-\sum_d\frac{m(d)}d,
-```
-
-where `m(d)` is descendant multiplicity. The original problem concerns
+The raw theorem controls occurrence mass
 
 ```math
-\sum_{d:m(d)>0}\frac1d.
+\sum_d\frac{m(d)}d.
 ```
 
-Because the genealogy is binary, raw occurrence count grows at most like `2^h`, already below `(8/3)^h`. The unresolved issue is rapid numerical contraction, which increases reciprocal weight.
+CL-011 and CL-012 resolve repeated middle labels within one parent node. The unresolved problem is repetition across different parent states:
 
-The approved closing targets are:
+```math
+\boxed{
+\text{cross-state multiplicity}
+\quad+
+\text{scale contraction}
+\quad+
+\text{genealogical overlap}.
+}
+```
 
-1. prove a weighted multiplicity rate strictly below `8/3`;
-2. construct a bounded multiscale potential;
-3. control repeated-label energy;
+Approved next targets:
+
+1. group equal terminal steps across sibling or same-depth states and construct global fiber children;
+2. build a potential that counts each terminal numerical label once and charges repeated copies recursively;
+3. prove a bounded-energy theorem for equal labels across states;
 4. prove a stopping theorem for repeated rapid contraction;
-5. computationally search for multigeneration examples with high multiplicity, rapid contraction, and low distinct harmonic gain.
+5. computationally search for multigeneration examples with high cross-state multiplicity and low distinct harmonic gain.
 
 No current repository theorem closes this gap.

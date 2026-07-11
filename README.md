@@ -6,19 +6,21 @@ This repository develops a partial-progress attack on Erdős Problem #3:
 
 The full problem remains open.
 
-The active program studies four-term-progression-free sets using a multiscale side-anchor deletion DAG. Two complementary theorems are now central:
+The active program studies four-term-progression-free sets using a multiscale side-anchor deletion DAG. Three complementary results are now central:
 
 - a binary lower-scale occurrence recursion with harmonic factor `8/3`;
-- a binary multiplicity-resolving recursion with factor `5/3`, which keeps one distinct copy of every middle step and converts repeated copies into lower-scale four-term-progression-free center-difference children.
+- a binary multiplicity-resolving recursion with factor `5/3`, which keeps one distinct copy of every middle step and converts repeated copies into lower-scale center-difference children;
+- a half-contraction theorem giving a conserved linear-label potential and contracting higher label moments across all generations.
 
-The remaining gap is repetition across different parent states together with rapid scale contraction.
+The remaining gap is concentration of cross-state multiplicity near the smallest labels.
 
 ## Start here
 
 - `docs/current-proof-program.md` — authoritative theorem chain and current gap.
 - `docs/certainty-ledger.md` — status, confidence, and audit state of the main claims.
 - `docs/full-middle-binary-eight-thirds-recursion.md` — strongest raw occurrence theorem.
-- `docs/middle-multiplicity-fiber-five-thirds-recursion.md` — current multiplicity-resolution theorem.
+- `docs/middle-multiplicity-fiber-five-thirds-recursion.md` — within-node multiplicity resolution.
+- `docs/half-contraction-multiscale-label-potential.md` — global all-generation label-moment potential.
 - `docs/spanning-forest-binary-four-thirds-recursion.md` — structural balance used by both recursions.
 - `docs/deletion-dag-merge-difference-recursion.md` — indegree excess and merge-difference children.
 - `docs/side-anchor-deletion-dag.md` — affine deletion-DAG construction.
@@ -151,15 +153,57 @@ H(Q)
 
 This factor is smaller than `8/3`, but it resolves all middle-label multiplicity within one parent node.
 
-## Central gap
+## Half-contraction and global label potential
 
-The remaining unresolved issue is no longer within-node repetition. It is repetition across different recursive states:
+The coordinated side-anchor orientation depends only on the step `q`. For two selected progressions with the same `q`, the difference of their centers equals the difference of their sponsors. Consequently every multiplicity-fiber label associated with sponsor `a` is at most `a/2`.
+
+The retained structural labels and terminal representative steps are also at most half their associated parent label. Therefore every parent produces at most two outputs, each at most half the parent.
+
+For every real `p>=1`, the outputs of one parent `a` satisfy
 
 ```math
 \boxed{
-\text{cross-state multiplicity}
+\sum_{u\text{ output of }a}u^p
+\le
+2^{1-p}a^p.
+}
+```
+
+Across the full recursive tree, if `mu(q)` is the total multiplicity of terminal numerical label `q`, then
+
+```math
+\boxed{
+\sum_q\mu(q)q^p
+\le
+2^{1-p}
+\sum_{a\text{ root occurrence}}a^p
+\qquad(p\ge1).
+}
+```
+
+In particular,
+
+```math
+\boxed{
+\sum_q\mu(q)q
+\le
+\sum_a a.
+}
+```
+
+Every recursive path has length at most `floor(log_2 a_0)` when it starts at label `a_0`.
+
+This is the first bounded all-generation potential controlling cross-state terminal multiplicity. It rules out uncontrolled repetition at moderate and large labels, but does not yet control repetition concentrated near label `1`.
+
+## Central gap
+
+The unresolved regime is now
+
+```math
+\boxed{
+\text{small-label concentration}
 \quad+
-\text{scale contraction}
+\text{cross-state multiplicity}
 \quad+
 \text{genealogical overlap}.
 }
@@ -167,10 +211,10 @@ The remaining unresolved issue is no longer within-node repetition. It is repeti
 
 The approved closing targets are:
 
-1. group equal terminal steps across sibling or same-depth states and export repeated copies to lower-scale fibers;
-2. construct a potential that counts each terminal numerical label once;
-3. prove a bounded-energy or bounded-multiplicity theorem for equal labels across states;
-4. prove a stopping theorem for repeated rapid contraction.
+1. prove that excessive multiplicity at the bottom scales forces additional distinct labels;
+2. construct a potential that combines reciprocal weight with the positive-moment bounds;
+3. prove an additive-energy bound for repeated small terminal labels across states;
+4. computationally search for multigeneration examples concentrating terminal mass near `1`.
 
 ## Research discipline
 

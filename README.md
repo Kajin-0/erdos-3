@@ -6,18 +6,24 @@ This repository develops a partial-progress attack on Erdős Problem #3:
 
 The full problem remains open.
 
-The active program studies four-term-progression-free sets using a multiscale **side-anchor deletion DAG**. The current best internal theorem constructs a binary genealogy of lower-scale four-term-progression-free child occurrences with harmonic branching factor `8/3`. The central unresolved step is converting occurrence mass into harmonic mass of distinct integers.
+The active program studies four-term-progression-free sets using a multiscale side-anchor deletion DAG. Two complementary theorems are now central:
+
+- a binary lower-scale occurrence recursion with harmonic factor `8/3`;
+- a binary multiplicity-resolving recursion with factor `5/3`, which keeps one distinct copy of every middle step and converts repeated copies into lower-scale four-term-progression-free center-difference children.
+
+The remaining gap is repetition across different parent states together with rapid scale contraction.
 
 ## Start here
 
-- `docs/current-proof-program.md` — authoritative theorem chain, dependency graph, false targets, and closing gaps.
-- `docs/certainty-ledger.md` — claims classified by status, confidence, and audit state.
-- `docs/full-middle-binary-eight-thirds-recursion.md` — current best binary occurrence theorem.
-- `docs/spanning-forest-binary-four-thirds-recursion.md` — structural balance used by the current theorem.
+- `docs/current-proof-program.md` — authoritative theorem chain and current gap.
+- `docs/certainty-ledger.md` — status, confidence, and audit state of the main claims.
+- `docs/full-middle-binary-eight-thirds-recursion.md` — strongest raw occurrence theorem.
+- `docs/middle-multiplicity-fiber-five-thirds-recursion.md` — current multiplicity-resolution theorem.
+- `docs/spanning-forest-binary-four-thirds-recursion.md` — structural balance used by both recursions.
 - `docs/deletion-dag-merge-difference-recursion.md` — indegree excess and merge-difference children.
 - `docs/side-anchor-deletion-dag.md` — affine deletion-DAG construction.
 
-## Active theorem chain
+## One-block setup
 
 For a four-term-progression-free block
 
@@ -39,74 +45,49 @@ K=|D|-s.
 
 The selected progressions define an acyclic graph in which every deleted sponsor points to the two surviving points of its selected three-term progression.
 
-### Merge-difference children
+## Structural children
 
-If `rho` is the number of indegree-zero vertices, the exact indegree excess is
-
-```math
-\boxed{
-M
-=
-\sum_v\max\{d^-(v)-1,0\}
-=
-K-s+\rho.
-}
-```
-
-Translating incoming sponsors at each target gives lower-scale four-term-progression-free children `Delta_v` with
+If `rho` is the number of indegree-zero vertices, translating incoming sponsors at each target gives lower-scale four-term-progression-free children `Delta_v` with
 
 ```math
 \sum_v|\Delta_v|=K-s+\rho.
 ```
 
-### Spanning-forest children
-
-Choose one incoming edge for every nonroot DAG vertex. Translating each forest component by its smallest element gives lower-scale four-term-progression-free children `Theta_j` with
+Choosing one incoming edge for each nonroot DAG vertex gives a spanning forest. Translating each forest component by its smallest element gives lower-scale four-term-progression-free children `Theta_j` with
 
 ```math
 \sum_j|\Theta_j|=K+s-\rho.
 ```
 
-Thus the two structural families satisfy
+Therefore
 
 ```math
 \boxed{
-\sum_v|\Delta_v|
-+
-\sum_j|\Theta_j|
-=2K.
+\sum_v|\Delta_v|+\sum_j|\Theta_j|=2K.
 }
 ```
 
-After retaining at most one structural occurrence per parent element, at least `2K/3` structural occurrences remain.
+Retaining at most one structural occurrence per parent element preserves at least `2K/3` structural occurrences and harmonic mass at least
 
-### Full middle children
+```math
+\frac{2K}{3N}.
+```
 
-For every selected progression with center `x` and step `q`, place `q` in
+## Raw full-middle recursion
+
+For every selected progression centered at `x` with common difference `q`, place `q` in
 
 ```math
 M_x=\{q_i:b_i=x\}.
 ```
 
-Each `M_x` is four-term-progression-free: a four-term progression among its steps would give one among the points `x+q` in `D`.
-
-Every selected step satisfies `q<=N/2`, so
+Each `M_x` is four-term-progression-free. Every selected step satisfies `q<=N/2`, so
 
 ```math
-\boxed{
-\sum_xH(M_x)
-\ge
-\frac{2K}{N}.
-}
+\sum_xH(M_x)\ge\frac{2K}{N}.
 ```
 
-No valuation-color restriction is needed in this deletion-DAG recursion.
-
-### Binary eight-thirds theorem
-
-Retain every middle occurrence and at most one structural occurrence per parent. Every deleted sponsor produces at most two children: one middle and one structural. Every residual parent produces at most one structural child.
-
-Therefore
+Keeping every middle occurrence and at most one structural occurrence per parent gives a binary genealogy satisfying
 
 ```math
 \boxed{
@@ -118,87 +99,88 @@ Therefore
 }
 ```
 
-This supersedes the earlier binary factors `7/6`, `4/3`, and `16/9`.
+This is the strongest raw occurrence bound. It counts repeated numerical labels separately.
 
-## Central gap
+## Middle multiplicity resolution
 
-The theorem controls
-
-```math
-\sum_d\frac{m(d)}d,
-```
-
-where `m(d)` counts occurrences of numerical label `d`.
-
-The original problem concerns
+Let
 
 ```math
-\sum_{d:m(d)>0}\frac1d.
+Q=\{q_i:1\le i\le K\}
 ```
 
-The unresolved task is to control
+be the distinct selected steps. For each `q in Q`, let
+
+```math
+X_q=\{b_i:q_i=q\}
+```
+
+be its set of centers, and define
+
+```math
+\Xi_q
+=
+\{x-\min X_q:x\in X_q,\ x>\min X_q\}.
+```
+
+Each `Xi_q` is four-term-progression-free and lies in `[1,N)`. The exact multiplicity identity is
 
 ```math
 \boxed{
-\text{multiplicity},
-\quad
-\text{scale contraction},
-\quad
+|Q|+\sum_{q\in Q}|\Xi_q|=K.
+}
+```
+
+Thus one copy of each distinct step is retained as terminal distinct harmonic mass, while every additional occurrence becomes a lower-scale recursive child.
+
+Combining this with the thinned structural family gives a binary hybrid inequality:
+
+```math
+\boxed{
+H(Q)
++
+\sum_{q\in Q}H(\Xi_q)
++
+\sum H(\text{retained structural children})
+\ge
+\frac53H(D)
+-
+\frac53\frac{r_3(N)}N.
+}
+```
+
+This factor is smaller than `8/3`, but it resolves all middle-label multiplicity within one parent node.
+
+## Central gap
+
+The remaining unresolved issue is no longer within-node repetition. It is repetition across different recursive states:
+
+```math
+\boxed{
+\text{cross-state multiplicity}
+\quad+
+\text{scale contraction}
+\quad+
 \text{genealogical overlap}.
 }
 ```
 
 The approved closing targets are:
 
-1. a weighted multiplicity rate strictly below `8/3`;
-2. a bounded multiscale potential;
-3. an energy bound for repeated numerical labels across child states;
-4. a stopping theorem for repeated rapid contraction.
-
-## Supporting results
-
-The repository also contains:
-
-- a root-rich versus long valuation-directed path dichotomy;
-- componentwise scale-compensated side-middle packing;
-- exact counterexamples to bounded affine-lift overlap;
-- an exact counterexample to uncorrected local `8/3` packing;
-- popular-direction, high-interaction, and affine-tree supporting lemmas.
-
-See `docs/current-proof-program.md` for dependency and status classification.
+1. group equal terminal steps across sibling or same-depth states and export repeated copies to lower-scale fibers;
+2. construct a potential that counts each terminal numerical label once;
+3. prove a bounded-energy or bounded-multiplicity theorem for equal labels across states;
+4. prove a stopping theorem for repeated rapid contraction.
 
 ## Research discipline
 
-The active policy is:
-
-- no new broad proof language unless it proves or falsifies an explicit closing target;
-- recent theorem-style lemmas are marked as proved in the repository but awaiting independent audit;
-- counterexamples and superseded routes remain documented;
-- occurrence mass and distinct mass must be reported separately.
+- Recent theorem-style lemmas are proved in the repository but await independent expert review.
+- Occurrence mass and distinct mass must always be reported separately.
+- New proof language should be added only when it proves or falsifies an explicit closing target.
+- Counterexamples and superseded routes remain documented so false approaches are not revived.
 
 ## Earlier computational program
 
-The repository also contains PB/MaxSAT, modular digit-set, shifted Kempner, and DFA search tools. These remain useful for finite extremizer exploration and reproducible computation, but finite-state constructions cannot produce a divergent reciprocal-sum counterexample.
-
-Relevant files include:
-
-- `src/modular_kempner_search.py`
-- `src/cyclic_pb_encoder.py`
-- `src/dfa_ap_cert.py`
-- `src/dfa_growth_score.py`
-- `data/public_benchmarks.csv`
-- `examples/dfa/`
-
-These tools are supporting or legacy work rather than the active route to the full problem.
-
-## Verification status
-
-The repository distinguishes:
-
-- standard or literature-dependent reductions;
-- symbolic proofs developed in the repository;
-- computationally verified finite claims;
-- conjectural closing targets;
-- explicitly false statements.
+The PB/MaxSAT, modular digit-set, shifted Kempner, and DFA tools remain useful for finite extremizer exploration and reproducible computation. They are supporting or legacy work rather than the active route to the full problem.
 
 No recent deletion-DAG theorem has yet received independent expert review. The full Erdős problem remains unresolved.

@@ -72,59 +72,51 @@ The exponent `log_2 3-2` is negative, so the construction remains compatible wit
 
 ---
 
-## CL-next: Dyadic scale-eight barrier for exact three-translate replication
+## CL-next: Exact equal-translate model is sharply classified
 
-**Status:** proved by an elementary shell argument.
+**Status:** proved by elementary progression, cardinality, and shell arguments.
 
 **Certainty:** high.
 
 **Audit state:** awaiting independent review and integration into `docs/certainty-ledger.md`.
 
-Consider an exact three-translate aligned-replication step
+### Equal-translate ceiling
+
+A four-term-progression-free equal-translate state contains at most three layers. Four layers would contain
 
 ```math
-S\subseteq[L,2L),
-\qquad
-A=\{0\}\cup S,
+0,R,2R,3R.
 ```
+
+The occurrence genealogy is binary, so one parent has at most two persistent children.
+
+### Dyadic scale barrier
+
+For an exact replication step
 
 ```math
 G=A\cup(A+R)\cup(A+2R),
 ```
 
-followed by
+with uncontaminated backbone reproduction `R>=2L` and
 
 ```math
-S'=L'+G\subseteq[L',2L'),
+L'+G\subseteq[L',2L'),
 ```
 
-where `L` and `L'` are powers of two. If exact uncontaminated backbone reproduction requires
-
-```math
-R\ge2L,
-```
-
-then `2R` belongs to `G`, while `G subseteq[0,L')`. Hence
+one has `2R in G`, hence
 
 ```math
 L'>2R\ge4L.
 ```
 
-Since `L'/L` is a power of two,
+Because `L'/L` is a power of two,
 
 ```math
 \boxed{L'\ge8L.}
 ```
 
-After `h` exact replication generations,
-
-```math
-L_h\ge8^hL_0,
-\qquad
-P_h=2^h,
-```
-
-and therefore
+Thus after `h` exact generations,
 
 ```math
 \boxed{
@@ -132,31 +124,9 @@ P_h\le\left(\frac{L_h}{L_0}\right)^{1/3}.
 }
 ```
 
-The scale-eight construction attains the exponent `1/3`, so this exponent is optimal inside the exact standard-dyadic three-translate replication model.
+### Sharp weighted-density theorem
 
-**Primary note:** `docs/three-translate-dyadic-scale-barrier.md`.
-
-**Consequence:** the open possibility of reducing the dyadic scale factor below `8` is closed for this exact model. Any stronger persistence construction must use overlapping layers, cross-parent interaction, nonuniform branching, multishell reproduction, or another mechanism outside the theorem's hypotheses.
-
-**Caveat:** this is not a universal `L^(1/3)` upper bound for arbitrary aligned-diamond persistence in the full recursive proof program.
-
----
-
-## CL-next: Sharp weighted-density decay for exact equal-translate genealogies
-
-**Status:** proved by elementary cardinality and shell estimates.
-
-**Certainty:** high.
-
-**Audit state:** awaiting independent review and integration into `docs/certainty-ledger.md`.
-
-A four-term-progression-free equal-translate state can contain at most three layers, because four layers would contain
-
-```math
-0,R,2R,3R.
-```
-
-The occurrence genealogy is binary, so the maximal exact architecture has three support layers and two persistent children. Together with the scale-eight barrier, the maximal exact one-step weighted-density efficiency is
+The maximal exact one-step efficiency is
 
 ```math
 \boxed{
@@ -168,29 +138,17 @@ The occurrence genealogy is binary, so the maximal exact architecture has three 
 }
 ```
 
-For an exact genealogy, write
+Writing
 
 ```math
 n_h=|S_h|,
 \qquad
 \alpha_h=\frac{n_h}{L_h},
 \qquad
-P_h=2^h.
+P_h=2^h,
 ```
 
-Disjoint three-translate growth gives
-
-```math
-n_{h+1}=3(n_h+1),
-```
-
-while the scale barrier gives
-
-```math
-L_{h+1}\ge8L_h.
-```
-
-Therefore, with
+and
 
 ```math
 C_0=\frac{n_0+3/2}{L_0},
@@ -223,10 +181,13 @@ and
 }
 ```
 
-The scale-eight family attains the exponents, so `2-log_2(3)` is the sharp weighted-density decay exponent inside the exact standard-dyadic equal-translate model.
+The scale-eight family attains the exponents `1/3` and `2-log_2(3)`. Therefore ambient persistence, density decay, and aggregate weighted-density charge are optimal inside the exact standard-dyadic equal-translate model.
 
-**Primary note:** `docs/exact-three-translate-weighted-density-theorem.md`.
+**Primary notes:**
 
-**Consequence:** universal weighted-density decay and aggregate charging are resolved for one exact genealogy. The remaining bottleneck consists of overlapping, approximate, cross-parent, nonuniform, multishell, or interacting genealogies.
+- `docs/three-translate-dyadic-scale-barrier.md`;
+- `docs/exact-three-translate-weighted-density-theorem.md`.
 
-**Caveat:** the theorem does not yet control arbitrary persistence in the full recursive proof program.
+**Consequence:** the canonical exact obstruction is no longer the unresolved case. The remaining bottleneck consists of overlapping, approximate, cross-parent, nonuniform, multishell, or interacting genealogies.
+
+**Caveat:** this does not yet control arbitrary persistence in the full recursive proof program.

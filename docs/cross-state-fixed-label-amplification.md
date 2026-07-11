@@ -1,48 +1,58 @@
 # Cross-state fixed-label amplification
 
-## Status
+## Corrected status
 
-Exact finite-avoidance amplification of the sibling two-layer sharpness example.
-
-The explicit gadget in
+This note amplifies the dyadic-shell-compatible sibling sharpness construction from
 
 ```text
-docs/sibling-two-layer-sharpness-counterexample.md
+docs/dyadic-shell-compatible-sibling-sharpness.md
 ```
 
-produces the same terminal label
+The resulting family proves that raw fixed-label terminal multiplicity can grow polynomially inside four-term-progression-free blocks. The repeated copies occur at different lifted centers, so the global lifted-center layer theorem exports this multiplicity into lower-scale difference children.
 
-```math
-q_0=18
-```
-
-in two sibling layers. This note proves that arbitrarily many translated copies of that gadget can coexist inside one finite four-term-progression-free set.
-
-Consequently, fixed-label cross-state terminal multiplicity is not bounded. Quantitatively, one can obtain multiplicity at least
-
-```math
-cN^{1/2}
-```
-
-inside a block of diameter `N`.
+Thus the construction rules out bounded raw multiplicity, but it does not contradict the current reduced target of controlling repeated use of one exact lifted progression.
 
 ---
 
-## 1. Translation gadget
+## 1. Shell-compatible translation gadget
 
-Let `G` be the 31-element four-term-progression-free set from the sharpness example:
+Let
 
 ```math
-\begin{aligned}
-G=\{&309,324,342,360,365,386,419,434,438,440,452,453,460,466,470,475,\\
-&490,494,498,510,514,515,529,540,543,544,550,560,562,580,585\}.
-\end{aligned}
+D_0=\{309,324,342,360,365,386,419,434,438,440,452,453,460,466,470,475,
+490,494,498,510,514,515,529,540,543,544,550,560,562,580,585\}.
 ```
 
-Inside `G`, the valid side-anchor deletion sequence and chosen spanning tree produce terminal label `18` in both
+Put
 
-1. the middle multiplicity-fiber child `Xi_110`, and
-2. the spanning-forest component child `Theta`.
+```math
+D_1=D_0\cup\{284,394,504\}
+```
+
+and define
+
+```math
+G=13D_1+4500.
+```
+
+Then
+
+```math
+G\subseteq[8192,16384)
+```
+
+and `G` is four-term-progression-free.
+
+The certified deletion sequence and spanning forest produce terminal label
+
+```math
+q_0=234
+```
+
+in two sibling dyadic shells:
+
+1. the middle multiplicity-fiber shell `[512,1024)`;
+2. the spanning-component shell `[2048,4096)`.
 
 For every integer shift `L`, the translated set
 
@@ -50,55 +60,29 @@ For every integer shift `L`, the translated set
 G+L
 ```
 
-has exactly the same internal difference structure. Therefore it remains four-term-progression-free and carries the same deletion-DAG certificate and the same duplicated terminal label `18`.
+has the same internal differences, deletion certificate, child differences, and duplicated terminal label `234`.
 
 ---
 
 ## 2. Finite-avoidance lemma
 
-Let `U` be a finite four-term-progression-free set. Then there are only finitely many shifts `L` for which
+Let `U` be a finite four-term-progression-free set. Only finitely many shifts `L` make
 
 ```math
 U\cup(G+L)
 ```
 
-fails to be four-term-progression-free or fails to be disjoint.
+non-disjoint or create a mixed four-term progression.
 
-### Proof
-
-Disjointness fails only if
-
-```math
-u=g+L
-```
-
-for some `u in U` and `g in G`. This forbids finitely many values
-
-```math
-L=u-g.
-```
-
-Now consider a four-term progression
-
-```math
-z_0,z_1,z_2,z_3
-```
-
-in `U union (G+L)` that uses points from both sets. Write
+For a possible mixed progression write
 
 ```math
 z_i=w_i+\varepsilon_iL,
+\qquad
+\varepsilon_i\in\{0,1\}.
 ```
 
-where
-
-```math
-\varepsilon_i\in\{0,1\},
-```
-
-and `w_i` is chosen from `U` when `epsilon_i=0` and from `G` when `epsilon_i=1`.
-
-The four-term progression equations are
+The progression equations are
 
 ```math
 z_0-2z_1+z_2=0,
@@ -110,125 +94,67 @@ and
 z_1-2z_2+z_3=0.
 ```
 
-The coefficients of `L` are
+For a nonconstant binary membership vector `epsilon`, the coefficients of `L` cannot vanish in both equations. Otherwise `epsilon_0,epsilon_1,epsilon_2,epsilon_3` would itself be a length-four arithmetic progression in `{0,1}`, which forces it to be constant.
 
-```math
-\varepsilon_0-2\varepsilon_1+\varepsilon_2
-```
+Thus every fixed membership pattern and fixed point assignment forbids at most one shift. Since there are finitely many assignments, only finitely many shifts are excluded.
 
-and
-
-```math
-\varepsilon_1-2\varepsilon_2+\varepsilon_3.
-```
-
-They cannot both vanish for a nonconstant binary vector
-
-```math
-(\varepsilon_0,\varepsilon_1,\varepsilon_2,\varepsilon_3).
-```
-
-Indeed, if both vanish, the binary sequence `epsilon_i` is an arithmetic progression of length four. The only such sequence taking values in `{0,1}` is constant.
-
-Therefore at least one progression equation has a nonzero coefficient of `L`. Once the membership pattern and the points `w_i` are fixed, that equation determines at most one value of `L`.
-
-There are finitely many membership patterns and point choices, so only finitely many shifts are forbidden.
-
-Hence some shift `L` makes `U union (G+L)` disjoint and four-term-progression-free.
+Inductively, arbitrarily many translated copies of `G` can coexist in one four-term-progression-free union.
 
 ---
 
-## 3. Arbitrarily many copies
+## 3. Arbitrarily large raw multiplicity
 
-Apply the lemma inductively.
-
-Start with
+For every positive integer `k`, choose shifts
 
 ```math
-U_1=G+L_1.
+L_1,\ldots,L_k
 ```
 
-Given a disjoint four-term-progression-free union
+such that
 
 ```math
-U_m=\bigcup_{j=1}^{m}(G+L_j),
+U_k=\bigcup_{j=1}^{k}(G+L_j)
 ```
 
-choose `L_{m+1}` outside the finite forbidden set for `U_m`.
+is a disjoint four-term-progression-free union.
 
-Then
+Run the certified internal deletion sequence in each copy. Every copy produces two shell-resolved sibling terminal occurrences of label `234`. Therefore
 
 ```math
-U_{m+1}=U_m\cup(G+L_{m+1})
+\boxed{
+\mu(234)\ge2k.
+}
 ```
 
-is again a disjoint four-term-progression-free union.
-
-Thus, for every positive integer `k`, there is a finite four-term-progression-free set containing `k` translated copies of `G`.
-
-Run the certified deletion sequence independently inside each copy. Each copy produces two sibling terminal occurrences of label `18`. Therefore
-
-```math
-\boxed{\mu(18)\ge 2k.}
-```
-
-In particular, no absolute or polylogarithmic bound on fixed-label cross-state multiplicity can follow from four-term-progression-freeness alone.
+Hence no absolute or polylogarithmic upper bound on raw fixed-label terminal multiplicity follows from four-term-progression-freeness alone.
 
 ---
 
 ## 4. Quadratic diameter bound
 
-The induction can be made quantitative.
+Suppose `U_m` contains `m` copies. For each nonconstant membership pattern, fix the gadget offsets in the positions belonging to the new copy.
 
-Suppose `U_m` contains `m` copies, so
-
-```math
-|U_m|=m|G|.
-```
-
-Fix a nonconstant membership pattern
+If exactly one progression position lies in `G+L`, the two independent progression equations leave at most two freely chosen old values; the remaining old value and `L` are determined. Hence these patterns forbid
 
 ```math
-\varepsilon\in\{0,1\}^4
-```
-
-and fix the gadget offsets in every position with `epsilon_i=1`.
-
-If exactly one progression point lies in `G+L`, then three positions lie in `U_m`. The two progression equations have rank two in the three old values and `L`. After choosing any two old values, the remaining old value and `L` are determined. Thus these patterns forbid at most
-
-```math
-O(|U_m|^2)
+O(|U_m|^2)=O(m^2)
 ```
 
 shifts.
 
-If exactly two progression points lie in `G+L`, there are only two old values, so the number of assignments is already
-
-```math
-O(|U_m|^2).
-```
-
-If exactly three progression points lie in `G+L`, there is one old value, giving only
-
-```math
-O(|U_m|)
-```
-
-possibilities.
-
-The gadget `G` and the 14 nonconstant membership patterns are fixed. Adding the disjointness exclusions, the total number of forbidden shifts at stage `m` is therefore
+Patterns with two or three new-copy positions forbid no more. Adding disjointness exclusions, the total number of forbidden shifts at stage `m` is
 
 ```math
 O(m^2).
 ```
 
-Choose `L_{m+1}` among the first one more than the number of forbidden nonnegative integers. Inductively, all `k` shifts can be chosen in an interval of length
+Choose the next shift among the first one more than the number of forbidden nonnegative shifts. Then `k` copies fit in diameter
 
 ```math
 O(k^2).
 ```
 
-After one final common translation, the union lies in a dyadic interval
+After one common translation, the union lies in a ratio-two block
 
 ```math
 [N,2N)
@@ -240,31 +166,40 @@ with
 N=O(k^2).
 ```
 
-Since `mu(18)>=2k`, this gives
+Therefore, for infinitely many `N`,
 
 ```math
-\boxed{\mu(18)\ge cN^{1/2}}
+\boxed{
+\mu(234)\ge cN^{1/2}
+}
 ```
 
-for an absolute constant `c>0` and infinitely many `N`.
+for an absolute constant `c>0`.
 
----
-
-## 5. Consequence for the active proof program
-
-The sibling two-layer theorem is sharp, and the sharp event can be repeated polynomially many times across unrelated parent components.
-
-Therefore the remaining multiplicity theorem cannot assert any of the following without additional global hypotheses:
-
-1. bounded fixed-label multiplicity;
-2. polylogarithmic fixed-label multiplicity;
-3. universal one-layer sibling collapse;
-4. elimination of the component-child duplication mechanism.
-
-The correct target must charge repeated fixed-label events to the amount or scale distribution of the parent set. The finite-avoidance construction has density only
+The construction has density only
 
 ```math
 O(N^{-1/2}),
 ```
 
-so it does not approach a divergent reciprocal-sum counterexample. It does, however, show that the missing theorem must be genuinely quantitative and density-sensitive.
+so its dyadic densities are summable.
+
+---
+
+## 5. Interpretation after global center layering
+
+The copies `G+L_j` produce the same numerical label `234`, but their lifted progression centers differ by the shifts `L_j`.
+
+The global lifted-center layer construction groups these distinct centers and exports all but one representative per layer into lower-scale four-term-progression-free difference children.
+
+Therefore this amplified family shows:
+
+1. raw fixed-label multiplicity can be polynomially large;
+2. a useful theorem must distinguish repeated labels at different lifted centers from repeated use of the same lifted progression;
+3. the active unresolved quantity is
+   ```math
+   L(q)=\max_x\nu_q(x),
+   ```
+   not the total raw multiplicity `mu(q)`.
+
+The correct next target is an exact-progression persistence theorem, not a universal fixed-label multiplicity bound.

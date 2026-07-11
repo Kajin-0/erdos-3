@@ -10,7 +10,7 @@ This note improves the ambient-scale estimate in the self-replicating aligned-di
 S_h\subseteq[L_h,2L_h)
 ```
 
-with identical complete-anchor-history persistence `2^h`, cardinality `Theta(3^h)`, and now the exact scale law
+with identical complete-anchor-history persistence `2^h`, cardinality `Theta(3^h)`, and the exact scale law
 
 ```math
 \boxed{L_h=8^{h+1}.}
@@ -114,17 +114,7 @@ R_h
 \end{cases}
 ```
 
-The two choices are the base-eight two-digit coefficients
-
-```text
-26_8
-```
-
-and
-
-```text
-21_8.
-```
+The two choices are the base-eight two-digit coefficients `26_8` and `21_8`.
 
 Their two-adic valuations are
 
@@ -341,7 +331,7 @@ where
 
 Thus this efficient replication family still spends a geometrically summable amount of multiplicity-weighted dyadic density.
 
-The exact equal-translate architecture has three support layers, two persistent children, and scale factor eight. Its one-step efficiency is therefore
+The exact equal-translate architecture has three support layers, two persistent children, and scale factor eight. Its one-step efficiency is
 
 ```math
 \boxed{

@@ -6,14 +6,14 @@ This repository develops a partial-progress attack on Erdős Problem #3:
 
 The full problem remains open.
 
-The active program studies four-term-progression-free sets using a multiscale **side-anchor deletion DAG**. The current best theorem constructs a binary genealogy of lower-scale four-term-progression-free child occurrences with harmonic branching factor `16/9`. The central unresolved step is converting occurrence mass into harmonic mass of distinct integers.
+The active program studies four-term-progression-free sets using a multiscale **side-anchor deletion DAG**. The current best internal theorem constructs a binary genealogy of lower-scale four-term-progression-free child occurrences with harmonic branching factor `8/3`. The central unresolved step is converting occurrence mass into harmonic mass of distinct integers.
 
 ## Start here
 
 - `docs/current-proof-program.md` — authoritative theorem chain, dependency graph, false targets, and closing gaps.
 - `docs/certainty-ledger.md` — claims classified by status, confidence, and audit state.
-- `docs/color-aware-binary-sixteen-ninths-recursion.md` — current best binary occurrence theorem.
-- `docs/spanning-forest-binary-four-thirds-recursion.md` — superseded intermediate binary theorem.
+- `docs/full-middle-binary-eight-thirds-recursion.md` — current best binary occurrence theorem.
+- `docs/spanning-forest-binary-four-thirds-recursion.md` — structural balance used by the current theorem.
 - `docs/deletion-dag-merge-difference-recursion.md` — indegree excess and merge-difference children.
 - `docs/side-anchor-deletion-dag.md` — affine deletion-DAG construction.
 
@@ -53,7 +53,7 @@ K-s+\rho.
 }
 ```
 
-Translating the incoming sponsors at each target gives lower-scale four-term-progression-free children `Delta_v` with
+Translating incoming sponsors at each target gives lower-scale four-term-progression-free children `Delta_v` with
 
 ```math
 \sum_v|\Delta_v|=K-s+\rho.
@@ -61,13 +61,13 @@ Translating the incoming sponsors at each target gives lower-scale four-term-pro
 
 ### Spanning-forest children
 
-Choose one incoming edge for every nonroot DAG vertex. Translating each resulting forest component by its smallest element gives lower-scale four-term-progression-free children `Theta_j` with
+Choose one incoming edge for every nonroot DAG vertex. Translating each forest component by its smallest element gives lower-scale four-term-progression-free children `Theta_j` with
 
 ```math
 \sum_j|\Theta_j|=K+s-\rho.
 ```
 
-The two structural families therefore satisfy the exact balance
+Thus the two structural families satisfy
 
 ```math
 \boxed{
@@ -78,27 +78,47 @@ The two structural families therefore satisfy the exact balance
 }
 ```
 
-### Color-aware binary thinning
+After retaining at most one structural occurrence per parent element, at least `2K/3` structural occurrences remain.
 
-For each deleted sponsor, let `ell(a) in {0,1,2,3}` be the number of associated structural occurrences. Choose the middle color jointly with the structural allocation:
+### Full middle children
 
-- sponsors in the chosen middle color retain their middle occurrence and at most one structural occurrence;
-- sponsors outside the chosen color retain at most two structural occurrences;
-- residual parents retain their structural occurrence.
+For every selected progression with center `x` and step `q`, place `q` in
 
-Every parent element creates at most two retained child occurrences. Averaging over the three middle colors gives
+```math
+M_x=\{q_i:b_i=x\}.
+```
+
+Each `M_x` is four-term-progression-free: a four-term progression among its steps would give one among the points `x+q` in `D`.
+
+Every selected step satisfies `q<=N/2`, so
+
+```math
+\boxed{
+\sum_xH(M_x)
+\ge
+\frac{2K}{N}.
+}
+```
+
+No valuation-color restriction is needed in this deletion-DAG recursion.
+
+### Binary eight-thirds theorem
+
+Retain every middle occurrence and at most one structural occurrence per parent. Every deleted sponsor produces at most two children: one middle and one structural. Every residual parent produces at most one structural child.
+
+Therefore
 
 ```math
 \boxed{
 \sum H(\text{binary child occurrences})
 \ge
-\frac{16}{9}H(D)
+\frac83H(D)
 -
-\frac{16}{9}\frac{r_3(N)}N.
+\frac83\frac{r_3(N)}N.
 }
 ```
 
-This supersedes the previous binary factors `7/6` and `4/3`.
+This supersedes the earlier binary factors `7/6`, `4/3`, and `16/9`.
 
 ## Central gap
 
@@ -108,7 +128,7 @@ The theorem controls
 \sum_d\frac{m(d)}d,
 ```
 
-where `m(d)` counts occurrences of the numerical label `d`.
+where `m(d)` counts occurrences of numerical label `d`.
 
 The original problem concerns
 
@@ -128,12 +148,12 @@ The unresolved task is to control
 }
 ```
 
-The current approved closing targets are:
+The approved closing targets are:
 
-1. a weighted multiplicity rate strictly below `16/9`;
+1. a weighted multiplicity rate strictly below `8/3`;
 2. a bounded multiscale potential;
-3. structural exclusion of the abstract extremal load pattern `ell=0` on one third of sponsors and `ell=3` on two thirds;
-4. scalable computational counterexamples that persist over multiple generations.
+3. an energy bound for repeated numerical labels across child states;
+4. a stopping theorem for repeated rapid contraction.
 
 ## Supporting results
 

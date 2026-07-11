@@ -69,3 +69,73 @@ P\alpha(P)\asymp P^{\log_2 3-2}.
 ```
 
 The exponent `log_2 3-2` is negative, so the construction remains compatible with a theorem forcing decay of multiplicity-weighted density.
+
+---
+
+## CL-next: Dyadic scale-eight barrier for exact three-translate replication
+
+**Status:** proved by an elementary shell argument.
+
+**Certainty:** high.
+
+**Audit state:** awaiting independent review and integration into `docs/certainty-ledger.md`.
+
+Consider an exact three-translate aligned-replication step
+
+```math
+S\subseteq[L,2L),
+\qquad
+A=\{0\}\cup S,
+```
+
+```math
+G=A\cup(A+R)\cup(A+2R),
+```
+
+followed by
+
+```math
+S'=L'+G\subseteq[L',2L'),
+```
+
+where `L` and `L'` are powers of two. If exact uncontaminated backbone reproduction requires
+
+```math
+R\ge2L,
+```
+
+then `2R` belongs to `G`, while `G subseteq[0,L')`. Hence
+
+```math
+L'>2R\ge4L.
+```
+
+Since `L'/L` is a power of two,
+
+```math
+\boxed{L'\ge8L.}
+```
+
+After `h` exact replication generations,
+
+```math
+L_h\ge8^hL_0,
+\qquad
+P_h=2^h,
+```
+
+and therefore
+
+```math
+\boxed{
+P_h\le\left(\frac{L_h}{L_0}\right)^{1/3}.
+}
+```
+
+The scale-eight construction attains the exponent `1/3`, so this exponent is optimal inside the exact standard-dyadic three-translate replication model.
+
+**Primary note:** `docs/three-translate-dyadic-scale-barrier.md`.
+
+**Consequence:** the open possibility of reducing the dyadic scale factor below `8` is closed for this exact model. Any stronger persistence construction must use overlapping layers, cross-parent interaction, nonuniform branching, multishell reproduction, or another mechanism outside the theorem's hypotheses.
+
+**Caveat:** this is not a universal `L^(1/3)` upper bound for arbitrary aligned-diamond persistence in the full recursive proof program.

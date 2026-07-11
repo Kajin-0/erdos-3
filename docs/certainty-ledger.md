@@ -331,6 +331,81 @@ Root-rich deletion DAGs give strict merge-difference harmonic gain. Root-poor DA
 
 ---
 
+## CL-015: Every retained output is at most half its parent
+
+**Status:** proved in repository.
+
+**Certainty:** medium-high.
+
+**Audit state:** awaiting independent review.
+
+The coordinated side-anchor orientation depends only on the common difference `q`. Hence for repeated `q`, differences between centers equal differences between their sponsors. Every multiplicity-fiber output associated with sponsor `a` therefore satisfies
+
+```math
+\xi\le a-N\le a/2.
+```
+
+Terminal representative steps satisfy `q<=N/2<=a/2`. Retained component-translation and merge-difference labels also satisfy
+
+```math
+\theta\le a/2,
+\qquad
+\delta\le a/2.
+```
+
+Thus every parent creates at most two outputs, each no larger than half the parent.
+
+For every real `p>=1`,
+
+```math
+\boxed{
+\sum_{u\text{ output of }a}u^p
+\le
+2^{1-p}a^p.
+}
+```
+
+**Primary note:** `docs/half-contraction-multiscale-label-potential.md`.
+
+---
+
+## CL-016: Global positive-moment bounds for terminal multiplicity
+
+**Status:** proved in repository.
+
+**Certainty:** medium.
+
+**Audit state:** awaiting independent review.
+
+Let `mu(q)` be the total number of terminal occurrences of numerical label `q` across all states and generations. For every `p>=1`,
+
+```math
+\boxed{
+\sum_q\mu(q)q^p
+\le
+2^{1-p}
+\sum_{a\text{ root occurrence}}a^p.
+}
+```
+
+In particular,
+
+```math
+\boxed{
+\sum_q\mu(q)q
+\le
+\sum_a a.
+}
+```
+
+Every recursive path beginning at `a_0` has length at most `floor(log_2 a_0)`.
+
+**Consequence:** cross-state multiplicity at moderate and large labels is globally bounded. Any critical example must concentrate repeated terminal mass near the smallest labels.
+
+**Primary note:** `docs/half-contraction-multiscale-label-potential.md`.
+
+---
+
 # Superseded quantitative results
 
 The binary factors
@@ -360,7 +435,7 @@ Primary counterexample notes remain in `docs/`.
 
 ---
 
-# Open bottleneck OB-001: Cross-state multiplicity and scale contraction
+# Open bottleneck OB-001: Bottom-scale multiplicity concentration
 
 The raw theorem controls occurrence mass
 
@@ -368,13 +443,13 @@ The raw theorem controls occurrence mass
 \sum_d\frac{m(d)}d.
 ```
 
-CL-011 and CL-012 resolve repeated middle labels within one parent node. The unresolved problem is repetition across different parent states:
+CL-011 and CL-012 resolve repeated middle labels within one parent node. CL-015 and CL-016 globally bound every positive moment of cross-state terminal multiplicity.
+
+The unresolved regime is therefore
 
 ```math
 \boxed{
-\text{cross-state multiplicity}
-\quad+
-\text{scale contraction}
+\text{multiplicity concentrated at very small labels}
 \quad+
 \text{genealogical overlap}.
 }
@@ -382,10 +457,9 @@ CL-011 and CL-012 resolve repeated middle labels within one parent node. The unr
 
 Approved next targets:
 
-1. group equal terminal steps across sibling or same-depth states and construct global fiber children;
-2. build a potential that counts each terminal numerical label once and charges repeated copies recursively;
-3. prove a bounded-energy theorem for equal labels across states;
-4. prove a stopping theorem for repeated rapid contraction;
-5. computationally search for multigeneration examples with high cross-state multiplicity and low distinct harmonic gain.
+1. prove that excessive bottom-scale multiplicity forces additional distinct labels;
+2. combine reciprocal mass with the positive-moment potential;
+3. prove an additive-energy theorem for equal small labels across states;
+4. computationally search for multigeneration examples concentrating terminal mass near `1`.
 
 No current repository theorem closes this gap.

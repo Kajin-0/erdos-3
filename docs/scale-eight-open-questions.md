@@ -31,7 +31,17 @@ and
 \sum_hP_h\alpha_h<\infty.
 ```
 
-Four-term-progression-freeness also permits at most three equal translate layers, while the occurrence genealogy permits at most two persistent children. The scale-eight construction attains all resulting exponents. Thus ambient scale, persistence, density decay, and aggregate weighted-density charge are sharp within the exact equal-translate model.
+Four-term-progression-freeness permits at most three equal translate layers, while the occurrence genealogy permits at most two persistent children. The maximal exact one-step efficiency is therefore
+
+```math
+\rho_{\mathrm{exact}}
+=
+\frac{2\cdot3}{8}
+=
+\frac34.
+```
+
+The scale-eight construction attains all resulting exponents. Thus ambient scale, persistence, density decay, and aggregate weighted-density charge are sharp within the exact equal-translate model.
 
 ## Remaining questions
 
@@ -81,15 +91,9 @@ For a recursive segment, define its effective weighted-density ratio schematical
 }.
 ```
 
-The exact equal-translate segment has
+The next theorem should define this quantity rigorously for general recursive segments and prove a dichotomy:
 
-```math
-\rho=\frac{2\cdot3}{8}=\frac34.
-```
-
-The next theorem should define this defect rigorously for general recursive segments and prove a dichotomy:
-
-1. **near-exact case:** `rho` is close to `3/4`, forcing structural proximity to the exact three-translate architecture;
+1. **near-exact case:** `rho` is close to `3/4`, forcing structural proximity to the exact equal-translate architecture;
 2. **defective case:** `rho` is bounded below `3/4` by a uniform amount, yielding stronger geometric contraction.
 
 After that, the remaining task would be packing and overlap control among near-exact segments.

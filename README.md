@@ -1,31 +1,12 @@
 # Erdős Problem #3: harmonic arithmetic progressions
 
-This repository develops a partial-progress attack on Erdős Problem #3:
+This repository develops partial progress on Erdős Problem #3:
 
 > If `A subseteq N` and `sum_{n in A} 1/n = infinity`, must `A` contain arbitrarily long arithmetic progressions?
 
-The full problem remains open.
+The full problem remains open. The active program studies the four-term-progression-free case through a multiscale side-anchor deletion DAG.
 
-The active program studies four-term-progression-free sets using a multiscale side-anchor deletion DAG. Three complementary results are now central:
-
-- a binary lower-scale occurrence recursion with harmonic factor `8/3`;
-- a binary multiplicity-resolving recursion with factor `5/3`, which keeps one distinct copy of every middle step and converts repeated copies into lower-scale center-difference children;
-- a half-contraction theorem giving a conserved linear-label potential and contracting higher label moments across all generations.
-
-The remaining gap is concentration of cross-state multiplicity near the smallest labels.
-
-## Start here
-
-- `docs/current-proof-program.md` — authoritative theorem chain and current gap.
-- `docs/certainty-ledger.md` — status, confidence, and audit state of the main claims.
-- `docs/full-middle-binary-eight-thirds-recursion.md` — strongest raw occurrence theorem.
-- `docs/middle-multiplicity-fiber-five-thirds-recursion.md` — within-node multiplicity resolution.
-- `docs/half-contraction-multiscale-label-potential.md` — global all-generation label-moment potential.
-- `docs/spanning-forest-binary-four-thirds-recursion.md` — structural balance used by both recursions.
-- `docs/deletion-dag-merge-difference-recursion.md` — indegree excess and merge-difference children.
-- `docs/side-anchor-deletion-dag.md` — affine deletion-DAG construction.
-
-## One-block setup
+## Current central results
 
 For a four-term-progression-free block
 
@@ -39,29 +20,13 @@ run side-anchor deletion until a three-term-progression-free residual of size
 s\le r_3(N)
 ```
 
-remains. Put
+remains, and write
 
 ```math
 K=|D|-s.
 ```
 
-The selected progressions define an acyclic graph in which every deleted sponsor points to the two surviving points of its selected three-term progression.
-
-## Structural children
-
-If `rho` is the number of indegree-zero vertices, translating incoming sponsors at each target gives lower-scale four-term-progression-free children `Delta_v` with
-
-```math
-\sum_v|\Delta_v|=K-s+\rho.
-```
-
-Choosing one incoming edge for each nonroot DAG vertex gives a spanning forest. Translating each forest component by its smallest element gives lower-scale four-term-progression-free children `Theta_j` with
-
-```math
-\sum_j|\Theta_j|=K+s-\rho.
-```
-
-Therefore
+The selected progressions define an affine DAG. Two structural child families satisfy the exact balance
 
 ```math
 \boxed{
@@ -69,31 +34,27 @@ Therefore
 }
 ```
 
-Retaining at most one structural occurrence per parent element preserves at least `2K/3` structural occurrences and harmonic mass at least
+After retaining at most one structural occurrence per parent element, at least `2K/3` structural occurrences remain.
 
-```math
-\frac{2K}{3N}.
-```
+### Raw occurrence recursion
 
-## Raw full-middle recursion
-
-For every selected progression centered at `x` with common difference `q`, place `q` in
+For each selected progression with center `x` and step `q`, put `q` in the full middle child
 
 ```math
 M_x=\{q_i:b_i=x\}.
 ```
 
-Each `M_x` is four-term-progression-free. Every selected step satisfies `q<=N/2`, so
+Each `M_x` is four-term-progression-free, and
 
 ```math
 \sum_xH(M_x)\ge\frac{2K}{N}.
 ```
 
-Keeping every middle occurrence and at most one structural occurrence per parent gives a binary genealogy satisfying
+Keeping every middle occurrence and at most one structural occurrence per parent gives a binary occurrence genealogy with
 
 ```math
 \boxed{
-\sum H(\text{binary child occurrences})
+\sum H(\text{children})
 \ge
 \frac83H(D)
 -
@@ -101,23 +62,11 @@ Keeping every middle occurrence and at most one structural occurrence per parent
 }
 ```
 
-This is the strongest raw occurrence bound. It counts repeated numerical labels separately.
+This is the strongest raw occurrence theorem. It counts repeated numerical labels separately.
 
-## Middle multiplicity resolution
+### Within-node multiplicity resolution
 
-Let
-
-```math
-Q=\{q_i:1\le i\le K\}
-```
-
-be the distinct selected steps. For each `q in Q`, let
-
-```math
-X_q=\{b_i:q_i=q\}
-```
-
-be its set of centers, and define
+Let `Q` be the set of distinct selected middle steps. For each `q in Q`, let `X_q` be its selected centers and define
 
 ```math
 \Xi_q
@@ -125,25 +74,23 @@ be its set of centers, and define
 \{x-\min X_q:x\in X_q,\ x>\min X_q\}.
 ```
 
-Each `Xi_q` is four-term-progression-free and lies in `[1,N)`. The exact multiplicity identity is
+Then
 
 ```math
 \boxed{
-|Q|+\sum_{q\in Q}|\Xi_q|=K.
+|Q|+\sum_q|\Xi_q|=K.
 }
 ```
 
-Thus one copy of each distinct step is retained as terminal distinct harmonic mass, while every additional occurrence becomes a lower-scale recursive child.
-
-Combining this with the thinned structural family gives a binary hybrid inequality:
+One copy of each distinct step is retained as terminal mass, and every additional copy becomes a lower-scale four-term-progression-free child. Adding the retained structural family gives
 
 ```math
 \boxed{
 H(Q)
 +
-\sum_{q\in Q}H(\Xi_q)
+\sum_qH(\Xi_q)
 +
-\sum H(\text{retained structural children})
+\sum H(\text{structural children})
 \ge
 \frac53H(D)
 -
@@ -151,15 +98,9 @@ H(Q)
 }
 ```
 
-This factor is smaller than `8/3`, but it resolves all middle-label multiplicity within one parent node.
+### Half-contraction potential
 
-## Half-contraction and global label potential
-
-The coordinated side-anchor orientation depends only on the step `q`. For two selected progressions with the same `q`, the difference of their centers equals the difference of their sponsors. Consequently every multiplicity-fiber label associated with sponsor `a` is at most `a/2`.
-
-The retained structural labels and terminal representative steps are also at most half their associated parent label. Therefore every parent produces at most two outputs, each at most half the parent.
-
-For every real `p>=1`, the outputs of one parent `a` satisfy
+Every retained output associated with parent label `a` is at most `a/2`, and every parent produces at most two outputs. Hence, for every real `p>=1`,
 
 ```math
 \boxed{
@@ -169,62 +110,113 @@ For every real `p>=1`, the outputs of one parent `a` satisfy
 }
 ```
 
-Across the full recursive tree, if `mu(q)` is the total multiplicity of terminal numerical label `q`, then
+Across all generations, if `mu(q)` is total terminal multiplicity, then
 
 ```math
 \boxed{
 \sum_q\mu(q)q^p
 \le
 2^{1-p}
-\sum_{a\text{ root occurrence}}a^p
-\qquad(p\ge1).
+\sum_{a\text{ root}}a^p.
 }
 ```
 
-In particular,
+Recursive depth is logarithmic.
+
+## Shell interface
+
+A child family generally lies in `[1,N)` rather than in one ratio-two block. Before reapplying the deletion theorem, each child is partitioned into standard dyadic shells
+
+```math
+[2^j,2^{j+1}).
+```
+
+Harmonic mass is additive across this partition. Claims about repeated terminal progressions must therefore be checked after shell decomposition, not only in the unshelled child set.
+
+The original 31-element sibling-overlap example was only an algebraic precursor. The corrected 34-element construction in
+
+```text
+docs/dyadic-shell-compatible-sibling-sharpness.md
+```
+
+proves that the same terminal label can occur in both a middle-fiber shell and a spanning-component shell. Its verifier is
+
+```text
+src/verify_dyadic_shell_sibling_sharpness.py
+```
+
+## Global lifted-center resolution
+
+Every recursive state has the form
+
+```math
+S=B-t,
+\qquad B\subseteq D,
+```
+
+for the original root block `D`. A terminal step `q` in `S` therefore lifts to a three-term progression
+
+```math
+x-q,
+\quad x,
+\quad x+q
+```
+
+inside `D`.
+
+Let `nu_q(x)` be the number of terminal occurrences of `q` lifting to center `x`, and let
+
+```math
+L(q)=\max_x\nu_q(x).
+```
+
+Define the nested center layers
+
+```math
+X_{q,k}=\{x:\nu_q(x)\ge k\}.
+```
+
+Translating each nonempty layer by its minimum gives lower-scale four-term-progression-free children `Omega_{q,k}` and the exact identity
 
 ```math
 \boxed{
-\sum_q\mu(q)q
-\le
-\sum_a a.
+\mu(q)
+=
+L(q)
++
+\sum_{k=1}^{L(q)}|\Omega_{q,k}|.
 }
 ```
 
-Every recursive path has length at most `floor(log_2 a_0)` when it starts at label `a_0`.
-
-This is the first bounded all-generation potential controlling cross-state terminal multiplicity. It rules out uncontrolled repetition at moderate and large labels, but does not yet control repetition concentrated near label `1`.
-
-## Central gap
-
-The unresolved regime is now
+Thus all cross-state repetition occurring at different lifted centers is exported. The remaining multiplicity is
 
 ```math
 \boxed{
-\text{small-label concentration}
-\quad+
-\text{cross-state multiplicity}
-\quad+
-\text{genealogical overlap}.
+L(q)=\text{the number of recursive states reusing one exact lifted }q\text{-progression}.
 }
 ```
 
-The approved closing targets are:
+## Current bottleneck
 
-1. prove that excessive multiplicity at the bottom scales forces additional distinct labels;
-2. construct a potential that combines reciprocal weight with the positive-moment bounds;
-3. prove an additive-energy bound for repeated small terminal labels across states;
-4. computationally search for multigeneration examples concentrating terminal mass near `1`.
+The active target is now an exact-progression persistence theorem:
 
-## Research discipline
+```math
+\boxed{
+\text{control how often one fixed lifted progression can survive through the recursive genealogy.}
+}
+```
 
-- Recent theorem-style lemmas are proved in the repository but await independent expert review.
-- Occurrence mass and distinct mass must always be reported separately.
-- New proof language should be added only when it proves or falsifies an explicit closing target.
-- Counterexamples and superseded routes remain documented so false approaches are not revived.
+The translated-gadget amplification shows that raw fixed-label multiplicity can be polynomially large, but those copies occur at different lifted centers and are handled by the global layer decomposition.
 
-## Earlier computational program
+## Start here
 
-The PB/MaxSAT, modular digit-set, shifted Kempner, and DFA tools remain useful for finite extremizer exploration and reproducible computation. They are supporting or legacy work rather than the active route to the full problem.
+- `docs/current-proof-program.md` — authoritative theorem chain and current gap.
+- `docs/certainty-ledger.md` — claim status, confidence, and audit state.
+- `docs/full-middle-binary-eight-thirds-recursion.md` — strongest raw occurrence theorem.
+- `docs/middle-multiplicity-fiber-five-thirds-recursion.md` — within-node multiplicity resolution.
+- `docs/half-contraction-multiscale-label-potential.md` — global label-moment potential.
+- `docs/global-lifted-center-layer-resolution.md` — cross-state center-layer decomposition.
+- `docs/dyadic-shell-compatible-sibling-sharpness.md` — shell-compatible two-layer sharpness.
+- `docs/side-anchor-deletion-dag.md` — deletion-DAG construction.
 
-No recent deletion-DAG theorem has yet received independent expert review. The full Erdős problem remains unresolved.
+All recent theorem-style claims are proved internally but await independent expert review.

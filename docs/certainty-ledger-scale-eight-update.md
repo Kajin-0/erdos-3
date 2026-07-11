@@ -156,7 +156,17 @@ A four-term-progression-free equal-translate state can contain at most three lay
 0,R,2R,3R.
 ```
 
-The occurrence genealogy is binary, so the maximal exact architecture has three support layers and two persistent children.
+The occurrence genealogy is binary, so the maximal exact architecture has three support layers and two persistent children. Together with the scale-eight barrier, the maximal exact one-step weighted-density efficiency is
+
+```math
+\boxed{
+\rho_{\mathrm{exact}}
+\le
+\frac{2\cdot3}{8}
+=
+\frac34.
+}
+```
 
 For an exact genealogy, write
 

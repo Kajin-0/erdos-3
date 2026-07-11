@@ -224,7 +224,7 @@ docs/scale-eight-self-replicating-aligned-diamond.md
 
 ### Sharp exact-model theorems
 
-The canonical three-translate obstruction is now quantitatively classified.
+The canonical equal-translate obstruction is now quantitatively classified.
 
 If one exact replication step has
 
@@ -250,7 +250,19 @@ then uncontaminated backbone reproduction requires `R>=2L`. Since `2R in G`, one
 \boxed{L'\ge8L.}
 ```
 
-Thus after `h` exact generations,
+Also, four equal translate layers are impossible because `0,R,2R,3R` would be a four-term progression. Thus three layers are maximal. Since the occurrence genealogy is binary, two persistent children are maximal. The canonical architecture therefore has the extremal one-step efficiency
+
+```math
+\boxed{
+\rho_{\mathrm{exact}}
+=
+\frac{2\cdot3}{8}
+=
+\frac34.
+}
+```
+
+After `h` exact generations,
 
 ```math
 \boxed{
@@ -258,15 +270,13 @@ P_h\le\left(\frac{L_h}{L_0}\right)^{1/3}.
 }
 ```
 
-The scale-eight family attains the exponent `1/3`.
-
 The exact cardinality recurrence is
 
 ```math
 n_{h+1}=3(n_h+1),
 ```
 
-so every exact three-translate genealogy satisfies
+so every exact equal-translate genealogy satisfies
 
 ```math
 \boxed{
@@ -288,13 +298,13 @@ C_0=\frac{n_0+3/2}{L_0}.
 }
 ```
 
-The exponent `2-log_2(3)` is sharp in this model.
+The scale-eight family attains the exponents `1/3` and `2-log_2(3)`.
 
 ## Current bottleneck
 
-The remaining theorem must control persistence outside the exact three-translate model.
+The remaining theorem must control persistence outside the exact equal-translate model.
 
-The exact obstruction now has summable multiplicity-weighted density, so any unresolved mechanism must involve at least one genuinely different feature:
+The exact obstruction already has summable multiplicity-weighted density, so any unresolved mechanism must involve at least one genuinely different feature:
 
 1. overlapping or only partially resolved translate layers;
 2. several parent states feeding one terminal history;
@@ -307,21 +317,11 @@ The active target is therefore
 
 ```math
 \boxed{
-\text{decompose general persistence into controlled exact or near-exact genealogies plus a quantitatively cheaper error class.}
+\text{decompose general persistence into exact or near-exact genealogies plus a quantitatively cheaper error class.}
 }
 ```
 
-The scale-eight family gives the sharp exact-model benchmark:
-
-```math
-\alpha(P)
-\asymp
-P^{\log_2 3-3},
-\qquad
-P\alpha(P)
-\asymp
-P^{\log_2 3-2}.
-```
+A useful next theorem would define a general local efficiency ratio and prove that every segment either stays structurally close to the exact `3/4` architecture or contracts by a uniformly stronger factor.
 
 ## Supporting deletion-DAG theory
 

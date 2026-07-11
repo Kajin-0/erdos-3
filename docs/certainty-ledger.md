@@ -23,11 +23,9 @@ docs/current-proof-program.md
 
 **Certainty:** high.
 
-**Audit state:** not independently checked in this project; likely standard or folklore.
+**Audit state:** likely standard or folklore; not independently checked in this project.
 
-**Statement.** If a base-`b` automatic set has divergent reciprocal sum, then it has positive upper density and hence contains arithmetic progressions of every finite length.
-
-**Consequence.** Fixed finite automata and regular digit languages cannot produce a divergent reciprocal-sum counterexample.
+**Consequence:** fixed finite automata and regular digit languages cannot produce a divergent reciprocal-sum counterexample.
 
 ---
 
@@ -61,8 +59,6 @@ a divergent reciprocal sum requires
 \sum_j\alpha_j=\infty.
 ```
 
-**Consequence.** The hard case is slowly divergent logarithmic-scale dust.
-
 ---
 
 ## CL-003: Blockwise extremal bounds reduce the problem to summability
@@ -81,7 +77,7 @@ a divergent reciprocal sum requires
 
 then every `k`-AP-free subset of the natural numbers has convergent reciprocal sum.
 
-**Consequence.** Known general bounds for `k>=4` are insufficient; cross-scale information is required.
+**Consequence:** known general bounds for `k>=4` are insufficient; cross-scale information is required.
 
 ---
 
@@ -93,8 +89,6 @@ then every `k`-AP-free subset of the natural numbers has convergent reciprocal s
 
 **Audit state:** reproducible within the repository.
 
-**Consequence.** Small substitutions in the implemented cyclic modular model do not improve the benchmark.
-
 ---
 
 ## CL-005: Finite-state search is not a full counterexample route
@@ -103,9 +97,7 @@ then every `k`-AP-free subset of the natural numbers has convergent reciprocal s
 
 **Certainty:** high.
 
-**Audit state:** same as CL-001.
-
-**Consequence.** PB/MaxSAT and DFA tools are supporting or legacy work, not the active proof route.
+**Consequence:** PB/MaxSAT and DFA tools are supporting or legacy work, not the active proof route.
 
 ---
 
@@ -149,8 +141,6 @@ K=|D|-s,
 s\le r_3(N).
 ```
 
-**Consequence.** The overlap problem becomes a concrete geometric DAG problem.
-
 **Primary note:** `docs/side-anchor-deletion-dag.md`.
 
 ---
@@ -175,21 +165,19 @@ K-s+\rho.
 }
 ```
 
-For each target `v`, translate its incoming sponsors by their minimum to obtain
+For each target `v`, translating its incoming sponsors by their minimum gives a four-term-progression-free child
 
 ```math
-\Delta_v\subseteq[1,N).
+\Delta_v\subseteq[1,N)
 ```
 
-Each `Delta_v` is four-term-progression-free and
+with
 
 ```math
 \boxed{
 \sum_v|\Delta_v|=K-s+\rho.
 }
 ```
-
-**Consequence.** Indegree merging generates canonical lower-scale children.
 
 **Primary note:** `docs/deletion-dag-merge-difference-recursion.md`.
 
@@ -203,7 +191,7 @@ Each `Delta_v` is four-term-progression-free and
 
 **Audit state:** awaiting independent review.
 
-**Statement.** Choose one incoming edge for every nonroot DAG vertex. The selected edges form a spanning forest with `rho` components. Translating each component by its numerical minimum produces four-term-progression-free children
+**Statement.** Choose one incoming edge for every nonroot DAG vertex. Translating each forest component by its numerical minimum gives four-term-progression-free children
 
 ```math
 \Theta_j\subseteq[1,N)
@@ -228,44 +216,11 @@ Together with CL-007,
 }
 ```
 
-**Consequence.** The residual and root terms cancel exactly at the structural-occurrence level.
-
 **Primary note:** `docs/spanning-forest-binary-four-thirds-recursion.md`.
 
 ---
 
-## CL-009: Structural load is at most three per deleted sponsor
-
-**Status:** proved in repository.
-
-**Certainty:** medium-high.
-
-**Audit state:** awaiting independent review.
-
-**Statement.** Associate each component occurrence with its translated parent and each merge occurrence with its nonminimal sponsor. A residual parent carries at most one structural occurrence. A deleted sponsor carries at most:
-
-1. one component occurrence;
-2. two merge occurrences.
-
-Thus its structural load satisfies
-
-```math
-\ell(a)\in\{0,1,2,3\}.
-```
-
-If `r` structural occurrences are attached to residual vertices, then
-
-```math
-\boxed{
-\sum_{a\text{ deleted}}\ell(a)=2K-r.
-}
-```
-
-**Consequence.** Structural thinning can be treated as a finite per-sponsor allocation problem.
-
----
-
-## CL-010: Color-aware binary sixteen-ninths recursion
+## CL-009: One structural occurrence per parent retains at least `2K/3`
 
 **Status:** proved in repository.
 
@@ -273,35 +228,79 @@ If `r` structural occurrences are attached to residual vertices, then
 
 **Audit state:** awaiting independent review.
 
-**Statement.** Give each deleted sponsor the color
+**Statement.** Associate component occurrences with their translated parent and merge occurrences with their nonminimal sponsor. A residual parent carries at most one structural occurrence and a deleted sponsor at most three.
+
+Retaining at most one structural occurrence per parent preserves at least
 
 ```math
-c(a)
-=
-v_2(q_a)-v_3(q_a)\pmod3.
+\boxed{
+\frac{2K}{3}
+}
 ```
 
-Choose one color globally. Sponsors in that color retain their middle occurrence and at most one structural occurrence. Sponsors outside it retain at most two structural occurrences. Residual parents retain their structural occurrence.
-
-Every parent creates at most two retained child occurrences.
-
-Averaging over the three colors gives, for structural load `ell`,
+structural occurrences. Since every structural label is below `N`,
 
 ```math
-g(\ell)
-=
-\frac{2+1_{\ell\ge1}+2\min\{\ell,2\}}3
+\boxed{
+\sum H(\text{retained structural children})
 \ge
-\frac23+\frac59\ell.
+\frac{2K}{3N}.
+}
 ```
 
-Using CL-009, some color satisfies
+**Primary note:** `docs/full-middle-binary-eight-thirds-recursion.md`.
+
+---
+
+## CL-010: Full middle children are four-term-progression-free
+
+**Status:** proved in repository.
+
+**Certainty:** medium-high.
+
+**Audit state:** awaiting independent review.
+
+**Statement.** For each center `x`, let
+
+```math
+M_x=\{q_i:b_i=x\}.
+```
+
+If four steps in `M_x` formed a four-term progression, then the corresponding points `x+q` would form a four-term progression in `D`. Therefore every `M_x` is four-term-progression-free.
+
+Every selected step satisfies `q_i<=N/2`, and each selected progression contributes exactly one middle occurrence. Hence
+
+```math
+\boxed{
+\sum_xH(M_x)
+\ge
+\frac{2K}{N}.
+}
+```
+
+**Consequence:** the valuation-color restriction from the older side-middle packing branch is unnecessary for deletion-DAG recursion.
+
+**Primary note:** `docs/full-middle-binary-eight-thirds-recursion.md`.
+
+---
+
+## CL-011: Binary full-middle eight-thirds recursion
+
+**Status:** proved in repository.
+
+**Certainty:** medium.
+
+**Audit state:** awaiting independent review.
+
+**Statement.** Retain every full-middle occurrence and at most one structural occurrence per parent element. Every deleted sponsor creates at most two children: one middle and one structural. Every residual parent creates at most one structural child.
+
+The total retained harmonic occurrence mass satisfies
 
 ```math
 \boxed{
 \sum H(\text{retained binary child occurrences})
 \ge
-\frac{16K}{9N}.
+\frac{8K}{3N}.
 }
 ```
 
@@ -311,21 +310,21 @@ Therefore
 \boxed{
 \sum H(\text{retained binary child occurrences})
 \ge
-\frac{16}{9}H(D)
+\frac83H(D)
 -
-\frac{16}{9}\frac{r_3(N)}N.
+\frac83\frac{r_3(N)}N.
 }
 ```
 
-**Critical caveat.** This is an occurrence-multiset inequality. It does not establish growth in the harmonic mass of distinct integers.
+**Critical caveat:** this is an occurrence-multiset inequality. It does not establish growth in the harmonic mass of distinct integers.
 
-**Consequence.** The current best binary branching factor is `16/9`.
+**Consequence:** the current best binary branching factor is `8/3`.
 
-**Primary note:** `docs/color-aware-binary-sixteen-ninths-recursion.md`.
+**Primary note:** `docs/full-middle-binary-eight-thirds-recursion.md`.
 
 ---
 
-## CL-011: Root-rich versus long-path dichotomy
+## CL-012: Root-rich versus long-path dichotomy
 
 **Status:** proved in repository.
 
@@ -333,13 +332,7 @@ Therefore
 
 **Audit state:** awaiting independent review.
 
-**Statement.** If
-
-```math
-\rho\ge\delta|D|,
-```
-
-then the merge-difference family has strict harmonic gain. If roots are sparse, the DAG contains a long path whose increments have the form
+**Statement.** Root-rich deletion DAGs give strict merge-difference harmonic gain. Root-poor DAGs contain a long path whose increments are
 
 ```math
 x_{j+1}-x_j
@@ -349,15 +342,15 @@ x_{j+1}-x_j
 c_j\in\{1,2\},
 ```
 
-with the sign determined by `v_2(q_j) mod 2`.
+with direction determined by `v_2(q_j) mod 2`.
 
-**Consequence.** Near-critical merge behavior requires long valuation-directed affine cancellation.
+**Current role:** supporting theory, not part of the shortest binary `8/3` proof.
 
 **Primary note:** `docs/deletion-dag-root-depth-dichotomy.md`.
 
 ---
 
-## CL-012: Componentwise scale-compensated side-middle packing
+## CL-013: Componentwise scale-compensated side-middle packing
 
 **Status:** proved in repository through finite case classification.
 
@@ -376,12 +369,7 @@ R H(T\cap[1,R))
 \frac43(|S|+|T|)-\eta.
 ```
 
-**Consequence.** Efficient local overlap exports potential to lower scale. This remains supporting theory rather than the shortest active proof chain.
-
-**Primary notes:**
-
-- `docs/full-component-scale-export.md`
-- `docs/unequal-cardinality-scale-compensated-packing.md`
+**Current role:** supporting theory rather than the shortest active proof chain.
 
 ---
 
@@ -389,19 +377,17 @@ R H(T\cap[1,R))
 
 ## SP-001: Binary seven-sixths thinning
 
-**Status:** valid but superseded.
-
-**Statement.** Merge-plus-middle thinning gave binary branching factor `7/6`.
-
-**Superseded by:** CL-010.
+**Status:** valid but superseded by CL-011.
 
 ## SP-002: Binary four-thirds spanning-forest thinning
 
-**Status:** valid but superseded.
+**Status:** valid but superseded by CL-011.
 
-**Statement.** Retaining one structural occurrence per parent and the selected middle occurrence gave binary branching factor `4/3`.
+## SP-003: Color-aware binary sixteen-ninths recursion
 
-**Superseded by:** CL-010.
+**Status:** valid but superseded by CL-011.
+
+**Reason:** its one-third middle-color loss was unnecessary for recursive descent. Pairwise-disjoint first three dilates were needed only in the older local packing branch, not for four-term-progression-free child recursion.
 
 ---
 
@@ -411,15 +397,11 @@ R H(T\cap[1,R))
 
 **Status:** false.
 
-**Certainty:** high; explicit finite-avoidance construction.
-
 **Primary note:** `docs/depth-two-overlap-counterexample.md`.
 
 ## FL-002: Universal uncorrected local eight-thirds packing
 
 **Status:** false.
-
-**Certainty:** high; explicit computationally checkable example.
 
 **Primary note:** `docs/seven-thirds-local-packing-counterexample.md`.
 
@@ -427,19 +409,15 @@ R H(T\cap[1,R))
 
 **Status:** false as a general mechanism in the inherited three-dilate class.
 
-**Certainty:** high internally.
-
 ## FL-004: Fixed-size sampling creates genuine off-diagonal discrepancy
 
 **Status:** false.
-
-**Certainty:** high internally.
 
 **Primary note:** `docs/offdiagonal-correction-direction-energy.md`.
 
 ---
 
-# Open bottleneck OB-001: Multiplicity versus scale
+# Open bottleneck OB-001: Multiplicity versus scale contraction
 
 The current theorem controls
 
@@ -453,16 +431,14 @@ where `m(d)` is descendant multiplicity. The original problem concerns
 \sum_{d:m(d)>0}\frac1d.
 ```
 
-The active closing targets are:
+Because the genealogy is binary, raw occurrence count grows at most like `2^h`, already below `(8/3)^h`. The unresolved issue is rapid numerical contraction, which increases reciprocal weight.
 
-1. prove an effective weighted multiplicity rate strictly below `16/9`;
+The approved closing targets are:
+
+1. prove a weighted multiplicity rate strictly below `8/3`;
 2. construct a bounded multiscale potential;
-3. rule out or quantify the abstract extremal structural-load pattern
-   ```math
-   \ell=0\text{ on one third},
-   \qquad
-   \ell=3\text{ on two thirds};
-   ```
-4. computationally search for multigeneration examples with high multiplicity, rapid contraction, and low unique harmonic gain.
+3. control repeated-label energy;
+4. prove a stopping theorem for repeated rapid contraction;
+5. computationally search for multigeneration examples with high multiplicity, rapid contraction, and low distinct harmonic gain.
 
-No current repository result closes this gap.
+No current repository theorem closes this gap.

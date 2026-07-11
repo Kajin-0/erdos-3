@@ -1,168 +1,548 @@
 # Certainty ledger
 
-This file records claims that should survive chat-context loss.  Each entry separates:
+This file records claims that should survive chat-context loss. Each entry separates:
 
-- **status**: proved / computationally verified / conjectural / open bottleneck;
-- **certainty**: how strongly this repository should rely on the claim;
-- **consequence**: what the claim rules out or redirects.
+- **status**: standard / proved in repository / computationally verified / conjectural / false / open bottleneck;
+- **certainty**: how strongly the project should rely on the claim;
+- **audit state**: whether the claim has received independent review;
+- **consequence**: what the claim proves, rules out, or redirects.
 
 The full Erdős reciprocal-sum problem remains open.
+
+The authoritative dependency order is maintained in:
+
+```text
+docs/current-proof-program.md
+```
 
 ---
 
 ## CL-001: Automatic sets cannot be counterexamples
 
-**Status:** proved, modulo standard regular-language growth and Szemerédi.
+**Status:** proved modulo standard regular-language growth and Szemerédi.
 
 **Certainty:** high.
 
-**Statement.** Fix an integer `b >= 2`.  Let `A subset N` be base-`b` automatic, meaning that
-the canonical base-`b` representations of elements of `A` form a regular language.  If
+**Audit state:** not independently checked in this project; likely standard or folklore.
+
+**Statement.** Fix `b>=2`. If `A subseteq N` is base-`b` automatic and
 
 ```math
-\sum_{n\in A}\frac{1}{n}=\infty,
+\sum_{n\in A}\frac1n=\infty,
 ```
 
-then `A` has positive upper asymptotic density.  Therefore, by Szemerédi's theorem, `A` contains
-arithmetic progressions of every finite length.
+then `A` has positive upper asymptotic density and therefore contains arithmetic progressions of every finite length.
 
-**Proof sketch.** Let `a_m` be the number of accepted canonical words of length `m`.  The harmonic
-sum diverges iff
-
-```math
-\sum_m \frac{a_m}{b^m}=\infty.
-```
-
-For a regular language, `a_m` is controlled by the Perron spectral radius `rho` of the coaccessible
-transition graph.  If `rho < b`, the above series converges.  Hence divergence forces `rho=b`.
-A full spectral-radius strongly connected component in a deterministic `b`-digit automaton must
-have all `b` digit transitions staying inside the component.  Once this component is reached, all
-middle digit blocks are admissible, and bounded accepting suffixes give positive upper density.
-Szemerédi then gives arbitrarily long APs.
-
-**Consequence.** No fixed finite automaton / regular digit-language / automatic-set construction
-can produce a divergent reciprocal-sum counterexample to Erdős Problem #3.
-
-**Caveat.** This may be known folklore in automatic sequences or regular languages.  Treat it as
-a reliable theorem, not necessarily as a novel theorem.
+**Consequence.** No fixed finite automaton, regular digit language, or automatic-set construction can produce a divergent reciprocal-sum counterexample.
 
 ---
 
-## CL-002: Any AP-free divergent candidate must be sparse in every fixed-ratio interval
+## CL-002: An AP-free divergent candidate is sparse in every fixed-ratio interval
 
-**Status:** proved, using Szemerédi.
+**Status:** standard consequence of Szemerédi.
 
 **Certainty:** high.
 
-**Statement.** If `A subset N` is `k`-AP-free for some fixed `k >= 3`, then for every fixed
-`lambda > 1`,
+**Audit state:** standard.
+
+**Statement.** If `A subseteq N` is `k`-AP-free for fixed `k>=3`, then for every fixed `lambda>1`,
 
 ```math
-\frac{|A\cap [N,\lambda N]|}{N}\to 0.
+\frac{|A\cap[N,\lambda N]|}{N}\to0.
 ```
 
-**Proof sketch.** If a fixed-ratio interval `[N_i, lambda N_i]` contained `>= delta N_i` points
-for infinitely many `N_i`, then inside that interval `A` would have positive relative density.
-For sufficiently large intervals, Szemerédi's theorem would force a `k`-term AP, contradiction.
-
-**Consequence.** Any counterexample to Erdős Problem #3 must have dyadic densities
+For dyadic densities
 
 ```math
-\delta_j = |A\cap[2^j,2^{j+1})|/2^j
+\alpha_j
+=
+\frac{|A\cap[2^j,2^{j+1})|}{2^j},
 ```
 
-satisfying
+a divergent reciprocal sum requires
 
 ```math
-\delta_j\to 0,
+\alpha_j\to0,
 \qquad
-\sum_j \delta_j=\infty.
+\sum_j\alpha_j=\infty.
 ```
 
-The mass must be a slowly divergent logarithmic-scale dust, not persistent dense blocks.
+**Consequence.** The hard case is slowly divergent logarithmic-scale dust, not persistent dense blocks.
 
 ---
 
-## CL-003: Blockwise extremal bounds reduce the problem to summability of r_k bounds
+## CL-003: Blockwise extremal bounds reduce the problem to summability
 
 **Status:** standard reduction.
 
 **Certainty:** high.
 
-**Statement.** Let `r_k(N)` be the largest size of a `k`-AP-free subset of `[1,N]`.  If
+**Audit state:** standard.
+
+**Statement.** If
 
 ```math
-\sum_j \frac{r_k(2^j)}{2^j}<\infty,
+\sum_j\frac{r_k(2^j)}{2^j}<\infty,
 ```
 
-then every `k`-AP-free set has convergent reciprocal sum.
+then every `k`-AP-free subset of `N` has convergent reciprocal sum.
 
-**Proof sketch.** For `A_j=A cap [2^j,2^{j+1})`,
-
-```math
-\sum_{n\in A_j}\frac1n \le \frac{|A_j|}{2^j}\le C\frac{r_k(2^j)}{2^j}.
-```
-
-Summing over `j` gives the claim.
-
-**Consequence.** The full problem would follow from sufficiently strong bounds on `r_k(N)`, e.g.
-roughly
-
-```math
-r_k(N) \ll \frac{N}{(\log N)(\log\log N)^{1+\epsilon}}.
-```
-
-**Current bottleneck.** Known general `k >= 4` bounds are not strong enough for this summability.
-A successful proof likely needs cross-block constraints, not only independent dyadic-block bounds.
+**Consequence.** Known general `r_k(N)` bounds for `k>=4` are insufficient; a successful proof likely needs cross-scale arithmetic information.
 
 ---
 
-## CL-004: Walker base-55 shifted Kempner benchmark is locally rigid under small substitutions
+## CL-004: Walker base-55 benchmark is locally rigid in the implemented model
 
-**Status:** computationally verified in this repo.
+**Status:** computationally verified.
 
-**Certainty:** high for the implemented finite check; not a theorem of global optimality.
+**Certainty:** high for the finite computation; no global optimality claim.
 
-**Statement.** Walker's public `k=4`, base-55 shifted Kempner digit set with harmonic score
-`4.43975` has no AP-free same-size digit-substitution neighbors at radius 1 or 2 in the repository's
-cyclic modular digit-template model.
+**Audit state:** reproducible within the repository.
 
-**Consequence.** Beating Walker's benchmark likely requires a larger structural change than small
-same-size perturbations of the base-55 digit set.
+**Statement.** Walker's public base-55 shifted Kempner digit set has no AP-free same-size digit-substitution neighbor at radius one or two in the repository's cyclic modular model.
 
-**Caveat.** This only concerns one finite neighborhood in one model class.  It does not prove global
-optimality among shifted Kempner sets.
+**Consequence.** Small perturbations in that finite model are unlikely to improve the benchmark.
 
 ---
 
-## CL-005: Finite-state / regular-language search is not a counterexample route
+## CL-005: Finite-state search is not a full counterexample route
 
 **Status:** consequence of CL-001.
 
 **Certainty:** high.
 
-**Statement.** Random DFA search, regular-language search, and finite-state digit-language search can
-find finite harmonic-sum extremizers or interesting AP-free finite-density examples, but cannot find
-a divergent reciprocal-sum AP-free counterexample.
+**Audit state:** same as CL-001.
 
-**Consequence.** Use DFA tools for bounded extremizer exploration and structural insight only.  Do
-not treat them as a plausible route to a full counterexample.
+**Statement.** DFA and regular-language searches can study finite extremizers but cannot produce an AP-free set with divergent reciprocal sum.
+
+**Consequence.** The PB/MaxSAT and DFA infrastructure is supporting or legacy work, not the active proof route.
 
 ---
 
-## Open bottleneck OB-001: Cross-block arithmetic constraints
+## CL-006: Side-anchor deletion produces an affine DAG
 
-The remaining hard case has dyadic densities `delta_j -> 0` but `sum_j delta_j = infinity`.
-Blockwise Szemerédi/extremal bounds are insufficient for `k >= 4`.  The likely missing ingredient is
-a theorem showing that AP-free sets with divergent dyadic harmonic mass must create cross-block
-additive configurations.
+**Status:** proved in repository.
 
-A useful target would be a result of the form:
+**Certainty:** medium-high.
+
+**Audit state:** awaiting independent review.
+
+**Statement.** Let
 
 ```math
-\sum_j \delta_j=\infty
-\quad\Longrightarrow\quad
-\text{some multi-scale density configuration forces a }k\text{-AP}.
+D\subseteq[N,2N)
 ```
 
-This is the main proof direction to attack next.
+be four-term-progression-free. Repeatedly select a three-term progression and delete its coordinated side anchor until the residual set is three-term-progression-free.
+
+Writing each selected progression as
+
+```math
+(a_i,b_i,c_i),
+\qquad
+a_i+c_i=2b_i,
+```
+
+with `a_i` deleted, the directed edges
+
+```math
+a_i\to b_i,
+\qquad
+a_i\to c_i
+```
+
+form an acyclic graph. Every deleted vertex has outdegree two; every residual vertex has outdegree zero.
+
+If `K` vertices are deleted and `s` remain, then
+
+```math
+K=|D|-s,
+\qquad
+s\le r_3(N).
+```
+
+**Dependencies:** side-anchor deletion rule; deletion-time ordering; Roth residual bound.
+
+**Consequence.** The overlap problem can be studied through a concrete geometric DAG rather than an abstract role tree.
+
+**Primary note:** `docs/side-anchor-deletion-dag.md`.
+
+---
+
+## CL-007: Exact indegree excess and merge-difference children
+
+**Status:** proved in repository.
+
+**Certainty:** medium.
+
+**Audit state:** central claim awaiting independent review.
+
+**Statement.** Let `rho` be the number of indegree-zero vertices of the deletion DAG. Then
+
+```math
+\boxed{
+M
+=
+\sum_v\max\{d^-(v)-1,0\}
+=
+K-s+\rho.
+}
+```
+
+For each vertex `v`, let `I_v` be its incoming sponsors, choose `p_v=min I_v`, and define
+
+```math
+\Delta_v
+=
+\{a-p_v:a\in I_v,\ a>p_v\}.
+```
+
+Then:
+
+```math
+\Delta_v\subseteq[1,N),
+```
+
+`Delta_v` is four-term-progression-free, and
+
+```math
+\boxed{
+\sum_v|\Delta_v|=K-s+\rho.
+}
+```
+
+Consequently,
+
+```math
+\boxed{
+\sum_vH(\Delta_v)
+\ge
+H(D)-2\frac{r_3(N)}N.
+}
+```
+
+**Dependencies:** CL-006.
+
+**Consequence.** Indegree merging generates a canonical family of lower-scale four-term-progression-free children preserving parent harmonic mass with multiplicity.
+
+**Primary note:** `docs/deletion-dag-merge-difference-recursion.md`.
+
+---
+
+## CL-008: Merge-plus-middle occurrence branching
+
+**Status:** proved in repository.
+
+**Certainty:** medium.
+
+**Audit state:** awaiting independent review.
+
+**Statement.** Selecting the heaviest color of
+
+```math
+\chi(q)=v_2(q)-v_3(q)\pmod3
+```
+
+produces middle children `M_x^*` satisfying
+
+```math
+\sum_xH(M_x^*)\ge\frac{2K}{3N}.
+```
+
+Together with CL-007,
+
+```math
+\boxed{
+\sum_vH(\Delta_v)
++
+\sum_xH(M_x^*)
+\ge
+\frac53H(D)
+-
+\frac83\frac{r_3(N)}N.
+}
+```
+
+After retaining at most one merge occurrence per sponsor,
+
+```math
+\boxed{
+\sum_vH(\Delta_v')
++
+\sum_xH(M_x^*)
+\ge
+\frac76H(D)
+-
+\frac53\frac{r_3(N)}N.
+}
+```
+
+and each sponsor generates at most two child occurrences.
+
+**Critical caveat.** These are occurrence-multiset inequalities. They do not establish growth in the harmonic mass of distinct integers.
+
+**Dependencies:** CL-006 and CL-007.
+
+**Consequence.** A canonical binary occurrence genealogy has a supercritical harmonic lower bound, but multiplicity and scale contraction remain uncontrolled.
+
+**Primary note:** `docs/deletion-dag-merge-difference-recursion.md`.
+
+---
+
+## CL-009: Root-rich versus long-path dichotomy
+
+**Status:** proved in repository.
+
+**Certainty:** medium.
+
+**Audit state:** awaiting independent review.
+
+**Statement.** If the deletion DAG has
+
+```math
+\rho\ge\delta|D|,
+```
+
+then
+
+```math
+\boxed{
+\sum_vH(\Delta_v)
+\ge
+(1+\delta)H(D)
+-
+2\frac{r_3(N)}N.
+}
+```
+
+If roots are sparse, the maximum directed path length satisfies
+
+```math
+\boxed{
+L
+\ge
+\left\lceil
+\log_2\left(\frac{|D|}{\rho}+1\right)
+\right\rceil-1.
+}
+```
+
+Along such a path,
+
+```math
+x_{j+1}-x_j
+=
+\sigma(q_j)c_jq_j,
+\qquad
+c_j\in\{1,2\},
+```
+
+where the sign `sigma(q_j)` is determined by `v_2(q_j) mod 2`.
+
+**Dependencies:** CL-006 and CL-007.
+
+**Consequence.** Near-critical merge recursion can occur only in root-poor DAGs containing long valuation-directed affine paths.
+
+**Primary note:** `docs/deletion-dag-root-depth-dichotomy.md`.
+
+---
+
+## CL-010: Componentwise scale-compensated side-middle packing
+
+**Status:** proved in repository through finite case classification.
+
+**Certainty:** medium.
+
+**Audit state:** awaiting independent symbolic review; some finite examples are computationally verified.
+
+**Statement.** Let
+
+```math
+S\subseteq[R,2R)
+```
+
+be a coordinated side shell and `T` an arbitrary subset of its paired middle child. Then
+
+```math
+\boxed{
+|A(S)\cup M_q(T)|
++
+R H(T\cap[1,R))
+\ge
+2+
+\frac43(|S|+|T|)-\eta,
+}
+```
+
+where `0<=eta<=2` records anchor coincidences.
+
+If `T subseteq [R,2R)`, the lower-scale correction vanishes.
+
+**Dependencies:** coordinated valuation compression; full intersection forest; finite component classification.
+
+**Consequence.** Efficient local overlap cannot destroy the relevant capacity; it exports it to lower scale. This is supporting theory, not yet the closing global multiplicity theorem.
+
+**Primary notes:**
+
+- `docs/full-component-scale-export.md`
+- `docs/unequal-cardinality-scale-compensated-packing.md`
+
+---
+
+## CL-011: Sponsored sparse recursion removes global child matching
+
+**Status:** proved in repository.
+
+**Certainty:** medium.
+
+**Audit state:** awaiting independent review.
+
+**Statement.** The deletion proof can select at least
+
+```math
+|D|-r_3(N)
+```
+
+three-term progressions with distinct sponsor elements. Each sponsor creates exactly one side occurrence and at most one selected middle occurrence.
+
+**Consequence.** The global child-state matching problem can be replaced by a canonical occurrence-level binary sponsorship map.
+
+**Caveat.** This does not solve multiplicity; labels can contract rapidly.
+
+**Primary note:** `docs/sponsored-three-ap-binary-recursion.md`.
+
+---
+
+# Explicitly false or superseded targets
+
+## FL-001: Uniformly bounded depth-two affine-lift overlap
+
+**Status:** false.
+
+**Certainty:** high; explicit finite-avoidance construction.
+
+**Statement ruled out.** A fixed root point and terminal direction do not support only boundedly many depth-two affine lifts in a four-term-progression-free set.
+
+**Primary note:** `docs/depth-two-overlap-counterexample.md`.
+
+---
+
+## FL-002: Universal uncorrected local `8/3` packing
+
+**Status:** false.
+
+**Certainty:** high; explicit computationally checkable example.
+
+**Statement ruled out.** One cannot universally prove
+
+```math
+|A(S)\cup M_q(T)|\ge\frac83|S|-O(1)
+```
+
+without a lower-scale correction.
+
+A coordinated four-term-progression-free example has
+
+```math
+|S|=|T|=45,
+\qquad
+|A(S)\cup M_q(T)|=107<120.
+```
+
+**Primary note:** `docs/seven-thirds-local-packing-counterexample.md`.
+
+---
+
+## FL-003: Naive recursive density increment
+
+**Status:** false as a general mechanism in the inherited three-dilate class.
+
+**Certainty:** high internally.
+
+**Statement ruled out.** Passing to predecessor children does not automatically increase normalized density; disjoint affine copies give a nonincrease bound.
+
+**Primary note:** `docs/affine-tree-multiplicity-lower-bound.md`.
+
+---
+
+## FL-004: Fixed-size sampling creates genuine off-diagonal discrepancy
+
+**Status:** false.
+
+**Certainty:** high internally.
+
+**Statement ruled out.** Fixed-size sampling scales the corrected off-diagonal discrepancy by the expected combinatorial factor; it does not create or amplify it.
+
+**Primary note:** `docs/offdiagonal-correction-direction-energy.md`.
+
+---
+
+# Open bottlenecks
+
+## OB-001: Cross-block arithmetic constraints
+
+**Status:** broad original bottleneck; retained but refined.
+
+A divergent AP-free candidate would satisfy
+
+```math
+\alpha_j\to0,
+\qquad
+\sum_j\alpha_j=\infty.
+```
+
+Independent blockwise extremal estimates are insufficient.
+
+**Refinement:** OB-002 is the current precise form pursued by the deletion-DAG program.
+
+---
+
+## OB-002: Multiplicity versus scale contraction
+
+**Status:** authoritative current bottleneck.
+
+The project controls occurrence harmonic mass
+
+```math
+\sum_d\frac{m(d)}d
+```
+
+but the original set problem concerns distinct mass
+
+```math
+\sum_{d:m(d)>0}\frac1d.
+```
+
+The missing theorem must jointly control:
+
+```math
+\boxed{
+\text{multiplicity},
+\quad
+\text{scale contraction},
+\quad
+\text{valuation-directed path geometry}.
+}
+```
+
+Acceptable closing results include:
+
+1. a weighted multiplicity inequality beating the binary factor `7/6`;
+2. a bounded multiscale potential that grows under recursion;
+3. a stopping theorem showing root-poor valuation-directed paths cannot persist;
+4. a computationally discovered scalable family falsifying the route.
+
+No current result closes OB-002.
+
+---
+
+# Repository policy
+
+A new theorem note should be added only if it:
+
+1. proves or falsifies a stated closing target in `docs/current-proof-program.md`;
+2. repairs a concrete dependency gap;
+3. supplies a reproducible counterexample;
+4. consolidates or independently audits an existing claim.
+
+Recent deletion-DAG claims are safe to use as **internal lemmas under review**, not as established literature results or a solution of Erdős Problem #3.

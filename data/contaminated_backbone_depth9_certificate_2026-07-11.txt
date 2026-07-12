@@ -1,0 +1,49 @@
+Contaminated-backbone depth-nine certificate
+Date: 2026-07-11
+
+Parent state:
+S8 shell = [8388608,16777216)
+S8 size = 29523
+S8 maximum = 14604604
+S8 FNV64 = 023db79dd7cbf62b
+
+First exact factor-eight recovery:
+R = 16777217
+v2(R) = 0
+R = 2*8388608 + 1
+
+Rejected preceding candidate:
+R = 16777216
+4-AP witness = 0,8388608,16777216,25165824
+
+Raw state G9:
+size = 88572
+minimum = 0
+maximum = 48159038
+SHA256 = 68fd383e153a8a6beb5ed42b643b21a2f841abeac3e015f8a38a26866963cc5c
+FNV64 = a323906d13700252
+4-AP-free = verified
+translate layers disjoint = verified
+left-sponsor deletion schedule = verified
+middle fiber equals S8 = verified
+backbone shell equals S8 = verified
+
+Translated state S9:
+shell = [67108864,134217728)
+size = 88572
+minimum = 67108864
+maximum = 115267902
+SHA256 = 43811627a1a49910ecea5656f6542f533d3e177adc2be80daccfe2092c4f650b
+FNV64 = 5005dc89644a7b80
+certified persistence lower bound = 512
+
+Scale-factor sequence:
+4,8,4,4,8,4,8,8
+
+Weighted density:
+W9 = 22143/32768
+W9/W8 = 7381/9841
+W9/W5 = 7381/11648
+
+Verifier:
+src/verify_contaminated_backbone_depth9.cpp

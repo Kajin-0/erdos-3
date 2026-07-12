@@ -1,4 +1,4 @@
-# Current proof program: backbone recursion and long-run contamination compensation
+# Current proof program: backbone recursion and path-dependent contamination
 
 ## Status
 
@@ -62,9 +62,7 @@ Put
 K=|D|-s.
 ```
 
-Every deleted sponsor creates one selected middle-step occurrence `q<=N/2`.
-
-The selected progressions also define an affine deletion DAG. That structure is no longer needed for the strongest one-generation constants, but remains relevant to overlap and contamination geometry.
+Every deleted sponsor creates one selected middle-step occurrence `q<=N/2`. The selected progressions also define an affine deletion DAG, which remains relevant to overlap and contamination geometry.
 
 ---
 
@@ -92,7 +90,7 @@ Then
 |\mathcal B(D)|=|D|-1,
 ```
 
-and `B(D)` is four-term-progression-free. Every associated label satisfies
+`B(D)` is four-term-progression-free, and every associated label satisfies
 
 ```math
 0<d-m\le d/2.
@@ -404,29 +402,15 @@ The scale-eight family attains the exponents. The exact model is sharply classif
 
 # 10. Contaminated-backbone depth-five burst
 
-The exact-model contraction does not extend locally when the backbone shell merely contains the replay state.
-
-There are certified four-term-progression-free states
+There are certified four-term-progression-free states through depth five with scales
 
 ```math
-S_h\subseteq[L_h,2L_h),
-\qquad
-1\le h\le5,
-```
-
-with scales
-
-```math
-(L_1,L_2,L_3,L_4,L_5)
-=
 (64,256,2048,8192,32768)
 ```
 
 and separations
 
 ```math
-(R_1,R_2,R_3,R_4)
-=
 (61,303,1597,8195).
 ```
 
@@ -436,21 +420,7 @@ The dyadic scale factors are
 \boxed{4,8,4,4.}
 ```
 
-At each step:
-
-1. the selected middle multiplicity fiber is exactly the previous state;
-2. the relevant backbone shell contains the previous state plus contaminating points;
-3. the verified deletion schedule can be replayed inside that subset;
-4. both continuations share the new root anchor;
-5. certified identical-history persistence doubles.
-
-Thus
-
-```math
-P_h^{\mathrm{cert}}=2^h
-```
-
-is a certified lower bound.
+At each step, the middle multiplicity fiber is exactly the previous state, while the relevant backbone shell contains the replay state plus possible contaminating points. The verified deletion schedule can be replayed inside that subset, both continuations share the new root anchor, and certified identical-history persistence doubles.
 
 Define
 
@@ -480,12 +450,7 @@ and
 }
 ```
 
-Therefore the following are false without stronger hypotheses:
-
-1. universal one-step `3/4` contraction for contaminated backbones;
-2. universal strict contraction at every non-exact step;
-3. contraction over every four-step replication window;
-4. a local near-exact/defective dichotomy in which every non-exact step pays an immediate stronger loss.
+This rules out universal local contraction and contraction over every four-step window.
 
 **Verifier:** `src/verify_contaminated_backbone_depth5.py`.
 
@@ -495,17 +460,9 @@ Therefore the following are false without stronger hypotheses:
 
 ---
 
-# 11. Finite forced recovery after the burst
+# 11. Branch-specific forced recovery
 
-The depth-five state satisfies
-
-```math
-S_5\subseteq[32768,65536),
-\qquad
-|S_5|=1092.
-```
-
-An exhaustive finite search over every sponsor-compatible disjoint three-translate continuation gives:
+The depth-five state has no factor-two or factor-four continuation:
 
 ```math
 \boxed{N_{5,2}=0,}
@@ -513,78 +470,29 @@ An exhaustive finite search over every sponsor-compatible disjoint three-transla
 \boxed{N_{5,4}=0.}
 ```
 
-The factor-two search contains `622` candidates; the factor-four search contains `22467` candidates.
-
-Therefore every continuation of this recorded state in the standard-dyadic replay-containment model must use scale factor at least `8`.
-
-The first valid sponsor-compatible exact-backbone factor-eight recovery is
+The first valid exact-backbone factor-eight recovery is
 
 ```math
-\boxed{R_5^*=65547.}
+R_5=65547.
 ```
 
-It gives a four-term-progression-free state
-
-```math
-S_6\subseteq[262144,524288),
-\qquad
-|S_6|=3279.
-```
-
-A second exhaustive search gives
-
-```math
-\boxed{N_{6,2}=0,}
-\qquad
-\boxed{N_{6,4}=0.}
-```
-
-The factor-two search contains `22459` candidates; the factor-four search contains `197222` candidates.
-
-Thus any continuation from this selected recovered state either terminates or again uses scale factor at least `8`.
-
-The selected first recovery satisfies
-
-```math
-\frac{W_6}{W_5}
-=
-\frac{1093}{1456}.
-```
-
-Any next continuation satisfies
-
-```math
-\frac{W_7}{W_6}
-\le
-\frac{820}{1093}.
-```
-
-Therefore
-
-```math
-\boxed{
-\frac{W_7}{W_5}
-\le
-\frac{205}{364}
-\approx0.563187,
-}
-```
-
-or equivalently
-
-```math
-\boxed{W_7\le\frac{615}{1024}}
-```
-
-if a seventh state exists in this model.
-
-This is the first explicit finite compensation block after a contaminated cheap-growth burst:
+For that selected recovery, the resulting state also has no factor-two or factor-four continuation. Along this branch,
 
 ```math
 4,8,4,4
 \quad\longrightarrow\quad
-8,\ge8.
+8,\ge8
 ```
+
+or termination, and
+
+```math
+\frac{W_7}{W_5}
+\le
+\frac{205}{364}.
+```
+
+This remains a correct finite theorem about one selected recovery branch.
 
 **Verifier:** `src/verify_forced_recovery_after_depth5.py`.
 
@@ -592,11 +500,111 @@ This is the first explicit finite compensation block after a contaminated cheap-
 
 **Certificate:** `data/forced_recovery_after_depth5_certificate_2026-07-11.txt`.
 
-**Caveat:** this is a state-specific finite theorem. It does not prove that every factor-eight continuation of `S_5`, or every contaminated genealogy, has the same recovery behavior.
+**Controlling caveat:** this behavior does not extend to all exact factor-eight recoveries of `S_5`.
 
 ---
 
-# 12. Current unresolved problem: state-independent long-run compensation
+# 12. Alternative depth-seven branch
+
+A different exact factor-eight recovery is
+
+```math
+\boxed{R_5=93476.}
+```
+
+It produces an exact-backbone four-term-progression-free state
+
+```math
+S_6\subseteq[262144,524288),
+\qquad
+|S_6|=3279.
+```
+
+This state admits the factor-four continuation
+
+```math
+\boxed{R_6=230164.}
+```
+
+The next backbone shell contains the replay state plus exactly two points,
+
+```math
+460328,
+\qquad
+492308,
+```
+
+while the middle fiber is exactly the previous state. The resulting state is
+
+```math
+S_7\subseteq[1048576,2097152),
+\qquad
+|S_7|=9840,
+```
+
+and certified persistence is
+
+```math
+P_7^{\mathrm{cert}}=128.
+```
+
+The full outer scale sequence is
+
+```math
+\boxed{4,8,4,4,8,4.}
+```
+
+The weighted densities satisfy
+
+```math
+W_6=\frac{3279}{4096},
+\qquad
+W_7=\frac{615}{512},
+```
+
+so
+
+```math
+\boxed{
+\frac{W_7}{W_5}
+=
+\frac{205}{182}
+>1
+}
+```
+
+and
+
+```math
+\boxed{
+\frac{W_7}{W_1}
+=
+\frac{205}{64}
+=3.203125.
+}
+```
+
+Thus neither a universal two-generation recovery law after an exact factor-eight step nor contraction over every six outer generations is valid.
+
+An exhaustive factor-two search from `S_7` gives
+
+```math
+\boxed{N_{7,2}=0.}
+```
+
+The factor-two domain contains `25161` sponsor-compatible candidates; `202` have disjoint translate layers, and every one of those contains a four-term progression.
+
+The factor-four continuation problem from `S_7` remains open.
+
+**Verifier:** `src/verify_contaminated_backbone_depth7.cpp`.
+
+**Primary note:** `docs/contaminated-backbone-depth-seven-chain.md`.
+
+**Certificate:** `data/contaminated_backbone_depth7_certificate_2026-07-11.txt`.
+
+---
+
+# 13. Current unresolved problem: continuation-graph control
 
 For disjoint three-translate growth,
 
@@ -623,27 +631,32 @@ then
 
 Ignoring the lower-order term, long-run contraction requires geometric-mean scale expansion greater than `6`.
 
-The contaminated burst shows that compensation need not occur locally or over four generations. The finite recovery result shows that one explicit cheap burst is followed by a two-generation contraction block along its first exact recovery.
+The known continuation behavior is path-dependent:
+
+1. the smallest exact recovery from `S_5` forces a second expensive step or termination;
+2. another exact recovery from the same `S_5` releases a valid factor-four descendant;
+3. weighted density grows through six outer generations;
+4. the resulting `S_7` has no factor-two continuation, while factor four is unresolved.
 
 The active target is
 
 ```math
 \boxed{
-\text{prove state-independent long-run compensation for cheap contaminated-backbone replication.}
+\text{control the full contaminated-backbone continuation graph, not one selected branch.}
 }
 ```
 
-A successful result may take one of the following forms:
+Useful forms include:
 
-1. every sufficiently long genealogy has cumulative scale expansion above the `6`-per-generation threshold;
-2. contamination creates exportable lower-scale difference mass;
-3. repeated cheap steps force a four-term progression;
-4. repeatable patterns fall into a finite symbolic class with subcritical spectral growth;
-5. overlap among contaminated replay cores obeys an aggregate packing theorem;
-6. a monotone contamination-debt potential forces recovery or termination.
+1. classify all factor-eight recoveries of `S_5` by their cheap descendants;
+2. resolve the factor-four continuation problem from `S_7`;
+3. construct a contamination-debt potential that permits delayed release but forces eventual repayment;
+4. prove that every infinite path has geometric-mean scale expansion greater than `6`;
+5. reduce repeatable continuation patterns to a finite-state system with subcritical spectral radius;
+6. control overlap among many replay cores by an aggregate packing theorem.
 
-The immediate computational target is to classify all valid factor-eight continuations of `S_5` by whether they admit factor-two or factor-four successors.
+The immediate computational target is the factor-four extension search from `S_7` and a classification of the exact factor-eight recovery family from `S_5`.
 
-The immediate proof target is to identify a state-independent recovery invariant that turns finite forced-recovery blocks into a summable multiscale estimate.
+The immediate proof target is a state-dependent potential or transition inequality that composes along every path in the continuation graph.
 
 The full Erdős problem remains unresolved.

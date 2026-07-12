@@ -63,12 +63,15 @@ def vertices(equalities, rhs, bounds):
     return result
 
 
-def top_layer_patterns():
+def top_layer_patterns(state_upper, separation_upper):
     feasible = []
     for layers in combinations_with_replacement(range(3), 4):
         for nonzero in product((0, 1), repeat=4):
-            bounds = [(Q(1), Q(7, 4)) if flag else (Q(0), Q(0)) for flag in nonzero]
-            bounds.append((Q(2), Q(65, 32)))  # r = R/L
+            bounds = [
+                (Q(1), Q(state_upper)) if flag else (Q(0), Q(0))
+                for flag in nonzero
+            ]
+            bounds.append((Q(2), Q(separation_upper)))
             c1 = layers[0] - 2 * layers[1] + layers[2]
             c2 = layers[1] - 2 * layers[2] + layers[3]
             equations = (
@@ -91,12 +94,15 @@ def top_layer_patterns():
 def completion_descent_patterns():
     feasible = []
     # Current separation is R/L = 2 + kappa with 0 <= kappa <= 1/32.
-    # The target raw completion is 8L + tau*L with 0 <= tau <= 2.
-    # The widened tau range covers the full two-step basin classification at S10.
+    # Target raw completion offset satisfies 0 <= tau=c/L <= 4.
+    # This covers both completion descents needed for the full S10 exact-fit classification.
     for layers in combinations_with_replacement(range(3), 3):
         for nonzero in product((0, 1), repeat=3):
-            bounds = [(Q(1), Q(7, 4)) if flag else (Q(0), Q(0)) for flag in nonzero]
-            bounds.extend(((Q(0), Q(1, 32)), (Q(0), Q(2))))
+            bounds = [
+                (Q(1), Q(7, 4)) if flag else (Q(0), Q(0))
+                for flag in nonzero
+            ]
+            bounds.extend(((Q(0), Q(1, 32)), (Q(0), Q(4))))
             second_difference = layers[0] - 2 * layers[1] + layers[2]
             completion_layer = 2 * layers[2] - layers[1]
             # Variables are a0,a1,a2,kappa,tau.
@@ -123,7 +129,6 @@ def completion_descent_patterns():
 
 
 def main():
-    top = top_layer_patterns()
     expected_top = [
         ((0, 0, 0, 0), (1, 1, 1, 1)),
         ((0, 0, 0, 1), (1, 1, 1, 0)),
@@ -135,18 +140,30 @@ def main():
         ((1, 1, 2, 2), (0, 1, 0, 1)),
         ((2, 2, 2, 2), (1, 1, 1, 1)),
     ]
-    if top != expected_top:
-        raise AssertionError(f"unexpected top-layer patterns: {top}")
+
+    generic_top = top_layer_patterns(Q(7, 4), Q(65, 32))
+    if generic_top != expected_top:
+        raise AssertionError(f"unexpected generic top-layer patterns: {generic_top}")
+
+    # Exact S10 geometry:
+    # max(S10)/L10 = 920574272/536870912;
+    # maximum fitting exact separation is 1687196511/536870912.
+    s10_top = top_layer_patterns(
+        Q(920574272, 536870912),
+        Q(1687196511, 536870912),
+    )
+    if s10_top != expected_top:
+        raise AssertionError(f"unexpected S10 full-fit patterns: {s10_top}")
 
     descent = completion_descent_patterns()
     expected_descent = [((0, 1, 2), (1, 1, 1))]
     if descent != expected_descent:
         raise AssertionError(f"unexpected completion-descent patterns: {descent}")
 
-    print("verified: top-layer 4-AP classification has exactly nine feasible patterns")
-    print("verified: six nonconstant patterns are completion or half-separation obstructions")
-    print("verified: completion descent through target offsets 0 <= c <= 2L has only layer pattern 0,1,2")
-    print("top_patterns=" + repr(top))
+    print("verified: generic small-offset top-layer classification has nine patterns")
+    print("verified: full S10 exact-factor-eight fit range has the same nine patterns")
+    print("verified: completion descent through target offsets 0 <= c <= 4L has only layer pattern 0,1,2")
+    print("top_patterns=" + repr(expected_top))
     print("descent_patterns=" + repr(descent))
 
 

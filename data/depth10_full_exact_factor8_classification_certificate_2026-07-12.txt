@@ -1,0 +1,42 @@
+complete positive-offset exact factor-eight classification from S10
+status=exact finite classification using state-specific top-layer theorem and completion descent
+
+S10_scale=536870912
+S10_size=265719
+S10_max=920574272
+
+positive_offset_range_min=1
+positive_offset_range_max=613454687
+sponsor_compatible_positive_offsets=408969792
+
+completion_obstruction:
+count=54999
+first_offset=13
+last_offset=260795
+FNV64=e22bc4f8babba2ac
+SHA256=b0cdf6b95ee9f17f39560e182b5b1f9c72e6af7fa5b1ef41a51c35a49abdf6ec
+
+half_separation_obstruction:
+count=59034
+first_offset=150994944
+last_offset=536870916
+FNV64=a1d342c2504bb966
+SHA256=45075ac0f88a7e591bdd6850846831d3d15f63db8016878e35bb0644eb739ca9
+
+obstruction_overlap=0
+union_blocked_count=114033
+union_blocked_FNV64=704c4821b177ab25
+union_blocked_SHA256=92614cc5ec33add8064ef0aedaf4f8fe758600b30912315bec45aa47d48c6861
+
+valid_exact_factor8_positive_offsets=408855759
+zero_offset_k=0_is_invalid=true
+zero_offset_obstruction=R/2=L10 belongs to S10
+
+completion_geometry:
+maximum_possible_S10_right_completion_offset=230535808
+maximum_offset_requiring_second_descent_to_S8=29209215
+completion_descent_target_range_verified=0<c<=4L
+
+pattern_verifier=src/verify_exact_tail_pattern_lemmas.py
+classification_verifier=src/verify_depth10_full_exact_factor8_classification.cpp
+scope=complete exact factor-eight classification for recorded S10; does not classify factor-two or factor-four escapes

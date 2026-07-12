@@ -6,7 +6,7 @@ This is the authoritative overview of the active program for Erdős Problem #3:
 
 > If `A subseteq N` and `sum_{n in A}1/n = infinity`, must `A` contain arbitrarily long arithmetic progressions?
 
-The full problem remains open. This repository studies the four-term case. The claims below are proved internally or computationally certified as stated, but await independent expert review.
+The full problem remains open. This repository studies the four-term case. Claims below are proved internally or computationally certified as stated, but await independent expert review.
 
 ---
 
@@ -20,13 +20,13 @@ A_j=A\cap[2^j,2^{j+1}),
 \alpha_j=\frac{|A_j|}{2^j},
 ```
 
-one has, up to constants,
-
 ```math
 \sum_{n\in A}\frac1n=\infty
 \quad\Longleftrightarrow\quad
-\sum_j\alpha_j=\infty.
+\sum_j\alpha_j=\infty
 ```
+
+up to absolute constants.
 
 Coordinated side-anchor deletion and the minimum-translation backbone give
 
@@ -108,11 +108,7 @@ A certified contaminated chain has scale factors
 \boxed{4,8,4,4}
 ```
 
-through `S_5`. For
-
-```math
-W_h=P_h^{\mathrm{cert}}\frac{|S_h|}{L_h},
-```
+through `S_5`, with
 
 ```math
 W_1=\frac38,
@@ -121,8 +117,6 @@ W_5=\frac{273}{256},
 \qquad
 \frac{W_5}{W_1}=\frac{91}{32}.
 ```
-
-Local contraction and contraction over every four-generation window are false.
 
 The alternative exact recovery
 
@@ -148,7 +142,7 @@ through `S_7`, with
 \frac{W_7}{W_5}=\frac{205}{182}>1.
 ```
 
-Universal two-generation recovery and contraction over every six-generation window are false. Recovery is path-dependent.
+Therefore universal local contraction, universal two-generation recovery, and contraction over every four- or six-generation window are false. Recovery is path-dependent.
 
 ---
 
@@ -206,9 +200,9 @@ and
 
 ---
 
-## 5. Exact-tail layer theorems
+## 5. Exact-tail pattern theorems
 
-For the exact-tail shell geometry, the top-layer reduction says every new four-term progression in three translates comes from either:
+For the certified exact-tail geometry, every new four-term progression in three translates comes from either:
 
 1. a three-term progression completed at the separation `R`; or
 2. the half-separation point `R/2` lying in the state.
@@ -219,21 +213,20 @@ For `R=2L+k`, completion descent maps a child target offset `c` to the parent of
 c-3k.
 ```
 
-Exact rational enumeration gives the unique descent layer pattern `012` in the certified regions. A state-specific rational classification proves that the same nine top-layer patterns remain complete across the full fitting exact factor-eight range of `S_10` and its first three scheduled descendants.
+Exact rational enumeration gives the unique scheduled descent layer pattern `012`. The same nine top-layer patterns remain complete across:
 
-**Primary references:**
-
-- `docs/extended-completion-descent.md`;
-- `src/verify_exact_tail_pattern_lemmas.py`;
-- `src/verify_full_fitting_exact_tail_basin.py`.
+1. the generic small-offset basin;
+2. the half-scale basin;
+3. the full fitting exact range of `S_10` and its finite scheduled descendants;
+4. the two `+1` repair regions used in the complete exact-child fan.
 
 ---
 
-## 6. Exact-tail basin theorems
+## 6. Exact-tail basin progression
 
-### 6.1 Original small-offset basin
+### 6.1 Generic small-offset basin
 
-If
+For
 
 ```math
 \min S=L,
@@ -241,13 +234,7 @@ If
 S\subseteq[L,7L/4),
 ```
 
-```math
-0<k\le L/32,
-\qquad
-v_2(k)\equiv0\pmod2,
-```
-
-and the first exact step at `R=2L+k` is valid, then
+with `0<k<=L/32`, even `v_2(k)`, and a valid first exact step at `R=2L+k`, the recurrence
 
 ```math
 L_{n+1}=8L_n,
@@ -259,21 +246,13 @@ defines an infinite exact four-term-progression-free tail.
 
 ### 6.2 Half-scale basin
 
-The exact pattern audit enlarges the generic entry range to
+The generic entry range enlarges to
 
 ```math
 \boxed{0<k<L/2.}
 ```
 
-If the first exact step is valid, all scheduled successors remain valid. The first child enters
-
-```math
-S_1\subseteq[L_1,59L_1/32),
-\qquad
-k_1/L_1<1/4,
-```
-
-and the region
+The first child enters a region from which
 
 ```math
 S_n\subseteq[L_n,15L_n/8),
@@ -283,17 +262,15 @@ k_n/L_n<1/4
 
 is invariant.
 
-### 6.3 Full-fitting `S_10` basin
+### 6.3 Full-fitting scheduled basin at `S_10`
 
-For the recorded `S_10`, every fitting exact offset satisfies
+Across the full fitting exact range
 
 ```math
-1\le k\le613454687.
+1\le k\le613454687,
 ```
 
-Across this complete range, the standard nine top-layer patterns and unique `012` scheduled completion descent persist through the three finite generations needed to enter the invariant region.
-
-Beyond validity of the first exact child, only two additional scheduled half tests occur:
+only two additional scheduled half tests occur:
 
 ```math
 2k\notin S_{10},
@@ -305,22 +282,70 @@ and
 8(k-L_{10})\notin S_{10}.
 ```
 
-The second scheduled half class contains `88614` sponsor-compatible offsets. The third contains exactly
+Exactly `408767151` valid exact children pass the unmodified schedule. The failing valid classes are:
+
+```text
+88606 second-step failures
+2 third-step failures.
+```
+
+### 6.4 Complete exact-child fan
+
+Every second-step failure is repaired by replacing
+
+```math
+4k
+```
+
+with
+
+```math
+4k+1.
+```
+
+The repaired offset is odd, so its half obstruction disappears. Exact rational enumeration finds no feasible completion pattern for the perturbed target, and the repaired branch enters the invariant basin after one additional exact step.
+
+The two third-step failures
 
 ```text
 603979776
-613416960.
+613416960
 ```
 
-Eight second-step offsets were already removed by the first-step half obstruction. Therefore only
+are repaired by replacing
 
 ```math
-\boxed{88608}
+16k
 ```
 
-of the already-valid exact children fail the scheduled basin test.
+with
 
-For entry size `N`, replay multiplicity `P`, and scale `L`, every certified tail has terminal charge
+```math
+16k+1.
+```
+
+The same odd-offset and no-completion argument applies.
+
+Thus
+
+```math
+\boxed{
+408767151+88606+2
+=
+408855759.
+}
+```
+
+This equals the complete number of valid positive exact factor-eight children of `S_10`. Therefore
+
+```math
+\boxed{
+\text{every valid exact factor-eight child of }S_{10}
+\text{ has an infinite exact tail.}
+}
+```
+
+For entry size `N`, replay multiplicity `P`, and scale `L`, every tail has terminal charge
 
 ```math
 \boxed{
@@ -328,30 +353,32 @@ For entry size `N`, replay multiplicity `P`, and scale `L`, every certified tail
 }
 ```
 
+At `S_10`, every tail has charge
+
+```math
+\boxed{33215/16384.}
+```
+
 **Primary references:**
 
 - `docs/half-scale-exact-tail-basin.md`;
 - `docs/full-fitting-exact-tail-basin.md`;
-- `src/verify_half_scale_exact_tail_basin.py`;
-- `src/verify_full_fitting_exact_tail_basin.py`.
+- `docs/complete-exact-child-tail-fan.md`;
+- `src/verify_complete_exact_child_tail_fan.py`.
 
 ---
 
-## 7. Exact child classification at `S_10`
+## 7. Complete exact factor-eight classification at `S_10`
 
 Write every fitting exact separation as
 
 ```math
 R=2L_{10}+k,
-```
-
-with
-
-```math
+\qquad
 1\le k\le613454687.
 ```
 
-There are `408969792` sponsor-compatible positive offsets. The complete first-step obstruction split is
+There are `408969792` sponsor-compatible positive offsets. The first-step obstruction split is
 
 ```text
 completion-blocked:       54999
@@ -365,73 +392,23 @@ so
 \boxed{408855759}
 ```
 
-positive offsets give valid exact factor-eight continuations.
+offsets give valid exact factor-eight children.
 
-### 7.1 Original basin fan
+The complete tail-fan theorem now assigns an explicit infinite summable continuation to every valid child:
 
-In `4<=k<=L_{10}/32`, exactly
-
-```math
-11129810
+```text
+standard x4 schedule        408767151
+second-step +1 repair           88606
+third-step +1 repair                 2
 ```
 
-offsets enter certified infinite tails.
-
-### 7.2 Half-scale basin fan
-
-In
-
-```math
-1\le k<L_{10}/2,
-```
-
-exactly
-
-```math
-\boxed{178872402}
-```
-
-valid offsets enter certified infinite tails.
-
-### 7.3 Full-fitting basin fan
-
-Among all valid positive exact children, the only additional failures are the `88608` scheduled half obstructions. Hence
-
-```math
-\boxed{
-408855759-88608
-=
-408767151
-}
-```
-
-valid offsets enter certified infinite exact tails.
-
-The exact coverage fraction is
-
-```math
-\boxed{
-\frac{408767151}{408855759}
-=
-\frac{10481209}{10483481}
-}
-```
-
-or approximately `99.9783278092458%`.
-
-Every tail has charge
-
-```math
-\boxed{33215/16384.}
-```
-
-Only `88608` valid exact children remain outside the scheduled basin certificate.
+The exact factor-eight branch from `S_10` is therefore completely classified both at the first step and in long-run continuation behavior.
 
 ---
 
 ## 8. Bellman potential and debt
 
-For constant exact scale factor `c>6`, the affine future-cost function is
+For constant exact scale factor `c>6`,
 
 ```math
 \boxed{
@@ -494,7 +471,7 @@ a step with scale factor `c` and separation `R` satisfies
 
 Every cheap Bellman debt therefore carries a geometric certificate: strict slack consumption or imported prefix contamination.
 
-The exact `S_10` layer-disjoint candidate domains are:
+The exact `S_10` layer-disjoint cheap candidate domains are:
 
 ### Factor two
 
@@ -514,7 +491,7 @@ layer-disjoint:       348012826
 FNV-64:               ae1d9e1ec77b2dfb
 ```
 
-These are domain certificates only. Complete exclusion or a cheap escape construction remains open.
+These are domain certificates only. Complete exclusion or construction of a cheap escape remains open.
 
 ---
 
@@ -534,18 +511,17 @@ The current architecture is
 contaminated transient
     -> exact Bellman debt
     -> slack consumption or prefix contamination
-    -> repayment parsing or basin entry
+    -> repayment parsing or exact-tail entry
     -> finite terminal charge.
 ```
 
-Equivalent remaining tasks:
+The exact factor-eight fan from `S_10` is completely closed. Equivalent remaining tasks are:
 
-1. classify the `88608` exceptional valid exact children of `S_10`;
-2. classify the exact `S_10` factor-two and factor-four escape domains;
-3. prove every path eventually enters an exact or near-exact basin;
-4. prove every non-basin scale word admits a repayment parsing;
-5. extend the Bellman potential by a contamination reserve dominating all children;
-6. charge imported prefixes through difference export or overlap packing;
-7. construct a finite-state or spectral quotient of the pre-basin continuation tree.
+1. classify the exact `S_10` factor-two and factor-four escape domains;
+2. prove every path eventually enters an exact or near-exact basin;
+3. prove every non-basin scale word admits a repayment parsing;
+4. extend the Bellman potential by a contamination reserve dominating all children;
+5. charge imported prefixes through difference export or overlap packing;
+6. construct a finite-state or spectral quotient of the pre-basin continuation tree.
 
 No current theorem closes this gap. The full Erdős problem remains unresolved.

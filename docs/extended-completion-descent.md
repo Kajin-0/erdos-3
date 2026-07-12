@@ -1,10 +1,10 @@
-# Extended completion descent through target offset `2L`
+# Extended completion descent through target offset `4L`
 
 ## Status
 
 Elementary layer-pattern theorem with exact rational polytope verification.
 
-This strengthens the completion-descent range used in the original infinite-tail proof. The layer conclusion is unchanged, but the target completion offset may now be as large as twice the parent scale.
+This strengthens the completion-descent range used in the original infinite-tail proof. The layer conclusion is unchanged, but the target completion offset may be as large as four times the parent scale.
 
 **Verifier:** `src/verify_exact_tail_pattern_lemmas.py`.
 
@@ -41,7 +41,7 @@ S'=8L+G.
 Let
 
 ```math
-0<c\le2L.
+0<c\le4L.
 ```
 
 Suppose `S'` contains an increasing nontrivial three-term progression whose missing right completion is
@@ -82,7 +82,7 @@ Normalize by `L` and impose:
 2. the equation placing its missing completion at `16L+c`;
 3. `a_j/L` equal to zero or lying in `[1,7/4)`;
 4. `0<=k/L<=1/32`;
-5. `0<=c/L<=2`.
+5. `0<=c/L<=4`.
 
 Exact rational vertex enumeration over every layer pattern and zero/nonzero base pattern leaves exactly
 
@@ -105,7 +105,7 @@ The unique pattern has one point in each translate layer. The three base points 
 }
 ```
 
-Thus:
+Thus
 
 ```math
 \boxed{
@@ -115,66 +115,66 @@ Thus:
 }
 ```
 
-The converse lift holds whenever the three parent points exist: a parent progression completed at `2L+(c-3k)` lifts through layers `0,1,2` to a progression in `S'` completed at `16L+c`.
-
-The reflected left-completion statement follows by the same calculation.
+The converse lift holds whenever the three parent points exist. The reflected left-completion statement follows by the same calculation.
 
 ---
 
-## 4. Relation to the original lemma
+## 4. Relation to the infinite-tail induction
 
-The original infinite-tail induction only needs
+The original scheduled tail only needs
 
 ```math
 0<c\le L/8,
 ```
 
-because its scheduled child offset is `c=4k<=L/8`.
+because its child offset is `c=4k<=L/8`.
 
-The extended range
+The range through `2L` certifies the entire depth-ten basin-criterion interval. The range through `4L` additionally certifies the only geometrically possible completion offsets needed for the complete exact factor-eight classification from `S_10`.
 
-```math
-0<c\le2L
-```
-
-is needed to pull the entire depth-ten basin-criterion interval back through the two exact offset-one steps from `S_10` to `S_8`.
-
-At the first descent,
+For the first descent from `S_10` to `S_9`, a completion at `2L_10+k` is geometrically possible only for
 
 ```math
-c=k\le L_{10}/32=L_9/4<2L_9.
+k\le230535808<4L_9.
 ```
 
-At the second descent,
+After descent, the `S_9` shell geometry shows that a second descent is required only for
 
 ```math
-c=k-3\le2L_8.
+k\le29209215,
 ```
 
-Therefore every basin-criterion offset
+and then
+
+```math
+k-3<4L_8.
+```
+
+Thus every completion obstruction in the full fitting exact factor-eight range has an exact test against the signed completion set of `S_8`.
+
+---
+
+## 5. Consequences
+
+### Full basin-criterion fan
+
+Every
 
 ```math
 4\le k\le L_{10}/32
 ```
 
-has an exact two-step completion test against the certified signed completion set of `S_8`.
+has an exact two-step completion test. This gives the `11129810`-tail basin fan recorded in `docs/depth-ten-exact-tail-basin-fan.md`.
 
----
+### Full exact factor-eight classification
 
-## 5. Consequence
-
-This theorem removes the former artificial upper bound `k<=1048579` from the depth-ten basin fan. The complete criterion range is
+For every fitting positive exact offset
 
 ```math
-4\le k\le16777216.
+1\le k\le613454687,
 ```
 
-Within that range, basin validity is equivalent to:
+the completion obstruction is either geometrically impossible or descends exactly to the certified `S_8` completion set. Combined with the state-specific top-layer pattern theorem and the half-separation test, this yields the complete classification in
 
-1. even `v_2(k)`;
-2. absence of the signed `S_8` completion coordinate
-   ```math
-   2L_8+(k-6).
-   ```
-
-The full finite classification is recorded in `docs/depth-ten-exact-tail-basin-fan.md`.
+```text
+docs/depth-ten-full-exact-factor-eight-classification.md
+```

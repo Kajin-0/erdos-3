@@ -210,20 +210,12 @@ and
 
 ---
 
-## 5. Infinite exact basin and general criterion
+## 5. Layer-pattern and completion-descent theorems
 
-The top-layer reduction lemma says that, for
+For a state in the original exact-tail shell geometry, the top-layer reduction says that every new four-term progression in three translates comes from either:
 
-```math
-S\subseteq[L,7L/4),
-\qquad
-2L<R\le65L/32,
-```
-
-every new four-term progression in three translates comes from either:
-
-1. a three-term progression in `S` completed at `R`; or
-2. `R` even with `R/2 in S`.
+1. a three-term progression completed at the separation `R`; or
+2. the half-separation point `R/2` inside the state.
 
 For `R=2L+k`, the completion-descent equation sends a next-state target offset `c` to parent offset
 
@@ -231,11 +223,22 @@ For `R=2L+k`, the completion-descent equation sends a next-state target offset `
 c-3k.
 ```
 
-Exact rational enumeration shows the unique layer pattern remains `012` throughout
+Exact rational enumeration proves the unique descent layer pattern is `012` throughout
 
 ```math
-0<c\le2L.
+0<c\le4L.
 ```
+
+A state-specific rational classification also proves that the same nine top-layer patterns remain the complete pattern list across the entire fitting exact factor-eight range of the recorded `S_10`.
+
+**Primary references:**
+
+- `docs/extended-completion-descent.md`;
+- `src/verify_exact_tail_pattern_lemmas.py`.
+
+---
+
+## 6. General exact-tail basin criterion
 
 A state `(S,L,k,P)` is an exact-tail basin entry when
 
@@ -277,13 +280,13 @@ defines an infinite exact four-term-progression-free tail. If the entry state ha
 }
 ```
 
-For the recorded `S_10`, one explicit choice is
+For one explicit `S_10` choice,
 
 ```math
 k_{10}=262149,
 ```
 
-and the resulting tail has
+and
 
 ```math
 \sum_{n\ge0}W_{10+n}=\frac{33215}{16384}.
@@ -291,7 +294,7 @@ and the resulting tail has
 
 ---
 
-## 6. Complete certified basin fan at `S_10`
+## 7. Complete small-offset basin fan at `S_10`
 
 The complete signed `S_8` completion set contains
 
@@ -299,25 +302,13 @@ The complete signed `S_8` completion set contains
 2772873
 ```
 
-coordinates. The extended two-step descent gives an exact seed-completion test for every basin-criterion offset
+coordinates. Two exact completion descents classify every basin-criterion offset
 
 ```math
-\boxed{4\le k\le L_{10}/32=16777216.}
+4\le k\le L_{10}/32=16777216.
 ```
 
-There are
-
-```text
-11184809
-```
-
-values in this range with even `v_2(k)`. Exactly
-
-```text
-54999
-```
-
-are blocked by the signed `S_8` completion coordinate
+There are `11184809` values with even `v_2(k)`. Exactly `54999` are blocked by the signed seed completion coordinate
 
 ```math
 2L_8+(k-6).
@@ -329,41 +320,87 @@ Therefore
 \boxed{11129810}
 ```
 
-offsets are valid exact-tail basin entries at `S_10`.
+offsets are valid exact-tail basin entries. This is approximately `99.51%` of the sponsor-compatible offsets in the criterion range.
 
-This is approximately `99.51%` of the sponsor-compatible offsets in the full criterion range. The first and last valid offsets are `4` and `16777216`. The canonical valid-list hashes are
+The canonical valid-list hashes are
 
 ```text
 FNV-64  2a52c71cddac07f5
 SHA-256 9cbbd28aab4db0a74d48c4a8eaf95d18b3854e56bd7138123734eaefe5b2d384
 ```
 
-Each valid offset gives a distinct infinite exact tail with terminal charge
+Each gives a distinct infinite exact tail with terminal charge `33215/16384`.
 
-```math
-\frac{33215}{16384}.
-```
-
-Nested audit subfamilies remain independently verified:
+Nested independent audit subfamilies remain certified:
 
 ```text
 4..1048579:       644052 valid offsets
 260799..1048579:  525189 valid offsets
 ```
 
+---
+
+## 8. Complete exact factor-eight classification from `S_10`
+
+Write every fitting exact separation as
+
+```math
+R=2L_{10}+k.
+```
+
+The full positive offset range is
+
+```math
+1\le k\le613454687.
+```
+
+There are
+
+```text
+408969792
+```
+
+sponsor-compatible positive offsets.
+
+The complete obstruction classification is:
+
+```text
+completion-blocked:       54999
+half-separation-blocked:  59034
+obstruction overlap:          0
+```
+
+The zero offset `k=0` is separately invalid because `R/2=L_10` belongs to `S_10`.
+
+Therefore
+
+```math
+\boxed{408855759}
+```
+
+positive offsets give valid four-term-progression-free exact factor-eight continuations.
+
+Canonical obstruction-list hashes:
+
+```text
+completion SHA-256  b0cdf6b95ee9f17f39560e182b5b1f9c72e6af7fa5b1ef41a51c35a49abdf6ec
+half SHA-256        45075ac0f88a7e591bdd6850846831d3d15f63db8016878e35bb0644eb739ca9
+union SHA-256       92614cc5ec33add8064ef0aedaf4f8fe758600b30912315bec45aa47d48c6861
+```
+
+The `11129810` basin children form a certified infinite-summable subset of these valid exact children. The long-run behavior of the remaining valid exact children is open.
+
 **Primary references:**
 
-- `docs/extended-completion-descent.md`;
-- `docs/depth-ten-exact-tail-basin-fan.md`;
-- `src/verify_exact_tail_pattern_lemmas.py`;
-- `src/verify_depth10_full_exact_tail_basin_fan.cpp`;
-- `data/depth10_exact_tail_basin_fan_certificate_2026-07-12.txt`.
+- `docs/depth-ten-full-exact-factor-eight-classification.md`;
+- `src/verify_depth10_full_exact_factor8_classification.cpp`;
+- `data/depth10_full_exact_factor8_classification_certificate_2026-07-12.txt`.
 
 ---
 
-## 7. Bellman potential and scale-word debt
+## 9. Bellman potential and scale-word debt
 
-For a constant exact scale factor `c>6`, the unique affine future-cost function is
+For constant exact scale factor `c>6`, the unique affine future-cost function is
 
 ```math
 \boxed{
@@ -408,8 +445,6 @@ For an `H`-step scale word with product `C_H`,
 }
 ```
 
-The endpoint charge depends only on the scale product, not the order or contamination profile.
-
 Exact repayment consequences:
 
 - one factor `4` plus one factor `8` still expands endpoint charge;
@@ -418,7 +453,7 @@ Exact repayment consequences:
 
 ---
 
-## 8. Repayment parsing criterion
+## 10. Repayment parsing criterion
 
 If, from state size at least `9`, a scale word can be partitioned into consecutive blocks of the forms
 
@@ -428,7 +463,7 @@ If, from state size at least `9`, a scale word can be partitioned into consecuti
 [one 2 and four 8-equivalents]
 ```
 
-with larger factors allowed through product thresholds, then block-boundary Bellman charge contracts uniformly. The worst exact block factor is
+then block-boundary Bellman charge contracts uniformly. The worst exact block factor is
 
 ```math
 \frac{2551}{2560}<1.
@@ -444,23 +479,15 @@ This converts whole-path summability into a geometric debt-token matching proble
 
 ---
 
-## 9. Cheap-step geometry
+## 11. Cheap-step geometry
 
-For an anchored state
-
-```math
-S\subseteq[L,2L),
-\qquad
-\min S=L,
-```
-
-define top slack
+For an anchored state, define top slack
 
 ```math
 T=2L-\max S.
 ```
 
-A three-translate step with factor `c` and separation `R` satisfies
+A three-translate step with scale factor `c` and separation `R` satisfies
 
 ```math
 \boxed{T'=T+(c-2)L-2R.}
@@ -477,9 +504,9 @@ Every cheap Bellman debt therefore carries a geometric certificate: slack consum
 
 ---
 
-## 10. Exact `S_10` escape domains
+## 12. Exact `S_10` cheap escape domains
 
-The recursive positive-difference support of `S_10` gives the complete layer-disjoint candidate domains.
+The recursive positive-difference support gives the complete layer-disjoint candidate domains.
 
 ### Factor two
 
@@ -499,11 +526,11 @@ layer-disjoint:             348012826
 candidate-list FNV-64:      ae1d9e1ec77b2dfb
 ```
 
-These are domain counts only. Complete four-term-progression exclusion or construction of an escape candidate remains open.
+These are domain counts only. Complete four-term-progression exclusion or construction of a cheap escape candidate remains open.
 
 ---
 
-## 11. Current unresolved problem: whole-tree compensation
+## 13. Current unresolved problem: whole-tree compensation
 
 The active target is
 
@@ -513,13 +540,13 @@ The active target is
 }
 ```
 
-The current proof architecture is
+The current architecture is
 
 ```text
 contaminated transient
     -> exact Bellman debt
     -> slack consumption or prefix contamination
-    -> forced repayment parsing or basin entry
+    -> repayment parsing or basin entry
     -> finite terminal charge.
 ```
 
@@ -530,6 +557,7 @@ Equivalent remaining tasks:
 3. extend the Bellman potential by a contamination reserve dominating all children;
 4. charge imported prefixes through difference export or overlap packing;
 5. construct a finite-state or spectral quotient of the pre-basin continuation tree;
-6. classify the `S_10` factor-two and factor-four escape domains using recursive witness propagation.
+6. classify the `S_10` factor-two and factor-four escape domains;
+7. classify long-run behavior of valid exact factor-eight children outside the certified basin fan.
 
 The full Erdős problem remains unresolved.

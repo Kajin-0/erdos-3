@@ -28,7 +28,7 @@ A_j=A\cap[2^j,2^{j+1}),
 
 up to constants. A divergent four-term-progression-free candidate must have `alpha_j -> 0` but `sum_j alpha_j = infinity`.
 
-Coordinated side-anchor deletion and the minimum-translation backbone give the one-generation bounds
+Coordinated side-anchor deletion and the minimum-translation backbone give
 
 ```math
 H(\mathcal B(D))+\sum_xH(M_x)
@@ -49,10 +49,10 @@ The genealogy is binary. Every recursive child must be resolved into standard dy
 Every parent creates at most two retained outputs, each at most half its label. Hence, for `p>=1`,
 
 ```math
-\sum_{u\text{ output of }a}u^p\le2^{1-p}a^p,
+\sum_{u\text{ output of }a}u^p\le2^{1-p}a^p.
 ```
 
-and fixed-history multiplicity obeys center, anchor, predecessor, and antichain compression. These facts control positive moments but do not close reciprocal mass.
+Center, root-anchor, predecessor-anchor, and antichain decompositions compress repeated labels. These tools control positive moments and local multiplicity, but not reciprocal mass by themselves.
 
 ---
 
@@ -233,7 +233,7 @@ c-3k
 
 in the parent.
 
-For the recorded `S_10`, choose
+For one explicit tail from `S_10`, choose
 
 ```math
 D=262143,
@@ -303,23 +303,79 @@ Then `L'=8L`, `k'=4k`, and `R=2L+k` define an infinite exact tail. If the entry 
 
 This is a reusable absorbing-state certificate.
 
-Two completion descents from `S_10` to the certified `S_8` seed prove that every
+---
 
-```math
-260799\le k\le1048579
+## 7. Complete certified basin fan at `S_10`
+
+The complete signed `S_8` completion set contains
+
+```text
+2772873
 ```
 
-with even `v_2(k)` is a basin entry. There are exactly
+coordinates. Two completion descents show that every sponsor-compatible offset in
 
 ```math
-\boxed{525189}
+4\le k\le1048579
 ```
 
-such offsets, giving distinct infinite exact tails with the same terminal charge.
+is a candidate basin entry at `S_10`, with seed completion coordinate
+
+```math
+2L_8+(k-6).
+```
+
+There are
+
+```text
+699051
+```
+
+values in this range with even `v_2(k)`. Exactly
+
+```text
+54999
+```
+
+are blocked by the signed `S_8` completion set. Therefore
+
+```math
+\boxed{644052}
+```
+
+offsets are valid exact-tail basin entries.
+
+The first and last valid offsets are `4` and `1048579`. The canonical valid-list hashes are
+
+```text
+FNV-64  5e1b143b6a59b345
+SHA-256 22daeb2366e5e3324b7e835c61adb34f8e08c0ae203b86420c941f53991069b4
+```
+
+Each offset produces a distinct infinite exact tail with terminal charge
+
+```math
+\frac{33215}{16384}.
+```
+
+The earlier Python verifier certifies the simpler upper-interval subfamily
+
+```math
+260799\le k\le1048579,
+```
+
+containing `525189` tails. This remains a correct independent subfamily audit; the full C++ verifier certifies the complete `644052`-tail fan.
+
+**Primary references:**
+
+- `docs/depth-ten-exact-tail-basin-fan.md`;
+- `src/verify_depth10_full_exact_tail_basin_fan.cpp`;
+- `src/verify_depth10_exact_tail_basin_fan.py`;
+- `data/depth10_exact_tail_basin_fan_certificate_2026-07-12.txt`.
 
 ---
 
-## 7. Bellman potential and scale-word debt
+## 8. Bellman potential and scale-word debt
 
 For a constant exact scale factor `c>6`, the unique affine future-cost function is
 
@@ -334,7 +390,7 @@ For a constant exact scale factor `c>6`, the unique affine future-cost function 
 
 At `c=8`, this is `4P(N+1)/L`.
 
-For an arbitrary disjoint three-translate step with scale factor `c`, define the reference potential
+For an arbitrary disjoint three-translate step with scale factor `c`, define
 
 ```math
 \mathfrak B=\frac{4P(N+1)}L.
@@ -353,11 +409,7 @@ Its exact one-step Bellman defect is
 }
 ```
 
-Therefore:
-
-- factor `2` and factor `4` create debt;
-- factor `8` is Bellman-neutral;
-- factors at least `16` create surplus.
+Therefore factors `2` and `4` create debt, factor `8` is Bellman-neutral, and factors at least `16` create surplus.
 
 For an `H`-step scale word with product `C_H`,
 
@@ -374,15 +426,15 @@ The endpoint charge depends only on the scale product, not the order or contamin
 
 Exact repayment consequences:
 
-- one factor `4` plus one factor `8` still expands the endpoint charge;
+- one factor `4` plus one factor `8` still expands endpoint charge;
 - one factor `4` plus two factor `8` steps contracts it for `N>=2`;
 - one factor `2` plus four factor `8` steps contracts it for `N>=9`.
 
 ---
 
-## 8. Repayment parsing criterion
+## 9. Repayment parsing criterion
 
-If, from a state size at least `9`, a scale word can be partitioned into consecutive blocks of the forms
+If, from state size at least `9`, a scale word can be partitioned into consecutive blocks of the forms
 
 ```text
 [8 or larger]
@@ -390,7 +442,7 @@ If, from a state size at least `9`, a scale word can be partitioned into consecu
 [one 2 and four 8-equivalents]
 ```
 
-with larger factors allowed through the product thresholds, then block-boundary Bellman charge contracts uniformly. The worst exact block factor is
+with larger factors allowed through product thresholds, then block-boundary Bellman charge contracts uniformly. The worst exact block factor is
 
 ```math
 \frac{2551}{2560}<1.
@@ -406,7 +458,7 @@ This converts whole-path summability into a geometric debt-token matching proble
 
 ---
 
-## 9. Cheap-step geometry
+## 10. Cheap-step geometry
 
 For an anchored state
 
@@ -425,12 +477,10 @@ T=2L-\max S.
 A three-translate step with factor `c` and separation `R` satisfies
 
 ```math
-\boxed{
-T'=T+(c-2)L-2R.
-}
+\boxed{T'=T+(c-2)L-2R.}
 ```
 
-Thus:
+Consequences:
 
 ### Factor two
 
@@ -455,19 +505,15 @@ T'=T+2(L-R).
 The value `R=L` is impossible because it creates `0,R,2R,3R`.
 
 - If `R>L`, top slack decreases by at least `2` and the anchor `R` is contamination.
-- If `R<L`, slack is replenished only by importing the prefix
-  ```math
-  S\cap[L,2L-R)
-  ```
-  into the backbone.
+- If `R<L`, slack is replenished only by importing the prefix `S\cap[L,2L-R)` into the backbone.
 
 Every cheap Bellman debt therefore carries a geometric certificate: slack consumption or imported prefix contamination.
 
 ---
 
-## 10. Exact `S_10` escape domains
+## 11. Exact `S_10` escape domains
 
-The recursive positive-difference support of `S_10` gives the complete layer-disjoint candidate domains:
+The recursive positive-difference support of `S_10` gives the complete layer-disjoint candidate domains.
 
 ### Factor two
 
@@ -487,13 +533,11 @@ layer-disjoint:             348012826
 candidate-list FNV-64:      ae1d9e1ec77b2dfb
 ```
 
-The recursive computation reproduces the certified `S_9` domains before advancing to `S_10`.
-
 These are domain counts only. Complete four-term-progression exclusion or construction of an escape candidate remains open.
 
 ---
 
-## 11. Current unresolved problem: whole-tree compensation
+## 12. Current unresolved problem: whole-tree compensation
 
 The active target is
 
@@ -503,11 +547,11 @@ The active target is
 }
 ```
 
-The current proof architecture is:
+The current proof architecture is
 
 ```text
 contaminated transient
-    -> Bellman debt
+    -> exact Bellman debt
     -> slack consumption or prefix contamination
     -> forced repayment parsing or basin entry
     -> finite terminal charge.
@@ -517,19 +561,9 @@ Equivalent remaining tasks:
 
 1. prove every path eventually enters an exact or near-exact basin;
 2. prove every non-basin scale word admits a repayment parsing;
-3. extend the Bellman potential by a contamination reserve that dominates all children;
+3. extend the Bellman potential by a contamination reserve dominating all children;
 4. charge imported prefixes through difference export or overlap packing;
 5. construct a finite-state or spectral quotient of the pre-basin continuation tree;
 6. classify the `S_10` factor-two and factor-four escape domains using recursive witness propagation.
-
-**Primary new references:**
-
-- `docs/exact-tail-basin-criterion.md`;
-- `docs/depth-ten-exact-tail-basin-fan.md`;
-- `docs/exact-tail-bellman-potential.md`;
-- `docs/scale-word-bellman-debt.md`;
-- `docs/cheap-debt-repayment-parsing.md`;
-- `docs/cheap-step-slack-contamination-debt.md`;
-- `docs/depth-ten-cheap-candidate-domains.md`.
 
 The full Erdős problem remains unresolved.

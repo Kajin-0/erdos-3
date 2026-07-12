@@ -1,0 +1,353 @@
+# Cheap-step slack, contamination, and Bellman debt
+
+## Status
+
+Elementary theorem for anchored disjoint three-translate replay states. This note combines the exact top-slack recurrence with the Bellman debt identity.
+
+It does not yet bound total debt. It identifies the geometric resource consumed or created by every factor-two or factor-four step.
+
+---
+
+## 1. Anchored replay state
+
+Let
+
+```math
+S\subseteq[L,2L),
+\qquad
+\min S=L,
+```
+
+and put
+
+```math
+A=\{0\}\cup S.
+```
+
+For a positive integer separation `R`, form the disjoint three-translate raw state
+
+```math
+G=A\cup(A+R)\cup(A+2R).
+```
+
+Let the next dyadic scale be
+
+```math
+L'=cL,
+```
+
+and define
+
+```math
+S'=L'+G.
+```
+
+Assume `G` fits below `L'` and is four-term-progression-free.
+
+Define the absolute top slack
+
+```math
+T=2L-\max S,
+```
+
+and
+
+```math
+T'=2L'-\max S'.
+```
+
+---
+
+## 2. Exact top-slack recurrence
+
+Because
+
+```math
+\max G=\max S+2R,
+```
+
+```math
+\max S'=cL+\max S+2R.
+```
+
+Therefore
+
+```math
+\boxed{
+T'
+=
+T+(c-2)L-2R.
+}
+```
+
+This identity is exact.
+
+---
+
+## 3. Factor-two steps
+
+For
+
+```math
+c=2,
+```
+
+```math
+\boxed{T'=T-2R.}
+```
+
+Thus every factor-two step consumes at least two units of absolute top slack. The fit condition is equivalent to
+
+```math
+2R<T,
+```
+
+so only finitely many separations can occur from one fixed state.
+
+Since `R<L`, every point
+
+```math
+s\in S\cap[L,2L-R)
+```
+
+produces a shifted point
+
+```math
+s+R\in[L,2L)
+```
+
+in the backbone shell. Disjointness makes these points distinct from the unshifted replay copy. Hence, writing
+
+```math
+\kappa
+=
+\left|
+G\cap[L,2L)\setminus S
+\right|,
+```
+
+one has
+
+```math
+\boxed{
+\kappa
+\ge
+|S\cap[L,2L-R)|.
+}
+```
+
+A factor-two step therefore both consumes slack and imports a lower prefix of the state as contamination.
+
+---
+
+## 4. Factor-four steps
+
+For
+
+```math
+c=4,
+```
+
+```math
+\boxed{
+T'=T+2(L-R).
+}
+```
+
+### 4.1 The separation `R=L` is impossible
+
+If `R=L`, then
+
+```math
+0,
+\quad R,
+\quad2R
+```
+
+belong to `G` through the anchor `0`, while
+
+```math
+3R=L+2R
+```
+
+belongs to the third translate of the minimum point `L in S`.
+
+Thus
+
+```math
+0,R,2R,3R
+```
+
+is a four-term progression. Therefore
+
+```math
+\boxed{R\ne L.}
+```
+
+### 4.2 Upper-side factor-four step
+
+If
+
+```math
+R=L+\delta,
+\qquad
+\delta\ge1,
+```
+
+then
+
+```math
+\boxed{T'=T-2\delta\le T-2.}
+```
+
+The point `R` itself lies in the backbone shell `[L,2L)`. It cannot already belong to `S`, because that would overlap the anchor point in layer one with the unshifted layer. Hence
+
+```math
+\boxed{\kappa\ge1.}
+```
+
+An upper-side factor-four step creates Bellman debt while consuming top slack.
+
+### 4.3 Lower-side factor-four step
+
+If
+
+```math
+R=L-\delta,
+\qquad
+\delta\ge1,
+```
+
+then
+
+```math
+\boxed{T'=T+2\delta.}
+```
+
+Slack is replenished, but the shifted lower prefix enters the backbone:
+
+```math
+(S+R)\cap[L,2L)
+\supseteq
+\{s+R:s\in S\cap[L,L+\delta)\}.
+```
+
+Therefore
+
+```math
+\boxed{
+\kappa
+\ge
+|S\cap[L,L+\delta)|.
+}
+```
+
+A lower-side factor-four step can replenish top slack only by importing a prefix of `S` as contamination.
+
+---
+
+## 5. Bellman debt attached to cheap steps
+
+Let
+
+```math
+N=|S|,
+\qquad
+P=\text{certified replay multiplicity}.
+```
+
+The factor-eight reference potential is
+
+```math
+\mathfrak B=\frac{4P(N+1)}L.
+```
+
+The one-step Bellman defect at scale factor `c` is
+
+```math
+\mathfrak D_c
+=
+\frac{P(3N+4)}L
+\left(1-\frac8c\right).
+```
+
+Thus the positive debt magnitude is:
+
+### Factor two
+
+```math
+\boxed{
+-\mathfrak D_2
+=
+3\frac{P(3N+4)}L.
+}
+```
+
+### Factor four
+
+```math
+\boxed{
+-\mathfrak D_4
+=
+\frac{P(3N+4)}L.
+}
+```
+
+Combining with the slack theorem:
+
+- factor two: Bellman debt + strict slack consumption + prefix contamination;
+- factor four with `R>L`: Bellman debt + strict slack consumption;
+- factor four with `R<L`: Bellman debt + slack replenishment paid for by imported prefix contamination.
+
+This is the precise cheap-step trichotomy.
+
+---
+
+## 6. Certified depth-five example
+
+For the recorded depth-five burst, the factor-four separations illustrate both sides:
+
+```math
+R_1=61<L_1=64,
+```
+
+```math
+R_3=1597<L_3=2048,
+```
+
+which replenish slack and import prefixes, while
+
+```math
+R_4=8195>L_4=8192
+```
+
+consumes six units of top slack and creates the single anchor contamination point `8195`.
+
+The certified contamination counts
+
+```text
+4,1,33,1
+```
+
+are consistent with the lower-prefix and anchor bounds above.
+
+---
+
+## 7. Remaining theorem
+
+The Bellman debt is now quantified algebraically, and every cheap step has a geometric certificate in top slack or imported prefix contamination.
+
+The unresolved charging theorem is to bound
+
+```math
+\sum \bigl(-\mathfrak D_{c_h}\bigr)_+
+```
+
+along every branch, or over the entire continuation tree, by:
+
+1. initial and replenished top slack;
+2. exportable structure generated by imported prefixes;
+3. later factor-eight or larger repayments;
+4. overlap and packing constraints among contaminated replay cores.
+
+Proving such a bound would extend the exact Bellman potential from basin nodes to contaminated states.

@@ -224,7 +224,7 @@ docs/scale-eight-self-replicating-aligned-diamond.md
 
 ### Sharp exact-model theorems
 
-The canonical equal-translate obstruction is now quantitatively classified.
+The canonical equal-translate obstruction is quantitatively classified when the backbone reproduces the previous state exactly.
 
 If one exact replication step has
 
@@ -250,7 +250,7 @@ then uncontaminated backbone reproduction requires `R>=2L`. Since `2R in G`, one
 \boxed{L'\ge8L.}
 ```
 
-Also, four equal translate layers are impossible because `0,R,2R,3R` would be a four-term progression. Thus three layers are maximal. Since the occurrence genealogy is binary, two persistent children are maximal. The canonical architecture therefore has the extremal one-step efficiency
+Also, four equal translate layers are impossible because `0,R,2R,3R` would be a four-term progression. Thus three layers are maximal. Since the occurrence genealogy is binary, two persistent children are maximal. The exact architecture has one-step efficiency
 
 ```math
 \boxed{
@@ -300,28 +300,93 @@ C_0=\frac{n_0+3/2}{L_0}.
 
 The scale-eight family attains the exponents `1/3` and `2-log_2(3)`.
 
-## Current bottleneck
+### Contaminated-backbone finite chain
 
-The remaining theorem must control persistence outside the exact equal-translate model.
+Exact reproduction is not the only way persistence can continue. It is enough for the relevant backbone shell to contain a replayable copy of the previous state.
 
-The exact obstruction already has summable multiplicity-weighted density, so any unresolved mechanism must involve at least one genuinely different feature:
+A certified depth-five chain uses dyadic scale factors
 
-1. overlapping or only partially resolved translate layers;
-2. several parent states feeding one terminal history;
-3. nonuniform branching or child counts;
-4. approximate rather than exact recurrence;
-5. persistence distributed across multiple dyadic shells;
-6. many genealogies whose charges cannot be separated.
+```math
+\boxed{4,8,4,4}
+```
 
-The active target is therefore
+and separations
+
+```math
+61,303,1597,8195.
+```
+
+Every state is four-term-progression-free. At each outer step:
+
+1. the middle multiplicity fiber is exactly the previous state;
+2. the backbone shell contains the previous state plus contaminating points;
+3. the previous deletion schedule can be replayed inside that subset;
+4. certified identical-history persistence doubles.
+
+For
+
+```math
+W_h
+=
+2^h\frac{|S_h|}{L_h},
+```
+
+the chain satisfies
+
+```math
+W_1=\frac38,
+\qquad
+W_5=\frac{273}{256},
+```
+
+and therefore
 
 ```math
 \boxed{
-\text{decompose general persistence into exact or near-exact genealogies plus a quantitatively cheaper error class.}
+\frac{W_5}{W_1}
+=
+\frac{91}{32}
+=2.84375.
 }
 ```
 
-A useful next theorem would define a general local efficiency ratio and prove that every segment either stays structurally close to the exact `3/4` architecture or contracts by a uniformly stronger factor.
+Thus the exact-model `3/4` contraction does not extend to contaminated backbones one step at a time, or over every window of four steps.
+
+The construction is documented in
+
+```text
+docs/contaminated-backbone-depth-five-chain.md
+```
+
+and verified by
+
+```text
+src/verify_contaminated_backbone_depth5.py
+```
+
+## Current bottleneck
+
+The remaining theorem must control the **long-run behavior** of contaminated, overlapping, or interacting persistence genealogies.
+
+A local near-exact/defective contraction dichotomy is insufficient: the depth-five chain contains three scale-factor `4` steps and increases multiplicity-weighted density over four outer generations.
+
+The active target is now
+
+```math
+\boxed{
+\text{prove long-run compensation for cheap contaminated-backbone replication.}
+}
+```
+
+Useful forms would include:
+
+1. cumulative scale expansion eventually exceeding the `6`-per-level threshold required to offset `3`-for-`2` replication;
+2. a monotone contamination or overlap potential that forces later expensive recovery steps;
+3. export of contaminating points into additional lower-scale difference structure;
+4. a finite-state or spectral classification of indefinitely repeatable contaminated patterns;
+5. a proof that repeated cheap factors force a four-term progression.
+
+The immediate computational question is whether the scale pattern can be extended indefinitely or only in bounded bursts. The immediate proof question is what quantity stores the debt created by a factor-four step.
 
 ## Supporting deletion-DAG theory
 
@@ -332,7 +397,7 @@ The deletion-DAG merge and spanning-component identities remain valid:
 ```
 
 ```math
-\sum_j|\Theta_j|=K+s-\rho,
+\sum_j|\Theta_j|=K+s-ho,
 ```
 
 and
@@ -358,6 +423,8 @@ They are no longer needed for the strongest one-generation constants, but remain
 - `docs/scale-eight-self-replicating-aligned-diamond.md` — exact scale-eight refinement and density benchmark.
 - `docs/three-translate-dyadic-scale-barrier.md` — sharp `L' >= 8L` theorem for exact replication.
 - `docs/exact-three-translate-weighted-density-theorem.md` — sharp weighted-density decay and summability in the exact model.
+- `docs/contaminated-backbone-depth-five-chain.md` — finite cheap-replication chain defeating local contraction.
+- `src/verify_contaminated_backbone_depth5.py` — exact depth-five certificate.
 - `src/verify_scale_eight_aligned_diamond.py` — infinite-family automaton certificate.
 - `src/verify_self_replicating_aligned_diamond_depth2.py` — original depth-two verifier.
 - `docs/half-contraction-multiscale-label-potential.md` — all-generation moment potential.

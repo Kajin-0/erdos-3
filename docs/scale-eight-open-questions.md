@@ -1,6 +1,6 @@
-# Scale-eight benchmark: immediate open questions
+# Persistence benchmark: revised open questions
 
-The exact scale-eight family and the companion elementary theorems now classify the canonical exact standard-dyadic equal-translate obstruction.
+The exact scale-eight family and the companion elementary theorems classify the canonical exact standard-dyadic equal-translate obstruction. The finite contaminated-backbone chain shows that this classification does not extend locally once the backbone is allowed to contain, rather than equal, the replay state.
 
 ## Resolved inside the exact model
 
@@ -11,7 +11,7 @@ docs/three-translate-dyadic-scale-barrier.md
 docs/exact-three-translate-weighted-density-theorem.md
 ```
 
-prove:
+prove
 
 ```math
 L'\ge8L,
@@ -31,7 +31,7 @@ and
 \sum_hP_h\alpha_h<\infty.
 ```
 
-Four-term-progression-freeness permits at most three equal translate layers, while the occurrence genealogy permits at most two persistent children. The maximal exact one-step efficiency is
+The exact one-step efficiency is
 
 ```math
 \rho_{\mathrm{exact}}
@@ -41,59 +41,95 @@ Four-term-progression-freeness permits at most three equal translate layers, whi
 \frac34.
 ```
 
-The scale-eight construction attains all resulting exponents. Thus ambient scale, persistence, density decay, and aggregate weighted-density charge are sharp within the exact equal-translate model.
+The scale-eight construction attains the resulting exponents.
+
+## New finite obstruction to local contraction
+
+The note
+
+```text
+docs/contaminated-backbone-depth-five-chain.md
+```
+
+constructs certified four-term-progression-free states with scale factors
+
+```math
+4,8,4,4.
+```
+
+At every step, the middle fiber is the previous state exactly and the backbone shell contains a replayable copy of the previous state. The certified multiplicity-weighted density grows by
+
+```math
+\boxed{
+\frac{W_5}{W_1}
+=
+\frac{91}{32}.
+}
+```
+
+Therefore the following approaches are false:
+
+1. universal one-step `3/4` contraction outside the exact model;
+2. universal strict contraction for every contaminated step;
+3. contraction over every block of four consecutive steps;
+4. a dichotomy in which every non-exact step automatically contracts more strongly than an exact step.
 
 ## Remaining questions
 
-1. **General weighted-density decay.** Does there exist `epsilon>0` such that every aligned-diamond persistence event of multiplicity `P` in a block `D subseteq[N,2N)` satisfies
+1. **Long-run scale compensation.** Must every sufficiently long contaminated genealogy satisfy
 
    ```math
-   P\frac{|D|}{N}\ll P^{-\epsilon}?
+   \prod_{h=1}^{H}c_h
+   >
+   6^H
    ```
 
-   The exact-model theorem proves this with
+   after accounting for lower-order cardinality terms, where `c_h=L_{h+1}/L_h`?
 
-   ```math
-   \epsilon=2-\log_2 3\approx0.4150375
-   ```
+2. **Contamination debt.** Is there a monotone quantity that increases during scale-factor `4` steps and must later be discharged through a larger scale jump, exported difference structure, or a forbidden progression?
 
-   for one exact genealogy. The unresolved issue is whether overlap, cross-parent merging, approximate recurrence, or multishell persistence can destroy decay.
+3. **Indefinite extension.** Can the finite factor pattern be extended indefinitely, periodically, or with geometric-mean scale below `6`? A positive answer would invalidate multiplicity-weighted density decay as the closing invariant.
 
-2. **General aggregate charging.** Can arbitrary persistence be decomposed into genealogies whose total multiplicity-weighted dyadic density is summable? The exact model has the explicit bound
+4. **Finite-state classification.** Do indefinitely repeatable contaminated patterns admit a finite symbolic description whose spectral radius controls the long-run ratio between support growth, persistence, and dyadic scale?
 
-   ```math
-   \sum_hP_h\alpha_h
-   \le
-   4\frac{n_0+3/2}{L_0}.
-   ```
+5. **Aggregate charging.** If several contaminated genealogies overlap, can their replay cores and contaminating points be assigned bounded total charge?
 
-   The obstruction is interaction among many non-disjoint genealogies.
-
-3. **Near-extremal classification.** Does persistence near `L^(1/3)` force an approximate alternating base-eight translate structure, or at least an approximate equal-translate architecture with local efficiency near `3/4`?
-
-4. **Beyond equal translates.** Can a genuinely non-equal, overlapping, or cross-parent construction produce a larger effective branching-density ratio than `3/4`?
-
-5. **Pure proof of the automaton certificate.** Can the 34-state product/carry computation be compressed into a short invariant or hand-checkable state quotient?
+6. **Pure proof of finite-state certificates.** Can the automaton computations for the exact family, and any future contaminated family, be compressed into short invariants or hand-checkable quotients?
 
 ## Active quantitative target
 
-For a recursive segment, define its effective weighted-density ratio schematically as
+For a contaminated step define
 
 ```math
-\rho
+B_h
 =
-\frac{
-\text{persistent-child multiplicity factor}
-\times
-\text{support-cardinality factor}
-}{
-\text{dyadic-scale factor}
-}.
+G_{h+1}\cap[L_h,2L_h),
 ```
 
-The next theorem should define this quantity rigorously for general recursive segments and prove a dichotomy:
+and contamination
 
-1. **near-exact case:** `rho` is close to `3/4`, forcing structural proximity to the exact equal-translate architecture;
-2. **defective case:** `rho` is bounded below `3/4` by a uniform amount, yielding stronger geometric contraction.
+```math
+\kappa_h
+=
+|B_h\setminus S_h|.
+```
 
-After that, the remaining task would be packing and overlap control among near-exact segments.
+The depth-five chain has
+
+```math
+(\kappa_1,\kappa_2,\kappa_3,\kappa_4)
+=
+(4,1,33,1),
+```
+
+so contamination cardinality alone does not correlate monotonically with the immediate scale factor.
+
+The next theorem should introduce a richer overlap potential that records where contaminating points originate and how they propagate into later translate layers. The desired conclusion is not local contraction but a long-horizon inequality of the form
+
+```math
+W_H
+\le
+C\,\Theta_H W_0,
+```
+
+where `Theta_H` is summable or tends to zero after all contamination debt is included.

@@ -1,6 +1,6 @@
 # Certainty ledger
 
-This file records claims that should survive context loss. The full Erdős reciprocal-sum problem remains open. The theorem dependency order and active strategy are in `docs/current-proof-program.md`.
+This file records claims that should survive context loss. The full Erdős reciprocal-sum problem remains open. The active dependency structure is in `docs/current-proof-program.md`.
 
 ---
 
@@ -39,7 +39,7 @@ H(\mathcal B(D))+\sum_xH(M_x)
 3H(D)-2\frac{r_3(N)}N-\frac1N,
 ```
 
-and, after exact middle-multiplicity resolution,
+and
 
 ```math
 H(Q)+\sum_qH(\Xi_q)+H(\mathcal B(D))
@@ -88,8 +88,6 @@ P_h=2^h,
 P_h\asymp|S_h|^{\log_3 2}.
 ```
 
-Bounded, logarithmic, polylogarithmic, and sufficiently small cardinality-only subpower persistence bounds are false.
-
 ---
 
 ## CL-007: Infinite exact scale-eight family
@@ -114,13 +112,7 @@ A 34-state automaton and a `17238`-state carry search certify no nontrivial four
 **Status:** elementary theorem.  
 **Certainty:** high internally.
 
-Exact uncontaminated equal-translate reproduction requires
-
-```math
-L'\ge8L.
-```
-
-Moreover
+Exact uncontaminated equal-translate reproduction requires `L'>=8L`. Moreover
 
 ```math
 P_h\alpha_h\le C_0(3/4)^h,
@@ -135,13 +127,7 @@ P_h\alpha_h\le C_0(3/4)^h,
 **Status:** exact finite construction.  
 **Certainty:** high.
 
-The scale factors are
-
-```math
-\boxed{4,8,4,4},
-```
-
-and
+The scale factors are `4,8,4,4`, and
 
 ```math
 \frac{W_5}{W_1}=\frac{91}{32}.
@@ -156,13 +142,7 @@ Universal local contraction and contraction over every four-step window are fals
 **Status:** exact finite construction.  
 **Certainty:** high.
 
-The alternative recovery `R_5=93476` admits the factor-four descendant `R_6=230164`, giving
-
-```math
-\boxed{4,8,4,4,8,4}
-```
-
-through `S_7`, with
+The alternative recovery `R_5=93476` admits the factor-four descendant `R_6=230164`, giving `4,8,4,4,8,4` through `S_7`, with
 
 ```math
 \frac{W_7}{W_5}=\frac{205}{182}>1.
@@ -178,7 +158,7 @@ Universal two-generation recovery and contraction over every six-step window are
 **Certainty:** high.
 
 ```math
-\boxed{N_{7,2}=N_{7,4}=0.}
+N_{7,2}=N_{7,4}=0.
 ```
 
 The factor-four domain has `359419` disjoint candidates, exhausted by completion, `1001`, and `0011` witnesses.
@@ -208,7 +188,7 @@ W_8=\frac{29523}{32768}.
 **Certainty:** high.
 
 ```math
-\boxed{N_{8,2}=N_{8,4}=0.}
+N_{8,2}=N_{8,4}=0.
 ```
 
 The factor-four domain has `4190292` disjoint candidates and is fully exhausted.
@@ -238,7 +218,7 @@ W_9=\frac{22143}{32768}.
 **Certainty:** high.
 
 ```math
-\boxed{N_{9,2}=N_{9,4}=0.}
+N_{9,2}=N_{9,4}=0.
 ```
 
 The factor-four domain has `39459384` disjoint candidates. Completion and recursive rectangle witnesses reduce it to seven explicit terminal witnesses.
@@ -252,9 +232,7 @@ The factor-four domain has `39459384` disjoint candidates. Completion and recurs
 
 ```math
 R_9=134217729,
-```
-
-```math
+\quad
 |S_{10}|=265719,
 \quad
 P_{10}=1024,
@@ -262,11 +240,7 @@ P_{10}=1024,
 W_{10}=\frac{265719}{524288}.
 ```
 
-The finite scale pattern is
-
-```math
-\boxed{4,8,4,4,8,4,8,8,8.}
-```
+The finite scale pattern is `4,8,4,4,8,4,8,8,8`.
 
 ---
 
@@ -275,27 +249,16 @@ The finite scale pattern is
 **Status:** elementary theorem with exact rational pattern verification.  
 **Certainty:** high internally.
 
-In the certified exact-tail geometry, every new four-term progression in three translates comes from either:
-
-1. a three-term progression completed at `R`; or
-2. `R` even with `R/2` inside the state.
-
-The same nine layer patterns remain complete across the full fitting exact factor-eight range of the recorded `S_10` and the finite scheduled regions used in CL-029.
+In the certified exact-tail geometry, every new four-term progression in three translates comes from either a completion at `R` or the half-separation point `R/2` inside the state. The same nine layer patterns remain complete in every region used through CL-030.
 
 ---
 
-## CL-018: Extended completion descent
+## CL-018: Completion descent
 
 **Status:** elementary theorem with exact rational pattern verification.  
 **Certainty:** high internally.
 
-For `R=2L+k`, scheduled child completion targets descend through the unique layer pattern `012`. In the original extended range, a completion at `16L+c` descends to a parent completion at
-
-```math
-2L+(c-3k).
-```
-
-The scheduled specialization `c=4k` descends exactly to `2L+k`.
+For `R=2L+k`, child completion targets descend through the unique layer pattern `012`. The scheduled target `4k` descends exactly to the preceding separation `2L+k`.
 
 ---
 
@@ -304,17 +267,7 @@ The scheduled specialization `c=4k` descends exactly to `2L+k`.
 **Status:** exact infinite theorem with finite seed certificate.  
 **Certainty:** high internally; awaiting independent review.
 
-For one explicit schedule,
-
-```math
-k_{10}=262149,
-\qquad
-k_{h+1}=4k_h,
-\qquad
-R_h=2L_h+k_h,
-```
-
-`S_10` has an infinite exact four-term-progression-free tail with
+For one explicit offset schedule, `S_10` has an infinite exact four-term-progression-free tail with
 
 ```math
 \sum_{n\ge0}W_{10+n}=\frac{33215}{16384}.
@@ -327,18 +280,10 @@ R_h=2L_h+k_h,
 **Status:** elementary theorem.  
 **Certainty:** high internally.
 
-If
+If `S subseteq [L,7L/4)`, `0<k<=L/32`, and the first exact step is valid, then `L'=8L`, `k'=4k` defines an infinite exact tail. Its charge is
 
 ```math
-S\subseteq[L,7L/4),
-\quad
-0<k\le L/32,
-```
-
-with the required gap and no first-step obstruction, then `L'=8L`, `k'=4k` defines an infinite exact tail. For entry size `N`, replay multiplicity `P`, and scale `L`,
-
-```math
-\sum_{n\ge0}W_n=\frac{4P(N+1)}L.
+\frac{4P(N+1)}L.
 ```
 
 ---
@@ -348,13 +293,7 @@ with the required gap and no first-step obstruction, then `L'=8L`, `k'=4k` defin
 **Status:** exact signed-completion classification.  
 **Certainty:** high.
 
-In `4<=k<=L_{10}/32`, exactly
-
-```math
-\boxed{11129810}
-```
-
-offsets enter exact infinite tails. Each has terminal charge `33215/16384`.
+In `4<=k<=L_{10}/32`, exactly `11129810` offsets enter exact infinite tails. Each has charge `33215/16384`.
 
 ---
 
@@ -398,21 +337,7 @@ Factors `2` and `4` create debt, `8` is neutral, and factors at least `16` creat
 **Status:** elementary sufficient theorem.  
 **Certainty:** high.
 
-A scale word parsable into blocks
-
-```text
-[8 or larger]
-[one 4 plus two 8-equivalents]
-[one 2 plus four 8-equivalents]
-```
-
-has summable weighted density. The worst block-boundary contraction is
-
-```math
-2551/2560<1.
-```
-
-Universal geometric realizability of this parsing is not proved.
+A scale word parsable into blocks `[8 or larger]`, `[one 4 plus two 8-equivalents]`, and `[one 2 plus four 8-equivalents]` has summable weighted density. The worst block factor is `2551/2560<1`. Universal geometric realizability remains open.
 
 ---
 
@@ -421,13 +346,7 @@ Universal geometric realizability of this parsing is not proved.
 **Status:** elementary exact theorem.  
 **Certainty:** high.
 
-For
-
-```math
-T=2L-\max S,
-```
-
-a step of scale factor `c` and separation `R` satisfies
+For `T=2L-max S`,
 
 ```math
 T'=T+(c-2)L-2R.
@@ -469,15 +388,7 @@ No complete exclusion or escape construction is yet claimed.
 **Status:** exact finite classification.  
 **Certainty:** high.
 
-For positive exact offsets
-
-```math
-1\le k\le613454687,
-\qquad
-R=2L_{10}+k,
-```
-
-there are `408969792` sponsor-compatible values. The first-step obstruction split is
+For `1<=k<=613454687`, there are `408969792` sponsor-compatible positive offsets. The first-step obstruction split is
 
 ```text
 completion-blocked       54999
@@ -485,13 +396,7 @@ half-separation-blocked  59034
 overlap                       0
 ```
 
-so
-
-```math
-\boxed{408855759}
-```
-
-positive offsets give valid exact factor-eight continuations.
+so `408855759` offsets give valid exact factor-eight children.
 
 ---
 
@@ -500,67 +405,19 @@ positive offsets give valid exact factor-eight continuations.
 **Status:** elementary infinite theorem with exact rational pattern verification and finite `S_10` counting.  
 **Certainty:** high internally; awaiting independent review.
 
-Let
-
-```math
-\min S=L,
-\qquad
-S\subseteq[L,7L/4),
-```
-
-and let `0<k<L/2` with even `v_2(k)`. If the first exact step at
-
-```math
-R=2L+k
-```
-
-is four-term-progression-free, then
-
-```math
-L_{n+1}=8L_n,
-\qquad
-k_{n+1}=4k_n
-```
-
-defines an infinite exact four-term-progression-free tail.
-
-For `S_10`, exactly
-
-```math
-\boxed{178872402}
-```
-
-offsets enter certified infinite exact tails. Each has charge
-
-```math
-\boxed{33215/16384.}
-```
+For `S subseteq [L,7L/4)` and `0<k<L/2`, a valid first exact step implies an infinite scheduled exact tail. At `S_10`, exactly `178872402` offsets enter such tails.
 
 ---
 
-## CL-029: Full-fitting exact-tail basin from `S_10`
+## CL-029: Full-fitting scheduled basin from `S_10`
 
 **Status:** exact finite obstruction classification plus elementary infinite induction.  
 **Certainty:** high internally; awaiting independent review.
 
-Across the complete fitting exact range
+Across the complete fitting exact range, only two additional scheduled half tests occur:
 
 ```math
-1\le k\le613454687,
-```
-
-the standard nine top-layer patterns and unique scheduled completion descent `012` persist through the three finite generations needed to enter the invariant region
-
-```math
-S_n\subseteq[L_n,15L_n/8),
-\qquad
-k_n/L_n<1/4.
-```
-
-After validity of the first exact child, only two additional scheduled half tests occur:
-
-```math
-2k\in S_{10},
+2k\in S_{10}
 ```
 
 or
@@ -569,36 +426,49 @@ or
 8(k-L_{10})\in S_{10}.
 ```
 
-The second scheduled half class contains `88614` sponsor-compatible offsets. The third contains exactly
+Only `88608` already-valid exact children fail the unmodified schedule. Thus `408767151` valid exact children enter infinite tails without repair.
+
+---
+
+## CL-030: Complete exact-child infinite-tail fan from `S_10`
+
+**Status:** exact finite repair classification plus elementary infinite induction.  
+**Certainty:** high internally; awaiting independent review.
+
+The `88606` valid second-step failures are repaired by replacing
+
+```math
+4k
+```
+
+with
+
+```math
+4k+1.
+```
+
+The repaired offset is odd, so no half obstruction exists. Exact rational enumeration finds no feasible completion pattern, and the repaired branch enters the invariant basin after one additional exact step.
+
+The only two third-step failures,
 
 ```text
 603979776
-613416960.
+613416960
 ```
 
-Eight second-step offsets were already excluded by the first-step half obstruction. Thus only
+are repaired by replacing `16k` with `16k+1`; the same proof applies.
 
-```math
-\boxed{88608}
-```
-
-of the `408855759` valid exact children fail the scheduled basin test, and
-
-```math
-\boxed{408767151}
-```
-
-valid exact children enter infinite exact tails.
-
-The exact coverage fraction is
+Therefore
 
 ```math
 \boxed{
-\frac{10481209}{10483481}
+408767151+88606+2
+=
+408855759.
 }
 ```
 
-or approximately `99.9783278092458%`. Every tail has charge
+Every valid positive exact factor-eight child of `S_10` has a certified infinite exact four-term-progression-free continuation. Every tail has charge
 
 ```math
 \boxed{33215/16384.}
@@ -606,9 +476,9 @@ or approximately `99.9783278092458%`. Every tail has charge
 
 **Primary references:**
 
-- `docs/full-fitting-exact-tail-basin.md`;
-- `src/verify_full_fitting_exact_tail_basin.py`;
-- `data/full_fitting_exact_tail_basin_certificate_2026-07-12.txt`.
+- `docs/complete-exact-child-tail-fan.md`;
+- `src/verify_complete_exact_child_tail_fan.py`;
+- `data/complete_exact_child_tail_fan_certificate_2026-07-12.txt`.
 
 ---
 
@@ -623,7 +493,7 @@ Do not use without new hypotheses:
 5. contraction over every four- or six-step window;
 6. universal two-generation recovery after an exact factor-eight step;
 7. extrapolating one branch to all recoveries;
-8. treating one or many basin tails as a whole-tree theorem;
+8. treating one or many exact tails as a whole-tree theorem;
 9. random candidate sampling as a finite certificate;
 10. recursive arguments that ignore mandatory shell resolution.
 
@@ -637,7 +507,7 @@ The current architecture is
 cheap step
   -> exact Bellman debt
   -> slack consumption or imported prefix contamination
-  -> repayment parsing or basin entry
+  -> repayment parsing or exact-tail entry
   -> finite terminal charge.
 ```
 
@@ -649,14 +519,13 @@ The unresolved theorem is
 }
 ```
 
-Approved targets:
+The exact factor-eight fan from `S_10` is completely classified. Approved targets:
 
-1. classify the `88608` exceptional valid exact children of `S_10`;
-2. classify the exact `S_10` factor-two and factor-four escape domains;
-3. prove every path eventually enters an exact or near-exact basin;
-4. prove every non-basin path admits a debt-repayment parsing;
-5. extend the Bellman potential by a contamination reserve dominating all children;
-6. charge imported prefixes through difference export or overlap packing;
-7. construct a finite-state or spectral quotient of the pre-basin tree.
+1. classify the exact `S_10` factor-two and factor-four escape domains;
+2. prove every path eventually enters an exact or near-exact basin;
+3. prove every non-basin scale word admits a debt-repayment parsing;
+4. extend the Bellman potential by a contamination reserve dominating all children;
+5. charge imported prefixes through difference export or overlap packing;
+6. construct a finite-state or spectral quotient of the pre-basin tree.
 
 No current theorem closes this gap. The full Erdős problem remains unresolved.

@@ -219,12 +219,13 @@ For `R=2L+k`, completion descent maps a child target offset `c` to the parent of
 c-3k.
 ```
 
-Exact rational enumeration gives the unique descent layer pattern `012` in the certified regions. A state-specific rational classification also proves that the same nine top-layer patterns remain complete across the full fitting exact factor-eight range of `S_10`.
+Exact rational enumeration gives the unique descent layer pattern `012` in the certified regions. A state-specific rational classification proves that the same nine top-layer patterns remain complete across the full fitting exact factor-eight range of `S_10` and its first three scheduled descendants.
 
 **Primary references:**
 
 - `docs/extended-completion-descent.md`;
-- `src/verify_exact_tail_pattern_lemmas.py`.
+- `src/verify_exact_tail_pattern_lemmas.py`;
+- `src/verify_full_fitting_exact_tail_basin.py`.
 
 ---
 
@@ -256,33 +257,23 @@ k_{n+1}=4k_n
 
 defines an infinite exact four-term-progression-free tail.
 
-### 6.2 Half-scale basin enlargement
+### 6.2 Half-scale basin
 
-The exact pattern audit enlarges the entry range to
+The exact pattern audit enlarges the generic entry range to
 
 ```math
 \boxed{0<k<L/2.}
 ```
 
-Assume
-
-```math
-\min S=L,
-\qquad
-S\subseteq[L,7L/4),
-```
-
-and that the first exact step at `R=2L+k` is valid. Then the scheduled successor is also valid, and all later scheduled successors remain valid.
-
-The first child satisfies
+If the first exact step is valid, all scheduled successors remain valid. The first child enters
 
 ```math
 S_1\subseteq[L_1,59L_1/32),
 \qquad
-k_1/L_1<1/4.
+k_1/L_1<1/4,
 ```
 
-Thereafter the region
+and the region
 
 ```math
 S_n\subseteq[L_n,15L_n/8),
@@ -290,9 +281,46 @@ S_n\subseteq[L_n,15L_n/8),
 k_n/L_n<1/4
 ```
 
-is invariant. The same nine top-layer patterns remain complete, scheduled completion descent has the unique pattern `012`, and the half-separation obstruction is impossible because `0<2k_n<L_n`.
+is invariant.
 
-For entry size `N`, replay multiplicity `P`, and scale `L`, every such tail has terminal charge
+### 6.3 Full-fitting `S_10` basin
+
+For the recorded `S_10`, every fitting exact offset satisfies
+
+```math
+1\le k\le613454687.
+```
+
+Across this complete range, the standard nine top-layer patterns and unique `012` scheduled completion descent persist through the three finite generations needed to enter the invariant region.
+
+Beyond validity of the first exact child, only two additional scheduled half tests occur:
+
+```math
+2k\notin S_{10},
+```
+
+and
+
+```math
+8(k-L_{10})\notin S_{10}.
+```
+
+The second scheduled half class contains `88614` sponsor-compatible offsets. The third contains exactly
+
+```text
+603979776
+613416960.
+```
+
+Eight second-step offsets were already removed by the first-step half obstruction. Therefore only
+
+```math
+\boxed{88608}
+```
+
+of the already-valid exact children fail the scheduled basin test.
+
+For entry size `N`, replay multiplicity `P`, and scale `L`, every certified tail has terminal charge
 
 ```math
 \boxed{
@@ -303,8 +331,9 @@ For entry size `N`, replay multiplicity `P`, and scale `L`, every such tail has 
 **Primary references:**
 
 - `docs/half-scale-exact-tail-basin.md`;
+- `docs/full-fitting-exact-tail-basin.md`;
 - `src/verify_half_scale_exact_tail_basin.py`;
-- `data/half_scale_exact_tail_basin_certificate_2026-07-12.txt`.
+- `src/verify_full_fitting_exact_tail_basin.py`.
 
 ---
 
@@ -322,7 +351,7 @@ with
 1\le k\le613454687.
 ```
 
-There are `408969792` sponsor-compatible positive offsets. The complete obstruction split is
+There are `408969792` sponsor-compatible positive offsets. The complete first-step obstruction split is
 
 ```text
 completion-blocked:       54999
@@ -356,21 +385,39 @@ In
 1\le k<L_{10}/2,
 ```
 
-there are
-
-```text
-178956970 sponsor-compatible offsets
-54999 completion obstructions
-29569 half-separation obstructions.
-```
-
-Therefore
+exactly
 
 ```math
 \boxed{178872402}
 ```
 
-valid offsets enter certified infinite exact tails. This is approximately `43.75%` of all valid positive exact children and approximately `16.07` times the original basin fan.
+valid offsets enter certified infinite tails.
+
+### 7.3 Full-fitting basin fan
+
+Among all valid positive exact children, the only additional failures are the `88608` scheduled half obstructions. Hence
+
+```math
+\boxed{
+408855759-88608
+=
+408767151
+}
+```
+
+valid offsets enter certified infinite exact tails.
+
+The exact coverage fraction is
+
+```math
+\boxed{
+\frac{408767151}{408855759}
+=
+\frac{10481209}{10483481}
+}
+```
+
+or approximately `99.9783278092458%`.
 
 Every tail has charge
 
@@ -378,7 +425,7 @@ Every tail has charge
 \boxed{33215/16384.}
 ```
 
-The behavior of valid exact children with `k>=L_{10}/2` remains open.
+Only `88608` valid exact children remain outside the scheduled basin certificate.
 
 ---
 
@@ -493,12 +540,12 @@ contaminated transient
 
 Equivalent remaining tasks:
 
-1. classify the exact `S_10` factor-two and factor-four escape domains;
-2. prove every path eventually enters an exact or near-exact basin;
-3. prove every non-basin scale word admits a repayment parsing;
-4. extend the Bellman potential by a contamination reserve dominating all children;
-5. charge imported prefixes through difference export or overlap packing;
-6. classify valid exact `S_10` children with `k>=L_{10}/2`;
+1. classify the `88608` exceptional valid exact children of `S_10`;
+2. classify the exact `S_10` factor-two and factor-four escape domains;
+3. prove every path eventually enters an exact or near-exact basin;
+4. prove every non-basin scale word admits a repayment parsing;
+5. extend the Bellman potential by a contamination reserve dominating all children;
+6. charge imported prefixes through difference export or overlap packing;
 7. construct a finite-state or spectral quotient of the pre-basin continuation tree.
 
 No current theorem closes this gap. The full Erdős problem remains unresolved.

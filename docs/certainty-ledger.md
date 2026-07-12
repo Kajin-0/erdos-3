@@ -42,8 +42,6 @@ is four-term-progression-free, lies below `N`, has size `|D|-1`, and contracts e
 **Status:** proved in repository.  
 **Certainty:** medium-high internally.
 
-The raw middle family and backbone satisfy
-
 ```math
 H(\mathcal B(D))+\sum_xH(M_x)
 \ge
@@ -88,13 +86,11 @@ Positive moments do not by themselves control reciprocal mass.
 **Status:** proved in repository.  
 **Certainty:** medium-high internally.
 
-Repeated labels occurring at different lifted centers, root anchors, or predecessor anchors are exported by translated difference layers. Copies with one fixed complete anchor history obey
+Repeated labels at different lifted centers, root anchors, or predecessor anchors are exported by translated layers. Copies with one fixed complete anchor history obey
 
 ```math
 \lambda_{x,q}(t)(a-t)\le a.
 ```
-
-High unresolved multiplicity is localized immediately below the root sponsor.
 
 ---
 
@@ -103,21 +99,15 @@ High unresolved multiplicity is localized immediately below the root sponsor.
 **Status:** proved recursively; finite instances computationally verified.  
 **Certainty:** medium-high.
 
-There are four-term-progression-free states with
-
 ```math
 |S_h|=\frac{9\cdot3^h-3}{2},
 \qquad
-P_h=2^h.
-```
-
-Hence
-
-```math
+P_h=2^h,
+\qquad
 P_h\asymp|S_h|^{\log_3 2}.
 ```
 
-**Consequence:** bounded, logarithmic, polylogarithmic, and sufficiently small subpower persistence bounds in terms of parent cardinality are false.
+**Consequence:** bounded, logarithmic, polylogarithmic, and sufficiently small subpower persistence bounds based only on parent cardinality are false.
 
 ---
 
@@ -125,8 +115,6 @@ P_h\asymp|S_h|^{\log_3 2}.
 
 **Status:** computer-assisted exact construction.  
 **Certainty:** high for the finite-state certificate; medium-high for the full interpretation pending review.
-
-There is an infinite exact family with
 
 ```math
 L_h=8^{h+1},
@@ -159,8 +147,6 @@ P_h\alpha_h\le C_0\left(\frac34\right)^h,
 \sum_hP_h\alpha_h\le4C_0.
 ```
 
-The scale-eight family attains the exponents.
-
 **Caveat:** this does not control contaminated backbones.
 
 ---
@@ -168,7 +154,7 @@ The scale-eight family attains the exponents.
 ## CL-009: Finite contaminated depth-five burst
 
 **Status:** exact finite computer-assisted construction.  
-**Certainty:** high for the finite certificate.
+**Certainty:** high.
 
 The scale factors are
 
@@ -197,9 +183,9 @@ W_5=\frac{273}{256},
 ## CL-010: Path-dependent exact recovery
 
 **Status:** exact finite computer-assisted construction.  
-**Certainty:** high for the finite branches.
+**Certainty:** high.
 
-The state `S_5` has no factor-two or factor-four continuation. Its smallest exact recovery enters a strongly contracting branch, but the alternative exact recovery `R_5=93476` admits the factor-four descendant `R_6=230164`.
+The state `S_5` has no factor-two or factor-four continuation. Its alternative exact recovery `R_5=93476` admits the factor-four descendant `R_6=230164`.
 
 The resulting scale pattern through `S_7` is
 
@@ -226,7 +212,7 @@ with
 \boxed{N_{7,2}=N_{7,4}=0.}
 ```
 
-The factor-four domain has `359419` disjoint candidates, covered by `352979` completion witnesses, `215` pattern-`1001` witnesses, and `6225` pattern-`0011` witnesses.
+The factor-four domain has `359419` disjoint candidates, exhausted by completion, `1001`, and `0011` witnesses.
 
 ---
 
@@ -235,15 +221,13 @@ The factor-four domain has `359419` disjoint candidates, covered by `352979` com
 **Status:** exact finite construction.  
 **Certainty:** high.
 
-The first valid exact factor-eight continuation from `S_7` is
-
 ```math
-R_7=2097164.
-```
-
-It produces `|S_8|=29523`, `P_8=256`, and
-
-```math
+R_7=2097164,
+\qquad
+|S_8|=29523,
+\qquad
+P_8=256,
+\qquad
 W_8=\frac{29523}{32768}.
 ```
 
@@ -258,7 +242,7 @@ W_8=\frac{29523}{32768}.
 \boxed{N_{8,2}=N_{8,4}=0.}
 ```
 
-The factor-four domain has `4190292` disjoint candidates. Completion, `1001`, and bounded-memory `0011` witnesses exhaust the domain.
+The factor-four domain has `4190292` disjoint candidates. Completion, `1001`, and bounded-memory `0011` witnesses exhaust it.
 
 ---
 
@@ -267,15 +251,13 @@ The factor-four domain has `4190292` disjoint candidates. Completion, `1001`, an
 **Status:** exact finite construction.  
 **Certainty:** high.
 
-The first valid exact factor-eight continuation is
-
 ```math
-R_8=16777217.
-```
-
-It produces `|S_9|=88572`, `P_9=512`, and
-
-```math
+R_8=16777217,
+\qquad
+|S_9|=88572,
+\qquad
+P_9=512,
+\qquad
 W_9=\frac{22143}{32768}.
 ```
 
@@ -284,7 +266,7 @@ W_9=\frac{22143}{32768}.
 ## CL-015: Complete cheap-extension exclusion from `S_9`
 
 **Status:** exact finite theorem with structural witnesses.  
-**Certainty:** high for the recorded domains and hashes.
+**Certainty:** high.
 
 ```math
 \boxed{N_{9,2}=N_{9,4}=0.}
@@ -299,13 +281,9 @@ The factor-four domain has `39459384` disjoint candidates. Completion witnesses 
 **Status:** exact finite construction.  
 **Certainty:** high.
 
-The first valid exact factor-eight continuation is
-
 ```math
-R_9=134217729.
+R_9=134217729,
 ```
-
-It produces
 
 ```math
 |S_{10}|=265719,
@@ -315,7 +293,7 @@ P_{10}=1024,
 W_{10}=\frac{265719}{524288}.
 ```
 
-The certified finite scale pattern is
+The finite scale pattern is
 
 ```math
 \boxed{4,8,4,4,8,4,8,8,8.}
@@ -328,7 +306,7 @@ The certified finite scale pattern is
 **Status:** elementary theorem with exact rational pattern verification.  
 **Certainty:** high internally.
 
-Let `S subseteq[L,7L/4)`, `A={0} union S`, and `2L<R<=65L/32`. If `A` is four-term-progression-free, every nontrivial four-term progression in
+Let `S subseteq[L,7L/4)`, `A={0} union S`, and `2L<R<=65L/32`. If `A` is four-term-progression-free, every new four-term progression in
 
 ```math
 A\cup(A+R)\cup(A+2R)
@@ -338,14 +316,6 @@ comes from either:
 
 1. a three-term progression in `S` completed at `R`; or
 2. `R` even with `R/2 in S`.
-
-The exact verifier leaves only the layer patterns
-
-```text
-0000,1111,2222
-0001,0012,1112
-0011,0112,1122.
-```
 
 ---
 
@@ -360,7 +330,7 @@ For `R=2L+k`, `0<k<=L/32`, and `S'=8L+(({0} union S)+{0,R,2R})`, every three-ter
 2L+(c-3k).
 ```
 
-The converse lift also holds, as does the left-completion version.
+The converse and left-completion versions also hold.
 
 ---
 
@@ -384,40 +354,16 @@ L_{h+1}=8L_h,
 \qquad
 k_{h+1}=4k_h,
 \qquad
-R_h=2L_h+k_h,
+R_h=2L_h+k_h.
 ```
 
-and use exact three-translate reproduction.
-
-A finite `S_8` completion certificate has `2772873` completion coordinates with maximum `17038008`, while
+Every scheduled tail state is four-term-progression-free and exact-backbone. For `n>=0`,
 
 ```math
-2L_8+D=17039359.
-```
-
-Completion descent and a persistent lower gap therefore exclude both top-layer obstructions forever. Every tail state is four-term-progression-free and exact-backbone.
-
-For `n>=0`,
-
-```math
-k_{10+n}=262149\cdot4^n,
-```
-
-```math
-|S_{10+n}|=\frac{3^{12+n}-3}{2},
-\qquad
-P_{10+n}=2^{10+n},
+W_{10+n}=\frac{3^{12+n}-3}{2^{20+2n}},
 ```
 
 and
-
-```math
-\boxed{
-W_{10+n}=\frac{3^{12+n}-3}{2^{20+2n}}.
-}
-```
-
-The tail is summable:
 
 ```math
 \boxed{
@@ -425,9 +371,121 @@ The tail is summable:
 }
 ```
 
-**Consequence:** the recorded contaminated branch has an explicit infinite summable compensation basin.
-
 **Caveat:** this proves one continuation path is summable; it does not control all descendants or the union across shells.
+
+---
+
+## CL-020: General exact-tail basin criterion
+
+**Status:** elementary theorem derived from CL-017 and CL-018.  
+**Certainty:** high internally.
+
+Suppose
+
+```math
+S\subseteq[L,7L/4),
+\qquad
+0<k\le L/32,
+```
+
+```math
+v_2(k)\equiv0\pmod2,
+```
+
+```math
+S\cap(L,L+L/8)=\varnothing,
+```
+
+and `S` has no three-term progression completed at `2L+k`.
+
+Then the recurrence
+
+```math
+L_{n+1}=8L_n,
+\qquad
+k_{n+1}=4k_n,
+\qquad
+R_n=2L_n+k_n
+```
+
+defines an infinite exact four-term-progression-free continuation.
+
+If the entry state has size `N`, replay multiplicity `P`, and scale `L`, then the exact future charge is
+
+```math
+\boxed{
+\sum_{n\ge0}W_n=\frac{4P(N+1)}L.
+}
+```
+
+**Primary reference:** `docs/exact-tail-basin-criterion.md`.
+
+---
+
+## CL-021: Depth-ten basin fan
+
+**Status:** exact finite arithmetic certificate plus CL-020.  
+**Certainty:** high.
+
+Every offset
+
+```math
+260799\le k\le1048579
+```
+
+with even `v_2(k)` is an exact-tail basin entry at the recorded `S_10`. There are exactly
+
+```math
+\boxed{525189}
+```
+
+such offsets. Their increasing list has SHA-256
+
+```text
+99eb9011d140b420ddf4bd2bf33b6d98d9381b36e12089e231eda8323c548e60
+```
+
+and each tail has terminal charge `33215/16384`.
+
+**Caveat:** these are distinct scheduled exact tails, not a classification of every `S_10` descendant.
+
+---
+
+## CL-022: Exact-tail Bellman potential
+
+**Status:** elementary algebraic theorem.  
+**Certainty:** high.
+
+For constant exact scale factor `c>6`, size recurrence `N'=3(N+1)`, replay recurrence `P'=2P`, and scale recurrence `L'=cL`, the unique affine future-cost function satisfying
+
+```math
+\mathfrak B_c(N,P,L)
+=
+\frac{PN}{L}
++
+\mathfrak B_c(N',P',L')
+```
+
+is
+
+```math
+\boxed{
+\mathfrak B_c(N,P,L)
+=
+\frac{cP}{(c-6)L}
+\left(N+\frac{6}{c-2}\right).
+}
+```
+
+At `c=8`,
+
+```math
+\boxed{
+\mathfrak B_8(N,P,L)=\frac{4P(N+1)}L.
+}
+```
+
+This is the exact absorbing value for a certified factor-eight basin node.
 
 ---
 
@@ -442,14 +500,14 @@ Do not use the following without new hypotheses:
 5. contraction over every block of four or six outer steps;
 6. a universal two-generation recovery theorem after an exact factor-eight step;
 7. extrapolating one recovery branch to every recovery;
-8. treating one summable infinite tail as a whole-tree theorem;
+8. treating one or many scheduled summable tails as a whole-tree theorem;
 9. recursive arguments that ignore mandatory dyadic shell resolution.
 
 ---
 
 # Open bottleneck OB-001: Whole-tree compensation
 
-One explicit contaminated branch now enters an infinite exact tail with finite total weighted density. The remaining question is
+The recorded `S_10` has `525189` certified summable exact tails and an exact absorbing terminal charge for each. The remaining question is
 
 ```math
 \boxed{
@@ -460,9 +518,10 @@ One explicit contaminated branch now enters an infinite exact tail with finite t
 Equivalent approved targets:
 
 1. prove every infinite path has long-run geometric-mean scale expansion greater than `6`;
-2. prove every path eventually enters a summable exact or near-exact basin;
-3. construct a contamination-debt potential that permits delayed release but forces repayment;
-4. control the entire continuation tree by a finite-state or spectral quotient;
-5. prove an aggregate packing theorem for overlapping replay cores.
+2. prove every path eventually enters an exact or near-exact basin;
+3. extend the Bellman potential to contaminated states and branching;
+4. construct a contamination-debt potential that permits delayed release but forces repayment;
+5. control the continuation tree by a finite-state or spectral quotient;
+6. prove an aggregate packing theorem for overlapping replay cores.
 
 No current theorem closes this gap. The full Erdős problem remains unresolved.

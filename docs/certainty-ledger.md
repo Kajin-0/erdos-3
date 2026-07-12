@@ -66,8 +66,6 @@ Children must be resolved into standard dyadic shells. For `p>=1`,
 \sum_{u\text{ output of }a}u^p\le2^{1-p}a^p.
 ```
 
-The analogous full-tree bound holds.
-
 ---
 
 ## CL-005: Center, anchor, predecessor, and antichain compression
@@ -290,18 +288,24 @@ For `S subseteq[L,7L/4)` and `2L<R<=65L/32`, every new four-term progression in 
 
 ---
 
-## CL-018: Small-offset completion descent
+## CL-018: Extended completion descent
 
 **Status:** elementary theorem with exact rational pattern verification.  
 **Certainty:** high internally.
 
-For `R=2L+k`, a next-state completion offset `c` descends to parent offset
+For `R=2L+k`, `0<=k<=L/32`, and next state `S'=8L+(({0} union S)+{0,R,2R})`, every three-term progression in `S'` completed at `16L+c`, throughout
 
 ```math
-c-3k
+0<c\le2L,
 ```
 
-through the unique layer pattern `012`, within the certified small-offset ranges.
+descends through the unique layer pattern `012` to a progression in `S` completed at
+
+```math
+2L+(c-3k).
+```
+
+The converse lift and reflected left-completion statement also hold.
 
 ---
 
@@ -359,35 +363,46 @@ For entry size `N`, replay multiplicity `P`, and scale `L`,
 
 ---
 
-## CL-021: Complete depth-ten basin fan
+## CL-021: Complete depth-ten small-offset exact classification
 
-**Status:** exact signed-completion classification plus CL-020.  
+**Status:** exact signed-completion classification plus CL-017 through CL-020.  
 **Certainty:** high.
 
-Within the complete two-step-descent range
+In the full basin-criterion range
 
 ```math
-4\le k\le1048579,
+4\le k\le L_{10}/32=16777216,
 ```
 
-there are `699051` offsets with even `v_2(k)`. Exactly `54999` are blocked by a coordinate in the complete signed `S_8` completion set. Therefore
+there are `11184809` offsets with even `v_2(k)`. Two exact descents identify the corresponding seed completion coordinate as
 
 ```math
-\boxed{644052}
+2L_8+(k-6).
 ```
 
-offsets are exact-tail basin entries at `S_10`.
+Exactly `54999` offsets are blocked by the complete signed `S_8` completion set and therefore lift explicit four-term-progression obstructions. The remaining
 
-The first and last valid offsets are `4` and `1048579`. Their increasing comma-terminated list has
+```math
+\boxed{11129810}
+```
+
+offsets are valid exact-tail basin entries.
+
+The valid-list hashes are
 
 ```text
-FNV-64  5e1b143b6a59b345
-SHA-256 22daeb2366e5e3324b7e835c61adb34f8e08c0ae203b86420c941f53991069b4
+FNV-64  2a52c71cddac07f5
+SHA-256 9cbbd28aab4db0a74d48c4a8eaf95d18b3854e56bd7138123734eaefe5b2d384
 ```
 
-Each tail has terminal charge `33215/16384`.
+Each valid offset produces a distinct exact summable tail with terminal charge `33215/16384`.
 
-The earlier Python verifier certifies the valid upper-interval subfamily of `525189` offsets. It is a correct lower subfamily, not the complete fan.
+Nested audit subfamilies:
+
+```text
+4..1048579:       644052 valid
+260799..1048579:  525189 valid
+```
 
 ---
 

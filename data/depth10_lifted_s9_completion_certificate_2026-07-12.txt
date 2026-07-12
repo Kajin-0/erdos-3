@@ -1,0 +1,111 @@
+DEPTH-TEN LIFTED S9 COMPLETION CERTIFICATE
+Date: 2026-07-12
+
+STATUS
+Exact finite structural-witness reduction for the recorded S10 factor-four domain.
+
+DEPENDENCIES
+1. Certified S9 state and S9 completion support.
+2. Exact recursive construction of S10 from three translates of A9={0} union S9.
+3. Exact S10 positive-difference domain certificate.
+
+S9 COMPLETION OBJECTS
+Distinct signed 3-AP completion coordinates:
+
+  13,923,661
+
+Completion coordinate range:
+
+  50,331,647 through 134,478,523
+
+Distinct absolute completion-to-base differences:
+
+  71,129,286
+
+LIFTING IDENTITY
+Let Q=R9=134,217,729. If d is an absolute completion-to-base
+difference in A9, then completions and base points placed in any two of the
+three embedded A9 copies in S10 produce differences
+
+  |d + mQ| and |d - mQ|,  m=0,1,2.
+
+Embedded completion coordinates compared with the global anchor zero are also
+included.
+
+LIFTED SUPPORT
+Distinct lifted completion-to-base differences:
+
+  354,838,701
+
+S10 FACTOR-FOUR DOMAIN
+Maximum separation:
+
+  613,454,687
+
+Sponsor-compatible separations:
+
+  408,969,792
+
+Layer-disjoint candidates:
+
+  348,012,826
+
+INHERITED LOWER INTERVAL
+The complete factor-two inheritance theorem excludes every candidate with
+
+  R <= 76,583,775.
+
+This interval contains
+
+  33,026,376
+
+layer-disjoint candidates. The endpoint R=76,583,776 is not sponsor-compatible
+because v2(R)=5.
+
+GENUINELY NEW DOMAIN
+
+  348,012,826 - 33,026,376 = 314,986,450
+
+LIFTED COMPLETION COVERAGE IN THE NEW DOMAIN
+
+  137,142,200
+
+NEW RESIDUAL
+
+  314,986,450 - 137,142,200 = 177,844,250
+
+First residual separation:
+
+  97,474,324
+
+Last residual separation:
+
+  613,454,687
+
+Ordered residual-list FNV-64:
+
+  00369694f2d70526
+
+TOTAL COMPLETION COVERAGE
+Across the full S10 factor-four disjoint domain, the lifted support covers
+
+  170,164,054
+
+candidates. Of these, 4,522 lie in the lower inherited interval and are already
+excluded independently by the S9 factor-four theorem.
+
+CONCLUSION
+Combining the factor-two inheritance theorem and the lifted S9 completion
+support gives a complete factor-four exclusion through
+
+  R < 97,474,324.
+
+The unresolved genuinely new factor-four domain has exactly
+
+  177,844,250
+
+layer-disjoint candidates.
+
+REPRODUCTION
+
+  bash src/run_verify_depth10_lifted_s9_completion.sh

@@ -1,0 +1,92 @@
+Complete depth-eight cheap-extension exclusion certificate
+Date: 2026-07-11
+
+State:
+S8 shell = [8388608,16777216)
+S8 size = 29523
+S8 maximum = 14604604
+S8 FNV64 = 023db79dd7cbf62b
+
+Factor two domain:
+maximum R = 1086305
+sponsor-compatible candidates = 724204
+disjoint-layer candidates = 172448
+completion witnesses = 172448
+conclusion: N_8_2 = 0
+
+Factor four domain:
+maximum R = 9474913
+sponsor-compatible candidates = 6316609
+disjoint-layer candidates = 4190292
+completion witnesses = 3442176
+remaining after completion = 748116
+pattern 1001 witnesses = 73
+remaining after pattern 1001 = 748043
+post-1001 FNV64 = b8ddbb02d22c7ca4
+
+Pattern 0011 phase 1:
+processed groups = 289
+pair operations = 2000000000
+remaining = 27182
+remaining SHA256 = dfee570e7ec3aed6c966aceb981385b2292698682ebb77d7cb6df2ffff50f252
+remaining FNV64 = 7a7433cf08775279
+
+Pattern 0011 phase 2:
+processed groups = 900
+pair operations = 2000000000
+remaining = 1266
+remaining SHA256 = e1691f5baa7e3618cf7e039ccea50e452229bd6e2334ad7e27eec0d4a8981c21
+remaining FNV64 = 2cd2e22c6768791d
+
+Pattern 0011 phase 3:
+processed groups = 1886
+pair operations = 2000000000
+remaining = 45
+remaining SHA256 = dd5fb4a0faa9b5d9ab77262546eab367691de85fd75f1aab9c4ee9012a50fb3b
+remaining FNV64 = ec113295ef522398
+
+Pattern 0011 phase 4:
+processed groups = 105273
+pair operations = 2000000000
+remaining = 4
+remaining SHA256 = a2c57ee3707718aa797414b16df5fe4be47bd51b39331ff5b152651caf720b8c
+remaining FNV64 = 1c87eedd7756042d
+
+Pattern 0011 phase 5:
+processed groups = 128084
+pair operations = 5000000000
+remaining = 3
+remaining values = 5353028,5353089,5353229
+remaining SHA256 = 4a3ffd8cf9ec69fbf01156b375831f69e888946596e3c64d1c98ab81aac8ff43
+remaining FNV64 = 4ca400f49b2c73f1
+
+Explicit terminal witnesses:
+R = 5353028
+4-AP = 10161822,11951729,13741636,15531543
+base points = 10161822,11951729,8388608,10178515
+layer pattern = 0011
+
+R = 5353089
+4-AP = 8388608,12029053,15669498,19309943
+base points = 8388608,12029053,10316409,13956854
+layer pattern = 0011
+
+R = 5353229
+4-AP = 12035410,13893656,15751902,17610148
+base points = 12035410,13893656,10398673,12256919
+layer pattern = 0011
+
+Final conclusions:
+N_8_2 = 0
+N_8_4 = 0
+Every continuation of this recorded state in the stated model terminates or has dyadic scale factor at least 8.
+
+Weighted-density consequence for any S9:
+W9 <= 22143/32768
+W9/W8 <= 7381/9841
+W9/W5 <= 7381/11648
+
+Verifier:
+src/verify_depth8_no_cheap_extension.cpp
+Driver:
+src/run_verify_depth8_no_cheap_extension.sh

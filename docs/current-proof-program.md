@@ -210,7 +210,7 @@ and
 
 ---
 
-## 5. Infinite exact basin from `S_10`
+## 5. Infinite exact basin and general criterion
 
 The top-layer reduction lemma says that, for
 
@@ -225,53 +225,19 @@ every new four-term progression in three translates comes from either:
 1. a three-term progression in `S` completed at `R`; or
 2. `R` even with `R/2 in S`.
 
-The small-offset completion-descent lemma states that, for `R=2L+k`, a completion offset `c` in the next state descends to offset
+For `R=2L+k`, the completion-descent equation sends a next-state target offset `c` to parent offset
 
 ```math
-c-3k
+c-3k.
 ```
 
-in the parent.
-
-For one explicit tail from `S_10`, choose
+Exact rational enumeration shows the unique layer pattern remains `012` throughout
 
 ```math
-D=262143,
-\qquad
-k_{10}=262149.
+0<c\le2L.
 ```
 
-The recurrence
-
-```math
-L_{h+1}=8L_h,
-\qquad
-k_{h+1}=4k_h,
-\qquad
-R_h=2L_h+k_h
-```
-
-produces an infinite exact-backbone four-term-progression-free tail.
-
-For `n>=0`,
-
-```math
-W_{10+n}=\frac{3^{12+n}-3}{2^{20+2n}},
-```
-
-and
-
-```math
-\boxed{
-\sum_{n\ge0}W_{10+n}=\frac{33215}{16384}.
-}
-```
-
----
-
-## 6. General exact-tail basin criterion
-
-A state `(S,L,k,P)` is a basin entry when
+A state `(S,L,k,P)` is an exact-tail basin entry when
 
 ```math
 S\subseteq[L,7L/4),
@@ -289,7 +255,17 @@ S\cap(L,L+L/8)=\varnothing,
 
 and no three-term progression in `S` has missing completion `2L+k`.
 
-Then `L'=8L`, `k'=4k`, and `R=2L+k` define an infinite exact tail. If the entry state has size `N`, replay multiplicity `P`, and scale `L`, its exact terminal charge is
+Then
+
+```math
+L_{n+1}=8L_n,
+\qquad
+k_{n+1}=4k_n,
+\qquad
+R_n=2L_n+k_n
+```
+
+defines an infinite exact four-term-progression-free tail. If the entry state has size `N`, replay multiplicity `P`, and scale `L`, its exact terminal charge is
 
 ```math
 \boxed{
@@ -301,11 +277,21 @@ Then `L'=8L`, `k'=4k`, and `R=2L+k` define an infinite exact tail. If the entry 
 }
 ```
 
-This is a reusable absorbing-state certificate.
+For the recorded `S_10`, one explicit choice is
+
+```math
+k_{10}=262149,
+```
+
+and the resulting tail has
+
+```math
+\sum_{n\ge0}W_{10+n}=\frac{33215}{16384}.
+```
 
 ---
 
-## 7. Complete certified basin fan at `S_10`
+## 6. Complete certified basin fan at `S_10`
 
 The complete signed `S_8` completion set contains
 
@@ -313,22 +299,16 @@ The complete signed `S_8` completion set contains
 2772873
 ```
 
-coordinates. Two completion descents show that every sponsor-compatible offset in
+coordinates. The extended two-step descent gives an exact seed-completion test for every basin-criterion offset
 
 ```math
-4\le k\le1048579
-```
-
-is a candidate basin entry at `S_10`, with seed completion coordinate
-
-```math
-2L_8+(k-6).
+\boxed{4\le k\le L_{10}/32=16777216.}
 ```
 
 There are
 
 ```text
-699051
+11184809
 ```
 
 values in this range with even `v_2(k)`. Exactly
@@ -337,45 +317,51 @@ values in this range with even `v_2(k)`. Exactly
 54999
 ```
 
-are blocked by the signed `S_8` completion set. Therefore
+are blocked by the signed `S_8` completion coordinate
 
 ```math
-\boxed{644052}
+2L_8+(k-6).
 ```
 
-offsets are valid exact-tail basin entries.
+Therefore
 
-The first and last valid offsets are `4` and `1048579`. The canonical valid-list hashes are
+```math
+\boxed{11129810}
+```
+
+offsets are valid exact-tail basin entries at `S_10`.
+
+This is approximately `99.51%` of the sponsor-compatible offsets in the full criterion range. The first and last valid offsets are `4` and `16777216`. The canonical valid-list hashes are
 
 ```text
-FNV-64  5e1b143b6a59b345
-SHA-256 22daeb2366e5e3324b7e835c61adb34f8e08c0ae203b86420c941f53991069b4
+FNV-64  2a52c71cddac07f5
+SHA-256 9cbbd28aab4db0a74d48c4a8eaf95d18b3854e56bd7138123734eaefe5b2d384
 ```
 
-Each offset produces a distinct infinite exact tail with terminal charge
+Each valid offset gives a distinct infinite exact tail with terminal charge
 
 ```math
 \frac{33215}{16384}.
 ```
 
-The earlier Python verifier certifies the simpler upper-interval subfamily
+Nested audit subfamilies remain independently verified:
 
-```math
-260799\le k\le1048579,
+```text
+4..1048579:       644052 valid offsets
+260799..1048579:  525189 valid offsets
 ```
-
-containing `525189` tails. This remains a correct independent subfamily audit; the full C++ verifier certifies the complete `644052`-tail fan.
 
 **Primary references:**
 
+- `docs/extended-completion-descent.md`;
 - `docs/depth-ten-exact-tail-basin-fan.md`;
+- `src/verify_exact_tail_pattern_lemmas.py`;
 - `src/verify_depth10_full_exact_tail_basin_fan.cpp`;
-- `src/verify_depth10_exact_tail_basin_fan.py`;
 - `data/depth10_exact_tail_basin_fan_certificate_2026-07-12.txt`.
 
 ---
 
-## 8. Bellman potential and scale-word debt
+## 7. Bellman potential and scale-word debt
 
 For a constant exact scale factor `c>6`, the unique affine future-cost function is
 
@@ -432,7 +418,7 @@ Exact repayment consequences:
 
 ---
 
-## 9. Repayment parsing criterion
+## 8. Repayment parsing criterion
 
 If, from state size at least `9`, a scale word can be partitioned into consecutive blocks of the forms
 
@@ -458,7 +444,7 @@ This converts whole-path summability into a geometric debt-token matching proble
 
 ---
 
-## 10. Cheap-step geometry
+## 9. Cheap-step geometry
 
 For an anchored state
 
@@ -482,36 +468,16 @@ A three-translate step with factor `c` and separation `R` satisfies
 
 Consequences:
 
-### Factor two
-
-```math
-T'=T-2R,
-```
-
-and the backbone imports at least
-
-```math
-|S\cap[L,2L-R)|
-```
-
-prefix points as contamination.
-
-### Factor four
-
-```math
-T'=T+2(L-R).
-```
-
-The value `R=L` is impossible because it creates `0,R,2R,3R`.
-
-- If `R>L`, top slack decreases by at least `2` and the anchor `R` is contamination.
-- If `R<L`, slack is replenished only by importing the prefix `S\cap[L,2L-R)` into the backbone.
+- factor `2`: strict slack consumption and imported lower-prefix contamination;
+- factor `4`, `R>L`: strict slack consumption and anchor contamination;
+- factor `4`, `R<L`: slack replenishment only through imported prefix contamination;
+- `R=L` is impossible because it creates `0,R,2R,3R`.
 
 Every cheap Bellman debt therefore carries a geometric certificate: slack consumption or imported prefix contamination.
 
 ---
 
-## 11. Exact `S_10` escape domains
+## 10. Exact `S_10` escape domains
 
 The recursive positive-difference support of `S_10` gives the complete layer-disjoint candidate domains.
 
@@ -537,7 +503,7 @@ These are domain counts only. Complete four-term-progression exclusion or constr
 
 ---
 
-## 12. Current unresolved problem: whole-tree compensation
+## 11. Current unresolved problem: whole-tree compensation
 
 The active target is
 

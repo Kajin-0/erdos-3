@@ -249,7 +249,7 @@ The finite scale pattern is `4,8,4,4,8,4,8,8,8`.
 **Status:** elementary theorem with exact rational pattern verification.  
 **Certainty:** high internally.
 
-In the certified exact-tail geometry, every new four-term progression in three translates comes from either a completion at `R` or the half-separation point `R/2` inside the state. The same nine layer patterns remain complete in every region used through CL-030.
+In every certified exact-tail geometry used through CL-030, each new four-term progression in three translates comes from either a completion at `R` or the half-separation point `R/2` inside the state.
 
 ---
 
@@ -267,7 +267,7 @@ For `R=2L+k`, child completion targets descend through the unique layer pattern 
 **Status:** exact infinite theorem with finite seed certificate.  
 **Certainty:** high internally; awaiting independent review.
 
-For one explicit offset schedule, `S_10` has an infinite exact four-term-progression-free tail with
+For one explicit offset schedule,
 
 ```math
 \sum_{n\ge0}W_{10+n}=\frac{33215}{16384}.
@@ -280,11 +280,7 @@ For one explicit offset schedule, `S_10` has an infinite exact four-term-progres
 **Status:** elementary theorem.  
 **Certainty:** high internally.
 
-If `S subseteq [L,7L/4)`, `0<k<=L/32`, and the first exact step is valid, then `L'=8L`, `k'=4k` defines an infinite exact tail. Its charge is
-
-```math
-\frac{4P(N+1)}L.
-```
+If `S subseteq [L,7L/4)`, `0<k<=L/32`, and the first exact step is valid, then `L'=8L`, `k'=4k` defines an infinite exact tail. Its charge is `4P(N+1)/L`.
 
 ---
 
@@ -379,8 +375,6 @@ layer-disjoint        348012826
 FNV-64                 ae1d9e1ec77b2dfb
 ```
 
-No complete exclusion or escape construction is yet claimed.
-
 ---
 
 ## CL-027: Complete exact factor-eight classification from `S_10`
@@ -388,7 +382,7 @@ No complete exclusion or escape construction is yet claimed.
 **Status:** exact finite classification.  
 **Certainty:** high.
 
-For `1<=k<=613454687`, there are `408969792` sponsor-compatible positive offsets. The first-step obstruction split is
+For `1<=k<=613454687`, the first-step obstruction split is
 
 ```text
 completion-blocked       54999
@@ -414,19 +408,7 @@ For `S subseteq [L,7L/4)` and `0<k<L/2`, a valid first exact step implies an inf
 **Status:** exact finite obstruction classification plus elementary infinite induction.  
 **Certainty:** high internally; awaiting independent review.
 
-Across the complete fitting exact range, only two additional scheduled half tests occur:
-
-```math
-2k\in S_{10}
-```
-
-or
-
-```math
-8(k-L_{10})\in S_{10}.
-```
-
-Only `88608` already-valid exact children fail the unmodified schedule. Thus `408767151` valid exact children enter infinite tails without repair.
+Across the complete fitting exact range, only `88608` already-valid exact children fail the unmodified schedule. Thus `408767151` valid exact children enter infinite tails without repair.
 
 ---
 
@@ -435,28 +417,7 @@ Only `88608` already-valid exact children fail the unmodified schedule. Thus `40
 **Status:** exact finite repair classification plus elementary infinite induction.  
 **Certainty:** high internally; awaiting independent review.
 
-The `88606` valid second-step failures are repaired by replacing
-
-```math
-4k
-```
-
-with
-
-```math
-4k+1.
-```
-
-The repaired offset is odd, so no half obstruction exists. Exact rational enumeration finds no feasible completion pattern, and the repaired branch enters the invariant basin after one additional exact step.
-
-The only two third-step failures,
-
-```text
-603979776
-613416960
-```
-
-are repaired by replacing `16k` with `16k+1`; the same proof applies.
+The `88606` valid second-step failures are repaired by `4k -> 4k+1`. The only two third-step failures, `603979776` and `613416960`, are repaired by `16k -> 16k+1`.
 
 Therefore
 
@@ -468,17 +429,59 @@ Therefore
 }
 ```
 
-Every valid positive exact factor-eight child of `S_10` has a certified infinite exact four-term-progression-free continuation. Every tail has charge
+Every valid positive exact factor-eight child of `S_10` has a certified infinite exact four-term-progression-free continuation. Every tail has charge `33215/16384`.
+
+---
+
+## CL-031: Complete factor-two inheritance exclusion from `S_10`
+
+**Status:** exact embedding theorem using the certified depth-nine factor-four exclusion.  
+**Certainty:** high.
+
+The depth-ten construction contains
 
 ```math
-\boxed{33215/16384.}
+L_{10}+(\{0\}\cup S_9)\subseteq S_{10}.
 ```
+
+Hence, for every separation `R`,
+
+```math
+L_{10}+G_9(R)\subseteq G_{10}(R).
+```
+
+The factor-four fit endpoint from `S_9` is `76583776`; the factor-two fit endpoint from `S_10` is `76583775`. Therefore every sponsor-compatible layer-disjoint factor-two candidate from `S_10` is an embedded candidate in the complete `S_9` factor-four domain.
+
+Since
+
+```math
+N_{9,4}=0,
+```
+
+one obtains
+
+```math
+\boxed{N_{10,2}=0.}
+```
+
+Consequences:
+
+1. every continuation from the recorded `S_10` terminates or has scale factor at least `4`;
+2. factor-two Bellman debt is absent from the tree rooted at this state;
+3. the inherited interval removes `33026376` layer-disjoint candidates from the `S_10` factor-four frontier;
+4. the genuinely new factor-four domain has
+
+```math
+\boxed{314986450}
+```
+
+layer-disjoint candidates.
 
 **Primary references:**
 
-- `docs/complete-exact-child-tail-fan.md`;
-- `src/verify_complete_exact_child_tail_fan.py`;
-- `data/complete_exact_child_tail_fan_certificate_2026-07-12.txt`.
+- `docs/depth-ten-factor-two-inheritance-exclusion.md`;
+- `src/verify_depth10_factor2_inheritance.py`;
+- `data/depth10_factor2_inheritance_certificate_2026-07-12.txt`.
 
 ---
 
@@ -519,9 +522,9 @@ The unresolved theorem is
 }
 ```
 
-The exact factor-eight fan from `S_10` is completely classified. Approved targets:
+The exact factor-eight fan and factor-two domain from the recorded `S_10` are completely classified. Approved targets:
 
-1. classify the exact `S_10` factor-two and factor-four escape domains;
+1. classify the `314986450` genuinely new factor-four candidates from `S_10`;
 2. prove every path eventually enters an exact or near-exact basin;
 3. prove every non-basin scale word admits a debt-repayment parsing;
 4. extend the Bellman potential by a contamination reserve dominating all children;

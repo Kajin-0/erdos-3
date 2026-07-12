@@ -1,31 +1,36 @@
 depth-ten exact-tail basin fan
-status=exact finite arithmetic certificate plus exact-tail basin theorem
+status=complete exact two-step-descent classification within the certified small-offset range
 
 L8=8388608
 L9=67108864
 L10=536870912
-S8_completion_max=17038008
-D_min=260793
-k_min=260799
-k_max=1048579
-valid_offset_count=525189
-offset_sha256=99eb9011d140b420ddf4bd2bf33b6d98d9381b36e12089e231eda8323c548e60
+S8_completion_count=2772873
 
-v2_class_0=393891
-v2_class_2=98472
-v2_class_4=24618
-v2_class_6=6155
-v2_class_8=1539
-v2_class_10=385
-v2_class_12=96
-v2_class_14=24
-v2_class_16=6
+full_offset_range_min=4
+full_offset_range_max=1048579
+sponsor_compatible_offsets=699051
+blocked_by_S8_completion=54999
+valid_basin_offsets=644052
+valid_offset_fnv64=5e1b143b6a59b345
+valid_offset_sha256=22daeb2366e5e3324b7e835c61adb34f8e08c0ae203b86420c941f53991069b4
+first_valid_offset=4
+last_valid_offset=1048579
+
+v2_class_0=483016
+v2_class_2=120732
+v2_class_4=30191
+v2_class_6=7584
+v2_class_8=1892
+v2_class_10=472
+v2_class_12=123
+v2_class_14=31
+v2_class_16=8
 v2_class_18=2
 v2_class_20=1
 
 for_every_valid_k:
-D=k-6
-2*L8+D>S8_completion_max
+seed_completion_coordinate=2*L8+(k-6)
+seed_completion_coordinate is absent from the complete signed S8 completion set
 0<k<=L9/8
 0<k-3<=L8/8
 0<k<=L10/32
@@ -37,4 +42,12 @@ R_n=2*L_n+k_n
 L_(n+1)=8*L_n
 
 terminal_charge=4*1024*(265719+1)/536870912=33215/16384
-scope=525189 distinct scheduled infinite exact tails from the recorded S10; not all descendants
+
+lightweight_subfamily_audit:
+range=260799..1048579
+valid_offset_count=525189
+offset_sha256=99eb9011d140b420ddf4bd2bf33b6d98d9381b36e12089e231eda8323c548e60
+verifier=src/verify_depth10_exact_tail_basin_fan.py
+
+full_verifier=src/verify_depth10_full_exact_tail_basin_fan.cpp
+scope=644052 distinct scheduled infinite exact tails from the recorded S10; not a classification of every descendant

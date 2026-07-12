@@ -1,0 +1,25 @@
+depth-ten cheap continuation candidate domains
+status=exact finite domain certificate; no four-term-progression exclusion claimed
+
+S10_scale=536870912
+S10_size=265719
+S10_max=920574272
+S10_fnv64=405b941a1f8b2580
+
+factor2_max_R=76583775
+factor2_sponsor_candidates=51055851
+factor2_disjoint_candidates=33026376
+factor2_disjoint_fnv64=59cfbc6761c6224d
+
+factor4_max_R=613454687
+factor4_sponsor_candidates=408969792
+factor4_disjoint_candidates=348012826
+factor4_disjoint_fnv64=ae1d9e1ec77b2dfb
+
+audit_S9_factor2_sponsor=6316608
+audit_S9_factor2_disjoint=2967413
+audit_S9_factor4_sponsor=51055851
+audit_S9_factor4_disjoint=39459384
+
+method=build A8 difference support directly; lift recursively through exact three-translate S9 and S10 structures; add zero-to-state differences; require even v2(R), fit, and neither R nor 2R in positive difference support
+scope=domain only; candidate counts do not establish validity or invalidity

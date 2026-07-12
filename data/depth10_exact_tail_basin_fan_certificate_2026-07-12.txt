@@ -1,39 +1,40 @@
 depth-ten exact-tail basin fan
-status=complete exact two-step-descent classification within the certified small-offset range
+status=complete exact classification across the full basin-criterion range
 
 L8=8388608
 L9=67108864
 L10=536870912
 S8_completion_count=2772873
 
+extended_completion_descent_target_range=0<c<=2L
 full_offset_range_min=4
-full_offset_range_max=1048579
-sponsor_compatible_offsets=699051
+full_offset_range_max=16777216
+sponsor_compatible_offsets=11184809
 blocked_by_S8_completion=54999
-valid_basin_offsets=644052
-valid_offset_fnv64=5e1b143b6a59b345
-valid_offset_sha256=22daeb2366e5e3324b7e835c61adb34f8e08c0ae203b86420c941f53991069b4
+valid_basin_offsets=11129810
+valid_offset_fnv64=2a52c71cddac07f5
+valid_offset_sha256=9cbbd28aab4db0a74d48c4a8eaf95d18b3854e56bd7138123734eaefe5b2d384
 first_valid_offset=4
-last_valid_offset=1048579
+last_valid_offset=16777216
 
-v2_class_0=483016
-v2_class_2=120732
-v2_class_4=30191
-v2_class_6=7584
-v2_class_8=1892
-v2_class_10=472
-v2_class_12=123
-v2_class_14=31
-v2_class_16=8
-v2_class_18=2
-v2_class_20=1
+v2_class_0=8347334
+v2_class_2=2086812
+v2_class_4=521711
+v2_class_6=130464
+v2_class_8=32612
+v2_class_10=8152
+v2_class_12=2043
+v2_class_14=511
+v2_class_16=128
+v2_class_18=32
+v2_class_20=8
+v2_class_22=2
+v2_class_24=1
 
 for_every_valid_k:
 seed_completion_coordinate=2*L8+(k-6)
 seed_completion_coordinate is absent from the complete signed S8 completion set
-0<k<=L9/8
-0<k-3<=L8/8
-0<k<=L10/32
+4<=k<=L10/32
 v2(k) is even
 
 recurrence:
@@ -43,11 +44,20 @@ L_(n+1)=8*L_n
 
 terminal_charge=4*1024*(265719+1)/536870912=33215/16384
 
-lightweight_subfamily_audit:
+intermediate_full_signed_fan:
+range=4..1048579
+sponsor_compatible=699051
+blocked=54999
+valid=644052
+FNV64=5e1b143b6a59b345
+SHA256=22daeb2366e5e3324b7e835c61adb34f8e08c0ae203b86420c941f53991069b4
+
+lightweight_upper_interval_subfamily:
 range=260799..1048579
-valid_offset_count=525189
-offset_sha256=99eb9011d140b420ddf4bd2bf33b6d98d9381b36e12089e231eda8323c548e60
+valid=525189
+SHA256=99eb9011d140b420ddf4bd2bf33b6d98d9381b36e12089e231eda8323c548e60
 verifier=src/verify_depth10_exact_tail_basin_fan.py
 
 full_verifier=src/verify_depth10_full_exact_tail_basin_fan.cpp
-scope=644052 distinct scheduled infinite exact tails from the recorded S10; not a classification of every descendant
+pattern_verifier=src/verify_exact_tail_pattern_lemmas.py
+scope=11129810 distinct scheduled infinite exact tails from recorded S10; not a classification of every descendant

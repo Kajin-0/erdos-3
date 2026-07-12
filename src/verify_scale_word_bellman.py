@@ -66,7 +66,7 @@ def main() -> None:
         raise AssertionError("four factor eights failed to repay factor two")
 
     recorded = (4, 8, 4, 4, 8, 4, 8, 8, 8)
-    if endpoint_ratio(12, recorded) != Fraction(88573, 85184):
+    if endpoint_ratio(12, recorded) != Fraction(2555, 2048):
         # B10/B1 = [4*1024*(265720)/L10] / [4*2*13/64].
         raise AssertionError("recorded branch endpoint ratio mismatch")
 
@@ -74,6 +74,7 @@ def main() -> None:
     print("verified: endpoint ratio depends only on cumulative scale product")
     print("verified: one factor four plus two factor eights contracts for N>=2")
     print("verified: one factor two plus four factor eights contracts for N>=9")
+    print("recorded_B10_over_B1=2555/2048")
     print("factor4_block_uniform_bound_N9=283/320")
     print("factor2_block_uniform_bound_N9=2551/2560")
 

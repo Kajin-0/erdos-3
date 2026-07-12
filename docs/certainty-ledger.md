@@ -24,13 +24,7 @@ divergence of `sum_{n in A}1/n` is equivalent up to constants to `sum_j alpha_j 
 **Status:** proved in repository.  
 **Certainty:** medium-high internally.
 
-Coordinated deletion removes `K=|D|-s` sponsors and leaves a three-term-progression-free residual with `s<=r_3(N)`. For `m=min D`,
-
-```math
-\mathcal B(D)=\{d-m:d\in D,\ d>m\}
-```
-
-is four-term-progression-free, lies below `N`, has size `|D|-1`, and contracts associated labels by at least one half.
+Coordinated deletion leaves a three-term-progression-free residual of size at most `r_3(N)`. The minimum-translation backbone is four-term-progression-free, has size `|D|-1`, lies below `N`, and contracts associated labels by at least one half.
 
 ---
 
@@ -276,15 +270,17 @@ The finite scale pattern is
 
 ---
 
-## CL-017: Top-layer reduction lemma
+## CL-017: Top-layer reduction
 
 **Status:** elementary theorem with exact rational pattern verification.  
 **Certainty:** high internally.
 
-For `S subseteq[L,7L/4)` and `2L<R<=65L/32`, every new four-term progression in three translates comes from either:
+In the certified exact-tail geometry, every new four-term progression in three translates comes from either:
 
-1. a three-term progression in `S` completed at `R`; or
-2. `R` even with `R/2 in S`.
+1. a three-term progression completed at `R`; or
+2. `R` even with `R/2` inside the state.
+
+The same nine layer patterns remain complete across the full fitting exact factor-eight range of the recorded `S_10`.
 
 ---
 
@@ -293,19 +289,19 @@ For `S subseteq[L,7L/4)` and `2L<R<=65L/32`, every new four-term progression in 
 **Status:** elementary theorem with exact rational pattern verification.  
 **Certainty:** high internally.
 
-For `R=2L+k`, `0<=k<=L/32`, and next state `S'=8L+(({0} union S)+{0,R,2R})`, every three-term progression in `S'` completed at `16L+c`, throughout
+For `R=2L+k`, `0<=k<=L/32`, every three-term progression in the next exact state completed at `16L+c`, throughout
 
 ```math
-0<c\le2L,
+0<c\le4L,
 ```
 
-descends through the unique layer pattern `012` to a progression in `S` completed at
+descends through the unique layer pattern `012` to a progression in the parent completed at
 
 ```math
 2L+(c-3k).
 ```
 
-The converse lift and reflected left-completion statement also hold.
+The converse lift and reflected statement also hold.
 
 ---
 
@@ -363,46 +359,33 @@ For entry size `N`, replay multiplicity `P`, and scale `L`,
 
 ---
 
-## CL-021: Complete depth-ten small-offset exact classification
+## CL-021: Complete depth-ten small-offset basin classification
 
 **Status:** exact signed-completion classification plus CL-017 through CL-020.  
 **Certainty:** high.
 
-In the full basin-criterion range
+In
 
 ```math
 4\le k\le L_{10}/32=16777216,
 ```
 
-there are `11184809` offsets with even `v_2(k)`. Two exact descents identify the corresponding seed completion coordinate as
-
-```math
-2L_8+(k-6).
-```
-
-Exactly `54999` offsets are blocked by the complete signed `S_8` completion set and therefore lift explicit four-term-progression obstructions. The remaining
+there are `11184809` sponsor-compatible offsets. Exactly `54999` lift completion obstructions from the complete signed `S_8` completion set. The remaining
 
 ```math
 \boxed{11129810}
 ```
 
-offsets are valid exact-tail basin entries.
+offsets are exact-tail basin entries.
 
-The valid-list hashes are
+Valid-list hashes:
 
 ```text
 FNV-64  2a52c71cddac07f5
 SHA-256 9cbbd28aab4db0a74d48c4a8eaf95d18b3854e56bd7138123734eaefe5b2d384
 ```
 
-Each valid offset produces a distinct exact summable tail with terminal charge `33215/16384`.
-
-Nested audit subfamilies:
-
-```text
-4..1048579:       644052 valid
-260799..1048579:  525189 valid
-```
+Each gives a distinct exact summable tail with terminal charge `33215/16384`.
 
 ---
 
@@ -503,12 +486,7 @@ a step of scale factor `c` and separation `R` satisfies
 \boxed{T'=T+(c-2)L-2R.}
 ```
 
-Consequences:
-
-- factor `2`: strict slack consumption and lower-prefix contamination;
-- factor `4`, `R>L`: strict slack consumption and anchor contamination;
-- factor `4`, `R<L`: slack replenishment only through imported prefix contamination;
-- `R=L` is impossible because it creates `0,R,2R,3R`.
+Factor-two and factor-four debt is accompanied by strict slack consumption or imported prefix contamination; `R=L` is impossible because it creates `0,R,2R,3R`.
 
 ---
 
@@ -536,6 +514,47 @@ FNV-64                 ae1d9e1ec77b2dfb
 ```
 
 **Caveat:** domain only. No complete exclusion or escape construction is claimed.
+
+---
+
+## CL-027: Complete exact factor-eight classification from `S_10`
+
+**Status:** exact finite classification using state-specific layer patterns and completion descent.  
+**Certainty:** high.
+
+For positive exact offsets
+
+```math
+1\le k\le613454687,
+\qquad
+R=2L_{10}+k,
+```
+
+there are `408969792` sponsor-compatible values.
+
+The complete obstruction split is
+
+```text
+completion-blocked       54999
+half-separation-blocked  59034
+overlap                       0
+```
+
+Therefore
+
+```math
+\boxed{408855759}
+```
+
+positive offsets give valid four-term-progression-free exact factor-eight continuations. The zero offset is invalid because `R/2=L_10` belongs to `S_10`.
+
+Obstruction union SHA-256:
+
+```text
+92614cc5ec33add8064ef0aedaf4f8fe758600b30912315bec45aa47d48c6861
+```
+
+**Caveat:** only `11129810` of these valid exact children currently carry explicit certified infinite basin tails.
 
 ---
 
@@ -583,6 +602,7 @@ Approved targets:
 3. extend the Bellman potential by a contamination reserve dominating all children;
 4. charge imported prefixes through difference export or overlap packing;
 5. construct a finite-state or spectral quotient of the pre-basin tree;
-6. classify the exact `S_10` factor-two and factor-four escape domains.
+6. classify the exact `S_10` factor-two and factor-four escape domains;
+7. classify long-run behavior of the valid exact factor-eight children outside the basin fan.
 
 No current theorem closes this gap. The full Erdős problem remains unresolved.

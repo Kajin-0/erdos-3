@@ -1,0 +1,78 @@
+Full-fitting exact-tail basin certificate
+Date: 2026-07-12
+Repository: Kajin-0/erdos-3
+
+State:
+  L10                       536870912
+  |S10|                     265719
+  min(S10)                  536870912
+  max(S10)                  920574272
+
+Complete exact factor-eight domain:
+  positive fitting offsets  1 <= k <= 613454687
+  sponsor-compatible        408969792
+  completion-blocked        54999
+  first-half-blocked        59034
+  obstruction overlap       0
+  valid exact children      408855759
+
+Pattern induction:
+  q0 = 920574272 / 536870912
+  r0 <= 613454687 / 536870912
+  q1 <= 4294967295 / 2147483648
+  r1 <= 613454687 / 1073741824
+  q2 <= 32518589819 / 17179869184
+  r2 <= 613454687 / 2147483648
+  q3 <= 248492295019 / 137438953472 < 15/8
+  r3 <= 613454687 / 4294967296 < 1/4
+
+For generations 0, 1, and 2, exact rational vertex enumeration returns:
+  top-layer patterns          the standard nine patterns only
+  scheduled descent pattern  layers 012, base pattern 111 only
+
+The third scheduled state lies in the invariant region
+  S subset [L,15L/8)
+  k/L < 1/4.
+
+Additional scheduled half-separation obstructions:
+
+Second scheduled step:
+  condition                  2k in S10
+  count                      88614
+  minimum k                  268435456
+  maximum k                  460287135
+  FNV-64                     9cbe1d4b4bf738d2
+  SHA-256                    09f3cbb9ae87bfefcdc117f8e4340f4a1c93792ccf2a6b3ccacd5f2489ccb15e
+
+Third scheduled step:
+  condition                  8(k-L10) in S10
+  offsets                    603979776, 613416960
+  count                      2
+  FNV-64                     91e961fb57e2e687
+  SHA-256                    ae93a9f5f94348348c156b29e75074a61097723d2d98bd497629c3df5a16ba4f
+
+Overlap:
+  first-half / second-half   8
+  first-half / third-half    0
+  second-half / third-half   0
+
+Additional obstructions among already-valid exact children:
+  count                      88608
+  minimum                    268435456
+  maximum                    613416960
+  FNV-64                     bd7c3b1c8c99b586
+  SHA-256                    87e998e9e425e84c934ddb9c205ab4d934cd1af9f832662e7436595a66fae122
+
+Certified infinite-tail entries:
+  408855759 - 88608 = 408767151
+
+Coverage among valid exact children:
+  exact fraction             10481209 / 10483481
+  decimal                    0.999783278092458
+  percentage                 99.9783278092458%
+
+Every certified tail has terminal charge:
+  4 P10 (|S10|+1) / L10 = 33215 / 16384.
+
+Verifier:
+  python src/verify_full_fitting_exact_tail_basin.py

@@ -38,19 +38,19 @@ A divergent four-term-progression-free candidate must satisfy
 \sum_j\alpha_j=\infty.
 ```
 
-The closing argument must therefore control the aggregate contribution of sparse dyadic blocks.
+The closing argument must control the aggregate contribution of sparse dyadic blocks.
 
 ---
 
 # 2. One-generation recursion
 
-Fix a four-term-progression-free block
+For a four-term-progression-free block
 
 ```math
-D\subseteq[N,2N).
+D\subseteq[N,2N),
 ```
 
-Coordinated side-anchor deletion removes
+coordinated side-anchor deletion removes
 
 ```math
 K=|D|-s
@@ -70,13 +70,9 @@ For `m=min D`, the minimum-translation backbone
 \{d-m:d\in D,\ d>m\}
 ```
 
-is four-term-progression-free, lies in `[1,N)`, has size `|D|-1`, and satisfies
+is four-term-progression-free, lies in `[1,N)`, has size `|D|-1`, and satisfies `d-m<=d/2`.
 
-```math
-d-m\le d/2.
-```
-
-The full middle family and backbone give the raw occurrence inequality
+The raw middle family and backbone give
 
 ```math
 \boxed{
@@ -92,9 +88,7 @@ H(\mathcal B(D))
 }
 ```
 
-Equal numerical labels are counted repeatedly.
-
-Let `Q` be the distinct selected middle steps and let `Xi_q` be the translated center-difference child for step `q`. Then
+For distinct selected middle steps `Q` and translated center-difference children `Xi_q`,
 
 ```math
 \boxed{
@@ -103,7 +97,7 @@ Let `Q` be the distinct selected middle steps and let `Xi_q` be the translated c
 }
 ```
 
-Combining these fibers with the backbone gives the strongest multiplicity-resolving inequality
+Combining the fibers with the backbone gives
 
 ```math
 \boxed{
@@ -123,16 +117,11 @@ H(\mathcal B(D))
 
 The genealogy remains binary.
 
-**Primary notes:**
-
-- `docs/minimum-translation-backbone-recursion.md`;
-- `docs/middle-multiplicity-fiber-five-thirds-recursion.md`.
-
 ---
 
-# 3. Shell interface and global multiplicity compression
+# 3. Shell interface and multiplicity compression
 
-Every child in `[1,N)` must be partitioned into standard dyadic shells before deletion is reapplied. A progression crossing shell boundaries is not a recursive terminal event.
+Every child must be partitioned into standard dyadic shells before deletion is reapplied. A progression crossing shell boundaries is not a recursive terminal event.
 
 Every parent creates at most two retained outputs, each at most half its label. Hence, for `p>=1`,
 
@@ -150,12 +139,11 @@ Across the full tree,
 \boxed{
 \sum_q\mu(q)q^p
 \le
-2^{1-p}
-\sum_{a\text{ root}}a^p.
+2^{1-p}\sum_{a\text{ root}}a^p.
 }
 ```
 
-Repeated terminal labels are compressed by lifted-center layers, root-anchor layers, and predecessor-anchor layers. Copies with one fixed complete anchor history obey the antichain budget
+Repeated labels at different centers, root anchors, and predecessor anchors are exported by translated layers. Copies with one fixed complete anchor history obey
 
 ```math
 \boxed{
@@ -163,14 +151,7 @@ Repeated terminal labels are compressed by lifted-center layers, root-anchor lay
 }
 ```
 
-Thus high unresolved persistence is localized immediately below the root sponsor.
-
-**Primary notes:**
-
-- `docs/global-lifted-center-layer-resolution.md`;
-- `docs/state-anchor-layer-and-antichain-budget.md`;
-- `docs/predecessor-anchor-layer-resolution.md`;
-- `docs/half-contraction-multiscale-label-potential.md`.
+High unresolved persistence is therefore localized immediately below the root sponsor.
 
 ---
 
@@ -179,57 +160,15 @@ Thus high unresolved persistence is localized immediately below the root sponsor
 The base set
 
 ```math
-H=
-\{0,1,2,16,17,18,21,22,23,26,27,28\}
+H=\{0,1,2,16,17,18,21,22,23,26,27,28\}
 ```
 
-produces the terminal progression
-
-```math
-16,21,26
-```
-
-both in a middle multiplicity fiber and in the minimum-translation backbone.
+produces the terminal progression `16,21,26` in both a middle multiplicity fiber and the backbone.
 
 A three-translate recursion gives four-term-progression-free states with
 
 ```math
-|S_h|=
-\frac{9\cdot3^h-3}{2}
-```
-
-and certified identical-history persistence
-
-```math
-P_h=2^h.
-```
-
-Therefore
-
-```math
-P_h\asymp|S_h|^{\log_3 2}.
-```
-
-Bounded, logarithmic, polylogarithmic, and sufficiently small subpower persistence bounds are false in terms of parent cardinality alone.
-
-**Primary note:** `docs/self-replicating-aligned-diamond.md`.
-
----
-
-# 5. Exact scale-eight model
-
-There is a computer-certified infinite family
-
-```math
-S_h\subseteq[L_h,2L_h)
-```
-
-with
-
-```math
-L_h=8^{h+1},
-\qquad
-|S_h|=rac{9\cdot3^h-3}{2},
+|S_h|=\frac{9\cdot3^h-3}{2},
 \qquad
 P_h=2^h.
 ```
@@ -237,41 +176,58 @@ P_h=2^h.
 Thus
 
 ```math
+P_h\asymp|S_h|^{\log_3 2}.
+```
+
+Bounded, logarithmic, polylogarithmic, and sufficiently small subpower persistence bounds are false in terms of parent cardinality alone.
+
+---
+
+# 5. Exact scale-eight model
+
+There is a computer-certified infinite family with
+
+```math
+S_h\subseteq[L_h,2L_h),
+\qquad
+L_h=8^{h+1},
+```
+
+```math
+|S_h|=\frac{9\cdot3^h-3}{2},
+\qquad
+P_h=2^h=\frac12L_h^{1/3}.
+```
+
+A 34-state base-eight automaton recognizes the union, and an exact `17238`-state product/carry search finds no nontrivial four-term progression.
+
+The exact standard-dyadic equal-translate model is sharply classified:
+
+```math
+\boxed{L'\ge8L,}
+```
+
+```math
 \boxed{
-P_h=\frac12L_h^{1/3}.
+P_h\alpha_h
+\le
+C_0\left(\frac34\right)^h
+=
+C_0P_h^{\log_2 3-2},
 }
 ```
 
-The union is recognized by a 34-state base-eight automaton. The exact product/carry search explores `17238` states and reaches no accepting nontrivial four-term progression.
+and
 
-For every exact standard-dyadic equal-translate genealogy:
+```math
+\boxed{
+\sum_hP_h\alpha_h\le4C_0.
+}
+```
 
-1. at most three equal translate layers are possible;
-2. binary persistence gives at most two persistent children;
-3. exact backbone reproduction forces
-   ```math
-   L'\ge8L;
-   ```
-4. writing `alpha_h=|S_h|/L_h`,
-   ```math
-   \boxed{
-   P_h\alpha_h
-   \le
-   C_0\left(\frac34\right)^h
-   =
-   C_0P_h^{\log_2 3-2};
-   }
-   ```
-5. the aggregate charge satisfies
-   ```math
-   \boxed{
-   \sum_hP_h\alpha_h\le4C_0.
-   }
-   ```
+The scale-eight family attains the exponents.
 
-The scale-eight family attains these exponents. The exact model is sharply classified.
-
-**Primary notes and verifier:**
+**Primary references:**
 
 - `docs/scale-eight-self-replicating-aligned-diamond.md`;
 - `docs/three-translate-dyadic-scale-barrier.md`;
@@ -282,36 +238,27 @@ The scale-eight family attains these exponents. The exact model is sharply class
 
 # 6. Contaminated depth-five burst
 
-There are certified states with scales
+A certified contaminated-backbone chain has scales
 
 ```math
 (64,256,2048,8192,32768)
 ```
 
-and separations
-
-```math
-(61,303,1597,8195),
-```
-
-so the outer scale factors are
+and scale factors
 
 ```math
 \boxed{4,8,4,4.}
 ```
 
-The middle fiber is exact at every step. The relevant backbone shell contains a replayable copy of the previous state, possibly with contamination.
+The middle fiber is exact at every step, and each backbone contains a replayable copy of the previous state.
 
-Define
+For
 
 ```math
 W_h
 =
-P_h^{\mathrm{cert}}
-\frac{|S_h|}{L_h}.
+P_h^{\mathrm{cert}}\frac{|S_h|}{L_h},
 ```
-
-Then
 
 ```math
 W_1=\frac38,
@@ -319,27 +266,19 @@ W_1=\frac38,
 W_5=\frac{273}{256},
 ```
 
-and
+so
 
 ```math
 \boxed{
-\frac{W_5}{W_1}
-=
-\frac{91}{32}.
+\frac{W_5}{W_1}=\frac{91}{32}.
 }
 ```
 
-Therefore universal local contraction and contraction over every four-generation window are false.
-
-**Primary note, verifier, and certificate:**
-
-- `docs/contaminated-backbone-depth-five-chain.md`;
-- `src/verify_contaminated_backbone_depth5.py`;
-- `data/contaminated_backbone_depth5_certificate_2026-07-11.txt`.
+Universal local contraction and contraction over every four-generation window are false.
 
 ---
 
-# 7. Two different recovery branches from `S_5`
+# 7. Path-dependent recovery from `S_5`
 
 The depth-five state admits no factor-two or factor-four continuation:
 
@@ -347,52 +286,32 @@ The depth-five state admits no factor-two or factor-four continuation:
 \boxed{N_{5,2}=N_{5,4}=0.}
 ```
 
-Every continuation therefore has scale factor at least `8`.
-
 ## 7.1 Smallest exact recovery
 
-The first exact recovery is
+For
 
 ```math
-R_5=65547.
+R_5=65547,
 ```
 
-The resulting state again has no factor-two or factor-four continuation. Along this selected branch,
+the recovered state again has no factor-two or factor-four continuation. Along this branch,
 
 ```math
-4,8,4,4
-\quad\longrightarrow\quad
-8,\ge8
+\frac{W_7}{W_5}\le\frac{205}{364}.
 ```
 
-or termination, and
+## 7.2 Alternative recovery and cheap release
+
+For
 
 ```math
-\frac{W_7}{W_5}
-\le
-\frac{205}{364}.
+R_5=93476,
 ```
 
-## 7.2 Alternative recovery with cheap release
-
-A different exact recovery is
+the exact recovered state admits the factor-four descendant
 
 ```math
-\boxed{R_5=93476.}
-```
-
-It admits the factor-four descendant
-
-```math
-\boxed{R_6=230164.}
-```
-
-whose backbone contains the replay state plus exactly two points:
-
-```math
-460328,
-\qquad
-492308.
+R_6=230164.
 ```
 
 The resulting scale sequence is
@@ -401,7 +320,7 @@ The resulting scale sequence is
 \boxed{4,8,4,4,8,4.}
 ```
 
-The depth-seven state satisfies
+with
 
 ```math
 S_7\subseteq[1048576,2097152),
@@ -417,67 +336,34 @@ and
 W_7=\frac{615}{512}.
 ```
 
-Hence
+Thus
 
 ```math
 \boxed{
-\frac{W_7}{W_5}
-=
-\frac{205}{182}>1,
+\frac{W_7}{W_5}=\frac{205}{182}>1,
 }
 ```
 
-and
-
-```math
-\boxed{
-\frac{W_7}{W_1}
-=
-\frac{205}{64}.
-}
-```
-
-Universal two-generation recovery and contraction over every six-generation window are therefore false.
-
-**Primary notes and verifiers:**
-
-- `docs/forced-recovery-after-depth-five.md`;
-- `docs/contaminated-backbone-depth-seven-chain.md`;
-- `src/verify_forced_recovery_after_depth5.py`;
-- `src/verify_contaminated_backbone_depth7.cpp`.
+so universal two-generation recovery and contraction over every six-generation window are false.
 
 ---
 
 # 8. Complete cheap-extension exclusion from `S_7`
 
-The factor-two search from `S_7` has
-
-```text
-25161 sponsor-compatible candidates
-202 disjoint candidates
-0 valid candidates.
-```
-
-Thus
+The factor-two domain has `25161` sponsor-compatible candidates, of which `202` are layer-disjoint. All fail:
 
 ```math
 N_{7,2}=0.
 ```
 
-For factor four, the fit condition gives
-
-```math
-R\le1086317.
-```
-
-There are
+The factor-four domain has
 
 ```text
 724212 sponsor-compatible candidates
-359419 disjoint candidates.
+359419 layer-disjoint candidates.
 ```
 
-Every disjoint candidate receives an explicit structural four-term-progression witness:
+Every disjoint candidate has an explicit four-term-progression witness:
 
 ```text
 352979 completion witnesses
@@ -491,51 +377,9 @@ Therefore
 \boxed{N_{7,4}=0.}
 ```
 
-Combining the two exclusions,
+Every continuation from `S_7` terminates or has scale factor at least `8`.
 
-```math
-\boxed{
-\text{every continuation from }S_7\text{ terminates or has scale factor at least }8.
-}
-```
-
-Since `|S_7|=9840`, every possible next continuation satisfies
-
-```math
-\boxed{
-\frac{W_8}{W_7}
-\le
-\frac{9841}{13120}.
-}
-```
-
-Therefore, if `S_8` exists,
-
-```math
-\boxed{
-W_8\le\frac{29523}{32768}
-}
-```
-
-and
-
-```math
-\boxed{
-\frac{W_8}{W_5}
-\le
-\frac{757}{896}<1.
-}
-```
-
-Thus the alternative branch has the finite compensation pattern
-
-```math
-4,8,4,4,8,4,\ge8
-```
-
-or termination. The cheap factor-four release is followed by a forced expensive step.
-
-**Primary note, verifier, and certificate:**
+**Primary references:**
 
 - `docs/depth-seven-factor-four-exclusion.md`;
 - `src/verify_depth7_no_factor4_extension.cpp`;
@@ -543,7 +387,75 @@ or termination. The cheap factor-four release is followed by a forced expensive 
 
 ---
 
-# 9. Current unresolved problem: continuation-graph control
+# 9. Exact depth-eight continuation
+
+The first valid exact factor-eight continuation from `S_7` is
+
+```math
+\boxed{R_7=2097164.}
+```
+
+It produces
+
+```math
+S_8\subseteq[8388608,16777216),
+\qquad
+|S_8|=29523,
+\qquad
+P_8^{\mathrm{cert}}=256.
+```
+
+The full scale sequence is
+
+```math
+\boxed{4,8,4,4,8,4,8.}
+```
+
+The backbone is exact and `S_8` is four-term-progression-free.
+
+Its weighted density is
+
+```math
+\boxed{
+W_8=\frac{29523}{32768}.
+}
+```
+
+The final factor-eight step gives
+
+```math
+\boxed{
+\frac{W_8}{W_7}=\frac{9841}{13120}
+}
+```
+
+and the three-generation block beginning at `S_5` satisfies
+
+```math
+\boxed{
+\frac{W_8}{W_5}=\frac{757}{896}<1.
+}
+```
+
+Thus the cheap release at depth seven is repaid by the forced exact factor-eight step.
+
+Relative to the base,
+
+```math
+\frac{W_8}{W_1}=\frac{9841}{4096}>1,
+```
+
+so this finite compensation does not by itself establish long-run decay.
+
+**Primary references:**
+
+- `docs/contaminated-backbone-depth-eight-chain.md`;
+- `src/verify_contaminated_backbone_depth8.cpp`;
+- `data/contaminated_backbone_depth8_certificate_2026-07-11.txt`.
+
+---
+
+# 10. Current unresolved problem: repeated release cycles
 
 For disjoint three-translate growth,
 
@@ -558,31 +470,34 @@ c_h=\frac{L_{h+1}}{L_h}.
 
 Ignoring the lower-order term, long-run contraction requires geometric-mean scale expansion greater than `6`.
 
-The known behavior is path-dependent:
+The current branch exhibits a complete delayed-compensation cycle:
 
-1. exact recovery can lead to another expensive step;
-2. exact recovery can instead release a factor-four descendant;
-3. the released state then forbids another immediate factor-two or factor-four step;
-4. both known branches eventually compensate relative to `S_5`, but no state-independent theorem is known.
+```math
+\text{exact recovery}
+\to
+\text{cheap contaminated release}
+\to
+\text{forced exact recovery}.
+```
 
 The active target is
 
 ```math
 \boxed{
-\text{control every path in the contaminated-backbone continuation graph.}
+\text{determine whether such release cycles can repeat indefinitely with average scale growth at most }6.
 }
 ```
 
 Immediate computational targets:
 
-1. find and classify factor-eight continuations of `S_7`;
-2. test whether their descendants release another cheap step;
-3. classify all exact factor-eight recoveries of `S_5` by descendant behavior.
+1. classify factor-two and factor-four continuations of `S_8`;
+2. if another cheap descendant exists, extend and certify the cycle;
+3. classify exact factor-eight recovery states by future cheap-release behavior.
 
 Immediate proof targets:
 
-1. explain the structural completion and equal-difference witnesses that force recovery from `S_7`;
-2. define a contamination-debt potential that allows delayed release but forces repayment;
+1. explain why the two contaminating points at depth seven create enough completion and equal-difference witnesses to force recovery;
+2. define a contamination-debt potential that allows release but forces repayment;
 3. prove every infinite continuation path has geometric-mean scale expansion greater than `6`;
 4. reduce repeatable patterns to a finite-state system with subcritical spectral radius;
 5. control overlap among replay cores by an aggregate packing theorem.

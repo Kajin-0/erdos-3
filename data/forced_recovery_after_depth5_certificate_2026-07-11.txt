@@ -1,0 +1,47 @@
+status=exact finite computer-assisted search
+scope=standard-dyadic disjoint three-translate continuations with even v2(R) and replay-state containment
+
+s5_scale=32768
+s5_size=1092
+s5_min=32768
+s5_max=63668
+s5_sha256=a315deca0997d946ca9bb5058d2a04bfe3e585332d4db5260e7d9edc9142f841
+
+s5_factor2_max_r=933
+s5_factor2_sponsor_compatible_candidates=622
+s5_factor2_valid=0
+
+s5_factor4_max_r=33701
+s5_factor4_sponsor_compatible_candidates=22467
+s5_factor4_valid=0
+
+first_exact_factor8_recovery_r=65547
+first_exact_factor8_recovery_v2=0
+recovery_raw_size=3279
+recovery_raw_min=0
+recovery_raw_max=194762
+recovery_raw_sha256=fd54f32a858cf81b0236aa992447d99d91710193623948cb23ecf77466a2660c
+
+s6_scale=262144
+s6_size=3279
+s6_min=262144
+s6_max=456906
+s6_sha256=ff10f8482f475206eba84c4cbbcef48ec0402ec1870edf81575495b9aae7d463
+
+s6_factor2_max_r=33690
+s6_factor2_sponsor_compatible_candidates=22459
+s6_factor2_valid=0
+
+s6_factor4_max_r=295834
+s6_factor4_sponsor_compatible_candidates=197222
+s6_factor4_valid=0
+
+w5=273/256
+w6=3279/4096
+w6_over_w5=1093/1456
+conditional_max_w7_over_w6=820/1093
+conditional_max_w7_over_w5=205/364
+conditional_max_w7=615/1024
+
+caveat=finite result; does not prove universal recovery for every contaminated genealogy or every factor-8 continuation
+verifier=src/verify_forced_recovery_after_depth5.py

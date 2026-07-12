@@ -1,64 +1,50 @@
-# A fan of 525,189 exact summable tails from `S_10`
+# A fan of 644,052 exact summable tails from `S_10`
 
 ## Status
 
-Exact finite arithmetic consequence of:
+Complete exact two-step-descent classification within the certified small-offset range, using:
 
-1. the certified `S_8` completion maximum;
+1. the full signed `S_8` three-term-progression completion set;
 2. two applications of the small-offset completion-descent lemma;
 3. the exact-tail basin criterion.
 
-The recorded state `S_10` does not merely admit one summable exact continuation. It admits at least
+The recorded state `S_10` admits
 
 ```math
-\boxed{525189}
+\boxed{644052}
 ```
 
 distinct scheduled infinite exact factor-eight tails.
 
-**Verifier:** `src/verify_depth10_exact_tail_basin_fan.py`.
+**Full verifier:** `src/verify_depth10_full_exact_tail_basin_fan.cpp`.
+
+**Lightweight upper-interval subfamily verifier:** `src/verify_depth10_exact_tail_basin_fan.py`.
 
 **Certificate:** `data/depth10_exact_tail_basin_fan_certificate_2026-07-12.txt`.
 
 ---
 
-## 1. Completion-free interval inherited from `S_8`
+## 1. Complete signed completion set at `S_8`
 
-For the certified depth-eight anchor set
-
-```math
-A_8=\{0\}\cup S_8,
-```
-
-the exact completion search finds no three-term-progression completion above
+Let
 
 ```math
-C_8^{\max}=17038008.
+A_8=\{0\}\cup S_8.
 ```
 
-Since
+The exact completion search constructs every signed coordinate that completes a nontrivial three-term progression in `A_8`. The set contains
 
-```math
-2L_8=16777216,
+```text
+2772873
 ```
 
-every integer
+distinct coordinates.
 
-```math
-D\ge260793
-```
-
-satisfies
-
-```math
-2L_8+D>C_8^{\max}
-```
-
-and is therefore absent from the completion set.
+The full verifier reconstructs this set directly from the 29,524-point anchor set before testing any depth-ten offset.
 
 ---
 
-## 2. Lifting a missing completion to `S_10`
+## 2. Two-step completion descent
 
 The exact steps from `S_8` to `S_9` and from `S_9` to `S_10` both use offset `1`:
 
@@ -68,19 +54,25 @@ R_8=2L_8+1,
 R_9=2L_9+1.
 ```
 
-Small-offset completion descent subtracts three times the offset at each step. Thus a hypothetical completion in `S_10` at
+A hypothetical completion in `S_10` at
 
 ```math
 2L_{10}+k
 ```
 
-would descend to a completion in `S_8` at
+descends first to offset `k-3` at `S_9`, then to offset
+
+```math
+k-6
+```
+
+at `S_8`. Thus the corresponding seed completion coordinate is
 
 ```math
 2L_8+(k-6).
 ```
 
-The two descent lemmas apply provided
+The descent lemmas apply when
 
 ```math
 0<k\le L_9/8
@@ -92,65 +84,96 @@ and
 0<k-3\le L_8/8.
 ```
 
-The second condition is stronger and gives
+Together these give the complete integer range
 
 ```math
-k\le1048579.
+\boxed{4\le k\le1048579.}
 ```
 
-Combining this with `k-6>=260793` gives the interval
-
-```math
-\boxed{
-260799\le k\le1048579.
-}
-```
-
-For every `k` in this interval, `S_10` has no three-term progression completed at `2L_10+k`.
-
----
-
-## 3. Sponsor-compatible basin offsets
-
-The exact-tail basin criterion additionally requires
+The basin criterion also requires
 
 ```math
 v_2(k)\equiv0\pmod2.
 ```
 
+---
+
+## 3. Complete sponsor-compatible classification
+
 There are exactly
 
-```math
-\boxed{525189}
+```text
+699051
 ```
 
-such integers in the interval. Their two-adic distribution is:
+integers in the permitted range with even two-adic valuation.
 
-| `v_2(k)` | Count |
-|---:|---:|
-| 0 | 393891 |
-| 2 | 98472 |
-| 4 | 24618 |
-| 6 | 6155 |
-| 8 | 1539 |
-| 10 | 385 |
-| 12 | 96 |
-| 14 | 24 |
-| 16 | 6 |
-| 18 | 2 |
-| 20 | 1 |
+For each one, the verifier tests whether
 
-The canonical SHA-256 hash of the increasing offset list is
+```math
+2L_8+(k-6)
+```
+
+belongs to the complete signed `S_8` completion set.
+
+Exactly
 
 ```text
-99eb9011d140b420ddf4bd2bf33b6d98d9381b36e12089e231eda8323c548e60
+54999
+```
+
+sponsor-compatible offsets are blocked by a seed completion. The remaining
+
+```math
+\boxed{644052}
+```
+
+offsets are valid exact-tail basin entries.
+
+The first and last valid offsets are
+
+```math
+k=4
+```
+
+and
+
+```math
+k=1048579.
+```
+
+The canonical hashes of the comma-terminated increasing valid-offset list are
+
+```text
+FNV-64  5e1b143b6a59b345
+SHA-256 22daeb2366e5e3324b7e835c61adb34f8e08c0ae203b86420c941f53991069b4
 ```
 
 ---
 
-## 4. Distinct infinite tails
+## 4. Two-adic distribution
 
-For each valid initial offset `k`, define
+| `v_2(k)` | Valid offsets |
+|---:|---:|
+| 0 | 483016 |
+| 2 | 120732 |
+| 4 | 30191 |
+| 6 | 7584 |
+| 8 | 1892 |
+| 10 | 472 |
+| 12 | 123 |
+| 14 | 31 |
+| 16 | 8 |
+| 18 | 2 |
+| 20 | 1 |
+
+Every class has even valuation, so coordinated deletion selects the left sponsor throughout the induced exact tail.
+
+---
+
+## 5. Distinct infinite tails
+
+For every valid initial offset `k`, define
 
 ```math
 k_n=4^nk,
@@ -160,17 +183,23 @@ k_n=4^nk,
 R_{10+n}=2L_{10+n}+k_n,
 ```
 
-and apply exact three-translate reproduction at scale factor `8`.
+and apply exact three-translate reproduction at factor `8`.
 
-The basin criterion proves that every resulting state is four-term-progression-free and exact-backbone. Distinct initial offsets give distinct first separations and therefore distinct first child states. Their later offsets remain distinct after multiplication by `4`.
+The basin criterion proves that every resulting state is four-term-progression-free and exact-backbone. Distinct initial offsets give distinct first separations and therefore distinct first child states. Multiplication by `4` preserves distinctness at all later generations.
 
-Thus `S_10` is the root of at least `525189` distinct certified infinite exact tails.
+Thus `S_10` is the root of at least
+
+```math
+\boxed{644052}
+```
+
+distinct certified infinite exact tails.
 
 ---
 
-## 5. Common terminal charge
+## 6. Common terminal charge
 
-The state size, scale, and certified replay multiplicity are independent of which valid offset is selected. Every tail has the same total certified weighted density:
+State size, scale, and certified replay multiplicity do not depend on which valid offset is chosen. Every tail has the same total certified weighted density:
 
 ```math
 \boxed{
@@ -182,4 +211,38 @@ The state size, scale, and certified replay multiplicity are independent of whic
 }
 ```
 
-This demonstrates that the summable basin at `S_10` has substantial width in the separation parameter. It remains possible that other descendants of `S_10` avoid all these scheduled exact tails; the whole-tree problem is still open.
+---
+
+## 7. Earlier interval-only subfamily
+
+The lightweight Python verifier certifies the simpler completion-free upper interval
+
+```math
+260799\le k\le1048579,
+```
+
+which contains
+
+```text
+525189
+```
+
+valid sponsor-compatible offsets. Its list SHA-256 is
+
+```text
+99eb9011d140b420ddf4bd2bf33b6d98d9381b36e12089e231eda8323c548e60
+```
+
+This remains a correct independently reproducible subfamily. The full C++ verifier strengthens it by testing the entire signed completion set and adding another
+
+```text
+118863
+```
+
+certified tails.
+
+---
+
+## 8. Scope
+
+The result demonstrates that the summable basin at `S_10` has substantial width in the separation parameter. It does not classify every factor-eight descendant, and it does not control the factor-two or factor-four escape domains. The whole continuation-tree problem remains open.

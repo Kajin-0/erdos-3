@@ -1,0 +1,31 @@
+verified: S7 has no factor-four continuation
+
+state_depth=7
+state_scale=1048576
+state_size=9840
+state_minimum=1048576
+state_maximum=2021668
+requested_factor=4
+next_scale=4194304
+maximum_separation=1086317
+sponsor_candidate_count=724212
+disjoint_candidate_count=359419
+
+completion_witness_count=352979
+layer_1001_witness_count=215
+layer_0011_witness_count=6225
+uncovered_count=0
+valid_count=0
+
+factor2_valid_count=0
+factor4_valid_count=0
+minimum_possible_next_factor=8
+
+weighted_density_S5=273/256
+weighted_density_S7=615/512
+maximum_W8_over_W7=9841/13120
+maximum_W8=29523/32768
+maximum_W8_over_W5=757/896
+
+compile=g++ -O3 -march=native -fopenmp src/verify_depth7_no_factor4_extension.cpp -o verify_s7_no_f4
+run=OMP_NUM_THREADS=32 ./verify_s7_no_f4

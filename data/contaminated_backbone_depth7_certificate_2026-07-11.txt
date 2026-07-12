@@ -1,0 +1,45 @@
+verified: exact factor-eight recovery R5=93476
+verified: contaminated factor-four continuation R6=230164
+verified: scale pattern 4,8,4,4,8,4
+verified: S7 has no factor-two continuation
+
+scales=64,256,2048,8192,32768,262144,1048576
+scale_factors=4,8,4,4,8,4
+separations=61,303,1597,8195,93476,230164
+state_sizes=12,39,120,363,1092,3279,9840
+backbone_contamination=4,1,33,1,0,2
+weighted_density=3/8,39/64,15/32,363/512,273/256,3279/4096,615/512
+weighted_density_growth_S7_over_S5=205/182
+weighted_density_growth_S7_over_S1=205/64
+
+S5_range=32768,63668
+G6_range=0,250620
+S6_range=262144,512764
+G7_range=0,973092
+S7_range=1048576,2021668
+
+S5_sha256=a315deca0997d946ca9bb5058d2a04bfe3e585332d4db5260e7d9edc9142f841
+G6_sha256=143ac2d24d2a2fdc1c44575f3287f22d5eaaea0104faac08e047b5a437705309
+S6_sha256=c7cbf524dc999a38facba1b587967f4d58b1bc028aca5e2ff131119439d8a88a
+G7_sha256=3d400b6280d5425be1e0c316867ffa35c99b553ebad376b74cdcf1146e160c1d
+S7_sha256=0e6080448a9e171fcf915e110bb23fa8278d281d4d732da20454e8a10cb47e88
+
+S5_fnv64=534fd1f8cef8c788
+G6_fnv64=bbf390929eafe9d0
+S6_fnv64=82f7a53866d615ec
+G7_fnv64=a8e466af4e4bfcb2
+S7_fnv64=d1cfd1ae8b1faada
+
+R5_v2=2
+R6_v2=2
+R5_backbone_contamination=0
+R6_backbone_contamination=2
+R6_backbone_extra_points=460328,492308
+
+S7_factor2_maximum_separation=37741
+S7_factor2_sponsor_candidate_count=25161
+S7_factor2_disjoint_candidate_count=202
+S7_factor2_valid_count=0
+
+compile=g++ -O3 -march=native -fopenmp src/verify_contaminated_backbone_depth7.cpp -o verify_depth7
+run=./verify_depth7

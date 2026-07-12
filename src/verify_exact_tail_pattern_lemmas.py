@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Exact rational verification of the two layer-pattern lemmas used by the infinite exact tail."""
+"""Exact rational verification of the layer-pattern lemmas used by exact tails."""
 from fractions import Fraction
 from itertools import combinations, combinations_with_replacement, product
 
@@ -91,11 +91,12 @@ def top_layer_patterns():
 def completion_descent_patterns():
     feasible = []
     # Current separation is R/L = 2 + kappa with 0 <= kappa <= 1/32.
-    # The target raw completion is 8L + tau*L with 0 <= tau <= 1/8.
+    # The target raw completion is 8L + tau*L with 0 <= tau <= 2.
+    # The widened tau range covers the full two-step basin classification at S10.
     for layers in combinations_with_replacement(range(3), 3):
         for nonzero in product((0, 1), repeat=3):
             bounds = [(Q(1), Q(7, 4)) if flag else (Q(0), Q(0)) for flag in nonzero]
-            bounds.extend(((Q(0), Q(1, 32)), (Q(0), Q(1, 8))))
+            bounds.extend(((Q(0), Q(1, 32)), (Q(0), Q(2))))
             second_difference = layers[0] - 2 * layers[1] + layers[2]
             completion_layer = 2 * layers[2] - layers[1]
             # Variables are a0,a1,a2,kappa,tau.
@@ -144,7 +145,7 @@ def main():
 
     print("verified: top-layer 4-AP classification has exactly nine feasible patterns")
     print("verified: six nonconstant patterns are completion or half-separation obstructions")
-    print("verified: general small-offset completion descent has only layer pattern 0,1,2")
+    print("verified: completion descent through target offsets 0 <= c <= 2L has only layer pattern 0,1,2")
     print("top_patterns=" + repr(top))
     print("descent_patterns=" + repr(descent))
 

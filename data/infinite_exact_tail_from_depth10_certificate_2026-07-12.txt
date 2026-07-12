@@ -1,0 +1,36 @@
+infinite exact factor-eight tail from recorded S10
+status=exact theorem with finite seed certificate and exact rational layer classification
+
+seed_S8_size=29523
+seed_S8_min=8388608
+seed_S8_max=14604604
+seed_S8_fnv64=023db79dd7cbf62b
+seed_completion_count=2772873
+seed_completion_min=6291444
+seed_completion_max=17038008
+D=262143
+seed_target=17039359
+seed_target_absent=true
+
+recorded_S10_size=265719
+recorded_S10_min=536870912
+recorded_S10_max=920574272
+recorded_S10_fnv64=405b941a1f8b2580
+recorded_prior_offsets=1,1
+recorded_completion_descent=6
+k10=262149
+
+infinite_tail_rules:
+L_(h+1)=8*L_h
+k_(h+1)=4*k_h
+R_h=2*L_h+k_h
+S_(h+1)=8*L_h+(({0} union S_h)+{0,R_h,2R_h})
+
+closed_form_k_(10+n)=262149*4^n
+v2_R_(10+n)=2n
+cardinality_S_(10+n)=(3^(12+n)-3)/2
+persistence_P_(10+n)=2^(10+n)
+weighted_density_W_(10+n)=(3^(12+n)-3)/2^(20+2n)
+weighted_tail_sum=(3^12-1)/2^18=33215/16384
+
+scope=one infinite exact continuation path; not a classification of the full continuation tree

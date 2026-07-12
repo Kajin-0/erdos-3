@@ -39,7 +39,7 @@ H(\mathcal B(D))+\sum_xH(M_x)
 3H(D)-2\frac{r_3(N)}N-\frac1N,
 ```
 
-and
+and, after exact middle-multiplicity resolution,
 
 ```math
 H(Q)+\sum_qH(\Xi_q)+H(\mathcal B(D))
@@ -62,12 +62,12 @@ Children must be resolved into standard dyadic shells. For `p>=1`,
 
 ---
 
-## CL-005: Multiplicity compression
+## CL-005: Center, anchor, predecessor, and antichain compression
 
 **Status:** proved in repository.  
 **Certainty:** medium-high internally.
 
-Center, root-anchor, predecessor-anchor, and antichain decompositions export repeated labels. Fixed complete anchor histories obey
+Repeated labels at different centers or anchors are exported by translated layers. Fixed complete anchor histories obey
 
 ```math
 \lambda_{x,q}(t)(a-t)\le a.
@@ -88,7 +88,7 @@ P_h=2^h,
 P_h\asymp|S_h|^{\log_3 2}.
 ```
 
-Cardinality alone cannot give bounded, logarithmic, polylogarithmic, or sufficiently small subpower persistence bounds.
+Bounded, logarithmic, polylogarithmic, and sufficiently small cardinality-only subpower persistence bounds are false.
 
 ---
 
@@ -138,7 +138,7 @@ P_h\alpha_h\le C_0(3/4)^h,
 The scale factors are
 
 ```math
-\boxed{4,8,4,4}
+\boxed{4,8,4,4},
 ```
 
 and
@@ -275,7 +275,12 @@ The finite scale pattern is
 **Status:** elementary theorem with exact rational pattern verification.  
 **Certainty:** high internally.
 
-In the certified exact-tail geometry, every new four-term progression in three translates comes from either a three-term progression completed at `R` or `R/2` lying in the state. The same nine layer patterns remain complete across the full fitting exact factor-eight range of `S_10`.
+In the certified exact-tail geometry, every new four-term progression in three translates comes from either:
+
+1. a three-term progression completed at `R`; or
+2. `R` even with `R/2` inside the state.
+
+The same nine layer patterns remain complete across the full fitting exact factor-eight range of the recorded `S_10` and the finite scheduled regions used in CL-029.
 
 ---
 
@@ -284,20 +289,22 @@ In the certified exact-tail geometry, every new four-term progression in three t
 **Status:** elementary theorem with exact rational pattern verification.  
 **Certainty:** high internally.
 
-For `R=2L+k`, a child completion at `16L+c` descends through the unique layer pattern `012` to a parent completion at
+For `R=2L+k`, scheduled child completion targets descend through the unique layer pattern `012`. In the original extended range, a completion at `16L+c` descends to a parent completion at
 
 ```math
 2L+(c-3k).
 ```
 
+The scheduled specialization `c=4k` descends exactly to `2L+k`.
+
 ---
 
-## CL-019: Infinite exact summable tail from `S_10`
+## CL-019: Explicit infinite exact tail from `S_10`
 
 **Status:** exact infinite theorem with finite seed certificate.  
 **Certainty:** high internally; awaiting independent review.
 
-For one explicit offset schedule,
+For one explicit schedule,
 
 ```math
 k_{10}=262149,
@@ -328,7 +335,7 @@ S\subseteq[L,7L/4),
 0<k\le L/32,
 ```
 
-with the lower gap and no completion obstruction, then `L'=8L`, `k'=4k` defines an infinite exact tail. For entry size `N`, replay multiplicity `P`, and scale `L`,
+with the required gap and no first-step obstruction, then `L'=8L`, `k'=4k` defines an infinite exact tail. For entry size `N`, replay multiplicity `P`, and scale `L`,
 
 ```math
 \sum_{n\ge0}W_n=\frac{4P(N+1)}L.
@@ -470,7 +477,7 @@ For positive exact offsets
 R=2L_{10}+k,
 ```
 
-there are `408969792` sponsor-compatible values. The obstruction split is
+there are `408969792` sponsor-compatible values. The first-step obstruction split is
 
 ```text
 completion-blocked       54999
@@ -507,7 +514,7 @@ and let `0<k<L/2` with even `v_2(k)`. If the first exact step at
 R=2L+k
 ```
 
-is four-term-progression-free, then the scheduled recurrence
+is four-term-progression-free, then
 
 ```math
 L_{n+1}=8L_n,
@@ -517,39 +524,81 @@ k_{n+1}=4k_n
 
 defines an infinite exact four-term-progression-free tail.
 
-The first child enters
-
-```math
-S_1\subseteq[L_1,59L_1/32),
-\qquad
-k_1/L_1<1/4,
-```
-
-and the region
-
-```math
-S_n\subseteq[L_n,15L_n/8),
-\qquad
-k_n/L_n<1/4
-```
-
-is invariant. The nine top-layer patterns remain complete, scheduled completion descent has the unique pattern `012`, and the half-separation obstruction is impossible.
-
-For `S_10`, the half-scale range contains
-
-```text
-178956970 sponsor-compatible offsets
-54999 completion obstructions
-29569 half-separation obstructions.
-```
-
-Therefore
+For `S_10`, exactly
 
 ```math
 \boxed{178872402}
 ```
 
-offsets enter certified infinite exact tails. Each has terminal charge
+offsets enter certified infinite exact tails. Each has charge
+
+```math
+\boxed{33215/16384.}
+```
+
+---
+
+## CL-029: Full-fitting exact-tail basin from `S_10`
+
+**Status:** exact finite obstruction classification plus elementary infinite induction.  
+**Certainty:** high internally; awaiting independent review.
+
+Across the complete fitting exact range
+
+```math
+1\le k\le613454687,
+```
+
+the standard nine top-layer patterns and unique scheduled completion descent `012` persist through the three finite generations needed to enter the invariant region
+
+```math
+S_n\subseteq[L_n,15L_n/8),
+\qquad
+k_n/L_n<1/4.
+```
+
+After validity of the first exact child, only two additional scheduled half tests occur:
+
+```math
+2k\in S_{10},
+```
+
+or
+
+```math
+8(k-L_{10})\in S_{10}.
+```
+
+The second scheduled half class contains `88614` sponsor-compatible offsets. The third contains exactly
+
+```text
+603979776
+613416960.
+```
+
+Eight second-step offsets were already excluded by the first-step half obstruction. Thus only
+
+```math
+\boxed{88608}
+```
+
+of the `408855759` valid exact children fail the scheduled basin test, and
+
+```math
+\boxed{408767151}
+```
+
+valid exact children enter infinite exact tails.
+
+The exact coverage fraction is
+
+```math
+\boxed{
+\frac{10481209}{10483481}
+}
+```
+
+or approximately `99.9783278092458%`. Every tail has charge
 
 ```math
 \boxed{33215/16384.}
@@ -557,9 +606,9 @@ offsets enter certified infinite exact tails. Each has terminal charge
 
 **Primary references:**
 
-- `docs/half-scale-exact-tail-basin.md`;
-- `src/verify_half_scale_exact_tail_basin.py`;
-- `data/half_scale_exact_tail_basin_certificate_2026-07-12.txt`.
+- `docs/full-fitting-exact-tail-basin.md`;
+- `src/verify_full_fitting_exact_tail_basin.py`;
+- `data/full_fitting_exact_tail_basin_certificate_2026-07-12.txt`.
 
 ---
 
@@ -602,9 +651,9 @@ The unresolved theorem is
 
 Approved targets:
 
-1. classify the exact `S_10` factor-two and factor-four escape domains;
-2. prove every path eventually enters an exact or near-exact basin;
-3. classify valid exact `S_10` children with `k>=L_{10}/2`;
+1. classify the `88608` exceptional valid exact children of `S_10`;
+2. classify the exact `S_10` factor-two and factor-four escape domains;
+3. prove every path eventually enters an exact or near-exact basin;
 4. prove every non-basin path admits a debt-repayment parsing;
 5. extend the Bellman potential by a contamination reserve dominating all children;
 6. charge imported prefixes through difference export or overlap packing;

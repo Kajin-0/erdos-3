@@ -1,0 +1,65 @@
+DEPTH-TEN FACTOR-TWO INHERITANCE CERTIFICATE
+Date: 2026-07-12
+
+MODEL
+S9 is the certified 88,572-point state in [67,108,864, 134,217,728).
+S10 is the certified 265,719-point state in [536,870,912, 1,073,741,824).
+The S10 construction is
+
+  S10 = L10 + (({0} union S9) + {0, R9, 2R9}),
+
+with
+
+  L10 = 536870912
+  R9  = 134217729.
+
+Therefore
+
+  L10 + ({0} union S9) subseteq S10.
+
+FINITE ENDPOINTS
+S9 factor-four fit endpoint:
+
+  floor((4*L9 - 1 - max(S9))/2)
+  = floor((268435456 - 1 - 115267902)/2)
+  = 76583776.
+
+S10 factor-two fit endpoint:
+
+  floor((2*L10 - 1 - max(S10))/2)
+  = floor((1073741824 - 1 - 920574272)/2)
+  = 76583775.
+
+Thus every sponsor-compatible S10 factor-two separation lies in the already
+certified S9 factor-four domain.
+
+CANDIDATE CONTAINMENT
+For every integer R,
+
+  L10 + [({0} union S9) + {0,R,2R}]
+
+is a subset of
+
+  ({0} union S10) + {0,R,2R}.
+
+Hence every four-term arithmetic progression in the S9 candidate lifts by
+translation through L10 to a four-term arithmetic progression in the S10
+candidate.
+
+DEPENDENCY
+The exact finite theorem N_{9,4}=0 is certified in:
+
+  docs/depth-nine-no-cheap-extension.md
+  src/verify_depth9_no_cheap_extension.cpp
+  data/depth9_no_cheap_extension_certificate_2026-07-12.txt
+
+CONCLUSION
+
+  N_{10,2}=0.
+
+Every continuation from the recorded S10 either terminates or has scale factor
+at least 4.
+
+VERIFIER
+
+  python src/verify_depth10_factor2_inheritance.py

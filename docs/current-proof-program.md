@@ -38,7 +38,7 @@ A divergent four-term-progression-free candidate must satisfy
 \sum_j\alpha_j=\infty.
 ```
 
-The closing argument must control the aggregate contribution of sparse dyadic blocks.
+The closing argument must therefore control the aggregate contribution of sparse dyadic blocks.
 
 ---
 
@@ -153,6 +153,14 @@ Repeated labels at different centers, root anchors, and predecessor anchors are 
 
 High unresolved persistence is therefore localized immediately below the root sponsor.
 
+**Primary references:**
+
+- `docs/minimum-translation-backbone-recursion.md`;
+- `docs/global-lifted-center-layer-resolution.md`;
+- `docs/state-anchor-layer-and-antichain-budget.md`;
+- `docs/predecessor-anchor-layer-resolution.md`;
+- `docs/half-contraction-multiscale-label-potential.md`.
+
 ---
 
 # 4. Self-replicating aligned diamonds
@@ -180,6 +188,8 @@ P_h\asymp|S_h|^{\log_3 2}.
 ```
 
 Bounded, logarithmic, polylogarithmic, and sufficiently small subpower persistence bounds are false in terms of parent cardinality alone.
+
+**Primary reference:** `docs/self-replicating-aligned-diamond.md`.
 
 ---
 
@@ -238,13 +248,7 @@ The scale-eight family attains the exponents.
 
 # 6. Contaminated depth-five burst
 
-A certified contaminated-backbone chain has scales
-
-```math
-(64,256,2048,8192,32768)
-```
-
-and scale factors
+A certified contaminated-backbone chain has scale factors
 
 ```math
 \boxed{4,8,4,4.}
@@ -276,6 +280,11 @@ so
 
 Universal local contraction and contraction over every four-generation window are false.
 
+**Primary references:**
+
+- `docs/contaminated-backbone-depth-five-chain.md`;
+- `src/verify_contaminated_backbone_depth5.py`.
+
 ---
 
 # 7. Path-dependent recovery from `S_5`
@@ -286,41 +295,25 @@ The depth-five state admits no factor-two or factor-four continuation:
 \boxed{N_{5,2}=N_{5,4}=0.}
 ```
 
-## 7.1 Smallest exact recovery
-
-For
-
-```math
-R_5=65547,
-```
-
-the recovered state again has no factor-two or factor-four continuation. Along this branch,
+The smallest exact recovery `R_5=65547` produces a branch whose next state again has no factor-two or factor-four continuation. Along that selected branch,
 
 ```math
 \frac{W_7}{W_5}\le\frac{205}{364}.
 ```
 
-## 7.2 Alternative recovery and cheap release
-
-For
+However, the alternative exact recovery
 
 ```math
-R_5=93476,
+R_5=93476
 ```
 
-the exact recovered state admits the factor-four descendant
+admits the factor-four descendant
 
 ```math
 R_6=230164.
 ```
 
-The resulting scale sequence is
-
-```math
-\boxed{4,8,4,4,8,4.}
-```
-
-with
+This produces
 
 ```math
 S_7\subseteq[1048576,2097152),
@@ -330,40 +323,38 @@ S_7\subseteq[1048576,2097152),
 P_7^{\mathrm{cert}}=128,
 ```
 
+with
+
+```math
+W_7=\frac{615}{512},
+```
+
 and
 
 ```math
-W_7=\frac{615}{512}.
-```
-
-Thus
-
-```math
 \boxed{
-\frac{W_7}{W_5}=\frac{205}{182}>1,
+\frac{W_7}{W_5}=\frac{205}{182}>1.
 }
 ```
 
-so universal two-generation recovery and contraction over every six-generation window are false.
+Thus universal two-generation recovery and contraction over every six-generation window are false. Recovery behavior is path-dependent.
+
+**Primary references:**
+
+- `docs/forced-recovery-after-depth-five.md`;
+- `docs/contaminated-backbone-depth-seven-chain.md`.
 
 ---
 
 # 8. Complete cheap-extension exclusion from `S_7`
 
-The factor-two domain has `25161` sponsor-compatible candidates, of which `202` are layer-disjoint. All fail:
+The depth-seven state has no factor-two or factor-four continuation:
 
 ```math
-N_{7,2}=0.
+\boxed{N_{7,2}=N_{7,4}=0.}
 ```
 
-The factor-four domain has
-
-```text
-724212 sponsor-compatible candidates
-359419 layer-disjoint candidates.
-```
-
-Every disjoint candidate has an explicit four-term-progression witness:
+The factor-four domain contains `359419` disjoint-layer candidates. Every one has an explicit witness:
 
 ```text
 352979 completion witnesses
@@ -371,13 +362,7 @@ Every disjoint candidate has an explicit four-term-progression witness:
 6225 layer-pattern 0011 witnesses.
 ```
 
-Therefore
-
-```math
-\boxed{N_{7,4}=0.}
-```
-
-Every continuation from `S_7` terminates or has scale factor at least `8`.
+Every continuation from `S_7` therefore terminates or has scale factor at least `8`.
 
 **Primary references:**
 
@@ -405,31 +390,27 @@ S_8\subseteq[8388608,16777216),
 P_8^{\mathrm{cert}}=256.
 ```
 
-The full scale sequence is
+The scale sequence through `S_8` is
 
 ```math
 \boxed{4,8,4,4,8,4,8.}
 ```
 
-The backbone is exact and `S_8` is four-term-progression-free.
-
 Its weighted density is
 
 ```math
-\boxed{
-W_8=\frac{29523}{32768}.
-}
+W_8=\frac{29523}{32768},
 ```
 
-The final factor-eight step gives
+with
 
 ```math
 \boxed{
-\frac{W_8}{W_7}=\frac{9841}{13120}
+\frac{W_8}{W_7}=\frac{9841}{13120},
 }
 ```
 
-and the three-generation block beginning at `S_5` satisfies
+and
 
 ```math
 \boxed{
@@ -437,25 +418,156 @@ and the three-generation block beginning at `S_5` satisfies
 }
 ```
 
-Thus the cheap release at depth seven is repaid by the forced exact factor-eight step.
-
-Relative to the base,
-
-```math
-\frac{W_8}{W_1}=\frac{9841}{4096}>1,
-```
-
-so this finite compensation does not by itself establish long-run decay.
+The cheap release at depth seven is therefore repaid by the next exact factor-eight step.
 
 **Primary references:**
 
 - `docs/contaminated-backbone-depth-eight-chain.md`;
-- `src/verify_contaminated_backbone_depth8.cpp`;
-- `data/contaminated_backbone_depth8_certificate_2026-07-11.txt`.
+- `src/verify_contaminated_backbone_depth8.cpp`.
 
 ---
 
-# 10. Current unresolved problem: repeated release cycles
+# 10. Complete cheap-extension exclusion from `S_8`
+
+The complete finite domains satisfy
+
+```math
+\boxed{N_{8,2}=N_{8,4}=0.}
+```
+
+For factor two:
+
+```text
+724204 sponsor-compatible candidates
+172448 disjoint-layer candidates
+172448 completion witnesses.
+```
+
+For factor four:
+
+```text
+6316609 sponsor-compatible candidates
+4190292 disjoint-layer candidates
+3442176 completion witnesses
+73 layer-pattern 1001 witnesses
+748043 layer-pattern 0011 candidates, all resolved.
+```
+
+The `0011` join is certified in five bounded-memory phases, ending with three explicit terminal witnesses. No candidate survives.
+
+Thus every continuation from `S_8` terminates or has scale factor at least `8`. Any ninth state must satisfy
+
+```math
+\boxed{
+W_9\le\frac{22143}{32768},
+}
+```
+
+```math
+\boxed{
+\frac{W_9}{W_8}\le\frac{7381}{9841},
+}
+```
+
+and
+
+```math
+\boxed{
+\frac{W_9}{W_5}\le\frac{7381}{11648}.
+}
+```
+
+**Primary references:**
+
+- `docs/depth-eight-no-cheap-extension.md`;
+- `src/verify_depth8_no_cheap_extension.cpp`;
+- `src/run_verify_depth8_no_cheap_extension.sh`;
+- `data/depth8_no_cheap_extension_certificate_2026-07-11.txt`.
+
+---
+
+# 11. Exact depth-nine continuation
+
+The exact candidate
+
+```math
+R=2L_8=16777216
+```
+
+is invalid because it contains
+
+```math
+0,
+\quad8388608,
+\quad16777216,
+\quad25165824.
+```
+
+The next sponsor-compatible separation is the first valid exact recovery:
+
+```math
+\boxed{R_8=16777217.}
+```
+
+It produces
+
+```math
+S_9\subseteq[67108864,134217728),
+\qquad
+|S_9|=88572,
+\qquad
+P_9^{\mathrm{cert}}=512.
+```
+
+The certified scale sequence is now
+
+```math
+\boxed{4,8,4,4,8,4,8,8.}
+```
+
+The weighted density is
+
+```math
+\boxed{
+W_9=\frac{22143}{32768},
+}
+```
+
+so the exclusion bound from the preceding section is attained:
+
+```math
+\boxed{
+\frac{W_9}{W_8}=\frac{7381}{9841}
+\approx0.750025.
+}
+```
+
+Relative to `S_5`,
+
+```math
+\boxed{
+\frac{W_9}{W_5}=\frac{7381}{11648}
+\approx0.633671.
+}
+```
+
+Relative to the base state,
+
+```math
+\frac{W_9}{W_1}=\frac{7381}{4096}>1.
+```
+
+The branch therefore exhibits one cheap release followed by two consecutive exact factor-eight repayments, but it remains above the base weighted density after eight outer generations.
+
+**Primary references:**
+
+- `docs/contaminated-backbone-depth-nine-chain.md`;
+- `src/verify_contaminated_backbone_depth9.cpp`;
+- `data/contaminated_backbone_depth9_certificate_2026-07-11.txt`.
+
+---
+
+# 12. Current unresolved problem: long-run continuation tree
 
 For disjoint three-translate growth,
 
@@ -470,36 +582,42 @@ c_h=\frac{L_{h+1}}{L_h}.
 
 Ignoring the lower-order term, long-run contraction requires geometric-mean scale expansion greater than `6`.
 
-The current branch exhibits a complete delayed-compensation cycle:
+The known branch has the certified pattern
 
 ```math
-\text{exact recovery}
-\to
-\text{cheap contaminated release}
-\to
-\text{forced exact recovery}.
+4,8,4,4,8,4,8,8.
 ```
+
+It demonstrates:
+
+1. several cheap contaminated steps can create substantial weighted-density growth;
+2. the first exact recovery does not determine future behavior;
+3. a cheap release can occur after an exact recovery;
+4. structural 4-AP witnesses can force one or more later factor-eight repayments;
+5. finite repayment along one branch is not yet a state-independent theorem.
 
 The active target is
 
 ```math
 \boxed{
-\text{determine whether such release cycles can repeat indefinitely with average scale growth at most }6.
+\text{prove that every infinite continuation path has long-run average scale growth greater than }6,
 }
 ```
 
+or replace weighted density by a stronger invariant if that statement is false.
+
 Immediate computational targets:
 
-1. classify factor-two and factor-four continuations of `S_8`;
-2. if another cheap descendant exists, extend and certify the cycle;
-3. classify exact factor-eight recovery states by future cheap-release behavior.
+1. classify factor-two and factor-four continuations of `S_9`;
+2. determine whether another cheap release occurs after the two consecutive factor-eight steps;
+3. classify exact recovery states by their future cheap-release behavior;
+4. construct a finite continuation graph or symbolic quotient and estimate its spectral radius.
 
 Immediate proof targets:
 
-1. explain why the two contaminating points at depth seven create enough completion and equal-difference witnesses to force recovery;
-2. define a contamination-debt potential that allows release but forces repayment;
-3. prove every infinite continuation path has geometric-mean scale expansion greater than `6`;
-4. reduce repeatable patterns to a finite-state system with subcritical spectral radius;
-5. control overlap among replay cores by an aggregate packing theorem.
+1. explain why the recursive completion and equal-difference structures force the `S_7` and `S_8` repayments;
+2. define a contamination-debt potential that permits delayed release but forces eventual repayment;
+3. control the whole recovery tree rather than a selected path;
+4. prove an aggregate packing theorem for overlapping replay cores.
 
 The full Erdős problem remains unresolved.

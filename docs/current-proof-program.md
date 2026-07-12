@@ -1,4 +1,4 @@
-# Current proof program: continuation-tree compensation
+# Current proof program: Bellman debt and whole-tree compensation
 
 ## Status
 
@@ -10,7 +10,7 @@ The full problem remains open. This repository studies the four-term case. The t
 
 ---
 
-## 1. Dyadic reduction and one-generation recursion
+## 1. Foundational recursion
 
 For
 
@@ -26,17 +26,9 @@ A_j=A\cap[2^j,2^{j+1}),
 \sum_j\alpha_j=\infty
 ```
 
-up to absolute constants. A divergent four-term-progression-free candidate must satisfy `alpha_j -> 0` while `sum_j alpha_j = infinity`.
+up to constants. A divergent four-term-progression-free candidate must have `alpha_j -> 0` but `sum_j alpha_j = infinity`.
 
-For a four-term-progression-free block `D subseteq[N,2N)`, coordinated side-anchor deletion removes `K=|D|-s` sponsors and leaves a three-term-progression-free residual with `s<=r_3(N)`. The minimum-translation backbone
-
-```math
-\mathcal B(D)=\{d-\min D:d\in D,\ d>\min D\}
-```
-
-is four-term-progression-free, has size `|D|-1`, lies below `N`, and contracts each associated label by at least one half.
-
-The strongest current one-generation inequalities are
+Coordinated side-anchor deletion and the minimum-translation backbone give the one-generation bounds
 
 ```math
 H(\mathcal B(D))+\sum_xH(M_x)
@@ -52,45 +44,21 @@ H(Q)+\sum_qH(\Xi_q)+H(\mathcal B(D))
 2H(D)-\frac{r_3(N)}N-\frac1N.
 ```
 
-The genealogy remains binary.
+The genealogy is binary. Every recursive child must be resolved into standard dyadic shells.
 
----
-
-## 2. Shell interface and multiplicity compression
-
-Every child must be resolved into standard dyadic shells before deletion is reapplied. A progression crossing shell boundaries is not a recursive terminal event.
-
-Each parent produces at most two retained outputs, each at most half its label. For `p>=1`,
+Every parent creates at most two retained outputs, each at most half its label. Hence, for `p>=1`,
 
 ```math
 \sum_{u\text{ output of }a}u^p\le2^{1-p}a^p,
 ```
 
-and across the full tree,
-
-```math
-\sum_q\mu(q)q^p\le2^{1-p}\sum_{a\text{ root}}a^p.
-```
-
-Repeated labels at different centers, root anchors, and predecessor anchors are exported by translated layers. Copies with one fixed complete anchor history obey
-
-```math
-\lambda_{x,q}(t)(a-t)\le a.
-```
-
-These facts control positive moments and local multiplicity, but not reciprocal mass by themselves.
+and fixed-history multiplicity obeys center, anchor, predecessor, and antichain compression. These facts control positive moments but do not close reciprocal mass.
 
 ---
 
-## 3. Self-replicating aligned diamonds and the exact model
+## 2. Sharp exact model and cardinality obstruction
 
-The base gadget
-
-```math
-H=\{0,1,2,16,17,18,21,22,23,26,27,28\}
-```
-
-supports identical-history persistence
+The aligned-diamond construction has
 
 ```math
 |S_h|=\frac{9\cdot3^h-3}{2},
@@ -98,7 +66,13 @@ supports identical-history persistence
 P_h=2^h.
 ```
 
-Thus `P_h asymp |S_h|^(log_3 2)`, disproving bounded, logarithmic, polylogarithmic, and sufficiently small subpower persistence bounds based only on parent cardinality.
+Thus
+
+```math
+P_h\asymp|S_h|^{\log_3 2},
+```
+
+which rules out bounded, logarithmic, polylogarithmic, and sufficiently small subpower persistence bounds based only on parent cardinality.
 
 There is a computer-certified infinite exact scale-eight family with
 
@@ -108,7 +82,7 @@ L_h=8^{h+1},
 P_h=\frac12L_h^{1/3}.
 ```
 
-A 34-state base-eight automaton and an exact `17238`-state carry search certify that its union contains no nontrivial four-term progression.
+A 34-state base-eight automaton and an exact `17238`-state carry search certify that its union has no nontrivial four-term progression.
 
 Inside the exact standard-dyadic equal-translate model,
 
@@ -116,11 +90,13 @@ Inside the exact standard-dyadic equal-translate model,
 L'\ge8L,
 ```
 
-and, with `alpha_h=|S_h|/L_h`,
-
 ```math
 P_h\alpha_h\le C_0\left(\frac34\right)^h,
-\qquad
+```
+
+and
+
+```math
 \sum_hP_h\alpha_h\le4C_0.
 ```
 
@@ -128,7 +104,7 @@ The exact model is sharply classified.
 
 ---
 
-## 4. Contaminated growth and path dependence
+## 3. Contaminated path dependence
 
 A certified contaminated chain has scale factors
 
@@ -150,9 +126,9 @@ W_5=\frac{273}{256},
 \frac{W_5}{W_1}=\frac{91}{32}.
 ```
 
-Thus local contraction and contraction over every four-generation window are false.
+Local contraction and contraction over every four-generation window are false.
 
-The state `S_5` has no factor-two or factor-four continuation. Its smallest exact recovery enters a strongly contracting branch, but the alternative exact recovery
+The state `S_5` has no factor-two or factor-four continuation. Its smallest exact recovery enters a contracting branch, but the alternative recovery
 
 ```math
 R_5=93476
@@ -173,36 +149,30 @@ This gives
 through `S_7`, with
 
 ```math
-W_7=\frac{615}{512},
-\qquad
 \frac{W_7}{W_5}=\frac{205}{182}>1.
 ```
 
-Universal two-generation recovery and contraction over every six-generation window are therefore false. Recovery is path-dependent.
+Universal two-generation recovery and contraction over every six-generation window are false. Recovery is path-dependent.
 
 ---
 
-## 5. Structural cheap-extension exclusions
+## 4. Structural exclusion and the recorded branch through `S_10`
 
-The recorded states `S_7`, `S_8`, and `S_9` each satisfy
+The recorded states `S_7`, `S_8`, and `S_9` satisfy
 
 ```math
 N_{h,2}=N_{h,4}=0.
 ```
 
-The factor-four exclusions use explicit structural witnesses:
+Their factor-four domains are exhausted by completion, `1001`, and equal-difference `0011` witnesses:
 
-- `S_7`: `359419` disjoint candidates, covered by completion, `1001`, and `0011` witnesses;
-- `S_8`: `4190292` disjoint candidates, covered by completion witnesses and bounded-memory residual joins;
-- `S_9`: `39459384` disjoint candidates, with `30221222` completion witnesses and the residual reduced to seven explicit full-parent witnesses.
+```text
+S7 disjoint domain:      359419
+S8 disjoint domain:     4190292
+S9 disjoint domain:    39459384
+```
 
-These are finite theorems for the recorded states, not state-independent results.
-
----
-
-## 6. Recorded exact branch through `S_10`
-
-The first valid exact continuations after `S_7` are
+The first valid exact continuations are
 
 ```math
 R_7=2097164,
@@ -212,31 +182,27 @@ R_8=16777217,
 R_9=134217729.
 ```
 
-The certified scale sequence becomes
+The finite scale sequence becomes
 
 ```math
 \boxed{4,8,4,4,8,4,8,8,8.}
 ```
 
-The depth-ten state satisfies
+At depth ten,
 
 ```math
-S_{10}\subseteq[536870912,1073741824),
+L_{10}=536870912,
+\qquad
+|S_{10}|=265719,
+\qquad
+P_{10}=1024,
 ```
 
 ```math
-|S_{10}|=265719,
-\qquad
-P_{10}^{\mathrm{cert}}=1024,
+W_{10}=\frac{265719}{524288},
 ```
 
 and
-
-```math
-W_{10}=\frac{265719}{524288}.
-```
-
-Relative to `S_5`,
 
 ```math
 \frac{W_{10}}{W_5}=\frac{88573}{186368}\approx0.475259.
@@ -244,74 +210,68 @@ Relative to `S_5`,
 
 ---
 
-## 7. Infinite exact summable tail from `S_10`
+## 5. Infinite exact basin from `S_10`
 
-Let
+The top-layer reduction lemma says that, for
 
 ```math
-D=2^{18}-1=262143,
+S\subseteq[L,7L/4),
 \qquad
-k_{10}=D+6=262149.
+2L<R\le65L/32,
 ```
 
-For `h>=10`, define
+every new four-term progression in three translates comes from either:
+
+1. a three-term progression in `S` completed at `R`; or
+2. `R` even with `R/2 in S`.
+
+The small-offset completion-descent lemma states that, for `R=2L+k`, a completion offset `c` in the next state descends to offset
+
+```math
+c-3k
+```
+
+in the parent.
+
+For the recorded `S_10`, choose
+
+```math
+D=262143,
+\qquad
+k_{10}=262149.
+```
+
+The recurrence
 
 ```math
 L_{h+1}=8L_h,
 \qquad
 k_{h+1}=4k_h,
 \qquad
-R_h=2L_h+k_h,
+R_h=2L_h+k_h
 ```
 
-and apply exact three-translate reproduction.
-
-Two exact layer-pattern lemmas reduce every possible new four-term progression to either:
-
-1. a three-term progression in `S_h` completed at `R_h`; or
-2. the point `R_h/2` inside `S_h`.
-
-A finite `S_8` certificate finds `2772873` three-term-progression completions, with maximum `17038008`. Since
-
-```math
-2L_8+D=17039359,
-```
-
-the seed completion is absent. Completion descent preserves the absence because `k_(h+1)=4k_h`, while a persistent lower gap excludes `R_h/2`.
+produces an infinite exact-backbone four-term-progression-free tail.
 
 For `n>=0`,
 
 ```math
-k_{10+n}=262149\cdot4^n,
-```
-
-```math
-|S_{10+n}|=\frac{3^{12+n}-3}{2},
-\qquad
-P_{10+n}^{\mathrm{cert}}=2^{10+n},
+W_{10+n}=\frac{3^{12+n}-3}{2^{20+2n}},
 ```
 
 and
 
 ```math
-W_{10+n}=\frac{3^{12+n}-3}{2^{20+2n}}.
-```
-
-The entire scheduled tail is summable:
-
-```math
 \boxed{
-\sum_{n\ge0}W_{10+n}
-=
-\frac{33215}{16384}.
+\sum_{n\ge0}W_{10+n}=\frac{33215}{16384}.
 }
 ```
 
 ---
 
-## 8. General exact-tail basin criterion
+## 6. General exact-tail basin criterion
 
-A state `(S,L,k,P)` is an exact-tail basin entry when:
+A state `(S,L,k,P)` is a basin entry when
 
 ```math
 S\subseteq[L,7L/4),
@@ -329,36 +289,11 @@ S\cap(L,L+L/8)=\varnothing,
 
 and no three-term progression in `S` has missing completion `2L+k`.
 
-Then the recurrence
-
-```math
-L_{n+1}=8L_n,
-\qquad
-k_{n+1}=4k_n,
-\qquad
-R_n=2L_n+k_n
-```
-
-produces an infinite exact four-term-progression-free tail.
-
-If the entry state has size `N`, certified replay multiplicity `P`, and scale `L`, then
-
-```math
-W_n
-=
-\frac{P}{L}
-\left[
-\left(N+\frac32\right)\left(\frac34\right)^n
--
-\frac32\left(\frac14\right)^n
-\right],
-```
-
-and its exact basin terminal charge is
+Then `L'=8L`, `k'=4k`, and `R=2L+k` define an infinite exact tail. If the entry state has size `N`, replay multiplicity `P`, and scale `L`, its exact terminal charge is
 
 ```math
 \boxed{
-\mathfrak B_8(S,L,P)
+\mathfrak B_8(N,P,L)
 =
 \sum_{n\ge0}W_n
 =
@@ -366,15 +301,9 @@ and its exact basin terminal charge is
 }
 ```
 
-This is a reusable absorbing-state criterion for continuation-tree arguments.
+This is a reusable absorbing-state certificate.
 
-**Primary reference:** `docs/exact-tail-basin-criterion.md`.
-
----
-
-## 9. Basin width at `S_10`
-
-Two completion descents from `S_10` to the certified `S_8` seed show that every offset
+Two completion descents from `S_10` to the certified `S_8` seed prove that every
 
 ```math
 260799\le k\le1048579
@@ -386,37 +315,13 @@ with even `v_2(k)` is a basin entry. There are exactly
 \boxed{525189}
 ```
 
-such offsets.
-
-Each produces a distinct infinite exact tail and has the same terminal charge
-
-```math
-\frac{33215}{16384}.
-```
-
-Thus the summable basin at `S_10` occupies a substantial finite interval of separation parameters rather than one isolated continuation.
-
-**Primary references:**
-
-- `docs/depth-ten-exact-tail-basin-fan.md`;
-- `src/verify_depth10_exact_tail_basin_fan.py`;
-- `data/depth10_exact_tail_basin_fan_certificate_2026-07-12.txt`.
+such offsets, giving distinct infinite exact tails with the same terminal charge.
 
 ---
 
-## 10. Bellman potential
+## 7. Bellman potential and scale-word debt
 
-For an exact constant-scale continuation with scale factor `c>6`, size recurrence `N'=3(N+1)`, and replay recurrence `P'=2P`, the unique affine future-cost function satisfying
-
-```math
-\mathfrak B_c(N,P,L)
-=
-\frac{PN}{L}
-+
-\mathfrak B_c(N',P',cL)
-```
-
-is
+For a constant exact scale factor `c>6`, the unique affine future-cost function is
 
 ```math
 \boxed{
@@ -427,23 +332,170 @@ is
 }
 ```
 
-At `c=8`,
+At `c=8`, this is `4P(N+1)/L`.
+
+For an arbitrary disjoint three-translate step with scale factor `c`, define the reference potential
+
+```math
+\mathfrak B=\frac{4P(N+1)}L.
+```
+
+Its exact one-step Bellman defect is
 
 ```math
 \boxed{
-\mathfrak B_8(N,P,L)=\frac{4P(N+1)}L.
+\mathfrak D_c
+=
+\mathfrak B-W-\mathfrak B'
+=
+\frac{P(3N+4)}L
+\left(1-\frac8c\right).
 }
 ```
 
-A basin node can therefore be replaced exactly by this terminal value in a dynamic-programming or supermartingale argument.
+Therefore:
 
-**Primary reference:** `docs/exact-tail-bellman-potential.md`.
+- factor `2` and factor `4` create debt;
+- factor `8` is Bellman-neutral;
+- factors at least `16` create surplus.
+
+For an `H`-step scale word with product `C_H`,
+
+```math
+\boxed{
+\frac{\mathfrak B_H}{\mathfrak B_0}
+=
+\frac{2^H}{C_H}
+\frac{3^H(N_0+\tfrac32)-\tfrac12}{N_0+1}.
+}
+```
+
+The endpoint charge depends only on the scale product, not the order or contamination profile.
+
+Exact repayment consequences:
+
+- one factor `4` plus one factor `8` still expands the endpoint charge;
+- one factor `4` plus two factor `8` steps contracts it for `N>=2`;
+- one factor `2` plus four factor `8` steps contracts it for `N>=9`.
+
+---
+
+## 8. Repayment parsing criterion
+
+If, from a state size at least `9`, a scale word can be partitioned into consecutive blocks of the forms
+
+```text
+[8 or larger]
+[one 4 and two 8-equivalents]
+[one 2 and four 8-equivalents]
+```
+
+with larger factors allowed through the product thresholds, then block-boundary Bellman charge contracts uniformly. The worst exact block factor is
+
+```math
+\frac{2551}{2560}<1.
+```
+
+Consequently
+
+```math
+\sum_hW_h<\infty.
+```
+
+This converts whole-path summability into a geometric debt-token matching problem.
+
+---
+
+## 9. Cheap-step geometry
+
+For an anchored state
+
+```math
+S\subseteq[L,2L),
+\qquad
+\min S=L,
+```
+
+define top slack
+
+```math
+T=2L-\max S.
+```
+
+A three-translate step with factor `c` and separation `R` satisfies
+
+```math
+\boxed{
+T'=T+(c-2)L-2R.
+}
+```
+
+Thus:
+
+### Factor two
+
+```math
+T'=T-2R,
+```
+
+and the backbone imports at least
+
+```math
+|S\cap[L,2L-R)|
+```
+
+prefix points as contamination.
+
+### Factor four
+
+```math
+T'=T+2(L-R).
+```
+
+The value `R=L` is impossible because it creates `0,R,2R,3R`.
+
+- If `R>L`, top slack decreases by at least `2` and the anchor `R` is contamination.
+- If `R<L`, slack is replenished only by importing the prefix
+  ```math
+  S\cap[L,2L-R)
+  ```
+  into the backbone.
+
+Every cheap Bellman debt therefore carries a geometric certificate: slack consumption or imported prefix contamination.
+
+---
+
+## 10. Exact `S_10` escape domains
+
+The recursive positive-difference support of `S_10` gives the complete layer-disjoint candidate domains:
+
+### Factor two
+
+```text
+maximum R:                   76583775
+sponsor-compatible:          51055851
+layer-disjoint:              33026376
+candidate-list FNV-64:       59cfbc6761c6224d
+```
+
+### Factor four
+
+```text
+maximum R:                  613454687
+sponsor-compatible:         408969792
+layer-disjoint:             348012826
+candidate-list FNV-64:      ae1d9e1ec77b2dfb
+```
+
+The recursive computation reproduces the certified `S_9` domains before advancing to `S_10`.
+
+These are domain counts only. Complete four-term-progression exclusion or construction of an escape candidate remains open.
 
 ---
 
 ## 11. Current unresolved problem: whole-tree compensation
 
-The existence of many summable tails from one state does not control all descendants. The active target is
+The active target is
 
 ```math
 \boxed{
@@ -451,20 +503,33 @@ The existence of many summable tails from one state does not control all descend
 }
 ```
 
-Equivalent targets include:
+The current proof architecture is:
 
-1. every infinite path has long-run geometric-mean scale expansion greater than `6`;
-2. every path eventually enters an exact or near-exact basin;
-3. contamination creates a debt repaid by later scale growth or exported difference structure;
-4. a parent potential dominates current weight plus the aggregate potential of all non-basin children;
-5. the continuation tree has a finite-state or spectral quotient with subcritical weighted growth;
-6. overlapping replay cores satisfy an aggregate packing theorem.
+```text
+contaminated transient
+    -> Bellman debt
+    -> slack consumption or prefix contamination
+    -> forced repayment parsing or basin entry
+    -> finite terminal charge.
+```
 
-Immediate work:
+Equivalent remaining tasks:
 
-1. classify factor-two and factor-four continuations of `S_10` that avoid the known basin fan;
-2. generalize the top-layer and completion-descent lemmas to contaminated or near-exact steps;
-3. construct a contamination-debt potential extending the exact Bellman potential;
-4. search for a finite quotient of pre-basin continuation states.
+1. prove every path eventually enters an exact or near-exact basin;
+2. prove every non-basin scale word admits a repayment parsing;
+3. extend the Bellman potential by a contamination reserve that dominates all children;
+4. charge imported prefixes through difference export or overlap packing;
+5. construct a finite-state or spectral quotient of the pre-basin continuation tree;
+6. classify the `S_10` factor-two and factor-four escape domains using recursive witness propagation.
+
+**Primary new references:**
+
+- `docs/exact-tail-basin-criterion.md`;
+- `docs/depth-ten-exact-tail-basin-fan.md`;
+- `docs/exact-tail-bellman-potential.md`;
+- `docs/scale-word-bellman-debt.md`;
+- `docs/cheap-debt-repayment-parsing.md`;
+- `docs/cheap-step-slack-contamination-debt.md`;
+- `docs/depth-ten-cheap-candidate-domains.md`.
 
 The full Erdős problem remains unresolved.

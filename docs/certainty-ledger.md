@@ -63,10 +63,10 @@ H(Q)+\sum_qH(\Xi_q)+H(\mathcal B(D))
 Children must be resolved into standard dyadic shells. For `p>=1`,
 
 ```math
-\sum_{u\text{ output of }a}u^p\le2^{1-p}a^p,
+\sum_{u\text{ output of }a}u^p\le2^{1-p}a^p.
 ```
 
-and the analogous full-tree bound holds.
+The analogous full-tree bound holds.
 
 ---
 
@@ -347,7 +347,7 @@ S\subseteq[L,7L/4),
 v_2(k)\equiv0\pmod2,
 ```
 
-`S` has the lower gap `(L,L+L/8)`, and `2L+k` is not a three-term-progression completion, then the recurrence `L'=8L`, `k'=4k` defines an infinite exact tail.
+`S` has the lower gap `(L,L+L/8)`, and `2L+k` is not a three-term-progression completion, then `L'=8L`, `k'=4k` defines an infinite exact tail.
 
 For entry size `N`, replay multiplicity `P`, and scale `L`,
 
@@ -359,28 +359,35 @@ For entry size `N`, replay multiplicity `P`, and scale `L`,
 
 ---
 
-## CL-021: Depth-ten basin fan
+## CL-021: Complete depth-ten basin fan
 
-**Status:** exact finite arithmetic certificate plus CL-020.  
+**Status:** exact signed-completion classification plus CL-020.  
 **Certainty:** high.
 
-Every
+Within the complete two-step-descent range
 
 ```math
-260799\le k\le1048579
+4\le k\le1048579,
 ```
 
-with even `v_2(k)` is a basin entry at `S_10`. There are exactly
+there are `699051` offsets with even `v_2(k)`. Exactly `54999` are blocked by a coordinate in the complete signed `S_8` completion set. Therefore
 
 ```math
-\boxed{525189}
+\boxed{644052}
 ```
 
-such offsets. Their list SHA-256 is
+offsets are exact-tail basin entries at `S_10`.
+
+The first and last valid offsets are `4` and `1048579`. Their increasing comma-terminated list has
 
 ```text
-99eb9011d140b420ddf4bd2bf33b6d98d9381b36e12089e231eda8323c548e60
+FNV-64  5e1b143b6a59b345
+SHA-256 22daeb2366e5e3324b7e835c61adb34f8e08c0ae203b86420c941f53991069b4
 ```
+
+Each tail has terminal charge `33215/16384`.
+
+The earlier Python verifier certifies the valid upper-interval subfamily of `525189` offsets. It is a correct lower subfamily, not the complete fan.
 
 ---
 
@@ -389,7 +396,7 @@ such offsets. Their list SHA-256 is
 **Status:** elementary algebraic theorem.  
 **Certainty:** high.
 
-For constant exact scale factor `c>6`, the unique affine future-cost function is
+For constant exact scale factor `c>6`,
 
 ```math
 \boxed{
@@ -439,8 +446,6 @@ For an `H`-step word with scale product `C_H`,
 }
 ```
 
-The endpoint charge depends only on the scale product, not order or contamination.
-
 ---
 
 ## CL-024: Cheap-debt repayment parsing
@@ -462,7 +467,7 @@ has summable total weighted density. The worst block-boundary contraction is
 \boxed{2551/2560<1.}
 ```
 
-**Caveat:** geometric realizability of such a parsing is not proved universally.
+**Caveat:** universal geometric realizability of such a parsing is not proved.
 
 ---
 
@@ -490,8 +495,6 @@ Consequences:
 - factor `4`, `R<L`: slack replenishment only through imported prefix contamination;
 - `R=L` is impossible because it creates `0,R,2R,3R`.
 
-This is the geometric certificate attached to every cheap Bellman debt.
-
 ---
 
 ## CL-026: Exact `S_10` cheap candidate domains
@@ -516,8 +519,6 @@ sponsor-compatible    408969792
 layer-disjoint        348012826
 FNV-64                 ae1d9e1ec77b2dfb
 ```
-
-The recursive support construction reproduces the certified `S_9` domains first.
 
 **Caveat:** domain only. No complete exclusion or escape construction is claimed.
 

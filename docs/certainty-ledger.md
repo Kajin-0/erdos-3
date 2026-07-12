@@ -1,8 +1,8 @@
 # Certainty ledger
 
-This file records claims that should survive context loss. Each entry states status, confidence, audit state, and consequence.
+This file records claims that should survive context loss. Each entry states status, certainty, audit state, consequence, and the controlling caveat.
 
-The full Erdős reciprocal-sum problem remains open. The authoritative dependency order is in `docs/current-proof-program.md`.
+The full Erdős reciprocal-sum problem remains open. The authoritative theorem dependency order is in `docs/current-proof-program.md`.
 
 ---
 
@@ -26,7 +26,7 @@ divergence of `sum_{n in A}1/n` is equivalent up to constants to
 \sum_j\alpha_j=\infty.
 ```
 
-A four-term-progression-free divergent candidate must have `alpha_j -> 0`.
+A four-term-progression-free divergent candidate must have `alpha_j -> 0` but `sum_j alpha_j = infinity`.
 
 ---
 
@@ -106,8 +106,6 @@ H(\mathcal B(D))
 
 **Caveat:** equal numerical labels are counted repeatedly.
 
-**Consequence:** raw factors `7/6`, `4/3`, `16/9`, and `8/3` are superseded.
-
 ---
 
 ## CL-005: Exact within-state middle multiplicity fibers
@@ -115,8 +113,6 @@ H(\mathcal B(D))
 **Status:** proved in repository.
 
 **Certainty:** medium-high.
-
-**Audit state:** awaiting independent review.
 
 For distinct selected steps `Q` and center-difference children `Xi_q`,
 
@@ -140,8 +136,6 @@ Every additional copy of a selected middle step becomes a lower-scale four-term-
 
 **Audit state:** awaiting independent review.
 
-Combining the exact middle fibers with the backbone gives
-
 ```math
 \boxed{
 H(Q)
@@ -160,30 +154,35 @@ H(\mathcal B(D))
 
 The genealogy remains binary.
 
-**Consequence:** the previous multiplicity-resolving factor `5/3` is superseded.
+---
+
+## CL-007: Shell resolution is mandatory
+
+**Status:** required interface condition.
+
+**Certainty:** high.
+
+Every child in `[1,N)` must be partitioned into standard dyadic shells before deletion is reapplied. A progression crossing shell boundaries is not a recursive terminal event.
 
 ---
 
-## CL-007: Half-contraction and positive moments
+## CL-008: Half-contraction and positive moments
 
 **Status:** proved in repository.
 
-**Certainty:** medium-high for one step; medium for the full multigeneration use.
+**Certainty:** medium-high for one step; medium for full multigeneration use.
 
-**Audit state:** awaiting independent review.
-
-Every parent creates at most two outputs, each at most half its label. Therefore
+Every parent creates at most two outputs, each at most half its label. Therefore, for `p>=1`,
 
 ```math
 \boxed{
 \sum_{u\text{ output of }a}u^p
 \le
-2^{1-p}a^p
-\qquad(p\ge1).
+2^{1-p}a^p.
 }
 ```
 
-If `mu(q)` is total terminal multiplicity, then
+Across the full tree,
 
 ```math
 \boxed{
@@ -198,37 +197,13 @@ Recursive depth is logarithmic.
 
 ---
 
-## CL-008: Shell resolution is mandatory
-
-**Status:** required interface condition.
-
-**Certainty:** high.
-
-Every child in `[1,N)` must be partitioned into standard dyadic shells before deletion is reapplied. A progression crossing shell boundaries is not a recursive terminal event.
-
----
-
-## CL-009: Global lifted-center layer decomposition
+## CL-009: Lifted-center layer decomposition
 
 **Status:** proved in repository.
 
 **Certainty:** medium-high.
 
-**Audit state:** awaiting independent review.
-
-Let `nu_q(x)` count terminal copies of step `q` lifting to center `x`. Define
-
-```math
-L(q)=\max_x\nu_q(x)
-```
-
-and
-
-```math
-X_{q,k}=\{x:\nu_q(x)\ge k\}.
-```
-
-Translating each nonempty center layer gives four-term-progression-free children `Omega_{q,k}` satisfying
+Let `nu_q(x)` count terminal copies of step `q` lifting to center `x`, and let `L(q)=max_x nu_q(x)`. Then translated center layers `Omega_{q,k}` satisfy
 
 ```math
 \boxed{
@@ -240,39 +215,30 @@ L(q)
 }
 ```
 
-**Consequence:** every repeated label occurring at a different lifted center is exported.
+Every repeated label occurring at a different lifted center is exported.
 
 ---
 
-## CL-010: Root-anchor layer decomposition
+## CL-010: Root-anchor and predecessor-anchor layer decompositions
 
 **Status:** proved in repository.
 
 **Certainty:** medium-high.
 
-**Audit state:** awaiting independent review.
+Copies of one exact lifted progression occurring at different root anchors are exported by translated anchor layers. The process iterates backward through predecessor anchors.
 
-Let `lambda_{x,q}(t)` count copies of one exact lifted progression produced in states with root anchor `t`. Put
-
-```math
-M_{x,q}
-=
-\max_{t\in D}\lambda_{x,q}(t).
-```
-
-Nested anchor layers give four-term-progression-free children `Gamma_{x,q,k}` with
+For one fixed predecessor transition,
 
 ```math
 \boxed{
-\sum_{t\in D}\lambda_{x,q}(t)
-=
-M_{x,q}
-+
-\sum_{k=1}^{M_{x,q}}|\Gamma_{x,q,k}|.
+c_{x,q,t}(p)(a-p)\le a.
 }
 ```
 
-**Consequence:** every exact-progression copy occurring with a different root anchor is exported.
+**Primary notes:**
+
+- `docs/state-anchor-layer-and-antichain-budget.md`;
+- `docs/predecessor-anchor-layer-resolution.md`.
 
 ---
 
@@ -282,9 +248,7 @@ M_{x,q}
 
 **Certainty:** medium-high.
 
-**Audit state:** awaiting independent review.
-
-Let `a=x-sigma(q)q` be the root sponsor. Copies produced in states with one anchor `t` have equal local sponsor label `a-t` and form an antichain. Therefore
+For root sponsor `a` and anchor `t`,
 
 ```math
 \boxed{
@@ -293,7 +257,7 @@ Let `a=x-sigma(q)q` be the root sponsor. Copies produced in states with one anch
 }
 ```
 
-High multiplicity implies
+Hence
 
 ```math
 \lambda_{x,q}(t)\ge m
@@ -301,223 +265,305 @@ High multiplicity implies
  t\ge a\left(1-\frac1m\right).
 ```
 
-Thus unresolved persistence is concentrated in a short interval immediately below the sponsor.
+High unresolved persistence is localized immediately below the sponsor.
 
 ---
 
-## CL-012: Predecessor-anchor layer decomposition
-
-**Status:** proved in repository.
-
-**Certainty:** medium-high.
-
-**Audit state:** awaiting independent review.
-
-For one target anchor `t`, let `c_{x,q,t}(p)` count copies whose immediate parent state has anchor `p`. Define
-
-```math
-C_{x,q}(t)
-=
-\max_{p\in D}c_{x,q,t}(p).
-```
-
-Nested predecessor layers produce four-term-progression-free children `Lambda_{x,q,t,k}` satisfying
-
-```math
-\boxed{
-\sum_{p\in D}c_{x,q,t}(p)
-=
-C_{x,q}(t)
-+
-\sum_{k=1}^{C_{x,q}(t)}|\Lambda_{x,q,t,k}|.
-}
-```
-
-Predecessor anchors satisfy
-
-```math
-p\le2t-a<t,
-```
-
-and one fixed transition obeys
-
-```math
-\boxed{
-c_{x,q,t}(p)(a-p)\le a.
-}
-```
-
-The construction iterates backward through the complete anchor history.
-
-**Primary note:** `docs/predecessor-anchor-layer-resolution.md`.
-
----
-
-## CL-013: Sharp one-step aligned diamond
+## CL-012: Sharp one-step aligned diamond
 
 **Status:** proved in repository and computationally verified.
 
 **Certainty:** high for the finite certificate.
 
-For every `N>=32`,
+The block
 
 ```math
-D_N
-=
-N+
-\{0,1,2,16,17,18,21,22,23,26,27,28\}
+N+\{0,1,2,16,17,18,21,22,23,26,27,28\}
 ```
 
-is four-term-progression-free.
-
-The middle multiplicity fiber and minimum-translation backbone both produce the progression
+is four-term-progression-free and produces two copies of the progression
 
 ```math
 16,21,26
 ```
 
-with the same root anchor.
+with the same root anchor: one in a middle multiplicity fiber and one in the minimum-translation backbone.
 
-**Consequence:** one parent can create two identical local copies; the one-parent bound `2` is sharp.
-
-**Primary note:** `docs/minimum-backbone-aligned-diamond-counterexample.md`.
-
-**Verifier:** `src/verify_minimum_backbone_aligned_diamond.py`.
+**Consequence:** the one-parent binary bound `2` is sharp.
 
 ---
 
-## CL-014: Self-replicating aligned diamonds
+## CL-013: Self-replicating aligned diamonds
 
-**Status:** proved in repository.
+**Status:** proved in repository; finite instances computationally verified.
 
-**Certainty:** medium-high for the recursive construction; depth-two certificate computationally verified.
-
-**Audit state:** awaiting independent review.
+**Certainty:** medium-high for the recursive construction.
 
 There are four-term-progression-free states `S_h` producing
 
 ```math
-\boxed{2^h}
+P_h=2^h
 ```
 
-terminal copies of the same exact local progression with the same complete anchor history.
-
-Their cardinalities are
+copies of the same exact local progression with the same complete anchor history, with
 
 ```math
-\boxed{
 |S_h|
 =
 \frac{9\cdot3^h-3}{2}.
-}
 ```
 
 Therefore
 
 ```math
-\boxed{
-\text{identical-history persistence}
-\asymp
-|S_h|^{\log_3 2}.
-}
+P_h\asymp|S_h|^{\log_3 2}.
 ```
 
-The construction uses a no-carry union of three widely separated translates and duplicates the previous gadget simultaneously in a middle multiplicity fiber and a backbone shell.
-
-**Consequence:** absolute, logarithmic, polylogarithmic, and subpower bounds below exponent `log_3 2` are false in terms of parent cardinality.
-
-**Primary note:** `docs/self-replicating-aligned-diamond.md`.
-
-**Verifier:** `src/verify_self_replicating_aligned-diamond-depth2.py`.
+**Consequence:** bounded, logarithmic, polylogarithmic, and subpower persistence bounds below exponent `log_3 2` are false in terms of parent cardinality.
 
 ---
 
-## CL-015: Supporting deletion-DAG structural balance
+## CL-014: Scale-eight infinite aligned-diamond family
 
-**Status:** proved in repository.
+**Status:** computer-assisted exact construction.
 
-**Certainty:** medium.
+**Certainty:** high for the finite-state certificate; medium-high for the full interpretation pending independent review.
+
+There are four-term-progression-free states
+
+```math
+S_h\subseteq[L_h,2L_h)
+```
+
+with
+
+```math
+L_h=8^{h+1},
+\qquad
+|S_h|=\frac{9\cdot3^h-3}{2},
+\qquad
+P_h=2^h.
+```
+
+Thus
+
+```math
+\boxed{
+P_h=\frac12L_h^{1/3}.
+}
+```
+
+A 34-state base-eight automaton recognizes the union. The exact product/carry search explores 17,238 reachable states and reaches no accepting nontrivial four-term progression.
+
+**Verifier:** `src/verify_scale_eight_aligned_diamond.py`.
+
+**Primary note:** `docs/scale-eight-self-replicating-aligned-diamond.md`.
+
+**Certificate signature:**
+
+```text
+e08c121adfee8cfa635ccb11d65c8519604611865ba504237f84896f908d757d
+```
+
+---
+
+## CL-015: Exact equal-translate model is sharply classified
+
+**Status:** proved by elementary progression, shell, and cardinality arguments.
+
+**Certainty:** high internally.
 
 **Audit state:** awaiting independent review.
 
-Merge and spanning-component children satisfy
+A four-term-progression-free equal-translate state has at most three layers, because four layers contain
 
 ```math
-\sum_v|\Delta_v|=K-s+\rho,
+0,R,2R,3R.
 ```
 
+The occurrence genealogy is binary, so one parent has at most two persistent children.
+
+If the backbone reproduces the previous state exactly, then `R>=2L`, and standard dyadic shelling forces
+
 ```math
-\sum_j|\Theta_j|=K+s-\rho,
+\boxed{L'\ge8L.}
+```
+
+Consequently
+
+```math
+\boxed{
+P_h\le\left(\frac{L_h}{L_0}\right)^{1/3}.
+}
+```
+
+Writing `alpha_h=|S_h|/L_h` and `C_0=(|S_0|+3/2)/L_0`,
+
+```math
+\boxed{
+P_h\alpha_h
+\le
+C_0\left(\frac34\right)^h
+=
+C_0P_h^{\log_2 3-2},
+}
 ```
 
 and
 
 ```math
-\sum_v|\Delta_v|
-+
-\sum_j|\Theta_j|
-=2K.
-```
-
-These results remain supporting overlap geometry but are no longer required for the strongest one-generation constants.
-
----
-
-# Superseded quantitative results
-
-The raw binary factors
-
-```math
-\frac76,
-\qquad
-\frac43,
-\qquad
-\frac{16}{9},
-\qquad
-\frac83
-```
-
-remain valid but are superseded by CL-004.
-
-The multiplicity-resolving factor `5/3` remains valid but is superseded by CL-006.
-
----
-
-# Explicitly false or corrected targets
-
-Do not use the following without new hypotheses:
-
-1. uniformly bounded depth-two affine-lift overlap;
-2. universal uncorrected local `8/3` packing;
-3. naive recursive density increment in the inherited three-dilate class;
-4. universal one-layer sibling collapse;
-5. universal one-copy-per-anchor persistence;
-6. bounded or polylogarithmic identical-anchor-history persistence;
-7. a subpower persistence bound with exponent below `log_3 2` in terms of parent cardinality;
-8. the original 31-element overlap as a shell-resolved recursive terminal example.
-
----
-
-# Open bottleneck OB-001: Density-sensitive aligned replication
-
-CL-014 shows that four-term-progression-freeness alone allows polynomially growing exact persistence.
-
-The construction remains sparse in its ambient interval. Its point count grows like `3^h`, while the scale required for `h` replication levels grows faster.
-
-The active closing target is
-
-```math
 \boxed{
-\text{prove that blocks with substantial reciprocal mass cannot sustain aligned-diamond replication efficiently across scales.}
+\sum_{h\ge0}P_h\alpha_h\le4C_0.
 }
 ```
 
-Approved targets:
+The scale-eight family attains the exponents. The exact model is therefore sharply classified.
 
-1. prove a lower bound on ambient scale required for `h` replication levels;
-2. establish a tradeoff between persistence and dyadic density;
-3. build a potential coupling reciprocal mass to the `3`-for-`2` replication law;
-4. classify constructions approaching minimum scale growth;
-5. show that nonsummable dyadic density is incompatible with indefinite efficient replication.
+**Primary notes:**
 
-No current theorem closes this gap.
+- `docs/three-translate-dyadic-scale-barrier.md`;
+- `docs/exact-three-translate-weighted-density-theorem.md`.
+
+**Caveat:** this does not control contaminated backbones.
+
+---
+
+## CL-016: Finite contaminated-backbone depth-five chain
+
+**Status:** exact finite computer-assisted construction.
+
+**Certainty:** high for the finite certificate; medium-high for the identical-history interpretation pending independent review.
+
+There are four-term-progression-free states
+
+```math
+S_h\subseteq[L_h,2L_h),
+\qquad 1\le h\le5,
+```
+
+with scales
+
+```math
+(64,256,2048,8192,32768)
+```
+
+and separations
+
+```math
+(61,303,1597,8195).
+```
+
+The outer dyadic scale factors are
+
+```math
+\boxed{4,8,4,4.}
+```
+
+At each step, the middle fiber is exactly the previous state, while the relevant backbone shell contains the previous state plus additional points. The verified deletion schedule can be replayed inside that subset, and both continuations inherit the same new root anchor.
+
+Thus
+
+```math
+P_h^{\mathrm{cert}}=2^h
+```
+
+is a certified lower bound.
+
+The state cardinalities are
+
+```math
+12,39,120,363,1092,
+```
+
+and the backbone contamination counts are
+
+```math
+4,1,33,1.
+```
+
+For
+
+```math
+W_h
+=
+P_h^{\mathrm{cert}}\frac{|S_h|}{L_h},
+```
+
+one has
+
+```math
+W_1=\frac38,
+\qquad
+W_5=\frac{273}{256},
+```
+
+so
+
+```math
+\boxed{
+\frac{W_5}{W_1}
+=
+\frac{91}{32}.
+}
+```
+
+**Verifier:** `src/verify_contaminated_backbone_depth5.py`.
+
+**Primary note:** `docs/contaminated-backbone-depth-five-chain.md`.
+
+**Certificate:** `data/contaminated_backbone_depth5_certificate_2026-07-11.txt`.
+
+**Caveat:** the construction is finite. It does not prove indefinite extension, long-run growth, or a divergent reciprocal-sum counterexample.
+
+---
+
+# Superseded or explicitly false targets
+
+Do not use the following without new hypotheses:
+
+1. bounded or polylogarithmic identical-anchor-history persistence;
+2. a subpower persistence bound below exponent `log_3 2` in terms of parent cardinality;
+3. a universal one-step `3/4` contraction when the backbone merely contains the replay state;
+4. universal strict contraction at every non-exact step;
+5. contraction over every block of four consecutive outer steps;
+6. a local near-exact/defective dichotomy in which every departure from exact reproduction immediately pays a stronger contraction;
+7. recursive arguments that ignore mandatory dyadic shell resolution.
+
+---
+
+# Open bottleneck OB-001: Long-run contamination compensation
+
+The exact equal-translate obstruction is controlled, but contaminated backbones can support short bursts of cheap replication during which multiplicity-weighted density grows.
+
+For disjoint three-translate growth,
+
+```math
+\frac{W_{h+1}}{W_h}
+=
+\frac{6}{c_h}
+\left(1+\frac1{|S_h|}\right),
+\qquad
+c_h=\frac{L_{h+1}}{L_h}.
+```
+
+Ignoring the lower-order term, long-run contraction requires geometric-mean scale expansion greater than `6`.
+
+The active target is
+
+```math
+\boxed{
+\text{prove long-run compensation for cheap contaminated-backbone replication.}
+}
+```
+
+Approved target forms:
+
+1. cumulative scale expansion eventually exceeds the `6`-per-generation threshold;
+2. contamination creates exportable lower-scale difference mass;
+3. repeated cheap steps force a four-term progression;
+4. repeatable patterns admit a finite-state or spectral classification with subcritical growth;
+5. overlap among contaminated replay cores obeys an aggregate packing theorem.
+
+The immediate computational question is whether cheap scale-factor patterns extend indefinitely, periodically, or only through bounded bursts.
+
+No current theorem closes this gap. The full Erdős problem remains unresolved.

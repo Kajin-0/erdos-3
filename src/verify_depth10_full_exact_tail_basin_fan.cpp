@@ -12,12 +12,12 @@ using namespace std;
 namespace {
 constexpr int L8 = 8388608;
 constexpr int K_MIN = 4;
-constexpr int K_MAX = 1048579;
+constexpr int K_MAX = 16777216;
 constexpr long long EXPECTED_COMPLETIONS = 2772873;
-constexpr long long EXPECTED_SPONSOR = 699051;
+constexpr long long EXPECTED_SPONSOR = 11184809;
 constexpr long long EXPECTED_BLOCKED = 54999;
-constexpr long long EXPECTED_VALID = 644052;
-constexpr uint64_t EXPECTED_FNV = 0x5e1b143b6a59b345ULL;
+constexpr long long EXPECTED_VALID = 11129810;
+constexpr uint64_t EXPECTED_FNV = 0x2a52c71cddac07f5ULL;
 constexpr uint64_t FNV_OFFSET = 1469598103934665603ULL;
 constexpr uint64_t FNV_PRIME = 1099511628211ULL;
 
@@ -72,7 +72,9 @@ inline void set_bit(vector<uint64_t>& bits, long long index) {
 }
 
 inline bool get_bit(const vector<uint64_t>& bits, long long index) {
-    return (bits[index >> 6] >> (index & 63)) & 1ULL;
+    return index >= 0 &&
+        static_cast<uint64_t>(index >> 6) < bits.size() &&
+        ((bits[index >> 6] >> (index & 63)) & 1ULL);
 }
 }  // namespace
 
@@ -177,13 +179,13 @@ int main(int argc, char** argv) {
         valid_count != EXPECTED_VALID ||
         hash != EXPECTED_FNV ||
         first_valid != 4 ||
-        last_valid != 1048579) {
+        last_valid != K_MAX) {
         throw runtime_error("full basin fan certificate mismatch");
     }
 
     const vector<long long> expected_classes = {
-        483016,0,120732,0,30191,0,7584,0,1892,0,472,0,
-        123,0,31,0,8,0,2,0,1
+        8347334,0,2086812,0,521711,0,130464,0,32612,0,8152,0,
+        2043,0,511,0,128,0,32,0,8,0,2,0,1
     };
     for (size_t index = 0; index < expected_classes.size(); ++index) {
         if (classes[index] != expected_classes[index]) {
@@ -191,15 +193,15 @@ int main(int argc, char** argv) {
         }
     }
 
-    cout << "verified: full two-step-descent basin fan at S10\n";
+    cout << "verified: full basin-criterion fan at S10\n";
     cout << "completion_count_S8=2772873\n";
     cout << "k_min=4\n";
-    cout << "k_max=1048579\n";
-    cout << "sponsor_compatible=699051\n";
+    cout << "k_max=16777216\n";
+    cout << "sponsor_compatible=11184809\n";
     cout << "blocked_by_seed_completion=54999\n";
-    cout << "valid_basin_offsets=644052\n";
-    cout << "valid_offset_fnv64=5e1b143b6a59b345\n";
-    cout << "valid_offset_sha256=22daeb2366e5e3324b7e835c61adb34f8e08c0ae203b86420c941f53991069b4\n";
+    cout << "valid_basin_offsets=11129810\n";
+    cout << "valid_offset_fnv64=2a52c71cddac07f5\n";
+    cout << "valid_offset_sha256=9cbbd28aab4db0a74d48c4a8eaf95d18b3854e56bd7138123734eaefe5b2d384\n";
     cout << "terminal_charge=33215/16384\n";
     return 0;
 }

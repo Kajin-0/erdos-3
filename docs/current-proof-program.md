@@ -6,7 +6,7 @@ This is the authoritative overview of the active program for Erdős Problem #3:
 
 > If `A subseteq N` and `sum_{n in A} 1/n = infinity`, must `A` contain arbitrarily long arithmetic progressions?
 
-The full problem remains open. The project focuses on the four-term case: prove that every four-term-progression-free subset of the positive integers has convergent reciprocal sum.
+The full problem remains open. This repository studies the four-term case: prove that every four-term-progression-free subset of the positive integers has convergent reciprocal sum.
 
 Recent theorem-style claims are proved internally or computationally certified as stated, but have not received independent expert review.
 
@@ -38,7 +38,7 @@ A divergent four-term-progression-free candidate must satisfy
 \sum_j\alpha_j=\infty.
 ```
 
-Therefore the closing argument must control the aggregate contribution of sparse dyadic blocks rather than prove a fixed positive-density statement.
+The closing argument must therefore control the aggregate contribution of sparse dyadic blocks.
 
 ---
 
@@ -132,7 +132,7 @@ H(\mathcal B(D))
 }
 ```
 
-This counts equal numerical labels repeatedly.
+Equal numerical labels are counted repeatedly.
 
 ## 4.2 Exact within-state multiplicity fibers
 
@@ -182,11 +182,11 @@ Every child in `[1,N)` must be partitioned into standard dyadic shells
 
 before deletion is reapplied. Harmonic mass is additive across shells.
 
-A progression crossing shell boundaries is not a recursive terminal event. Every multigeneration theorem, verifier, and counterexample must be checked after this shell resolution.
+A progression crossing shell boundaries is not a recursive terminal event. Every multigeneration theorem, verifier, and counterexample must be checked after shell resolution.
 
 ---
 
-# 6. Half-contraction and moment control
+# 6. Half-contraction and global multiplicity compression
 
 Every retained output associated with a parent label `a` is at most `a/2`, and every parent creates at most two outputs. Hence, for every `p>=1`,
 
@@ -209,43 +209,16 @@ Across the full recursive tree,
 }
 ```
 
-Every recursive path has logarithmic depth. Positive moments control scale, but they do not by themselves control reciprocal mass or identical-history persistence.
+Every recursive path has logarithmic depth. Positive moments control scale, but not reciprocal mass or identical-history persistence by themselves.
 
----
+Repeated terminal labels are compressed in stages:
 
-# 7. Global multiplicity compression
+1. different lifted centers are exported by center-difference layers;
+2. different root anchors are exported by anchor-difference layers;
+3. different predecessor anchors are exported recursively;
+4. copies with one complete anchor history obey antichain budgets.
 
-A terminal step `q` in a state `S=B-t` lifts to an exact root progression with center `x`.
-
-## 7.1 Lifted-center layers
-
-If `nu_q(x)` counts copies lifting to center `x`, define
-
-```math
-L(q)=\max_x\nu_q(x).
-```
-
-Nested center layers translate to four-term-progression-free children `Omega_{q,k}` satisfying
-
-```math
-\boxed{
-\mu(q)
-=
-L(q)
-+
-\sum_{k=1}^{L(q)}|\Omega_{q,k}|.
-}
-```
-
-Thus repetition at different lifted centers is exported.
-
-## 7.2 Root-anchor layers
-
-For one exact lifted progression, let `lambda_{x,q}(t)` count copies produced with root anchor `t`. Nested anchor layers give children `Gamma_{x,q,k}` with an exact layer identity, exporting all copies occurring at different root anchors.
-
-## 7.3 Same-anchor antichain budget
-
-Let `a` be the root sponsor. Copies with one anchor `t` have equal local sponsor label `a-t` and form an antichain. Therefore
+For root sponsor `a` and anchor `t`,
 
 ```math
 \boxed{
@@ -253,7 +226,7 @@ Let `a` be the root sponsor. Copies with one anchor `t` have equal local sponsor
 }
 ```
 
-In particular,
+Thus
 
 ```math
 \lambda_{x,q}(t)\ge m
@@ -263,40 +236,24 @@ In particular,
 
 High unresolved multiplicity is localized immediately below the sponsor.
 
-## 7.4 Predecessor-anchor layers
-
-For a fixed target anchor `t`, predecessor anchors satisfy
-
-```math
-p\le2t-a<t
-```
-
-and one fixed transition obeys
-
-```math
-\boxed{
-c_{x,q,t}(p)(a-p)\le a.
-}
-```
-
-The construction iterates backward through complete anchor histories.
-
 **Primary notes:**
 
 - `docs/global-lifted-center-layer-resolution.md`;
 - `docs/state-anchor-layer-and-antichain-budget.md`;
-- `docs/predecessor-anchor-layer-resolution.md`.
+- `docs/predecessor-anchor-layer-resolution.md`;
+- `docs/half-contraction-multiscale-label-potential.md`.
 
 ---
 
-# 8. Self-replicating aligned diamonds
+# 7. Self-replicating aligned diamonds
 
 The same complete anchor history can persist polynomially many times.
 
-A base block built from
+The base set
 
 ```math
-H=\{0,1,2,16,17,18,21,22,23,26,27,28\}
+H=
+\{0,1,2,16,17,18,21,22,23,26,27,28\}
 ```
 
 produces the terminal progression
@@ -310,7 +267,8 @@ both in a middle multiplicity fiber and in the minimum-translation backbone.
 A three-translate recursion gives four-term-progression-free states with
 
 ```math
-|S_h|=\frac{9\cdot3^h-3}{2}
+|S_h|=
+\frac{9\cdot3^h-3}{2}
 ```
 
 and certified identical-history persistence
@@ -322,16 +280,16 @@ P_h=2^h.
 Therefore
 
 ```math
-P_h\asymp |S_h|^{\log_3 2}.
+P_h\asymp|S_h|^{\log_3 2}.
 ```
 
-Consequently bounded, logarithmic, polylogarithmic, and subpower bounds below exponent `log_3 2` are false in terms of parent cardinality alone.
+Bounded, logarithmic, polylogarithmic, and subpower bounds below exponent `log_3 2` are false in terms of parent cardinality alone.
 
 **Primary note:** `docs/self-replicating-aligned-diamond.md`.
 
 ---
 
-# 9. Exact scale-eight family
+# 8. Exact scale-eight family
 
 There is a computer-certified infinite family
 
@@ -344,7 +302,8 @@ with
 ```math
 L_h=8^{h+1},
 \qquad
-|S_h|=\frac{9\cdot3^h-3}{2},
+|S_h|=
+\frac{9\cdot3^h-3}{2},
 \qquad
 P_h=2^h.
 ```
@@ -357,7 +316,7 @@ P_h=\frac12L_h^{1/3}.
 }
 ```
 
-The union is recognized by a 34-state least-significant-digit-first base-eight automaton. The exact product/carry search explores 17,238 reachable states and reaches no accepting nontrivial four-term progression.
+The union is recognized by a 34-state least-significant-digit-first base-eight automaton. The exact product/carry search explores `17238` reachable states and reaches no accepting nontrivial four-term progression.
 
 **Verifier:** `src/verify_scale_eight_aligned_diamond.py`.
 
@@ -365,7 +324,7 @@ The union is recognized by a 34-state least-significant-digit-first base-eight a
 
 ---
 
-# 10. Exact equal-translate model is sharply classified
+# 9. Exact equal-translate model is sharply classified
 
 Suppose an exact replication step is formed from
 
@@ -377,17 +336,13 @@ A,
 
 and the uncontaminated backbone shell reproduces the previous state exactly.
 
-## 10.1 At most three equal translate layers
-
-Four layers would contain
+Four equal translate layers would contain
 
 ```math
 0,R,2R,3R,
 ```
 
-so four-term-progression-freeness forces at most three equal translate layers. The occurrence genealogy is binary, so one parent has at most two persistent children.
-
-## 10.2 Dyadic scale-eight barrier
+so four-term-progression-freeness permits at most three layers. The occurrence genealogy is binary, so one parent has at most two persistent children.
 
 Exact uncontaminated backbone reproduction requires `R>=2L`. Since `2R` belongs to the raw state and the next raw state must fit below `L'`,
 
@@ -405,35 +360,20 @@ After `h` exact generations,
 
 ```math
 \boxed{
-P_h\le\left(\frac{L_h}{L_0}\right)^{1/3}.
+P_h\le
+\left(\frac{L_h}{L_0}\right)^{1/3}.
 }
 ```
-
-The scale-eight family attains the exponent.
-
-## 10.3 Sharp weighted-density decay
 
 Let
 
 ```math
 \alpha_h=\frac{|S_h|}{L_h},
 \qquad
-P_h=2^h.
+C_0=\frac{|S_0|+3/2}{L_0}.
 ```
 
-The exact cardinality recurrence is
-
-```math
-|S_{h+1}|=3(|S_h|+1).
-```
-
-Writing
-
-```math
-C_0=\frac{|S_0|+3/2}{L_0},
-```
-
-one obtains
+The exact recurrence `|S_{h+1}|=3(|S_h|+1)` gives
 
 ```math
 \boxed{
@@ -453,17 +393,7 @@ and
 }
 ```
 
-The exact one-step efficiency is
-
-```math
-\rho_{\mathrm{exact}}
-=
-\frac{2\cdot3}{8}
-=
-\frac34.
-```
-
-This classification is sharp inside the exact standard-dyadic equal-translate model.
+The scale-eight family attains the exponents. The exact model is sharply classified.
 
 **Primary notes:**
 
@@ -472,7 +402,7 @@ This classification is sharp inside the exact standard-dyadic equal-translate mo
 
 ---
 
-# 11. Contaminated-backbone depth-five chain
+# 10. Contaminated-backbone depth-five burst
 
 The exact-model contraction does not extend locally when the backbone shell merely contains the replay state.
 
@@ -480,7 +410,8 @@ There are certified four-term-progression-free states
 
 ```math
 S_h\subseteq[L_h,2L_h),
-\qquad 1\le h\le5,
+\qquad
+1\le h\le5,
 ```
 
 with scales
@@ -509,7 +440,7 @@ At each step:
 
 1. the selected middle multiplicity fiber is exactly the previous state;
 2. the relevant backbone shell contains the previous state plus contaminating points;
-3. the deletion schedule inside the previous state can be replayed in that subset;
+3. the verified deletion schedule can be replayed inside that subset;
 4. both continuations share the new root anchor;
 5. certified identical-history persistence doubles.
 
@@ -526,7 +457,8 @@ Define
 ```math
 W_h
 =
-P_h^{\mathrm{cert}}\frac{|S_h|}{L_h}.
+P_h^{\mathrm{cert}}
+\frac{|S_h|}{L_h}.
 ```
 
 Then
@@ -563,7 +495,108 @@ Therefore the following are false without stronger hypotheses:
 
 ---
 
-# 12. Current unresolved problem: long-run compensation
+# 11. Finite forced recovery after the burst
+
+The depth-five state satisfies
+
+```math
+S_5\subseteq[32768,65536),
+\qquad
+|S_5|=1092.
+```
+
+An exhaustive finite search over every sponsor-compatible disjoint three-translate continuation gives:
+
+```math
+\boxed{N_{5,2}=0,}
+\qquad
+\boxed{N_{5,4}=0.}
+```
+
+The factor-two search contains `622` candidates; the factor-four search contains `22467` candidates.
+
+Therefore every continuation of this recorded state in the standard-dyadic replay-containment model must use scale factor at least `8`.
+
+The first valid sponsor-compatible exact-backbone factor-eight recovery is
+
+```math
+\boxed{R_5^*=65547.}
+```
+
+It gives a four-term-progression-free state
+
+```math
+S_6\subseteq[262144,524288),
+\qquad
+|S_6|=3279.
+```
+
+A second exhaustive search gives
+
+```math
+\boxed{N_{6,2}=0,}
+\qquad
+\boxed{N_{6,4}=0.}
+```
+
+The factor-two search contains `22459` candidates; the factor-four search contains `197222` candidates.
+
+Thus any continuation from this selected recovered state either terminates or again uses scale factor at least `8`.
+
+The selected first recovery satisfies
+
+```math
+\frac{W_6}{W_5}
+=
+\frac{1093}{1456}.
+```
+
+Any next continuation satisfies
+
+```math
+\frac{W_7}{W_6}
+\le
+\frac{820}{1093}.
+```
+
+Therefore
+
+```math
+\boxed{
+\frac{W_7}{W_5}
+\le
+\frac{205}{364}
+\approx0.563187,
+}
+```
+
+or equivalently
+
+```math
+\boxed{W_7\le\frac{615}{1024}}
+```
+
+if a seventh state exists in this model.
+
+This is the first explicit finite compensation block after a contaminated cheap-growth burst:
+
+```math
+4,8,4,4
+\quad\longrightarrow\quad
+8,\ge8.
+```
+
+**Verifier:** `src/verify_forced_recovery_after_depth5.py`.
+
+**Primary note:** `docs/forced-recovery-after-depth-five.md`.
+
+**Certificate:** `data/forced_recovery_after_depth5_certificate_2026-07-11.txt`.
+
+**Caveat:** this is a state-specific finite theorem. It does not prove that every factor-eight continuation of `S_5`, or every contaminated genealogy, has the same recovery behavior.
+
+---
+
+# 12. Current unresolved problem: state-independent long-run compensation
 
 For disjoint three-translate growth,
 
@@ -590,33 +623,27 @@ then
 
 Ignoring the lower-order term, long-run contraction requires geometric-mean scale expansion greater than `6`.
 
-The certified four-step contaminated segment has
-
-```math
-\prod_{h=1}^{4}c_h
-=4\cdot8\cdot4\cdot4
-=512
-<6^4=1296.
-```
-
-Hence any universal theorem must operate on a longer horizon.
+The contaminated burst shows that compensation need not occur locally or over four generations. The finite recovery result shows that one explicit cheap burst is followed by a two-generation contraction block along its first exact recovery.
 
 The active target is
 
 ```math
 \boxed{
-\text{prove long-run compensation for cheap contaminated-backbone replication.}
+\text{prove state-independent long-run compensation for cheap contaminated-backbone replication.}
 }
 ```
 
 A successful result may take one of the following forms:
 
-1. cumulative scale expansion eventually exceeds the `6`-per-generation threshold;
-2. contaminating points create exportable lower-scale difference structure;
+1. every sufficiently long genealogy has cumulative scale expansion above the `6`-per-generation threshold;
+2. contamination creates exportable lower-scale difference mass;
 3. repeated cheap steps force a four-term progression;
-4. repeatable patterns fall into a finite symbolic class with controlled spectral growth;
-5. overlap among contaminated replay cores admits an aggregate packing bound.
+4. repeatable patterns fall into a finite symbolic class with subcritical spectral growth;
+5. overlap among contaminated replay cores obeys an aggregate packing theorem;
+6. a monotone contamination-debt potential forces recovery or termination.
 
-The immediate computational question is whether cheap scale-factor patterns extend indefinitely, periodically, or only through bounded bursts. The immediate proof question is to identify a monotone contamination or recovery potential.
+The immediate computational target is to classify all valid factor-eight continuations of `S_5` by whether they admit factor-two or factor-four successors.
+
+The immediate proof target is to identify a state-independent recovery invariant that turns finite forced-recovery blocks into a summable multiscale estimate.
 
 The full Erdős problem remains unresolved.

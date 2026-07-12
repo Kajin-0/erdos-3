@@ -1,0 +1,30 @@
+verified: first exact factor-eight continuation R7=2097164
+verified: G8 and S8 are four-term-progression-free
+verified: exact backbone reproduction
+
+scales=64,256,2048,8192,32768,262144,1048576,8388608
+scale_factors=4,8,4,4,8,4,8
+separations=61,303,1597,8195,93476,230164,2097164
+state_sizes=12,39,120,363,1092,3279,9840,29523
+backbone_contamination=4,1,33,1,0,2,0
+
+R7=2097164
+R7_v2=2
+G8_range=0,6215996
+G8_size=29523
+S8_range=8388608,14604604
+S8_size=29523
+G8_sha256=83eb6c27fd29e9b3454d9918a32263e4ee4bc2bfd9c0d2136baf465861fd862d
+S8_sha256=e0e750f074e3017b0d20b698c3f1dba3926a5fee5c40d4b0e7dea683b743888f
+G8_fnv64=b5fad81d83531b77
+S8_fnv64=023db79dd7cbf62b
+
+weighted_density_S5=273/256
+weighted_density_S7=615/512
+weighted_density_S8=29523/32768
+weighted_density_growth_S8_over_S7=9841/13120
+weighted_density_growth_S8_over_S5=757/896
+weighted_density_growth_S8_over_S1=9841/4096
+
+compile=g++ -O3 -march=native -fopenmp src/verify_contaminated_backbone_depth8.cpp -o verify_depth8
+run=OMP_NUM_THREADS=32 ./verify_depth8

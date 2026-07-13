@@ -210,11 +210,9 @@ where `T` is terminal-step harmonic mass, `O` is middle-fiber occurrence mass, a
 
 ---
 
-## 8. First common policy-weight cone
+## 8. First common occurrence-weight cone
 
-The same score has now been tested on the recorded lexicographic and reverse schedules through `S_6`.
-
-On `S_1`, reverse deletion has lower occurrence mass but higher terminal mass. Exact arithmetic gives
+On `S_1`, exact arithmetic gives
 
 ```math
 C_\lambda(\mathrm{reverse})
@@ -224,15 +222,9 @@ C_\lambda(\mathrm{lex})
 \lambda<\frac{260}{63}.
 ```
 
-At `lambda=3`, the exact `S_1` score gap is
-
-```math
-\frac{71}{624}>0.
-```
-
 On every `S_2,...,S_6`, reverse deletion has larger terminal mass, larger occurrence mass, and no smaller residual error, so lexicographic deletion is cheaper for every nonnegative `lambda`.
 
-Combining these inequalities with the `S_7` delayed-policy threshold gives the certified nonempty subcone
+Combining these inequalities with the `S_7` delayed-policy threshold gives
 
 ```math
 \boxed{
@@ -240,28 +232,84 @@ Combining these inequalities with the `S_7` delayed-policy threshold gives the c
 }.
 ```
 
-The rational witness
+The witness
 
 ```math
 \boxed{\lambda=3}
 ```
 
-selects the tested policy family
+selects
 
 ```text
 S1-S6: lexicographic
 S7:    delayed-seed
 ```
 
-and rejects reverse lexicographic deletion on every `S_1,...,S_7` comparison.
-
-This is an exact finite policy-ranking theorem. It does not prove that `C_lambda` is a retained-child Bellman potential or globally optimal over all complete schedules.
+among the tested lexicographic, reverse, and delayed-seed comparisons.
 
 **Primary reference:** `docs/policy-occurrence-cone-s1-s7.md`.
 
 ---
 
-## 9. Active theorem
+## 9. Uniform step-5 policy exposes the missing coordinate
+
+Let `pi_5` delay every progression-step-5 action, preserving lexicographic order otherwise.
+
+Exact recomputation gives
+
+```math
+C_3(\pi_5)=C_3(\pi_{\rm lex})
+```
+
+on `S_1`, and
+
+```math
+C_3(\pi_5)<C_3(\pi_{\rm lex})
+```
+
+on every `S_2,...,S_7`.
+
+Thus one uniform local priority rule improves the occurrence-weight score throughout the recorded frontier. However, at `S_7`, `pi_5` preserves the isolated canonical return to `S_1`.
+
+Define a hybrid policy `pi_h` that delays both all step-5 actions and the three seed-producing `q=1` actions. The hybrid has no canonical regeneration, but
+
+```math
+C_3(\pi_h)>C_3(\pi_5).
+```
+
+Therefore `T+3O+E` alone prefers a policy with known long continuation cost.
+
+Introduce
+
+```math
+C_{3,\gamma}(\pi)
+=
+T_\pi+3O_\pi+E_\pi+\gamma G_\pi,
+```
+
+where `G_pi` is the recorded regenerative continuation charge. The hybrid beats the step-5 policy exactly when
+
+```math
+\gamma>\gamma_*;
+\qquad
+\frac{57}{1000}<\gamma_*<\frac{29}{500}.
+```
+
+The exact witness
+
+```math
+\boxed{\gamma=\frac1{16}}
+```
+
+makes the non-regenerative hybrid cheaper than both the step-5 and lexicographic policies at `S_7`.
+
+This identifies the first mandatory continuation-sensitive coordinate. The occurrence-weight cone is nonempty but insufficient by itself.
+
+**Primary reference:** `docs/step5-policy-regeneration-weight.md`.
+
+---
+
+## 10. Active theorem
 
 The required object remains policy-aware:
 
@@ -286,23 +334,32 @@ A closing route must either:
 1. construct a global coordinated policy with controlled complete child cost; or
 2. prove a schedule-independent lower-envelope inequality over all complete policies.
 
-The state must include provenance overlap, SCC recycling, obstruction coverage, regenerative continuation cost, and residual error.
+The policy score now requires at least:
+
+```text
+terminal mass
+recursive occurrence/provenance load
+terminal residual error
+regenerative continuation charge.
+```
+
+A retention theorem is still required before these raw outputs can enter a Bellman child sum.
 
 ---
 
-## 10. Approved next targets
+## 11. Approved next targets
 
 1. Generate additional deterministic local policies on `S_1,...,S_7`.
-2. Convert every comparison into an exact rational half-space.
-3. Intersect the half-spaces in the exact branching-reserve LP harness.
-4. Extract the first infeasible subsystem if the common cone collapses.
+2. Convert every comparison into exact rational half-spaces in `(lambda,gamma)`.
+3. Intersect those half-spaces in the exact branching-reserve LP harness.
+4. Extract the first infeasible subsystem if the two-coordinate cone collapses.
 5. Add the missing coordinate identified by that subsystem.
 6. Prove a provenance-preserving retention quotient before treating raw shells as Bellman children.
 7. Establish a policy-aware or minimax branching Carleson inequality.
 
 ---
 
-## 11. Stop list
+## 12. Stop list
 
 Do not infer:
 
@@ -314,13 +371,14 @@ Do not infer:
 - avoiding regeneration makes a policy cheaper;
 - raw occurrence or distinct-label count ranks policies correctly;
 - the delayed-seed Pareto improvement is already a whole-tree contraction;
-- one finite weight interval validates the raw score globally;
+- a nonempty occurrence-weight cone makes continuation cost unnecessary;
+- adding the recorded path charge is already justified by retention;
 - the tested policy family is globally optimal;
 - one policy witness proves an all-policy theorem.
 
 ---
 
-## 12. Reproduction
+## 13. Reproduction
 
 Push-gating lightweight suite:
 
@@ -352,4 +410,5 @@ Current detailed notes:
 - `docs/s7-delayed-seed-policy.md`;
 - `docs/s7-policy-weight-regions.md`;
 - `docs/policy-occurrence-cone-s1-s7.md`;
+- `docs/step5-policy-regeneration-weight.md`;
 - `docs/branching-reserve-lp.md`.

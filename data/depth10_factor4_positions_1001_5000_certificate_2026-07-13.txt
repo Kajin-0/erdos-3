@@ -1,0 +1,45 @@
+DEPTH-TEN FACTOR-FOUR POSITIONS 1001-5000 CERTIFICATE
+Date: 2026-07-13
+
+MODEL
+  G10(R) = ({0} union S10) + {0,R,2R}
+  sponsor condition: v2(R) even
+  layer disjointness: R and 2R absent from the positive-difference support of {0} union S10
+  inherited factor-two cutoff: 76583775
+
+DOMAIN PREFIX
+  previously certified positions: 1-1000
+  newly certified positions: 1001-5000
+  newly certified count: 4000
+  first new separation: 76603913
+  last new separation: 76646105
+  total certified prefix: 5000
+
+DETERMINISTIC WITNESS SEARCH
+  initial RNG state: 88172645463325252
+  per-separation seed xor multiplier: 0x9e3779b97f4a7c15
+  xorshift operations: x ^= x << 7; x ^= x >> 9
+  maximum trials per separation: 3000000
+  total trials used: 363937682
+  maximum trials used by one separation: 774028
+  maximum-trial separation: 76604127
+  OpenMP parallelism changes execution order only; each separation has an isolated deterministic RNG stream.
+
+GENERATED WITNESS FILE
+  row format: R a b c d
+  rows: 4000
+  FNV-64: 2a029f96119035a1
+  SHA-256: b0dc16f4fea56c189c7b1c954ffe37bad36231ed291d9d6311d5a1c5ea3ff5d4
+
+Each generated row is checked for
+  b-a = c-b = d-c > 0
+and each of a,b,c,d is checked for membership in G10(R).
+
+VERIFIER
+  g++ -O3 -std=c++17 -fopenmp src/verify_depth10_factor4_positions_1001_5000.cpp -o /tmp/verify_positions_1001_5000
+  OMP_NUM_THREADS=16 /tmp/verify_positions_1001_5000 /tmp/depth10_factor4_positions_1001_5000_witnesses.txt
+
+CONCLUSION
+  The first 5000 genuinely new sponsor-compatible, layer-disjoint factor-four candidates after the inherited cutoff all contain explicit nontrivial four-term arithmetic progressions.
+
+This is a finite prefix certificate only. It does not prove N_10,4 = 0 and does not validate the rejected bulk anchor reduction.

@@ -1,0 +1,39 @@
+SIMULTANEOUS TRANSITION EXTENSION S6-S7
+
+policy=lexicographic_coordinated
+harmonic_average_bound=9/8
+exact_integer_string_limit=unbounded
+S6_selected=3041
+S6_residual=238
+S6_terminal_steps=13
+S6_recursive_occurrences=94
+S6_exact_state_classes=71
+S6_duplicate_classes=15
+S6_strict_containments=209
+S6_partial_overlaps=150
+S6_terminal_recursive_overlap=1,61,303,1597,8195,93476
+S6_multiplicity_distribution=1:4781,2:397,3:54,5:27,6:27,10:18,11:6,13:2
+S6_maximum_multiplicity=13
+S6_maximum_labels=93476,186952
+S6_harmonic_average_bound_verified=true
+S6_multiplicity_catalog_sha256=58c007732844869a880b5763a800fce414ccf80e1f78b292311dc9360f4e4beb
+S6_payload_sha256=56d2074c478a5715a60ef77a8d21c59a12f981cbcd2c130758328e7d35bd020a
+S7_selected=9360
+S7_residual=480
+S7_terminal_steps=25
+S7_recursive_occurrences=127
+S7_exact_state_classes=95
+S7_duplicate_classes=20
+S7_strict_containments=345
+S7_partial_overlaps=214
+S7_terminal_recursive_overlap=1,5,61,303,1597,8195,49158,93476,230164,323640
+S7_multiplicity_distribution=1:14679,2:1105,3:184,5:81,6:81,10:54,11:17,12:5,13:3,16:1
+S7_maximum_multiplicity=16
+S7_maximum_labels=230164
+S7_harmonic_average_bound_verified=true
+S7_multiplicity_catalog_sha256=c66b8c38d6d44acce9071ac12c6e4069ace3897db8d1427e902651a8de8deae3
+S7_payload_sha256=6f682a5a7be606c622cf4e660d7300f7f1ed76ed6d2835d1a111ef43a07b5678
+
+conclusion: the raw simultaneous frontier extends through S7.
+At S7, terminal-recursive overlap contains additional non-separation labels,
+so a bounded-reuse state cannot track only the latest replication separation.

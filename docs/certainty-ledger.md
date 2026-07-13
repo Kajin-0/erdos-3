@@ -74,8 +74,9 @@ Statuses marked **exact finite** are computational statements for recorded objec
 | CL-055 | Reverse lexicographic deletion avoids canonical regeneration but has over `75` times the lexicographic middle-fiber occurrence mass, over `744` times the duplicate mass, `2252` terminal steps, `2374` shells, and a `286`-label SCC. Avoiding regeneration is not a sufficient policy objective. | Exact two-policy finite theorem. |
 | CL-056 | Delaying only the three unforced seed-producing `q=1` actions removes canonical regeneration while reducing shell count, occurrence mass, union mass, duplicate mass, harmonic-average multiplicity, and maximum multiplicity relative to lexicographic deletion. Terminal mass rises and residual error increases by exactly `1/4096`. | Exact finite Pareto-tradeoff theorem. |
 | CL-057 | Exact policy-weight thresholds separate lexicographic and delayed-seed preferences: `2.384<lambda_*<2.385` for `T+lambda O+E`, `4.356<kappa_*<4.357` for `T+U+kappa D+E`, `0.021<gamma_*<0.022` when charging the lexicographic regenerative path, and `0.418<a_*<0.419` for `aT+O+E`. Unit terminal plus unit recursive-mass scores prefer lexicographic deletion. | Exact finite rational half-space theorem. |
+| CL-058 | The score `C_lambda=T+lambda O+E` has a certified common policy subcone `477/200<lambda<260/63`. Every such weight ranks lexicographic below reverse lexicographic deletion on `S_1,...,S_7`, while ranking the delayed-seed policy below lexicographic deletion on `S_7`. The witness `lambda=3` gives the tested policy family `S_1,...,S_6` lexicographic and `S_7` delayed-seed. | Exact finite multi-state policy-ranking theorem. |
 
-Primary references for CL-050 through CL-057:
+Primary references for CL-050 through CL-058:
 
 - `docs/s7-cyclic-scc-output-load.md`;
 - `docs/s7-cyclic-scc-local-completion-credit.md`;
@@ -85,14 +86,8 @@ Primary references for CL-050 through CL-057:
 - `docs/s7-policy-transition-tradeoff.md`;
 - `docs/s7-delayed-seed-policy.md`;
 - `docs/s7-policy-weight-regions.md`;
-- `src/verify_s7_scc_output_load.py`;
-- `src/verify_s7_scc_local_completion_credit.py`;
-- `src/verify_s7_scc_small_state_affine_frontier.py`;
-- `src/verify_s7_scc_seed_regeneration.py`;
-- `src/verify_s7_regenerative_seed_policy_dependence.py`;
-- `src/verify_s7_policy_transition_tradeoff.py`;
-- `src/verify_s7_delayed_seed_policy.py`;
-- `src/verify_s7_policy_weight_regions.py`.
+- `docs/policy-occurrence-cone-s1-s7.md`;
+- `src/verify_policy_occurrence_cone_s1_s7.py`.
 
 ---
 
@@ -127,21 +122,23 @@ Do not use without materially new hypotheses:
 25. treating avoidance of canonical regeneration as sufficient policy optimization;
 26. ranking policies by raw occurrence count or distinct-label count without harmonic and provenance weights;
 27. treating the delayed-seed Pareto tradeoff as a completed Bellman contraction;
-28. treating one finite weight threshold as global validation of its raw coordinate;
-29. random sampling as a finite certificate;
-30. the rejected depth-ten anchor reduction.
+28. treating one finite weight threshold or common cone as global validation of its raw coordinate;
+29. treating the tested lexicographic/delayed family as globally optimal over all complete schedules;
+30. random sampling as a finite certificate;
+31. the rejected depth-ten anchor reduction.
 
 ---
 
-# Open bottleneck OB-001: Exact policy cone and whole-tree packing
+# Open bottleneck OB-001: Policy cone, retention, and whole-tree packing
 
-The state-specific cheap-extension problem at `S_10` is closed. Raw simultaneous transition generation is certified through `S_7`. Exact policy experiments now give three regimes:
+The state-specific cheap-extension problem at `S_10` is closed. Raw simultaneous transition generation is certified through `S_7`. Exact policy experiments now give:
 
-1. lexicographic deletion has one isolated canonical regeneration and moderate raw cost;
-2. reverse deletion avoids regeneration but creates a severe load explosion;
-3. delaying only the three seed actions avoids regeneration and improves most recursive-load coordinates, with higher terminal mass and a residual penalty of `1/4096`.
+1. lexicographic deletion with moderate raw cost and one isolated canonical regeneration;
+2. reverse deletion with severe cyclic and duplicate load;
+3. a delayed-seed `S_7` policy improving recursive-load coordinates;
+4. a nonempty common occurrence-weight subcone spanning the tested `S_1,...,S_7` comparisons.
 
-The exact `S_7` comparison produces rational half-spaces for candidate policy weights. The unresolved task is to compute analogous half-spaces on `S_1,...,S_6` and intersect them in the exact LP harness.
+The next task is to generate additional deterministic policies, convert their comparisons into exact rational half-spaces, and intersect them in the LP harness. A first infeasible subsystem should identify the missing coordinate. A provenance-preserving retention quotient is still required before raw shell outputs can be treated as Bellman children.
 
 The target remains
 
@@ -158,5 +155,3 @@ The target remains
 \Phi_{\rm obs}(S)+
 \operatorname{controlled\ error}.
 ```
-
-A nonempty common cone would identify a candidate constructive policy cost. An infeasible subsystem would identify the smallest state and coordinate conflict requiring a new invariant. A provenance-preserving retention quotient is still required before raw shell outputs can be treated as Bellman children. No current theorem closes this gap.

@@ -14,6 +14,7 @@ TERMINAL_FIBER_SPECTRAL_SHA256="aa753127d2d0adbcb124b0a9f6e5c053350d422cd66fe2a4
 S7_SCC_OUTPUT_LOAD_SHA256="cb5dbba5f45c25b2c286fde17e9895d017abaa906f69f73255a5f0b5b62d081d"
 S7_SCC_LOCAL_COMPLETION_SHA256="0419cdeab12c1a8ab2f55e041a0259ffde77f90df7031be0736137502e6ff737"
 S7_SCC_SMALL_AFFINE_SHA256="6a1073d6fd485c0a99526c59c32b5a0985220632e32e67fc8fed9d5b8c5234e0"
+S7_SCC_SEED_REGENERATION_SHA256="b05c5b91ba5b148a1dbe999edc0617a5370889f4244cd66553c9d7a8c6ee9679"
 
 mkdir -p "$WORK"
 
@@ -102,4 +103,11 @@ python3 "$ROOT/src/verify_s7_scc_small_state_affine_frontier.py" \
 cmp "$S7_SCC_SMALL_AFFINE_RECORDED" "$S7_SCC_SMALL_AFFINE_GENERATED"
 verify_sha256 "$S7_SCC_SMALL_AFFINE_GENERATED" "$S7_SCC_SMALL_AFFINE_SHA256" "s7_scc_small_affine"
 
-echo "verified: simultaneous transition, multiplicity, incidence, SCC, spectral, output-load, local-completion, and small-state affine frontier through S7"
+S7_SCC_SEED_REGENERATION_GENERATED="$WORK/s7_scc_seed_regeneration_certificate.txt"
+S7_SCC_SEED_REGENERATION_RECORDED="$ROOT/data/s7_scc_seed_regeneration_certificate_2026-07-13.txt"
+python3 "$ROOT/src/verify_s7_scc_seed_regeneration.py" \
+  "$S7_SCC_SEED_REGENERATION_GENERATED"
+cmp "$S7_SCC_SEED_REGENERATION_RECORDED" "$S7_SCC_SEED_REGENERATION_GENERATED"
+verify_sha256 "$S7_SCC_SEED_REGENERATION_GENERATED" "$S7_SCC_SEED_REGENERATION_SHA256" "s7_scc_seed_regeneration"
+
+echo "verified: simultaneous transition, multiplicity, incidence, SCC, spectral, output-load, local-completion, small-state affine, and seed-regeneration frontier through S7"

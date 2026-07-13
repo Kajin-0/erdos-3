@@ -1,0 +1,28 @@
+S2 DETERMINISTIC NOVEL-FIBER REFERENCE
+
+status=exact_finite_schedule_specific
+schedule_rule=lexicographic_coordinated
+state_scale=256
+state_size=39
+state_maximum=470
+selected_progressions=26
+residual_size=13
+terminal_steps=1,5,30,31,61
+middle_fiber_1=16,21,26,61,77,82,87,122,138,143,148
+middle_fiber_5=1,61,62,122,123
+middle_fiber_30=empty
+middle_fiber_31=empty
+middle_fiber_61=65,66,86,87,92
+fiber_overlap_1_5=61,122
+fiber_overlap_1_61=87
+novel_fiber_support=1,16,21,26,62,77,123,138
+imported_fiber_support=61,65,66,82,86,87,92,122,143,148
+fiber_occurrence_mass=1265225421268357/941233603104080
+fiber_union_mass=3693784666860791/2823700809312240
+within_fiber_duplicate_mass=383/10614
+novel_fiber_mass=239396453/200655312
+imported_fiber_mass=218348937262/1897648393355
+state_sha256=134d805cfd73cbee488eca475d70ce0cb02c63e60927c74643891de48ee0ede9
+schedule_sha256=586f62323391a20555b2a452d1b1a20d55e9a5cf0387677fd2b7013cd1baa689
+
+conclusion: unlike S1, this deterministic S2 resolution exports positive middle-fiber support outside the backbone.

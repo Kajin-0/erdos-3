@@ -18,6 +18,7 @@ FORCED_FORK_NO_GO_SHA256="771c144b3c08cc186d2613eae314b2d0712d18933094323307b146
 SIMULTANEOUS_TRANSITION_SHA256="e8162ee59d496bec8fe2d4103edc8f79de9fbd42444ef37f41fc317aec13a14b"
 OCCURRENCE_MULTIPLICITY_SHA256="9774ea7c8cbd3626b3120ade6b48344008b5f1706b05e253923393cc8495e7e8"
 SIMULTANEOUS_S4_S5_SHA256="ada237c35a0980c15cecac51e30fd43ade50948067d6f421477af1bb79239756"
+SIMULTANEOUS_S6_S7_SHA256="4c1767a8c0b4e65b2deb4e576bfec6f8b74e6531f4ef12e4444fd53a9d0cb94c"
 
 mkdir -p "$WORK"
 
@@ -134,7 +135,14 @@ python3 "$ROOT/src/verify_simultaneous_transition_s4_s5.py" \
 cmp "$SIMULTANEOUS_S4_S5_RECORDED" "$SIMULTANEOUS_S4_S5_GENERATED"
 verify_sha256 "$SIMULTANEOUS_S4_S5_GENERATED" "$SIMULTANEOUS_S4_S5_SHA256" "simultaneous_s4_s5"
 
+SIMULTANEOUS_S6_S7_GENERATED="$WORK/simultaneous_transition_s6_s7_certificate.txt"
+SIMULTANEOUS_S6_S7_RECORDED="$ROOT/data/simultaneous_transition_s6_s7_certificate_2026-07-13.txt"
+python3 "$ROOT/src/verify_simultaneous_transition_s6_s7.py" \
+  "$SIMULTANEOUS_S6_S7_GENERATED"
+cmp "$SIMULTANEOUS_S6_S7_RECORDED" "$SIMULTANEOUS_S6_S7_GENERATED"
+verify_sha256 "$SIMULTANEOUS_S6_S7_GENERATED" "$SIMULTANEOUS_S6_S7_SHA256" "simultaneous_s6_s7"
+
 python3 "$ROOT/src/certified_contaminated_states.py" > /dev/null
 python3 "$ROOT/src/branching_reserve_lp.py" self-test
 
-echo "verified: transport, replay, reserve diagnostics, S1-S7 DAG checks, simultaneous transitions through S5, occurrence packing, forced-fork reserve/no-go, and LP harness"
+echo "verified: transport, replay, reserve diagnostics, S1-S7 DAG checks, simultaneous transitions through S7, occurrence packing, forced-fork reserve/no-go, and LP harness"

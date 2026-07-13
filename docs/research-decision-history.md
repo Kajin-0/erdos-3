@@ -1,110 +1,54 @@
 # Research decision history and stop list
 
-## Status and purpose
+## Purpose
 
-This document records how the project reached its current proof program and which earlier routes have already been tested, superseded, or disproved.
+This document records why the current proof program has its present form and which earlier routes should not be restarted without a materially new hypothesis.
 
-It is a navigation and decision document, not the primary theorem source. For current claims use:
+Current theorem status is authoritative in:
 
 1. `docs/current-proof-program.md`;
 2. `docs/certainty-ledger.md`;
-3. the dedicated note and verifier for the claim.
+3. the dedicated theorem note and verifier.
 
-The purpose is to prevent context loss and repeated work.
+The full four-term Erdős reciprocal-sum problem remains open.
 
 ---
 
 ## 1. Construction-search phase
 
-### PR #1: exact period-two threshold search
+### Periodic digit systems
 
-Period-two digit systems in bases `11`, `12`, and `13` were exhaustively tested at size profiles above the Walker base-55 density exponent
+Exact period-two searches, stochastic period-two/period-three searches, and local substitutions around the base-55 Walker benchmark did not improve the known exponent.
 
-```math
-\alpha_{55}=\frac{\log21}{\log55}.
-```
+**Decision:** do not repeat ordinary periodic digit-set search or small local substitution without a new structural model.
 
-No certified four-term-progression-free candidate above that threshold was found.
+### Solver bridge
 
-**Decision:** do not repeat the same small-base period-two enumeration without a materially stronger model or theorem target.
+A reproducible OPB/MaxSAT workflow was completed with exact AP recertification and true shifted harmonic scoring.
 
-### PR #2: stochastic period-two and period-three search
+**Decision:** solver output is evidence only after exact recertification; cardinality or proxy score is not enough.
 
-Witness-guided deletion and greedy rebuilding were tested. The best recorded exponent was
+### Finite automata
 
-```math
-\frac{\log6}{\log11},
-```
+The repository developed an exact DFA four-AP certifier, spectral-radius growth scoring, harmonic triage, minimization, canonicalization, and hashing.
 
-below the Walker threshold.
+A fixed finite automaton with divergent reciprocal sum would have sufficient growth to force positive upper density and hence long progressions.
 
-**Decision:** blind or lightly guided random deletion/rebuild is not an active route.
-
-### PR #3: literature audit and benchmark normalization
-
-The repository reproduced public shifted Kempner benchmarks and checked same-size substitution neighborhoods of the base-55 set. No four-term-progression-free neighbor was found at substitution radius one or two.
-
-**Decision:** do not reimplement ordinary Walker-style modular search or small local substitutions around the base-55 benchmark.
-
-### PR #4: pseudo-Boolean solver bridge
-
-A reproducible finite workflow was completed:
-
-```text
-OPB generation
--> external PB/MaxSAT solver
--> assignment parsing
--> exact AP recertification
--> shifted harmonic scoring.
-```
-
-**Decision:** any solver result must pass exact AP certification and true harmonic scoring. Cardinality or a linear proxy alone is not evidence of improvement.
+**Decision:** fixed regular languages remain useful finite extremizers, but cannot supply a divergent reciprocal-sum AP-free counterexample.
 
 ---
 
-## 2. Finite-state language phase
+## 2. Direct recursive proof phase
 
-### PRs #5–#8: DFA certification and canonical search
-
-The project developed:
-
-- an exact least-significant-digit-first DFA four-AP certifier;
-- spectral-radius growth scoring;
-- bounded harmonic triage;
-- random small-DFA discovery;
-- DFA minimization, canonicalization, and hashing.
-
-The growth exponent is
+Coordinated side-anchor deletion and the minimum-translation backbone produce the exact one-generation inequalities
 
 ```math
-\alpha=\frac{\log\rho(T)}{\log b}.
+H(\mathcal B(D))+\sum_xH(M_x)
+\ge
+3H(D)-2\frac{r_3(N)}N-\frac1N,
 ```
 
-Bounded reciprocal scoring is a triage quantity, not a full transfer-operator evaluation.
-
-### PR #9: certainty-ledger discipline
-
-A fixed base-`b` automatic set with divergent reciprocal sum has enough growth to force positive upper density and hence arbitrarily long arithmetic progressions by Szemerédi's theorem.
-
-**Decision:** fixed finite automata and regular digit languages remain useful for finite extremizers, but cannot produce a divergent reciprocal-sum AP-free counterexample.
-
----
-
-## 3. Transition to the direct proof program
-
-For
-
-```math
-D\subseteq[N,2N),
-```
-
-coordinated side-anchor deletion leaves a three-term-progression-free residual. Deleted occurrences generate middle-step children, while translation by the minimum generates
-
-```math
-\mathcal B(D)=\{d-\min D:d\in D,\ d>\min D\}.
-```
-
-The strongest multiplicity-resolving one-generation inequality is
+and
 
 ```math
 H(Q)+\sum_qH(\Xi_q)+H(\mathcal B(D))
@@ -112,186 +56,102 @@ H(Q)+\sum_qH(\Xi_q)+H(\mathcal B(D))
 2H(D)-\frac{r_3(N)}N-\frac1N.
 ```
 
-Each retained child label is at most half its parent label, and for `p>=1`,
+Every recursive output must be resolved into dyadic shells.
 
-```math
-\sum_{u\text{ output of }a}u^p\le2^{1-p}a^p.
-```
-
-**Decision:** recursive output must always be distinguished at three levels:
-
-1. occurrence multiplicity;
-2. exact numerical state;
-3. distinct numerical-label union.
-
-No level may replace another without a packing theorem.
+**Decision:** occurrence multiplicity, exact numerical state, and distinct-label union are separate accounting layers. None may replace another without a packing theorem.
 
 ---
 
-## 4. Aligned-diamond obstruction
+## 3. Exact benchmark and contaminated obstruction
 
-There are four-term-progression-free recursive states with
-
-```math
-P_h=2^h,
-```
-
-while
-
-```math
-|S_h|=\frac{9\cdot3^h-3}{2}.
-```
-
-Thus identical-history persistence grows like
+The aligned-diamond construction proves persistence can grow like
 
 ```math
 |S_h|^{\log_3 2}.
 ```
 
-**Decision:** bounded, logarithmic, polylogarithmic, and subpower persistence below exponent `log_3 2` are false without additional hypotheses.
-
-The construction is sparse in its ambient interval, so it is not a reciprocal-sum counterexample.
-
----
-
-## 5. Exact and contaminated continuation phase
-
-### PR #10: recursive deletion route
-
-Coordinated deletion, the backbone, exact middle fibers, dyadic shell resolution, and binary genealogy accounting were consolidated.
-
-### PR #11: exact scale-eight family
-
-The uncontaminated equal-translate model was classified sharply. It requires scale growth at least `8`, contracts weighted density by `3/4`, and is summable.
-
-**Decision:** exact aligned replication is no longer the bottleneck. The unresolved obstruction must use contamination, overlap, imported copies, or branching interactions.
-
-### PR #12: contaminated-backbone chain
-
-A certified chain with scale word
+The exact scale-eight model is summable, but the contaminated chain
 
 ```math
 4,8,4,4,8,4,8,8,8
 ```
 
-through `S_10` disproved universal one-step contraction, fixed short-window contraction, and universal two-generation recovery.
-
-The state-specific depth-ten theorem proved
+has
 
 ```math
-N_{10,2}=N_{10,4}=0,
+W_5/W_1=91/32>1.
 ```
 
-while every valid exact factor-eight child enters a certified summable tail.
+**Decisions:**
 
-**Decision:** one path, one barrier state, or one complete exact fan is not a whole-tree theorem.
+- bounded or polylogarithmic identical-history persistence is false;
+- universal local `3/4` contraction is false;
+- fixed short-window contraction is false;
+- universal two-generation recovery is false;
+- pathwise recovery cannot substitute for a treewise theorem.
 
 ---
 
-## 6. Whole-tree reserve phase
+## 4. State-specific depth-ten completion
 
-### PR #13: transport capacity and deletion-DAG diagnostics
-
-#### Exact target demand
-
-For four-ratio transport,
+The repository proves
 
 ```math
-q_S(I)=\max_{T\in I}\min_{1\le k\le4}|T-kS|.
+N_{10,2}=N_{10,4}=0
 ```
 
-At the `S_10` residual, the available rectangle radius exceeds exact demand by only
+for the recorded `S_10` state and certifies an infinite exact factor-eight tail from every valid positive exact child.
+
+The exact target-demand calculation shows the factor-four residual closes with margin only
 
 ```math
 5,
 ```
 
-although it exceeds the coarse half-scale threshold by `9,474,912`.
+not the much larger coarse half-scale excess.
 
-**Decision:** radius alone is not a faithful reserve coordinate. The target interval must be part of the state.
+**Decisions:**
 
-#### Naive reserve no-go
-
-On the recorded factor-four transition `S_6 -> S_7`, Bellman debt is positive while parent-minus-child changes in weighted density, right-shell slack, and raw contamination mass are all negative.
-
-**Decision:** a valid reserve must contain obstruction-aware and overlap-aware information.
-
-#### Replay siblings versus simultaneous children
-
-The restricted replay model has alternative continuation siblings:
-
-```text
-S1 factor 4: 4
-S2 factor 8: 203.
-```
-
-They are not simultaneous deletion-DAG children and cannot be summed in one Bellman row.
+- the target interval is part of the reserve state;
+- one state-specific barrier is not a whole-tree theorem;
+- one exact fan is not a whole-tree theorem;
+- further `S_10` prefix certification is finished work, not the bottleneck.
 
 ---
 
-## 7. Schedule and forced-output decisions
+## 5. Replay and schedule semantics
 
-### Exhaustive `S_1` schedules
+Replay catalogs enumerate alternative outer separations. They are not simultaneous children.
 
-There are
+Exhaustive `S_1` schedule analysis gives `1560` progression-labeled schedules, all with zero novel fiber support. On `S_2`, one schedule has positive novelty and another has zero novelty.
 
-```text
-120 reachable states
-1560 progression-labeled schedules
-930 sponsor sequences.
-```
+**Decisions:**
 
-Every schedule satisfies
-
-```math
-\bigcup_q\Xi_q\subseteq\mathcal B(S_1).
-```
-
-Thus novel-fiber mass is zero for every coordinated `S_1` schedule.
-
-### `S_2` schedule dependence
-
-The lexicographic `S_2` schedule has novel mass
-
-```math
-\frac{239396453}{200655312}>0,
-```
-
-but another valid schedule has zero novelty.
-
-**Decision:** raw novel-fiber mass is not a parent-only reserve.
-
-### Root-forced forks
-
-A root-forced progression must be selected in every complete coordinated schedule. This gives a positive parent-intrinsic lower bound
-
-```math
-\sum_qH(\Xi_q^\sigma)\ge\Psi(D)
-```
-
-through the recorded `S_7`.
-
-However, `P Psi` increases across `S_1 -> S_2` while that factor-four step has positive debt.
-
-**Decision:** forced-fork output is a transition resource, not a standalone telescoping potential.
+- replay siblings cannot be summed in one Bellman row;
+- raw novel-fiber mass is schedule dependent;
+- a deletion policy must be explicit whenever schedule-dependent features are used.
 
 ---
 
-## 8. Raw transition and overlap phase
+## 6. Forced-output phase
 
-### Complete fixed-policy raw exporter
+Root-forced progressions must be selected by every complete coordinated schedule. This gives positive parent-intrinsic forced-fork output through `S_7`.
 
-The repository now exports every raw simultaneous occurrence from one complete lexicographic schedule, including:
+However,
 
-- shell resolution;
-- point-level provenance;
-- exact duplicate classes;
-- strict containment;
-- partial overlap;
-- terminal-recursive overlap;
-- exact occurrence and union masses.
+```math
+F(S)=P\Psi(S)
+```
 
-The certified frontier is:
+has the wrong parent-minus-child sign on `S_1 -> S_2`.
+
+**Decision:** forced-fork mass is a transition resource feeding packing or obstruction growth, not a standalone stored Bellman potential.
+
+---
+
+## 7. Raw simultaneous transition phase
+
+The fixed lexicographic exporter now records complete raw output through `S_7`:
 
 | state | occurrences | state classes | containments | partial overlaps |
 |---:|---:|---:|---:|---:|
@@ -303,59 +163,53 @@ The certified frontier is:
 | `S_6` | 94 | 71 | 209 | 150 |
 | `S_7` | 127 | 95 | 345 | 214 |
 
-**Decision:** raw simultaneous generation is complete for the tested policy. The missing layer is retention and bounded reuse.
-
-### Pointwise multiplicity
-
-The exact maximum multiplicities through `S_7` are
+Maximum pointwise multiplicity grows
 
 ```text
 2,3,7,11,12,13,16,
 ```
 
-while harmonic-average multiplicity remains below the certified small constants `8/5`, `11/10`, or `9/8`.
+while harmonic-average multiplicity remains locally small.
 
-**Decision:** worst local multiplicity is unstable. A useful packing theorem must be provenance-sensitive and harmonically weighted.
+**Decisions:**
+
+- raw simultaneous generation is complete for the tested policy;
+- exact-state quotienting does not solve containment or partial overlap;
+- worst local multiplicity is not a stable universal packing constant;
+- the missing object is a provenance-preserving retention theorem.
 
 ---
 
-## 9. Terminal-fiber cycle phase
+## 8. Terminal-fiber cycle phase
 
-### Incidence graph
-
-Draw an edge
+The terminal-to-fiber incidence graph contains
 
 ```math
-q\to u
+61\longleftrightarrow303
 ```
 
-when `q` and `u` are terminal labels and `u in Xi_q`.
-
-The graph contains
-
-```math
-61\leftrightarrow303
-```
-
-at `S_3`, persisting through `S_6`. At `S_7`, the cyclic component becomes
+at `S_3`, persisting through `S_6`. At `S_7`, the cyclic component is
 
 ```math
 \{1,5,61,303,1597,8195,323640\}.
 ```
 
-**Decision:** no strict decreasing rank of terminal labels can orient every recursive incidence.
+At the same depth, terminal-recursive overlap contains nonhistorical labels `5`, `49158`, and `323640`.
 
-### Historical-separation state failure
+**Decisions:**
 
-Through `S_6`, terminal-recursive overlap equals the base step plus historical separations. At `S_7`, additional labels `5`, `49158`, and `323640` appear.
+- no strict decreasing rank of terminal labels can orient every recursive incidence;
+- tracking only the latest separation is inadequate;
+- tracking the complete separation history is also inadequate;
+- the natural finite state is component- and provenance-based.
 
-**Decision:** neither the latest separation nor the separation history is a sufficient overlap state.
+---
 
-### SCC quotient and capacity no-go
+## 9. SCC capacity phase
 
-Collapsing strongly connected components gives an acyclic condensation graph. For a component `C`, define harmonic vertex capacity `V(C)` and internal target mass `T(C)`.
+Collapsing strongly connected components gives an acyclic condensation graph. For component `C`, define harmonic vertex mass `V(C)` and internal target mass `T(C)`.
 
-For `C={61,303}` through `S_6`,
+For the two-label component through `S_6`,
 
 ```math
 T(C)=V(C).
@@ -369,49 +223,67 @@ T(C)-V(C)
 \frac{43727503229099}{1043823972523464}>0.
 ```
 
-**Decision:** SCC condensation solves ordering but not recycling. Unit harmonic vertex mass is not sufficient component capacity.
+**Decision:** harmonic vertex mass alone is not sufficient SCC capacity.
+
+The stronger linear-capacity test uses the internal adjacency matrix `A`. For the seven-label `S_7` component, the exact witness
+
+```math
+w=(43,59,31,31,14,10,26)^T
+```
+
+satisfies
+
+```math
+9Aw-23w>0,
+\qquad
+8w-3Aw>0.
+```
+
+Hence
+
+```math
+\frac{23}{9}<\rho(A)<\frac83.
+```
+
+**Decision:** no positive linear internal SCC capacity can be nonexpanding or factor-two contractive on the recorded `S_7` component. Any viable proof must use external obstruction export, nonlinear capacity, or multi-generation amortization.
 
 ---
 
 ## 10. Permanent stop list
 
-Do not restart any of the following without a materially new hypothesis, invariant, or model:
+Do not restart these routes without explicitly identifying which obstruction is avoided:
 
-1. ordinary Walker-style modular digit-set search;
+1. ordinary Walker-style modular digit search;
 2. blind stochastic periodic deletion/rebuild;
 3. small substitutions around the base-55 benchmark;
-4. a fixed finite-automaton counterexample route;
+4. a fixed finite-automaton counterexample;
 5. density exponent or cardinality as the final objective;
-6. recursive deletion before dyadic shell resolution;
-7. bounded or polylogarithmic identical-history persistence;
-8. persistence below exponent `log_3 2` from cardinality alone;
-9. universal local `3/4` contraction in contaminated states;
-10. fixed four- or six-generation contraction;
-11. universal two-generation recovery;
-12. pathwise summability as a whole-tree proof;
-13. replay siblings as simultaneous Bellman children;
-14. a reserve using only density, raw contamination, and shell slack;
-15. rectangle radius without target demand;
-16. raw novelty as schedule independent;
-17. `P Psi` as a standalone Bellman potential;
-18. copying raw occurrences into an LP child list;
-19. exact-state quotienting as a solution to containment or partial overlap;
-20. a uniform maximum-overlap constant inferred from the recorded path;
-21. a strict decreasing terminal-label rank;
-22. tracking only latest or historical separations;
-23. assigning each SCC only harmonic vertex mass;
-24. additional `S_10` prefix certification after complete closure;
+6. recursive deletion without shell resolution;
+7. bounded or polylogarithmic persistence;
+8. universal local `3/4` contraction;
+9. fixed short-window contraction;
+10. universal two-generation recovery;
+11. pathwise summability as a whole-tree proof;
+12. replay siblings as simultaneous children;
+13. density, raw contamination, and shell slack as a complete reserve;
+14. rectangle radius without target demand;
+15. raw novelty as schedule independent;
+16. `P Psi` as a standalone Bellman potential;
+17. raw occurrences copied into an LP child list;
+18. exact-state quotienting as an overlap theorem;
+19. a uniform maximum-overlap constant inferred from the recorded path;
+20. a strict decreasing terminal-label rank;
+21. latest- or historical-separation-only state;
+22. unit harmonic SCC capacity;
+23. positive linear SCC contraction with factor at most two at `S_7`;
+24. further `S_10` prefix certification;
 25. the rejected depth-ten anchor reduction.
-
-A route may be reopened only if the proposal explicitly identifies which prior obstruction it avoids.
 
 ---
 
 ## 11. Active closing target
 
-The current bottleneck is a cyclic-component retention and whole-tree packing theorem.
-
-The required object is a nonnegative potential satisfying
+The current bottleneck is a cyclic-component retention and whole-tree packing theorem:
 
 ```math
 \Delta(S)
@@ -427,29 +299,16 @@ The required object is a nonnegative potential satisfying
 \operatorname{controlled\ error}.
 ```
 
-The next finite experiment must attach explicit internal capacity vectors to terminal-fiber SCCs and test whether
+The next finite experiment must quantify how the high-growth `S_7` cyclic component exports mass into:
 
-```math
-\text{internal recycling}
-+
-\text{outgoing capacity}
-\le
-\text{incoming capacity}
-+
-\text{obstruction export}
-```
+1. nonterminal recursive fibers;
+2. affine obstruction classes;
+3. completion support;
+4. rectangle support;
+5. outgoing condensation components;
+6. provenance capacity consumed across generations.
 
-holds on the certified `S_1` through `S_7` transitions.
-
-The state must also account for:
-
-1. provenance-distinct exact duplicates;
-2. strict containment and partial overlap;
-3. terminal-recursive overlap;
-4. cyclic internal edge multiplicity;
-5. affine obstruction and rectangle coverage;
-6. target-specific completion and transport deficits;
-7. exact Bellman debt.
+A candidate retention rule must preserve duplicate, containment, partial-overlap, terminal-recursive, and SCC-internal provenance and emit the smallest exact failing transition.
 
 No current theorem closes this gap.
 
@@ -457,21 +316,12 @@ No current theorem closes this gap.
 
 ## 12. Documentation protocol
 
-Every substantial result must be classified as:
+Every substantive theorem, counterexample, or finite certificate should update:
 
-- proved in the repository;
-- computationally certified;
-- heuristically supported;
-- conjectural;
-- false or superseded;
-- open bottleneck.
+1. a dedicated note;
+2. a verifier and recorded certificate;
+3. `docs/certainty-ledger.md`;
+4. `docs/current-proof-program.md` when the dependency graph changes;
+5. this decision history when a route opens or closes.
 
-A substantive theorem, counterexample, or finite certificate should update:
-
-1. a dedicated proof or experiment note;
-2. `docs/certainty-ledger.md`;
-3. `docs/current-proof-program.md` when the dependency graph changes;
-4. a verifier and reproducible data when the claim is finite;
-5. this decision history when a route is opened or closed.
-
-Counterexamples to proposed lemmas must remain documented. Eliminating a false closing route is part of the progress record.
+Counterexamples to proposed lemmas remain part of the permanent progress record.

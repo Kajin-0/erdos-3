@@ -2,12 +2,16 @@
 
 ## Status
 
-Exact fixed-policy path theorem.
+Exact fixed-policy path theorem and exact finite uniqueness result.
 
 A novel shell-resolved middle-fiber child emitted by the `S_7` cyclic
 terminal-fiber component regenerates the canonical state `S_1` in one valid
 factor-four step. It therefore has the complete previously certified
 continuation through `S_10` and into the exact scale-eight tail.
+
+Among all `62` exact cyclic-source shell states and both factor-two and
+factor-four extensions, this is the unique exact regeneration of any canonical
+state `S_1,...,S_10`.
 
 This is a structural recurrence inside the replay genealogy. It is not yet a
 whole-tree theorem because the retention quotient for simultaneous raw outputs
@@ -20,7 +24,7 @@ has not been proved.
 Certificate SHA-256:
 
 ```text
-2d6296a1f161ef2b971681ad7ce967720c530c65298169a664e1983644f4fac3
+b05c5b91ba5b148a1dbe999edc0617a5370889f4244cd66553c9d7a8c6ee9679
 ```
 
 ---
@@ -41,8 +45,8 @@ X=\{16,21,26\}.
 None of these three labels belongs to the `S_7` minimum-translation backbone,
 so this occurrence is novel relative to the parent.
 
-The state was already identified as the first size-at-least-three survivor of
-the complete small-state affine test for both factor two and factor four.
+The state is also the first size-at-least-three survivor of the complete
+small-state affine test for both factor two and factor four.
 
 ---
 
@@ -74,7 +78,7 @@ is exactly
 }
 ```
 
-This is the repository's canonical `BASE_PATTERN`. It is four-term-
+This is the repository's canonical `BASE_PATTERN`, and it is four-term-
 progression-free.
 
 Because the next factor-four scale is
@@ -97,12 +101,37 @@ X\xrightarrow[f=4]{R=1}S_1.
 }
 ```
 
-The equality is numerical, not merely isomorphic after an affine change of
-variables.
+The equality is numerical, not merely affine-isomorphic.
 
 ---
 
-## 3. Certified continuation
+## 3. Uniqueness on the certified cyclic-source frontier
+
+The verifier groups the `63` cyclic-source shell occurrences into `62` exact
+numerical states. For every state `Y` and each factor
+
+```math
+f\in\{2,4\},
+```
+
+it checks whether the next scale `fL(Y)` equals a canonical scale and whether
+some admissible separation produces exactly one of `S_1,...,S_10`.
+
+The complete regeneration catalog is
+
+```text
+state={16,21,26}, factor=4, separation=1, target=S1.
+```
+
+No other exact cyclic-source state returns to a canonical chain state under a
+factor-two or factor-four extension.
+
+This does not rule out regeneration of a noncanonical translated shape or a
+return after more than one intervening generation.
+
+---
+
+## 4. Certified continuation
 
 Appending the recorded contaminated-chain transitions gives the exact scale
 word
@@ -133,13 +162,13 @@ S_{10},
 
 followed by the certified exact infinite tail from `S_10`.
 
-This does not create a divergent path: the complete recorded continuation is
-summable. Its significance is that a novel child emitted at depth seven can
-restart the entire contaminated seed geometry at a lower local scale.
+This path remains summable. Its significance is that a novel child emitted at
+depth seven restarts the entire contaminated seed geometry at a lower local
+scale.
 
 ---
 
-## 4. Exact normalized charge
+## 5. Exact normalized charge
 
 Assign the seed occurrence persistence one. Then
 
@@ -178,22 +207,20 @@ W(X)+\text{future charge}
 }
 ```
 
-These values are pathwise accounting data. They are not a simultaneous-child
-Bellman estimate.
+These are pathwise accounting data, not a simultaneous-child Bellman estimate.
 
 ---
 
-## 5. Consequence for the proof program
+## 6. Consequence
 
 The small-state residual is not explained by weak additive structure. The
-state `{16,21,26}` is precisely a compressed precursor of the base pattern.
-One cheap extension unfolds it into the original contaminated genealogy.
+state `{16,21,26}` is a compressed precursor of the base pattern. One cheap
+extension unfolds it into the original contaminated genealogy.
 
-Therefore a valid retention theorem cannot simply classify small surviving
-states as negligible terminal errors. At least one such state is a
-**regenerative seed**.
+A valid retention theorem therefore cannot classify all small surviving states
+as negligible terminal errors. At least one is a **regenerative seed**.
 
-The relevant mechanism is now
+The mechanism is
 
 ```text
 S7 cyclic terminal output
@@ -204,16 +231,14 @@ S7 cyclic terminal output
     -> exact summable tail.
 ```
 
-This explains why complete one-generation affine obstruction coverage does not
-close the cyclic output: part of the residual is structured to reproduce an
-already known difficult state.
+This explains one concrete part of the residual left by complete
+one-generation affine obstruction testing.
 
 ---
 
-## 6. Scope
+## 7. Scope
 
-The theorem proves an exact continuation path under the restricted replay
-model. It does not prove:
+The theorem does not prove:
 
 1. that this occurrence is retained after a valid overlap quotient;
 2. that multiple regenerated copies may be counted independently;
@@ -221,27 +246,24 @@ model. It does not prove:
 4. that every surviving child has a comparable continuation;
 5. or that the full four-term Erdős problem is solved.
 
-The retention question is essential because the seed occurrence may overlap
+The retention question remains essential because this occurrence may overlap
 other simultaneous children or share provenance with them.
 
 ---
 
-## 7. Revised target
+## 8. Revised target
 
-The next structural question is no longer only whether residual candidates
-gain obstruction support in one generation. It is:
+The next question is:
 
-> How many provenance-distinct regenerative seeds can survive simultaneously,
-> and can their total restarted-chain charge be bounded by the parent SCC
-> output, overlap, or obstruction capacity?
+> How many provenance-distinct regenerative or near-regenerative seeds survive
+> simultaneously, and can their restarted-chain charge be bounded by parent
+> SCC output, overlap, or obstruction capacity?
 
 The immediate finite tasks are:
 
-1. identify every exact cyclic-source child that regenerates a previous
-   certified state or a translated copy of one;
+1. identify near-regenerations up to translation, scaling, and bounded defects;
 2. retain origin provenance for each regeneration;
-3. compute overlap and containment among regenerative occurrences;
-4. test whether regenerative multiplicity is bounded by forced-fork output,
-   SCC capacity, or a Carleson packing estimate;
-5. incorporate the exact restarted-chain charge into the branching-reserve LP
-   only after the retention rule is justified.
+3. compute containment and partial overlap among regenerative occurrences;
+4. test whether regenerative multiplicity obeys a Carleson packing estimate;
+5. incorporate restarted-chain charge into the branching LP only after the
+   retention rule is justified.

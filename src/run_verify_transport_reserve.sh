@@ -10,6 +10,7 @@ NAIVE_NO_GO_SHA256="67a8f08bdaacb838a364079c9fe9e03f7fcf3ae8325ba4aee970c9977916
 S1_DAG_SHA256="e31c232158b2abed03ebf7ec12e60d44ef14cff9ae7e066afaa645c80dd9b639"
 S1_ALL_SHA256="8a0726c30041eba72d047924922cfc7c1ba756c63d58da3a04d92f27919273cc"
 S2_NOVEL_SHA256="c552a6146531e02b19a1416c8913287d1efa86a0520eab031899630f8ecd33d7"
+S2_ZERO_SHA256="e5d7a3bbefea78c7c5eeb85ec9155e947d00443e8c279ba6cfc72978267bf972"
 
 mkdir -p "$WORK"
 
@@ -69,6 +70,13 @@ python3 "$ROOT/src/verify_s2_novel_fiber_reference.py" \
   "$S2_NOVEL_GENERATED"
 cmp "$S2_NOVEL_RECORDED" "$S2_NOVEL_GENERATED"
 verify_sha256 "$S2_NOVEL_GENERATED" "$S2_NOVEL_SHA256" "s2_novel"
+
+S2_ZERO_GENERATED="$WORK/s2_zero_novelty_schedule_certificate.txt"
+S2_ZERO_RECORDED="$ROOT/data/s2_zero_novelty_schedule_certificate_2026-07-13.txt"
+python3 "$ROOT/src/verify_s2_zero_novelty_schedule.py" \
+  "$S2_ZERO_GENERATED"
+cmp "$S2_ZERO_RECORDED" "$S2_ZERO_GENERATED"
+verify_sha256 "$S2_ZERO_GENERATED" "$S2_ZERO_SHA256" "s2_zero"
 
 python3 "$ROOT/src/certified_contaminated_states.py" > /dev/null
 python3 "$ROOT/src/branching_reserve_lp.py" self-test

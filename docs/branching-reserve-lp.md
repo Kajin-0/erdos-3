@@ -2,69 +2,70 @@
 
 ## Status
 
-Exact rational infrastructure for exporting and checking candidate linear reserve
-inequalities. This file defines the input contract and the distinction between
-continuation siblings, simultaneous deletion-DAG children, and schedule-dependent
-features.
+Exact rational infrastructure for exporting and checking candidate whole-tree reserve inequalities.
 
-**Implementation:** `src/branching_reserve_lp.py`.
+The repository now distinguishes four objects that must not be conflated:
 
-The harness does not prove that any selected feature family is sufficient. It
-only preserves exact arithmetic and makes proposed inequalities mechanically
-checkable.
+1. **replay siblings:** alternative outer separation choices;
+2. **raw simultaneous occurrences:** all outputs generated together by one complete deletion schedule;
+3. **retained Bellman children:** the family left after a proved retention and overlap rule;
+4. **LP rows:** exact inequalities formed from the retained family.
+
+Only the fourth object is accepted by `src/branching_reserve_lp.py`.
+
+**LP implementation:** `src/branching_reserve_lp.py`.
+
+**Raw transition exporter:** `src/export_simultaneous_deletion_transition.py`.
 
 ---
 
 ## 1. Target inequality
 
-For a state `S`, the intended branching inequality has the form
+For a parent state `S`, the intended inequality is
 
 ```math
 D(S)
 +
-\sum_{S'\in\operatorname{Child}(S)}\Phi(S')
+\sum_{S'\in\operatorname{Child}(S)}
+\Phi(S')
 \le
 \Phi(S)+E(S),
 ```
 
 where:
 
-- `D(S)` is the Bellman debt to be repaid;
+- `D(S)` is the positive Bellman debt;
 - `E(S)` is a separately justified controlled error;
-- `Phi` is a nonnegative reserve;
-- `Child(S)` is the complete retained-child family from one deletion-DAG
-  resolution, including exact multiplicities after merges.
+- `Child(S)` is the complete **retained** simultaneous child family;
+- `Phi` is a nonnegative reserve.
 
 For a linear feature model,
 
 ```math
-\Phi(S)
-=
-\sum_f w_f F_f(S),
+\Phi(S)=\sum_f w_fF_f(S),
 \qquad
 w_f\ge0.
 ```
 
-Each input row therefore represents
+One row therefore means
 
 ```math
 \sum_f
 \left(
-F_f(S)
--
+F_f(S)-
 \sum_{S'}m(S')F_f(S')
 \right)w_f
 \ge
 D(S)-E(S).
 ```
 
-All coefficients are stored as exact rational numbers.
+All values are stored as exact rational numbers.
 
 ---
 
 ## 2. JSONL row format
 
-Each non-comment line is one JSON object:
+Each non-comment line is one complete retained transition:
 
 ```json
 {
@@ -87,146 +88,174 @@ Each non-comment line is one JSON object:
 }
 ```
 
-Numeric values may be integers or rational strings such as `"17/32"`.
-Booleans and floating-point values are rejected.
+Numbers may be integers or rational strings such as `"17/32"`. Floating-point values and booleans are rejected.
 
-The parser converts every value to `fractions.Fraction` before forming the
-constraint.
+The parser forms
+
+```math
+A_f=F_f(S)-\sum_{S'}m(S')F_f(S')
+```
+
+and exports
+
+```math
+\sum_fA_fw_f\ge D-E.
+```
+
+Denominators are cleared exactly before CPLEX-LP output is written.
 
 ---
 
-## 3. Critical semantic requirement
+## 3. Replay siblings are not children
 
-A row may aggregate only states that are retained **simultaneously** from one
-parent resolution.
-
-The exact replay catalogs produced by
-`src/export_replay_transition_catalog.py` enumerate alternative separation
-choices. Their records carry the semantic label
+`src/export_replay_transition_catalog.py` enumerates alternative outer replication choices. Its semantic label is
 
 ```text
 alternative_continuation_siblings_not_simultaneous_children
 ```
 
-and must not be copied wholesale into one `children` array.
-
-For example, `S_1` has four valid factor-four replay siblings with separations
+For example, `S_1` has four valid factor-four replay separations:
 
 ```text
-61, 68, 69, 71.
+61,68,69,71.
 ```
 
-This does not assert that a deletion-DAG parent has four disjoint retained
-children with those states. Treating the four alternatives as a simultaneous
-sum would strengthen the branching load without proof and can create a false
-LP obstruction.
-
-Before a continuation catalog can be converted into branching rows, an adapter
-must certify:
-
-1. the parent deletion-DAG object;
-2. the complete retained family for that resolution;
-3. multiplicities after genealogy merges;
-4. overlap and imported-prefix identifications;
-5. any controlled error assigned to discarded or unresolved mass.
-
-The repository now contains the first exact finite adapter for one coordinated
-resolution of `S_1`, plus an exhaustive analysis of all coordinated schedules
-on `S_1`. These are reference objects, not yet a general transition generator.
+They are four alternative continuations. They may not be placed together in one `children` array without a theorem proving that they occur simultaneously in the deletion genealogy.
 
 ---
 
-## 4. Exact constraint construction
+## 4. Raw simultaneous transition export
 
-For every feature, the parser forms
+The first missing adapter layer is now implemented.
+
+`src/export_simultaneous_deletion_transition.py` fixes the lexicographic coordinated policy and records the complete raw occurrence family produced by one parent resolution. The payload contains:
+
+1. the selected progression history;
+2. terminal steps and their sponsor provenance;
+3. the terminal residual;
+4. the minimum-translation backbone;
+5. every middle multiplicity fiber;
+6. every standard-dyadic shell occurrence;
+7. point-level provenance;
+8. exact duplicate state classes;
+9. strict containments;
+10. partial overlaps;
+11. terminal-recursive overlaps;
+12. exact occurrence and union mass ledgers.
+
+Its semantic label is
+
+```text
+one_complete_schedule_specific_simultaneous_output_family_before_retention_quotient
+```
+
+The certified reference frontier is:
+
+| parent | raw recursive occurrences | exact state classes | duplicate classes | strict containments | partial overlaps |
+|---:|---:|---:|---:|---:|---:|
+| `S_1` | 5 | 4 | 1 | 1 | 0 |
+| `S_2` | 11 | 10 | 1 | 3 | 5 |
+| `S_3` | 25 | 21 | 3 | 23 | 15 |
+
+This completes raw simultaneous output generation for a fixed policy. It does not complete retained-child construction.
+
+---
+
+## 5. Why raw occurrences cannot be copied into an LP row
+
+The raw family contains several accounting layers.
+
+### Exact duplicates
+
+Two occurrences can have identical numerical support but different provenance. A set-valued potential may wish to quotient them; a provenance-sensitive potential may not. The exporter records both the numerical class and every origin.
+
+### Strict containment
+
+One child state may be a strict subset of another simultaneous child. Counting both preserves occurrence genealogy but double-counts numerical support. Dropping the smaller state may discard independent future histories.
+
+### Partial overlap
+
+Two child states may intersect without either containing the other. Neither exact-state quotienting nor maximal-set retention resolves this case.
+
+### Terminal-recursive overlap
+
+A terminal step label may already occur in a recursive state. Terminal and recursive mass cannot automatically be added as distinct numerical support.
+
+### Cross-generation reuse
+
+Even a locally correct numerical union can be charged again by descendants. A local deduplication rule is not a whole-tree packing theorem.
+
+Therefore the raw exporter reports
+
+```text
+bellman_row_status=blocked_until_retention_and_bounded_overlap_rule_is_supplied
+```
+
+and does not emit LP constraints directly.
+
+---
+
+## 6. Required retention contract
+
+A valid conversion from a raw payload to an LP row must state:
+
+1. the potential convention: occurrence-valued, state-valued, support-valued, or provenance-valued;
+2. which exact duplicate classes are merged;
+3. how duplicate multiplicities are retained or discarded;
+4. how strict containments are charged;
+5. how partial intersections are charged;
+6. how terminal-recursive overlap is handled;
+7. how imported labels are identified across parent transitions;
+8. a bound preventing repeated payment by the same provenance class;
+9. any discarded mass entered as controlled error;
+10. proof that the emitted child list is complete under that convention.
+
+Without this contract, an LP can be exactly solved and still represent the wrong mathematical inequality.
+
+---
+
+## 7. Schedule-dependent features
+
+For a coordinated schedule `sigma`, define
 
 ```math
-A_f
+\mathcal N_\sigma(D)
 =
-F_f(S)
--
-\sum_{S'}m(S')F_f(S').
+H\left(
+\left(\bigcup_q\Xi_q^\sigma\right)
+\setminus\mathcal B(D)
+\right).
 ```
 
-The row becomes
+The finite facts are:
 
 ```math
-\sum_f A_fw_f
-\ge
-D(S)-E(S).
+\mathcal N_\sigma(S_1)=0
 ```
 
-Zero coefficients are removed. Negative multiplicities are rejected.
-
-The LP exporter computes the least common multiple of all denominators in one
-row and multiplies the complete inequality by that positive integer. The
-resulting CPLEX-LP file therefore has integer row coefficients and an integer
-right-hand side without decimal approximation.
-
----
-
-## 5. Commands
-
-Export a feasibility LP:
-
-```bash
-python3 src/branching_reserve_lp.py export \
-  constraints.jsonl \
-  reserve.lp
-```
-
-Verify proposed nonnegative weights exactly:
-
-```bash
-python3 src/branching_reserve_lp.py verify \
-  constraints.jsonl \
-  weights.json
-```
-
-Run the built-in parser, export, and exact-slack self-test:
-
-```bash
-python3 src/branching_reserve_lp.py self-test
-```
-
-Run all lightweight reserve checks:
-
-```bash
-bash src/run_verify_transport_reserve.sh
-```
-
----
-
-## 6. Weight file
-
-A weight file is a JSON object:
-
-```json
-{
-  "radius_deficit": "5/4",
-  "support_holes": 3
-}
-```
-
-Every supplied weight must be nonnegative. Features omitted from the file are
-treated as weight zero during verification.
-
-The verifier reports each exact slack
+for all `1,560` coordinated schedules;
 
 ```math
-\operatorname{slack}
+\mathcal N_{\rm lex}(S_2)
 =
-\sum_f A_fw_f-(D-E).
+\frac{239396453}{200655312}>0;
 ```
 
-A weight vector passes only when every slack is nonnegative.
+but another valid `S_2` schedule has
+
+```math
+\mathcal N_{\sigma_0}(S_2)=0.
+```
+
+Thus raw novelty may enter an LP only when the deletion policy is part of the state or when a schedule-independent theorem is available.
 
 ---
 
-## 7. Known mass-coordinate obstruction
+## 8. Known feature no-go results
 
-The exact theorem in `docs/naive-reserve-coordinate-no-go.md` proves that the
-nonnegative feature family
+### Naive mass coordinates
+
+The nonnegative span of
 
 ```text
 weighted_density
@@ -234,137 +263,96 @@ right_shell_slack
 incoming_contamination_mass
 ```
 
-cannot pay even the single recorded factor-four transition `S_6 -> S_7`.
-The parent-minus-child coefficient of every feature is negative, while the debt
-is
+cannot pay the recorded factor-four transition `S_6 -> S_7`. Every parent-minus-child coefficient is negative while the debt is
 
 ```math
 \frac{9841}{4096}>0.
 ```
 
-This one-row sign certificate should be checked before any broader LP search.
-The result does not prohibit these coordinates as auxiliary terms, but at least
-one obstruction-aware feature is necessary.
+### Forced-fork feature
+
+The parent-intrinsic forced-fork reserve `Psi` satisfies a positive local novelty-or-overlap floor, but
+
+```math
+F(S)=P\Psi(S)
+```
+
+is not a standalone stored Bellman potential. On `S_1 -> S_2`,
+
+```math
+F(S_1)-F(S_2)<0
+```
+
+while the factor-four debt is positive.
+
+These features may remain auxiliary terms, but neither family closes the branching inequality alone.
 
 ---
 
-## 8. Schedule-dependent novelty obstruction
+## 9. Commands
 
-For a coordinated deletion schedule `sigma`, define the novel middle-fiber mass
+Export a feasibility LP:
 
-```math
-\mathcal N_{\sigma}(D)
-=
-H\left(
-\left(\bigcup_q\Xi_q^{\sigma}\right)
-\setminus
-\mathcal B(D)
-\right).
+```bash
+python3 src/branching_reserve_lp.py export \
+  constraints.jsonl reserve.lp
 ```
 
-The finite data now show three distinct behaviors.
+Verify nonnegative weights exactly:
 
-### `S_1`: schedule-independent zero
-
-All `1,560` progression-labeled coordinated schedules satisfy
-
-```math
-\bigcup_q\Xi_q^{\sigma}
-\subseteq
-\mathcal B(S_1),
+```bash
+python3 src/branching_reserve_lp.py verify \
+  constraints.jsonl weights.json
 ```
 
-so
+Export one raw simultaneous transition ledger:
 
-```math
-\mathcal N_{\sigma}(S_1)=0
+```bash
+python3 src/export_simultaneous_deletion_transition.py export \
+  --state-depth 2 \
+  --output /tmp/S2_transition.json
 ```
 
-for every schedule.
+Run the complete lightweight suite:
 
-### `S_2`: positive reference schedule
-
-The deterministic lexicographic schedule has
-
-```math
-\mathcal N_{\mathrm{lex}}(S_2)
-=
-\frac{239396453}{200655312}>0.
+```bash
+bash src/run_verify_transport_reserve.sh
 ```
-
-### `S_2`: exact zero schedule
-
-The explicit witness in `docs/s2-zero-novelty-schedule.md` has
-
-```math
-\mathcal N_{\sigma_0}(S_2)=0.
-```
-
-Because novel mass is nonnegative,
-
-```math
-\boxed{
-\min_{\sigma}\mathcal N_{\sigma}(S_2)=0.
-}
-```
-
-Therefore `novel_fiber_mass` is not a parent-only state feature unless the row
-also fixes and certifies the deletion policy. The schedule-robust lower envelope
-cannot pay positive debt at `S_2`.
-
-A future dataset may include schedule-dependent coordinates only when it also
-records:
-
-1. a canonical or optimized schedule identifier;
-2. the complete progression-labeled deletion history or a certified compressed
-   representation;
-3. proof that the same policy is compatible with every child transition used in
-   the Bellman tree;
-4. exact imported, duplicate, and novel support after overlap resolution.
-
-The LP harness deliberately does not infer those semantics from a bare feature
-name.
 
 ---
 
-## 9. Intended next inputs
+## 10. Active next input
 
-The first meaningful branching dataset should contain exact small-state rows
-with features such as:
+The next meaningful LP dataset is not another raw transition catalog. It must be produced by a retention adapter implementing a proved bounded-reuse convention.
 
-1. uncovered cheap-separation capacity;
-2. direct rectangle-support radius;
-3. target interval demand;
-4. support-hole or zero-class counts from the 34 affine obstruction classes;
-5. completion-fiber deficit;
-6. imported-prefix mass with overlap multiplicities;
-7. dyadic slack as an auxiliary coordinate;
-8. schedule-dependent fiber coordinates only under an explicit certified
-   deletion policy.
+The preferred first experiment is:
 
-The data generator must emit all retained children for each row. A selected
-path, a list of alternative replay separations, or a collection of separately
-valid exact tails is not sufficient.
+1. use the exact-state classes from the `S_1` through `S_3` raw payloads;
+2. retain all provenance edges;
+3. introduce explicit overlap-capacity or label-reuse variables;
+4. test candidate inequalities against the exact duplicate, containment, and partial-overlap graph;
+5. emit the smallest exact state where the convention fails.
 
-The next structural target is a parent-intrinsic obstruction coordinate or a
-constructive deletion policy whose exported reserve survives exact overlap
-accounting across the full child family.
+Target feature families include:
+
+- target interval demand and rectangle-support deficit;
+- affine-obstruction zero classes;
+- completion-fiber deficit;
+- forced-fork transition output;
+- imported-label reuse capacity;
+- dyadic slack as an auxiliary coordinate.
 
 ---
 
-## 10. Scope
+## 11. Scope
 
-The harness establishes exact bookkeeping only. The repository now has finite
-small-state child ledgers, but it does not establish:
+The LP harness and raw transition exporter establish exact bookkeeping. They do not establish:
 
-- a general deletion-DAG transition generator;
-- a schedule-independent positive novelty reserve;
+- a valid retention quotient;
+- bounded cross-generation reuse;
 - feasible reserve weights;
-- bounded overlap;
 - monotone rectangle growth;
 - a branching Carleson inequality;
-- or a solution of the four-term Erdős problem.
+- or the four-term Erdős conjecture.
 
-Its purpose is to ensure that future finite-state experiments fail or succeed
-for mathematical reasons rather than decimal error, incomplete child lists,
-ambiguous branching semantics, or unrecorded schedule choices.
+Their purpose is to ensure that future feasibility or infeasibility results reflect the stated genealogy and overlap convention rather than decimal error, incomplete child families, or ambiguous branching semantics.

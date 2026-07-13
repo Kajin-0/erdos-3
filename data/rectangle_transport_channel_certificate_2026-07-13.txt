@@ -1,0 +1,23 @@
+K=4 RECTANGLE TRANSPORT CHANNEL
+
+base_rectangle=x,x+d,x+2d-U,x+3d-U
+positive_common_difference=d>0
+
+plus_transport:
+  T=4S+U
+  outer_lambda=0011
+  parent_mu=0202
+  output_common_difference=d+2S
+
+minus_transport:
+  T=4S-U
+  hypotheses=0<U<2S
+  outer_lambda=0112
+  parent_mu=2020
+  output_common_difference=d+2S-U
+
+all_normalized_k4_signature_channels:
+  0011 0202 lambda_sig=(0, 1, -1) mu_sig=(2, -4, 4)
+  0112 2020 lambda_sig=(1, -1, 1) mu_sig=(-2, 4, -4)
+  1100 2020 lambda_sig=(0, -1, 1) mu_sig=(-2, 4, -4)
+  2110 0202 lambda_sig=(-1, 1, -1) mu_sig=(2, -4, 4)

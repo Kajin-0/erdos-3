@@ -76,9 +76,11 @@ Statuses marked **exact finite** are computational statements for recorded objec
 | CL-057 | Exact policy-weight thresholds separate lexicographic and delayed-seed preferences: `2.384<lambda_*<2.385` for `T+lambda O+E`, `4.356<kappa_*<4.357` for `T+U+kappa D+E`, `0.021<gamma_*<0.022` when charging the lexicographic regenerative path, and `0.418<a_*<0.419` for `aT+O+E`. Unit terminal plus unit recursive-mass scores prefer lexicographic deletion. | Exact finite rational half-space theorem. |
 | CL-058 | The score `C_lambda=T+lambda O+E` has a certified common policy subcone `477/200<lambda<260/63`. Every such weight ranks lexicographic below reverse lexicographic deletion on `S_1,...,S_7`, while ranking the delayed-seed policy below lexicographic deletion on `S_7`. The witness `lambda=3` gives the tested policy family `S_1,...,S_6` lexicographic and `S_7` delayed-seed. | Exact finite multi-state policy-ranking theorem. |
 | CL-059 | The uniform policy that delays every step-5 action ties lexicographic deletion under `C_3=T+3O+E` on `S_1` and is strictly cheaper on every `S_2,...,S_7`. At `S_7` it still contains the isolated canonical return `{16,21,26}->S_1`. | Exact finite uniform-policy theorem. |
-| CL-060 | A hybrid delaying step-5 and the three seed-producing `q=1` actions removes canonical regeneration but has higher raw `C_3` than the step-5 policy. For `C_{3,gamma}=T+3O+E+gamma G_regen`, the hybrid wins when `gamma>gamma_*`, where `0.057<gamma_*<0.058`; `gamma=1/16` is an exact witness and also ranks the hybrid below lexicographic deletion at `S_7`. | Exact finite continuation-weight theorem. |
+| CL-060 | A hybrid delaying step-5 and the three seed-producing `q=1` actions removes canonical regeneration but has higher raw `C_3` than the step-5 policy. For `C_{3,gamma}=T+3O+E+gamma G_regen`, the hybrid beats step-5 when `gamma>gamma_5`, where `0.057<gamma_5<0.058`; `gamma=1/16` is a valid witness for that pairwise comparison. | Exact finite continuation-weight theorem. |
+| CL-061 | In the enlarged finite policy family, `C_{3,1/10}=T+3O+E+(1/10)G_regen` selects `step5/step540` on `S_2`, `step540` on `S_3,...,S_6`, and the non-regenerative `hybrid5` policy on `S_7`; reverse deletion is never selected. The active S7 constraint is `0.0837<gamma_540<0.0838`, so `gamma=1/16` fails and `gamma=1/10` succeeds. | Exact finite two-coordinate ranking theorem. |
+| CL-062 | Delaying step `30` alone improves `C_3` relative to lexicographic deletion on every `S_2,...,S_7`, but adding the same delay after steps `5` and `40` reverses sign and worsens `C_3` on every `S_2,...,S_7`. Favorable local policy perturbations are not composable. | Exact finite interaction/no-greedy theorem. |
 
-Primary references for CL-050 through CL-060:
+Primary references for CL-050 through CL-062:
 
 - `docs/s7-cyclic-scc-output-load.md`;
 - `docs/s7-cyclic-scc-local-completion-credit.md`;
@@ -90,8 +92,10 @@ Primary references for CL-050 through CL-060:
 - `docs/s7-policy-weight-regions.md`;
 - `docs/policy-occurrence-cone-s1-s7.md`;
 - `docs/step5-policy-regeneration-weight.md`;
+- `docs/two-coordinate-policy-family.md`;
 - `src/verify_policy_occurrence_cone_s1_s7.py`;
-- `src/verify_step5_policy_regeneration_weight.py`.
+- `src/verify_step5_policy_regeneration_weight.py`;
+- `src/verify_two_coordinate_policy_family.py`.
 
 ---
 
@@ -128,23 +132,25 @@ Do not use without materially new hypotheses:
 27. treating the delayed-seed Pareto tradeoff as a completed Bellman contraction;
 28. treating one finite weight threshold or common cone as global validation of its raw coordinate;
 29. treating `T+3O+E` as sufficient after it chooses a known regenerative schedule;
-30. inserting the recorded path charge directly into a Bellman child sum without a retention theorem;
-31. treating the tested policy family as globally optimal over all complete schedules;
-32. random sampling as a finite certificate;
-33. the rejected depth-ten anchor reduction.
+30. assuming `gamma=1/16` survives enlargement of the policy family;
+31. greedily composing individually favorable policy delays;
+32. inserting the recorded path charge directly into a Bellman child sum without a retention theorem;
+33. treating the tested policy family as globally optimal over all complete schedules;
+34. random sampling as a finite certificate;
+35. the rejected depth-ten anchor reduction.
 
 ---
 
-# Open bottleneck OB-001: Regeneration-sensitive policy cone and retention
+# Open bottleneck OB-001: Two-coordinate policy cone and retention
 
 The state-specific cheap-extension problem at `S_10` is closed. Raw simultaneous transition generation is certified through `S_7`. Exact policy experiments now establish:
 
-1. a nonempty occurrence-weight subcone across the tested lexicographic, reverse, and delayed-seed policies;
-2. a uniform step-5 priority rule that lowers the occurrence-weight score across `S_2,...,S_7`;
-3. a failure of the occurrence-only score because it prefers a policy retaining the canonical regenerative child;
-4. an exact lower threshold for a continuation-sensitive regeneration penalty.
+1. a nonempty occurrence-weight subcone;
+2. a necessary continuation-sensitive regeneration coordinate;
+3. a stable finite witness `(lambda,gamma)=(3,1/10)` for the current deterministic policy family;
+4. a non-composability obstruction showing that independently favorable priority changes can interact destructively.
 
-The next task is to generate additional deterministic policies, convert their comparisons into exact rational half-spaces in `(lambda,gamma)`, and intersect them in the LP harness. A first infeasible subsystem should identify the next missing coordinate. A provenance-preserving retention quotient is still required before raw shell or path charges can be treated as Bellman children.
+The next task is to export the current comparisons as exact rational half-spaces in `(lambda,gamma)`, intersect them in the LP harness, and add further deterministic policy families. A first infeasible subsystem should identify the next missing coordinate. A provenance-preserving retention quotient is still required before raw shell or path charges can be treated as Bellman children.
 
 The target remains
 

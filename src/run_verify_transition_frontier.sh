@@ -116,4 +116,18 @@ run_check s7_policy_transition_tradeoff \
   python3 "$ROOT/src/verify_s7_policy_transition_tradeoff.py" \
   "$WORK/s7_policy_transition_tradeoff_certificate.txt"
 
-echo "verified: simultaneous transition, SCC, obstruction, regeneration, policy dependence, and policy tradeoff through S7"
+run_check s7_delayed_seed_policy \
+  37ed54c207820478fb5b2b2843342b2aebd9b274b4dd5ef1e6cf79e3d627f4e9 \
+  "$ROOT/data/s7_delayed_seed_policy_certificate_2026-07-13.txt" \
+  "$WORK/s7_delayed_seed_policy_certificate.txt" \
+  python3 "$ROOT/src/verify_s7_delayed_seed_policy.py" \
+  "$WORK/s7_delayed_seed_policy_certificate.txt"
+
+run_check s7_policy_weight_regions \
+  97f45313494b16f022f47f87ef1c788962011c76c349dc88faef1ba8e1838693 \
+  "$ROOT/data/s7_policy_weight_regions_certificate_2026-07-13.txt" \
+  "$WORK/s7_policy_weight_regions_certificate.txt" \
+  python3 "$ROOT/src/verify_s7_policy_weight_regions.py" \
+  "$WORK/s7_policy_weight_regions_certificate.txt"
+
+echo "verified: simultaneous transition, SCC, obstruction, regeneration, policy tradeoff, delayed policy, and exact weight regions through S7"

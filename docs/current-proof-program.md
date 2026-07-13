@@ -50,19 +50,19 @@ The uncontaminated equal-translate model is summable:
 P_h\alpha_h\le C_0(3/4)^h.
 ```
 
-The certified contaminated path has scale word
+The certified contaminated path reaches `S_10` with scale word
 
 ```text
 4,8,4,4,8,4,8,8,8
 ```
 
-through `S_10`, and
+and satisfies
 
 ```math
 \frac{W_5}{W_1}=\frac{91}{32}>1.
 ```
 
-Universal local and fixed-window contraction claims are false.
+Universal local contraction, fixed short-window contraction, and universal two-generation recovery are false.
 
 For exact scale factor `c>6`,
 
@@ -91,7 +91,7 @@ At `S_10`, inheritance, lifted completion support, and direct rectangle transpor
 \boxed{N_{10,2}=N_{10,4}=0.}
 ```
 
-The exact transport closure margin is only `5`. Every valid exact factor-eight child has a certified summable exact tail. This closes the recorded state, not the full deletion tree.
+The exact transport closure margin is `5`. Every valid exact factor-eight child has a certified summable exact tail. This closes the recorded state, not the full deletion tree.
 
 ---
 
@@ -113,9 +113,9 @@ Replay siblings are alternative choices, not simultaneous Bellman children.
 
 ---
 
-## 5. Cyclic output obstruction
+## 5. Cyclic output and retention obstruction
 
-At `S_7`, the terminal-fiber graph contains the cyclic component
+At `S_7`, the terminal-fiber graph contains
 
 ```math
 C=\{1,5,61,303,1597,8195,323640\}.
@@ -129,31 +129,27 @@ Its internal adjacency matrix satisfies
 
 The component emits `6,020` distinct novel labels. Even after numerical deduplication, its output/input harmonic ratio exceeds `7/5`. Raw output is recursive load, not stored repayment.
 
----
-
-## 6. Obstruction credit is real but incomplete
-
-Across the `62` exact cyclic-source shell states, novel labels create local collision/completion invalidity for
+Local and affine obstruction export is real but incomplete:
 
 ```text
-140,352 of 950,202 factor-two candidates
-398,745 of 4,986,696 factor-four candidates.
+140,352 of 950,202 factor-two candidates removed locally
+398,745 of 4,986,696 factor-four candidates removed locally
 ```
 
-On the `33` exact states of size at most `50`, complete three-translate four-AP testing still leaves
+On the `33` exact cyclic-source states of size at most `50`, complete one-generation four-AP testing still leaves
 
 ```text
 15,160 of 21,724 factor-two candidates
 75,723 of 87,829 factor-four candidates.
 ```
 
-Deterministic first witnesses span `33` of the `34` nonconstant affine classes. Complete one-generation affine testing is broad but insufficient.
+A provenance-preserving retention quotient remains missing.
 
 ---
 
-## 7. Regeneration and policy dependence
+## 6. Regeneration and policy dependence
 
-Under lexicographic deletion, the novel isolated child
+Under lexicographic deletion, the isolated child
 
 ```math
 X=\{16,21,26\}\subset[16,32)
@@ -165,21 +161,13 @@ satisfies
 X\xrightarrow[f=4]{R=1}S_1.
 ```
 
-It is the unique exact factor-two/factor-four return from the `62` cyclic-source states to any canonical `S_1,...,S_10`, and it is disjoint from every other raw recursive shell and terminal output in the lexicographic `S_7` transition.
-
-Its certified path charge, assigning seed persistence one, is
+It is the unique exact factor-two/factor-four return from the `62` cyclic-source states to any canonical `S_1,...,S_10`. Its recorded path charge is
 
 ```math
 G=\frac{36953}{4096}.
 ```
 
-The seed-producing centers are not root-forced. A reverse-lexicographic complete schedule has no canonical return. Therefore regeneration is schedule-dependent, not parent-intrinsic.
-
----
-
-## 8. Reverse deletion solves the wrong objective
-
-The reverse policy avoids canonical regeneration but has a much larger raw transition:
+The seed-producing actions are not root-forced. Reverse lexicographic deletion avoids the return but creates a severe load explosion:
 
 | coordinate | lexicographic | reverse lexicographic |
 |---|---:|---:|
@@ -189,35 +177,13 @@ The reverse policy avoids canonical regeneration but has a much larger raw trans
 | maximum label multiplicity | `15` | `160` |
 | residual error | `15/256` | `165/2048` |
 
-Exact harmonic comparisons give
-
-```math
-75
-<
-\frac{M_{\rm occ}^{\rm rev}}{M_{\rm occ}^{\rm lex}}
-<
-76,
-```
-
-and
-
-```math
-744
-<
-\frac{M_{\rm dup}^{\rm rev}}{M_{\rm dup}^{\rm lex}}
-<
-745.
-```
-
 Avoiding a recognizable descendant is not a sufficient policy objective.
 
 ---
 
-## 9. Targeted delayed-seed policy
+## 7. Targeted delayed-seed policy
 
-Delay only the three unforced lexicographic `q=1` actions that produce the regenerative seed. All other initial actions keep lexicographic priority. The delayed actions become stale.
-
-The delayed policy has no canonical return and changes the transition as follows:
+Delay only the three unforced lexicographic `q=1` actions that produce the regenerative seed. The delayed actions become stale.
 
 | coordinate | lexicographic | delayed-seed |
 |---|---:|---:|
@@ -226,125 +192,78 @@ The delayed policy has no canonical return and changes the transition as follows
 | maximum multiplicity | `15` | `14` |
 | residual error | `240/4096` | `241/4096` |
 
-Exact harmonic ratios satisfy
-
-```math
-\frac9{10}
-<
-\frac{M_{\rm occ}^{\rm delay}}{M_{\rm occ}^{\rm lex}}
-<
-\frac{14}{15},
-```
-
-and
-
-```math
-\frac23
-<
-\frac{M_{\rm dup}^{\rm delay}}{M_{\rm dup}^{\rm lex}}
-<
-\frac7{10}.
-```
-
-Occurrence mass falls by about `7.3%`, duplicate mass by about `30.3%`, and residual error rises by exactly `1/4096`. Terminal-step mass rises. This is an exact Pareto tradeoff, not a Bellman theorem.
-
----
-
-## 10. Exact policy-weight boundaries
-
-Let
-
-```math
-T=\text{terminal-step harmonic mass},
-```
-
-```math
-O=\text{middle-fiber occurrence mass},
-\qquad
-U=\text{distinct union mass},
-\qquad
-D=O-U,
-```
-
-and let `E` be normalized residual error.
+Occurrence mass falls by about `7.3%`, duplicate mass by about `30.3%`, and residual error rises by exactly `1/4096`. Terminal-step mass rises.
 
 For
 
 ```math
-C_\lambda=T+\lambda O+E,
+C_\lambda(\pi)=T_\pi+\lambda O_\pi+E_\pi,
 ```
 
-the delayed policy wins exactly when
+where `T` is terminal-step harmonic mass, `O` is middle-fiber occurrence mass, and `E` is normalized residual error, the delayed policy beats lexicographic deletion at `S_7` exactly when
 
 ```math
-\lambda>\lambda_*;
+\lambda>\lambda_*,
 \qquad
 \frac{298}{125}<\lambda_*<\frac{477}{200}.
 ```
 
-Thus
+---
+
+## 8. First common policy-weight cone
+
+The same score has now been tested on the recorded lexicographic and reverse schedules through `S_6`.
+
+On `S_1`, reverse deletion has lower occurrence mass but higher terminal mass. Exact arithmetic gives
+
+```math
+C_\lambda(\mathrm{reverse})
+>
+C_\lambda(\mathrm{lex})
+\quad\Longleftrightarrow\quad
+\lambda<\frac{260}{63}.
+```
+
+At `lambda=3`, the exact `S_1` score gap is
+
+```math
+\frac{71}{624}>0.
+```
+
+On every `S_2,...,S_6`, reverse deletion has larger terminal mass, larger occurrence mass, and no smaller residual error, so lexicographic deletion is cheaper for every nonnegative `lambda`.
+
+Combining these inequalities with the `S_7` delayed-policy threshold gives the certified nonempty subcone
+
+```math
+\boxed{
+\frac{477}{200}<\lambda<\frac{260}{63}
+}.
+```
+
+The rational witness
+
+```math
+\boxed{\lambda=3}
+```
+
+selects the tested policy family
 
 ```text
-2.384 < lambda_* < 2.385.
+S1-S6: lexicographic
+S7:    delayed-seed
 ```
 
-For
+and rejects reverse lexicographic deletion on every `S_1,...,S_7` comparison.
 
-```math
-C_\kappa=T+U+\kappa D+E,
-```
+This is an exact finite policy-ranking theorem. It does not prove that `C_lambda` is a retained-child Bellman potential or globally optimal over all complete schedules.
 
-the delayed policy wins exactly when
-
-```math
-\kappa>\kappa_*;
-\qquad
-\frac{1089}{250}<\kappa_*<\frac{4357}{1000}.
-```
-
-Thus
-
-```text
-4.356 < kappa_* < 4.357.
-```
-
-For
-
-```math
-C_\gamma=T+O+E+\gamma G_{\rm lex},
-```
-
-the delayed policy wins exactly when
-
-```math
-\gamma>\gamma_*;
-\qquad
-\frac{21}{1000}<\gamma_*<\frac{11}{500}.
-```
-
-Finally, for
-
-```math
-C_a=aT+O+E,
-```
-
-the delayed policy wins exactly when
-
-```math
-a<a_*;
-\qquad
-\frac{209}{500}<a_*<\frac{419}{1000}.
-```
-
-Unit terminal plus unit recursive-mass scores still prefer lexicographic deletion. The delayed policy becomes cheaper only when recursive occurrence, duplicate, or regenerative continuation cost receives sufficient weight.
-
-These are exact necessary constraints on a candidate policy score. They do not prove that the raw coordinates are valid retained-child Bellman potentials.
+**Primary reference:** `docs/policy-occurrence-cone-s1-s7.md`.
 
 ---
 
-## 11. Active theorem
+## 9. Active theorem
 
-The required object is explicitly policy-aware:
+The required object remains policy-aware:
 
 ```math
 \boxed{
@@ -364,25 +283,26 @@ The required object is explicitly policy-aware:
 
 A closing route must either:
 
-1. construct a global coordinated policy `pi` with controlled complete child cost; or
+1. construct a global coordinated policy with controlled complete child cost; or
 2. prove a schedule-independent lower-envelope inequality over all complete policies.
 
 The state must include provenance overlap, SCC recycling, obstruction coverage, regenerative continuation cost, and residual error.
 
 ---
 
-## 12. Approved next targets
+## 10. Approved next targets
 
-1. Compute the same policy coordinates and local alternatives on `S_1,...,S_6`.
-2. Convert every certified policy comparison into an exact rational half-space.
-3. Intersect the half-spaces in the branching-reserve LP harness.
-4. If infeasible, extract the smallest exact conflicting subsystem and add the missing coordinate.
-5. Prove a provenance-preserving retention quotient before treating raw shells as Bellman children.
-6. Establish a policy-aware or minimax branching Carleson inequality.
+1. Generate additional deterministic local policies on `S_1,...,S_7`.
+2. Convert every comparison into an exact rational half-space.
+3. Intersect the half-spaces in the exact branching-reserve LP harness.
+4. Extract the first infeasible subsystem if the common cone collapses.
+5. Add the missing coordinate identified by that subsystem.
+6. Prove a provenance-preserving retention quotient before treating raw shells as Bellman children.
+7. Establish a policy-aware or minimax branching Carleson inequality.
 
 ---
 
-## 13. Stop list
+## 11. Stop list
 
 Do not infer:
 
@@ -394,20 +314,27 @@ Do not infer:
 - avoiding regeneration makes a policy cheaper;
 - raw occurrence or distinct-label count ranks policies correctly;
 - the delayed-seed Pareto improvement is already a whole-tree contraction;
-- one finite weight threshold validates the corresponding coordinate globally;
+- one finite weight interval validates the raw score globally;
+- the tested policy family is globally optimal;
 - one policy witness proves an all-policy theorem.
 
 ---
 
-## 14. Reproduction
+## 12. Reproduction
 
-Complete lightweight suite:
+Push-gating lightweight suite:
+
+```bash
+bash src/run_verify_ci_lightweight.sh
+```
+
+Complete extended suite:
 
 ```bash
 bash src/run_verify_transport_reserve.sh
 ```
 
-Transition-only suite:
+Transition and policy frontier only:
 
 ```bash
 bash src/run_verify_transition_frontier.sh
@@ -424,4 +351,5 @@ Current detailed notes:
 - `docs/s7-policy-transition-tradeoff.md`;
 - `docs/s7-delayed-seed-policy.md`;
 - `docs/s7-policy-weight-regions.md`;
+- `docs/policy-occurrence-cone-s1-s7.md`;
 - `docs/branching-reserve-lp.md`.

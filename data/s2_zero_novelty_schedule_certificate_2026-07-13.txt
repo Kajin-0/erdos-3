@@ -1,0 +1,16 @@
+verified: valid coordinated S2 deletion schedule
+verified: terminal residual is three-AP-free
+verified: all middle fibers lie in the minimum-translation backbone
+state=S2
+state_size=39
+schedule_length=22
+residual_size=17
+selected_steps=1,4,5,6,56,57,61,62
+fiber_union=61,65,66,80,81,82,86,91,92,122,143
+novel_support=
+novel_harmonic_mass=0
+minimum_novel_harmonic_mass=0
+state_sha256=cff7a986bfeb8def36b5597655a585f261f8a58facdb1ee9339d72a9eaa78e37
+schedule_sha256=75409bc254f8ac850880dbd9a83276fb6b454f2bd064aef2a5e96bc7bb74dac8
+fiber_union_sha256=34ce0c2dd4042838212e083b1a06154ddc9cd7098cdbc64968f18d0fa5446f8b
+residual_sha256=c767976406872890d391155e4a7395e072f7882589dcdb912387551c05641394

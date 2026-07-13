@@ -38,7 +38,7 @@ H(Q)+\sum_qH(\Xi_q)+H(\mathcal B(D))
 2H(D)-\frac{r_3(N)}N-\frac1N.
 ```
 
-Every recursive output is resolved into standard dyadic shells. These statements control local moments, not the full branching reciprocal mass.
+Every recursive output is resolved into standard dyadic shells. These are local accounting statements, not a whole-tree reciprocal-mass theorem.
 
 ---
 
@@ -56,7 +56,7 @@ The certified contaminated path reaches `S_10` with scale word
 4,8,4,4,8,4,8,8,8
 ```
 
-and satisfies
+and
 
 ```math
 \frac{W_5}{W_1}=\frac{91}{32}>1.
@@ -97,7 +97,7 @@ The exact transport closure margin is `5`. Every valid exact factor-eight child 
 
 ## 4. Raw simultaneous transition frontier
 
-The fixed lexicographic exporter records complete raw occurrence families before a retention quotient.
+The lexicographic exporter records complete raw occurrence families before any retention quotient.
 
 | parent | occurrences | state classes | duplicate classes | containments | partial overlaps |
 |---:|---:|---:|---:|---:|---:|
@@ -129,7 +129,7 @@ Its internal adjacency matrix satisfies
 
 The component emits `6,020` distinct novel labels. Even after numerical deduplication, its output/input harmonic ratio exceeds `7/5`. Raw output is recursive load, not stored repayment.
 
-Local and affine obstruction export is real but incomplete:
+Local and affine obstruction export is substantial but incomplete:
 
 ```text
 140,352 of 950,202 factor-two candidates removed locally
@@ -181,18 +181,7 @@ Avoiding a recognizable descendant is not a sufficient policy objective.
 
 ---
 
-## 7. Targeted delayed-seed policy
-
-Delay only the three unforced lexicographic `q=1` actions that produce the regenerative seed. The delayed actions become stale.
-
-| coordinate | lexicographic | delayed-seed |
-|---|---:|---:|
-| terminal steps | `25` | `31` |
-| middle-fiber shells | `124` | `123` |
-| maximum multiplicity | `15` | `14` |
-| residual error | `240/4096` | `241/4096` |
-
-Occurrence mass falls by about `7.3%`, duplicate mass by about `30.3%`, and residual error rises by exactly `1/4096`. Terminal-step mass rises.
+## 7. First occurrence-weight cone
 
 For
 
@@ -200,31 +189,23 @@ For
 C_\lambda(\pi)=T_\pi+\lambda O_\pi+E_\pi,
 ```
 
-where `T` is terminal-step harmonic mass, `O` is middle-fiber occurrence mass, and `E` is normalized residual error, the delayed policy beats lexicographic deletion at `S_7` exactly when
+where `T` is terminal-step harmonic mass, `O` is middle-fiber occurrence mass, and `E` is normalized terminal-residual error, the targeted delayed-seed policy beats lexicographic deletion at `S_7` exactly when
 
 ```math
-\lambda>\lambda_*,
+\lambda>\lambda_*;
 \qquad
 \frac{298}{125}<\lambda_*<\frac{477}{200}.
 ```
 
----
-
-## 8. First common occurrence-weight cone
-
-On `S_1`, exact arithmetic gives
+On `S_1`, lexicographic deletion beats reverse deletion exactly when
 
 ```math
-C_\lambda(\mathrm{reverse})
->
-C_\lambda(\mathrm{lex})
-\quad\Longleftrightarrow\quad
 \lambda<\frac{260}{63}.
 ```
 
-On every `S_2,...,S_6`, reverse deletion has larger terminal mass, larger occurrence mass, and no smaller residual error, so lexicographic deletion is cheaper for every nonnegative `lambda`.
+On every `S_2,...,S_6`, reverse deletion has larger terminal mass, larger occurrence mass, and no smaller residual error.
 
-Combining these inequalities with the `S_7` delayed-policy threshold gives
+Therefore the tested family has the nonempty common subcone
 
 ```math
 \boxed{
@@ -232,28 +213,19 @@ Combining these inequalities with the `S_7` delayed-policy threshold gives
 }.
 ```
 
-The witness
+The exact witness is
 
 ```math
-\boxed{\lambda=3}
+\boxed{\lambda=3}.
 ```
-
-selects
-
-```text
-S1-S6: lexicographic
-S7:    delayed-seed
-```
-
-among the tested lexicographic, reverse, and delayed-seed comparisons.
 
 **Primary reference:** `docs/policy-occurrence-cone-s1-s7.md`.
 
 ---
 
-## 9. Uniform step-5 policy exposes the missing coordinate
+## 8. Uniform step-5 policy exposes continuation cost
 
-Let `pi_5` delay every progression-step-5 action, preserving lexicographic order otherwise.
+Let `pi_5` delay every progression-step-5 action and preserve lexicographic order otherwise.
 
 Exact recomputation gives
 
@@ -269,47 +241,106 @@ C_3(\pi_5)<C_3(\pi_{\rm lex})
 
 on every `S_2,...,S_7`.
 
-Thus one uniform local priority rule improves the occurrence-weight score throughout the recorded frontier. However, at `S_7`, `pi_5` preserves the isolated canonical return to `S_1`.
-
-Define a hybrid policy `pi_h` that delays both all step-5 actions and the three seed-producing `q=1` actions. The hybrid has no canonical regeneration, but
-
-```math
-C_3(\pi_h)>C_3(\pi_5).
-```
-
-Therefore `T+3O+E` alone prefers a policy with known long continuation cost.
+At `S_7`, `pi_5` retains the isolated canonical return. A hybrid delaying both step `5` and the three seed-producing `q=1` actions removes regeneration but has higher raw `C_3`.
 
 Introduce
 
 ```math
 C_{3,\gamma}(\pi)
 =
-T_\pi+3O_\pi+E_\pi+\gamma G_\pi,
+T_\pi+3O_\pi+E_\pi+\gamma G_\pi.
 ```
 
-where `G_pi` is the recorded regenerative continuation charge. The hybrid beats the step-5 policy exactly when
+In the pairwise `pi_5` versus hybrid comparison, the hybrid wins once
 
 ```math
-\gamma>\gamma_*;
+\gamma>\gamma_5,
 \qquad
-\frac{57}{1000}<\gamma_*<\frac{29}{500}.
+\frac{57}{1000}<\gamma_5<\frac{29}{500}.
 ```
 
-The exact witness
-
-```math
-\boxed{\gamma=\frac1{16}}
-```
-
-makes the non-regenerative hybrid cheaper than both the step-5 and lexicographic policies at `S_7`.
-
-This identifies the first mandatory continuation-sensitive coordinate. The occurrence-weight cone is nonempty but insufficient by itself.
+The witness `gamma=1/16` is valid only for that pairwise comparison.
 
 **Primary reference:** `docs/step5-policy-regeneration-weight.md`.
 
 ---
 
-## 10. Active theorem
+## 9. Two-coordinate finite policy family
+
+The policy family was enlarged to include:
+
+```text
+lexicographic
+reverse lexicographic
+single-step delays 30, 40, 142, 161
+step5
+step540
+step54030
+S7 seed-delayed hybrids of the cumulative policies.
+```
+
+At
+
+```math
+\boxed{
+\lambda=3,
+\qquad
+\gamma=\frac1{10},
+}
+```
+
+the exact winners are:
+
+| state | winner |
+|---:|---|
+| `S_1` | all tested non-reverse policies tie |
+| `S_2` | `step5`, `step540` tie |
+| `S_3` | `step540` |
+| `S_4` | `step540` |
+| `S_5` | `step540` |
+| `S_6` | `step540` |
+| `S_7` | non-regenerative `hybrid5` |
+
+The stronger regenerative `step540` policy tightens the continuation constraint. The hybrid beats it exactly when
+
+```math
+\gamma>\gamma_{540},
+\qquad
+\frac{837}{10000}<\gamma_{540}<\frac{419}{5000}.
+```
+
+Thus
+
+```text
+gamma = 1/16 fails
+gamma = 1/10 succeeds.
+```
+
+This is the first stable finite two-coordinate witness for the present policy family.
+
+**Primary reference:** `docs/two-coordinate-policy-family.md`.
+
+---
+
+## 10. Policy improvements are not composable
+
+Delaying step `30` alone improves `C_3` relative to lexicographic deletion on every `S_2,...,S_7`.
+
+After steps `5` and `40` are already delayed, the same modification reverses sign:
+
+```math
+C_3(\pi_{5,40,30})
+>
+C_3(\pi_{5,40})
+```
+
+on every `S_2,...,S_7`.
+
+Therefore independently favorable local policy moves cannot be greedily combined. The policy objective is interaction-sensitive, and every candidate priority set must be recomputed as a complete schedule or controlled by a new structural theorem.
+
+---
+
+## 11. Active theorem
 
 The required object remains policy-aware:
 
@@ -329,12 +360,7 @@ The required object remains policy-aware:
 }
 ```
 
-A closing route must either:
-
-1. construct a global coordinated policy with controlled complete child cost; or
-2. prove a schedule-independent lower-envelope inequality over all complete policies.
-
-The policy score now requires at least:
+The current finite policy score needs at least
 
 ```text
 terminal mass
@@ -343,23 +369,23 @@ terminal residual error
 regenerative continuation charge.
 ```
 
-A retention theorem is still required before these raw outputs can enter a Bellman child sum.
+A retention theorem is still required before raw shell or path charges can enter a Bellman child sum.
 
 ---
 
-## 11. Approved next targets
+## 12. Approved next targets
 
-1. Generate additional deterministic local policies on `S_1,...,S_7`.
-2. Convert every comparison into exact rational half-spaces in `(lambda,gamma)`.
-3. Intersect those half-spaces in the exact branching-reserve LP harness.
-4. Extract the first infeasible subsystem if the two-coordinate cone collapses.
-5. Add the missing coordinate identified by that subsystem.
-6. Prove a provenance-preserving retention quotient before treating raw shells as Bellman children.
+1. Export all current policy comparisons as exact rational half-spaces in `(lambda,gamma)`.
+2. Intersect them in the branching-reserve LP harness.
+3. Add additional deterministic priority families and update the feasible cone.
+4. Extract the first exact infeasible subsystem if the two-coordinate cone collapses.
+5. Add the coordinate identified by that subsystem.
+6. Prove a provenance-preserving retention quotient.
 7. Establish a policy-aware or minimax branching Carleson inequality.
 
 ---
 
-## 12. Stop list
+## 13. Stop list
 
 Do not infer:
 
@@ -370,15 +396,16 @@ Do not infer:
 - canonical regeneration is forced by `S_7`;
 - avoiding regeneration makes a policy cheaper;
 - raw occurrence or distinct-label count ranks policies correctly;
-- the delayed-seed Pareto improvement is already a whole-tree contraction;
 - a nonempty occurrence-weight cone makes continuation cost unnecessary;
-- adding the recorded path charge is already justified by retention;
+- `gamma=1/16` survives enlarged policy families;
+- locally favorable policy moves compose greedily;
+- adding the recorded path charge is justified without retention;
 - the tested policy family is globally optimal;
-- one policy witness proves an all-policy theorem.
+- one finite witness proves an all-policy theorem.
 
 ---
 
-## 13. Reproduction
+## 14. Reproduction
 
 Push-gating lightweight suite:
 
@@ -411,4 +438,5 @@ Current detailed notes:
 - `docs/s7-policy-weight-regions.md`;
 - `docs/policy-occurrence-cone-s1-s7.md`;
 - `docs/step5-policy-regeneration-weight.md`;
+- `docs/two-coordinate-policy-family.md`;
 - `docs/branching-reserve-lp.md`.

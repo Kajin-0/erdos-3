@@ -11,6 +11,7 @@ S1_DAG_SHA256="e31c232158b2abed03ebf7ec12e60d44ef14cff9ae7e066afaa645c80dd9b639"
 S1_ALL_SHA256="8a0726c30041eba72d047924922cfc7c1ba756c63d58da3a04d92f27919273cc"
 S2_NOVEL_SHA256="c552a6146531e02b19a1416c8913287d1efa86a0520eab031899630f8ecd33d7"
 S2_ZERO_SHA256="e5d7a3bbefea78c7c5eeb85ec9155e947d00443e8c279ba6cfc72978267bf972"
+LEX_NOVELTY_SHA256="6fe0b27e20284a93ef13c4a738122c4889432c2e673d63794ccec6a7ba36c2e1"
 
 mkdir -p "$WORK"
 
@@ -78,7 +79,14 @@ python3 "$ROOT/src/verify_s2_zero_novelty_schedule.py" \
 cmp "$S2_ZERO_RECORDED" "$S2_ZERO_GENERATED"
 verify_sha256 "$S2_ZERO_GENERATED" "$S2_ZERO_SHA256" "s2_zero"
 
+LEX_NOVELTY_GENERATED="$WORK/lexicographic_novelty_s1_s5_certificate.txt"
+LEX_NOVELTY_RECORDED="$ROOT/data/lexicographic_novelty_s1_s5_certificate_2026-07-13.txt"
+python3 "$ROOT/src/verify_lexicographic_novelty_s1_s5.py" \
+  "$LEX_NOVELTY_GENERATED"
+cmp "$LEX_NOVELTY_RECORDED" "$LEX_NOVELTY_GENERATED"
+verify_sha256 "$LEX_NOVELTY_GENERATED" "$LEX_NOVELTY_SHA256" "lex_novelty"
+
 python3 "$ROOT/src/certified_contaminated_states.py" > /dev/null
 python3 "$ROOT/src/branching_reserve_lp.py" self-test
 
-echo "verified: transport, replay, reserve diagnostics, S1/S2 DAG checks, and LP harness"
+echo "verified: transport, replay, reserve diagnostics, S1-S5 DAG checks, and LP harness"

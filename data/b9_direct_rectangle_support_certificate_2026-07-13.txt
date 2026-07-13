@@ -1,0 +1,115 @@
+DIRECT RECTANGLE SUPPORT OF B9={0} UNION S9
+Date: 2026-07-13
+
+STATUS
+Exact finite computer-assisted theorem.
+
+CLAIM
+For every integer U with
+
+  1 <= U <= 76,583,776,
+
+there exist x,d with d>0 such that
+
+  x,
+  x+d,
+  x+2d-U,
+  x+3d-U
+
+all belong to B9={0} union S9.
+
+Equivalently,
+
+  F_{B9}(U,-U;0) > 0
+
+through the complete depth-nine factor-four fit range.
+
+PAIR-FIBER DECOMPOSITION
+For P_delta(B9)={x:x,x+delta in B9}, a pair of starts whose signed
+difference is D produces effective separations
+
+  U = 2 delta + D
+  U = 2 delta - D.
+
+The verifier reconstructs every relevant P_delta(B9) exactly from the three
+embedded A8 copies and the global anchor zero.
+
+STRUCTURAL SUPPORT
+Special R8-aligned support values: 20,682,803
+
+Exact count bands:
+
+  count interval   groups     starts       pair comparisons    band support
+  (0,16]           1491233     12479508          76206084        18732316
+  (16,32]          1130717     28639718         389597167        38187592
+  (32,64]          1777456     86449011        2222186841        61265926
+  (64,128]         2302548    217231839       10738742213        73937604
+  (128,256]        2356421    434911006       41870738292        76407456
+  (256,300]         567838    161226381       22995501791        76264912
+  (300,350]         334951    108588614       17672142223        76227713
+  (350,400]         385029    145105838       27450979298        76361145
+  (400,450]         365112    157297454       33975401607        76488055
+  (450,512]         225954    109965601       26843231018        76465778
+
+The union of the special support and all count bands covers
+
+  76,581,484
+
+values. The exact terminal zero list has
+
+  2,292
+
+values, first 4 and last 76,561,920.
+
+Terminal zero-list FNV-64:  954213145a3dba7
+Terminal zero-list SHA-256: 2847efd3228c8c175c8d3d944efc7680aa95a2ca4f60b9ab8d5df984decfc08d
+Union-bitset SHA-256:        56c22b2bf90f99c42010d0e6b0b9a211040af04b54f87d46e8a9fb9336fa35a3
+
+TERMINAL EXPLICIT WITNESSES
+A fixed per-U deterministic xorshift search, followed by independent point
+membership and rectangle-equation checks, certifies 2,285 of the 2,292 terminal
+values.
+
+Deterministic statistics:
+
+  successful witnesses:       2285
+  total trials:           134920545
+  maximum trials:            887134
+  maximum-trial U:           5601876
+
+Witness FNV-64:  63be7ecdc206eeb7
+Witness SHA-256: 56643ba1c0b36de464813470366cb74c66cc7ed21496dbb64578f56ec877198f
+
+The seven values not found by the fixed terminal search are:
+
+  11,892,397
+  27,493,106
+  43,809,995
+  73,170,196
+  74,090,852
+  76,468,444
+  76,561,920
+
+They have stored exact large-fiber witnesses in
+
+  data/b9_direct_rectangle_terminal7_witnesses_2026-07-13.txt
+
+whose FNV-64 is d2c19c77b1792c42 and SHA-256 is
+
+  447357ff5c38f927f9ed8ebacd9244ba273c5ff3c888b45566fc730064186ba6.
+
+ARITHMETIC
+
+  76,581,484 + 2,285 + 7 = 76,583,776.
+
+Therefore the direct rectangle-support zero set is empty throughout the entire
+range 1<=U<=76,583,776.
+
+PRIMARY FILES
+src/verify_b9_direct_rectangle_support.cpp
+src/run_verify_s10_factor4_rectangle_closure.sh
+data/b9_direct_rectangle_terminal7_witnesses_2026-07-13.txt
+
+SCOPE
+This is an exact theorem for the recorded state B9. It is not yet a universal
+state-independent lower bound for rectangle coverage in arbitrary states.

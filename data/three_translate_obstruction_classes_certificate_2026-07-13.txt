@@ -1,0 +1,66 @@
+THREE-TRANSLATE 4-AP OBSTRUCTION CLASSIFICATION
+
+raw_layer_words=81
+normalized_layer_words=65
+base_only_class=0000
+nonconstant_normalized_words=64
+nonconstant_reversal_classes=34
+two_word_reversal_classes=30
+self_reversing_classes=4
+self_reversing_words=0110,0220,1001,2002
+
+signature definitions:
+  r=lambda1-lambda0
+  a=lambda0-2*lambda1+lambda2
+  b=lambda1-2*lambda2+lambda3
+
+class representative reverse r a b orbit_size
+01 0001 1000 +0 +0 +1 2
+02 0002 2000 +0 +0 +2 2
+03 0010 0100 +0 +1 -2 2
+04 0011 1100 +0 +1 -1 2
+05 0012 2100 +0 +1 +0 2
+06 0020 0200 +0 +2 -4 2
+07 0021 1200 +0 +2 -3 2
+08 0022 2200 +0 +2 -2 2
+09 0101 1010 +1 -2 +2 2
+10 0102 2010 +1 -2 +3 2
+11 0110 0110 +1 -1 -1 1
+12 0111 1110 +1 -1 +0 2
+13 0112 2110 +1 -1 +1 2
+14 0120 0210 +1 +0 -3 2
+15 0121 1210 +1 +0 -2 2
+16 0122 2210 +1 +0 -1 2
+17 0201 1020 +2 -4 +3 2
+18 0202 2020 +2 -4 +4 2
+19 0211 1120 +2 -3 +1 2
+20 0212 2120 +2 -3 +2 2
+21 0220 0220 +2 -2 -2 1
+22 0221 1220 +2 -2 -1 2
+23 0222 2220 +2 -2 +0 2
+24 1001 1001 -1 +1 +1 1
+25 1002 2001 -1 +1 +2 2
+26 1011 1101 -1 +2 -1 2
+27 1012 2101 -1 +2 +0 2
+28 1021 1201 -1 +3 -3 2
+29 1022 2201 -1 +3 -2 2
+30 1102 2011 +0 -1 +3 2
+31 1202 2021 +1 -3 +4 2
+32 2002 2002 -2 +2 +2 1
+33 2012 2102 -2 +3 +0 2
+34 2022 2202 -2 +4 -2 2
+
+exact one-scale affine parameterization:
+  base points = x, x+d, x+2d-aR, x+3d-(2a+b)R
+  projected common difference = d+rR
+  nontriviality condition = d+rR != 0
+
+exact labeled two-scale composition:
+  A=a(lambda)T+a(mu)S
+  B=b(lambda)T+b(mu)S
+  Q=r(lambda)T+r(mu)S
+  base points = x, x+d, x+2d-A, x+3d-(2A+B)
+  projected common difference = d+Q
+
+pair-start recurrence:
+  P_d(G_S(B)) = union_{i,j in {0,1,2}} (P_{d+(i-j)S}(B)+iS)

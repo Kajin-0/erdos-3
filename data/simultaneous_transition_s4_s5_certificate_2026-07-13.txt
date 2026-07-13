@@ -1,0 +1,38 @@
+SIMULTANEOUS TRANSITION EXTENSION S4-S5
+
+policy=lexicographic_coordinated
+harmonic_average_bound=9/8
+S4_selected=305
+S4_residual=58
+S4_terminal_steps=11
+S4_recursive_occurrences=46
+S4_exact_state_classes=34
+S4_duplicate_classes=7
+S4_strict_containments=91
+S4_partial_overlaps=35
+S4_terminal_recursive_overlap=1,61,303,1597
+S4_multiplicity_distribution=1:460,2:60,3:7,5:3,6:3,11:2
+S4_maximum_multiplicity=11
+S4_maximum_labels=1597,3194
+S4_harmonic_average_bound_verified=true
+S4_multiplicity_catalog_sha256=dd0029d181a8195b03fe7db7c69f4ce7c19c85f3af3a3589103e3a1091e2c0a1
+S4_payload_sha256=023330cc1babb1f10d8956f5b966a98f38d0b6f6dc062bdf1ee00c7b47976c03
+S5_selected=974
+S5_residual=118
+S5_terminal_steps=12
+S5_recursive_occurrences=68
+S5_exact_state_classes=51
+S5_duplicate_classes=11
+S5_strict_containments=145
+S5_partial_overlaps=88
+S5_terminal_recursive_overlap=1,61,303,1597,8195
+S5_multiplicity_distribution=1:1482,2:167,3:18,5:9,6:9,10:6,12:2
+S5_maximum_multiplicity=12
+S5_maximum_labels=8195,16390
+S5_harmonic_average_bound_verified=true
+S5_multiplicity_catalog_sha256=0cba557321d68c27d86221b45943150941b1c8108b650c916d7a773ca8ed754b
+S5_payload_sha256=028cc066383a969cbec7b9ec285aec208c99e6c7f8fa233555067eb241e0f03b
+
+conclusion: the raw simultaneous transition and multiplicity ledgers extend
+through S5. Maximum multiplicity rises to 12 while harmonic-average
+multiplicity remains below 9/8; bounded-reuse must be provenance-sensitive.

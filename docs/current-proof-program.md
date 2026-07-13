@@ -1,4 +1,4 @@
-# Current proof program: Bellman debt and whole-tree compensation
+# Current proof program: obstruction coverage and whole-tree Bellman compensation
 
 ## Status
 
@@ -253,16 +253,12 @@ L_{n+1}=8L_n,
 k_{n+1}=4k_n
 ```
 
-already gives infinite exact tails for `408767151` valid children.
-
-The remaining valid children are repaired as follows:
+already gives infinite exact tails for `408767151` valid children. The remaining valid children are repaired as follows:
 
 ```text
 88606 second-step failures:  4k  -> 4k+1
 2 third-step failures:       16k -> 16k+1
 ```
-
-The repaired offsets are odd, so the half-separation obstruction disappears. Exact rational enumeration finds no completion obstruction, and each repaired branch enters the invariant exact-tail basin after one additional exact step.
 
 Therefore
 
@@ -339,7 +335,7 @@ has summable weighted density. The worst block-boundary contraction is
 \frac{2551}{2560}<1.
 ```
 
-Universal geometric realizability of this parsing remains open.
+Universal geometric realizability of this parsing remains open. The Bellman identity is an accounting theorem; it does not by itself explain why cheap debt must be repaid.
 
 ---
 
@@ -357,7 +353,7 @@ a step with scale factor `c` and separation `R` satisfies
 \boxed{T'=T+(c-2)L-2R.}
 ```
 
-Every cheap Bellman debt therefore carries a geometric certificate: strict slack consumption or imported prefix contamination.
+Every cheap Bellman debt therefore carries a geometric certificate: strict slack consumption or imported prefix contamination. The missing theorem must convert this geometry and the associated arithmetic coverage into a branching-compatible reserve.
 
 ---
 
@@ -385,19 +381,7 @@ where
 G_h(R)=(\{0\}\cup S_h)+\{0,R,2R\}.
 ```
 
-The factor-four fit endpoint from `S_9` is
-
-```math
-76583776,
-```
-
-while the factor-two fit endpoint from `S_10` is
-
-```math
-76583775.
-```
-
-Hence every sponsor-compatible layer-disjoint factor-two candidate from `S_10` lies in the already exhausted factor-four domain of `S_9`. Since
+The factor-four fit endpoint from `S_9` is `76583776`, while the factor-two fit endpoint from `S_10` is `76583775`. Hence every sponsor-compatible layer-disjoint factor-two candidate from `S_10` lies in the already exhausted factor-four domain of `S_9`. Since
 
 ```math
 N_{9,4}=0,
@@ -409,8 +393,6 @@ every such progression lifts by translation into the `S_10` candidate. Thus
 \boxed{N_{10,2}=0.}
 ```
 
-This removes the factor-two Bellman debt token from the continuation tree rooted at the recorded `S_10`.
-
 **Primary references:**
 
 - `docs/depth-ten-factor-two-inheritance-exclusion.md`;
@@ -419,7 +401,7 @@ This removes the factor-two Bellman debt token from the continuation tree rooted
 
 ---
 
-## 10. Remaining factor-four escape domain from `S_10`
+## 10. Factor-four `S_10` domain: finite evidence, not the active theorem
 
 The complete factor-four domain certificate gives
 
@@ -430,70 +412,199 @@ layer-disjoint:       348012826
 FNV-64:               ae1d9e1ec77b2dfb
 ```
 
-The inherited interval
+The inherited interval `R<=76583775` contains exactly `33026376` layer-disjoint candidates and is excluded by the factor-two inheritance theorem. Therefore the genuinely new factor-four domain has
 
 ```math
-R\le76583775
+\boxed{314986450}
 ```
 
-contains exactly the `33026376` layer-disjoint factor-two candidates and is now completely excluded by the theorem above. The endpoint `R=76583776` has odd two-adic valuation and is not sponsor-compatible.
+candidates.
 
-Therefore the genuinely new factor-four domain has
+The first `10000` candidates in this new domain have explicit deterministic four-point witnesses. The certified prefix runs from
+
+```text
+R = 76583927
+through
+R = 76697408
+```
+
+and leaves at most
 
 ```math
-\boxed{
-348012826-33026376
-=
-314986450
-}
+314976450
 ```
 
-layer-disjoint candidates.
+unclassified candidates. This is a finite prefix certificate only. It does not prove `N_10,4=0` and does not validate the rejected bulk anchor reduction.
 
-Initial exact probes throughout this new range have all produced four-term progressions. The observed witnesses include completion, `1001`, `2002`, and predominantly equal-difference `0011` rectangles. These probes are evidence only; they are not yet a complete certificate.
+Sequential prefix certification is now deprioritized. The existing first-`10000` suite is retained as a regression test and theorem-discovery dataset.
 
-The immediate finite target is:
+**Primary references:**
 
-```math
-\boxed{
-\text{classify all }314986450\text{ genuinely new factor-four candidates from }S_{10}.
-}
-```
-
-Either outcome is useful:
-
-1. a surviving candidate gives an explicit cheap descendant to analyze;
-2. complete exclusion proves every nonterminating continuation from `S_10` has scale factor at least `8`, and therefore enters the already classified exact or surplus regimes.
+- `docs/depth-ten-factor-four-first10000.md`;
+- `src/run_verify_depth10_factor4_first10000.sh`;
+- `docs/depth-ten-factor-four-exclusion-audit.md`.
 
 ---
 
-## 11. Current unresolved problem: whole-tree compensation
+## 11. Exact state-independent obstruction coverage
 
-The active theorem target is
+For
+
+```math
+G_R(B)=B\cup(B+R)\cup(B+2R),
+```
+
+write a potential progression as
+
+```math
+z_i=b_i+\lambda_iR,
+\qquad
+\lambda_i\in\{0,1,2\}.
+```
+
+After removing global layer shifts and quotienting by reversal, the `80` nonconstant raw layer words reduce to exactly
+
+```math
+\boxed{34}
+```
+
+obstruction classes: `30` reversal pairs and the four self-reversing classes
+
+```text
+0110  0220  1001  2002.
+```
+
+Define the exact signature
+
+```math
+r_\lambda=\lambda_1-\lambda_0,
+```
+
+```math
+a_\lambda=\lambda_0-2\lambda_1+\lambda_2,
+```
+
+```math
+b_\lambda=\lambda_1-2\lambda_2+\lambda_3.
+```
+
+The triple `(r,a,b)` uniquely reconstructs the normalized layer word. A class occurs at separation `R` exactly when there are `x,d` such that
+
+```math
+x,
+\quad x+d,
+\quad x+2d-aR,
+\quad x+3d-(2a+b)R
+```
+
+belong to `B`, with
+
+```math
+d+rR\ne0.
+```
+
+Define the affine-incidence spectrum
+
+```math
+\mathcal F_B(A,C;Q)
+=
+\#\{(x,d):x,x+d,x+2d-A,x+3d-(2A+C)\in B,
+\ d+Q\ne0\}.
+```
+
+Then
+
+```math
+\Gamma_\lambda(B;R)
+=
+\mathcal F_B(a_\lambda R,b_\lambda R;r_\lambda R).
+```
+
+For the `0011` class this factors through pair-start sets
+
+```math
+P_d(B)=\{x\in B:x+d\in B\},
+```
+
+with exact recurrence
 
 ```math
 \boxed{
-\text{every infinite continuation path has summable total weighted density.}
+P_d(G_S(B))
+=
+\bigcup_{i,j\in\{0,1,2\}}
+\left(P_{d+(i-j)S}(B)+iS\right).
 }
 ```
 
-The current architecture is
+More generally, if `B'=G_S(B)` and a new separation `T` is tested, the labeled class coverage obeys
 
-```text
-contaminated transient
-    -> exact Bellman debt
-    -> slack consumption or prefix contamination
-    -> repayment parsing or exact-tail entry
-    -> finite terminal charge.
+```math
+\boxed{
+\widetilde\Gamma_\lambda(G_S(B);T)
+=
+\sum_{\mu\in\{0,1,2\}^4}
+\mathcal F_B(
+ a_\lambda T+a_\mu S,
+ b_\lambda T+b_\mu S;
+ r_\lambda T+r_\mu S
+).
+}
 ```
 
-Equivalent remaining tasks:
+This is the exact state-independent obstruction-coverage recurrence. It corrects the insufficient one-scalar third-difference formulation: a four-term progression requires two second-difference constraints.
 
-1. classify the `S_10` factor-four escape domain;
-2. prove every path eventually enters an exact or near-exact basin;
-3. prove every non-basin scale word admits a debt-repayment parsing;
-4. extend the Bellman potential by a contamination reserve dominating all children;
-5. charge imported prefixes through difference export or overlap packing;
-6. construct a finite-state or spectral quotient of the pre-basin continuation tree.
+**Primary references:**
 
-No current theorem closes this gap. The full Erdős problem remains unresolved.
+- `docs/three-translate-obstruction-coverage-recurrence.md`;
+- `src/verify_three_translate_obstruction_classes.py`;
+- `data/three_translate_obstruction_classes_certificate_2026-07-13.txt`.
+
+---
+
+## 12. Active target: whole-tree contamination reserve
+
+A pathwise estimate alone is not enough. Exponentially many paths can each have finite charge while the full recursive tree has divergent total mass. The required theorem must control the branching genealogy after deduplication or packing.
+
+The active target is a nonnegative reserve `Phi` in Bellman units such that a branching transition satisfies an inequality of the form
+
+```math
+\boxed{
+W(S)
++
+\sum_{S'\in\operatorname{Child}(S)}
+\left(\mathfrak B(S')+\Phi(S')\right)
+\le
+\mathfrak B(S)+\Phi(S)
++
+\operatorname{controlled\ error}.
+}
+```
+
+The reserve should combine normalized obstruction coverage, remaining dyadic slack, imported prefixes, and overlap packing. The conceptual mechanism is
+
+```text
+cheap replication
+    -> Bellman debt
+    -> growth of affine obstruction coverage or loss of slack
+    -> forced expensive replication / exact-tail entry
+    -> treewise repayment.
+```
+
+Approved next targets:
+
+1. classify stratified witnesses across the full `S_10` factor-four range by the `34` exact layer classes;
+2. trace each witness to parent-layer word `mu` and ancestor origin in the two-scale recurrence;
+3. identify a small closed subsystem or monotone contraction of the uncovered-separation zero set;
+4. define a normalized affine-coverage reserve in units `P/L`;
+5. prove a branching Carleson/packing inequality for all retained children;
+6. charge imported prefixes through difference export or overlap packing.
+
+Deprioritized routes:
+
+1. additional contiguous `S_10` prefix certification;
+2. extending one distinguished branch without testing a recurrence or reserve;
+3. more exact-tail counting;
+4. local constants without a telescoping or branching consequence.
+
+No current theorem closes the reserve inequality. The full Erdős problem remains unresolved.

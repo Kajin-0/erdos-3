@@ -9,7 +9,13 @@ This file records claims that should survive context loss. The full Erdős recip
 **Status:** standard.  
 **Certainty:** high.
 
-For `alpha_j=|A intersect [2^j,2^{j+1})|/2^j`, divergence of `sum_{n in A}1/n` is equivalent up to constants to `sum_j alpha_j=infinity`.
+For
+
+```math
+\alpha_j=\frac{|A\cap[2^j,2^{j+1})|}{2^j},
+```
+
+divergence of `sum_{n in A}1/n` is equivalent up to constants to `sum_j alpha_j=infinity`.
 
 ---
 
@@ -61,13 +67,13 @@ Children must be resolved into standard dyadic shells. For `p>=1`,
 **Status:** proved in repository.  
 **Certainty:** medium-high internally.
 
-Repeated labels at different centers or anchors are exported by translated layers. Fixed complete anchor histories obey `lambda_{x,q}(t)(a-t)<=a`.
+Repeated labels at different centers or anchors are exported by translated layers. Fixed complete anchor histories obey the recorded antichain bounds.
 
 ---
 
 ## CL-006: Self-replicating aligned diamonds
 
-**Status:** proved recursively; finite instances verified.  
+**Status:** recursive theorem with finite verification.  
 **Certainty:** medium-high.
 
 ```math
@@ -93,7 +99,7 @@ L_h=8^{h+1},
 P_h=2^h=\frac12L_h^{1/3}.
 ```
 
-A 34-state automaton and a `17238`-state carry search certify no nontrivial four-term progression in the union.
+A finite automaton and exact carry search certify no nontrivial four-term progression in the union.
 
 ---
 
@@ -102,7 +108,7 @@ A 34-state automaton and a `17238`-state carry search certify no nontrivial four
 **Status:** elementary theorem.  
 **Certainty:** high internally.
 
-Exact uncontaminated equal-translate reproduction requires `L'>=8L`. Moreover
+Exact uncontaminated equal-translate reproduction requires `L'>=8L`, and
 
 ```math
 P_h\alpha_h\le C_0(3/4)^h,
@@ -117,7 +123,13 @@ P_h\alpha_h\le C_0(3/4)^h,
 **Status:** exact finite construction.  
 **Certainty:** high.
 
-The scale factors are `4,8,4,4`, and `W_5/W_1=91/32`. Universal local contraction and contraction over every four-step window are false.
+The scale factors are `4,8,4,4`, and
+
+```math
+\frac{W_5}{W_1}=\frac{91}{32}>1.
+```
+
+Universal local contraction and contraction over every four-step window are false.
 
 ---
 
@@ -126,7 +138,7 @@ The scale factors are `4,8,4,4`, and `W_5/W_1=91/32`. Universal local contractio
 **Status:** exact finite construction.  
 **Certainty:** high.
 
-The alternative recovery `R_5=93476` admits the factor-four descendant `R_6=230164`, giving `4,8,4,4,8,4` through `S_7`, with `W_7/W_5=205/182>1`. Universal two-generation recovery and contraction over every six-step window are false.
+The chain extends through `S_7` with scale word `4,8,4,4,8,4` and `W_7/W_5>1`. Universal two-generation recovery and contraction over every six-step window are false.
 
 ---
 
@@ -139,8 +151,6 @@ The alternative recovery `R_5=93476` admits the factor-four descendant `R_6=2301
 N_{7,2}=N_{7,4}=0.
 ```
 
-The factor-four domain has `359419` disjoint candidates, exhausted by completion, `1001`, and `0011` witnesses.
-
 ---
 
 ## CL-012: Exact depth-eight continuation
@@ -148,7 +158,13 @@ The factor-four domain has `359419` disjoint candidates, exhausted by completion
 **Status:** exact finite construction.  
 **Certainty:** high.
 
-`R_7=2097164`, `|S_8|=29523`, `P_8=256`, and `W_8=29523/32768`.
+```math
+R_7=2097164,
+\qquad
+|S_8|=29523,
+\qquad
+P_8=256.
+```
 
 ---
 
@@ -161,8 +177,6 @@ The factor-four domain has `359419` disjoint candidates, exhausted by completion
 N_{8,2}=N_{8,4}=0.
 ```
 
-The factor-four domain has `4190292` disjoint candidates and is fully exhausted.
-
 ---
 
 ## CL-014: Exact depth-nine continuation
@@ -170,7 +184,13 @@ The factor-four domain has `4190292` disjoint candidates and is fully exhausted.
 **Status:** exact finite construction.  
 **Certainty:** high.
 
-`R_8=16777217`, `|S_9|=88572`, `P_9=512`, and `W_9=22143/32768`.
+```math
+R_8=16777217,
+\qquad
+|S_9|=88572,
+\qquad
+P_9=512.
+```
 
 ---
 
@@ -183,7 +203,7 @@ The factor-four domain has `4190292` disjoint candidates and is fully exhausted.
 N_{9,2}=N_{9,4}=0.
 ```
 
-The factor-four domain has `39459384` disjoint candidates. Completion and recursive rectangle witnesses reduce it to seven explicit terminal witnesses.
+The factor-four domain has `39459384` layer-disjoint candidates and is exhausted by completion and recursive rectangle witnesses, followed by seven explicit terminal witnesses.
 
 ---
 
@@ -192,11 +212,21 @@ The factor-four domain has `39459384` disjoint candidates. Completion and recurs
 **Status:** exact finite construction.  
 **Certainty:** high.
 
-`R_9=134217729`, `|S_10|=265719`, `P_10=1024`, and `W_10=265719/524288`. The finite scale pattern is `4,8,4,4,8,4,8,8,8`.
+```math
+R_9=134217729,
+\qquad
+L_{10}=536870912,
+\qquad
+|S_{10}|=265719,
+\qquad
+P_{10}=1024.
+```
+
+The finite scale word is `4,8,4,4,8,4,8,8,8`.
 
 ---
 
-## CL-017: Top-layer reduction
+## CL-017: Exact-tail top-layer reduction
 
 **Status:** elementary theorem with exact rational pattern verification.  
 **Certainty:** high internally.
@@ -210,16 +240,16 @@ In every certified exact-tail geometry used through CL-030, each new four-term p
 **Status:** elementary theorem with exact rational pattern verification.  
 **Certainty:** high internally.
 
-For `R=2L+k`, child completion targets descend through the unique layer pattern `012`. The scheduled target `4k` descends exactly to the preceding separation `2L+k`.
+For `R=2L+k`, scheduled child completion targets descend through the unique recorded layer pattern, and `4k` descends to the preceding separation.
 
 ---
 
 ## CL-019: Explicit infinite exact tail from `S_10`
 
 **Status:** exact infinite theorem with finite seed certificate.  
-**Certainty:** high internally; awaiting independent review.
+**Certainty:** high internally.
 
-For one explicit offset schedule,
+For the explicit schedule,
 
 ```math
 \sum_{n\ge0}W_{10+n}=\frac{33215}{16384}.
@@ -232,16 +262,16 @@ For one explicit offset schedule,
 **Status:** elementary theorem.  
 **Certainty:** high internally.
 
-If `S subseteq [L,7L/4)`, `0<k<=L/32`, and the first exact step is valid, then `L'=8L`, `k'=4k` defines an infinite exact tail. Its charge is `4P(N+1)/L`.
+The original small-offset criterion produces infinite exact scale-eight tails with charge `4P(N+1)/L`.
 
 ---
 
 ## CL-021: Original depth-ten basin fan
 
-**Status:** exact signed-completion classification.  
+**Status:** exact finite classification.  
 **Certainty:** high.
 
-In `4<=k<=L_10/32`, exactly `11129810` offsets enter exact infinite tails. Each has charge `33215/16384`.
+The original basin contains `11129810` certified offsets from `S_10`.
 
 ---
 
@@ -285,7 +315,7 @@ Factors `2` and `4` create debt, `8` is neutral, and factors at least `16` creat
 **Status:** elementary sufficient theorem.  
 **Certainty:** high.
 
-A scale word parsable into blocks `[8 or larger]`, `[one 4 plus two 8-equivalents]`, and `[one 2 plus four 8-equivalents]` has summable weighted density. The worst block factor is `2551/2560<1`. Universal geometric realizability remains open.
+A scale word parsable into the recorded repayment blocks has summable weighted density. Universal geometric realizability remains open.
 
 ---
 
@@ -300,32 +330,16 @@ For `T=2L-max S`,
 T'=T+(c-2)L-2R.
 ```
 
-Factor-two and factor-four debt is accompanied by strict slack consumption or imported prefix contamination.
+Factor-two and factor-four debt is accompanied by strict slack consumption or imported-prefix contamination.
 
 ---
 
-## CL-026: Exact `S_10` cheap candidate domains
+## CL-026: Exact `S_10` candidate domains
 
 **Status:** exact finite domain certificate.  
-**Certainty:** high for support, counts, and hashes.
+**Certainty:** high.
 
-Factor two:
-
-```text
-maximum R              76583775
-sponsor-compatible     51055851
-layer-disjoint         33026376
-FNV-64                  59cfbc6761c6224d
-```
-
-Factor four:
-
-```text
-maximum R             613454687
-sponsor-compatible    408969792
-layer-disjoint        348012826
-FNV-64                 ae1d9e1ec77b2dfb
-```
+Factor two has `33026376` layer-disjoint candidates. Factor four has `348012826` layer-disjoint candidates and FNV-64 `ae1d9e1ec77b2dfb`.
 
 ---
 
@@ -334,144 +348,80 @@ FNV-64                 ae1d9e1ec77b2dfb
 **Status:** exact finite classification.  
 **Certainty:** high.
 
-For `1<=k<=613454687`, the first-step obstruction split is
+There are
 
-```text
-completion-blocked       54999
-half-separation-blocked  59034
-overlap                       0
+```math
+408855759
 ```
 
-so `408855759` offsets give valid exact factor-eight children.
+valid positive exact factor-eight children.
 
 ---
 
 ## CL-028: Half-scale exact-tail basin
 
-**Status:** elementary infinite theorem with exact rational pattern verification and finite `S_10` counting.  
-**Certainty:** high internally; awaiting independent review.
+**Status:** elementary infinite theorem with exact rational verification.  
+**Certainty:** high internally.
 
-For `S subseteq [L,7L/4)` and `0<k<L/2`, a valid first exact step implies an infinite scheduled exact tail. At `S_10`, exactly `178872402` offsets enter such tails.
+A valid exact child in the half-scale region enters an infinite scheduled exact tail. At `S_10`, this gives `178872402` certified offsets.
 
 ---
 
 ## CL-029: Full-fitting scheduled basin from `S_10`
 
-**Status:** exact finite obstruction classification plus elementary infinite induction.  
-**Certainty:** high internally; awaiting independent review.
+**Status:** exact finite obstruction classification plus elementary induction.  
+**Certainty:** high internally.
 
-Across the complete fitting exact range, only `88608` already-valid exact children fail the unmodified schedule. Thus `408767151` valid exact children enter infinite tails without repair.
+The unmodified schedule gives infinite tails for `408767151` valid exact children.
 
 ---
 
 ## CL-030: Complete exact-child infinite-tail fan from `S_10`
 
-**Status:** exact finite repair classification plus elementary infinite induction.  
-**Certainty:** high internally; awaiting independent review.
+**Status:** exact finite repair classification plus elementary induction.  
+**Certainty:** high internally.
 
-The `88606` valid second-step failures are repaired by `4k -> 4k+1`. The only two third-step failures, `603979776` and `613416960`, are repaired by `16k -> 16k+1`.
-
-Therefore
-
-```math
-\boxed{408767151+88606+2=408855759.}
-```
-
-Every valid positive exact factor-eight child of `S_10` has a certified infinite exact four-term-progression-free continuation. Every tail has charge `33215/16384`.
+Finite `+1` repairs cover the remaining `88608` valid exact children. Hence every one of the `408855759` valid exact children has a certified infinite tail of charge `33215/16384`.
 
 ---
 
 ## CL-031: Complete factor-two inheritance exclusion from `S_10`
 
-**Status:** exact embedding theorem using the certified depth-nine factor-four exclusion.  
+**Status:** exact embedding theorem using CL-015.  
 **Certainty:** high.
 
-The depth-ten construction contains
-
 ```math
-L_{10}+(\{0\}\cup S_9)\subseteq S_{10}.
+L_{10}+(\{0\}\cup S_9)\subseteq S_{10}
 ```
 
-Hence, for every separation `R`,
-
-```math
-L_{10}+G_9(R)\subseteq G_{10}(R).
-```
-
-The factor-four fit endpoint from `S_9` is `76583776`; the factor-two fit endpoint from `S_10` is `76583775`. Since `N_{9,4}=0`,
+implies
 
 ```math
 \boxed{N_{10,2}=0.}
 ```
 
-The genuinely new factor-four domain has `314986450` layer-disjoint candidates.
-
 ---
 
 ## CL-032: First 10000 genuinely new `S_10` factor-four candidates
 
-**Status:** exact finite prefix certificate with explicit deterministic witnesses.  
-**Certainty:** high for the certified prefix only.
+**Status:** exact finite prefix certificate.  
+**Certainty:** high for the prefix only.
 
-The first `10000` sponsor-compatible, layer-disjoint candidates above the inherited cutoff all contain explicit nontrivial four-term progressions. The certified prefix runs from `R=76583927` through `R=76697408`.
-
-This leaves at most `314976450` candidates unclassified. It does not prove `N_{10,4}=0` and does not validate the rejected bulk anchor reduction. Further contiguous prefix certification is deprioritized.
-
-**Primary references:**
-
-- `docs/depth-ten-factor-four-first10000.md`;
-- `src/run_verify_depth10_factor4_first10000.sh`;
-- `docs/depth-ten-factor-four-exclusion-audit.md`.
+The first `10000` candidates above the inherited cutoff have explicit witnesses. This result is retained as regression data and is superseded as a frontier by CL-037.
 
 ---
 
 ## CL-033: Exact 34-class three-translate obstruction recurrence
 
 **Status:** elementary state-independent theorem with exact symbolic verification.  
-**Certainty:** high internally; awaiting independent review.
+**Certainty:** high internally.
 
-For `G_R(B)=B union (B+R) union (B+2R)`, the `80` nonconstant raw four-term layer words reduce, after global layer normalization and reversal, to exactly `34` obstruction classes: `30` reversal pairs and the self-reversing classes `0110`, `0220`, `1001`, and `2002`.
-
-For a layer word `lambda`, define
-
-```math
-r_\lambda=\lambda_1-\lambda_0,
-```
-
-```math
-a_\lambda=\lambda_0-2\lambda_1+\lambda_2,
-```
-
-```math
-b_\lambda=\lambda_1-2\lambda_2+\lambda_3.
-```
-
-The triple `(r,a,b)` uniquely reconstructs the normalized word. The class occurs at separation `R` exactly when
-
-```math
-x,
-\quad x+d,
-\quad x+2d-aR,
-\quad x+3d-(2a+b)R
-```
-
-belong to `B`, with `d+rR != 0`.
-
-The pair-start sets satisfy the exact recurrence
-
-```math
-P_d(G_S(B))
-=
-\bigcup_{i,j\in\{0,1,2\}}
-\left(P_{d+(i-j)S}(B)+iS\right).
-```
-
-The full labeled class coverage closes on the three-parameter affine spectrum:
+The `80` nonconstant raw layer words reduce to `34` classes. The affine spectrum closes under the exact two-scale recurrence
 
 ```math
 \widetilde\Gamma_\lambda(G_S(B);T)
 =
-\sum_{\mu\in\{0,1,2\}^4}
+\sum_\mu
 \mathcal F_B(
  a_\lambda T+a_\mu S,
  b_\lambda T+b_\mu S;
@@ -479,13 +429,130 @@ The full labeled class coverage closes on the three-parameter affine spectrum:
 ).
 ```
 
-This corrects the insufficient one-scalar third-difference formulation: a four-term progression requires two second-difference equations.
+---
+
+## CL-034: Lifted `S_9` completion reduction at `S_10`
+
+**Status:** exact finite structural-witness theorem.  
+**Certainty:** high.
+
+The genuinely new factor-four domain contains `314986450` candidates. Lifted depth-nine completion support removes
+
+```math
+137142200
+```
+
+and leaves the exact residual
+
+```math
+\boxed{177844250}.
+```
+
+The residual ranges from `97474324` through `613454687` and has FNV-64 `00369694f2d70526`.
+
+This theorem is valid and must not be confused with the rejected exploratory anchor reduction.
+
+---
+
+## CL-035: Exact four-ratio rectangle transport
+
+**Status:** elementary state-independent theorem with exact symbolic verification.  
+**Certainty:** high internally.
+
+If `B` contains
+
+```math
+x,x+d,x+2d-U,x+3d-U,
+```
+
+with `d>0` and `0<U<S`, then for each
+
+```math
+k\in\{1,2,3,4\},
+```
+
+both `T=kS+U` and `T=kS-U` produce a nontrivial progression in `G_T(G_S(B))`. There are no positive integer rectangle-cancellation ratios `k>=5`.
+
+---
+
+## CL-036: Complete direct rectangle support of `B_9`
+
+**Status:** exact finite computer-assisted theorem.  
+**Certainty:** high internally; awaiting independent review.
+
+For
+
+```math
+B_9=\{0\}\cup S_9,
+```
+
+one has
+
+```math
+\boxed{
+\mathcal F_{B_9}(U,-U;0)>0
+\quad
+\text{for every }1\le U\le76583776.
+}
+```
+
+Certificate decomposition:
+
+```text
+76581484 structural count-band values
+2285 deterministic explicit terminal witnesses
+7 stored exact large-fiber witnesses
+```
+
+so
+
+```math
+76581484+2285+7=76583776.
+```
 
 **Primary references:**
 
-- `docs/three-translate-obstruction-coverage-recurrence.md`;
-- `src/verify_three_translate_obstruction_classes.py`;
-- `data/three_translate_obstruction_classes_certificate_2026-07-13.txt`.
+- `src/verify_b9_direct_rectangle_support.cpp`;
+- `data/b9_direct_rectangle_support_certificate_2026-07-13.txt`;
+- `data/b9_direct_rectangle_terminal7_witnesses_2026-07-13.txt`.
+
+---
+
+## CL-037: Complete factor-four exclusion from `S_10`
+
+**Status:** exact finite computer-assisted theorem plus elementary transport.  
+**Certainty:** high internally; awaiting independent review.
+
+The complete layer-disjoint factor-four domain partitions as
+
+```math
+33026376+137142200+177844250=348012826.
+```
+
+The three terms are excluded by:
+
+1. factor-two inheritance from `S_9`;
+2. lifted `S_9` completion support;
+3. complete `B_9` rectangle support and four-ratio transport.
+
+The four transport windows overlap and cover the complete residual interval. The `U=0` boundary is blocked by a pure layer-index progression. Therefore
+
+```math
+\boxed{N_{10,4}=0.}
+```
+
+Together with CL-031,
+
+```math
+\boxed{N_{10,2}=N_{10,4}=0.}
+```
+
+**Primary references:**
+
+- `docs/complete-depth-ten-factor-four-exclusion.md`;
+- `src/run_verify_s10_factor4_rectangle_closure.sh`;
+- `src/verify_s10_factor4_rectangle_closure.py`;
+- `data/s10_factor4_rectangle_closure_certificate_2026-07-13.txt`.
 
 ---
 
@@ -499,29 +566,21 @@ Do not use without new hypotheses:
 4. universal strict contraction at every non-exact step;
 5. contraction over every four- or six-step window;
 6. universal two-generation recovery after an exact factor-eight step;
-7. extrapolating one branch to all recoveries;
-8. treating one or many exact tails as a whole-tree theorem;
-9. random candidate sampling as a finite certificate;
-10. recursive arguments that ignore mandatory shell resolution;
-11. using one third-difference equation as a complete four-term-progression test;
-12. treating pathwise summability alone as sufficient for the branching deletion tree;
-13. further contiguous `S_10` prefix certification without a structural hypothesis.
+7. extrapolating one path to the whole continuation tree;
+8. treating exact tails as a whole-tree theorem;
+9. using one third-difference equation as a complete four-term-progression test;
+10. treating pathwise summability as sufficient for the branching deletion tree;
+11. random sampling as a finite certificate;
+12. the rejected depth-ten anchor reduction;
+13. further contiguous `S_10` prefix certification.
 
 ---
 
 # Open bottleneck OB-001: Whole-tree contamination reserve
 
-The current architecture is
+The state-specific cheap-extension problem at `S_10` is closed. The unresolved theorem is treewise, not merely pathwise.
 
-```text
-cheap step
-  -> exact Bellman debt
-  -> affine obstruction coverage growth or slack/prefix consumption
-  -> forced expensive step / exact-tail entry
-  -> branching repayment and finite tree charge.
-```
-
-The required theorem is treewise, not merely pathwise. The active target is a nonnegative reserve `Phi` in Bellman units satisfying a branching inequality of the form
+The active target is a nonnegative reserve `Phi` in Bellman units satisfying
 
 ```math
 \boxed{
@@ -536,13 +595,15 @@ W(S)
 }
 ```
 
+The reserve must convert completion growth, pair-fiber/rectangle coverage, slack consumption, imported prefixes, and overlap packing into branching repayment.
+
 Approved targets:
 
-1. classify stratified witnesses across the full `S_10` factor-four range by the `34` exact layer classes;
-2. trace witnesses to parent-layer words and ancestor origins in the two-scale recurrence;
-3. identify a small closed subsystem or monotone contraction of the uncovered-separation zero set;
-4. define a normalized affine-coverage reserve in units `P/L`;
-5. prove a branching Carleson/packing inequality for all retained children;
-6. charge imported prefixes through difference export or overlap packing.
+1. define normalized completion and rectangle reserves in units `P/L`;
+2. prove a state-class zero-set contraction or coverage-growth theorem;
+3. charge imported prefixes through difference export or bounded overlap;
+4. prove a branching Carleson inequality for all retained children;
+5. construct a finite-state or spectral quotient of the pre-basin tree;
+6. identify structural hypotheses under which CL-036 persists beyond the numerical state `B_9`.
 
 No current theorem closes this gap. The full Erdős problem remains unresolved.

@@ -16,7 +16,11 @@ A_j=A\cap[2^j,2^{j+1}),
 \alpha_j=\frac{|A_j|}{2^j},
 ```
 
-reciprocal divergence is equivalent up to constants to `sum_j alpha_j=infinity`.
+reciprocal divergence is equivalent up to constants to
+
+```math
+\sum_j\alpha_j=\infty.
+```
 
 Coordinated side-anchor deletion and the minimum-translation backbone give
 
@@ -34,7 +38,7 @@ H(Q)+\sum_qH(\Xi_q)+H(\mathcal B(D))
 2H(D)-\frac{r_3(N)}N-\frac1N.
 ```
 
-Every recursive output is resolved into standard dyadic shells. These results control local moments, not the full branching reciprocal mass.
+Every recursive output is resolved into standard dyadic shells. These statements control local moments, not the full branching reciprocal mass.
 
 ---
 
@@ -52,7 +56,13 @@ The certified contaminated path has scale word
 4,8,4,4,8,4,8,8,8
 ```
 
-through `S_10`, and `W_5/W_1=91/32>1`. Universal local and fixed-window contraction claims are false.
+through `S_10`, and
+
+```math
+\frac{W_5}{W_1}=\frac{91}{32}>1.
+```
+
+Universal local and fixed-window contraction claims are false.
 
 For exact scale factor `c>6`,
 
@@ -141,7 +151,7 @@ Deterministic first witnesses span `33` of the `34` nonconstant affine classes. 
 
 ---
 
-## 7. Isolated canonical regeneration
+## 7. Regeneration and policy dependence
 
 Under lexicographic deletion, the novel isolated child
 
@@ -157,26 +167,19 @@ X\xrightarrow[f=4]{R=1}S_1.
 
 It is the unique exact factor-two/factor-four return from the `62` cyclic-source states to any canonical `S_1,...,S_10`, and it is disjoint from every other raw recursive shell and terminal output in the lexicographic `S_7` transition.
 
-Its certified path charge, assigning seed persistence one, is `36953/4096`.
+Its certified path charge, assigning seed persistence one, is
 
----
-
-## 8. Regeneration is policy-dependent
-
-The seed-producing `q=1` centers are not root-forced. A reverse-lexicographic complete coordinated schedule has
-
-```text
-0 seed shells
-0 exact factor-two/factor-four returns to S1,...,S10.
+```math
+G=\frac{36953}{4096}.
 ```
 
-Therefore canonical regeneration is not a parent-intrinsic feature of `S_7`.
+The seed-producing centers are not root-forced. A reverse-lexicographic complete schedule has no canonical return. Therefore regeneration is schedule-dependent, not parent-intrinsic.
 
 ---
 
-## 9. Avoiding regeneration is not a sufficient policy objective
+## 8. Reverse deletion solves the wrong objective
 
-The reverse policy avoids the canonical return but has a much larger raw transition:
+The reverse policy avoids canonical regeneration but has a much larger raw transition:
 
 | coordinate | lexicographic | reverse lexicographic |
 |---|---:|---:|
@@ -206,13 +209,142 @@ and
 745.
 ```
 
-Thus a policy must be scored by complete transition cost, not by canonical-return count or raw label count.
+Avoiding a recognizable descendant is not a sufficient policy objective.
 
 ---
 
-## 10. Active theorem
+## 9. Targeted delayed-seed policy
 
-The required object is now explicitly policy-aware:
+Delay only the three unforced lexicographic `q=1` actions that produce the regenerative seed. All other initial actions keep lexicographic priority. The delayed actions become stale.
+
+The delayed policy has no canonical return and changes the transition as follows:
+
+| coordinate | lexicographic | delayed-seed |
+|---|---:|---:|
+| terminal steps | `25` | `31` |
+| middle-fiber shells | `124` | `123` |
+| maximum multiplicity | `15` | `14` |
+| residual error | `240/4096` | `241/4096` |
+
+Exact harmonic ratios satisfy
+
+```math
+\frac9{10}
+<
+\frac{M_{\rm occ}^{\rm delay}}{M_{\rm occ}^{\rm lex}}
+<
+\frac{14}{15},
+```
+
+and
+
+```math
+\frac23
+<
+\frac{M_{\rm dup}^{\rm delay}}{M_{\rm dup}^{\rm lex}}
+<
+\frac7{10}.
+```
+
+Occurrence mass falls by about `7.3%`, duplicate mass by about `30.3%`, and residual error rises by exactly `1/4096`. Terminal-step mass rises. This is an exact Pareto tradeoff, not a Bellman theorem.
+
+---
+
+## 10. Exact policy-weight boundaries
+
+Let
+
+```math
+T=\text{terminal-step harmonic mass},
+```
+
+```math
+O=\text{middle-fiber occurrence mass},
+\qquad
+U=\text{distinct union mass},
+\qquad
+D=O-U,
+```
+
+and let `E` be normalized residual error.
+
+For
+
+```math
+C_\lambda=T+\lambda O+E,
+```
+
+the delayed policy wins exactly when
+
+```math
+\lambda>\lambda_*;
+\qquad
+\frac{298}{125}<\lambda_*<\frac{477}{200}.
+```
+
+Thus
+
+```text
+2.384 < lambda_* < 2.385.
+```
+
+For
+
+```math
+C_\kappa=T+U+\kappa D+E,
+```
+
+the delayed policy wins exactly when
+
+```math
+\kappa>\kappa_*;
+\qquad
+\frac{1089}{250}<\kappa_*<\frac{4357}{1000}.
+```
+
+Thus
+
+```text
+4.356 < kappa_* < 4.357.
+```
+
+For
+
+```math
+C_\gamma=T+O+E+\gamma G_{\rm lex},
+```
+
+the delayed policy wins exactly when
+
+```math
+\gamma>\gamma_*;
+\qquad
+\frac{21}{1000}<\gamma_*<\frac{11}{500}.
+```
+
+Finally, for
+
+```math
+C_a=aT+O+E,
+```
+
+the delayed policy wins exactly when
+
+```math
+a<a_*;
+\qquad
+\frac{209}{500}<a_*<\frac{419}{1000}.
+```
+
+Unit terminal plus unit recursive-mass scores still prefer lexicographic deletion. The delayed policy becomes cheaper only when recursive occurrence, duplicate, or regenerative continuation cost receives sufficient weight.
+
+These are exact necessary constraints on a candidate policy score. They do not prove that the raw coordinates are valid retained-child Bellman potentials.
+
+---
+
+## 11. Active theorem
+
+The required object is explicitly policy-aware:
 
 ```math
 \boxed{
@@ -239,19 +371,18 @@ The state must include provenance overlap, SCC recycling, obstruction coverage, 
 
 ---
 
-## 11. Approved next targets
+## 12. Approved next targets
 
-1. Define exact Bellman-unit policy coordinates constrained by the lex/reverse tradeoff.
-2. Reject any coordinate system that ranks the reverse transition below lexicographic despite its exact load explosion.
-3. Compare additional deterministic policies on `S_1` through `S_7`.
-4. Search for a stable constructive policy objective.
-5. Prove a provenance-preserving retention quotient.
+1. Compute the same policy coordinates and local alternatives on `S_1,...,S_6`.
+2. Convert every certified policy comparison into an exact rational half-space.
+3. Intersect the half-spaces in the branching-reserve LP harness.
+4. If infeasible, extract the smallest exact conflicting subsystem and add the missing coordinate.
+5. Prove a provenance-preserving retention quotient before treating raw shells as Bellman children.
 6. Establish a policy-aware or minimax branching Carleson inequality.
-7. Feed only proved retained-child rows into the exact rational LP harness.
 
 ---
 
-## 12. Stop list
+## 13. Stop list
 
 Do not infer:
 
@@ -261,12 +392,16 @@ Do not infer:
 - one-generation affine coverage repays cyclic output;
 - canonical regeneration is forced by `S_7`;
 - avoiding regeneration makes a policy cheaper;
-- raw occurrence count ranks policies correctly;
+- raw occurrence or distinct-label count ranks policies correctly;
+- the delayed-seed Pareto improvement is already a whole-tree contraction;
+- one finite weight threshold validates the corresponding coordinate globally;
 - one policy witness proves an all-policy theorem.
 
 ---
 
-## 13. Reproduction
+## 14. Reproduction
+
+Complete lightweight suite:
 
 ```bash
 bash src/run_verify_transport_reserve.sh
@@ -287,4 +422,6 @@ Current detailed notes:
 - `docs/s7-cyclic-output-seed-regeneration.md`;
 - `docs/s7-regenerative-seed-policy-dependence.md`;
 - `docs/s7-policy-transition-tradeoff.md`;
+- `docs/s7-delayed-seed-policy.md`;
+- `docs/s7-policy-weight-regions.md`;
 - `docs/branching-reserve-lp.md`.

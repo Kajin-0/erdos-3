@@ -4,7 +4,8 @@
 
 Exact rational infrastructure for exporting and checking candidate linear reserve
 inequalities. This file defines the input contract and the distinction between
-continuation siblings and simultaneous deletion-DAG children.
+continuation siblings, simultaneous deletion-DAG children, and schedule-dependent
+features.
 
 **Implementation:** `src/branching_reserve_lp.py`.
 
@@ -120,7 +121,8 @@ children with those states. Treating the four alternatives as a simultaneous
 sum would strengthen the branching load without proof and can create a false
 LP obstruction.
 
-Before a catalog can be converted into branching rows, an adapter must certify:
+Before a continuation catalog can be converted into branching rows, an adapter
+must certify:
 
 1. the parent deletion-DAG object;
 2. the complete retained family for that resolution;
@@ -128,7 +130,9 @@ Before a catalog can be converted into branching rows, an adapter must certify:
 4. overlap and imported-prefix identifications;
 5. any controlled error assigned to discarded or unresolved mass.
 
-This adapter is the next missing theorem/computation layer.
+The repository now contains the first exact finite adapter for one coordinated
+resolution of `S_1`, plus an exhaustive analysis of all coordinated schedules
+on `S_1`. These are reference objects, not yet a general transition generator.
 
 ---
 
@@ -219,7 +223,7 @@ A weight vector passes only when every slack is nonnegative.
 
 ---
 
-## 7. Known feature obstruction
+## 7. Known mass-coordinate obstruction
 
 The exact theorem in `docs/naive-reserve-coordinate-no-go.md` proves that the
 nonnegative feature family
@@ -244,7 +248,86 @@ one obstruction-aware feature is necessary.
 
 ---
 
-## 8. Intended next inputs
+## 8. Schedule-dependent novelty obstruction
+
+For a coordinated deletion schedule `sigma`, define the novel middle-fiber mass
+
+```math
+\mathcal N_{\sigma}(D)
+=
+H\left(
+\left(\bigcup_q\Xi_q^{\sigma}\right)
+\setminus
+\mathcal B(D)
+\right).
+```
+
+The finite data now show three distinct behaviors.
+
+### `S_1`: schedule-independent zero
+
+All `1,560` progression-labeled coordinated schedules satisfy
+
+```math
+\bigcup_q\Xi_q^{\sigma}
+\subseteq
+\mathcal B(S_1),
+```
+
+so
+
+```math
+\mathcal N_{\sigma}(S_1)=0
+```
+
+for every schedule.
+
+### `S_2`: positive reference schedule
+
+The deterministic lexicographic schedule has
+
+```math
+\mathcal N_{\mathrm{lex}}(S_2)
+=
+\frac{239396453}{200655312}>0.
+```
+
+### `S_2`: exact zero schedule
+
+The explicit witness in `docs/s2-zero-novelty-schedule.md` has
+
+```math
+\mathcal N_{\sigma_0}(S_2)=0.
+```
+
+Because novel mass is nonnegative,
+
+```math
+\boxed{
+\min_{\sigma}\mathcal N_{\sigma}(S_2)=0.
+}
+```
+
+Therefore `novel_fiber_mass` is not a parent-only state feature unless the row
+also fixes and certifies the deletion policy. The schedule-robust lower envelope
+cannot pay positive debt at `S_2`.
+
+A future dataset may include schedule-dependent coordinates only when it also
+records:
+
+1. a canonical or optimized schedule identifier;
+2. the complete progression-labeled deletion history or a certified compressed
+   representation;
+3. proof that the same policy is compatible with every child transition used in
+   the Bellman tree;
+4. exact imported, duplicate, and novel support after overlap resolution.
+
+The LP harness deliberately does not infer those semantics from a bare feature
+name.
+
+---
+
+## 9. Intended next inputs
 
 The first meaningful branching dataset should contain exact small-state rows
 with features such as:
@@ -255,19 +338,27 @@ with features such as:
 4. support-hole or zero-class counts from the 34 affine obstruction classes;
 5. completion-fiber deficit;
 6. imported-prefix mass with overlap multiplicities;
-7. dyadic slack as an auxiliary coordinate.
+7. dyadic slack as an auxiliary coordinate;
+8. schedule-dependent fiber coordinates only under an explicit certified
+   deletion policy.
 
 The data generator must emit all retained children for each row. A selected
 path, a list of alternative replay separations, or a collection of separately
 valid exact tails is not sufficient.
 
+The next structural target is a parent-intrinsic obstruction coordinate or a
+constructive deletion policy whose exported reserve survives exact overlap
+accounting across the full child family.
+
 ---
 
-## 9. Scope
+## 10. Scope
 
-The harness establishes exact bookkeeping only. It does not establish:
+The harness establishes exact bookkeeping only. The repository now has finite
+small-state child ledgers, but it does not establish:
 
-- a valid deletion-DAG child adapter;
+- a general deletion-DAG transition generator;
+- a schedule-independent positive novelty reserve;
 - feasible reserve weights;
 - bounded overlap;
 - monotone rectangle growth;
@@ -275,5 +366,5 @@ The harness establishes exact bookkeeping only. It does not establish:
 - or a solution of the four-term Erdős problem.
 
 Its purpose is to ensure that future finite-state experiments fail or succeed
-for mathematical reasons rather than decimal error, incomplete child lists, or
-ambiguous branching semantics.
+for mathematical reasons rather than decimal error, incomplete child lists,
+ambiguous branching semantics, or unrecorded schedule choices.

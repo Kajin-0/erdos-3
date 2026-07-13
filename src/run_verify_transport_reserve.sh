@@ -15,6 +15,7 @@ S2_ZERO_SHA256="e5d7a3bbefea78c7c5eeb85ec9155e947d00443e8c279ba6cfc72978267bf972
 LEX_NOVELTY_SHA256="6fe0b27e20284a93ef13c4a738122c4889432c2e673d63794ccec6a7ba36c2e1"
 FORCED_FORK_SHA256="032307354597d531340a4dc87c9646a9b4bde6b6f7f7cc2a427719cbe7be8190"
 FORCED_FORK_NO_GO_SHA256="771c144b3c08cc186d2613eae314b2d0712d18933094323307b1468a4577d6ef"
+SIMULTANEOUS_TRANSITION_SHA256="e8162ee59d496bec8fe2d4103edc8f79de9fbd42444ef37f41fc317aec13a14b"
 
 mkdir -p "$WORK"
 
@@ -110,7 +111,14 @@ python3 "$ROOT/src/verify_forced_fork_bellman_no_go.py" \
 cmp "$FORCED_FORK_NO_GO_RECORDED" "$FORCED_FORK_NO_GO_GENERATED"
 verify_sha256 "$FORCED_FORK_NO_GO_GENERATED" "$FORCED_FORK_NO_GO_SHA256" "forced_fork_no_go"
 
+SIMULTANEOUS_TRANSITION_GENERATED="$WORK/simultaneous_deletion_transition_certificate.txt"
+SIMULTANEOUS_TRANSITION_RECORDED="$ROOT/data/simultaneous_deletion_transition_certificate_2026-07-13.txt"
+python3 "$ROOT/src/export_simultaneous_deletion_transition.py" self-test \
+  "$SIMULTANEOUS_TRANSITION_GENERATED"
+cmp "$SIMULTANEOUS_TRANSITION_RECORDED" "$SIMULTANEOUS_TRANSITION_GENERATED"
+verify_sha256 "$SIMULTANEOUS_TRANSITION_GENERATED" "$SIMULTANEOUS_TRANSITION_SHA256" "simultaneous_transition"
+
 python3 "$ROOT/src/certified_contaminated_states.py" > /dev/null
 python3 "$ROOT/src/branching_reserve_lp.py" self-test
 
-echo "verified: transport, replay, reserve diagnostics, S1-S7 DAG checks, forced-fork reserve/no-go, and LP harness"
+echo "verified: transport, replay, reserve diagnostics, S1-S7 DAG checks, simultaneous transition export, forced-fork reserve/no-go, and LP harness"

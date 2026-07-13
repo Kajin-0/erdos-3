@@ -1,0 +1,62 @@
+S7 CYCLIC SCC SMALL-STATE COMPLETE AFFINE FRONTIER
+
+maximum_state_size=50
+exact_states=33
+state_catalog_sha256=55a148e8eb49994881ee97b4df45bb9138dbd0a6b7577256968a01b4f139e6ca
+
+classification: exact three-translate generation and complete four-AP membership test
+local_baseline: layer collision plus same-layer completion
+all_selected_states_have_imported_labels=0
+
+factor2_domain=21724
+factor2_local_invalid=2128
+factor2_additional_affine_invalid=4436
+factor2_exact_invalid=6564
+factor2_valid=15160
+factor2_overlap=1424
+factor2_four_ap=5140
+factor2_nonempty_states=30
+factor2_fully_excluded_states=1
+factor2_surviving_states=29
+factor2_active_first_witness_classes=33
+factor2_base_only_first_witnesses=0
+factor2_missing_first_witness_class=22
+factor2_first_witness_class_histogram_sha256=270349594a150e57a23388aa80da8dfb2581b0dafd462f911578b645e99438af
+
+factor2_first_survivor_scale=4
+factor2_first_survivor_state=5
+factor2_first_survivor_R=1
+factor2_first_size_ge_3_survivor_scale=16
+factor2_first_size_ge_3_survivor_state=16,21,26
+factor2_first_size_ge_3_survivor_R=1
+
+factor4_domain=87829
+factor4_local_invalid=4538
+factor4_additional_affine_invalid=7568
+factor4_exact_invalid=12106
+factor4_valid=75723
+factor4_overlap=2548
+factor4_four_ap=9558
+factor4_nonempty_states=33
+factor4_fully_excluded_states=1
+factor4_surviving_states=32
+factor4_active_first_witness_classes=33
+factor4_base_only_first_witnesses=0
+factor4_missing_first_witness_class=22
+factor4_first_witness_class_histogram_sha256=5da0d0cbd4934eabd3ba0a492288c871a424990f59d9c16a86b22b2204ae4339
+
+factor4_first_survivor_scale=4
+factor4_first_survivor_state=5
+factor4_first_survivor_R=1
+factor4_first_size_ge_3_survivor_scale=16
+factor4_first_size_ge_3_survivor_state=16,21,26
+factor4_first_size_ge_3_survivor_R=1
+
+factor2_exact_invalid_fraction=1641/5431
+factor2_valid_fraction=3790/5431
+factor4_exact_invalid_fraction=12106/87829
+factor4_valid_fraction=75723/87829
+
+conclusion: complete affine testing strengthens local completion coverage but leaves most candidates valid
+on the exact size-at-most-50 child frontier. The smallest surviving state is {5} at scale 4 with R=1;
+the first surviving state of size at least three is {16,21,26} at scale 16 with R=1.

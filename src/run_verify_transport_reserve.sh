@@ -9,6 +9,7 @@ REPLAY_SHA256="9c76d18a0c90f2818a47d39ecb9e8067c3b0f5663bd1daf252356e765e6d781d"
 NAIVE_NO_GO_SHA256="67a8f08bdaacb838a364079c9fe9e03f7fcf3ae8325ba4aee970c997791664b8"
 S1_DAG_SHA256="e31c232158b2abed03ebf7ec12e60d44ef14cff9ae7e066afaa645c80dd9b639"
 S1_ALL_SHA256="8a0726c30041eba72d047924922cfc7c1ba756c63d58da3a04d92f27919273cc"
+S2_NOVEL_SHA256="c552a6146531e02b19a1416c8913287d1efa86a0520eab031899630f8ecd33d7"
 
 mkdir -p "$WORK"
 
@@ -62,7 +63,14 @@ python3 "$ROOT/src/verify_s1_all_deletion_schedules.py" \
 cmp "$S1_ALL_RECORDED" "$S1_ALL_GENERATED"
 verify_sha256 "$S1_ALL_GENERATED" "$S1_ALL_SHA256" "s1_all"
 
+S2_NOVEL_GENERATED="$WORK/s2_novel_fiber_reference_certificate.txt"
+S2_NOVEL_RECORDED="$ROOT/data/s2_novel_fiber_reference_certificate_2026-07-13.txt"
+python3 "$ROOT/src/verify_s2_novel_fiber_reference.py" \
+  "$S2_NOVEL_GENERATED"
+cmp "$S2_NOVEL_RECORDED" "$S2_NOVEL_GENERATED"
+verify_sha256 "$S2_NOVEL_GENERATED" "$S2_NOVEL_SHA256" "s2_novel"
+
 python3 "$ROOT/src/certified_contaminated_states.py" > /dev/null
 python3 "$ROOT/src/branching_reserve_lp.py" self-test
 
-echo "verified: transport, replay, reserve no-go, S1 DAG schedules, and LP harness"
+echo "verified: transport, replay, reserve diagnostics, S1/S2 DAG checks, and LP harness"

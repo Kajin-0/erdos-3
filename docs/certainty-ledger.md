@@ -50,185 +50,31 @@ Statuses marked **exact finite** are computational statements for recorded objec
 
 ---
 
-## CL-038: Exact target-demand transport reserve
-
-**Status:** elementary interval theorem plus exact finite application. **Certainty:** high.
-
-For target interval `I`,
-
-```math
-q_S(I)=\max_{T\in I}\min_{1\le k\le4}|T-kS|.
-```
-
-At the `S_10` residual, `q_S(I)=76583771`, so the closure margin is exactly `5`. The larger overlap excess `9474912` is not the target reserve.
-
----
-
-## CL-039: Replay siblings are not simultaneous children
-
-**Status:** exact semantic and finite catalog result. **Certainty:** high.
-
-`S_1` has four factor-four replay siblings and `S_2` has `203` factor-eight replay siblings, but these are alternative continuations and cannot be summed as one simultaneous Bellman child family.
-
----
-
-## CL-040: Exhaustive coordinated schedule theorem on `S_1`
-
-**Status:** exact finite exhaustion. **Certainty:** high.
-
-There are `120` reachable states, `1560` progression-labeled schedules, and `930` sponsor sequences. Every schedule has all middle-fiber support inside the backbone and zero novel fiber mass.
-
----
-
-## CL-041: Novel fiber mass is schedule dependent on `S_2`
-
-**Status:** exact finite witnesses. **Certainty:** high.
-
-The lexicographic schedule has positive novel mass, while another valid schedule has zero novelty. Therefore
-
-```math
-\min_\sigma\mathcal N_\sigma(S_2)=0.
-```
-
-Raw novelty is not parent-intrinsic.
-
----
-
-## CL-042: Root-forced fork lemma and reserve
-
-**Status:** general combinatorial lemma plus exact finite values. **Certainty:** high internally.
-
-A root-forced progression must be selected by every complete coordinated schedule. Hence
-
-```math
-\sum_qH(\Xi_q^\sigma)\ge\Psi(D).
-```
-
-Positive lower bounds are certified through `S_7`.
-
----
-
-## CL-043: Forced-fork reserve is not a standalone Bellman potential
-
-**Status:** exact finite no-go theorem. **Certainty:** high.
-
-For `F(S)=P Psi(S)`, the factor-four transition `S_1 -> S_2` has `F(S_1)-F(S_2)<0` while debt is `5/4`.
-
----
-
-## CL-044: Raw simultaneous transition exporter
-
-**Status:** exact fixed-policy infrastructure. **Certainty:** high for the payloads.
-
-| parent | raw occurrences | state classes | duplicate classes | containments | partial overlaps |
-|---:|---:|---:|---:|---:|---:|
-| `S_1` | 5 | 4 | 1 | 1 | 0 |
-| `S_2` | 11 | 10 | 1 | 3 | 5 |
-| `S_3` | 25 | 21 | 3 | 23 | 15 |
-| `S_4` | 46 | 34 | 7 | 91 | 35 |
-| `S_5` | 68 | 51 | 11 | 145 | 88 |
-| `S_6` | 94 | 71 | 15 | 209 | 150 |
-| `S_7` | 127 | 95 | 20 | 345 | 214 |
-
-The payload is before any retention quotient and is not a Bellman child list.
-
----
-
-## CL-045: Exact local occurrence-multiplicity packing
-
-**Status:** elementary identity plus exact finite spectra. **Certainty:** high.
-
-```math
-\sum_iH(C_i)=\sum_u\frac{m(u)}u
-\le
-M H\left(\bigcup_iC_i\right).
-```
-
-The exact maximum multiplicities through `S_7` are
-
-```text
-2,3,7,11,12,13,16.
-```
-
-The harmonic-average multiplicity remains below `8/5`, `11/10`, or `9/8`. This does not prove bounded cross-generation reuse.
-
----
-
-## CL-046: Terminal-fiber incidence graph is cyclic
-
-**Status:** exact fixed-policy finite theorem. **Certainty:** high.
-
-The graph with edge `q -> u` when `u in Q intersect Xi_q` contains `61 <-> 303` at `S_3`. At `S_7`, the cyclic component is
-
-```math
-\{1,5,61,303,1597,8195,323640\}.
-```
-
-A strict decreasing terminal-label rank is impossible.
-
----
-
-## CL-047: Historical-separation-only state fails at `S_7`
-
-**Status:** exact fixed-policy obstruction. **Certainty:** high.
-
-At `S_7`, terminal-recursive overlap contains `5,49158,323640` in addition to historical separations. Tracking only the latest separation or separation history is inadequate.
-
----
-
-## CL-048: SCC quotient and unit harmonic capacity no-go
-
-**Status:** exact finite quotient and no-go theorem. **Certainty:** high.
-
-For component `C`, let
-
-```math
-V(C)=\sum_{u\in C}\frac1u,
-\qquad
-T(C)=\sum_{(q,u)\text{ internal edge}}\frac1u.
-```
-
-For `{61,303}` through `S_6`, `T(C)=V(C)`. At `S_7`,
-
-```math
-T(C)-V(C)
-=
-\frac{43727503229099}{1043823972523464}>0.
-```
-
-Harmonic vertex mass alone is insufficient component capacity.
-
----
-
-## CL-049: Exact SCC spectral-growth obstruction
-
-**Status:** exact finite theorem using Collatz-Wielandt. **Certainty:** high.
-
-For the two-label component through `S_6`, the internal adjacency matrix squares to the identity and has spectral radius `1`.
-
-For the seven-label `S_7` component, the positive integer vector
-
-```math
-w=(43,59,31,31,14,10,26)^T
-```
-
-satisfies
-
-```math
-9Aw-23w>0,
-\qquad
-8w-3Aw>0.
-```
-
-Therefore
-
-```math
-\boxed{
-\frac{23}{9}<\rho(A)<\frac83.
-}
-```
-
-No positive linear internal SCC capacity can be nonexpanding or factor-two contractive on this recorded component without external obstruction export.
+## Whole-tree reserve and transition ledger
+
+| ID | Durable claim | Status |
+|---|---|---|
+| CL-038 | For target interval `I`, `q_S(I)=max_{T in I} min_{1<=k<=4}|T-kS|`. At the `S_10` residual the exact closure margin is `5`, not the coarse overlap excess `9474912`. | Elementary interval theorem plus exact finite application. |
+| CL-039 | Replay siblings are alternative continuations, not simultaneous Bellman children. `S_1` has four factor-four replay siblings and `S_2` has `203` factor-eight replay siblings. | Exact semantic and finite catalog result. |
+| CL-040 | `S_1` has `120` reachable states, `1560` progression-labeled schedules, and `930` sponsor sequences; every schedule has zero novel fiber mass outside the backbone. | Exact finite exhaustion. |
+| CL-041 | Novel fiber mass is schedule dependent on `S_2`; one valid schedule has positive novelty and another has zero, so `min_sigma N_sigma(S_2)=0`. | Exact finite witnesses. |
+| CL-042 | Every root-forced progression must be selected, giving `sum_q H(Xi_q^sigma)>=Psi(D)`; positive lower bounds are certified through `S_7`. | General combinatorial lemma plus exact finite values. |
+| CL-043 | `F(S)=P Psi(S)` is not a standalone Bellman potential: on `S_1 -> S_2`, `F(S_1)-F(S_2)<0` while factor-four debt is `5/4`. | Exact finite no-go theorem. |
+| CL-044 | The raw simultaneous transition exporter is certified through `S_7`; the `S_7` payload has `127` occurrences, `95` state classes, `20` duplicate classes, `345` containments, and `214` partial overlaps. | Exact fixed-policy infrastructure. |
+| CL-045 | `sum_i H(C_i)=sum_u m(u)/u <= M H(union_i C_i)`. Maximum local multiplicities through `S_7` are `2,3,7,11,12,13,16`; harmonic-average multiplicity stays small but does not control cross-generation reuse. | Elementary identity plus exact finite spectra. |
+| CL-046 | The terminal-fiber incidence graph is cyclic. It contains `61 <-> 303` at `S_3`; at `S_7` the cyclic component is `{1,5,61,303,1597,8195,323640}`. | Exact fixed-policy finite theorem. |
+| CL-047 | Historical-separation-only state fails at `S_7`: terminal-recursive overlap also contains `5,49158,323640`. | Exact fixed-policy obstruction. |
+| CL-048 | Unit harmonic SCC capacity fails. For the `S_7` component, `T(C)-V(C)=43727503229099/1043823972523464>0`. | Exact finite quotient and no-go theorem. |
+| CL-049 | The `S_7` internal SCC adjacency satisfies `23/9 < rho(A) < 8/3`; no positive linear internal capacity can be nonexpanding or factor-two contractive without external credit. | Exact finite Collatz-Wielandt theorem. |
+| CL-050 | The `S_7` cyclic component emits `6020` distinct novel labels. Even after numerical deduplication, total emitted support has output/input harmonic ratio greater than `7/5`; raw output union is additional recursive load, not repayment. | Exact fixed-policy finite theorem. |
+| CL-051 | Across `62` exact shell children sourced by the `S_7` cyclic component, novel labels create local collision/completion invalidity for `140352/950202` factor-two and `398745/4986696` factor-four replay candidates. Most candidates remain. | Exact fixed-policy finite theorem. |
+
+Primary references for CL-050 and CL-051:
+
+- `docs/s7-cyclic-scc-output-load.md`;
+- `docs/s7-cyclic-scc-local-completion-credit.md`;
+- `src/verify_s7_scc_output_load.py`;
+- `src/verify_s7_scc_local_completion_credit.py`.
 
 ---
 
@@ -252,27 +98,29 @@ Do not use without materially new hypotheses:
 14. latest- or historical-separation-only state;
 15. unit harmonic SCC capacity;
 16. any positive linear SCC capacity with contraction factor at most two on the recorded `S_7` component;
-17. random sampling as a finite certificate;
-18. the rejected depth-ten anchor reduction.
+17. treating the numerical union of cyclic output as unit-weight stored capacity;
+18. treating layer collisions and same-layer completions as sufficient repayment for the `S_7` cyclic output;
+19. random sampling as a finite certificate;
+20. the rejected depth-ten anchor reduction.
 
 ---
 
-# Open bottleneck OB-001: Cyclic-component retention and bounded reuse
+# Open bottleneck OB-001: Residual affine obstruction and bounded reuse
 
-The state-specific cheap-extension problem at `S_10` is closed. Raw simultaneous transition generation is certified through `S_7`.
+The state-specific cheap-extension problem at `S_10` is closed. Raw simultaneous transition generation is certified through `S_7`. The first exact novel-label obstruction map is positive but incomplete.
 
 The unresolved theorem must control:
 
 1. exact duplicate multiplicity;
-2. strict containment;
-3. partial overlap;
-4. terminal-recursive overlap;
-5. cyclic SCC internal recycling and spectral growth;
-6. imported-label matching across generations;
-7. repeated use of inherited and compound labels;
-8. controlled error from discarded mass.
+2. strict containment and partial overlap;
+3. terminal-recursive overlap;
+4. cyclic SCC internal recycling and spectral growth;
+5. imported-label matching across generations;
+6. repeated use of inherited, compound, and novel labels;
+7. the factor-two and factor-four candidates remaining after local collision/completion removal;
+8. conversion of residual 34-class, rectangle, or completion coverage into bounded reusable Bellman credit.
 
-The target is
+The target remains
 
 ```math
 \Delta(S)
@@ -288,4 +136,4 @@ The target is
 \operatorname{controlled\ error}.
 ```
 
-The next finite experiment must quantify export from the high-growth cyclic SCC into nonterminal fibers, affine obstruction classes, completion support, or rectangle coverage. No current theorem closes this gap.
+The next finite experiment must retain the residual candidate set for every cyclic-source shell child and test the remaining affine layer classes, separating imported-only witnesses from witnesses requiring novel labels. No current theorem closes this gap.

@@ -139,4 +139,11 @@ run_check policy_occurrence_cone_s1_s7 \
   python3 "$EXACT_PYTHON" "$ROOT/src/verify_policy_occurrence_cone_s1_s7.py" \
   "$WORK/policy_occurrence_cone_s1_s7_certificate.txt"
 
-echo "verified: simultaneous transition, SCC, obstruction, regeneration, policy tradeoff, delayed policy, and common weight cone through S7"
+run_check step5_policy_regeneration_weight \
+  4e64334bb09a12e0c1e764f59bbe5a6c71d477f631539cfcfceccc453cca7928 \
+  "$ROOT/data/step5_policy_regeneration_weight_certificate_2026-07-13.txt" \
+  "$WORK/step5_policy_regeneration_weight_certificate.txt" \
+  python3 "$EXACT_PYTHON" "$ROOT/src/verify_step5_policy_regeneration_weight.py" \
+  "$WORK/step5_policy_regeneration_weight_certificate.txt"
+
+echo "verified: simultaneous transition, SCC, obstruction, regeneration, policy tradeoff, common cone, and regeneration-weight frontier through S7"

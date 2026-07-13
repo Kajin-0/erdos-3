@@ -1,0 +1,29 @@
+S7 CYCLIC OUTPUT SEED REGENERATION
+
+source_parent=S7
+source_terminal_step=1
+seed_scale=16
+seed_values=16,21,26
+seed_imported_labels=0
+seed_occurrence_count=1
+
+first_factor=4
+first_separation=1
+generated_raw=0,1,2,16,17,18,21,22,23,26,27,28
+generated_raw_equals_BASE_PATTERN=true
+translated_child_scale=64
+translated_child_equals_S1=true
+
+scale_word=4,4,8,4,4,8,4,8,8,8
+separation_word=1,61,303,1597,8195,93476,230164,2097164,16777217,134217729
+terminal_state=S10
+then_enters_certified_exact_tail=true
+
+normalized_seed_weight=3/16
+first_factor4_bellman_debt=13/16
+future_charge_from_S1=36185/4096
+path_charge_from_seed=36953/4096
+
+conclusion: a novel shell child emitted by the S7 cyclic component regenerates the canonical contaminated seed S1
+in one valid factor-four step and therefore inherits the complete recorded continuation through S10 and its exact tail.
+This is a pathwise structural recurrence, not a proof that the occurrence is retained in a Bellman child quotient.

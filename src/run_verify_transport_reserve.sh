@@ -16,6 +16,7 @@ LEX_NOVELTY_SHA256="6fe0b27e20284a93ef13c4a738122c4889432c2e673d63794ccec6a7ba36
 FORCED_FORK_SHA256="032307354597d531340a4dc87c9646a9b4bde6b6f7f7cc2a427719cbe7be8190"
 FORCED_FORK_NO_GO_SHA256="771c144b3c08cc186d2613eae314b2d0712d18933094323307b1468a4577d6ef"
 SIMULTANEOUS_TRANSITION_SHA256="e8162ee59d496bec8fe2d4103edc8f79de9fbd42444ef37f41fc317aec13a14b"
+OCCURRENCE_MULTIPLICITY_SHA256="9774ea7c8cbd3626b3120ade6b48344008b5f1706b05e253923393cc8495e7e8"
 
 mkdir -p "$WORK"
 
@@ -118,7 +119,14 @@ python3 "$ROOT/src/export_simultaneous_deletion_transition.py" self-test \
 cmp "$SIMULTANEOUS_TRANSITION_RECORDED" "$SIMULTANEOUS_TRANSITION_GENERATED"
 verify_sha256 "$SIMULTANEOUS_TRANSITION_GENERATED" "$SIMULTANEOUS_TRANSITION_SHA256" "simultaneous_transition"
 
+OCCURRENCE_MULTIPLICITY_GENERATED="$WORK/recursive_occurrence_multiplicity_certificate.txt"
+OCCURRENCE_MULTIPLICITY_RECORDED="$ROOT/data/recursive_occurrence_multiplicity_certificate_2026-07-13.txt"
+python3 "$ROOT/src/verify_recursive_occurrence_multiplicity.py" \
+  "$OCCURRENCE_MULTIPLICITY_GENERATED"
+cmp "$OCCURRENCE_MULTIPLICITY_RECORDED" "$OCCURRENCE_MULTIPLICITY_GENERATED"
+verify_sha256 "$OCCURRENCE_MULTIPLICITY_GENERATED" "$OCCURRENCE_MULTIPLICITY_SHA256" "occurrence_multiplicity"
+
 python3 "$ROOT/src/certified_contaminated_states.py" > /dev/null
 python3 "$ROOT/src/branching_reserve_lp.py" self-test
 
-echo "verified: transport, replay, reserve diagnostics, S1-S7 DAG checks, simultaneous transition export, forced-fork reserve/no-go, and LP harness"
+echo "verified: transport, replay, reserve diagnostics, S1-S7 DAG checks, simultaneous transition export, occurrence packing, forced-fork reserve/no-go, and LP harness"

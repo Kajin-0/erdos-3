@@ -6,6 +6,8 @@ seed_scale=16
 seed_values=16,21,26
 seed_imported_labels=0
 seed_occurrence_count=1
+canonical_regeneration_count=1
+unique_factor2_factor4_canonical_regeneration=true
 
 first_factor=4
 first_separation=1

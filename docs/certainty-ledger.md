@@ -2,7 +2,7 @@
 
 This file records claims that should survive context loss. The full Erdős reciprocal-sum problem remains open. The active dependency structure is in `docs/current-proof-program.md`.
 
-Statuses marked “exact finite” are computational statements for the recorded objects, not general asymptotic theorems.
+Statuses marked **exact finite** are computational statements for the recorded objects, not general asymptotic theorems.
 
 ---
 
@@ -52,7 +52,7 @@ H(Q)+\sum_qH(\Xi_q)+H(\mathcal B(D))
 
 **Status:** proved. **Certainty:** high for shelling.
 
-Every child must be resolved into standard dyadic shells. For `p>=1`,
+Every recursive output must be resolved into standard dyadic shells. For `p>=1`,
 
 ```math
 \sum_{u\text{ output of }a}u^p\le2^{1-p}a^p.
@@ -114,7 +114,7 @@ P_h\alpha_h\le C_0(3/4)^h,
 
 **Status:** exact finite construction. **Certainty:** high.
 
-The scale factors are `4,8,4,4`, and
+The initial scale factors are `4,8,4,4`, and
 
 ```math
 \frac{W_5}{W_1}=\frac{91}{32}>1.
@@ -347,7 +347,7 @@ The unmodified schedule gives infinite tails for `408767151` valid exact childre
 
 **Status:** exact finite repair classification plus induction. **Certainty:** high internally.
 
-Finite `+1` repairs cover the remaining `88608` children. Every one of the `408855759` valid exact children has a certified infinite tail of charge `33215/16384`.
+Finite `+1` repairs cover the remaining `88608` children. Every valid exact factor-eight child has a certified infinite tail of charge `33215/16384`.
 
 ---
 
@@ -417,7 +417,7 @@ The certificate contains `76581484` structural values, `2285` deterministic term
 33026376+137142200+177844250=348012826,
 ```
 
-and the three blocks are excluded by inheritance, lifted completion support, and direct rectangle transport. Therefore
+and the blocks are excluded by inheritance, lifted completion support, and direct rectangle transport. Therefore
 
 ```math
 \boxed{N_{10,2}=N_{10,4}=0.}
@@ -435,7 +435,7 @@ For four centers `S,2S,3S,4S`, integer windows coalesce exactly when
 2U+1\ge S.
 ```
 
-For target interval `I`, the required radius is
+For target interval `I`,
 
 ```math
 q_S(I)=\max_{T\in I}\min_{1\le k\le4}|T-kS|.
@@ -491,7 +491,7 @@ A root-forced progression must be selected by every complete coordinated schedul
 \sum_qH(\Xi_q^\sigma)\ge\Psi(D).
 ```
 
-Positive exact lower bounds are certified through `S_7`: `1/21,1/18,1/51,1/200,1/624,1/4321,1/14046`.
+Positive lower bounds are certified through `S_7`: `1/21,1/18,1/51,1/200,1/624,1/4321,1/14046`.
 
 ---
 
@@ -499,7 +499,7 @@ Positive exact lower bounds are certified through `S_7`: `1/21,1/18,1/51,1/200,1
 
 **Status:** exact finite no-go theorem. **Certainty:** high.
 
-For `F(S)=P Psi(S)`, the recorded factor-four transition `S_1 -> S_2` has
+For `F(S)=P Psi(S)`, the factor-four transition `S_1 -> S_2` has
 
 ```math
 F(S_1)-F(S_2)<0
@@ -509,11 +509,13 @@ while its debt is `5/4`. No nonnegative multiple of `P Psi` is a standalone stor
 
 ---
 
-## CL-044: Raw simultaneous transition exporter through `S_5`
+## CL-044: Raw simultaneous transition exporter
 
-**Status:** exact fixed-policy finite infrastructure. **Certainty:** high for the payloads.
+**Status:** exact fixed-policy infrastructure. **Certainty:** high for the payloads.
 
 The lexicographic exporter records the complete raw simultaneous occurrence family with schedule, shell resolution, provenance, exact duplicates, containments, and partial overlap.
+
+The exact frontier through `S_7` is:
 
 | parent | raw occurrences | state classes | duplicate classes | containments | partial overlaps |
 |---:|---:|---:|---:|---:|---:|
@@ -522,6 +524,8 @@ The lexicographic exporter records the complete raw simultaneous occurrence fami
 | `S_3` | 25 | 21 | 3 | 23 | 15 |
 | `S_4` | 46 | 34 | 7 | 91 | 35 |
 | `S_5` | 68 | 51 | 11 | 145 | 88 |
+| `S_6` | 94 | 71 | 15 | 209 | 150 |
+| `S_7` | 127 | 95 | 20 | 345 | 214 |
 
 The payload is before any retention quotient and is not a Bellman child list.
 
@@ -539,19 +543,75 @@ For raw recursive occurrences `C_i`,
 M H\left(\bigcup_iC_i\right),
 ```
 
-where `M=max m(u)`. The exact maxima through `S_5` are
+where `M=max m(u)`. The exact maxima through `S_7` are
 
 ```text
-2,3,7,11,12.
+2,3,7,11,12,13,16.
 ```
 
 The harmonic-average multiplicity is bounded by
 
 ```text
-8/5,11/10,11/10,9/8,9/8.
+8/5,11/10,11/10,9/8,9/8,9/8,9/8.
 ```
 
 Worst-case local multiplicity is not uniformly stable. Local harmonic-average control does not prove bounded cross-generation provenance reuse.
+
+---
+
+## CL-046: Terminal-fiber incidence graph is cyclic
+
+**Status:** exact fixed-policy finite theorem. **Certainty:** high.
+
+Draw an edge `q -> u` when `q` and `u` are terminal steps and `u in Xi_q`. The graph is acyclic at `S_1,S_2`, but contains the cycle
+
+```math
+61\longleftrightarrow303
+```
+
+at `S_3`, persisting through `S_6`. At `S_7`, the cyclic component is
+
+```math
+\{1,5,61,303,1597,8195,323640\}.
+```
+
+Any retention potential based on a strict decreasing rank of terminal labels is false on the recorded genealogy.
+
+---
+
+## CL-047: Historical-separation-only state fails at `S_7`
+
+**Status:** exact fixed-policy finite obstruction. **Certainty:** high.
+
+Through `S_6`, terminal-recursive overlap equals the base step plus historical replication separations. At `S_7`, additional labels `5,49158,323640` occur. A state tracking only the latest separation or the list of historical separations is inadequate.
+
+---
+
+## CL-048: SCC quotient and unit harmonic capacity no-go
+
+**Status:** exact finite quotient and no-go theorem. **Certainty:** high.
+
+Collapsing terminal-fiber strongly connected components yields an acyclic condensation graph. For a cyclic component `C`, define
+
+```math
+V(C)=\sum_{u\in C}\frac1u
+```
+
+and internal target mass
+
+```math
+T(C)=\sum_{(q,u)\text{ internal edge}}\frac1u.
+```
+
+For `C={61,303}` through `S_6`, `T(C)=V(C)`. At `S_7`, the seven-label component satisfies
+
+```math
+T(C)-V(C)
+=
+\frac{43727503229099}{1043823972523464}>0.
+```
+
+Thus SCC capacity equal only to harmonic vertex mass fails at `S_7`. Internal edge capacity, provenance capacity, nonlinear potential, or obstruction export is required.
 
 ---
 
@@ -572,24 +632,28 @@ Do not use without materially new hypotheses:
 11. merging provenance-distinct exact duplicates without a convention;
 12. assuming a uniform maximum-overlap constant from the recorded path;
 13. treating exact-state quotienting as a solution to containment or partial overlap;
-14. random sampling as a finite certificate;
-15. the rejected depth-ten anchor reduction.
+14. assigning a strict decreasing rank to terminal-fiber labels;
+15. tracking only the latest or historical separations;
+16. assigning each SCC only its harmonic vertex mass as capacity;
+17. random sampling as a finite certificate;
+18. the rejected depth-ten anchor reduction.
 
 ---
 
-# Open bottleneck OB-001: Retention and bounded-reuse packing
+# Open bottleneck OB-001: Cyclic-component retention and bounded reuse
 
-The state-specific cheap-extension problem at `S_10` is closed. Raw simultaneous transition generation is complete through the recorded fixed-policy frontier `S_5`.
+The state-specific cheap-extension problem at `S_10` is closed. Raw simultaneous transition generation is certified through `S_7`.
 
-The unresolved theorem must convert the raw occurrence family into a complete retained child family while preserving provenance and controlling:
+The unresolved theorem must convert the raw occurrence family into a complete retained child family while controlling:
 
 1. exact duplicate multiplicity;
 2. strict containment;
 3. partial overlap;
 4. terminal-recursive overlap;
-5. imported-label matching across generations;
-6. repeated use of inherited separation labels;
-7. controlled error from discarded mass.
+5. cyclic SCC internal recycling;
+6. imported-label matching across generations;
+7. repeated use of inherited and compound labels;
+8. controlled error from discarded mass.
 
 The target whole-tree inequality is
 
@@ -609,12 +673,12 @@ The target whole-tree inequality is
 
 Approved next targets:
 
-1. define a provenance-preserving retention quotient on the `S_1` through `S_5` overlap graphs;
-2. introduce explicit label-reuse or overlap-capacity variables;
-3. connect forced-fork output to affine obstruction and rectangle coverage;
-4. prove bounded reuse of inherited separation labels or export repeated reuse into smaller difference fibers;
-5. feed the proved quotient into the exact rational LP harness;
-6. extract the smallest exact failing transition for every candidate convention;
+1. attach explicit internal capacity vectors to the certified SCC quotients;
+2. test whether internal recycling plus outgoing capacity is paid by incoming capacity plus obstruction export;
+3. preserve provenance while merging exact numerical state classes;
+4. connect cyclic-component output to affine obstruction and rectangle coverage;
+5. feed a proved retention convention into the exact rational LP harness;
+6. extract the smallest exact failing transition for each candidate convention;
 7. establish the branching Carleson inequality for all pre-basin states.
 
 No current theorem closes this gap. The full Erdős problem remains unresolved.

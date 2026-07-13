@@ -10,6 +10,7 @@ SIMULTANEOUS_S4_S5_SHA256="ada237c35a0980c15cecac51e30fd43ade50948067d6f421477af
 SIMULTANEOUS_S6_S7_SHA256="4c1767a8c0b4e65b2deb4e576bfec6f8b74e6531f4ef12e4444fd53a9d0cb94c"
 TERMINAL_FIBER_SHA256="ddedf75bd52a6cc67cef6ecb0a635b836e9a1c7c5094a860449dd35dd2651c18"
 TERMINAL_FIBER_SCC_SHA256="3166cbb0801eb774e8b6691ace6a8612f5457a9415bd8ae3762a1260216d0fe2"
+TERMINAL_FIBER_SPECTRAL_SHA256="aa753127d2d0adbcb124b0a9f6e5c053350d422cd66fe2a4c73d1045b2917bf4"
 
 mkdir -p "$WORK"
 
@@ -70,4 +71,11 @@ python3 "$ROOT/src/export_terminal_fiber_scc_quotient.py" self-test \
 cmp "$TERMINAL_FIBER_SCC_RECORDED" "$TERMINAL_FIBER_SCC_GENERATED"
 verify_sha256 "$TERMINAL_FIBER_SCC_GENERATED" "$TERMINAL_FIBER_SCC_SHA256" "terminal_fiber_scc"
 
-echo "verified: simultaneous transition, multiplicity, incidence, and SCC frontier through S7"
+TERMINAL_FIBER_SPECTRAL_GENERATED="$WORK/terminal_fiber_scc_spectral_growth_certificate.txt"
+TERMINAL_FIBER_SPECTRAL_RECORDED="$ROOT/data/terminal_fiber_scc_spectral_growth_certificate_2026-07-13.txt"
+python3 "$ROOT/src/verify_terminal_fiber_scc_spectral_growth.py" \
+  "$TERMINAL_FIBER_SPECTRAL_GENERATED"
+cmp "$TERMINAL_FIBER_SPECTRAL_RECORDED" "$TERMINAL_FIBER_SPECTRAL_GENERATED"
+verify_sha256 "$TERMINAL_FIBER_SPECTRAL_GENERATED" "$TERMINAL_FIBER_SPECTRAL_SHA256" "terminal_fiber_spectral"
+
+echo "verified: simultaneous transition, multiplicity, incidence, SCC, and spectral frontier through S7"

@@ -15,10 +15,6 @@ S2_ZERO_SHA256="e5d7a3bbefea78c7c5eeb85ec9155e947d00443e8c279ba6cfc72978267bf972
 LEX_NOVELTY_SHA256="6fe0b27e20284a93ef13c4a738122c4889432c2e673d63794ccec6a7ba36c2e1"
 FORCED_FORK_SHA256="032307354597d531340a4dc87c9646a9b4bde6b6f7f7cc2a427719cbe7be8190"
 FORCED_FORK_NO_GO_SHA256="771c144b3c08cc186d2613eae314b2d0712d18933094323307b1468a4577d6ef"
-SIMULTANEOUS_TRANSITION_SHA256="e8162ee59d496bec8fe2d4103edc8f79de9fbd42444ef37f41fc317aec13a14b"
-OCCURRENCE_MULTIPLICITY_SHA256="9774ea7c8cbd3626b3120ade6b48344008b5f1706b05e253923393cc8495e7e8"
-SIMULTANEOUS_S4_S5_SHA256="ada237c35a0980c15cecac51e30fd43ade50948067d6f421477af1bb79239756"
-SIMULTANEOUS_S6_S7_SHA256="4c1767a8c0b4e65b2deb4e576bfec6f8b74e6531f4ef12e4444fd53a9d0cb94c"
 
 mkdir -p "$WORK"
 
@@ -114,35 +110,10 @@ python3 "$ROOT/src/verify_forced_fork_bellman_no_go.py" \
 cmp "$FORCED_FORK_NO_GO_RECORDED" "$FORCED_FORK_NO_GO_GENERATED"
 verify_sha256 "$FORCED_FORK_NO_GO_GENERATED" "$FORCED_FORK_NO_GO_SHA256" "forced_fork_no_go"
 
-SIMULTANEOUS_TRANSITION_GENERATED="$WORK/simultaneous_deletion_transition_certificate.txt"
-SIMULTANEOUS_TRANSITION_RECORDED="$ROOT/data/simultaneous_deletion_transition_certificate_2026-07-13.txt"
-python3 "$ROOT/src/export_simultaneous_deletion_transition.py" self-test \
-  "$SIMULTANEOUS_TRANSITION_GENERATED"
-cmp "$SIMULTANEOUS_TRANSITION_RECORDED" "$SIMULTANEOUS_TRANSITION_GENERATED"
-verify_sha256 "$SIMULTANEOUS_TRANSITION_GENERATED" "$SIMULTANEOUS_TRANSITION_SHA256" "simultaneous_transition"
-
-OCCURRENCE_MULTIPLICITY_GENERATED="$WORK/recursive_occurrence_multiplicity_certificate.txt"
-OCCURRENCE_MULTIPLICITY_RECORDED="$ROOT/data/recursive_occurrence_multiplicity_certificate_2026-07-13.txt"
-python3 "$ROOT/src/verify_recursive_occurrence_multiplicity.py" \
-  "$OCCURRENCE_MULTIPLICITY_GENERATED"
-cmp "$OCCURRENCE_MULTIPLICITY_RECORDED" "$OCCURRENCE_MULTIPLICITY_GENERATED"
-verify_sha256 "$OCCURRENCE_MULTIPLICITY_GENERATED" "$OCCURRENCE_MULTIPLICITY_SHA256" "occurrence_multiplicity"
-
-SIMULTANEOUS_S4_S5_GENERATED="$WORK/simultaneous_transition_s4_s5_certificate.txt"
-SIMULTANEOUS_S4_S5_RECORDED="$ROOT/data/simultaneous_transition_s4_s5_certificate_2026-07-13.txt"
-python3 "$ROOT/src/verify_simultaneous_transition_s4_s5.py" \
-  "$SIMULTANEOUS_S4_S5_GENERATED"
-cmp "$SIMULTANEOUS_S4_S5_RECORDED" "$SIMULTANEOUS_S4_S5_GENERATED"
-verify_sha256 "$SIMULTANEOUS_S4_S5_GENERATED" "$SIMULTANEOUS_S4_S5_SHA256" "simultaneous_s4_s5"
-
-SIMULTANEOUS_S6_S7_GENERATED="$WORK/simultaneous_transition_s6_s7_certificate.txt"
-SIMULTANEOUS_S6_S7_RECORDED="$ROOT/data/simultaneous_transition_s6_s7_certificate_2026-07-13.txt"
-python3 "$ROOT/src/verify_simultaneous_transition_s6_s7.py" \
-  "$SIMULTANEOUS_S6_S7_GENERATED"
-cmp "$SIMULTANEOUS_S6_S7_RECORDED" "$SIMULTANEOUS_S6_S7_GENERATED"
-verify_sha256 "$SIMULTANEOUS_S6_S7_GENERATED" "$SIMULTANEOUS_S6_S7_SHA256" "simultaneous_s6_s7"
+bash "$ROOT/src/run_verify_transition_frontier.sh" \
+  "$WORK/transition_frontier"
 
 python3 "$ROOT/src/certified_contaminated_states.py" > /dev/null
 python3 "$ROOT/src/branching_reserve_lp.py" self-test
 
-echo "verified: transport, replay, reserve diagnostics, S1-S7 DAG checks, simultaneous transitions through S7, occurrence packing, forced-fork reserve/no-go, and LP harness"
+echo "verified: transport, reserve diagnostics, transition frontier through S7, forced-fork reserve/no-go, and LP harness"

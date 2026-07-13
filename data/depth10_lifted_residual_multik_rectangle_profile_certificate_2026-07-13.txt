@@ -1,0 +1,102 @@
+DEPTH-TEN LIFTED-COMPLETION RESIDUAL FOUR-RATIO RECTANGLE PROFILE
+Date: 2026-07-13
+
+STATUS
+Exact finite equal-rank sample with explicit transported four-term-progression witnesses.
+This is not a complete exclusion theorem for the 177,844,250-candidate residual.
+
+CERTIFIED RESIDUAL
+Residual count:                 177844250
+First residual separation:      97474324
+Last residual separation:      613454687
+Ordered residual FNV-64:        00369694f2d70526
+
+EQUAL-RANK SAMPLE
+Sample count:                         512
+Rank formula: floor((2j+1)*177844250/1024), 0 <= j < 512
+First sampled separation:       176639281
+Last sampled separation:        613171820
+Sample-separation FNV-64:       26df76d56ec920f2
+Complete sample-file SHA-256:   cdee14adb2f1ca29b4bac2a32384adab2ff139b9955370168f522279f0f8a832
+
+STATE-INDEPENDENT RECTANGLE TRANSPORT
+Let B contain
+
+  x, x+d, x+2d-U, x+3d-U,
+
+with d>0 and 0<U<S. For each k in {1,2,3,4}, exact layer-word
+cancellation transports this rectangle to a nontrivial four-term progression
+in G_T(G_S(B)) for both
+
+  T = kS + U
+
+and
+
+  T = kS - U.
+
+The selected canonical channels are:
+
+  plus:  0011/1100, 0011/2200, 0011/1201, 0011/0202
+  minus: 0112/0011, 0112/0022, 0112/1021, 0112/2020
+
+for k=1,2,3,4 respectively.
+
+Exact normalized cancellation-pair counts:
+
+  k=1: 8
+  k=2: 8
+  k=3: 4
+  k=4: 4
+  k>=5: 0
+
+For S=R9=134217729 and Umax=76583776, the four transport windows are
+
+  k=1: [ 57633953, 210801505]
+  k=2: [191851682, 345019234]
+  k=3: [326069411, 479236963]
+  k=4: [460287140, 613454692]
+
+They overlap continuously and contain the full certified residual interval.
+
+EXACT SAMPLE PROFILE
+All 512 exact residual samples have explicit B9 rectangle witnesses and
+transported progressions in the actual S10 candidates.
+
+Channel split:
+
+  k=1:   8
+  k=2:  23
+  k=3: 212
+  k=4: 269
+  total: 512
+
+Deterministic search statistics:
+
+  total successful trials:          58459477
+  maximum trials for one sample:     2465835
+  worst sample index:                     47
+  worst sampled separation:         344872741
+
+Witness-row FNV-64:              85bfaba25312486b
+Witness-file SHA-256:            e43df5b7621ead4ee9bd1b02d3c812114a7d9a60f9130de0b5f6ab8cad419929
+
+Every witness row is independently checked for:
+1. an ancestor 0011 rectangle in B9={0} union S9;
+2. the exact k and sign layer-word channel;
+3. positive equal spacing of the transported four points;
+4. membership of all four points in the actual S10 factor-four candidate.
+
+PRIMARY FILES
+src/verify_four_ratio_rectangle_transport.py
+data/four_ratio_rectangle_transport_certificate_2026-07-13.txt
+src/verify_depth10_residual_multik_rectangle_profile.cpp
+src/run_verify_depth10_residual_multik_rectangle_profile.sh
+src/sample_depth10_lifted_s9_completion_residual.cpp
+src/run_sample_depth10_lifted_s9_completion_residual.sh
+
+CONCLUSION
+The finite residual sample is completely explained by a single four-ratio
+rectangle-transport subsystem. The remaining exact task is not further
+sampling: compute the direct B9 rectangle-coverage zero set on every effective
+value U=|T-kR9| induced by the full 177,844,250-candidate residual. Complete
+coverage of at least one such U for every residual T would prove N_{10,4}=0.

@@ -22,7 +22,7 @@ verify_sha256() {
     echo "actual=$actual" >&2
     exit 1
   fi
-  echo "$label_sha256=$actual" | sed "s/label_/${label}_/"
+  echo "${label}_sha256=$actual"
 }
 
 TRANSPORT_GENERATED="$WORK/transport_interval_capacity_certificate.txt"

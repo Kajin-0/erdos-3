@@ -9,11 +9,13 @@ import sys
 
 from certified_contaminated_states import (
     BASE_PATTERN,
+    SCALES,
     SEPARATIONS,
     state_by_depth,
     three_translate_raw,
 )
 from export_simultaneous_deletion_transition import build_payload
+from verify_s7_scc_local_completion_credit import COMPONENT, parity_ok
 
 SEED = frozenset({16, 21, 26})
 SEED_SCALE = 16
@@ -25,7 +27,7 @@ EXPECTED_PATH_CHARGE = Fraction(36_953, 4_096)
 EXPECTED_FUTURE_CHARGE = Fraction(36_185, 4_096)
 EXPECTED_DEBT = Fraction(13, 16)
 CERTIFICATE_SHA256 = (
-    "2d6296a1f161ef2b971681ad7ce967720c530c65298169a664e1983644f4fac3"
+    "b05c5b91ba5b148a1dbe999edc0617a5370889f4244cd66553c9d7a8c6ee9679"
 )
 
 
@@ -43,6 +45,51 @@ def first_four_ap(values: frozenset[int]) -> tuple[int, int] | None:
     return None
 
 
+def all_canonical_regenerations(
+    payload: dict[str, object],
+) -> list[tuple[tuple[int, ...], int, int, int]]:
+    """Find exact factor-two/factor-four returns to canonical S1,...,S10."""
+    grouped: dict[tuple[int, ...], int] = {}
+    for occurrence in payload["recursive_shell_occurrences"]:
+        if occurrence["source"] != "middle_fiber":
+            continue
+        if occurrence["source_step"] not in COMPONENT:
+            continue
+        values = tuple(occurrence["values"])
+        scale = int(occurrence["shell_scale"])
+        previous = grouped.setdefault(values, scale)
+        if previous != scale:
+            raise AssertionError("exact state appeared at two shell scales")
+
+    scale_to_depth = {
+        scale: depth
+        for depth, scale in enumerate(SCALES, start=1)
+    }
+    regenerations: list[tuple[tuple[int, ...], int, int, int]] = []
+    for values, scale in grouped.items():
+        for factor in (2, 4):
+            next_scale = factor * scale
+            depth = scale_to_depth.get(next_scale)
+            if depth is None:
+                continue
+            target = state_by_depth(depth).values
+            target_raw = frozenset(value - next_scale for value in target)
+            if len(target_raw) != 3 * (len(values) + 1):
+                continue
+            upper = (next_scale - 1 - max(values)) // 2
+            candidates = sorted(
+                value
+                for value in target_raw
+                if 1 <= value <= upper
+                and 2 * value in target_raw
+                and parity_ok(value)
+            )
+            for separation in candidates:
+                if three_translate_raw(values, separation) == target_raw:
+                    regenerations.append((values, factor, separation, depth))
+    return sorted(regenerations)
+
+
 def fraction_text(value: Fraction) -> str:
     if value.denominator == 1:
         return str(value.numerator)
@@ -52,8 +99,16 @@ def fraction_text(value: Fraction) -> str:
 def build_certificate() -> str:
     payload = build_payload(7)
     backbone = set(payload["backbone"]["values"])
+    regenerations = all_canonical_regenerations(payload)
+    expected_regeneration = [((16, 21, 26), 4, 1, 1)]
+    if regenerations != expected_regeneration:
+        raise AssertionError(
+            f"canonical regeneration catalog mismatch: {regenerations!r}"
+        )
     if SEED & backbone:
-        raise AssertionError("regenerating seed is not novel relative to S7 backbone")
+        raise AssertionError(
+            "regenerating seed is not novel relative to S7 backbone"
+        )
 
     occurrences = [
         occurrence
@@ -64,16 +119,25 @@ def build_certificate() -> str:
         and frozenset(occurrence["values"]) == SEED
     ]
     if len(occurrences) != 1:
-        raise AssertionError(f"unexpected seed occurrence count: {len(occurrences)}")
+        raise AssertionError(
+            f"unexpected seed occurrence count: {len(occurrences)}"
+        )
 
     generated = three_translate_raw(SEED, FIRST_SEPARATION)
     if generated != BASE_PATTERN:
-        raise AssertionError("factor-four seed extension did not reproduce base pattern")
+        raise AssertionError(
+            "factor-four seed extension did not reproduce base pattern"
+        )
     if first_four_ap(generated) is not None:
-        raise AssertionError("regenerated base pattern contains a four-term AP")
+        raise AssertionError(
+            "regenerated base pattern contains a four-term AP"
+        )
 
     s1 = state_by_depth(1)
-    translated = frozenset(FIRST_FACTOR * SEED_SCALE + value for value in generated)
+    translated = frozenset(
+        FIRST_FACTOR * SEED_SCALE + value
+        for value in generated
+    )
     if translated != s1.values:
         raise AssertionError("translated seed extension is not canonical S1")
 
@@ -96,7 +160,10 @@ def build_certificate() -> str:
 
     seed_weight = Fraction(SEED_PERSISTENCE * len(SEED), SEED_SCALE)
     pre_s10 = sum(
-        (state_by_depth(depth).weighted_density for depth in range(1, 10)),
+        (
+            state_by_depth(depth).weighted_density
+            for depth in range(1, 10)
+        ),
         Fraction(0),
     )
     future_charge = pre_s10 + EXACT_TAIL_FROM_S10
@@ -122,6 +189,8 @@ def build_certificate() -> str:
         "seed_values=16,21,26",
         "seed_imported_labels=0",
         "seed_occurrence_count=1",
+        "canonical_regeneration_count=1",
+        "unique_factor2_factor4_canonical_regeneration=true",
         "",
         "first_factor=4",
         "first_separation=1",
@@ -163,7 +232,9 @@ def build_certificate() -> str:
 
 def main() -> int:
     if len(sys.argv) > 2:
-        raise SystemExit("usage: verify_s7_scc_seed_regeneration.py [OUTPUT]")
+        raise SystemExit(
+            "usage: verify_s7_scc_seed_regeneration.py [OUTPUT]"
+        )
     certificate = build_certificate()
     if len(sys.argv) == 2:
         Path(sys.argv[1]).write_text(certificate, encoding="utf-8")

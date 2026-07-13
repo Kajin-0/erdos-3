@@ -11,7 +11,7 @@ from fractions import Fraction
 from pathlib import Path
 
 from export_simultaneous_deletion_transition import build_payload
-from verify_terminal_fiber_incidence import components
+from verify_terminal_fiber_incidence import strongly_connected_components
 
 
 EXPECTED = {
@@ -95,7 +95,11 @@ def build_quotient(depth: int) -> dict[str, object]:
             if value in nodes:
                 edges.add((step, value))
 
-    strongly_connected = components(nodes, edges)
+    ordered_edges = tuple(sorted(edges))
+    strongly_connected = strongly_connected_components(
+        nodes,
+        ordered_edges,
+    )
     component_of = {
         value: index
         for index, component in enumerate(strongly_connected)
@@ -108,7 +112,7 @@ def build_quotient(depth: int) -> dict[str, object]:
         internal_edges = tuple(
             sorted(
                 (source, target)
-                for source, target in edges
+                for source, target in ordered_edges
                 if source in member_set and target in member_set
             )
         )
@@ -116,7 +120,7 @@ def build_quotient(depth: int) -> dict[str, object]:
             sorted(
                 {
                     component_of[source]
-                    for source, target in edges
+                    for source, target in ordered_edges
                     if target in member_set and source not in member_set
                 }
             )
@@ -125,7 +129,7 @@ def build_quotient(depth: int) -> dict[str, object]:
             sorted(
                 {
                     component_of[target]
-                    for source, target in edges
+                    for source, target in ordered_edges
                     if source in member_set and target not in member_set
                 }
             )
@@ -165,7 +169,7 @@ def build_quotient(depth: int) -> dict[str, object]:
         sorted(
             {
                 (component_of[source], component_of[target])
-                for source, target in edges
+                for source, target in ordered_edges
                 if component_of[source] != component_of[target]
             }
         )

@@ -109,4 +109,11 @@ run_check s7_seed_policy_dependence \
   python3 "$ROOT/src/verify_s7_regenerative_seed_policy_dependence.py" \
   "$WORK/s7_regenerative_seed_policy_dependence_certificate.txt"
 
-echo "verified: simultaneous transition, multiplicity, SCC, obstruction, isolated regeneration, and policy-dependence frontier through S7"
+run_check s7_policy_transition_tradeoff \
+  e4313f37643ad729fb8faa160ae63d5d59d61c521b149258a6aa131485dec70d \
+  "$ROOT/data/s7_policy_transition_tradeoff_certificate_2026-07-13.txt" \
+  "$WORK/s7_policy_transition_tradeoff_certificate.txt" \
+  python3 "$ROOT/src/verify_s7_policy_transition_tradeoff.py" \
+  "$WORK/s7_policy_transition_tradeoff_certificate.txt"
+
+echo "verified: simultaneous transition, SCC, obstruction, regeneration, policy dependence, and policy tradeoff through S7"

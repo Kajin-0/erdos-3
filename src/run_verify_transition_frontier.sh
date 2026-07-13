@@ -13,6 +13,7 @@ TERMINAL_FIBER_SCC_SHA256="3166cbb0801eb774e8b6691ace6a8612f5457a9415bd8ae3762a1
 TERMINAL_FIBER_SPECTRAL_SHA256="aa753127d2d0adbcb124b0a9f6e5c053350d422cd66fe2a4c73d1045b2917bf4"
 S7_SCC_OUTPUT_LOAD_SHA256="cb5dbba5f45c25b2c286fde17e9895d017abaa906f69f73255a5f0b5b62d081d"
 S7_SCC_LOCAL_COMPLETION_SHA256="0419cdeab12c1a8ab2f55e041a0259ffde77f90df7031be0736137502e6ff737"
+S7_SCC_SMALL_AFFINE_SHA256="6a1073d6fd485c0a99526c59c32b5a0985220632e32e67fc8fed9d5b8c5234e0"
 
 mkdir -p "$WORK"
 
@@ -94,4 +95,11 @@ python3 "$ROOT/src/verify_s7_scc_local_completion_credit.py" \
 cmp "$S7_SCC_LOCAL_COMPLETION_RECORDED" "$S7_SCC_LOCAL_COMPLETION_GENERATED"
 verify_sha256 "$S7_SCC_LOCAL_COMPLETION_GENERATED" "$S7_SCC_LOCAL_COMPLETION_SHA256" "s7_scc_local_completion"
 
-echo "verified: simultaneous transition, multiplicity, incidence, SCC, spectral, output-load, and local-completion frontier through S7"
+S7_SCC_SMALL_AFFINE_GENERATED="$WORK/s7_scc_small_state_affine_frontier_certificate.txt"
+S7_SCC_SMALL_AFFINE_RECORDED="$ROOT/data/s7_scc_small_state_affine_frontier_certificate_2026-07-13.txt"
+python3 "$ROOT/src/verify_s7_scc_small_state_affine_frontier.py" \
+  "$S7_SCC_SMALL_AFFINE_GENERATED"
+cmp "$S7_SCC_SMALL_AFFINE_RECORDED" "$S7_SCC_SMALL_AFFINE_GENERATED"
+verify_sha256 "$S7_SCC_SMALL_AFFINE_GENERATED" "$S7_SCC_SMALL_AFFINE_SHA256" "s7_scc_small_affine"
+
+echo "verified: simultaneous transition, multiplicity, incidence, SCC, spectral, output-load, local-completion, and small-state affine frontier through S7"

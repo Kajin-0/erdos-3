@@ -9,13 +9,7 @@ This file records claims that should survive context loss. The full Erdős recip
 **Status:** standard.  
 **Certainty:** high.
 
-For
-
-```math
-\alpha_j=\frac{|A\cap[2^j,2^{j+1})|}{2^j},
-```
-
-divergence of `sum_{n in A}1/n` is equivalent up to constants to `sum_j alpha_j = infinity`.
+For `alpha_j=|A intersect [2^j,2^{j+1})|/2^j`, divergence of `sum_{n in A}1/n` is equivalent up to constants to `sum_j alpha_j=infinity`.
 
 ---
 
@@ -67,11 +61,7 @@ Children must be resolved into standard dyadic shells. For `p>=1`,
 **Status:** proved in repository.  
 **Certainty:** medium-high internally.
 
-Repeated labels at different centers or anchors are exported by translated layers. Fixed complete anchor histories obey
-
-```math
-\lambda_{x,q}(t)(a-t)\le a.
-```
+Repeated labels at different centers or anchors are exported by translated layers. Fixed complete anchor histories obey `lambda_{x,q}(t)(a-t)<=a`.
 
 ---
 
@@ -127,13 +117,7 @@ P_h\alpha_h\le C_0(3/4)^h,
 **Status:** exact finite construction.  
 **Certainty:** high.
 
-The scale factors are `4,8,4,4`, and
-
-```math
-\frac{W_5}{W_1}=\frac{91}{32}.
-```
-
-Universal local contraction and contraction over every four-step window are false.
+The scale factors are `4,8,4,4`, and `W_5/W_1=91/32`. Universal local contraction and contraction over every four-step window are false.
 
 ---
 
@@ -142,13 +126,7 @@ Universal local contraction and contraction over every four-step window are fals
 **Status:** exact finite construction.  
 **Certainty:** high.
 
-The alternative recovery `R_5=93476` admits the factor-four descendant `R_6=230164`, giving `4,8,4,4,8,4` through `S_7`, with
-
-```math
-\frac{W_7}{W_5}=\frac{205}{182}>1.
-```
-
-Universal two-generation recovery and contraction over every six-step window are false.
+The alternative recovery `R_5=93476` admits the factor-four descendant `R_6=230164`, giving `4,8,4,4,8,4` through `S_7`, with `W_7/W_5=205/182>1`. Universal two-generation recovery and contraction over every six-step window are false.
 
 ---
 
@@ -170,15 +148,7 @@ The factor-four domain has `359419` disjoint candidates, exhausted by completion
 **Status:** exact finite construction.  
 **Certainty:** high.
 
-```math
-R_7=2097164,
-\quad
-|S_8|=29523,
-\quad
-P_8=256,
-\quad
-W_8=\frac{29523}{32768}.
-```
+`R_7=2097164`, `|S_8|=29523`, `P_8=256`, and `W_8=29523/32768`.
 
 ---
 
@@ -200,15 +170,7 @@ The factor-four domain has `4190292` disjoint candidates and is fully exhausted.
 **Status:** exact finite construction.  
 **Certainty:** high.
 
-```math
-R_8=16777217,
-\quad
-|S_9|=88572,
-\quad
-P_9=512,
-\quad
-W_9=\frac{22143}{32768}.
-```
+`R_8=16777217`, `|S_9|=88572`, `P_9=512`, and `W_9=22143/32768`.
 
 ---
 
@@ -230,17 +192,7 @@ The factor-four domain has `39459384` disjoint candidates. Completion and recurs
 **Status:** exact finite construction.  
 **Certainty:** high.
 
-```math
-R_9=134217729,
-\quad
-|S_{10}|=265719,
-\quad
-P_{10}=1024,
-\quad
-W_{10}=\frac{265719}{524288}.
-```
-
-The finite scale pattern is `4,8,4,4,8,4,8,8,8`.
+`R_9=134217729`, `|S_10|=265719`, `P_10=1024`, and `W_10=265719/524288`. The finite scale pattern is `4,8,4,4,8,4,8,8,8`.
 
 ---
 
@@ -289,7 +241,7 @@ If `S subseteq [L,7L/4)`, `0<k<=L/32`, and the first exact step is valid, then `
 **Status:** exact signed-completion classification.  
 **Certainty:** high.
 
-In `4<=k<=L_{10}/32`, exactly `11129810` offsets enter exact infinite tails. Each has charge `33215/16384`.
+In `4<=k<=L_10/32`, exactly `11129810` offsets enter exact infinite tails. Each has charge `33215/16384`.
 
 ---
 
@@ -422,11 +374,7 @@ The `88606` valid second-step failures are repaired by `4k -> 4k+1`. The only tw
 Therefore
 
 ```math
-\boxed{
-408767151+88606+2
-=
-408855759.
-}
+\boxed{408767151+88606+2=408855759.}
 ```
 
 Every valid positive exact factor-eight child of `S_10` has a certified infinite exact four-term-progression-free continuation. Every tail has charge `33215/16384`.
@@ -450,42 +398,98 @@ Hence, for every separation `R`,
 L_{10}+G_9(R)\subseteq G_{10}(R).
 ```
 
-The factor-four fit endpoint from `S_9` is `76583776`; the factor-two fit endpoint from `S_10` is `76583775`. Therefore every sponsor-compatible layer-disjoint factor-two candidate from `S_10` is an embedded candidate in the complete `S_9` factor-four domain.
-
-Since
-
-```math
-N_{9,4}=0,
-```
-
-one obtains
+The factor-four fit endpoint from `S_9` is `76583776`; the factor-two fit endpoint from `S_10` is `76583775`. Since `N_{9,4}=0`,
 
 ```math
 \boxed{N_{10,2}=0.}
 ```
 
-Consequences:
-
-1. every continuation from the recorded `S_10` terminates or has scale factor at least `4`;
-2. factor-two Bellman debt is absent from the tree rooted at this state;
-3. the inherited interval removes `33026376` layer-disjoint candidates from the `S_10` factor-four frontier;
-4. the genuinely new factor-four domain has
-
-```math
-\boxed{314986450}
-```
-
-layer-disjoint candidates.
-
-**Primary references:**
-
-- `docs/depth-ten-factor-two-inheritance-exclusion.md`;
-- `src/verify_depth10_factor2_inheritance.py`;
-- `data/depth10_factor2_inheritance_certificate_2026-07-12.txt`.
+The genuinely new factor-four domain has `314986450` layer-disjoint candidates.
 
 ---
 
-# Superseded or explicitly false targets
+## CL-032: First 10000 genuinely new `S_10` factor-four candidates
+
+**Status:** exact finite prefix certificate with explicit deterministic witnesses.  
+**Certainty:** high for the certified prefix only.
+
+The first `10000` sponsor-compatible, layer-disjoint candidates above the inherited cutoff all contain explicit nontrivial four-term progressions. The certified prefix runs from `R=76583927` through `R=76697408`.
+
+This leaves at most `314976450` candidates unclassified. It does not prove `N_{10,4}=0` and does not validate the rejected bulk anchor reduction. Further contiguous prefix certification is deprioritized.
+
+**Primary references:**
+
+- `docs/depth-ten-factor-four-first10000.md`;
+- `src/run_verify_depth10_factor4_first10000.sh`;
+- `docs/depth-ten-factor-four-exclusion-audit.md`.
+
+---
+
+## CL-033: Exact 34-class three-translate obstruction recurrence
+
+**Status:** elementary state-independent theorem with exact symbolic verification.  
+**Certainty:** high internally; awaiting independent review.
+
+For `G_R(B)=B union (B+R) union (B+2R)`, the `80` nonconstant raw four-term layer words reduce, after global layer normalization and reversal, to exactly `34` obstruction classes: `30` reversal pairs and the self-reversing classes `0110`, `0220`, `1001`, and `2002`.
+
+For a layer word `lambda`, define
+
+```math
+r_\lambda=\lambda_1-\lambda_0,
+```
+
+```math
+a_\lambda=\lambda_0-2\lambda_1+\lambda_2,
+```
+
+```math
+b_\lambda=\lambda_1-2\lambda_2+\lambda_3.
+```
+
+The triple `(r,a,b)` uniquely reconstructs the normalized word. The class occurs at separation `R` exactly when
+
+```math
+x,
+\quad x+d,
+\quad x+2d-aR,
+\quad x+3d-(2a+b)R
+```
+
+belong to `B`, with `d+rR != 0`.
+
+The pair-start sets satisfy the exact recurrence
+
+```math
+P_d(G_S(B))
+=
+\bigcup_{i,j\in\{0,1,2\}}
+\left(P_{d+(i-j)S}(B)+iS\right).
+```
+
+The full labeled class coverage closes on the three-parameter affine spectrum:
+
+```math
+\widetilde\Gamma_\lambda(G_S(B);T)
+=
+\sum_{\mu\in\{0,1,2\}^4}
+\mathcal F_B(
+ a_\lambda T+a_\mu S,
+ b_\lambda T+b_\mu S;
+ r_\lambda T+r_\mu S
+).
+```
+
+This corrects the insufficient one-scalar third-difference formulation: a four-term progression requires two second-difference equations.
+
+**Primary references:**
+
+- `docs/three-translate-obstruction-coverage-recurrence.md`;
+- `src/verify_three_translate_obstruction_classes.py`;
+- `data/three_translate_obstruction_classes_certificate_2026-07-13.txt`.
+
+---
+
+# Superseded, explicitly false, or deprioritized targets
 
 Do not use without new hypotheses:
 
@@ -498,37 +502,47 @@ Do not use without new hypotheses:
 7. extrapolating one branch to all recoveries;
 8. treating one or many exact tails as a whole-tree theorem;
 9. random candidate sampling as a finite certificate;
-10. recursive arguments that ignore mandatory shell resolution.
+10. recursive arguments that ignore mandatory shell resolution;
+11. using one third-difference equation as a complete four-term-progression test;
+12. treating pathwise summability alone as sufficient for the branching deletion tree;
+13. further contiguous `S_10` prefix certification without a structural hypothesis.
 
 ---
 
-# Open bottleneck OB-001: Whole-tree Bellman compensation
+# Open bottleneck OB-001: Whole-tree contamination reserve
 
 The current architecture is
 
 ```text
 cheap step
   -> exact Bellman debt
-  -> slack consumption or imported prefix contamination
-  -> repayment parsing or exact-tail entry
-  -> finite terminal charge.
+  -> affine obstruction coverage growth or slack/prefix consumption
+  -> forced expensive step / exact-tail entry
+  -> branching repayment and finite tree charge.
 ```
 
-The unresolved theorem is
+The required theorem is treewise, not merely pathwise. The active target is a nonnegative reserve `Phi` in Bellman units satisfying a branching inequality of the form
 
 ```math
 \boxed{
-\text{every infinite continuation path has summable total weighted density.}
+W(S)
++
+\sum_{S'\in\operatorname{Child}(S)}
+\left(\mathfrak B(S')+\Phi(S')\right)
+\le
+\mathfrak B(S)+\Phi(S)
++
+\operatorname{controlled\ error}.
 }
 ```
 
-The exact factor-eight fan and factor-two domain from the recorded `S_10` are completely classified. Approved targets:
+Approved targets:
 
-1. classify the `314986450` genuinely new factor-four candidates from `S_10`;
-2. prove every path eventually enters an exact or near-exact basin;
-3. prove every non-basin scale word admits a debt-repayment parsing;
-4. extend the Bellman potential by a contamination reserve dominating all children;
-5. charge imported prefixes through difference export or overlap packing;
-6. construct a finite-state or spectral quotient of the pre-basin tree.
+1. classify stratified witnesses across the full `S_10` factor-four range by the `34` exact layer classes;
+2. trace witnesses to parent-layer words and ancestor origins in the two-scale recurrence;
+3. identify a small closed subsystem or monotone contraction of the uncovered-separation zero set;
+4. define a normalized affine-coverage reserve in units `P/L`;
+5. prove a branching Carleson/packing inequality for all retained children;
+6. charge imported prefixes through difference export or overlap packing.
 
 No current theorem closes this gap. The full Erdős problem remains unresolved.

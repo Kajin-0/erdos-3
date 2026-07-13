@@ -1,0 +1,19 @@
+verified: exact imported-overlap charge on every coordinated S1 schedule
+verified: overlap charge equals middle-fiber occurrence mass
+progression_labeled_schedules=1560
+minimum_overlap_charge=1/21
+minimum_schedule_count=120
+maximum_overlap_charge=433/273
+maximum_schedule_count=240
+minimum_schedule_catalog_sha256=d435520de8fec8c389ca14109bd0821075bcac4189e378b3294c1adc7a3b2103
+overlap_charge_distribution:
+  120 1/21
+  180 47/546
+  60 37/336
+  120 649/4368
+  180 22/21
+  390 593/546
+  240 5017/4368
+  30 65/42
+  240 433/273
+conclusion: every coordinated deletion schedule on S1 has imported recursive overlap charge at least 1/21.

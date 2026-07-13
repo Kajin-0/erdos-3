@@ -305,7 +305,7 @@ q_S(I_{10})=76583771,
 so the true closure margin is
 
 ```math
-76583776-76583771=\boxed5.
+76583776-76583771=\boxed{5}.
 ```
 
 This proves
@@ -428,37 +428,109 @@ For one complete lexicographic coordinated schedule it records:
 - terminal-recursive overlap;
 - exact occurrence, union, imported, novel, and duplicate masses.
 
-The exact regression frontier is:
+The certified transition frontier is:
 
 | parent | raw occurrences | exact state classes | duplicate classes | strict containments | partial overlaps |
 |---:|---:|---:|---:|---:|---:|
 | `S_1` | 5 | 4 | 1 | 1 | 0 |
 | `S_2` | 11 | 10 | 1 | 3 | 5 |
 | `S_3` | 25 | 21 | 3 | 23 | 15 |
+| `S_4` | 46 | 34 | 7 | 91 | 35 |
+| `S_5` | 68 | 51 | 11 | 145 | 88 |
 
 Terminal labels already present recursively are:
 
 ```text
 S1: 1
 S2: 1,61
-S3: 1,61,303.
+S3: 1,61,303
+S4: 1,61,303,1597
+S5: 1,61,303,1597,8195.
 ```
 
-The exporter is complete for the fixed policy at the tested parent. It deliberately emits the raw occurrence family **before** a retention quotient.
+The exporter is complete for the fixed policy at each tested parent. It deliberately emits the raw occurrence family **before** a retention quotient.
 
-**Primary reference:** `docs/simultaneous-deletion-transition-exporter.md`.
+**Primary references:**
+
+- `docs/simultaneous-deletion-transition-exporter.md`;
+- `docs/simultaneous-transition-frontier-s5.md`.
 
 ---
 
-## 10. Missing layer: retention and bounded reuse
+## 10. Exact local occurrence packing
+
+For raw recursive shell occurrences `C_i`, define
+
+```math
+m(u)=|\{i:u\in C_i\}|,
+\qquad
+M=\max_um(u).
+```
+
+Then
+
+```math
+\sum_iH(C_i)=\sum_u\frac{m(u)}u
+```
+
+and
+
+```math
+\sum_iH(C_i)
+\le
+M H\left(\bigcup_iC_i\right).
+```
+
+The certified maximum multiplicities are
+
+```text
+S1,S2,S3,S4,S5: 2,3,7,11,12.
+```
+
+The maximum labels at `S_3,S_4,S_5` are the incoming separation or twice that separation:
+
+```text
+S3: 303
+S4: 1597,3194
+S5: 8195,16390.
+```
+
+Worst-case multiplicity is therefore not stable even on the recorded path.
+
+The harmonic-average multiplicity
+
+```math
+\overline m_H
+=
+\frac{\sum_iH(C_i)}{H(\bigcup_iC_i)}
+```
+
+satisfies
+
+```text
+S1: <8/5
+S2: <11/10
+S3: <11/10
+S4: <9/8
+S5: <9/8.
+```
+
+Large multiplicity concentrates on large inherited separation labels, so local reciprocal-mass inflation remains modest. This does not bound cross-generation reuse.
+
+**Primary reference:** `docs/recursive-occurrence-multiplicity.md`.
+
+---
+
+## 11. Missing layer: retention and bounded reuse
 
 Exact duplicate states can be identified mechanically. They cannot automatically be discarded because different occurrences can carry different provenance and future histories.
 
-The raw `S_3` transition also has
+By `S_5`, the raw transition has
 
 ```text
-23 strict containment relations
-15 partial overlap relations.
+11 exact duplicate classes
+145 strict containment relations
+88 partial overlap relations.
 ```
 
 Neither exact-state quotienting nor maximal-set retention resolves those overlaps.
@@ -478,7 +550,7 @@ Only after this theorem may the raw payload be converted into the `children` arr
 
 ---
 
-## 11. Active theorem: scale-compensated whole-tree packing
+## 12. Active theorem: scale-compensated whole-tree packing
 
 The current target is
 
@@ -523,12 +595,12 @@ A pathwise estimate is insufficient.
 
 ---
 
-## 12. Approved next targets
+## 13. Approved next targets
 
-1. Define and test a retention quotient on the exact `S_1` through `S_3` overlap graphs.
+1. Define and test a retention quotient on the exact `S_1` through `S_5` overlap graphs.
 2. Keep provenance edges while merging exact numerical state classes.
 3. Introduce explicit label-reuse or overlap-capacity variables.
-4. Prove bounded reuse for imported fiber labels, or export repeated reuse into smaller difference fibers.
+4. Prove bounded reuse for inherited separation labels, or export repeated reuse into smaller difference fibers.
 5. Connect forced-fork output to the 34 affine obstruction classes and rectangle support.
 6. Combine target demand, completion deficit, and packing charge in the exact rational LP harness.
 7. Emit the smallest exact failing transition whenever a candidate convention is infeasible.
@@ -536,7 +608,7 @@ A pathwise estimate is insufficient.
 
 ---
 
-## 13. Superseded or false targets
+## 14. Superseded or false targets
 
 Do not use without materially new hypotheses:
 
@@ -551,11 +623,12 @@ Do not use without materially new hypotheses:
 9. treating `P*Psi` as a standalone stored Bellman potential;
 10. copying raw simultaneous occurrences directly into an LP child sum;
 11. merging provenance-distinct exact duplicates without a convention;
-12. the rejected depth-ten anchor reduction.
+12. assuming a uniform local maximum-overlap constant from the recorded data;
+13. the rejected depth-ten anchor reduction.
 
 ---
 
-## 14. Reproduction and navigation
+## 15. Reproduction and navigation
 
 Run the complete lightweight suite:
 
@@ -569,8 +642,9 @@ Key documents:
 - `docs/transport-interval-capacity.md`;
 - `docs/branching-reserve-lp.md`;
 - `docs/simultaneous-deletion-transition-exporter.md`;
+- `docs/simultaneous-transition-frontier-s5.md`;
+- `docs/recursive-occurrence-multiplicity.md`;
 - `docs/s1-deletion-dag-overlap-ledger.md`;
-- `docs/s1-all-coordinated-schedules.md`;
 - `docs/s2-zero-novelty-schedule.md`;
 - `docs/lexicographic-novelty-s1-s5.md`;
 - `docs/s1-schedule-overlap-floor.md`;

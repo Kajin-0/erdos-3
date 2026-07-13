@@ -146,4 +146,11 @@ run_check step5_policy_regeneration_weight \
   python3 "$EXACT_PYTHON" "$ROOT/src/verify_step5_policy_regeneration_weight.py" \
   "$WORK/step5_policy_regeneration_weight_certificate.txt"
 
-echo "verified: simultaneous transition, SCC, obstruction, regeneration, policy tradeoff, common cone, and regeneration-weight frontier through S7"
+run_check two_coordinate_policy_family \
+  bd16d379e78feadcd32efb349302874367183101a32c9178eb439bda576e6e31 \
+  "$ROOT/data/two_coordinate_policy_family_certificate_2026-07-13.txt" \
+  "$WORK/two_coordinate_policy_family_certificate.txt" \
+  python3 "$EXACT_PYTHON" "$ROOT/src/verify_two_coordinate_policy_family.py" \
+  "$WORK/two_coordinate_policy_family_certificate.txt"
+
+echo "verified: simultaneous transition, SCC, obstruction, regeneration, policy tradeoff, common cone, and two-coordinate policy frontier through S7"

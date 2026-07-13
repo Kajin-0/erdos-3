@@ -1,0 +1,28 @@
+FOUR-RATIO RECTANGLE TRANSPORT CLASSIFICATION
+
+normalized_words=65
+rectangle_outer_words=0011,0112,1100,2110
+
+k=1 rectangle_cancellation_pairs=8
+k=2 rectangle_cancellation_pairs=8
+k=3 rectangle_cancellation_pairs=4
+k=4 rectangle_cancellation_pairs=4
+k=5 rectangle_cancellation_pairs=0
+k=6 rectangle_cancellation_pairs=0
+k=7 rectangle_cancellation_pairs=0
+k=8 rectangle_cancellation_pairs=0
+
+selected canonical channels:
+plus k=1 lambda=0011 mu=1100 q_coeff=(0, 1, 0, 0) point_coeffs=[(1, 0, 1, 0), (1, 1, 1, 0), (1, 2, 1, 0), (1, 3, 1, 0)]
+plus k=2 lambda=0011 mu=2200 q_coeff=(0, 1, 0, 0) point_coeffs=[(1, 0, 2, 0), (1, 1, 2, 0), (1, 2, 2, 0), (1, 3, 2, 0)]
+plus k=3 lambda=0011 mu=1201 q_coeff=(0, 1, 1, 0) point_coeffs=[(1, 0, 1, 0), (1, 1, 2, 0), (1, 2, 3, 0), (1, 3, 4, 0)]
+plus k=4 lambda=0011 mu=0202 q_coeff=(0, 1, 2, 0) point_coeffs=[(1, 0, 0, 0), (1, 1, 2, 0), (1, 2, 4, 0), (1, 3, 6, 0)]
+minus k=1 lambda=0112 mu=0011 q_coeff=(0, 1, 1, -1) point_coeffs=[(1, 0, 0, 0), (1, 1, 1, -1), (1, 2, 2, -2), (1, 3, 3, -3)]
+minus k=2 lambda=0112 mu=0022 q_coeff=(0, 1, 2, -1) point_coeffs=[(1, 0, 0, 0), (1, 1, 2, -1), (1, 2, 4, -2), (1, 3, 6, -3)]
+minus k=3 lambda=0112 mu=1021 q_coeff=(0, 1, 2, -1) point_coeffs=[(1, 0, 1, 0), (1, 1, 3, -1), (1, 2, 5, -2), (1, 3, 7, -3)]
+minus k=4 lambda=0112 mu=2020 q_coeff=(0, 1, 2, -1) point_coeffs=[(1, 0, 2, 0), (1, 1, 4, -1), (1, 2, 6, -2), (1, 3, 8, -3)]
+
+window statement:
+If 0<U<S and B contains x,x+d,x+2d-U,x+3d-U with d>0,
+then every T=kS+U and T=kS-U, k=1,2,3,4, has a transported nontrivial 4-AP in G_T(G_S(B)).
+The four windows [kS-Umax,kS+Umax] overlap whenever Umax>=S/2.

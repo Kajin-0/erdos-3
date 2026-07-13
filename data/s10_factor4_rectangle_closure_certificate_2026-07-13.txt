@@ -1,0 +1,20 @@
+S10 FACTOR-FOUR CLOSURE LOGIC
+
+S=134217729
+Umax=76583776
+residual_interval=97474324,613454687
+rectangle_cancellation_counts=8,8,4,4,0,0,0,0
+windows:
+  k=1 57633953 210801505
+  k=2 191851682 345019234
+  k=3 326069411 479236963
+  k=4 460287140 613454692
+
+pure-layer U=0 witnesses:
+  k=1 layer_sumset=[0, 1, 2, 3, 4] AP_start=0 AP_step=1
+  k=2 layer_sumset=[0, 1, 2, 3, 4, 5, 6] AP_start=0 AP_step=1
+  k=3 layer_sumset=[0, 1, 2, 3, 4, 5, 6, 7, 8] AP_start=0 AP_step=1
+  k=4 layer_sumset=[0, 1, 2, 4, 5, 6, 8, 9, 10] AP_start=0 AP_step=2
+
+partition=33026376+137142200+177844250=348012826
+conclusion: if direct B9 rectangle support contains every 1<=U<=Umax, then every residual T is blocked; U=0 is blocked by pure layers; hence N_10_4=0.

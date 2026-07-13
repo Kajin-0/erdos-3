@@ -1,0 +1,59 @@
+TERMINAL-FIBER SCC QUOTIENT
+
+schema=terminal_fiber_scc_quotient/v1
+verified_depths=1,2,3,4,5,6,7
+S1_components=2
+S1_condensation_edges=1
+S1_cyclic_components=0
+S1_cyclic_members=none
+S1_internal_cyclic_edges=0
+S1_recycling_excess=0
+S1_quotient_sha256=c8f9afb431e903b54c3e41fc6795fe7334e448dbe4b5b8975bb6a1c14c135b69
+S2_components=5
+S2_condensation_edges=3
+S2_cyclic_components=0
+S2_cyclic_members=none
+S2_internal_cyclic_edges=0
+S2_recycling_excess=0
+S2_quotient_sha256=e81ffd1df5bec410d3e3dd96e84c136792313bbb4c42a89a1488b3bcc3c05f4f
+S3_components=9
+S3_condensation_edges=6
+S3_cyclic_components=1
+S3_cyclic_members=61,303
+S3_internal_cyclic_edges=2
+S3_recycling_excess=0
+S3_quotient_sha256=2d6b760230cac0e79c9212c510b1114e5504ab1805432b5210abce342c4aa28f
+S4_components=10
+S4_condensation_edges=15
+S4_cyclic_components=1
+S4_cyclic_members=61,303
+S4_internal_cyclic_edges=2
+S4_recycling_excess=0
+S4_quotient_sha256=818f65fa27fd60809d6181bb5b1de7dc7873fee09d02cb8b489232c9b792245b
+S5_components=11
+S5_condensation_edges=25
+S5_cyclic_components=1
+S5_cyclic_members=61,303
+S5_internal_cyclic_edges=2
+S5_recycling_excess=0
+S5_quotient_sha256=5cdc05d87dd4fe9d0717012288a7d5859bda9273d51dc691758349c87f23a58c
+S6_components=12
+S6_condensation_edges=36
+S6_cyclic_components=1
+S6_cyclic_members=61,303
+S6_internal_cyclic_edges=2
+S6_recycling_excess=0
+S6_quotient_sha256=9738e822444c9776c36523d8bced55ca677eeeb5635a0520eacb069f08f111d3
+S7_components=19
+S7_condensation_edges=26
+S7_cyclic_components=1
+S7_cyclic_members=1,5,61,303,1597,8195,323640
+S7_internal_cyclic_edges=24
+S7_recycling_excess=43727503229099/1043823972523464
+S7_quotient_sha256=0249bce4a12db2e2faa40873d25cce9741fba7c5f2a2c94f16b42b1873bc7804
+
+S7_internal_target_to_vertex_capacity=6588286581562338/6369649065416843
+conclusion: SCC condensation removes label-level cycles but not internal recycling.
+The unit harmonic capacity is exactly balanced on the {61,303} cycle through S6
+and fails at S7 by positive recycling excess 43727503229099/1043823972523464.
+A valid SCC state therefore needs internal capacity or obstruction export, not only vertex mass.

@@ -4,13 +4,13 @@
 
 This is the authoritative overview of the active program for Erdős Problem #3:
 
-> If `A subseteq N` and `sum_{n in A}1/n = infinity`, must `A` contain arbitrarily long arithmetic progressions?
+> If `A subseteq N` and `sum_{n in A} 1/n = infinity`, must `A` contain arbitrarily long arithmetic progressions?
 
 The full problem remains open. This repository studies the four-term case. Claims below are proved internally or computationally certified as stated, but await independent expert review.
 
 ---
 
-## 1. Foundational recursion
+## 1. Foundational reduction and recursive genealogy
 
 For
 
@@ -44,17 +44,17 @@ H(Q)+\sum_qH(\Xi_q)+H(\mathcal B(D))
 2H(D)-\frac{r_3(N)}N-\frac1N.
 ```
 
-The genealogy is binary. Every child must be resolved into standard dyadic shells. Every parent creates at most two retained outputs, each at most half its label, so for `p>=1`,
+Every retained output must be resolved into standard dyadic shells. The genealogy is binary, and for `p>=1`,
 
 ```math
 \sum_{u\text{ output of }a}u^p\le2^{1-p}a^p.
 ```
 
-Center, root-anchor, predecessor-anchor, and antichain decompositions compress repeated labels. These tools control positive moments and local multiplicity, but not reciprocal mass by themselves.
+Center, root-anchor, predecessor-anchor, and antichain decompositions compress repeated labels. These tools control positive moments and local multiplicity, but reciprocal mass requires a genuinely treewise packing or potential theorem.
 
 ---
 
-## 2. Sharp exact model
+## 2. Sharp exact benchmark
 
 The aligned-diamond recursion has
 
@@ -67,7 +67,7 @@ P_h=2^h,
 so
 
 ```math
-P_h\asymp|S_h|^{\log_3 2}.
+P_h\asymp |S_h|^{\log_3 2}.
 ```
 
 There is a computer-certified infinite exact scale-eight family with
@@ -78,7 +78,7 @@ L_h=8^{h+1},
 P_h=\frac12L_h^{1/3}.
 ```
 
-A 34-state automaton and an exact `17238`-state carry search certify that its union contains no nontrivial four-term progression.
+A finite automaton and exact carry search certify that its union contains no nontrivial four-term progression.
 
 Inside the exact standard-dyadic equal-translate model,
 
@@ -96,89 +96,31 @@ and
 \sum_hP_h\alpha_h\le4C_0.
 ```
 
-The exact model is sharply classified.
+Thus the exact uncontaminated model is sharply classified and summable.
 
 ---
 
 ## 3. Contaminated path dependence
 
-A certified contaminated chain has scale factors
+A certified contaminated chain disproves universal local contraction. Its scale factors begin
 
 ```math
-\boxed{4,8,4,4}
+4,8,4,4,
 ```
 
-through `S_5`. With
+and, with
 
 ```math
 W_h=P_h^{\mathrm{cert}}\frac{|S_h|}{L_h},
 ```
 
-```math
-W_1=\frac38,
-\qquad
-W_5=\frac{273}{256},
-\qquad
-\frac{W_5}{W_1}=\frac{91}{32}.
-```
-
-Local contraction and contraction over every four-generation window are false.
-
-The alternative exact recovery
+one has
 
 ```math
-R_5=93476
+\frac{W_5}{W_1}=\frac{91}{32}>1.
 ```
 
-admits the factor-four descendant
-
-```math
-R_6=230164,
-```
-
-giving
-
-```math
-\boxed{4,8,4,4,8,4}
-```
-
-through `S_7`, with
-
-```math
-\frac{W_7}{W_5}=\frac{205}{182}>1.
-```
-
-Universal two-generation recovery and contraction over every six-generation window are false. Recovery is path-dependent.
-
----
-
-## 4. Recorded branch through `S_10`
-
-The recorded states `S_7`, `S_8`, and `S_9` satisfy
-
-```math
-N_{h,2}=N_{h,4}=0.
-```
-
-Their factor-four layer-disjoint domains are exhausted by completion, `1001`, and equal-difference `0011` witnesses:
-
-```text
-S7:      359419
-S8:     4190292
-S9:    39459384
-```
-
-The first valid exact continuations are
-
-```math
-R_7=2097164,
-\qquad
-R_8=16777217,
-\qquad
-R_9=134217729.
-```
-
-The finite scale sequence is
+The chain extends through the recorded depth-ten state with scale word
 
 ```math
 \boxed{4,8,4,4,8,4,8,8,8.}
@@ -194,111 +136,57 @@ L_{10}=536870912,
 P_{10}=1024,
 ```
 
+and
+
 ```math
-W_{10}=\frac{265719}{524288},
+W_{10}=\frac{265719}{524288}.
+```
+
+Universal one-step contraction, contraction over every four- or six-generation window, and universal two-generation recovery are false. Recovery is path-dependent.
+
+The recorded states satisfy
+
+```math
+N_{7,2}=N_{7,4}=0,
+```
+
+```math
+N_{8,2}=N_{8,4}=0,
 ```
 
 and
 
 ```math
-\frac{W_{10}}{W_5}=\frac{88573}{186368}\approx0.475259.
+N_{9,2}=N_{9,4}=0.
 ```
+
+Their finite domains are exhausted by completion, anchor, and equal-difference rectangle witnesses.
 
 ---
 
-## 5. Exact-tail layer theorems
+## 4. Exact factor-eight fan and Bellman accounting
 
-For the certified exact-tail shell geometries, every new four-term progression in three translates comes from either:
-
-1. a three-term progression completed at the separation `R`; or
-2. the half-separation point `R/2` lying in the state.
-
-For `R=2L+k`, child completion targets descend through the unique layer pattern `012`. The scheduled target `4k` descends exactly to the preceding separation `2L+k`.
-
-These layer statements were verified by exact rational vertex enumeration in all entry, invariant, repair, and full-fitting regions used below.
-
----
-
-## 6. Complete exact factor-eight fan from `S_10`
-
-Write every fitting exact separation as
-
-```math
-R=2L_{10}+k,
-\qquad
-1\le k\le613454687.
-```
-
-There are `408969792` sponsor-compatible positive offsets. The complete first-step obstruction split is
-
-```text
-completion-blocked       54999
-half-separation-blocked  59034
-overlap                       0
-```
-
-so
+Every valid positive exact factor-eight child of `S_10` has a certified infinite exact continuation. The complete fan contains
 
 ```math
 \boxed{408855759}
 ```
 
-offsets give valid exact factor-eight children.
-
-The unmodified schedule
-
-```math
-L_{n+1}=8L_n,
-\qquad
-k_{n+1}=4k_n
-```
-
-already gives infinite exact tails for `408767151` valid children. The remaining valid children are repaired as follows:
-
-```text
-88606 second-step failures:  4k  -> 4k+1
-2 third-step failures:       16k -> 16k+1
-```
-
-Therefore
+valid children. The unmodified schedule handles `408767151`; the remaining `88608` are covered by finite `+1` repairs. Every tail has charge
 
 ```math
 \boxed{
-408767151+88606+2
-=
-408855759.
+\sum_{n\ge0}W_{10+n}=\frac{33215}{16384}.
 }
 ```
-
-Every valid exact factor-eight child of `S_10` has an explicit infinite exact four-term-progression-free continuation. Every tail has total charge
-
-```math
-\boxed{
-\sum_{n\ge0}W_{10+n}
-=
-\frac{33215}{16384}.
-}
-```
-
-**Primary references:**
-
-- `docs/complete-exact-child-tail-fan.md`;
-- `src/verify_complete_exact_child_tail_fan.py`;
-- `data/complete_exact_child_tail_fan_certificate_2026-07-12.txt`.
-
----
-
-## 7. Bellman potential and debt
 
 For constant exact scale factor `c>6`, the affine future-cost function is
 
 ```math
-\boxed{
 \mathfrak B_c(N,P,L)
 =
 \frac{cP}{(c-6)L}
 \left(N+\frac{6}{c-2}\right).
-}
 ```
 
 At `c=8`,
@@ -307,7 +195,7 @@ At `c=8`,
 \mathfrak B_8=\frac{4P(N+1)}L.
 ```
 
-For any disjoint three-translate step with scale factor `c`,
+For any disjoint three-translate step,
 
 ```math
 \boxed{
@@ -319,134 +207,11 @@ For any disjoint three-translate step with scale factor `c`,
 }
 ```
 
-Factors `2` and `4` create debt, factor `8` is Bellman-neutral, and factors at least `16` create surplus.
-
-A path whose scale word can be parsed into blocks
-
-```text
-[8 or larger]
-[one 4 plus two 8-equivalents]
-[one 2 plus four 8-equivalents]
-```
-
-has summable weighted density. The worst block-boundary contraction is
-
-```math
-\frac{2551}{2560}<1.
-```
-
-Universal geometric realizability of this parsing remains open. The Bellman identity is an accounting theorem; it does not by itself explain why cheap debt must be repaid.
+Factors `2` and `4` create Bellman debt, factor `8` is neutral, and factors at least `16` create surplus. This identity is accounting; the missing global theorem must explain why arithmetic contamination forces repayment.
 
 ---
 
-## 8. Cheap-step geometry
-
-For top slack
-
-```math
-T=2L-\max S,
-```
-
-a step with scale factor `c` and separation `R` satisfies
-
-```math
-\boxed{T'=T+(c-2)L-2R.}
-```
-
-Every cheap Bellman debt therefore carries a geometric certificate: strict slack consumption or imported prefix contamination. The missing theorem must convert this geometry and the associated arithmetic coverage into a branching-compatible reserve.
-
----
-
-## 9. Complete factor-two exclusion from `S_10`
-
-The exact depth-ten construction contains a translated anchor copy of the preceding state:
-
-```math
-\boxed{
-L_{10}+(\{0\}\cup S_9)
-\subseteq
-S_{10}.
-}
-```
-
-Therefore, for every separation `R`,
-
-```math
-L_{10}+G_9(R)\subseteq G_{10}(R),
-```
-
-where
-
-```math
-G_h(R)=(\{0\}\cup S_h)+\{0,R,2R\}.
-```
-
-The factor-four fit endpoint from `S_9` is `76583776`, while the factor-two fit endpoint from `S_10` is `76583775`. Hence every sponsor-compatible layer-disjoint factor-two candidate from `S_10` lies in the already exhausted factor-four domain of `S_9`. Since
-
-```math
-N_{9,4}=0,
-```
-
-every such progression lifts by translation into the `S_10` candidate. Thus
-
-```math
-\boxed{N_{10,2}=0.}
-```
-
-**Primary references:**
-
-- `docs/depth-ten-factor-two-inheritance-exclusion.md`;
-- `src/verify_depth10_factor2_inheritance.py`;
-- `data/depth10_factor2_inheritance_certificate_2026-07-12.txt`.
-
----
-
-## 10. Factor-four `S_10` domain: finite evidence, not the active theorem
-
-The complete factor-four domain certificate gives
-
-```text
-maximum R:            613454687
-sponsor-compatible:   408969792
-layer-disjoint:       348012826
-FNV-64:               ae1d9e1ec77b2dfb
-```
-
-The inherited interval `R<=76583775` contains exactly `33026376` layer-disjoint candidates and is excluded by the factor-two inheritance theorem. Therefore the genuinely new factor-four domain has
-
-```math
-\boxed{314986450}
-```
-
-candidates.
-
-The first `10000` candidates in this new domain have explicit deterministic four-point witnesses. The certified prefix runs from
-
-```text
-R = 76583927
-through
-R = 76697408
-```
-
-and leaves at most
-
-```math
-314976450
-```
-
-unclassified candidates. This is a finite prefix certificate only. It does not prove `N_10,4=0` and does not validate the rejected bulk anchor reduction.
-
-Sequential prefix certification is now deprioritized. The existing first-`10000` suite is retained as a regression test and theorem-discovery dataset.
-
-**Primary references:**
-
-- `docs/depth-ten-factor-four-first10000.md`;
-- `src/run_verify_depth10_factor4_first10000.sh`;
-- `docs/depth-ten-factor-four-exclusion-audit.md`.
-
----
-
-## 11. Exact state-independent obstruction coverage
+## 5. Exact state-independent obstruction spectrum
 
 For
 
@@ -454,7 +219,7 @@ For
 G_R(B)=B\cup(B+R)\cup(B+2R),
 ```
 
-write a potential progression as
+write a possible progression as
 
 ```math
 z_i=b_i+\lambda_iR,
@@ -462,19 +227,15 @@ z_i=b_i+\lambda_iR,
 \lambda_i\in\{0,1,2\}.
 ```
 
-After removing global layer shifts and quotienting by reversal, the `80` nonconstant raw layer words reduce to exactly
+After global layer normalization and reversal, the `80` nonconstant layer words reduce to exactly
 
 ```math
 \boxed{34}
 ```
 
-obstruction classes: `30` reversal pairs and the four self-reversing classes
+obstruction classes.
 
-```text
-0110  0220  1001  2002.
-```
-
-Define the exact signature
+Define
 
 ```math
 r_\lambda=\lambda_1-\lambda_0,
@@ -488,27 +249,13 @@ a_\lambda=\lambda_0-2\lambda_1+\lambda_2,
 b_\lambda=\lambda_1-2\lambda_2+\lambda_3.
 ```
 
-The triple `(r,a,b)` uniquely reconstructs the normalized layer word. A class occurs at separation `R` exactly when there are `x,d` such that
-
-```math
-x,
-\quad x+d,
-\quad x+2d-aR,
-\quad x+3d-(2a+b)R
-```
-
-belong to `B`, with
-
-```math
-d+rR\ne0.
-```
-
-Define the affine-incidence spectrum
+The triple `(r,a,b)` uniquely reconstructs the normalized layer word. Define
 
 ```math
 \mathcal F_B(A,C;Q)
 =
-\#\{(x,d):x,x+d,x+2d-A,x+3d-(2A+C)\in B,
+\#\{(x,d):
+ x,x+d,x+2d-A,x+3d-(2A+C)\in B,
 \ d+Q\ne0\}.
 ```
 
@@ -520,13 +267,7 @@ Then
 \mathcal F_B(a_\lambda R,b_\lambda R;r_\lambda R).
 ```
 
-For the `0011` class this factors through pair-start sets
-
-```math
-P_d(B)=\{x\in B:x+d\in B\},
-```
-
-with exact recurrence
+The pair-start fibers satisfy
 
 ```math
 \boxed{
@@ -537,7 +278,7 @@ P_d(G_S(B))
 }
 ```
 
-More generally, if `B'=G_S(B)` and a new separation `T` is tested, the labeled class coverage obeys
+The full labeled two-scale recurrence is
 
 ```math
 \boxed{
@@ -552,7 +293,7 @@ More generally, if `B'=G_S(B)` and a new separation `T` is tested, the labeled c
 }
 ```
 
-This is the exact state-independent obstruction-coverage recurrence. It corrects the insufficient one-scalar third-difference formulation: a four-term progression requires two second-difference constraints.
+This is the state-independent arithmetic framework for contamination growth.
 
 **Primary references:**
 
@@ -562,11 +303,209 @@ This is the exact state-independent obstruction-coverage recurrence. It corrects
 
 ---
 
-## 12. Active target: whole-tree contamination reserve
+## 6. Complete factor-two exclusion from `S_10`
 
-A pathwise estimate alone is not enough. Exponentially many paths can each have finite charge while the full recursive tree has divergent total mass. The required theorem must control the branching genealogy after deduplication or packing.
+The depth-ten construction contains
 
-The active target is a nonnegative reserve `Phi` in Bellman units such that a branching transition satisfies an inequality of the form
+```math
+L_{10}+(\{0\}\cup S_9)\subseteq S_{10}.
+```
+
+Therefore
+
+```math
+L_{10}+G_9(R)\subseteq G_{10}(R).
+```
+
+The factor-four fit endpoint from `S_9` contains the complete factor-two fit range from `S_10`. Since
+
+```math
+N_{9,4}=0,
+```
+
+one obtains
+
+```math
+\boxed{N_{10,2}=0.}
+```
+
+This excludes all
+
+```math
+33026376
+```
+
+layer-disjoint factor-two candidates and also supplies the inherited lower part of the factor-four exclusion.
+
+---
+
+## 7. Complete factor-four exclusion from `S_10`
+
+The complete factor-four layer-disjoint domain contains
+
+```math
+348012826
+```
+
+candidates. It splits exactly as
+
+```math
+\boxed{
+33026376
++
+137142200
++
+177844250
+=
+348012826.
+}
+```
+
+### 7.1 Inherited interval
+
+The first `33026376` candidates are excluded by the translated `S_9` theorem above.
+
+### 7.2 Lifted completion support
+
+The certified depth-nine completion geometry has
+
+```text
+13923661 signed completion coordinates
+71129286 completion-to-base differences.
+```
+
+Lifting these objects through the three embedded depth-nine copies gives
+
+```text
+354838701 lifted completion-to-base differences.
+```
+
+This removes
+
+```math
+137142200
+```
+
+additional candidates. The exact residual has
+
+```math
+\boxed{177844250}
+```
+
+members, ranging from `97474324` through `613454687`, with FNV-64
+
+```text
+00369694f2d70526.
+```
+
+### 7.3 Complete direct rectangle support of `B_9`
+
+Let
+
+```math
+B_9=\{0\}\cup S_9.
+```
+
+The exact bounded-memory pair-fiber computation proves
+
+```math
+\boxed{
+\mathcal F_{B_9}(U,-U;0)>0
+\quad
+\text{for every }1\le U\le76583776.
+}
+```
+
+The proof consists of:
+
+```text
+76581484 structural support values from exact count bands;
+2285 deterministic explicit terminal witnesses;
+7 stored exact large-fiber witnesses.
+```
+
+Hence
+
+```math
+76581484+2285+7=76583776.
+```
+
+### 7.4 Four-ratio transport
+
+A direct rectangle at effective separation `U` transports through one three-translate replication at precisely the integer ratios
+
+```math
+\boxed{k=1,2,3,4.}
+```
+
+For each such `k`, both
+
+```math
+T=kS+U
+```
+
+and
+
+```math
+T=kS-U
+```
+
+produce a nontrivial four-term progression, where
+
+```math
+S=R_9=134217729.
+```
+
+With
+
+```math
+U_{\max}=76583776,
+```
+
+the four overlapping windows cover the complete residual interval. The boundary case `U=0` is blocked by a pure layer-index progression in
+
+```math
+\{0,1,2\}+k\{0,1,2\}.
+```
+
+Therefore every residual candidate is excluded, and
+
+```math
+\boxed{N_{10,4}=0.}
+```
+
+Combining the two cheap factors gives the new exact frontier:
+
+```math
+\boxed{N_{10,2}=N_{10,4}=0.}
+```
+
+**Primary references:**
+
+- `docs/complete-depth-ten-factor-four-exclusion.md`;
+- `src/verify_b9_direct_rectangle_support.cpp`;
+- `src/verify_four_ratio_rectangle_transport.py`;
+- `src/verify_s10_factor4_rectangle_closure.py`;
+- `src/run_verify_s10_factor4_rectangle_closure.sh`;
+- `data/b9_direct_rectangle_support_certificate_2026-07-13.txt`.
+
+---
+
+## 8. What the depth-ten theorem does and does not prove
+
+The result proves that the recorded state `S_10` has no admissible scale-factor `2` or `4` continuation. It replaces the invalid exploratory anchor reduction with actual structural and explicit witnesses.
+
+It does **not** prove that every arbitrary deletion-DAG state reaches `S_10`, has the same direct rectangle coverage, or enters the exact factor-eight fan. A state-specific barrier can coexist with an uncontrolled branching family of other states.
+
+The full Erdős problem therefore remains open.
+
+---
+
+## 9. Active theorem: whole-tree contamination reserve
+
+A pathwise estimate is insufficient: exponentially many paths may each have finite charge while the full tree diverges.
+
+The active target is a nonnegative reserve `Phi` in Bellman units satisfying a branching inequality of the form
 
 ```math
 \boxed{
@@ -581,30 +520,52 @@ W(S)
 }
 ```
 
-The reserve should combine normalized obstruction coverage, remaining dyadic slack, imported prefixes, and overlap packing. The conceptual mechanism is
+The reserve should combine:
+
+1. normalized affine obstruction coverage;
+2. remaining dyadic slack;
+3. imported-prefix mass;
+4. overlap and deduplication packing.
+
+The concrete repayment mechanism now visible at depth ten is
 
 ```text
 cheap replication
-    -> Bellman debt
-    -> growth of affine obstruction coverage or loss of slack
-    -> forced expensive replication / exact-tail entry
-    -> treewise repayment.
+    -> completion and pair-fiber contamination
+    -> dense rectangle support
+    -> complete elimination of future cheap replication.
 ```
 
-Approved next targets:
+The next deep theorem must make this mechanism quantitative and stable across arbitrary retained children.
 
-1. classify stratified witnesses across the full `S_10` factor-four range by the `34` exact layer classes;
-2. trace each witness to parent-layer word `mu` and ancestor origin in the two-scale recurrence;
-3. identify a small closed subsystem or monotone contraction of the uncovered-separation zero set;
-4. define a normalized affine-coverage reserve in units `P/L`;
-5. prove a branching Carleson/packing inequality for all retained children;
-6. charge imported prefixes through difference export or overlap packing.
+---
 
-Deprioritized routes:
+## 10. Approved next targets
 
-1. additional contiguous `S_10` prefix certification;
-2. extending one distinguished branch without testing a recurrence or reserve;
-3. more exact-tail counting;
-4. local constants without a telescoping or branching consequence.
+1. Define a normalized rectangle/completion coverage reserve in units `P/L`.
+2. Derive one-sided growth or zero-set contraction under contaminated three-translate replication.
+3. Prove that imported prefix copies contribute either new coverage or pack with bounded overlap.
+4. Establish a branching Carleson inequality for all retained children.
+5. Construct a finite-state or spectral quotient of the pre-basin continuation tree.
+6. Determine which structural hypotheses behind the complete `B_9` rectangle interval persist for a class of states, rather than for one numerical state.
 
-No current theorem closes the reserve inequality. The full Erdős problem remains unresolved.
+---
+
+## 11. Superseded, false, or deprioritized targets
+
+Do not use without new hypotheses:
+
+1. bounded or polylogarithmic identical-history persistence;
+2. cardinality-only subpower bounds below exponent `log_3 2`;
+3. universal one-step `3/4` contraction for contaminated backbones;
+4. universal strict contraction at every non-exact step;
+5. contraction over every four- or six-step window;
+6. universal two-generation recovery after an exact factor-eight step;
+7. extrapolating one distinguished path to the whole continuation tree;
+8. treating one or many exact tails as a whole-tree theorem;
+9. using one third-difference equation as a complete four-term-progression test;
+10. treating pathwise summability as sufficient for the branching deletion tree;
+11. the rejected depth-ten anchor reduction;
+12. additional contiguous `S_10` candidate-prefix certification.
+
+The complete `S_10` cheap-extension theorem is now a finished state-specific component. The unresolved problem is to convert arithmetic contamination into a universal treewise reserve and packing theorem.

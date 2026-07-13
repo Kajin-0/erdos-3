@@ -69,15 +69,18 @@ Statuses marked **exact finite** are computational statements for recorded objec
 | CL-050 | The `S_7` cyclic component emits `6020` distinct novel labels. Even after numerical deduplication, total emitted support has output/input harmonic ratio greater than `7/5`; raw output union is additional recursive load, not repayment. | Exact fixed-policy finite theorem. |
 | CL-051 | Across `62` exact shell children sourced by the `S_7` cyclic component, novel labels create local collision/completion invalidity for `140352/950202` factor-two and `398745/4986696` factor-four replay candidates. Most candidates remain. | Exact fixed-policy finite theorem. |
 | CL-052 | On the `33` exact cyclic-source child states of size at most `50`, complete three-translate four-AP testing leaves `15160/21724` factor-two and `75723/87829` factor-four candidates valid. Deterministic first witnesses span `33` of the `34` nonconstant affine classes; class `22` is absent only from the first-witness histogram. | Exact fixed-policy finite theorem. |
+| CL-053 | The novel child `{16,21,26}` at scale `16` is the unique factor-two/factor-four exact return from the `62` cyclic-source states to any canonical `S_1,...,S_10`: factor four with `R=1` gives `S_1` exactly. It is disjoint from all other `126` recursive shells and all terminal outputs of the raw `S_7` transition. | Exact fixed-policy path, uniqueness, and isolation theorem. |
 
-Primary references for CL-050 through CL-052:
+Primary references for CL-050 through CL-053:
 
 - `docs/s7-cyclic-scc-output-load.md`;
 - `docs/s7-cyclic-scc-local-completion-credit.md`;
 - `docs/s7-cyclic-scc-small-state-affine-frontier.md`;
+- `docs/s7-cyclic-output-seed-regeneration.md`;
 - `src/verify_s7_scc_output_load.py`;
 - `src/verify_s7_scc_local_completion_credit.py`;
-- `src/verify_s7_scc_small_state_affine_frontier.py`.
+- `src/verify_s7_scc_small_state_affine_frontier.py`;
+- `src/verify_s7_scc_seed_regeneration.py`.
 
 ---
 
@@ -105,14 +108,16 @@ Do not use without materially new hypotheses:
 18. treating layer collisions and same-layer completions as sufficient repayment for the `S_7` cyclic output;
 19. treating complete one-generation affine testing as sufficient repayment on small cyclic-output children;
 20. interpreting absence from the deterministic first-witness histogram as absence from all witnesses;
-21. random sampling as a finite certificate;
-22. the rejected depth-ten anchor reduction.
+21. treating all small surviving states as negligible terminal errors;
+22. inferring whole-tree divergence from the isolated regenerative path;
+23. random sampling as a finite certificate;
+24. the rejected depth-ten anchor reduction.
 
 ---
 
-# Open bottleneck OB-001: Multi-generation residual packing
+# Open bottleneck OB-001: Regenerative-child packing
 
-The state-specific cheap-extension problem at `S_10` is closed. Raw simultaneous transition generation is certified through `S_7`. Novel labels generate genuine local and mixed-layer affine obstruction credit, but complete one-generation testing still leaves a large valid residual on the exact small-state frontier.
+The state-specific cheap-extension problem at `S_10` is closed. Raw simultaneous transition generation is certified through `S_7`. Novel labels generate genuine local and mixed-layer obstruction credit, but complete one-generation testing leaves a large valid residual. One residual is an isolated child that restarts the canonical contaminated chain exactly.
 
 The unresolved theorem must control:
 
@@ -122,8 +127,9 @@ The unresolved theorem must control:
 4. cyclic SCC internal recycling and spectral growth;
 5. imported-label matching across generations;
 6. repeated use of inherited, compound, and novel labels;
-7. surviving factor-two and factor-four extensions, beginning with `{5}` and `{16,21,26}` at `R=1`;
-8. conversion of descendant completion, rectangle, or affine growth into bounded reusable Bellman credit.
+7. regenerative and near-regenerative children, even when numerically isolated;
+8. restarted-chain charge and its provenance multiplicity;
+9. conversion of descendant completion, rectangle, or affine growth into bounded reusable Bellman credit.
 
 The target remains
 
@@ -141,4 +147,4 @@ The target remains
 \operatorname{controlled\ error}.
 ```
 
-The next finite experiment should follow the smallest exact survivors for one additional coordinated generation, retaining provenance and measuring completion radius, rectangle support, affine zero-set contraction, and renewed cheap-extension capacity. No current theorem closes this gap.
+The next finite experiment should classify near-regenerations among the exact residual states and compute a provenance-aware packing bound for restarted canonical-chain charge. No current theorem closes this gap.

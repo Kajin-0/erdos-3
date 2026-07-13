@@ -1,0 +1,8 @@
+verified: canonical lexicographic coordinated policy on S1 through S5
+verified: exact middle multiplicity identities
+verified: positive novel support on S2 through S5
+S1:state_size=12,deletions=6,residual=6,steps=2,fiber_occ=4,fiber_union=4,imported=4,novel=0,novel_mass_lower=0,schedule_sha256=92a818934083b57e8533e2f84f9d0f62c0babc7c5be78dbf49eac6989750d842,novel_sha256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+S2:state_size=39,deletions=26,residual=13,steps=5,fiber_occ=21,fiber_union=18,imported=10,novel=8,novel_mass_lower=1193/1000,schedule_sha256=82213485f7b2bd8167e69a9b184b9459ccb151d2b0cba6ba2a9ece8f336aae9c,novel_sha256=50a278a066daaa2e53c4a8b0c11ce265d044d8297b13844d9c43baa709814e4e
+S3:state_size=120,deletions=92,residual=28,steps=10,fiber_occ=82,fiber_union=59,imported=2,novel=57,novel_mass_lower=7/5,schedule_sha256=05f1b062a2d2be6b76d979b302162b7bb1b19081139fa7ebf4429784254c18b6,novel_sha256=4367b775eec92f8cbabe8102d2954b6d9fed66d663b19eb7957309ed3114e226
+S4:state_size=363,deletions=305,residual=58,steps=11,fiber_occ=294,fiber_union=206,imported=33,novel=173,novel_mass_lower=29/20,schedule_sha256=03676957d8761f10afd4f65c038b48cd91bd24873c6d1d647ef04612753e22a1,novel_sha256=1eb2bf37bdedfc02c87d5a67d234389e8db6c3fe768f7e6514e592373f073524
+S5:state_size=1092,deletions=974,residual=118,steps=12,fiber_occ=962,fiber_union=678,imported=76,novel=602,novel_mass_lower=149/100,schedule_sha256=b88a5f339950492202de02bc3f0c55ecb16378301a7e2aee0e72821b68d8e694,novel_sha256=624f801abcef4310b206057a830dc90c63551f1b8f7b5137b49c0d23ff64121f

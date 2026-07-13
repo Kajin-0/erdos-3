@@ -86,7 +86,7 @@ P_h\alpha_h\le C_0(3/4)^h,
 \sum_hP_h\alpha_h\le4C_0.
 ```
 
-Thus the uncontaminated model is summable.
+Thus the uncontaminated equal-translate model is summable.
 
 A certified contaminated genealogy has scale word
 
@@ -132,7 +132,8 @@ The positive cheap-step debt for `c<8` is
 ```math
 \Delta_c
 =
-\frac{P(3N+4)}L\left(\frac8c-1\right).
+\frac{P(3N+4)}L
+\left(\frac8c-1\right).
 ```
 
 Factors `2` and `4` create debt, factor `8` is neutral, and larger factors create surplus.
@@ -166,7 +167,9 @@ and
 ```math
 \mathcal F_B(A,C;Q)
 =
-\#\{(x,d):x,x+d,x+2d-A,x+3d-(2A+C)\in B,\ d+Q\ne0\},
+\#\{(x,d):
+ x,x+d,x+2d-A,x+3d-(2A+C)\in B,
+ d+Q\ne0\},
 ```
 
 one has
@@ -254,7 +257,7 @@ Positive lower bounds are certified through `S_7`, but
 F(S)=P\Psi(S)
 ```
 
-is not a standalone Bellman potential: `F(S_1)-F(S_2)<0` while the factor-four debt is positive.
+is not a standalone Bellman potential: `F(S_1)-F(S_2)<0` while factor-four debt is positive.
 
 ---
 
@@ -274,19 +277,7 @@ The fixed-policy exporter records the complete raw simultaneous occurrence famil
 
 The payload is before any retention quotient and is not a Bellman child list.
 
----
-
-## 7. Local occurrence packing
-
-For raw recursive occurrences `C_i`, define
-
-```math
-m(u)=|\{i:u\in C_i\}|,
-\qquad
-M=\max_um(u).
-```
-
-Then
+For raw recursive occurrences `C_i`,
 
 ```math
 \sum_iH(C_i)=\sum_u\frac{m(u)}u
@@ -294,17 +285,17 @@ Then
 M H\left(\bigcup_iC_i\right).
 ```
 
-The certified maxima through `S_7` are
+Maximum local multiplicities through `S_7` are
 
 ```text
 2,3,7,11,12,13,16.
 ```
 
-The harmonic-average multiplicity remains below the certified constants `8/5`, `11/10`, or `9/8`. Worst-case multiplicity is unstable; local harmonic control does not imply bounded cross-generation reuse.
+The harmonic-average multiplicity remains small, but this does not imply bounded cross-generation reuse.
 
 ---
 
-## 8. Terminal-fiber incidence and SCC quotient
+## 7. Cyclic terminal-fiber obstruction
 
 Draw an edge
 
@@ -314,21 +305,21 @@ q\longrightarrow u
 
 when `q` and `u` are terminal steps and `u in Xi_q`.
 
-The graph contains the cycle
+The graph contains
 
 ```math
 61\longleftrightarrow303
 ```
 
-at `S_3`, persisting through `S_6`. At `S_7`, the cyclic component becomes
+at `S_3`. At `S_7`, the cyclic component is
 
 ```math
-\boxed{\{1,5,61,303,1597,8195,323640\}}.
+C=\{1,5,61,303,1597,8195,323640\}.
 ```
 
-Thus no strict decreasing rank of terminal labels can orient every recursive incidence.
+Thus no strict decreasing terminal-label rank can orient every recursive incidence.
 
-Collapsing strongly connected components gives an acyclic condensation graph. For a component `C`, define
+For component `C`, define
 
 ```math
 V(C)=\sum_{u\in C}\frac1u
@@ -340,7 +331,7 @@ and
 T(C)=\sum_{(q,u)\text{ internal edge}}\frac1u.
 ```
 
-For `C={61,303}` through `S_6`, `T(C)=V(C)`. At `S_7`,
+At `S_7`,
 
 ```math
 T(C)-V(C)
@@ -348,30 +339,9 @@ T(C)-V(C)
 \frac{43727503229099}{1043823972523464}>0.
 ```
 
-Therefore harmonic vertex mass alone is not sufficient component capacity.
+Unit harmonic vertex mass is not sufficient component capacity.
 
----
-
-## 9. Exact spectral-growth obstruction
-
-Let `A` be the internal adjacency matrix of a cyclic component. A positive linear capacity vector satisfying
-
-```math
-Aw\le\lambda w
-```
-
-requires `lambda` at least the Perron spectral radius.
-
-For the two-label component through `S_6`,
-
-```math
-A=
-\begin{pmatrix}0&1\\1&0\end{pmatrix},
-\qquad
-\rho(A)=1.
-```
-
-For the seven-label `S_7` component, the integer vector
+Let `A` be the internal adjacency matrix. For the seven-label component, the positive integer vector
 
 ```math
 w=(43,59,31,31,14,10,26)^T
@@ -380,12 +350,8 @@ w=(43,59,31,31,14,10,26)^T
 satisfies
 
 ```math
-9Aw-23w>0
-```
-
-and
-
-```math
+9Aw-23w>0,
+\qquad
 8w-3Aw>0.
 ```
 
@@ -397,7 +363,91 @@ By Collatz-Wielandt,
 }
 ```
 
-Consequently no positive linear internal capacity is nonexpanding or even factor-two contractive on the recorded `S_7` component. External obstruction export, nonlinear capacity, or multi-generation amortization is mandatory.
+No positive linear internal SCC capacity is nonexpanding or factor-two contractive without external obstruction credit.
+
+---
+
+## 8. Exact output-load obstruction
+
+The `S_7` cyclic component emits:
+
+| output class | occurrences | distinct labels |
+|---|---:|---:|
+| internal terminal | 24 | 7 |
+| external terminal | 12 | 2 |
+| external imported | 106 | 81 |
+| external novel | 7,728 | 6,020 |
+
+Even after complete numerical deduplication, total emitted support satisfies
+
+```math
+\frac75
+<
+\frac{H(\bigcup_{q\in C}\Xi_q)}{V(C)}
+<
+\frac32.
+```
+
+Therefore the numerical union of cyclic output is additional recursive load, not automatic repayment.
+
+**Primary reference:** `docs/s7-cyclic-scc-output-load.md`.
+
+---
+
+## 9. First exact novel-label obstruction credit
+
+A middle-fiber label is a difference between centers sharing the same terminal step. Its valid recursive object is therefore each shell-resolved child, not the union of all `6,020` novel labels.
+
+The seven cyclic source steps emit `63` shell occurrences representing `62` exact numerical states. For a child
+
+```math
+X\subseteq[L,2L),
+```
+
+define the restricted replay domain
+
+```math
+\mathcal D_f(X)
+=
+\left\{
+R:
+1\le R\le
+\left\lfloor\frac{fL-1-\max X}{2}\right\rfloor,
+\quad
+v_2(R)\equiv0\pmod2
+\right\}.
+```
+
+Let `X_imp` be the part already present in the `S_7` backbone. The verifier compares the full child `{0} union X` with the imported-only subset `{0} union X_imp` for two exact local mechanisms:
+
+1. translated-layer collision, when a pair difference equals `R` or `2R`;
+2. same-layer four-AP completion, when three points in one copy have a missing coordinate supplied from another copy.
+
+After exact-state deduplication:
+
+| quantity | factor two | factor four |
+|---|---:|---:|
+| candidate domain | `950,202` | `4,986,696` |
+| full local invalidity | `140,722` | `399,445` |
+| imported-only invalidity | `370` | `700` |
+| novel incremental invalidity | `140,352` | `398,745` |
+| candidates remaining | `809,480` | `4,587,251` |
+
+The exact novel incremental fractions are
+
+```math
+\frac{23392}{158367}
+```
+
+and
+
+```math
+\frac{132915}{1662232}.
+```
+
+Novel labels therefore create genuine future obstruction credit on most shell children. However, local collisions and same-layer completions remove only about `14.8%` of factor-two candidates and `8.0%` of factor-four candidates. They do not repay the cyclic expansion.
+
+**Primary reference:** `docs/s7-cyclic-scc-local-completion-credit.md`.
 
 ---
 
@@ -420,7 +470,8 @@ The missing theorem must specify:
 5. how SCC internal recycling is funded;
 6. how imported labels are matched across generations;
 7. how repeated numerical or provenance support is bounded;
-8. which discarded mass becomes controlled error.
+8. how residual affine obstruction coverage becomes durable Bellman credit;
+9. which discarded mass becomes controlled error.
 
 Only then may the raw payload become the `children` array of a branching LP row.
 
@@ -428,7 +479,7 @@ Only then may the raw payload become the `children` array of a branching LP row.
 
 ## 11. Active theorem
 
-The target is a scale-compensated whole-tree inequality
+The target remains a scale-compensated whole-tree inequality
 
 ```math
 \boxed{
@@ -448,31 +499,31 @@ The target is a scale-compensated whole-tree inequality
 
 Here `Pack` must track provenance, overlap, SCC internal capacity, and bounded reuse. `Phi_obs` must track affine obstruction, completion, rectangle support, and target demand.
 
-The next finite experiment should test whether
+The current mechanism to quantify is
 
-```math
-\text{internal recycling}
-+
-\text{outgoing capacity}
-\le
-\text{incoming capacity}
-+
-\text{obstruction export}
+```text
+cyclic terminal recycling
+    -> shell-resolved novel labels
+    -> local collision/completion credit
+    -> residual 34-class affine obstruction coverage
+    -> reduced future cheap-extension capacity.
 ```
 
-holds on the certified `S_1` through `S_7` transitions.
+A pathwise estimate is insufficient.
 
 ---
 
 ## 12. Approved next targets
 
-1. Attach explicit internal and outgoing capacity vectors to the SCC quotients.
-2. Quantify export from cyclic terminal labels into nonterminal fibers and affine obstruction classes.
-3. Preserve provenance while merging exact numerical state classes.
-4. Introduce capacity constraints for containment and partial-overlap graphs.
-5. Feed a proved retention convention into the exact rational LP harness.
-6. Emit the smallest exact failing transition for each candidate convention.
-7. Establish the branching Carleson inequality for all pre-basin states.
+1. Retain the residual candidate set for every cyclic-source shell child.
+2. Test all remaining affine layer classes after collision and same-layer completion removal.
+3. Separate imported-only affine witnesses from witnesses requiring novel labels.
+4. Extract the smallest exact child state with surviving factor-two or factor-four candidates.
+5. Connect repeated residual candidates to rectangle support or completion growth in descendants.
+6. Preserve provenance while merging exact numerical state classes.
+7. Introduce capacity constraints for containment and partial-overlap graphs.
+8. Feed a proved retention convention into the exact rational LP harness.
+9. Establish the branching Carleson inequality for all pre-basin states.
 
 ---
 
@@ -496,7 +547,9 @@ Do not use without materially new hypotheses:
 14. latest- or historical-separation-only state;
 15. unit harmonic SCC capacity;
 16. any positive linear SCC capacity with contraction factor at most two on the recorded `S_7` component;
-17. the rejected depth-ten anchor reduction.
+17. the numerical union of cyclic output as unit-weight stored capacity;
+18. local collision and same-layer completion as sufficient repayment;
+19. the rejected depth-ten anchor reduction.
 
 ---
 
@@ -523,5 +576,7 @@ Key documents:
 - `docs/terminal-fiber-incidence-graph.md`;
 - `docs/terminal-fiber-scc-quotient.md`;
 - `docs/terminal-fiber-scc-spectral-growth.md`;
+- `docs/s7-cyclic-scc-output-load.md`;
+- `docs/s7-cyclic-scc-local-completion-credit.md`;
 - `docs/certainty-ledger.md`;
 - `docs/research-decision-history.md`.

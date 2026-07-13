@@ -1,0 +1,26 @@
+TWO-COORDINATE POLICY HALFSPACE LP
+
+features=lambda,gamma
+weights=lambda:3,gamma:1/10
+constraints=60
+jsonl_bytes=293294
+jsonl_sha256=6e2aa22f5214450062e3805c883687a9fee55ff87ed998d65802db46a07bd89b
+lp_bytes=348333
+lp_lines=68
+lp_sha256=62d24dd40f69e87d627d12b1a69645153903c2915895d44f6070cffe0d649667
+
+result=FEASIBLE
+minimum_slack=0
+minimum_constraint=S1:lex<=q142
+active_equalities=S1:lex<=q142,S1:lex<=q161,S1:lex<=q30,S1:lex<=q40,S1:lex<=step5,S1:lex<=step540,S1:lex<=step54030,S2:step5<=step540
+strict_minimum_constraint=S1:lex<=reverse
+strict_minimum_slack_sha256=496cf601dff1b45d679d3b660ec70a7a97de1503fbe13272de83a9fa7fb9a830
+strict_minimum_slack_numerator_digits=2
+strict_minimum_slack_denominator_digits=3
+S7_hybrid5_vs_step540_slack_sha256=f7aaa21925e0b9eba07695a3a189d0172914d6f431ff274ff0819b8d817d03f7
+S7_hybrid5_vs_step540_slack_numerator_digits=6939
+S7_hybrid5_vs_step540_slack_denominator_digits=6940
+
+conclusion: all 60 exact policy-comparison half-spaces are feasible at lambda=3 and gamma=1/10.
+The active equalities are S1 policy ties and the S2 step5/step540 tie. The smallest strict margin is
+S1 lexicographic versus reverse; the active S7 continuation boundary is hybrid5 versus step540. This is an exact finite policy LP, not a retained-child Bellman LP.

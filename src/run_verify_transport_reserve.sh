@@ -14,6 +14,7 @@ S2_NOVEL_SHA256="c552a6146531e02b19a1416c8913287d1efa86a0520eab031899630f8ecd33d
 S2_ZERO_SHA256="e5d7a3bbefea78c7c5eeb85ec9155e947d00443e8c279ba6cfc72978267bf972"
 LEX_NOVELTY_SHA256="6fe0b27e20284a93ef13c4a738122c4889432c2e673d63794ccec6a7ba36c2e1"
 FORCED_FORK_SHA256="6941672cbe66bccd211f672eb5636440e63e7b3d36fb6063361dfbdc9922da27"
+FORCED_FORK_NO_GO_SHA256="771c144b3c08cc186d2613eae314b2d0712d18933094323307b1468a4577d6ef"
 
 mkdir -p "$WORK"
 
@@ -102,7 +103,14 @@ python3 "$ROOT/src/verify_forced_fork_reserve_s1_s5.py" \
 cmp "$FORCED_FORK_RECORDED" "$FORCED_FORK_GENERATED"
 verify_sha256 "$FORCED_FORK_GENERATED" "$FORCED_FORK_SHA256" "forced_fork"
 
+FORCED_FORK_NO_GO_GENERATED="$WORK/forced_fork_bellman_no_go_certificate.txt"
+FORCED_FORK_NO_GO_RECORDED="$ROOT/data/forced_fork_bellman_no_go_certificate_2026-07-13.txt"
+python3 "$ROOT/src/verify_forced_fork_bellman_no_go.py" \
+  "$FORCED_FORK_NO_GO_GENERATED"
+cmp "$FORCED_FORK_NO_GO_RECORDED" "$FORCED_FORK_NO_GO_GENERATED"
+verify_sha256 "$FORCED_FORK_NO_GO_GENERATED" "$FORCED_FORK_NO_GO_SHA256" "forced_fork_no_go"
+
 python3 "$ROOT/src/certified_contaminated_states.py" > /dev/null
 python3 "$ROOT/src/branching_reserve_lp.py" self-test
 
-echo "verified: transport, replay, reserve diagnostics, S1-S5 DAG checks, forced-fork reserve, and LP harness"
+echo "verified: transport, replay, reserve diagnostics, S1-S5 DAG checks, forced-fork reserve/no-go, and LP harness"

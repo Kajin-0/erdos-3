@@ -1,0 +1,30 @@
+TERMINAL-FIBER SCC SPECTRAL GROWTH
+
+theorem=Collatz-Wielandt exact rational bracket
+S3_members=61,303
+S3_adjacency_sha256=9d03a684ed88bcdd992e6dbe02b7fa54d25dc9441096f3ac3988f03f38f19700
+S3_A_squared_identity=true
+S3_spectral_radius=1
+S4_members=61,303
+S4_adjacency_sha256=9d03a684ed88bcdd992e6dbe02b7fa54d25dc9441096f3ac3988f03f38f19700
+S4_A_squared_identity=true
+S4_spectral_radius=1
+S5_members=61,303
+S5_adjacency_sha256=9d03a684ed88bcdd992e6dbe02b7fa54d25dc9441096f3ac3988f03f38f19700
+S5_A_squared_identity=true
+S5_spectral_radius=1
+S6_members=61,303
+S6_adjacency_sha256=9d03a684ed88bcdd992e6dbe02b7fa54d25dc9441096f3ac3988f03f38f19700
+S6_A_squared_identity=true
+S6_spectral_radius=1
+
+S7_members=1,5,61,303,1597,8195,323640
+S7_adjacency_sha256=41d9402acc277af39e3dcd83b91d043d2bef565698fd84ec8d75fa670dc49407
+S7_w=43,59,31,31,14,10,26
+S7_Aw=112,155,81,81,36,26,69
+S7_9Aw_minus_23w=19,38,16,16,2,4,23
+S7_8w_minus_3Aw=8,7,5,5,4,2,1
+S7_spectral_radius_lower=23/9
+S7_spectral_radius_upper=8/3
+conclusion: every positive linear internal capacity has expansion factor at least 23/9 on the S7 cyclic component.
+In particular, no such capacity is nonexpanding or factor-two contractive without external obstruction export.

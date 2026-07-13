@@ -1,0 +1,50 @@
+SIMULTANEOUS DELETION TRANSITION EXPORTER
+
+schema=simultaneous_deletion_transition/v1
+semantics=one_complete_schedule_specific_simultaneous_output_family_before_retention_quotient
+policy=lexicographically_smallest_step_left_middle_right_coordinated_side_sponsor
+verified_depths=1,2,3
+S1_selected=6
+S1_residual=6
+S1_terminal_steps=2
+S1_recursive_occurrences=5
+S1_exact_state_classes=4
+S1_exact_duplicate_classes=1
+S1_strict_containments=1
+S1_partial_overlaps=0
+S1_terminal_recursive_overlap=1
+S1_middle_internal_duplicate_mass=0
+S1_middle_imported_distinct_mass=5017/4368
+S1_middle_novel_distinct_mass=0
+S1_payload_sha256=98d55ecdbbf94402eee1b82a2437d531fd2ad2d933924597d79a7266a4ac73ae
+S2_selected=26
+S2_residual=13
+S2_terminal_steps=5
+S2_recursive_occurrences=11
+S2_exact_state_classes=10
+S2_exact_duplicate_classes=1
+S2_strict_containments=3
+S2_partial_overlaps=5
+S2_terminal_recursive_overlap=1,61
+S2_middle_internal_duplicate_mass=383/10614
+S2_middle_imported_distinct_mass=218348937262/1897648393355
+S2_middle_novel_distinct_mass=239396453/200655312
+S2_payload_sha256=8cc11f1cdff33b6b8756d33b97fc6b550159e9ffc9fda5032e35f3195b739b4e
+S3_selected=92
+S3_residual=28
+S3_terminal_steps=10
+S3_recursive_occurrences=25
+S3_exact_state_classes=21
+S3_exact_duplicate_classes=3
+S3_strict_containments=23
+S3_partial_overlaps=15
+S3_terminal_recursive_overlap=1,61,303
+S3_middle_internal_duplicate_mass=741175084808507/5412538546014600
+S3_middle_imported_distinct_mass=1/202
+S3_middle_novel_distinct_mass=263794861279616516530714602143928959351406948378652487/188399844058271400580736246041286596162958326209093600
+S3_payload_sha256=7bd2e36bb5f1ee4485739b910b3e804fb311da2019d54e09dfdc91df899c75c7
+
+conclusion: the exporter records the complete raw simultaneous output family
+for one fixed coordinated schedule, including shell resolution, point-level
+provenance, exact duplicates, strict containments, and partial overlaps.
+No retention quotient or Bellman child sum is inferred.

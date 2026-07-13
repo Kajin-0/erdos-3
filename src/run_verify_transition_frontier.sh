@@ -11,6 +11,8 @@ SIMULTANEOUS_S6_S7_SHA256="4c1767a8c0b4e65b2deb4e576bfec6f8b74e6531f4ef12e4444fd
 TERMINAL_FIBER_SHA256="ddedf75bd52a6cc67cef6ecb0a635b836e9a1c7c5094a860449dd35dd2651c18"
 TERMINAL_FIBER_SCC_SHA256="3166cbb0801eb774e8b6691ace6a8612f5457a9415bd8ae3762a1260216d0fe2"
 TERMINAL_FIBER_SPECTRAL_SHA256="aa753127d2d0adbcb124b0a9f6e5c053350d422cd66fe2a4c73d1045b2917bf4"
+S7_SCC_OUTPUT_LOAD_SHA256="cb5dbba5f45c25b2c286fde17e9895d017abaa906f69f73255a5f0b5b62d081d"
+S7_SCC_LOCAL_COMPLETION_SHA256="0419cdeab12c1a8ab2f55e041a0259ffde77f90df7031be0736137502e6ff737"
 
 mkdir -p "$WORK"
 
@@ -78,4 +80,18 @@ python3 "$ROOT/src/verify_terminal_fiber_scc_spectral_growth.py" \
 cmp "$TERMINAL_FIBER_SPECTRAL_RECORDED" "$TERMINAL_FIBER_SPECTRAL_GENERATED"
 verify_sha256 "$TERMINAL_FIBER_SPECTRAL_GENERATED" "$TERMINAL_FIBER_SPECTRAL_SHA256" "terminal_fiber_spectral"
 
-echo "verified: simultaneous transition, multiplicity, incidence, SCC, and spectral frontier through S7"
+S7_SCC_OUTPUT_LOAD_GENERATED="$WORK/s7_scc_output_load_certificate.txt"
+S7_SCC_OUTPUT_LOAD_RECORDED="$ROOT/data/s7_scc_output_load_certificate_2026-07-13.txt"
+python3 "$ROOT/src/verify_s7_scc_output_load.py" \
+  "$S7_SCC_OUTPUT_LOAD_GENERATED"
+cmp "$S7_SCC_OUTPUT_LOAD_RECORDED" "$S7_SCC_OUTPUT_LOAD_GENERATED"
+verify_sha256 "$S7_SCC_OUTPUT_LOAD_GENERATED" "$S7_SCC_OUTPUT_LOAD_SHA256" "s7_scc_output_load"
+
+S7_SCC_LOCAL_COMPLETION_GENERATED="$WORK/s7_scc_local_completion_credit_certificate.txt"
+S7_SCC_LOCAL_COMPLETION_RECORDED="$ROOT/data/s7_scc_local_completion_credit_certificate_2026-07-13.txt"
+python3 "$ROOT/src/verify_s7_scc_local_completion_credit.py" \
+  "$S7_SCC_LOCAL_COMPLETION_GENERATED"
+cmp "$S7_SCC_LOCAL_COMPLETION_RECORDED" "$S7_SCC_LOCAL_COMPLETION_GENERATED"
+verify_sha256 "$S7_SCC_LOCAL_COMPLETION_GENERATED" "$S7_SCC_LOCAL_COMPLETION_SHA256" "s7_scc_local_completion"
+
+echo "verified: simultaneous transition, multiplicity, incidence, SCC, spectral, output-load, and local-completion frontier through S7"

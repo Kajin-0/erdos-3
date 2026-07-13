@@ -1,0 +1,72 @@
+DEPTH-TEN LIFTED-COMPLETION RESIDUAL RECTANGLE PROFILE
+Date: 2026-07-13
+
+STATUS
+Exact finite equal-rank sample and explicit rectangle-witness certificate.
+This is not a complete exclusion theorem for the residual domain.
+
+CERTIFIED RESIDUAL
+Residual count:                 177844250
+First residual separation:      97474324
+Last residual separation:      613454687
+Ordered residual FNV-64:        00369694f2d70526
+
+EQUAL-RANK SAMPLE
+Sample count:                         512
+Rank formula: floor((2j+1)*177844250/1024), 0 <= j < 512
+First sampled separation:       176639281
+Last sampled separation:        613171820
+Sample-separation FNV-64:       26df76d56ec920f2
+Complete sample-file SHA-256:   cdee14adb2f1ca29b4bac2a32384adab2ff139b9955370168f522279f0f8a832
+Negative signed U samples:             372
+Positive signed U samples:             140
+Here U = T - 4*R9 and R9 = 134217729.
+
+RECTANGLE PROFILE
+Deterministic trial cap per sample:   5000000
+Explicit B9 rectangle witnesses:          284
+Search-unresolved samples:                 228
+First covered sample index:                228
+Covered sampled T range:            460676285 through 613171820
+
+All samples at indices 228 through 511 have an explicit rectangle witness.
+All samples at indices 0 through 227 lie below the k=4 transport window and
+were not resolved by this rectangle search. Search failure is not evidence of
+4-AP-freeness.
+
+The exact transport-window boundary is
+
+  4*R9 - 76583776 = 460287140.
+
+The first equal-rank residual sample above that boundary is index 228,
+T=460676285, with |U|=76194631. Every later sampled residual candidate has an
+explicit k=4 rectangle-transport witness.
+
+DETERMINISTIC SEARCH STATISTICS
+Total successful trials:         29552689
+Maximum trials for one success:   1066649
+Worst sample index:                    478
+Worst separation:                592613709
+
+WITNESS CERTIFICATE
+Witness-row FNV-64:              a391c1771f01d79b
+Witness-file SHA-256:            8f29ae200d72925052cd08ac9df94f7d8bdec9d0d24067b42c6cb74b5f5c58ed
+
+Each successful row is independently checked for:
+1. a signed 0011 rectangle x,x+d,x+2d-U,x+3d-U in B9={0} union S9;
+2. the appropriate transport channel 0112/2020 or 0011/0202;
+3. four equal-spaced transported points;
+4. membership of all four points in the actual S10 factor-four candidate.
+
+PRIMARY FILES
+src/sample_depth10_lifted_s9_completion_residual.cpp
+src/run_sample_depth10_lifted_s9_completion_residual.sh
+src/verify_depth10_residual_rectangle_profile.cpp
+src/run_verify_depth10_residual_rectangle_profile.sh
+
+CONCLUSION
+The exact post-completion residual sample exhibits a sharp structural split:
+all 284 sampled candidates inside the k=4 rectangle-transport window are
+explicitly excluded by transported B9 rectangles, while the 228 lower-window
+samples require other affine obstruction channels or a different transport
+ratio. No claim is made that the 228 are valid continuations.

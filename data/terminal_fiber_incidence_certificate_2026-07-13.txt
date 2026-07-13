@@ -1,0 +1,52 @@
+TERMINAL-FIBER INCIDENCE GRAPH
+
+edge=q->u iff u is terminal and u in Xi_q
+verified_depths=1,2,3,4,5,6,7
+S1_nodes=2
+S1_edges=1
+S1_scc_count=2
+S1_largest_scc=1
+S1_cyclic_components=none
+S1_graph_sha256=b05c4979e7b9347880bd9aa4a0587d968a3bec450490971d2ad13c319882a3cb
+S2_nodes=5
+S2_edges=3
+S2_scc_count=5
+S2_largest_scc=1
+S2_cyclic_components=none
+S2_graph_sha256=6bbb44826bc5397d4df77158553be9151c231836c5dcea404918974b2a7d4cdc
+S3_nodes=10
+S3_edges=10
+S3_scc_count=9
+S3_largest_scc=2
+S3_cyclic_components=61,303
+S3_graph_sha256=199ebc3e1857109ecee552c1317ebd76eff328fdb8c1806f32c55e3d47f4eead
+S4_nodes=11
+S4_edges=20
+S4_scc_count=10
+S4_largest_scc=2
+S4_cyclic_components=61,303
+S4_graph_sha256=7587b87f3d5f0210cc8fc9d0e1a917c2508293461d44eaa2ad1c4c925879547e
+S5_nodes=12
+S5_edges=31
+S5_scc_count=11
+S5_largest_scc=2
+S5_cyclic_components=61,303
+S5_graph_sha256=ba09e6ed05f256142a7a1f3ea7f90cde645c0c7765372ec965c083a5622a1dfb
+S6_nodes=13
+S6_edges=43
+S6_scc_count=12
+S6_largest_scc=2
+S6_cyclic_components=61,303
+S6_graph_sha256=54fdd9ba95e5e4f86eb10ef54030dda46dd138059ea5489cb6e27be74d8f0b6f
+S7_nodes=25
+S7_edges=75
+S7_scc_count=19
+S7_largest_scc=7
+S7_cyclic_components=1,5,61,303,1597,8195,323640
+S7_graph_sha256=17ef6a4af54dfba4b3d97c305aeb705b20b5c9cda61a0f2d0b4de9920f052f78
+
+conclusion: the terminal-fiber incidence graph is not acyclic.
+A 2-cycle {61,303} appears at S3 and persists through S6;
+at S7 it expands into a 7-label strongly connected component.
+Any retention potential based on a strict decreasing order of terminal labels
+is therefore invalid on the recorded lexicographic genealogy.

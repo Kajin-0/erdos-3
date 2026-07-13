@@ -71,19 +71,28 @@ Statuses marked **exact finite** are computational statements for recorded objec
 | CL-052 | On the `33` exact cyclic-source child states of size at most `50`, complete three-translate four-AP testing leaves `15160/21724` factor-two and `75723/87829` factor-four candidates valid. Deterministic first witnesses span `33` of the `34` nonconstant affine classes; class `22` is absent only from the first-witness histogram. | Exact fixed-policy finite theorem. |
 | CL-053 | The novel child `{16,21,26}` at scale `16` is the unique factor-two/factor-four exact return from the `62` cyclic-source states to any canonical `S_1,...,S_10`: factor four with `R=1` gives `S_1` exactly. It is disjoint from all other `126` recursive shells and all terminal outputs of the raw `S_7` transition. | Exact fixed-policy path, uniqueness, and isolation theorem. |
 | CL-054 | Canonical regeneration is schedule-dependent on `S_7`. The lexicographic schedule has one exact return to `S_1`; a reverse-lexicographic complete coordinated schedule has no `{16,21,26}` seed shell and no factor-two/factor-four exact return to any `S_1,...,S_10`. The seed-producing centers are not root-forced. | Exact two-policy finite theorem. |
+| CL-055 | Reverse lexicographic deletion avoids canonical regeneration but has over `75` times the lexicographic middle-fiber occurrence mass, over `744` times the duplicate mass, `2252` terminal steps, `2374` shells, and a `286`-label SCC. Avoiding regeneration is not a sufficient policy objective. | Exact two-policy finite theorem. |
+| CL-056 | Delaying only the three unforced seed-producing `q=1` actions removes canonical regeneration while reducing shell count, occurrence mass, union mass, duplicate mass, harmonic-average multiplicity, and maximum multiplicity relative to lexicographic deletion. Terminal mass rises and residual error increases by exactly `1/4096`. | Exact finite Pareto-tradeoff theorem. |
+| CL-057 | Exact policy-weight thresholds separate lexicographic and delayed-seed preferences: `2.384<lambda_*<2.385` for `T+lambda O+E`, `4.356<kappa_*<4.357` for `T+U+kappa D+E`, `0.021<gamma_*<0.022` when charging the lexicographic regenerative path, and `0.418<a_*<0.419` for `aT+O+E`. Unit terminal plus unit recursive-mass scores prefer lexicographic deletion. | Exact finite rational half-space theorem. |
 
-Primary references for CL-050 through CL-054:
+Primary references for CL-050 through CL-057:
 
 - `docs/s7-cyclic-scc-output-load.md`;
 - `docs/s7-cyclic-scc-local-completion-credit.md`;
 - `docs/s7-cyclic-scc-small-state-affine-frontier.md`;
 - `docs/s7-cyclic-output-seed-regeneration.md`;
 - `docs/s7-regenerative-seed-policy-dependence.md`;
+- `docs/s7-policy-transition-tradeoff.md`;
+- `docs/s7-delayed-seed-policy.md`;
+- `docs/s7-policy-weight-regions.md`;
 - `src/verify_s7_scc_output_load.py`;
 - `src/verify_s7_scc_local_completion_credit.py`;
 - `src/verify_s7_scc_small_state_affine_frontier.py`;
 - `src/verify_s7_scc_seed_regeneration.py`;
-- `src/verify_s7_regenerative_seed_policy_dependence.py`.
+- `src/verify_s7_regenerative_seed_policy_dependence.py`;
+- `src/verify_s7_policy_transition_tradeoff.py`;
+- `src/verify_s7_delayed_seed_policy.py`;
+- `src/verify_s7_policy_weight_regions.py`.
 
 ---
 
@@ -115,28 +124,26 @@ Do not use without materially new hypotheses:
 22. inferring whole-tree divergence from the isolated regenerative path;
 23. treating lexicographic regeneration as parent-intrinsic or schedule-independent;
 24. using one policy witness as a minimax or all-policy theorem;
-25. random sampling as a finite certificate;
-26. the rejected depth-ten anchor reduction.
+25. treating avoidance of canonical regeneration as sufficient policy optimization;
+26. ranking policies by raw occurrence count or distinct-label count without harmonic and provenance weights;
+27. treating the delayed-seed Pareto tradeoff as a completed Bellman contraction;
+28. treating one finite weight threshold as global validation of its raw coordinate;
+29. random sampling as a finite certificate;
+30. the rejected depth-ten anchor reduction.
 
 ---
 
-# Open bottleneck OB-001: Policy-aware whole-tree cost
+# Open bottleneck OB-001: Exact policy cone and whole-tree packing
 
-The state-specific cheap-extension problem at `S_10` is closed. Raw simultaneous transition generation is certified through `S_7`. Novel labels generate genuine obstruction credit, but complete one-generation testing leaves a large residual. One lexicographic residual is an isolated canonical regenerative seed, while another complete schedule avoids that return entirely.
+The state-specific cheap-extension problem at `S_10` is closed. Raw simultaneous transition generation is certified through `S_7`. Exact policy experiments now give three regimes:
 
-The unresolved theorem must either construct a coordinated policy with controlled complete child cost or prove a schedule-independent lower-envelope inequality. It must control:
+1. lexicographic deletion has one isolated canonical regeneration and moderate raw cost;
+2. reverse deletion avoids regeneration but creates a severe load explosion;
+3. delaying only the three seed actions avoids regeneration and improves most recursive-load coordinates, with higher terminal mass and a residual penalty of `1/4096`.
 
-1. exact duplicate multiplicity;
-2. strict containment and partial overlap;
-3. terminal-recursive overlap;
-4. cyclic SCC recycling and spectral growth;
-5. imported-label matching and repeated reuse;
-6. regenerative and near-regenerative continuation cost;
-7. schedule-dependent residual structure;
-8. terminal residual error;
-9. conversion of obstruction growth into bounded Bellman credit.
+The exact `S_7` comparison produces rational half-spaces for candidate policy weights. The unresolved task is to compute analogous half-spaces on `S_1,...,S_6` and intersect them in the exact LP harness.
 
-The target is now explicitly policy-aware:
+The target remains
 
 ```math
 \Delta(S)
@@ -152,4 +159,4 @@ The target is now explicitly policy-aware:
 \operatorname{controlled\ error}.
 ```
 
-The next finite experiment should compare lexicographic and reverse-lexicographic `S_7` transitions in common Bellman units, including middle-fiber mass, overlap load, SCC spectrum, affine coverage, regenerative continuation cost, and residual error. No current theorem closes this gap.
+A nonempty common cone would identify a candidate constructive policy cost. An infeasible subsystem would identify the smallest state and coordinate conflict requiring a new invariant. A provenance-preserving retention quotient is still required before raw shell outputs can be treated as Bellman children. No current theorem closes this gap.

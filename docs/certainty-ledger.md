@@ -75,8 +75,10 @@ Statuses marked **exact finite** are computational statements for recorded objec
 | CL-056 | Delaying only the three unforced seed-producing `q=1` actions removes canonical regeneration while reducing shell count, occurrence mass, union mass, duplicate mass, harmonic-average multiplicity, and maximum multiplicity relative to lexicographic deletion. Terminal mass rises and residual error increases by exactly `1/4096`. | Exact finite Pareto-tradeoff theorem. |
 | CL-057 | Exact policy-weight thresholds separate lexicographic and delayed-seed preferences: `2.384<lambda_*<2.385` for `T+lambda O+E`, `4.356<kappa_*<4.357` for `T+U+kappa D+E`, `0.021<gamma_*<0.022` when charging the lexicographic regenerative path, and `0.418<a_*<0.419` for `aT+O+E`. Unit terminal plus unit recursive-mass scores prefer lexicographic deletion. | Exact finite rational half-space theorem. |
 | CL-058 | The score `C_lambda=T+lambda O+E` has a certified common policy subcone `477/200<lambda<260/63`. Every such weight ranks lexicographic below reverse lexicographic deletion on `S_1,...,S_7`, while ranking the delayed-seed policy below lexicographic deletion on `S_7`. The witness `lambda=3` gives the tested policy family `S_1,...,S_6` lexicographic and `S_7` delayed-seed. | Exact finite multi-state policy-ranking theorem. |
+| CL-059 | The uniform policy that delays every step-5 action ties lexicographic deletion under `C_3=T+3O+E` on `S_1` and is strictly cheaper on every `S_2,...,S_7`. At `S_7` it still contains the isolated canonical return `{16,21,26}->S_1`. | Exact finite uniform-policy theorem. |
+| CL-060 | A hybrid delaying step-5 and the three seed-producing `q=1` actions removes canonical regeneration but has higher raw `C_3` than the step-5 policy. For `C_{3,gamma}=T+3O+E+gamma G_regen`, the hybrid wins when `gamma>gamma_*`, where `0.057<gamma_*<0.058`; `gamma=1/16` is an exact witness and also ranks the hybrid below lexicographic deletion at `S_7`. | Exact finite continuation-weight theorem. |
 
-Primary references for CL-050 through CL-058:
+Primary references for CL-050 through CL-060:
 
 - `docs/s7-cyclic-scc-output-load.md`;
 - `docs/s7-cyclic-scc-local-completion-credit.md`;
@@ -87,7 +89,9 @@ Primary references for CL-050 through CL-058:
 - `docs/s7-delayed-seed-policy.md`;
 - `docs/s7-policy-weight-regions.md`;
 - `docs/policy-occurrence-cone-s1-s7.md`;
-- `src/verify_policy_occurrence_cone_s1_s7.py`.
+- `docs/step5-policy-regeneration-weight.md`;
+- `src/verify_policy_occurrence_cone_s1_s7.py`;
+- `src/verify_step5_policy_regeneration_weight.py`.
 
 ---
 
@@ -123,22 +127,24 @@ Do not use without materially new hypotheses:
 26. ranking policies by raw occurrence count or distinct-label count without harmonic and provenance weights;
 27. treating the delayed-seed Pareto tradeoff as a completed Bellman contraction;
 28. treating one finite weight threshold or common cone as global validation of its raw coordinate;
-29. treating the tested lexicographic/delayed family as globally optimal over all complete schedules;
-30. random sampling as a finite certificate;
-31. the rejected depth-ten anchor reduction.
+29. treating `T+3O+E` as sufficient after it chooses a known regenerative schedule;
+30. inserting the recorded path charge directly into a Bellman child sum without a retention theorem;
+31. treating the tested policy family as globally optimal over all complete schedules;
+32. random sampling as a finite certificate;
+33. the rejected depth-ten anchor reduction.
 
 ---
 
-# Open bottleneck OB-001: Policy cone, retention, and whole-tree packing
+# Open bottleneck OB-001: Regeneration-sensitive policy cone and retention
 
-The state-specific cheap-extension problem at `S_10` is closed. Raw simultaneous transition generation is certified through `S_7`. Exact policy experiments now give:
+The state-specific cheap-extension problem at `S_10` is closed. Raw simultaneous transition generation is certified through `S_7`. Exact policy experiments now establish:
 
-1. lexicographic deletion with moderate raw cost and one isolated canonical regeneration;
-2. reverse deletion with severe cyclic and duplicate load;
-3. a delayed-seed `S_7` policy improving recursive-load coordinates;
-4. a nonempty common occurrence-weight subcone spanning the tested `S_1,...,S_7` comparisons.
+1. a nonempty occurrence-weight subcone across the tested lexicographic, reverse, and delayed-seed policies;
+2. a uniform step-5 priority rule that lowers the occurrence-weight score across `S_2,...,S_7`;
+3. a failure of the occurrence-only score because it prefers a policy retaining the canonical regenerative child;
+4. an exact lower threshold for a continuation-sensitive regeneration penalty.
 
-The next task is to generate additional deterministic policies, convert their comparisons into exact rational half-spaces, and intersect them in the LP harness. A first infeasible subsystem should identify the missing coordinate. A provenance-preserving retention quotient is still required before raw shell outputs can be treated as Bellman children.
+The next task is to generate additional deterministic policies, convert their comparisons into exact rational half-spaces in `(lambda,gamma)`, and intersect them in the LP harness. A first infeasible subsystem should identify the next missing coordinate. A provenance-preserving retention quotient is still required before raw shell or path charges can be treated as Bellman children.
 
 The target remains
 

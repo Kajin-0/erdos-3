@@ -1,0 +1,44 @@
+DEPTH-TEN FACTOR-FOUR POSITIONS 101-1000 CERTIFICATE
+Date: 2026-07-13
+
+MODEL
+  G10(R) = ({0} union S10) + {0,R,2R}
+  sponsor condition: v2(R) even
+  layer disjointness: R and 2R absent from the positive-difference support of {0} union S10
+  inherited factor-two cutoff: 76583775
+
+DOMAIN PREFIX
+  previously certified positions: 1-100
+  newly certified positions: 101-1000
+  newly certified count: 900
+  first new separation: 76587092
+  last new separation: 76603903
+  total certified prefix: 1000
+
+DETERMINISTIC WITNESS SEARCH
+  initial RNG state: 88172645463325252
+  per-separation seed xor multiplier: 0x9e3779b97f4a7c15
+  xorshift operations: x ^= x << 7; x ^= x >> 9
+  maximum trials per separation: 3000000
+  total trials used: 79638832
+  maximum trials used by one separation: 781823
+  maximum-trial separation: 76602965
+
+GENERATED WITNESS FILE
+  row format: R a b c d
+  rows: 900
+  FNV-64: dc92ceac26789b47
+  SHA-256: 0c8e16f6c4206c2fe2fd1a451d0c2aab1445baac154923b5656e3599e1b4897c
+
+Each generated row is checked for
+  b-a = c-b = d-c > 0
+and each of a,b,c,d is checked for membership in G10(R).
+
+VERIFIER
+  g++ -O3 -std=c++17 src/verify_depth10_factor4_positions_101_1000.cpp -o /tmp/verify_positions_101_1000
+  /tmp/verify_positions_101_1000 /tmp/depth10_factor4_positions_101_1000_witnesses.txt
+
+CONCLUSION
+  The first 1000 genuinely new sponsor-compatible, layer-disjoint factor-four candidates after the inherited cutoff all contain explicit nontrivial four-term arithmetic progressions.
+
+This is a finite prefix certificate only. It does not prove N_10,4 = 0.

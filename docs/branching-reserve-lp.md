@@ -1,195 +1,279 @@
-# Exact branching-reserve LP interface
+# Exact branching-reserve LP harness
 
 ## Status
 
-Research infrastructure for the whole-tree Bellman program. This tool exports and verifies candidate reserve inequalities; it does not establish that the current feature family is sufficient.
+Exact rational infrastructure for exporting and checking candidate linear reserve
+inequalities. This file defines the input contract and the distinction between
+continuation siblings and simultaneous deletion-DAG children.
 
-**Implementation:** `src/branching_reserve_lp.py`
+**Implementation:** `src/branching_reserve_lp.py`.
+
+The harness does not prove that any selected feature family is sufficient. It
+only preserves exact arithmetic and makes proposed inequalities mechanically
+checkable.
 
 ---
 
 ## 1. Target inequality
 
-For a parent state `B` with its complete retained child family, the desired inequality is
+For a state `S`, the intended branching inequality has the form
 
 ```math
-D(B)
+D(S)
 +
-\sum_{B'\in\operatorname{Child}(B)}\Phi(B')
+\sum_{S'\in\operatorname{Child}(S)}\Phi(S')
 \le
-\Phi(B)+E(B),
+\Phi(S)+E(S),
 ```
 
 where:
 
-```text
-D(B) = Bellman debt created at the parent transition;
-E(B) = explicitly controlled error;
-Phi   = a nonnegative linear reserve candidate.
-```
+- `D(S)` is the Bellman debt to be repaid;
+- `E(S)` is a separately justified controlled error;
+- `Phi` is a nonnegative reserve;
+- `Child(S)` is the complete retained-child family from one deletion-DAG
+  resolution, including exact multiplicities after merges.
 
-Let a state feature vector be
-
-```math
-f(B)=(f_1(B),\ldots,f_m(B))
-```
-
-and let
+For a linear feature model,
 
 ```math
-\Phi(B)=\sum_{j=1}^m w_j f_j(B),
+\Phi(S)
+=
+\sum_f w_f F_f(S),
 \qquad
-w_j\ge0.
+w_f\ge0.
 ```
 
-Then each parent transition gives the exact linear constraint
+Each input row therefore represents
 
 ```math
-\sum_j
+\sum_f
 \left(
- f_j(B)
- -
- \sum_{B'}m(B')f_j(B')
-\right)w_j
+F_f(S)
+-
+\sum_{S'}m(S')F_f(S')
+\right)w_f
 \ge
-D(B)-E(B),
+D(S)-E(S).
 ```
 
-where `m(B')` is the child multiplicity after the chosen deduplication convention.
-
-The essential point is that every row aggregates all retained children. Encoding one row per path would test a weaker and mathematically insufficient condition.
+All coefficients are stored as exact rational numbers.
 
 ---
 
-## 2. Exact input format
+## 2. JSONL row format
 
-The input is JSON Lines. Every nonempty, non-comment line is one complete parent transition.
+Each non-comment line is one JSON object:
 
 ```json
 {
-  "name": "state-17-factor-four",
-  "debt": "127/64",
+  "name": "transition-name",
+  "debt": "3/2",
   "error": "0",
   "parent": {
-    "radius_deficit": "31/8",
-    "support_holes": "5",
-    "imported_prefix": "3/2"
+    "radius_deficit": "4",
+    "support_holes": "2"
   },
   "children": [
     {
       "multiplicity": 1,
       "features": {
-        "radius_deficit": "1/2",
-        "support_holes": "2",
-        "imported_prefix": "1"
+        "radius_deficit": "1",
+        "support_holes": "1"
       }
     }
   ]
 }
 ```
 
-All numbers should be integers or exact rational strings. Floating-point input is rejected deliberately.
+Numeric values may be integers or rational strings such as `"17/32"`.
+Booleans and floating-point values are rejected.
 
-Suggested first-generation features are:
-
-```text
-radius_deficit_2;
-radius_deficit_4;
-support_holes_2;
-support_holes_4;
-completion_deficit;
-imported_prefix_mass;
-overlap_excess;
-slack_consumed;
-```
-
-Each feature should already be normalized into Bellman-compatible units, normally by multiplication by `P/L` where appropriate.
+The parser converts every value to `fractions.Fraction` before forming the
+constraint.
 
 ---
 
-## 3. Commands
+## 3. Critical semantic requirement
 
-Run the internal exact regression checks:
+A row may aggregate only states that are retained **simultaneously** from one
+parent resolution.
+
+The exact replay catalogs produced by
+`src/export_replay_transition_catalog.py` enumerate alternative separation
+choices. Their records carry the semantic label
+
+```text
+alternative_continuation_siblings_not_simultaneous_children
+```
+
+and must not be copied wholesale into one `children` array.
+
+For example, `S_1` has four valid factor-four replay siblings with separations
+
+```text
+61, 68, 69, 71.
+```
+
+This does not assert that a deletion-DAG parent has four disjoint retained
+children with those states. Treating the four alternatives as a simultaneous
+sum would strengthen the branching load without proof and can create a false
+LP obstruction.
+
+Before a catalog can be converted into branching rows, an adapter must certify:
+
+1. the parent deletion-DAG object;
+2. the complete retained family for that resolution;
+3. multiplicities after genealogy merges;
+4. overlap and imported-prefix identifications;
+5. any controlled error assigned to discarded or unresolved mass.
+
+This adapter is the next missing theorem/computation layer.
+
+---
+
+## 4. Exact constraint construction
+
+For every feature, the parser forms
+
+```math
+A_f
+=
+F_f(S)
+-
+\sum_{S'}m(S')F_f(S').
+```
+
+The row becomes
+
+```math
+\sum_f A_fw_f
+\ge
+D(S)-E(S).
+```
+
+Zero coefficients are removed. Negative multiplicities are rejected.
+
+The LP exporter computes the least common multiple of all denominators in one
+row and multiplies the complete inequality by that positive integer. The
+resulting CPLEX-LP file therefore has integer row coefficients and an integer
+right-hand side without decimal approximation.
+
+---
+
+## 5. Commands
+
+Export a feasibility LP:
+
+```bash
+python3 src/branching_reserve_lp.py export \
+  constraints.jsonl \
+  reserve.lp
+```
+
+Verify proposed nonnegative weights exactly:
+
+```bash
+python3 src/branching_reserve_lp.py verify \
+  constraints.jsonl \
+  weights.json
+```
+
+Run the built-in parser, export, and exact-slack self-test:
 
 ```bash
 python3 src/branching_reserve_lp.py self-test
 ```
 
-Export a CPLEX-LP feasibility instance:
+Run all lightweight reserve checks:
 
 ```bash
-python3 src/branching_reserve_lp.py export \
-  data/branching_transitions.jsonl \
-  /tmp/branching_reserve.lp
+bash src/run_verify_transport_reserve.sh
 ```
 
-Verify a proposed nonnegative weight vector exactly:
+---
 
-```bash
-python3 src/branching_reserve_lp.py verify \
-  data/branching_transitions.jsonl \
-  data/branching_reserve_weights.json
-```
+## 6. Weight file
 
-A weight file has the form
+A weight file is a JSON object:
 
 ```json
 {
-  "radius_deficit_2": "3/2",
-  "radius_deficit_4": "1",
-  "support_holes_4": "7/16"
+  "radius_deficit": "5/4",
+  "support_holes": 3
 }
 ```
 
-The exporter clears all rational denominators row by row, so the generated LP uses exact integer coefficients. The verifier reports the exact rational slack of every transition and exits nonzero if any row fails.
+Every supplied weight must be nonnegative. Features omitted from the file are
+treated as weight zero during verification.
 
----
+The verifier reports each exact slack
 
-## 4. Required transition generator
-
-The next missing component is a state enumerator that emits one row per parent with the complete child aggregate. It must record:
-
-```text
-parent state identifier and genealogy;
-scale factor and exact Bellman debt;
-all retained children after standard shell resolution;
-child multiplicity or deduplication weight;
-P/L-normalized interval-radius deficits;
-zero-set hole counts;
-completion and rectangle coverage coordinates;
-imported-prefix provenance;
-slack consumption;
-any controlled error term and its proof source.
+```math
+\operatorname{slack}
+=
+\sum_f A_fw_f-(D-E).
 ```
 
-The generator must not silently discard children that are inconvenient for a candidate reserve.
+A weight vector passes only when every slack is nonnegative.
 
 ---
 
-## 5. Falsification protocol
+## 7. Known feature obstruction
 
-A failed LP is useful only if it produces an exact obstruction.
+The exact theorem in `docs/naive-reserve-coordinate-no-go.md` proves that the
+nonnegative feature family
 
-For every infeasible feature family, retain:
+```text
+weighted_density
+right_shell_slack
+incoming_contamination_mass
+```
 
-1. the smallest failing parent transition;
-2. its complete child list;
-3. the negative exact slack under the proposed weights;
-4. the missing structural phenomenon suggested by the failure;
-5. whether the failure is caused by branching, imported prefixes, support holes, or overlap duplication.
+cannot pay even the single recorded factor-four transition `S_6 -> S_7`.
+The parent-minus-child coefficient of every feature is negative, while the debt
+is
 
-This should become the reserve analogue of the repository stop list: failed potentials must remain documented to prevent repeated work.
+```math
+\frac{9841}{4096}>0.
+```
+
+This one-row sign certificate should be checked before any broader LP search.
+The result does not prohibit these coordinates as auxiliary terms, but at least
+one obstruction-aware feature is necessary.
 
 ---
 
-## 6. Scope
+## 8. Intended next inputs
 
-The exporter and verifier establish only the correctness of the linear encoding and exact arithmetic. They do not provide:
+The first meaningful branching dataset should contain exact small-state rows
+with features such as:
 
-1. a complete transition dataset;
-2. feasible reserve weights;
-3. a proof that a linear reserve suffices;
-4. a controlled global error term;
-5. the required branching Carleson inequality.
+1. uncovered cheap-separation capacity;
+2. direct rectangle-support radius;
+3. target interval demand;
+4. support-hole or zero-class counts from the 34 affine obstruction classes;
+5. completion-fiber deficit;
+6. imported-prefix mass with overlap multiplicities;
+7. dyadic slack as an auxiliary coordinate.
 
-Their purpose is to make the next conjecture mechanically falsifiable and to prevent accidental replacement of the whole-tree theorem by a pathwise surrogate.
+The data generator must emit all retained children for each row. A selected
+path, a list of alternative replay separations, or a collection of separately
+valid exact tails is not sufficient.
+
+---
+
+## 9. Scope
+
+The harness establishes exact bookkeeping only. It does not establish:
+
+- a valid deletion-DAG child adapter;
+- feasible reserve weights;
+- bounded overlap;
+- monotone rectangle growth;
+- a branching Carleson inequality;
+- or a solution of the four-term Erdős problem.
+
+Its purpose is to ensure that future finite-state experiments fail or succeed
+for mathematical reasons rather than decimal error, incomplete child lists, or
+ambiguous branching semantics.

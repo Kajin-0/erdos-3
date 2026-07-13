@@ -132,4 +132,11 @@ run_check s7_policy_weight_regions \
   python3 "$EXACT_PYTHON" "$ROOT/src/verify_s7_policy_weight_regions.py" \
   "$WORK/s7_policy_weight_regions_certificate.txt"
 
-echo "verified: simultaneous transition, SCC, obstruction, regeneration, policy tradeoff, delayed policy, and exact weight regions through S7"
+run_check policy_occurrence_cone_s1_s7 \
+  4d1e8eae67c474dee651bcee35397c84906c0216649ddfe7794529c1d990d907 \
+  "$ROOT/data/policy_occurrence_cone_s1_s7_certificate_2026-07-13.txt" \
+  "$WORK/policy_occurrence_cone_s1_s7_certificate.txt" \
+  python3 "$EXACT_PYTHON" "$ROOT/src/verify_policy_occurrence_cone_s1_s7.py" \
+  "$WORK/policy_occurrence_cone_s1_s7_certificate.txt"
+
+echo "verified: simultaneous transition, SCC, obstruction, regeneration, policy tradeoff, delayed policy, and common weight cone through S7"

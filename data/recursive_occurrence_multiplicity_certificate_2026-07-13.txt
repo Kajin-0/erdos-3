@@ -1,0 +1,31 @@
+RECURSIVE OCCURRENCE MULTIPLICITY
+
+identity=sum_i H(C_i)=sum_u m(u)/u
+bound=sum_i H(C_i)<=M*H(union_i C_i)
+verified_depths=1,2,3
+S1_multiplicity_distribution=1:7,2:4
+S1_maximum_multiplicity=2
+S1_maximum_labels=1,16,21,26
+S1_duplicate_excess=5017/4368
+S1_harmonic_average_multiplicity=519623582/325420529
+S1_harmonic_average_bound=8/5
+S1_catalog_sha256=9680d1e76ac3035fb6ba26e432f466dab2de675c6b1a24f89586a86cfeecd6cc
+S2_multiplicity_distribution=1:36,2:7,3:3
+S2_maximum_multiplicity=3
+S2_maximum_labels=61,87,122
+S2_duplicate_excess=1720946837057/11385890360130
+S2_harmonic_average_multiplicity=28281038555397141057643795951660783499/25712603096895134188284556415873424299
+S2_harmonic_average_bound=11/10
+S2_catalog_sha256=99210bbd67a374077349d053a7a0ed74e8e56ee2b73628a518cd23d9a86518ab
+S3_multiplicity_distribution=1:162,2:10,3:2,6:1,7:1
+S3_maximum_multiplicity=7
+S3_maximum_labels=303
+S3_duplicate_excess=767969830085807/5412538546014600
+S3_harmonic_average_multiplicity=325539147331925266934481697756296963610816837040289633503596991238205435511819405827286400804819702480781267367682581018127852244968138571526558356413754430595313/299061551140938905688707318693663809340036780592833900097885256755665073045974334370307856910225390453919376943366892327640157912716551452294352159829062880059713
+S3_harmonic_average_bound=11/10
+S3_catalog_sha256=ac489a948644e027caf2862db4b1429f50e11e7fbc763c74d697a26e84b4faf0
+
+conclusion: pointwise multiplicity gives an exact local packing bound,
+but the maximum multiplicity grows from 2 to 7 by S3 while the harmonic
+average remains below the recorded small constants. A whole-tree theorem
+must track provenance reuse rather than rely only on local maximum multiplicity.

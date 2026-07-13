@@ -1,0 +1,12 @@
+verified: forced-fork stored-potential no-go
+verified: unit forced-fork transition credit is insufficient on every recorded factor-four step through S5
+S1_to_S2_factor=4
+S1_to_S2_bellman_debt=5/4
+S1_parent_forced_feature=2/21
+S2_child_forced_feature=1554672/6990295
+S1_parent_minus_child=-18667522/146796195
+S1_to_S2_debt_to_parent_credit=105/8
+S3_to_S4_debt_to_parent_credit=15368877363127658643/1722549498740988928
+S4_to_S5_debt_to_parent_credit=221024462498552230659735994125/8318654923632839692153748992
+conclusion: no nonnegative multiple of P*Psi can serve as a standalone stored Bellman potential on the recorded S1-to-S2 transition.
+conclusion: forced-fork mass remains usable only as a transition charge or as one component of a larger obstruction/packing potential.

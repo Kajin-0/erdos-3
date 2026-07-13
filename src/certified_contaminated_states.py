@@ -4,6 +4,10 @@
 The module centralizes the constants that were previously repeated across
 multiple finite verifiers. It reconstructs the certified path S_1,...,S_10
 without asserting that the path represents the full continuation tree.
+
+Exact harmonic certificates at later depths can have numerators and
+denominators containing more than Python's default 4,300 decimal digits. The
+repository intentionally permits those exact integer strings.
 """
 
 from __future__ import annotations
@@ -11,6 +15,12 @@ from __future__ import annotations
 from dataclasses import dataclass
 from fractions import Fraction
 from typing import Iterable
+import sys
+
+
+if hasattr(sys, "set_int_max_str_digits"):
+    sys.set_int_max_str_digits(0)
+
 
 BASE_PATTERN = frozenset(
     {0, 1, 2, 16, 17, 18, 21, 22, 23, 26, 27, 28}

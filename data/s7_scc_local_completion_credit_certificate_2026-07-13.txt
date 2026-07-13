@@ -1,0 +1,43 @@
+S7 CYCLIC SCC LOCAL COMPLETION CREDIT
+
+component=1,5,61,303,1597,8195,323640
+raw_shell_occurrences=63
+exact_numerical_states=62
+duplicate_exact_state=61
+state_catalog_sha256=edbc0b27f56ce5a5cb5fbd4aa7a3818c093d34cd587ede906edcced1dce7b4b9
+
+candidate_domain: 1 <= R <= floor((factor*L-1-max(X))/2), v2(R) even
+imported_baseline: X intersect S7 minimum-translation backbone
+local_support: layer collision or same-layer 4-AP completion
+novel_incremental: full local support minus imported-only local support
+
+factor2_domain=950202
+factor2_full_invalid=140722
+factor2_imported_invalid=370
+factor2_novel_incremental=140352
+factor2_novel_overlap=46467
+factor2_novel_completion=135943
+factor2_novel_completion_exclusive=93885
+factor2_remaining=809480
+factor2_positive_states=54
+factor2_nonempty_states=59
+factor2_fully_excluded_states=1
+
+factor4_domain=4986696
+factor4_full_invalid=399445
+factor4_imported_invalid=700
+factor4_novel_incremental=398745
+factor4_novel_overlap=121755
+factor4_novel_completion=385457
+factor4_novel_completion_exclusive=276994
+factor4_remaining=4587251
+factor4_positive_states=61
+factor4_nonempty_states=62
+factor4_fully_excluded_states=1
+
+factor2_novel_incremental_fraction=23392/158367
+factor4_novel_incremental_fraction=132915/1662232
+
+conclusion: novel S7 cyclic-output labels create exact local collision/completion credit on most shell children,
+but this certified subset excludes only 140352 of 950202 factor-two candidates and 398745 of 4986696
+factor-four candidates after exact-state deduplication. It is genuine obstruction export, not a closing reserve.

@@ -9,6 +9,7 @@ OCCURRENCE_MULTIPLICITY_SHA256="9774ea7c8cbd3626b3120ade6b48344008b5f1706b05e253
 SIMULTANEOUS_S4_S5_SHA256="ada237c35a0980c15cecac51e30fd43ade50948067d6f421477af1bb79239756"
 SIMULTANEOUS_S6_S7_SHA256="4c1767a8c0b4e65b2deb4e576bfec6f8b74e6531f4ef12e4444fd53a9d0cb94c"
 TERMINAL_FIBER_SHA256="ddedf75bd52a6cc67cef6ecb0a635b836e9a1c7c5094a860449dd35dd2651c18"
+TERMINAL_FIBER_SCC_SHA256="3166cbb0801eb774e8b6691ace6a8612f5457a9415bd8ae3762a1260216d0fe2"
 
 mkdir -p "$WORK"
 
@@ -62,4 +63,11 @@ python3 "$ROOT/src/verify_terminal_fiber_incidence.py" \
 cmp "$TERMINAL_FIBER_RECORDED" "$TERMINAL_FIBER_GENERATED"
 verify_sha256 "$TERMINAL_FIBER_GENERATED" "$TERMINAL_FIBER_SHA256" "terminal_fiber"
 
-echo "verified: simultaneous transition, multiplicity, and incidence frontier through S7"
+TERMINAL_FIBER_SCC_GENERATED="$WORK/terminal_fiber_scc_quotient_certificate.txt"
+TERMINAL_FIBER_SCC_RECORDED="$ROOT/data/terminal_fiber_scc_quotient_certificate_2026-07-13.txt"
+python3 "$ROOT/src/export_terminal_fiber_scc_quotient.py" self-test \
+  "$TERMINAL_FIBER_SCC_GENERATED"
+cmp "$TERMINAL_FIBER_SCC_RECORDED" "$TERMINAL_FIBER_SCC_GENERATED"
+verify_sha256 "$TERMINAL_FIBER_SCC_GENERATED" "$TERMINAL_FIBER_SCC_SHA256" "terminal_fiber_scc"
+
+echo "verified: simultaneous transition, multiplicity, incidence, and SCC frontier through S7"

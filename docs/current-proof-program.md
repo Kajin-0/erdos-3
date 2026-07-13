@@ -50,7 +50,7 @@ Every recursive output must be resolved into standard dyadic shells. For `p>=1`,
 \sum_{u\text{ output of }a}u^p\le2^{1-p}a^p.
 ```
 
-These tools control positive moments and local multiplicity. The reciprocal-sum problem requires a genuinely treewise packing theorem.
+These results control local multiplicity and positive moments. Reciprocal mass requires a genuinely treewise packing theorem.
 
 ---
 
@@ -318,7 +318,7 @@ The state-specific `S_10` barrier is complete. It is not a whole-tree theorem.
 
 ---
 
-## 7. Replay siblings versus simultaneous output
+## 7. Replay siblings, schedules, and forced output
 
 The replay catalog enumerates alternative outer separation choices. For example:
 
@@ -328,12 +328,6 @@ S2 factor 8: 203 alternatives.
 ```
 
 These are not automatically simultaneous deletion-DAG children.
-
-A valid Bellman row needs the outputs generated together by one complete parent resolution, followed by a proved retention and overlap convention.
-
----
-
-## 8. Schedule dependence and forced output
 
 For schedule `sigma`, define novel middle-fiber mass
 
@@ -362,33 +356,16 @@ but another valid `S_2` schedule has zero novelty. Hence
 
 Raw novelty is not parent-intrinsic.
 
-A root-forced progression is an initial progression whose own action is the only initial coordinated action capable of deleting any of its three points. Every complete schedule must select every root-forced progression.
-
-This yields a parent-intrinsic lower bound
+A root-forced progression is an initial progression whose own action is the only initial coordinated action capable of deleting any of its three points. Every complete schedule must select every root-forced progression. This yields
 
 ```math
 \sum_qH(\Xi_q^\sigma)\ge\Psi(D).
 ```
 
-Exact positive lower bounds are certified through `S_7`:
+Positive exact lower bounds are certified through `S_7`:
 
-| state | initial actions | forced actions | lower bound for `Psi` |
-|---:|---:|---:|---:|
-| `S_1` | 9 | 3 | `1/21` |
-| `S_2` | 60 | 5 | `1/18` |
-| `S_3` | 398 | 9 | `1/51` |
-| `S_4` | 2,195 | 12 | `1/200` |
-| `S_5` | 11,523 | 19 | `1/624` |
-| `S_6` | 58,708 | 28 | `1/4321` |
-| `S_7` | 298,606 | 30 | `1/14046` |
-
-For exact overlap charge `Omega_sigma`, one has
-
-```math
-\mathcal N_\sigma(D)+\Omega_\sigma(D)
-=
-\sum_qH(\Xi_q^\sigma)
-\ge\Psi(D).
+```text
+1/21,1/18,1/51,1/200,1/624,1/4321,1/14046.
 ```
 
 However,
@@ -407,15 +384,15 @@ while the factor-four debt is positive.
 
 ---
 
-## 9. Raw simultaneous transition exporter — completed layer
+## 8. Raw simultaneous transition exporter
 
-The repository now has a reusable fixed-policy raw transition exporter:
+The fixed-policy exporter
 
 ```text
 src/export_simultaneous_deletion_transition.py
 ```
 
-For one complete lexicographic coordinated schedule it records:
+records:
 
 - every selected progression and sponsor;
 - terminal outputs and residual;
@@ -428,36 +405,23 @@ For one complete lexicographic coordinated schedule it records:
 - terminal-recursive overlap;
 - exact occurrence, union, imported, novel, and duplicate masses.
 
-The certified transition frontier is:
+The certified frontier is:
 
-| parent | raw occurrences | exact state classes | duplicate classes | strict containments | partial overlaps |
+| parent | raw occurrences | state classes | duplicate classes | containments | partial overlaps |
 |---:|---:|---:|---:|---:|---:|
 | `S_1` | 5 | 4 | 1 | 1 | 0 |
 | `S_2` | 11 | 10 | 1 | 3 | 5 |
 | `S_3` | 25 | 21 | 3 | 23 | 15 |
 | `S_4` | 46 | 34 | 7 | 91 | 35 |
 | `S_5` | 68 | 51 | 11 | 145 | 88 |
+| `S_6` | 94 | 71 | 15 | 209 | 150 |
+| `S_7` | 127 | 95 | 20 | 345 | 214 |
 
-Terminal labels already present recursively are:
-
-```text
-S1: 1
-S2: 1,61
-S3: 1,61,303
-S4: 1,61,303,1597
-S5: 1,61,303,1597,8195.
-```
-
-The exporter is complete for the fixed policy at each tested parent. It deliberately emits the raw occurrence family **before** a retention quotient.
-
-**Primary references:**
-
-- `docs/simultaneous-deletion-transition-exporter.md`;
-- `docs/simultaneous-transition-frontier-s5.md`.
+The exporter is complete for the fixed policy at each tested parent. It emits the raw occurrence family **before** a retention quotient.
 
 ---
 
-## 10. Exact local occurrence packing
+## 9. Exact local occurrence packing
 
 For raw recursive shell occurrences `C_i`, define
 
@@ -471,12 +435,6 @@ Then
 
 ```math
 \sum_iH(C_i)=\sum_u\frac{m(u)}u
-```
-
-and
-
-```math
-\sum_iH(C_i)
 \le
 M H\left(\bigcup_iC_i\right).
 ```
@@ -484,18 +442,8 @@ M H\left(\bigcup_iC_i\right).
 The certified maximum multiplicities are
 
 ```text
-S1,S2,S3,S4,S5: 2,3,7,11,12.
+S1,...,S7: 2,3,7,11,12,13,16.
 ```
-
-The maximum labels at `S_3,S_4,S_5` are the incoming separation or twice that separation:
-
-```text
-S3: 303
-S4: 1597,3194
-S5: 8195,16390.
-```
-
-Worst-case multiplicity is therefore not stable even on the recorded path.
 
 The harmonic-average multiplicity
 
@@ -505,35 +453,116 @@ The harmonic-average multiplicity
 \frac{\sum_iH(C_i)}{H(\bigcup_iC_i)}
 ```
 
-satisfies
+is bounded by
 
 ```text
-S1: <8/5
-S2: <11/10
-S3: <11/10
-S4: <9/8
-S5: <9/8.
+8/5,11/10,11/10,9/8,9/8,9/8,9/8.
 ```
 
-Large multiplicity concentrates on large inherited separation labels, so local reciprocal-mass inflation remains modest. This does not bound cross-generation reuse.
-
-**Primary reference:** `docs/recursive-occurrence-multiplicity.md`.
+Worst-case multiplicity is not stable. High multiplicity concentrates on relatively large inherited labels, so local reciprocal-mass inflation remains modest. This does not control cross-generation reuse.
 
 ---
 
-## 11. Missing layer: retention and bounded reuse
+## 10. Terminal-fiber incidence and cycle obstruction
+
+Let `Q` be the terminal step set. Draw an edge
+
+```math
+q\longrightarrow u
+```
+
+when
+
+```math
+u\in Q\cap\Xi_q.
+```
+
+The graph is acyclic at `S_1` and `S_2`. At `S_3`, it contains the cycle
+
+```math
+61\longleftrightarrow303,
+```
+
+which persists through `S_6`.
+
+At `S_7`, the cyclic component expands to
+
+```math
+\boxed{\{1,5,61,303,1597,8195,323640\}}.
+```
+
+Therefore any retention potential based on a strict decreasing rank of terminal labels is false on the recorded genealogy.
+
+The `S_7` terminal-recursive overlap also includes nonhistorical labels:
+
+```text
+5,49158,323640.
+```
+
+A state containing only the latest separation or the list of historical separations is inadequate.
+
+---
+
+## 11. SCC quotient and internal-capacity no-go
+
+Collapsing the terminal-fiber graph into strongly connected components gives an acyclic condensation graph. For a component `C`, define
+
+```math
+V(C)=\sum_{u\in C}\frac1u
+```
+
+and
+
+```math
+T(C)=
+\sum_{
+(q,u)\text{ internal edge}
+}
+\frac1u.
+```
+
+For the two-cycle `C={61,303}` from `S_3` through `S_6`,
+
+```math
+T(C)=V(C),
+```
+
+so unit harmonic vertex capacity is exactly balanced.
+
+At `S_7`, the seven-label component has `24` internal edges and
+
+```math
+T(C)-V(C)
+=
+\boxed{
+\frac{43727503229099}{1043823972523464}
+}>0.
+```
+
+Equivalently,
+
+```math
+\frac{T(C)}{V(C)}
+=
+\frac{6588286581562338}{6369649065416843}
+>1.
+```
+
+Thus the SCC quotient solves graph ordering but not internal recycling. Capacity equal only to harmonic vertex mass fails at `S_7`.
+
+---
+
+## 12. Missing layer: retention and bounded reuse
 
 Exact duplicate states can be identified mechanically. They cannot automatically be discarded because different occurrences can carry different provenance and future histories.
 
-By `S_5`, the raw transition has
+By `S_7`, the raw transition has
 
 ```text
-11 exact duplicate classes
-145 strict containment relations
-88 partial overlap relations.
+20 exact duplicate classes
+345 strict containment relations
+214 partial overlap relations.
 ```
-
-Neither exact-state quotienting nor maximal-set retention resolves those overlaps.
 
 The missing theorem must specify:
 
@@ -542,15 +571,16 @@ The missing theorem must specify:
 3. how strict containment is charged;
 4. how partial overlap is charged;
 5. how terminal-recursive overlap is handled;
-6. how imported labels are matched across generations;
-7. how often the same numerical or provenance label may be charged;
-8. which discarded mass becomes controlled error.
+6. how cyclic SCC internal recycling is funded;
+7. how imported labels are matched across generations;
+8. how often the same numerical or provenance label may be charged;
+9. which discarded mass becomes controlled error.
 
 Only after this theorem may the raw payload be converted into the `children` array of a branching LP row.
 
 ---
 
-## 12. Active theorem: scale-compensated whole-tree packing
+## 13. Active theorem: scale-compensated whole-tree packing
 
 The current target is
 
@@ -576,7 +606,7 @@ The current target is
 Here:
 
 - `Child(S)` is the complete retained simultaneous family;
-- `Pack` tracks imported and duplicated provenance;
+- `Pack` tracks provenance, containment, partial overlap, and SCC internal capacity;
 - `Phi_obs` tracks target-specific rectangle, completion, and affine-obstruction deficits;
 - forced-fork mass supplies unavoidable transition output;
 - bounded reuse prevents repeated payment by the same support.
@@ -587,6 +617,7 @@ The mechanism to quantify is
 cheap replication
     -> forced middle-fiber output
     -> new obstruction support or imported overlap
+    -> cyclic component recycling or outward export
     -> completion / rectangle coverage
     -> elimination of later cheap replication.
 ```
@@ -595,20 +626,20 @@ A pathwise estimate is insufficient.
 
 ---
 
-## 13. Approved next targets
+## 14. Approved next targets
 
-1. Define and test a retention quotient on the exact `S_1` through `S_5` overlap graphs.
-2. Keep provenance edges while merging exact numerical state classes.
-3. Introduce explicit label-reuse or overlap-capacity variables.
-4. Prove bounded reuse for inherited separation labels, or export repeated reuse into smaller difference fibers.
-5. Connect forced-fork output to the 34 affine obstruction classes and rectangle support.
-6. Combine target demand, completion deficit, and packing charge in the exact rational LP harness.
-7. Emit the smallest exact failing transition whenever a candidate convention is infeasible.
+1. Attach explicit internal capacity vectors to the certified SCC quotients.
+2. Test whether internal recycling plus outgoing capacity is paid by incoming capacity plus obstruction export.
+3. Keep provenance edges while merging exact numerical state classes.
+4. Introduce label-reuse capacities for containment and partial-overlap graphs.
+5. Connect cyclic-component output to the 34 affine obstruction classes and rectangle support.
+6. Feed the proved retention convention into the exact rational LP harness.
+7. Emit the smallest exact failing transition for every candidate convention.
 8. Establish the branching Carleson inequality for all pre-basin states.
 
 ---
 
-## 14. Superseded or false targets
+## 15. Superseded or false targets
 
 Do not use without materially new hypotheses:
 
@@ -623,17 +654,26 @@ Do not use without materially new hypotheses:
 9. treating `P*Psi` as a standalone stored Bellman potential;
 10. copying raw simultaneous occurrences directly into an LP child sum;
 11. merging provenance-distinct exact duplicates without a convention;
-12. assuming a uniform local maximum-overlap constant from the recorded data;
-13. the rejected depth-ten anchor reduction.
+12. assuming a uniform local maximum-overlap constant;
+13. assigning a strict decreasing rank to terminal-fiber labels;
+14. assigning each SCC only its harmonic vertex mass as capacity;
+15. tracking only the latest or historical replication separations;
+16. the rejected depth-ten anchor reduction.
 
 ---
 
-## 15. Reproduction and navigation
+## 16. Reproduction and navigation
 
 Run the complete lightweight suite:
 
 ```bash
 bash src/run_verify_transport_reserve.sh
+```
+
+Run only the transition frontier:
+
+```bash
+bash src/run_verify_transition_frontier.sh
 ```
 
 Key documents:
@@ -642,12 +682,10 @@ Key documents:
 - `docs/transport-interval-capacity.md`;
 - `docs/branching-reserve-lp.md`;
 - `docs/simultaneous-deletion-transition-exporter.md`;
-- `docs/simultaneous-transition-frontier-s5.md`;
+- `docs/simultaneous-transition-frontier-s7.md`;
 - `docs/recursive-occurrence-multiplicity.md`;
-- `docs/s1-deletion-dag-overlap-ledger.md`;
-- `docs/s2-zero-novelty-schedule.md`;
-- `docs/lexicographic-novelty-s1-s5.md`;
-- `docs/s1-schedule-overlap-floor.md`;
+- `docs/terminal-fiber-incidence-graph.md`;
+- `docs/terminal-fiber-scc-quotient.md`;
 - `docs/forced-fork-reserve-s1-s7.md`;
 - `docs/forced-fork-bellman-no-go.md`;
 - `docs/certainty-ledger.md`;

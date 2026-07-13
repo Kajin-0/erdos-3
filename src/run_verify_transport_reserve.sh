@@ -13,6 +13,7 @@ S1_OVERLAP_SHA256="64d1680ce30699ef2c7ac53fa9b42e88e2085c442dd32ccd9178bf0c7be82
 S2_NOVEL_SHA256="c552a6146531e02b19a1416c8913287d1efa86a0520eab031899630f8ecd33d7"
 S2_ZERO_SHA256="e5d7a3bbefea78c7c5eeb85ec9155e947d00443e8c279ba6cfc72978267bf972"
 LEX_NOVELTY_SHA256="6fe0b27e20284a93ef13c4a738122c4889432c2e673d63794ccec6a7ba36c2e1"
+FORCED_FORK_SHA256="6941672cbe66bccd211f672eb5636440e63e7b3d36fb6063361dfbdc9922da27"
 
 mkdir -p "$WORK"
 
@@ -94,7 +95,14 @@ python3 "$ROOT/src/verify_lexicographic_novelty_s1_s5.py" \
 cmp "$LEX_NOVELTY_RECORDED" "$LEX_NOVELTY_GENERATED"
 verify_sha256 "$LEX_NOVELTY_GENERATED" "$LEX_NOVELTY_SHA256" "lex_novelty"
 
+FORCED_FORK_GENERATED="$WORK/forced_fork_reserve_s1_s5_certificate.txt"
+FORCED_FORK_RECORDED="$ROOT/data/forced_fork_reserve_s1_s5_certificate_2026-07-13.txt"
+python3 "$ROOT/src/verify_forced_fork_reserve_s1_s5.py" \
+  "$FORCED_FORK_GENERATED"
+cmp "$FORCED_FORK_RECORDED" "$FORCED_FORK_GENERATED"
+verify_sha256 "$FORCED_FORK_GENERATED" "$FORCED_FORK_SHA256" "forced_fork"
+
 python3 "$ROOT/src/certified_contaminated_states.py" > /dev/null
 python3 "$ROOT/src/branching_reserve_lp.py" self-test
 
-echo "verified: transport, replay, reserve diagnostics, S1-S5 DAG checks, and LP harness"
+echo "verified: transport, replay, reserve diagnostics, S1-S5 DAG checks, forced-fork reserve, and LP harness"

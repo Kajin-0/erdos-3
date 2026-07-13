@@ -20,7 +20,7 @@ import hashlib
 import sys
 
 from certified_contaminated_states import state_by_depth
-from verify_forced_fork_reserve_s1_s5 import EXPECTED
+from verify_forced_fork_reserve_s1_s7 import EXPECTED
 
 
 FACTOR_BY_PARENT_DEPTH = {

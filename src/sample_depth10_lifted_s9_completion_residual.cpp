@@ -14,6 +14,8 @@ constexpr int MAX_R4=613454687,INHERITED_MAX_R=76583775;
 constexpr long long RESIDUAL_COUNT=177844250;
 constexpr int SAMPLE_COUNT=512;
 constexpr uint64_t RESIDUAL_FNV=0x00369694f2d70526ULL;
+constexpr uint64_t SAMPLE_FNV=0x26df76d56ec920f2ULL;
+constexpr int FIRST_SAMPLE=176639281,LAST_SAMPLE=613171820;
 constexpr uint64_t FNV_OFFSET=1469598103934665603ULL,FNV_PRIME=1099511628211ULL;
 vector<int> uniq(vector<int> v){sort(v.begin(),v.end());v.erase(unique(v.begin(),v.end()),v.end());return v;}
 vector<int> raw(const vector<int>&s,int R){vector<int>o;o.reserve(3*(s.size()+1));for(int k=0;k<3;k++)o.push_back(k*R);for(int x:s)for(int k=0;k<3;k++)o.push_back(x+k*R);return uniq(move(o));}
@@ -59,6 +61,7 @@ int main(int argc,char**argv){try{
  if(next!=SAMPLE_COUNT)throw runtime_error("sample rank mismatch");
  uint64_t sample_hash=FNV_OFFSET;
  for(int R:samples) hash_value(sample_hash,R);
+ if(samples.front()!=FIRST_SAMPLE||samples.back()!=LAST_SAMPLE||sample_hash!=SAMPLE_FNV)throw runtime_error("sample audit mismatch");
  ofstream out(argv[3]);if(!out)throw runtime_error("cannot write output");
  out<<"index rank separation signed_u abs_u\n";
  for(int j=0;j<SAMPLE_COUNT;j++){long long u=1LL*samples[j]-4LL*R9;out<<j<<" "<<targets[j]<<" "<<samples[j]<<" "<<u<<" "<<llabs(u)<<"\n";}

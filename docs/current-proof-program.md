@@ -44,17 +44,17 @@ H(Q)+\sum_qH(\Xi_q)+H(\mathcal B(D))
 2H(D)-\frac{r_3(N)}N-\frac1N.
 ```
 
-Every recursive output must be resolved into standard dyadic shells. For `p>=1`, the binary genealogy satisfies
+Every recursive output is resolved into standard dyadic shells. For `p>=1`,
 
 ```math
 \sum_{u\text{ output of }a}u^p\le2^{1-p}a^p.
 ```
 
-These results control local multiplicity and positive moments. Reciprocal mass requires a genuinely treewise packing theorem.
+These facts control local multiplicity and positive moments. Reciprocal mass requires a whole-tree packing theorem.
 
 ---
 
-## 2. Exact uncontaminated benchmark
+## 2. Exact benchmark and contaminated obstruction
 
 The aligned-diamond recursion has
 
@@ -70,31 +70,23 @@ so
 P_h\asymp |S_h|^{\log_3 2}.
 ```
 
-There is a certified infinite exact scale-eight family with
+The exact scale-eight family satisfies
 
 ```math
 L_h=8^{h+1},
 \qquad
-P_h=\frac12L_h^{1/3}.
+P_h=\frac12L_h^{1/3},
 ```
 
-Inside the exact equal-translate model,
+and
 
 ```math
 P_h\alpha_h\le C_0(3/4)^h,
-```
-
-and therefore
-
-```math
+\qquad
 \sum_hP_h\alpha_h\le4C_0.
 ```
 
-Thus the exact uncontaminated model is summable.
-
----
-
-## 3. Contaminated path obstruction
+Thus the uncontaminated model is summable.
 
 A certified contaminated genealogy has scale word
 
@@ -102,41 +94,17 @@ A certified contaminated genealogy has scale word
 \boxed{4,8,4,4,8,4,8,8,8}
 ```
 
-through `S_10`.
-
-With
-
-```math
-W_h=P_h\frac{|S_h|}{L_h},
-```
-
-one has
+through `S_10`, and
 
 ```math
 \frac{W_5}{W_1}=\frac{91}{32}>1.
 ```
 
-At depth ten,
-
-```math
-L_{10}=536870912,
-\qquad
-|S_{10}|=265719,
-\qquad
-P_{10}=1024,
-```
-
-and
-
-```math
-W_{10}=\frac{265719}{524288}.
-```
-
-Universal one-step contraction, fixed short-window contraction, and universal two-generation recovery are false. Recovery is path-dependent.
+Universal one-step contraction, fixed short-window contraction, and universal two-generation recovery are false.
 
 ---
 
-## 4. Exact factor-eight basin and Bellman debt
+## 3. Exact factor-eight basin and Bellman debt
 
 Every valid positive exact factor-eight child of `S_10` has a certified infinite exact continuation. The complete fan contains
 
@@ -150,21 +118,13 @@ valid children, and every exact tail has charge
 \sum_{n\ge0}W_{10+n}=\frac{33215}{16384}.
 ```
 
-For constant exact scale factor `c>6`, the affine future-cost function is
+For constant exact scale factor `c>6`,
 
 ```math
 \mathfrak B_c(N,P,L)
 =
 \frac{cP}{(c-6)L}
 \left(N+\frac6{c-2}\right).
-```
-
-For one disjoint three-translate step,
-
-```math
-\mathfrak B-W-\mathfrak B'
-=
-\frac{P(3N+4)}L\left(1-\frac8c\right).
 ```
 
 The positive cheap-step debt for `c<8` is
@@ -179,23 +139,15 @@ Factors `2` and `4` create debt, factor `8` is neutral, and larger factors creat
 
 ---
 
-## 5. State-independent affine obstruction language
+## 4. Affine obstruction language and the depth-ten barrier
 
-For
-
-```math
-G_R(B)=B\cup(B+R)\cup(B+2R),
-```
-
-nonconstant layer words reduce, after normalization and reversal, to exactly
+Three-translate layer words reduce to exactly
 
 ```math
 \boxed{34}
 ```
 
-affine obstruction classes.
-
-Define
+affine obstruction classes. With
 
 ```math
 r_\lambda=\lambda_1-\lambda_0,
@@ -214,122 +166,64 @@ and
 ```math
 \mathcal F_B(A,C;Q)
 =
-\#\{(x,d):
- x,x+d,x+2d-A,x+3d-(2A+C)\in B,
-\ d+Q\ne0\}.
+\#\{(x,d):x,x+d,x+2d-A,x+3d-(2A+C)\in B,\ d+Q\ne0\},
 ```
 
-Then
+one has
 
 ```math
 \Gamma_\lambda(B;R)
 =
-\mathcal F_B(a_\lambda R,b_\lambda R;r_\lambda R),
+\mathcal F_B(a_\lambda R,b_\lambda R;r_\lambda R)
 ```
 
-and the exact two-scale recurrence is
+and an exact two-scale recurrence.
+
+At `S_10`, the complete factor-four candidate domain splits as
 
 ```math
-\widetilde\Gamma_\lambda(G_S(B);T)
-=
-\sum_\mu
-\mathcal F_B(
- a_\lambda T+a_\mu S,
- b_\lambda T+b_\mu S;
- r_\lambda T+r_\mu S
-).
+33026376+137142200+177844250=348012826.
 ```
 
-This is the state-independent arithmetic framework for contamination growth.
-
----
-
-## 6. Complete depth-ten cheap-extension barrier
-
-The complete factor-four domain from `S_10` contains
-
-```math
-348012826
-```
-
-candidates, partitioned as
-
-```math
-33026376+137142200+177844250.
-```
-
-Inheritance removes the first block and lifted completion support removes the second. The residual interval is
+Inheritance removes the first block, lifted completion support removes the second, and direct rectangle transport removes the residual interval
 
 ```math
 I_{10}=[97474324,613454687].
 ```
 
-For
-
-```math
-B_9=\{0\}\cup S_9,
-```
-
-the exact direct rectangle-support theorem gives
-
-```math
-\mathcal F_{B_9}(U,-U;0)>0
-\quad
-\text{for }1\le U\le76583776.
-```
-
-With
-
-```math
-S=134217729,
-```
-
-the four transport windows centered at `S,2S,3S,4S` coalesce when
-
-```math
-2U+1\ge S.
-```
-
-For a target interval `I`, define
+For target interval `I`, define
 
 ```math
 q_S(I)=\max_{T\in I}\min_{1\le k\le4}|T-kS|.
 ```
 
-At `I_{10}`,
+At the recorded residual,
 
 ```math
 q_S(I_{10})=76583771,
 ```
 
-so the true closure margin is
+while available direct support reaches `76583776`. The exact closure margin is
 
 ```math
-76583776-76583771=\boxed{5}.
+\boxed5.
 ```
 
-This proves
+Therefore
 
 ```math
 \boxed{N_{10,2}=N_{10,4}=0.}
 ```
 
-The state-specific `S_10` barrier is complete. It is not a whole-tree theorem.
+This is a complete state-specific barrier, not a whole-tree theorem.
 
 ---
 
-## 7. Replay siblings, schedules, and forced output
+## 5. Schedule dependence and forced output
 
-The replay catalog enumerates alternative outer separation choices. For example:
+Replay catalogs enumerate alternative continuation choices, not simultaneous children.
 
-```text
-S1 factor 4: 4 alternatives
-S2 factor 8: 203 alternatives.
-```
-
-These are not automatically simultaneous deletion-DAG children.
-
-For schedule `sigma`, define novel middle-fiber mass
+For schedule `sigma`, define
 
 ```math
 \mathcal N_\sigma(D)
@@ -340,15 +234,7 @@ H\left(
 \right).
 ```
 
-Every coordinated schedule on `S_1` has zero novelty. The lexicographic `S_2` schedule has
-
-```math
-\mathcal N_{\rm lex}(S_2)
-=
-\frac{239396453}{200655312}>0,
-```
-
-but another valid `S_2` schedule has zero novelty. Hence
+Every coordinated schedule on `S_1` has zero novelty. The lexicographic `S_2` schedule has positive novelty, but another valid `S_2` schedule has zero novelty. Hence
 
 ```math
 \min_\sigma\mathcal N_\sigma(S_2)=0.
@@ -356,58 +242,27 @@ but another valid `S_2` schedule has zero novelty. Hence
 
 Raw novelty is not parent-intrinsic.
 
-A root-forced progression is an initial progression whose own action is the only initial coordinated action capable of deleting any of its three points. Every complete schedule must select every root-forced progression. This yields
+A root-forced progression must be selected in every complete coordinated schedule. This gives
 
 ```math
 \sum_qH(\Xi_q^\sigma)\ge\Psi(D).
 ```
 
-Positive exact lower bounds are certified through `S_7`:
-
-```text
-1/21,1/18,1/51,1/200,1/624,1/4321,1/14046.
-```
-
-However,
+Positive lower bounds are certified through `S_7`, but
 
 ```math
 F(S)=P\Psi(S)
 ```
 
-is not a standalone Bellman potential. On `S_1 -> S_2`,
-
-```math
-F(S_1)-F(S_2)<0
-```
-
-while the factor-four debt is positive.
+is not a standalone Bellman potential: `F(S_1)-F(S_2)<0` while the factor-four debt is positive.
 
 ---
 
-## 8. Raw simultaneous transition exporter
+## 6. Raw simultaneous transition frontier
 
-The fixed-policy exporter
+The fixed-policy exporter records the complete raw simultaneous occurrence family, including schedule, shell resolution, point-level provenance, exact duplicate classes, strict containments, partial overlap, terminal-recursive overlap, and exact mass ledgers.
 
-```text
-src/export_simultaneous_deletion_transition.py
-```
-
-records:
-
-- every selected progression and sponsor;
-- terminal outputs and residual;
-- backbone and middle fibers;
-- every standard-dyadic recursive shell occurrence;
-- point-level provenance;
-- exact duplicate state classes;
-- strict containments;
-- partial overlaps;
-- terminal-recursive overlap;
-- exact occurrence, union, imported, novel, and duplicate masses.
-
-The certified frontier is:
-
-| parent | raw occurrences | state classes | duplicate classes | containments | partial overlaps |
+| parent | occurrences | state classes | duplicate classes | containments | partial overlaps |
 |---:|---:|---:|---:|---:|---:|
 | `S_1` | 5 | 4 | 1 | 1 | 0 |
 | `S_2` | 11 | 10 | 1 | 3 | 5 |
@@ -417,13 +272,13 @@ The certified frontier is:
 | `S_6` | 94 | 71 | 15 | 209 | 150 |
 | `S_7` | 127 | 95 | 20 | 345 | 214 |
 
-The exporter is complete for the fixed policy at each tested parent. It emits the raw occurrence family **before** a retention quotient.
+The payload is before any retention quotient and is not a Bellman child list.
 
 ---
 
-## 9. Exact local occurrence packing
+## 7. Local occurrence packing
 
-For raw recursive shell occurrences `C_i`, define
+For raw recursive occurrences `C_i`, define
 
 ```math
 m(u)=|\{i:u\in C_i\}|,
@@ -439,73 +294,41 @@ Then
 M H\left(\bigcup_iC_i\right).
 ```
 
-The certified maximum multiplicities are
+The certified maxima through `S_7` are
 
 ```text
-S1,...,S7: 2,3,7,11,12,13,16.
+2,3,7,11,12,13,16.
 ```
 
-The harmonic-average multiplicity
-
-```math
-\overline m_H
-=
-\frac{\sum_iH(C_i)}{H(\bigcup_iC_i)}
-```
-
-is bounded by
-
-```text
-8/5,11/10,11/10,9/8,9/8,9/8,9/8.
-```
-
-Worst-case multiplicity is not stable. High multiplicity concentrates on relatively large inherited labels, so local reciprocal-mass inflation remains modest. This does not control cross-generation reuse.
+The harmonic-average multiplicity remains below the certified constants `8/5`, `11/10`, or `9/8`. Worst-case multiplicity is unstable; local harmonic control does not imply bounded cross-generation reuse.
 
 ---
 
-## 10. Terminal-fiber incidence and cycle obstruction
+## 8. Terminal-fiber incidence and SCC quotient
 
-Let `Q` be the terminal step set. Draw an edge
+Draw an edge
 
 ```math
 q\longrightarrow u
 ```
 
-when
+when `q` and `u` are terminal steps and `u in Xi_q`.
+
+The graph contains the cycle
 
 ```math
-u\in Q\cap\Xi_q.
+61\longleftrightarrow303
 ```
 
-The graph is acyclic at `S_1` and `S_2`. At `S_3`, it contains the cycle
-
-```math
-61\longleftrightarrow303,
-```
-
-which persists through `S_6`.
-
-At `S_7`, the cyclic component expands to
+at `S_3`, persisting through `S_6`. At `S_7`, the cyclic component becomes
 
 ```math
 \boxed{\{1,5,61,303,1597,8195,323640\}}.
 ```
 
-Therefore any retention potential based on a strict decreasing rank of terminal labels is false on the recorded genealogy.
+Thus no strict decreasing rank of terminal labels can orient every recursive incidence.
 
-The `S_7` terminal-recursive overlap also includes nonhistorical labels:
-
-```text
-5,49158,323640.
-```
-
-A state containing only the latest separation or the list of historical separations is inadequate.
-
----
-
-## 11. SCC quotient and internal-capacity no-go
-
-Collapsing the terminal-fiber graph into strongly connected components gives an acyclic condensation graph. For a component `C`, define
+Collapsing strongly connected components gives an acyclic condensation graph. For a component `C`, define
 
 ```math
 V(C)=\sum_{u\in C}\frac1u
@@ -514,75 +337,98 @@ V(C)=\sum_{u\in C}\frac1u
 and
 
 ```math
-T(C)=
-\sum_{
-(q,u)\text{ internal edge}
-}
-\frac1u.
+T(C)=\sum_{(q,u)\text{ internal edge}}\frac1u.
 ```
 
-For the two-cycle `C={61,303}` from `S_3` through `S_6`,
-
-```math
-T(C)=V(C),
-```
-
-so unit harmonic vertex capacity is exactly balanced.
-
-At `S_7`, the seven-label component has `24` internal edges and
+For `C={61,303}` through `S_6`, `T(C)=V(C)`. At `S_7`,
 
 ```math
 T(C)-V(C)
 =
-\boxed{
-\frac{43727503229099}{1043823972523464}
-}>0.
+\frac{43727503229099}{1043823972523464}>0.
 ```
 
-Equivalently,
-
-```math
-\frac{T(C)}{V(C)}
-=
-\frac{6588286581562338}{6369649065416843}
->1.
-```
-
-Thus the SCC quotient solves graph ordering but not internal recycling. Capacity equal only to harmonic vertex mass fails at `S_7`.
+Therefore harmonic vertex mass alone is not sufficient component capacity.
 
 ---
 
-## 12. Missing layer: retention and bounded reuse
+## 9. Exact spectral-growth obstruction
 
-Exact duplicate states can be identified mechanically. They cannot automatically be discarded because different occurrences can carry different provenance and future histories.
+Let `A` be the internal adjacency matrix of a cyclic component. A positive linear capacity vector satisfying
 
-By `S_7`, the raw transition has
+```math
+Aw\le\lambda w
+```
+
+requires `lambda` at least the Perron spectral radius.
+
+For the two-label component through `S_6`,
+
+```math
+A=
+\begin{pmatrix}0&1\\1&0\end{pmatrix},
+\qquad
+\rho(A)=1.
+```
+
+For the seven-label `S_7` component, the integer vector
+
+```math
+w=(43,59,31,31,14,10,26)^T
+```
+
+satisfies
+
+```math
+9Aw-23w>0
+```
+
+and
+
+```math
+8w-3Aw>0.
+```
+
+By Collatz-Wielandt,
+
+```math
+\boxed{
+\frac{23}{9}<\rho(A)<\frac83.
+}
+```
+
+Consequently no positive linear internal capacity is nonexpanding or even factor-two contractive on the recorded `S_7` component. External obstruction export, nonlinear capacity, or multi-generation amortization is mandatory.
+
+---
+
+## 10. Missing retention theorem
+
+By `S_7`, the raw transition contains
 
 ```text
 20 exact duplicate classes
-345 strict containment relations
-214 partial overlap relations.
+345 strict containments
+214 partial overlaps.
 ```
 
 The missing theorem must specify:
 
 1. which exact duplicates merge;
 2. how provenance multiplicity is retained;
-3. how strict containment is charged;
-4. how partial overlap is charged;
-5. how terminal-recursive overlap is handled;
-6. how cyclic SCC internal recycling is funded;
-7. how imported labels are matched across generations;
-8. how often the same numerical or provenance label may be charged;
-9. which discarded mass becomes controlled error.
+3. how containment and partial overlap are charged;
+4. how terminal-recursive overlap is handled;
+5. how SCC internal recycling is funded;
+6. how imported labels are matched across generations;
+7. how repeated numerical or provenance support is bounded;
+8. which discarded mass becomes controlled error.
 
-Only after this theorem may the raw payload be converted into the `children` array of a branching LP row.
+Only then may the raw payload become the `children` array of a branching LP row.
 
 ---
 
-## 13. Active theorem: scale-compensated whole-tree packing
+## 11. Active theorem
 
-The current target is
+The target is a scale-compensated whole-tree inequality
 
 ```math
 \boxed{
@@ -590,79 +436,71 @@ The current target is
 +
 \sum_{S'\in\operatorname{Child}(S)}
 \left(
-\operatorname{Pack}(S')
-+
+\operatorname{Pack}(S')+
 \Phi_{\rm obs}(S')
 \right)
 \le
-\operatorname{Pack}(S)
-+
-\Phi_{\rm obs}(S)
-+
+\operatorname{Pack}(S)+
+\Phi_{\rm obs}(S)+
 \operatorname{controlled\ error}.
 }
 ```
 
-Here:
+Here `Pack` must track provenance, overlap, SCC internal capacity, and bounded reuse. `Phi_obs` must track affine obstruction, completion, rectangle support, and target demand.
 
-- `Child(S)` is the complete retained simultaneous family;
-- `Pack` tracks provenance, containment, partial overlap, and SCC internal capacity;
-- `Phi_obs` tracks target-specific rectangle, completion, and affine-obstruction deficits;
-- forced-fork mass supplies unavoidable transition output;
-- bounded reuse prevents repeated payment by the same support.
+The next finite experiment should test whether
 
-The mechanism to quantify is
-
-```text
-cheap replication
-    -> forced middle-fiber output
-    -> new obstruction support or imported overlap
-    -> cyclic component recycling or outward export
-    -> completion / rectangle coverage
-    -> elimination of later cheap replication.
+```math
+\text{internal recycling}
++
+\text{outgoing capacity}
+\le
+\text{incoming capacity}
++
+\text{obstruction export}
 ```
 
-A pathwise estimate is insufficient.
+holds on the certified `S_1` through `S_7` transitions.
 
 ---
 
-## 14. Approved next targets
+## 12. Approved next targets
 
-1. Attach explicit internal capacity vectors to the certified SCC quotients.
-2. Test whether internal recycling plus outgoing capacity is paid by incoming capacity plus obstruction export.
-3. Keep provenance edges while merging exact numerical state classes.
-4. Introduce label-reuse capacities for containment and partial-overlap graphs.
-5. Connect cyclic-component output to the 34 affine obstruction classes and rectangle support.
-6. Feed the proved retention convention into the exact rational LP harness.
-7. Emit the smallest exact failing transition for every candidate convention.
-8. Establish the branching Carleson inequality for all pre-basin states.
+1. Attach explicit internal and outgoing capacity vectors to the SCC quotients.
+2. Quantify export from cyclic terminal labels into nonterminal fibers and affine obstruction classes.
+3. Preserve provenance while merging exact numerical state classes.
+4. Introduce capacity constraints for containment and partial-overlap graphs.
+5. Feed a proved retention convention into the exact rational LP harness.
+6. Emit the smallest exact failing transition for each candidate convention.
+7. Establish the branching Carleson inequality for all pre-basin states.
 
 ---
 
-## 15. Superseded or false targets
+## 13. Superseded or false targets
 
 Do not use without materially new hypotheses:
 
-1. universal local `3/4` contraction in contaminated states;
+1. universal local `3/4` contraction;
 2. fixed short-window contraction;
 3. universal two-generation recovery;
-4. extrapolating one path or one exact fan to the full tree;
-5. treating replay siblings as simultaneous children;
-6. treating pathwise summability as sufficient;
-7. treating `nu(B)/S>1/2` as a complete target reserve;
-8. treating novel fiber mass as schedule independent;
-9. treating `P*Psi` as a standalone stored Bellman potential;
-10. copying raw simultaneous occurrences directly into an LP child sum;
-11. merging provenance-distinct exact duplicates without a convention;
-12. assuming a uniform local maximum-overlap constant;
-13. assigning a strict decreasing rank to terminal-fiber labels;
-14. assigning each SCC only its harmonic vertex mass as capacity;
-15. tracking only the latest or historical replication separations;
-16. the rejected depth-ten anchor reduction.
+4. extrapolating one path or exact fan to the full tree;
+5. replay siblings as simultaneous children;
+6. pathwise summability as sufficient;
+7. radius without target demand;
+8. raw novelty as schedule independent;
+9. `P Psi` as a standalone Bellman potential;
+10. raw occurrences copied directly into an LP child list;
+11. exact-state quotienting as a containment solution;
+12. a uniform maximum-overlap constant;
+13. a strict decreasing terminal-label rank;
+14. latest- or historical-separation-only state;
+15. unit harmonic SCC capacity;
+16. any positive linear SCC capacity with contraction factor at most two on the recorded `S_7` component;
+17. the rejected depth-ten anchor reduction.
 
 ---
 
-## 16. Reproduction and navigation
+## 14. Reproduction
 
 Run the complete lightweight suite:
 
@@ -678,15 +516,12 @@ bash src/run_verify_transition_frontier.sh
 
 Key documents:
 
-- `docs/complete-depth-ten-factor-four-exclusion.md`;
 - `docs/transport-interval-capacity.md`;
 - `docs/branching-reserve-lp.md`;
-- `docs/simultaneous-deletion-transition-exporter.md`;
 - `docs/simultaneous-transition-frontier-s7.md`;
 - `docs/recursive-occurrence-multiplicity.md`;
 - `docs/terminal-fiber-incidence-graph.md`;
 - `docs/terminal-fiber-scc-quotient.md`;
-- `docs/forced-fork-reserve-s1-s7.md`;
-- `docs/forced-fork-bellman-no-go.md`;
+- `docs/terminal-fiber-scc-spectral-growth.md`;
 - `docs/certainty-ledger.md`;
 - `docs/research-decision-history.md`.

@@ -9,6 +9,7 @@ REPLAY_SHA256="9c76d18a0c90f2818a47d39ecb9e8067c3b0f5663bd1daf252356e765e6d781d"
 NAIVE_NO_GO_SHA256="67a8f08bdaacb838a364079c9fe9e03f7fcf3ae8325ba4aee970c997791664b8"
 S1_DAG_SHA256="e31c232158b2abed03ebf7ec12e60d44ef14cff9ae7e066afaa645c80dd9b639"
 S1_ALL_SHA256="8a0726c30041eba72d047924922cfc7c1ba756c63d58da3a04d92f27919273cc"
+S1_OVERLAP_SHA256="64d1680ce30699ef2c7ac53fa9b42e88e2085c442dd32ccd9178bf0c7be828aa"
 S2_NOVEL_SHA256="c552a6146531e02b19a1416c8913287d1efa86a0520eab031899630f8ecd33d7"
 S2_ZERO_SHA256="e5d7a3bbefea78c7c5eeb85ec9155e947d00443e8c279ba6cfc72978267bf972"
 LEX_NOVELTY_SHA256="6fe0b27e20284a93ef13c4a738122c4889432c2e673d63794ccec6a7ba36c2e1"
@@ -64,6 +65,13 @@ python3 "$ROOT/src/verify_s1_all_deletion_schedules.py" \
   "$S1_ALL_GENERATED"
 cmp "$S1_ALL_RECORDED" "$S1_ALL_GENERATED"
 verify_sha256 "$S1_ALL_GENERATED" "$S1_ALL_SHA256" "s1_all"
+
+S1_OVERLAP_GENERATED="$WORK/s1_schedule_overlap_floor_certificate.txt"
+S1_OVERLAP_RECORDED="$ROOT/data/s1_schedule_overlap_floor_certificate_2026-07-13.txt"
+python3 "$ROOT/src/verify_s1_schedule_overlap_floor.py" \
+  "$S1_OVERLAP_GENERATED"
+cmp "$S1_OVERLAP_RECORDED" "$S1_OVERLAP_GENERATED"
+verify_sha256 "$S1_OVERLAP_GENERATED" "$S1_OVERLAP_SHA256" "s1_overlap"
 
 S2_NOVEL_GENERATED="$WORK/s2_novel_fiber_reference_certificate.txt"
 S2_NOVEL_RECORDED="$ROOT/data/s2_novel_fiber_reference_certificate_2026-07-13.txt"

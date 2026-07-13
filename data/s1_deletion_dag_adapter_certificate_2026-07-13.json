@@ -1,0 +1,272 @@
+{
+  "backbone": [
+    1,
+    2,
+    16,
+    17,
+    18,
+    21,
+    22,
+    23,
+    26,
+    27,
+    28
+  ],
+  "certificate": "S1 deterministic coordinated deletion-DAG adapter",
+  "exact_duplicate_groups": [
+    [
+      0,
+      4
+    ]
+  ],
+  "interpretation": {
+    "all_middle_fibers_contained_in_backbone": true,
+    "bellman_row_status": "blocked_pending_overlap_and_retention_convention",
+    "exact_duplicate_classes": 1,
+    "simultaneous_recursive_occurrences": 5,
+    "strict_containment_relations": 1
+  },
+  "mass_ledger": {
+    "recursive_distinct_union_mass": "46488647/24154416",
+    "recursive_duplicate_mass": "5017/4368",
+    "recursive_occurrence_mass": "259811791/84540456",
+    "terminal_occurrence_mass": "6/5",
+    "total_distinct_label_mass": "256597651/120772080",
+    "total_duplicate_mass": "9385/4368",
+    "total_output_occurrence_mass": "1806301691/422702280"
+  },
+  "middle_fibers": {
+    "1": [
+      16,
+      21,
+      26
+    ],
+    "5": [
+      1
+    ]
+  },
+  "parent": {
+    "depth": 1,
+    "scale": 64,
+    "size": 12,
+    "values": [
+      64,
+      65,
+      66,
+      80,
+      81,
+      82,
+      85,
+      86,
+      87,
+      90,
+      91,
+      92
+    ]
+  },
+  "residual": [
+    65,
+    66,
+    86,
+    87,
+    91,
+    92
+  ],
+  "schedule_rule": "lexicographically smallest (step,left,middle,right); left sponsor for even v2(step), right sponsor for odd v2(step)",
+  "selected_progressions": [
+    {
+      "middle": 65,
+      "opposite": 66,
+      "ordered_progression": [
+        64,
+        65,
+        66
+      ],
+      "sponsor": 64,
+      "step": 1,
+      "time": 1
+    },
+    {
+      "middle": 81,
+      "opposite": 82,
+      "ordered_progression": [
+        80,
+        81,
+        82
+      ],
+      "sponsor": 80,
+      "step": 1,
+      "time": 2
+    },
+    {
+      "middle": 86,
+      "opposite": 87,
+      "ordered_progression": [
+        85,
+        86,
+        87
+      ],
+      "sponsor": 85,
+      "step": 1,
+      "time": 3
+    },
+    {
+      "middle": 91,
+      "opposite": 92,
+      "ordered_progression": [
+        90,
+        91,
+        92
+      ],
+      "sponsor": 90,
+      "step": 1,
+      "time": 4
+    },
+    {
+      "middle": 86,
+      "opposite": 91,
+      "ordered_progression": [
+        81,
+        86,
+        91
+      ],
+      "sponsor": 81,
+      "step": 5,
+      "time": 5
+    },
+    {
+      "middle": 87,
+      "opposite": 92,
+      "ordered_progression": [
+        82,
+        87,
+        92
+      ],
+      "sponsor": 82,
+      "step": 5,
+      "time": 6
+    }
+  ],
+  "shell_occurrences": [
+    {
+      "harmonic_mass": "1",
+      "index": 0,
+      "provenance_sponsors_or_parents": [
+        65
+      ],
+      "shell_exponent": 0,
+      "shell_interval": [
+        1,
+        2
+      ],
+      "source": "backbone",
+      "source_step": null,
+      "values": [
+        1
+      ]
+    },
+    {
+      "harmonic_mass": "1/2",
+      "index": 1,
+      "provenance_sponsors_or_parents": [
+        66
+      ],
+      "shell_exponent": 1,
+      "shell_interval": [
+        2,
+        4
+      ],
+      "source": "backbone",
+      "source_step": null,
+      "values": [
+        2
+      ]
+    },
+    {
+      "harmonic_mass": "10257023/24154416",
+      "index": 2,
+      "provenance_sponsors_or_parents": [
+        80,
+        81,
+        82,
+        85,
+        86,
+        87,
+        90,
+        91,
+        92
+      ],
+      "shell_exponent": 4,
+      "shell_interval": [
+        16,
+        32
+      ],
+      "source": "backbone",
+      "source_step": null,
+      "values": [
+        16,
+        17,
+        18,
+        21,
+        22,
+        23,
+        26,
+        27,
+        28
+      ]
+    },
+    {
+      "harmonic_mass": "649/4368",
+      "index": 3,
+      "provenance_sponsors_or_parents": [
+        80,
+        85,
+        90
+      ],
+      "shell_exponent": 4,
+      "shell_interval": [
+        16,
+        32
+      ],
+      "source": "middle_fiber",
+      "source_step": 1,
+      "values": [
+        16,
+        21,
+        26
+      ]
+    },
+    {
+      "harmonic_mass": "1",
+      "index": 4,
+      "provenance_sponsors_or_parents": [
+        82
+      ],
+      "shell_exponent": 0,
+      "shell_interval": [
+        1,
+        2
+      ],
+      "source": "middle_fiber",
+      "source_step": 5,
+      "values": [
+        1
+      ]
+    }
+  ],
+  "status": "exact finite schedule-specific certificate",
+  "strict_containments": [
+    [
+      3,
+      2
+    ]
+  ],
+  "terminal_step_provenance": {
+    "1": 64,
+    "5": 81
+  },
+  "terminal_steps": [
+    1,
+    5
+  ]
+}

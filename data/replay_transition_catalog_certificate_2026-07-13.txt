@@ -1,0 +1,14 @@
+REPLAY TRANSITION CATALOG SELF-TEST
+
+model=standard_dyadic_disjoint_three_translate_replay
+semantics=alternative_continuation_siblings_not_simultaneous_children
+S1_factor2_valid=0
+S1_factor4_valid=4
+S1_factor4_separations=61,68,69,71
+S1_factor4_contamination=4,1,1,1
+S2_factor2_valid=0
+S2_factor4_valid=0
+S2_factor8_valid=203
+S2_factor8_first=303
+S2_factor8_last=788
+S1_factor4_catalog_sha256=ca97331f99bfb3391a985a8d3ec2b5a52cd22c5ccf3e68b401ef551463069897

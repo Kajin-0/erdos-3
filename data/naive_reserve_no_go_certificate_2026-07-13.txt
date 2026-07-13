@@ -1,0 +1,20 @@
+NAIVE RESERVE COORDINATE NO-GO
+
+transition=S6_to_S7
+factor=4
+parent_scale=262144
+parent_size=3279
+parent_persistence=64
+child_scale=1048576
+child_size=9840
+child_persistence=128
+bellman_debt=9841/4096
+parent_minus_child_weighted_density=-1641/4096
+parent_minus_child_right_shell_slack=-52437/8192
+parent_minus_child_incoming_contamination_mass=-1/4096
+
+For nonnegative weights a,b,c:
+Phi=a*weighted_density+b*right_shell_slack+c*incoming_contamination_mass
+Phi(S6)-Phi(S7)<=0
+required_drop=9841/4096>0
+conclusion=no_nonnegative_linear_combination_can_pay_this_step

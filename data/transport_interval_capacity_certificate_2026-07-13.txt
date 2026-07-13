@@ -1,0 +1,31 @@
+FOUR-RATIO TRANSPORT INTERVAL CAPACITY
+
+state_independent_checks=verified
+ratios=1,2,3,4
+integer_coalescence_condition=2U+1>=S
+target_radius_formula=max_{T in I} min_k |T-kS|
+pure_layer_boundary_witnesses=verified
+
+S=134217729
+available_radius=76583776
+normalized_available_radius=76583776/134217729
+integer_overlap_threshold=67108864
+overlap_excess=9474912
+target_interval=97474324,613454687
+target_points=515980364
+required_radius=76583771
+normalized_required_radius=76583771/134217729
+closure_margin=5
+covered_target_points=515980364
+uncovered_target_points=0
+windows:
+  k=1 57633953 210801505
+  k=2 191851682 345019234
+  k=3 326069411 479236963
+  k=4 460287140 613454692
+merged_windows:
+  57633953 613454692
+
+conclusion: the recorded B9 direct-support radius exceeds the exact
+radius required to cover the complete S10 factor-four residual by 5.
+The large overlap excess does not imply a large endpoint margin.

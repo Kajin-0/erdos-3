@@ -2,7 +2,8 @@
 
 ## Status
 
-Exact fixed-policy path theorem and exact finite uniqueness result.
+Exact fixed-policy path theorem, exact finite uniqueness result, and exact
+same-generation isolation result.
 
 A novel shell-resolved middle-fiber child emitted by the `S_7` cyclic
 terminal-fiber component regenerates the canonical state `S_1` in one valid
@@ -13,9 +14,13 @@ Among all `62` exact cyclic-source shell states and both factor-two and
 factor-four extensions, this is the unique exact regeneration of any canonical
 state `S_1,...,S_10`.
 
-This is a structural recurrence inside the replay genealogy. It is not yet a
-whole-tree theorem because the retention quotient for simultaneous raw outputs
-has not been proved.
+The occurrence is numerically disjoint from every other recursive shell and
+from every terminal output in the complete raw `S_7` transition. Thus its
+immediate retention issue is not an exact duplicate, containment, partial
+overlap, backbone overlap, or terminal-recursive overlap.
+
+This remains a replay-path theorem rather than a whole-tree theorem because a
+global retention and packing convention has not yet been proved.
 
 **Verifier:** `src/verify_s7_scc_seed_regeneration.py`.
 
@@ -24,7 +29,7 @@ has not been proved.
 Certificate SHA-256:
 
 ```text
-b05c5b91ba5b148a1dbe999edc0617a5370889f4244cd66553c9d7a8c6ee9679
+03da3a4d6a2a878b9ca3ba45d0862932ba06512a9697bd828f7fc73e5883421c
 ```
 
 ---
@@ -50,7 +55,36 @@ small-state affine test for both factor two and factor four.
 
 ---
 
-## 2. Exact return to `S_1`
+## 2. Exact same-generation isolation
+
+The complete `S_7` raw transition has `127` recursive shell occurrences. The
+verifier compares the numerical label set `{16,21,26}` with all other `126`
+occurrences and with the complete terminal-step set.
+
+It proves
+
+```text
+recursive overlap count = 0
+terminal overlap count = 0.
+```
+
+Therefore each of the labels `16`, `21`, and `26` appears only in this
+recursive occurrence among the raw simultaneous outputs being tested.
+
+This is stronger than exact-state uniqueness. The seed is not contained in a
+larger shell, does not partially intersect another shell, and does not share a
+terminal label.
+
+Consequently, a future retention quotient cannot eliminate this occurrence by
+merging it into a numerically overlapping output. Discarding it would require a
+separately justified controlled-error or domination rule.
+
+This statement is local to the recorded `S_7` transition; it does not bound
+reuse of the restarted geometry in later generations.
+
+---
+
+## 3. Exact return to `S_1`
 
 Adjoin the global anchor zero and take three translates with separation
 
@@ -105,7 +139,7 @@ The equality is numerical, not merely affine-isomorphic.
 
 ---
 
-## 3. Uniqueness on the certified cyclic-source frontier
+## 4. Uniqueness on the cyclic-source frontier
 
 The verifier groups the `63` cyclic-source shell occurrences into `62` exact
 numerical states. For every state `Y` and each factor
@@ -131,7 +165,7 @@ return after more than one intervening generation.
 
 ---
 
-## 4. Certified continuation
+## 5. Certified continuation
 
 Appending the recorded contaminated-chain transitions gives the exact scale
 word
@@ -168,7 +202,7 @@ scale.
 
 ---
 
-## 5. Exact normalized charge
+## 6. Exact normalized charge
 
 Assign the seed occurrence persistence one. Then
 
@@ -211,20 +245,21 @@ These are pathwise accounting data, not a simultaneous-child Bellman estimate.
 
 ---
 
-## 6. Consequence
+## 7. Consequence
 
 The small-state residual is not explained by weak additive structure. The
 state `{16,21,26}` is a compressed precursor of the base pattern. One cheap
 extension unfolds it into the original contaminated genealogy.
 
-A valid retention theorem therefore cannot classify all small surviving states
-as negligible terminal errors. At least one is a **regenerative seed**.
+A valid retention theorem cannot classify all small surviving states as
+negligible terminal errors. This occurrence is both regenerative and isolated
+inside its raw parent transition.
 
 The mechanism is
 
 ```text
 S7 cyclic terminal output
-    -> novel shell child {16,21,26}
+    -> isolated novel shell child {16,21,26}
     -> factor-four separation 1
     -> exact regeneration of S1
     -> contaminated chain through S10
@@ -236,22 +271,23 @@ one-generation affine obstruction testing.
 
 ---
 
-## 7. Scope
+## 8. Scope
 
 The theorem does not prove:
 
-1. that this occurrence is retained after a valid overlap quotient;
+1. that a global Bellman retention theorem must keep every isolated raw child;
 2. that multiple regenerated copies may be counted independently;
 3. that the return path causes divergent whole-tree mass;
 4. that every surviving child has a comparable continuation;
 5. or that the full four-term Erdős problem is solved.
 
-The retention question remains essential because this occurrence may overlap
-other simultaneous children or share provenance with them.
+The next issue is no longer local numerical overlap for this occurrence. It is
+whether its restarted-chain charge can be dominated by a parent reserve or by
+packing across other provenance-distinct branches.
 
 ---
 
-## 8. Revised target
+## 9. Revised target
 
 The next question is:
 
@@ -263,7 +299,8 @@ The immediate finite tasks are:
 
 1. identify near-regenerations up to translation, scaling, and bounded defects;
 2. retain origin provenance for each regeneration;
-3. compute containment and partial overlap among regenerative occurrences;
-4. test whether regenerative multiplicity obeys a Carleson packing estimate;
+3. compute packing interactions among regenerative occurrences even when their
+   numerical labels are disjoint;
+4. test whether regenerative multiplicity obeys a Carleson estimate;
 5. incorporate restarted-chain charge into the branching LP only after the
-   retention rule is justified.
+   retention and domination rule is justified.

@@ -1,0 +1,42 @@
+S7 REGENERATIVE SEED POLICY DEPENDENCE
+
+initial_three_ap_actions=298606
+root_forced_actions=30
+q1_forced_centers=1687866,1781342,1918030
+q1_possible_centers=2916
+q1_possible_minima_at_or_below_first_forced=1459
+seed_centers=1354065,1354070,1354075
+seed_centers_root_forced=0
+
+lex_selected=9360
+lex_residual=480
+lex_terminal_steps=25
+lex_middle_shells=124
+lex_q1_centers=2916
+lex_q1_minimum=1354049
+lex_schedule_sha256=12a369aa926f3ceac00943e8a383a9f635ec9f16b33565ec29f90c2d3d1d8ac1
+lex_residual_sha256=b4517f0c67753b3297549dc7acc52818a85cb1df9261ce1a30cb78ec8d129a33
+lex_q1_centers_sha256=f5c27ffd920b00b22ead173dca4111f3ec0f141b35c5b3a7d22e71a6d5d63592
+lex_q1_fiber_sha256=42a9000082da6b62d3c01d163608631780c26617a518a7e142c9dcabb1a597ae
+lex_seed_shells=1
+lex_canonical_regenerations=1
+
+reverse_selected=9180
+reverse_residual=660
+reverse_terminal_steps=2252
+reverse_middle_shells=2374
+reverse_q1_centers=55
+reverse_q1_minimum=1687866
+reverse_schedule_sha256=92b9763e6f4edc408192a3e47a34d5ecdd397ee24da090f3050c7e1f8cdf9d11
+reverse_residual_sha256=d0c1940a9cf627e2f8c176aa8e2fdb32cc58649925043c4a7db22596dbc7b213
+reverse_q1_centers_sha256=d1046daa565dae6af6daa158c722e19b5161be178a14addbe40923cf68cf66f9
+reverse_q1_fiber_sha256=7960fdc08c817c77f4b2dfffa6fb7819f581505b49e3271f07da5384def8a2cc
+reverse_seed_shells=0
+reverse_canonical_regenerations=0
+
+lex_regeneration=source_q1,scale16,state_16_21_26,factor4,R1,S1
+reverse_regeneration=none
+
+conclusion: the isolated exact S1 regeneration is specific to the lexicographic complete coordinated schedule.
+The reverse-lexicographic complete schedule has no seed shell and no factor-two/factor-four exact return
+to any canonical S1 through S10 state. Regeneration is therefore not schedule-independent on the recorded parent.

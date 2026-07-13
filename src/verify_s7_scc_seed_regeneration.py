@@ -27,7 +27,7 @@ EXPECTED_PATH_CHARGE = Fraction(36_953, 4_096)
 EXPECTED_FUTURE_CHARGE = Fraction(36_185, 4_096)
 EXPECTED_DEBT = Fraction(13, 16)
 CERTIFICATE_SHA256 = (
-    "b05c5b91ba5b148a1dbe999edc0617a5370889f4244cd66553c9d7a8c6ee9679"
+    "03da3a4d6a2a878b9ca3ba45d0862932ba06512a9697bd828f7fc73e5883421c"
 )
 
 
@@ -123,6 +123,24 @@ def build_certificate() -> str:
             f"unexpected seed occurrence count: {len(occurrences)}"
         )
 
+    seed_occurrence = occurrences[0]
+    recursive_overlaps = [
+        occurrence
+        for occurrence in payload["recursive_shell_occurrences"]
+        if occurrence is not seed_occurrence
+        and SEED & set(occurrence["values"])
+    ]
+    if recursive_overlaps:
+        raise AssertionError(
+            "regenerating seed overlaps other recursive outputs: "
+            f"{recursive_overlaps!r}"
+        )
+    terminal_overlap = SEED & set(payload["terminal_outputs"]["steps"])
+    if terminal_overlap:
+        raise AssertionError(
+            f"regenerating seed overlaps terminal outputs: {terminal_overlap}"
+        )
+
     generated = three_translate_raw(SEED, FIRST_SEPARATION)
     if generated != BASE_PATTERN:
         raise AssertionError(
@@ -191,6 +209,9 @@ def build_certificate() -> str:
         "seed_occurrence_count=1",
         "canonical_regeneration_count=1",
         "unique_factor2_factor4_canonical_regeneration=true",
+        "seed_recursive_overlap_count=0",
+        "seed_terminal_overlap_count=0",
+        "seed_isolated_raw_recursive_occurrence=true",
         "",
         "first_factor=4",
         "first_separation=1",

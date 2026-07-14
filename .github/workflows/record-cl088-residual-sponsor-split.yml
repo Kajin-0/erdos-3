@@ -1,0 +1,52 @@
+name: Record CL-088 residual-sponsor split
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - src/patch_cl088_residual_sponsor_split.py
+      - .github/workflows/record-cl088-residual-sponsor-split.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: probe-result-writers-main
+  cancel-in-progress: false
+
+jobs:
+  record:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Patch authoritative documents
+        run: |
+          python3 -m py_compile src/patch_cl088_residual_sponsor_split.py
+          python3 src/patch_cl088_residual_sponsor_split.py
+      - name: Commit update
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add \
+            README.md \
+            docs/certainty-ledger.md \
+            docs/current-proof-program.md \
+            docs/research-decision-history.md \
+            docs/residual-sponsor-backbone-refinement.md
+          if git diff --cached --quiet; then
+            echo "CL-088 documentation already current"
+            exit 0
+          fi
+          git commit -m "Record CL-088 residual-sponsor backbone refinement [skip ci]"
+          git fetch origin main
+          if ! git rebase origin/main; then
+            git rebase --abort || true
+            exit 1
+          fi
+          git push origin HEAD:main

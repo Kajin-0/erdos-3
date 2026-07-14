@@ -8,7 +8,7 @@ PATH = Path("docs/certainty-ledger.md")
 ROW_075 = "| CL-075 | The 43 second-generation terminal `(u,p)` tokens have no collision with first-generation raw or retained tokens, but `(60,1354490)` recurs as a third-generation terminal sink. Both occurrences are step-5 middle fibers; immediate provenance differs (`2810` versus `440`) and separates the collision. Numerical identity is much coarser: 28 labels and seven complete terminal numerical states recur. | Exact finite cross-generation token-collision and signature-refinement theorem. |"
 ROW_076 = "| CL-076 | With current harmonic mass coefficient fixed to one, an exact 11-feature screen finds four feasible standalone nonnegative corrections. In particular, `Phi_rep=H+2R`, where `R` is descendant harmonic mass on points whose root provenance repeats within the retained generation, contracts by `27.4704%`-`27.4705%` and then `6.0556%`-`6.0557%`. Independently, `Phi_tail=H+4T`, where `T` is descendant mass with immediate-provenance depth drop at least four, contracts on both transitions and has second-transition margin `0.1313%`-`0.1314%`. | Exact finite three-generation retained-potential theorem. |"
 
-TAIL = """# Open bottleneck OB-001: provenance-reserve validation
+TAIL = r"""# Open bottleneck OB-001: provenance-reserve validation
 
 The adversarial local-optimum transition now has:
 
@@ -79,6 +79,20 @@ def main() -> int:
         if inference_anchor not in text:
             raise AssertionError("prohibited-inference anchor not found")
         text = text.replace(inference_anchor, inference_anchor + inference_row, 1)
+
+    text = text.replace(
+        "35. maximum-harmonic local retention as globally optimal;\n"
+        "36. policy-LP feasibility as branching Bellman-LP feasibility;\n"
+        "37. the tested policy family as globally optimal;\n"
+        "38. random sampling as a finite certificate;\n"
+        "39. the rejected depth-ten anchor reduction.\n",
+        "36. maximum-harmonic local retention as globally optimal;\n"
+        "37. policy-LP feasibility as branching Bellman-LP feasibility;\n"
+        "38. the tested policy family as globally optimal;\n"
+        "39. random sampling as a finite certificate;\n"
+        "40. the rejected depth-ten anchor reduction.\n",
+        1,
+    )
 
     heading = "# Open bottleneck OB-001:"
     if heading not in text:

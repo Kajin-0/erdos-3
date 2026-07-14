@@ -84,8 +84,9 @@ Statuses marked **exact finite** are computational statements for recorded objec
 | CL-065 | Exhausting all `32` subsets of `{5,40,30,161,142}` on `S_7`, both with and without the seed-delay switch, plus reverse deletion, enlarges the exact policy LP to `250` constraints. `(lambda,gamma)=(3,1/10)` remains feasible. The unique `S_7` winner changes from `seed_5` to the non-regenerative `seed_5_142`; its exact advantage over `seed_5` lies between `3/2000` and `751/500000`. | Exact finite full five-step subset-lattice theorem through `S_7`. |
 | CL-066 | A seed-delayed `S_7` policy with `37` delayed progression steps resolves to `9323` selected actions, residual size `517`, `28` terminal step classes, `9295` middle-fiber occurrences, and no canonical regeneration. In the exact one-toggle neighborhood given by its terminal-step set union delayed-step set (`59` candidates), it has no improving toggle, two zero-slack toggles, and minimum strict slack `384/111292259161`. Its exact score improves on `seed_5_142` by a value between `1915/1000` and `1916/1000`. | Exact finite terminal-step local-optimality theorem. |
 | CL-067 | The raw transition of the 37-step local optimum has `131` shell occurrences, `87` exact state classes, `22` duplicate groups, `229` strict containments, `390` partial overlaps, maximum point multiplicity `18`, and an acyclic terminal-fiber incidence graph. Its recursive occurrence mass is between `254/1000` and `255/1000` of the lexicographic value. Relative to lexicographic deletion it removes the cyclic SCC and lowers harmonic load, but partial overlaps rise from `214` to `390` and maximum multiplicity from `16` to `18`. | Exact finite transition-profile and retention-obstruction theorem. |
+| CL-068 | Exact-state quotienting with deterministic provenance representatives, followed by componentwise maximum-harmonic independent-set selection in the same-shell intersection graph, produces a unique `21`-state point-disjoint retained family from the local-optimum transition. The graph has `87` classes, `290` edges, `20` components, and largest component `13`; every component has a unique optimum. The retained family carries `11753` distinct labels and between `731/1000` and `732/1000` of the raw-union harmonic mass. | Exact finite one-generation provenance-preserving retained-child theorem. |
 
-Primary references for CL-050 through CL-067:
+Primary references for CL-050 through CL-068:
 
 - `docs/s7-cyclic-scc-output-load.md`;
 - `docs/s7-cyclic-scc-local-completion-credit.md`;
@@ -103,6 +104,7 @@ Primary references for CL-050 through CL-067:
 - `docs/policy-subset-lattice-s1-s7.md`;
 - `docs/s7-terminal-step-local-optimum.md`;
 - `docs/s7-local-optimum-transition-profile.md`;
+- `docs/s7-provenance-retained-quotient.md`;
 - `src/verify_policy_occurrence_cone_s1_s7.py`;
 - `src/verify_step5_policy_regeneration_weight.py`;
 - `src/verify_two_coordinate_policy_family.py`;
@@ -110,7 +112,8 @@ Primary references for CL-050 through CL-067:
 - `src/verify_expanded_policy_subset_lp.py`;
 - `src/verify_policy_subset_lattice_s1_s7.py`;
 - `src/verify_s7_terminal_step_local_optimum.py`;
-- `src/verify_s7_local_optimum_transition_profile.py`.
+- `src/verify_s7_local_optimum_transition_profile.py`;
+- `src/verify_s7_provenance_retained_quotient.py`.
 
 ---
 
@@ -128,7 +131,7 @@ Do not use without materially new hypotheses:
 8. raw novelty as schedule independent;
 9. `P Psi` as a standalone Bellman potential;
 10. raw occurrences copied directly into an LP child sum;
-11. exact-state quotienting as a containment solution;
+11. exact-state quotienting as a containment solution by itself;
 12. a uniform maximum-overlap constant;
 13. a strict decreasing terminal-label rank;
 14. latest- or historical-separation-only state;
@@ -155,20 +158,21 @@ Do not use without materially new hypotheses:
 35. treating the 59-toggle neighborhood as exhaustive over arbitrary delayed progression steps;
 36. inferring disjoint retained children from acyclic terminal-fiber incidence;
 37. inferring Bellman contraction from lower raw harmonic occurrence mass;
-38. treating exact duplicate quotienting as a solution to containment or partial overlap;
-39. treating policy-half-space LP feasibility as branching Bellman-LP feasibility;
-40. inserting the recorded path charge directly into a Bellman child sum without a retention theorem;
-41. treating the tested policy family as globally optimal over all complete schedules;
-42. random sampling as a finite certificate;
-43. the rejected depth-ten anchor reduction.
+38. treating one-generation point-disjoint retention as a bound on cross-generation provenance reuse;
+39. treating maximum-harmonic local retention as globally Bellman-optimal;
+40. treating policy-half-space LP feasibility as branching Bellman-LP feasibility;
+41. inserting the recorded path charge directly into a Bellman child sum without a cross-generation packing theorem;
+42. treating the tested policy family as globally optimal over all complete schedules;
+43. random sampling as a finite certificate;
+44. the rejected depth-ten anchor reduction.
 
 ---
 
-# Open bottleneck OB-001: Provenance-preserving retention under mixed overlaps
+# Open bottleneck OB-001: Cross-generation provenance packing
 
-The state-specific cheap-extension problem at `S_10` is closed. Exact policy work now supplies an adversarial `S_7` schedule with low harmonic occurrence load and no terminal-fiber cycle. Its raw shell family nevertheless contains exact duplicates, strict containments, partial overlaps, and point multiplicity.
+Within-generation retention is now solved for the adversarial local-optimum `S_7` transition: the certified quotient is exact, point-disjoint, maximum-harmonic componentwise, and carries explicit representative provenance.
 
-The next task is to define a deterministic retained-child rule with explicit provenance, test exact-duplicate quotienting and containment pruning, and measure the residual partial-overlap conflict graph. A valid theorem must bound cross-generation reuse before any raw occurrence or continuation charge can enter a Bellman child sum.
+The next task is to propagate the `21` retained states, apply the same quotient where tractable, and build the provenance-reuse graph from parent and sponsor labels to retained descendant representatives. A valid theorem must bound repeated reuse across generations, or identify the smallest exact reuse cycle that requires another packing coordinate.
 
 The target remains
 

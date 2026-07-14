@@ -106,8 +106,10 @@ def patch_readme() -> None:
 def patch_decision_history() -> None:
     path = ROOT / "docs/research-decision-history.md"
     text = path.read_text(encoding="utf-8")
-    marker = "\n**Decisions:**\n"
-    section = """
+    lead = "The finite obstruction prefix is now restricted to `R_1 -> F_2` and `R_2 -> F_3`; the later transitions are closed."
+    marker = lead + "\n\n**Decisions:**\n"
+    section = lead + """
+
 ### Residual-sponsor backbone refinement
 
 The first workflow attempt did not test the mathematics: it imported a nonexistent module, and an unsafe named `git add -A` pathspec masked that exception. After the repository-wide workflow hardening pass, the original error was preserved and the probe was rewritten against the certified lexicographic propagation APIs.
@@ -118,7 +120,7 @@ This closes the finite question of whether the symbolic residual-sponsor split i
 
 **Decisions:**
 """
-    text = replace_once(text, marker, "\n" + section, "decision list")
+    text = replace_once(text, marker, section, "third-to-fourth decision boundary")
     old_tasks = """The next exact work is to:
 
 1. certify affine root references and exact pivot updates on the existing retained frontier;

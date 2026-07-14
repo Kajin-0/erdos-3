@@ -120,6 +120,13 @@ Statuses marked **exact finite** are computational statements for recorded objec
 
 Primary latest references:
 
+- `data/first_frontier_terminal_correction_certificate.txt`;
+- `src/verify_first_frontier_terminal_correction.py`;
+- `docs/full-color-coordinated-branching.md`;
+- `data/full_color_coordinated_branching_summary.txt`;
+- `docs/full-color-pair-edge-capacity.md`;
+- `docs/sponsor-pair-forward-transport.md`;
+- `docs/residual-minimum-star-completion-charge.md`;
 - `docs/reference-gap-collision-charge.md`;
 - `docs/collision-rectangle-aspect-identity.md`;
 - `docs/type-weighted-ap-transport.md`;
@@ -130,13 +137,6 @@ Primary latest references:
 - `docs/full-edge-collision-fiber-theorem.md`;
 - `docs/unbounded-shelled-latent-pair-reuse.md`;
 - `data/unbounded_shelled_pair_reuse_instance_summary.txt`;
-- `data/first_frontier_terminal_correction_certificate.txt`;
-- `src/verify_first_frontier_terminal_correction.py`;
-- `docs/full-color-coordinated-branching.md`;
-- `data/full_color_coordinated_branching_summary.txt`;
-- `docs/full-color-pair-edge-capacity.md`;
-- `docs/sponsor-pair-forward-transport.md`;
-- `docs/residual-minimum-star-completion-charge.md`;
 - `docs/residual-sponsor-backbone-refinement.md`;
 - `src/verify_residual_sponsor_backbone_split.py`;
 - `data/residual_sponsor_backbone_split_certificate_2026-07-14.txt`;

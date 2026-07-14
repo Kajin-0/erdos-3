@@ -1,0 +1,17 @@
+TWO-GENERATION RECURSIVE BELLMAN ROW
+
+source_first_generation_retained_mass_sha256=29f9f139dcdf764a486022f152d7ab0cacc8f40cd4af353f4a5e5f6bea843446
+source_terminal_second_generation_mass_sha256=b9c790f6e8be18382848adb9e66fecc01ad26ee0e2ca77e31f93326fb5d1765e
+source_recursive_second_generation_mass_sha256=539dfbe1e345d4e6f1e0ed1c08cfedd1eba8c3f9d195fc078ae9ac0d5e391775
+source_recursive_ratio_sha256=7feeb528abcb66253383e448fa50a19043a86c7059331a21f92432e09bded610
+source_contraction_margin_sha256=019f9b58c3addc0182870a02e40a616a953b3bfec09131d8d6e3024baf030bc1
+
+recursive_ratio_bracket=937/1000,469/500
+contraction_margin_bracket=31/500,63/1000
+certified_row=(31/500)*H1+H2_recursive<H1
+terminal_augmented_row=(31/500)*H1+H2_recursive+TermSink_first<H1+TermSink_first
+result=STRICTLY_FEASIBLE
+
+conclusion: the certified two-generation transition has a strict recursive Bellman contraction with rational credit 31/500 of parent retained mass.
+Terminal sink mass is carried in a separate first-appearance coordinate and is neither discarded nor charged as recursive load.
+This row is fixed-policy and fixed-retention; it is not a universal whole-tree inequality.

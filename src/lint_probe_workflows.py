@@ -3,7 +3,7 @@
 
 The linter is intentionally text based. It catches the exact failure mode that
 masked probe diagnostics: staging a named optional path with ``git add -A``.
-It also requires recently hardened probe writers to use the shared helpers and
+It also requires probe writers to use the shared recorder/staging path and the
 repository-wide serialization group.
 """
 from __future__ import annotations
@@ -21,6 +21,11 @@ PROBE_WRITER_MARKERS = (
     "_probe.json",
     "_summary.txt",
     "_status.txt",
+)
+SAFE_RECORDER_MARKERS = (
+    "reusable-python-probe-recorder.yml",
+    "src/stage_optional_probe_outputs.sh",
+    "src/commit_probe_outputs.sh",
 )
 
 
@@ -44,10 +49,9 @@ def main() -> int:
                     f"{path}: probe writer must use concurrency group "
                     "probe-result-writers-main"
                 )
-            if "src/stage_optional_probe_outputs.sh" not in text and \
-               "src/commit_probe_outputs.sh" not in text:
+            if not any(marker in text for marker in SAFE_RECORDER_MARKERS):
                 failures.append(
-                    f"{path}: probe writer must use the shared safe staging helper"
+                    f"{path}: probe writer must use the shared hardened recorder"
                 )
             for match in DIRECT_OPTIONAL_REDIRECT.finditer(text):
                 line = text.count("\n", 0, match.start()) + 1

@@ -1,9 +1,0 @@
-phase=started
-commit=ef36764ce0e0723feab0455414727ff4a1c652f1
-lp_exit_status=0
-witness_exit_status=0
-verifier_exit_status=0
-phase=completed
---- LP stderr ---
---- witness stderr ---
---- verifier stderr ---

@@ -20,6 +20,7 @@ S7_LOCAL_OPTIMUM_SHA256="8bd93afd6ed9bcd856ff23b5eb671b2963d5aa8b8e47df19f726b38
 S7_TRANSITION_PROFILE_SHA256="1bf8d15efd7c8cb1f9b04fba769d19e43d2b630d9fe36f141bbcc4466f9bb19e"
 S7_RETAINED_QUOTIENT_SHA256="2a1dd14ee54a9a1b39cc19d4fefc70f54b1157be82f496e2107d3a717052ff92"
 SECOND_GENERATION_PROVENANCE_SHA256="79fca7aa04469adefdd855d08a63b4bbefd7621c6c324d54cd6748f54e734caa"
+RETAINED_SCALE_PROFILE_SHA256="a38089295cec338b9155ea15bccff0a70dd55f1fea46c4a8deb2e13f390fd012"
 
 mkdir -p "$WORK"
 
@@ -164,7 +165,17 @@ verify_sha256 "$SECOND_GENERATION_GENERATED" \
   "$SECOND_GENERATION_PROVENANCE_SHA256" \
   "retained_provenance_second_generation"
 
+RETAINED_SCALE_GENERATED="$WORK/retained_provenance_scale_profile_certificate.txt"
+RETAINED_SCALE_RECORDED="$ROOT/data/retained_provenance_scale_profile_certificate_2026-07-13.txt"
+python3 "$ROOT/src/run_exact_python.py" \
+  "$ROOT/src/verify_retained_provenance_scale_profile.py" \
+  "$RETAINED_SCALE_GENERATED"
+cmp "$RETAINED_SCALE_RECORDED" "$RETAINED_SCALE_GENERATED"
+verify_sha256 "$RETAINED_SCALE_GENERATED" \
+  "$RETAINED_SCALE_PROFILE_SHA256" \
+  "retained_provenance_scale_profile"
+
 python3 "$ROOT/src/certified_contaminated_states.py" > /dev/null
 python3 "$ROOT/src/branching_reserve_lp.py" self-test
 
-echo "verified: transport, reserve diagnostics, transition frontier through S7, full policy subset lattice, exact S7 local optimum, retained quotient and second-generation provenance reuse, forced-fork reserve/no-go, and LP harness"
+echo "verified: transport, reserve diagnostics, transition frontier through S7, full policy subset lattice, exact S7 local optimum, retained quotient, second-generation provenance reuse and scale concentration, forced-fork reserve/no-go, and LP harness"

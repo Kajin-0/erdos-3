@@ -1,9 +1,9 @@
 schema=probe_workflow_hardening_status_v2
 lint_exit_status=1
 helper_test_exit_status=0
-source_commit=2dcc23753fd5f176f0d7d443e0fd087836bcfddb
+source_commit=3f113bc9e7d61e54ce17548529f3038d8760ab94
 source_ref=refs/heads/main
-workflow_run_id=29373839674
+workflow_run_id=29373962189
 workflow_run_attempt=1
 --- workflow lint ---
 probe workflow lint failed:
@@ -12,5 +12,9 @@ probe workflow lint failed:
 - .github/workflows/one-time-scale-transfer-docs.yml:61: status header is missing required metadata field source_ref
 - .github/workflows/one-time-scale-transfer-docs.yml:61: status header is missing required metadata field workflow_run_attempt
 - .github/workflows/record-cl089-cl096-collision-frontier.yml:139: status workflows may not suppress failures with || true
+- .github/workflows/scale-transfer-docs-patch.yml: probe writer must use concurrency group probe-result-writers-main
+- .github/workflows/scale-transfer-docs-patch.yml:48: status header is missing required metadata field source_ref
+- .github/workflows/scale-transfer-docs-patch.yml:48: status header is missing required metadata field workflow_run_attempt
+- .github/workflows/scale-transfer-docs-patch.yml:81: status assertion must run only after diagnostic artifacts are uploaded
 --- helper tests ---
 probe workflow helper tests passed

@@ -1,9 +1,9 @@
 schema=probe_workflow_hardening_status_v2
 lint_exit_status=1
 helper_test_exit_status=0
-source_commit=3f113bc9e7d61e54ce17548529f3038d8760ab94
+source_commit=6c4d9fd5d421184a314fc3963038d8791ac6ca9a
 source_ref=refs/heads/main
-workflow_run_id=29373962189
+workflow_run_id=29374305472
 workflow_run_attempt=1
 --- workflow lint ---
 probe workflow lint failed:

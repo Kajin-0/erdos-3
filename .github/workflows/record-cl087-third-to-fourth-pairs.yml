@@ -11,6 +11,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: probe-result-writers-main
+  cancel-in-progress: false
+
 jobs:
   record:
     if: github.actor != 'github-actions[bot]'
@@ -31,10 +35,9 @@ jobs:
           git add README.md docs/certainty-ledger.md docs/current-proof-program.md docs/research-decision-history.md
           if git diff --cached --quiet; then exit 0; fi
           git commit -m "Record CL-087 R3-to-F4 pair theorem [skip ci]"
-          for attempt in 1 2 3; do
-            git fetch origin main
-            git rebase origin/main
-            if git push origin HEAD:main; then exit 0; fi
-            sleep $((attempt * 2))
-          done
-          exit 1
+          git fetch origin main
+          if ! git rebase origin/main; then
+            git rebase --abort || true
+            exit 1
+          fi
+          git push origin HEAD:main

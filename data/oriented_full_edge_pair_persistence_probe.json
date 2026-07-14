@@ -117,17 +117,17 @@
   },
   "interval": [
     1,
-    16
+    18
   ],
   "maximum_multiplicity_witness": {
-    "children": 27,
-    "children_sha256": "ecc540eae65e52be84bc46704737dbbe50d86848127a4111306ef3dd0c51dbf2",
+    "children": 30,
+    "children_sha256": "6bc650882f09679fddba324bfc2be8d03b5e3dbbfc54d0337c0009b9c705b8ea",
     "current_mass": {
-      "decimal": "12.047619047619",
-      "fraction": "253/21",
-      "sha256": "8eaa287d610385f48ff34486ec4cdbe2bcaa87df5bdb1b140845a9488e67eec3"
+      "decimal": "15.217261904762",
+      "fraction": "5113/336",
+      "sha256": "22b19762248bad0298d67c2af92463a34d162dd6c1e281b1c4836dbaf4136640"
     },
-    "current_occurrences": 36,
+    "current_occurrences": 45,
     "latent_occurrence_mass": {
       "decimal": "1.875000000000",
       "fraction": "15/8",
@@ -144,33 +144,34 @@
     "maximum_reference_count": 1,
     "maximum_total_resource_multiplicity": 3,
     "parent_pair_energy": {
-      "decimal": "12.882886557887",
-      "fraction": "663211/51480",
-      "sha256": "a6cd20334d7318cc28e3ec00127d348f68ae4366f915000c151df6cc80a84d57"
+      "decimal": "15.245783383283",
+      "fraction": "3662647/240240",
+      "sha256": "3b203c10a5ba6042881bf48a40c374491e61593e45abf826b74d422635b9232e"
     },
     "recursive_children": 2,
-    "three_aps": 12,
+    "three_aps": 15,
     "total_occurrence_mass": {
-      "decimal": "13.922619047619",
-      "fraction": "2339/168",
-      "sha256": "87725e9821d8ef4e00e70cea0a4a912525682093ed3762553695e319780b3be6"
+      "decimal": "17.092261904762",
+      "fraction": "5743/336",
+      "sha256": "a0e4d19b58ce92e7b729fc17818631d2eeb76c067ba2051edefe75ad779fee57"
     },
     "total_union_mass": {
-      "decimal": "10.380952380952",
-      "fraction": "218/21",
-      "sha256": "ee1198053ec25d6ef5c6ff751f0245b7efb1fef16b1c8799c0344b08c8d409e5"
+      "decimal": "13.425595238095",
+      "fraction": "4511/336",
+      "sha256": "9854df32c62294bcb8e41d31eee3942282f9538147ccbfd764a2d5e8ddb2405e"
     },
     "values": [
-      1,
       2,
-      5,
+      3,
+      4,
       7,
-      8,
       9,
-      12,
+      10,
+      11,
       14,
-      15,
-      16
+      16,
+      17,
+      18
     ],
     "worst_pairs": [
       {
@@ -179,44 +180,10 @@
           {
             "child_key": [
               "side_first",
-              2,
+              4,
               null
             ],
-            "reference": 2
-          }
-        ],
-        "pair": [
-          5,
-          7
-        ]
-      },
-      {
-        "gap": 4,
-        "occurrences": [
-          {
-            "child_key": [
-              "side_first",
-              2,
-              null
-            ],
-            "reference": 2
-          }
-        ],
-        "pair": [
-          5,
-          9
-        ]
-      },
-      {
-        "gap": 2,
-        "occurrences": [
-          {
-            "child_key": [
-              "side_first",
-              2,
-              null
-            ],
-            "reference": 2
+            "reference": 4
           }
         ],
         "pair": [
@@ -229,33 +196,33 @@
         "occurrences": [
           {
             "child_key": [
-              "double_first",
-              2,
+              "side_first",
+              4,
               null
             ],
-            "reference": 2
+            "reference": 4
           }
         ],
         "pair": [
-          8,
-          12
+          7,
+          11
         ]
       },
       {
-        "gap": 8,
+        "gap": 2,
         "occurrences": [
           {
             "child_key": [
-              "double_first",
-              2,
+              "side_first",
+              4,
               null
             ],
-            "reference": 2
+            "reference": 4
           }
         ],
         "pair": [
-          8,
-          16
+          9,
+          11
         ]
       },
       {
@@ -264,32 +231,66 @@
           {
             "child_key": [
               "double_first",
-              2,
+              4,
               null
             ],
-            "reference": 2
+            "reference": 4
           }
         ],
         "pair": [
-          12,
-          16
+          10,
+          14
+        ]
+      },
+      {
+        "gap": 8,
+        "occurrences": [
+          {
+            "child_key": [
+              "double_first",
+              4,
+              null
+            ],
+            "reference": 4
+          }
+        ],
+        "pair": [
+          10,
+          18
+        ]
+      },
+      {
+        "gap": 4,
+        "occurrences": [
+          {
+            "child_key": [
+              "double_first",
+              4,
+              null
+            ],
+            "reference": 4
+          }
+        ],
+        "pair": [
+          14,
+          18
         ]
       }
     ]
   },
   "metrics": {
-    "children": 139872,
-    "four_ap_free_subsets": 22601,
-    "latent_pair_occurrences": 288,
-    "latent_pair_union": 288,
+    "children": 540702,
+    "four_ap_free_subsets": 71583,
+    "latent_pair_occurrences": 1248,
+    "latent_pair_union": 1248,
     "maximum_latent_pair_multiplicity": 1,
     "maximum_reference_count": 1,
     "maximum_total_resource_multiplicity": 3,
-    "recursive_children": 96,
-    "subsets_with_recursive_children": 48,
-    "three_aps": 49514
+    "recursive_children": 416,
+    "subsets_with_recursive_children": 208,
+    "three_aps": 192928
   },
-  "records_sha256": "1e729f7204d941b8bcee4631ff4312ae04b0eff58daf51e025ef685298089e7f",
+  "records_sha256": "c4a9adbe4f1a89c6f6dd4ed88da3103be3533229d948274c4ec27570f8ca3072",
   "schema": "oriented_full_edge_pair_persistence_probe_v1",
   "verified": {
     "all_child_resources_contained_in_parent_pairs": true,

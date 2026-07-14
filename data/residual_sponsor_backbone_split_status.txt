@@ -1,22 +1,10 @@
 schema=residual_sponsor_backbone_split_probe_v1
 compile_exit_status=0
-probe_exit_status=1
-summary_exit_status=not_run
+probe_exit_status=0
+summary_exit_status=0
 verifier_exit_status=not_applicable
-source_commit=13336d3b805fb784358c428689fb8b24a83162aa
+source_commit=119e0ad167c2d188dc266b726730ceb31d26f456
 source_ref=refs/heads/main
-workflow_run_id=29348707467
+workflow_run_id=29348921841
 workflow_run_attempt=1
 --- stderr ---
-Traceback (most recent call last):
-  File "/home/runner/work/erdos-3/erdos-3/src/run_exact_python.py", line 34, in <module>
-    raise SystemExit(main())
-                     ^^^^^^
-  File "/home/runner/work/erdos-3/erdos-3/src/run_exact_python.py", line 29, in main
-    runpy.run_path(str(target), run_name="__main__")
-  File "<frozen runpy>", line 286, in run_path
-  File "<frozen runpy>", line 98, in _run_module_code
-  File "<frozen runpy>", line 88, in _run_code
-  File "/home/runner/work/erdos-3/erdos-3/src/probe_residual_sponsor_backbone_split.py", line 27, in <module>
-    from exact_s1_child_ledger import coordinated_schedule, v2
-ModuleNotFoundError: No module named 'exact_s1_child_ledger'

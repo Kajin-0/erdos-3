@@ -5,9 +5,8 @@ on:
     branches:
       - main
     paths:
-      - src/probe_fourth_generation_potential_frontier.py
-      - src/summarize_fourth_generation_probe.py
       - src/verify_fourth_generation_potential_frontier.py
+      - src/patch_certainty_ledger_cl077.py
       - data/fourth_generation_potential_frontier_certificate_2026-07-13.txt
       - .github/workflows/fourth-generation-probe.yml
 
@@ -25,107 +24,50 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Apply canonical ordering fix
-        shell: bash
-        run: |
-          python3 - <<'PY'
-          from pathlib import Path
-          path = Path("src/verify_fourth_generation_potential_frontier.py")
-          text = path.read_text(encoding="utf-8")
-          old_block = '''EXPECTED_UP_COLLISIONS = (
-              (61, 1_584_290),
-              (62, 1_584_291),
-              (122, 1_584_351),
-              (123, 1_584_352),
-              (147, 1_584_356),
-              (152, 1_584_361),
-              (153, 1_584_362),
-          )'''
-          new_block = '''EXPECTED_UP_COLLISIONS = (
-              (122, 1_584_351),
-              (123, 1_584_352),
-              (147, 1_584_356),
-              (152, 1_584_361),
-              (153, 1_584_362),
-              (61, 1_584_290),
-              (62, 1_584_291),
-          )'''
-          old_line = 'observed_up = tuple(sorted(tuple(detail["signature"]) for detail in up_terminal))'
-          new_line = 'observed_up = tuple(tuple(detail["signature"]) for detail in up_terminal)'
-          if old_block not in text or old_line not in text:
-              raise SystemExit("canonical ordering patch anchors not found")
-          text = text.replace(old_block, new_block, 1).replace(old_line, new_line, 1)
-          path.write_text(text, encoding="utf-8")
-          PY
-
-      - name: Run exact fourth-generation probe
+      - name: Verify fourth-generation certificate and update ledger
         shell: bash
         run: |
           set +e
           python3 src/run_exact_python.py \
-            src/probe_fourth_generation_potential_frontier.py \
-            > /tmp/fourth_generation_probe.json \
-            2> /tmp/fourth_generation_probe.err
-          probe_status=$?
-          summary_status=not_run
-          verifier_status=not_run
-          : > /tmp/fourth_generation_summary.err
-          : > /tmp/fourth_generation_verifier.err
-          if [[ "$probe_status" == "0" ]]; then
-            cp /tmp/fourth_generation_probe.json \
-              data/fourth_generation_potential_frontier_probe.json
-            python3 src/summarize_fourth_generation_probe.py \
-              /tmp/fourth_generation_probe.json \
-              > /tmp/fourth_generation_summary.json \
-              2> /tmp/fourth_generation_summary.err
-            summary_status=$?
-            if [[ "$summary_status" == "0" ]]; then
-              cp /tmp/fourth_generation_summary.json \
-                data/fourth_generation_potential_frontier_summary.json
-            else
-              rm -f data/fourth_generation_potential_frontier_summary.json
-            fi
-            python3 src/run_exact_python.py \
-              src/verify_fourth_generation_potential_frontier.py \
-              /tmp/fourth_generation_certificate.txt \
-              > /tmp/fourth_generation_verifier.stdout \
-              2> /tmp/fourth_generation_verifier.err
+            src/verify_fourth_generation_potential_frontier.py \
+            /tmp/fourth_generation_certificate.txt \
+            > /tmp/fourth_generation_verifier.stdout \
+            2> /tmp/fourth_generation_verifier.err
+          verifier_status=$?
+          patch_status=not_run
+          if [[ "$verifier_status" == "0" ]]; then
+            cmp data/fourth_generation_potential_frontier_certificate_2026-07-13.txt \
+              /tmp/fourth_generation_certificate.txt
             verifier_status=$?
-            if [[ "$verifier_status" == "0" ]]; then
-              cmp data/fourth_generation_potential_frontier_certificate_2026-07-13.txt \
-                /tmp/fourth_generation_certificate.txt
-              verifier_status=$?
-            fi
+          fi
+          if [[ "$verifier_status" == "0" ]]; then
+            python3 src/patch_certainty_ledger_cl077.py \
+              2> /tmp/certainty_ledger_patch.err
+            patch_status=$?
           else
-            rm -f data/fourth_generation_potential_frontier_probe.json
-            rm -f data/fourth_generation_potential_frontier_summary.json
+            : > /tmp/certainty_ledger_patch.err
           fi
           {
-            echo "probe_exit_status=$probe_status"
-            echo "summary_exit_status=$summary_status"
             echo "verifier_exit_status=$verifier_status"
+            echo "patch_exit_status=$patch_status"
             echo "commit=${GITHUB_SHA}"
-            echo "--- probe stderr ---"
-            cat /tmp/fourth_generation_probe.err
-            echo "--- summary stderr ---"
-            cat /tmp/fourth_generation_summary.err
             echo "--- verifier stderr ---"
             cat /tmp/fourth_generation_verifier.err
+            echo "--- patch stderr ---"
+            cat /tmp/certainty_ledger_patch.err
           } > data/fourth_generation_probe_status.txt
           exit 0
 
-      - name: Commit deterministic probe output
+      - name: Commit deterministic theorem state
         shell: bash
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add src/verify_fourth_generation_potential_frontier.py
           git add data/fourth_generation_probe_status.txt
-          git add -A data/fourth_generation_potential_frontier_probe.json
-          git add -A data/fourth_generation_potential_frontier_summary.json
+          git add docs/certainty-ledger.md
           if git diff --cached --quiet; then
-            echo "No fourth-generation probe output change"
+            echo "No fourth-generation theorem state change"
             exit 0
           fi
-          git commit -m "Record fourth-generation exact frontier theorem [skip ci]"
+          git commit -m "Record fourth-generation provenance-reserve theorem [skip ci]"
           git push

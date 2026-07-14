@@ -48,15 +48,20 @@ def main() -> int:
     split = payload["split"]
     comparison = payload["comparison"]
     lines = [
-        "residual_sponsor_backbone_split_summary_v1",
+        "residual_sponsor_backbone_split_summary_v2",
+        f"probe_schema={payload['schema']}",
         f"probe_payload_sha256={payload['probe_payload_sha256']}",
         f"split_occurrences_sha256={payload['hashes']['split_occurrences']}",
         f"split_retained_sha256={payload['hashes']['split_retained']}",
         f"baseline_profile_sha256={payload['hashes']['baseline_profile']}",
         f"split_profile_sha256={payload['hashes']['split_profile']}",
         f"generation_six_propagated={str(payload['generation_six_propagated']).lower()}",
+        f"unshifted_residual_inserted={str(payload['unshifted_residual_inserted']).lower()}",
         f"raw_support_union_preserved={str(payload['raw_support_union_preserved']).lower()}",
+        f"raw_point_occurrences_preserved={str(payload['raw_point_occurrences_preserved']).lower()}",
+        f"raw_harmonic_occurrence_mass_preserved={str(payload['raw_harmonic_occurrence_mass_preserved']).lower()}",
         f"raw_support_union_size={payload['raw_support_union_size']}",
+        f"raw_harmonic_occurrence_mass={payload['raw_harmonic_occurrence_mass']['decimal']}",
         f"baseline_raw_occurrences={baseline['raw_occurrences']}",
         f"baseline_raw_occurrence_points={baseline['raw_occurrence_points']}",
         f"split_raw_occurrences={split['raw_occurrences']}",

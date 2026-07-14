@@ -1,0 +1,39 @@
+FOUR-GENERATION RETAINED FEATURE LP
+
+policy=local37_then_lexicographic_recursive_only
+retention=global_exact_duplicate_quotient_plus_maximum_harmonic_same_shell_independent_set
+current_harmonic_weight=1
+tested_nonnegative_features=11
+recursive_transitions=3
+
+generation1_retained_states=21
+generation1_retained_points=11753
+generation2_recursive_states=14
+generation2_recursive_points=7882
+generation3_recursive_states=14
+generation3_recursive_points=4789
+generation4_recursive_states=12
+generation4_recursive_points=1717
+
+basic_feasible_vertices=18
+primal_feasible=True
+exact_infeasibility_certificate=False
+sparsest_support=root_repeat_descendant_mass
+active_constraint=generation4_minus_generation3
+minimum_coefficient_bracket=73015/1000,9127/125
+minimum_coefficient_sha256=5b7cef5910cb64ec02a096277bc05ec406f32630e1719132147babbe1e950327
+
+integer_witness_coefficient=74
+integer_witness=Phi_g=H_g+74*R_g
+ratio_generation2_over_generation1_bracket=618519/1000000,15463/25000
+ratio_generation3_over_generation2_bracket=122393/1000000,61197/500000
+ratio_generation4_over_generation3_bracket=991321/1000000,495661/500000
+margin_generation2_bracket=381480/1000000,381481/1000000
+margin_generation3_bracket=877606/1000000,877607/1000000
+margin_generation4_bracket=8678/1000000,8679/1000000
+strictly_contracts_all_three_transitions=True
+
+conclusion: the exact eleven-feature cone is feasible through generation four.
+A single repeated-root descendant-mass coordinate suffices, but only with coefficient above 73.015.
+The clean integer witness H+74R contracts on every recorded recursive transition.
+This is a fixed-policy, fixed-retention four-generation theorem, not a universal Bellman potential.

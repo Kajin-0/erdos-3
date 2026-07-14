@@ -2,7 +2,14 @@
 
 ## Status
 
-Standard maximality reduction for the fixed four-term case, recorded here because it converts the missing-completion term in the sponsor-star inequality into genuine four-AP witness data.
+Standard maximality reduction for the fixed four-term case.
+
+For completion terms arising inside a retained parent root set `P`, one must distinguish:
+
+1. a completion root lying in the ambient counterexample but outside `P`;
+2. a completion integer genuinely absent from the ambient counterexample.
+
+Maximality applies only to the second class.
 
 ---
 
@@ -54,7 +61,7 @@ B\cup\{x\}
 
 contains a four-term arithmetic progression. Since `B` itself is four-AP-free, that progression must contain `x`.
 
-Thus every missing integer has a witness
+Thus every integer absent from `B` has a witness
 
 ```math
 p,\ p+h,\ p+2h,\ p+3h,
@@ -69,19 +76,55 @@ Fixing any deterministic ordering of witnesses gives a well-defined completion m
 x\longmapsto W(x).
 ```
 
-No missing integer lacks a completion witness.
+---
+
+## 3. Parent absence versus ambient absence
+
+Let `P\subseteq B` be the root set of one retained affine parent. A completion calculation may produce
+
+```math
+c\notin P.
+```
+
+This has two distinct meanings.
+
+### External ambient completion
+
+```math
+c\in B\setminus P.
+```
+
+Then `c` is a genuine ambient-set point that is absent only from the current parent lineage. It must be exported to an external-root, completion-support, or rectangle-transport ledger. Maximality supplies no new four-AP witness because `c` is not missing from `B`.
+
+### Genuine ambient hole
+
+```math
+c\notin B.
+```
+
+Only in this case does maximality supply a four-AP witness with three points of `B`.
+
+Therefore every parent-level missing-completion term must retain the trichotomy
+
+```text
+completion in P;
+completion in B \ P;
+completion outside B.
+```
+
+Collapsing the last two cases is invalid.
 
 ---
 
-## 3. Application to residual-minimum star debt
+## 4. Application to residual-minimum star debt
 
 In the residual-minimum star completion theorem, an unpaid backward star has
 
 ```math
-c=2s-a\notin P,
+c=2s-a\notin P
 ```
 
-and contributes weight
+and contributes
 
 ```math
 \frac1{s-a}
@@ -89,37 +132,61 @@ and contributes weight
 \frac2{c-a}.
 ```
 
-When the ambient counterexample is taken inclusion-maximal, `c` has a four-AP completion witness with three ambient-set points.
-
-The map
+For fixed `a`, the map
 
 ```math
 s\longmapsto c=2s-a
 ```
 
-is injective for fixed `a`. Therefore the missing-completion star mass becomes a weighted family of **distinct missing integers**, each carrying a genuine four-AP witness:
+is injective. Split its image as
+
+```math
+C_a^{\rm ext}
+=
+\{c:c\in B\setminus P\},
+```
+
+and
+
+```math
+C_a^{\rm hole}
+=
+\{c:c\notin B\}.
+```
+
+Then
 
 ```math
 M_a(P)
 =
-\sum_{c\in C_a}\frac2{c-a},
+M_a^{\rm ext}(P)
++
+M_a^{\rm hole}(P),
 ```
 
 where
 
 ```math
-C_a
+M_a^{\rm ext}(P)
 =
-\{2s-a:s\text{ is an unpaid close backward sponsor}\}.
+\sum_{c\in C_a^{\rm ext}}\frac2{c-a},
 ```
 
-This is precisely the type of object that can be exported to completion support or rectangle transport.
+and
+
+```math
+M_a^{\rm hole}(P)
+=
+\sum_{c\in C_a^{\rm hole}}\frac2{c-a}.
+```
+
+The external term is a lineage/export problem. The hole term is a maximality/completion-witness problem.
 
 ---
 
-## 4. Witness-position decomposition
+## 5. Witness-position decomposition for genuine holes
 
-For each `c\in C_a`, the deterministic witness places `c` in one of four roles:
+For each `c\in C_a^{\rm hole}`, the deterministic four-AP witness places `c` in one of four roles:
 
 ```text
 role 0: c, c+h, c+2h, c+3h;
@@ -128,7 +195,7 @@ role 2: c-2h, c-h, c, c+h;
 role 3: c-3h, c-2h, c-h, c.
 ```
 
-The weighted missing-completion ledger can therefore be partitioned by:
+The weighted hole ledger may be partitioned by:
 
 1. witness role;
 2. witness step `h`;
@@ -142,7 +209,7 @@ If `a` belongs to the witness, then
 c-a\in\{h,2h,3h\},
 ```
 
-and consequently
+so
 
 ```math
 \frac2{c-a}
@@ -150,19 +217,41 @@ and consequently
 \frac2h.
 ```
 
-Those terms are directly comparable with weighted four-AP witness incidence. The remaining terms are the cross-anchor rectangle case.
+Those terms are directly comparable with weighted four-AP witness incidence. The remaining terms are cross-anchor rectangle cases.
 
 ---
 
-## 5. Remaining theorem
+## 6. Remaining theorem
 
-Maximality does not by itself bound the total witness multiplicity: many missing integers may be completed by overlapping triples of ambient points.
-
-The required next inequality is a weighted completion-export bound of the form
+The correct completion-export target is
 
 ```math
-\sum_{c\in C_a}\frac1{c-a}
+M_a^{\rm ext}(P)
++
+M_a^{\rm hole}(P).
+```
+
+The two terms require different mechanisms:
+
+```math
+M_a^{\rm ext}(P)
+```
+
+must be charged to ambient roots omitted from the current lineage, while
+
+```math
+M_a^{\rm hole}(P)
+```
+
+must be charged to maximality witnesses.
+
+A complete inequality should have the form
+
+```math
+M_a(P)
 \le
+C\,\Phi_{\rm external}(P)
++
 C\,\Phi_{\rm completion}(P)
 +
 C\,\Phi_{\rm rectangle}(P)
@@ -170,13 +259,11 @@ C\,\Phi_{\rm rectangle}(P)
 \text{summable boundary error},
 ```
 
-with bounded reuse of each witness resource across the recursive tree.
+with bounded reuse across the recursive tree.
 
-The significance of the maximality reduction is narrower and exact:
+The exact significance of maximality is therefore:
 
 ```text
-missing sponsor-star completions are never unsupported holes;
-they always carry four-AP obstruction witnesses.
+genuine ambient holes always carry four-AP obstruction witnesses;
+parent-external ambient roots require a separate provenance export.
 ```
-
-Thus the cross residual-sponsor star problem has been reduced to the already identified completion/rectangle transport frontier.

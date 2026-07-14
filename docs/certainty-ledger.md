@@ -70,50 +70,35 @@ Statuses marked **exact finite** are computational statements for recorded objec
 | CL-051 | Across `62` exact shell children sourced by the `S_7` cyclic component, novel labels create local collision/completion invalidity for `140352/950202` factor-two and `398745/4986696` factor-four replay candidates. Most candidates remain. | Exact fixed-policy finite theorem. |
 | CL-052 | On the `33` exact cyclic-source child states of size at most `50`, complete three-translate four-AP testing leaves `15160/21724` factor-two and `75723/87829` factor-four candidates valid. Deterministic first witnesses span `33` of the `34` nonconstant affine classes; class `22` is absent only from the first-witness histogram. | Exact fixed-policy finite theorem. |
 | CL-053 | The novel child `{16,21,26}` at scale `16` is the unique factor-two/factor-four exact return from the `62` cyclic-source states to any canonical `S_1,...,S_10`: factor four with `R=1` gives `S_1` exactly. It is disjoint from all other `126` recursive shells and all terminal outputs of the raw `S_7` transition. | Exact fixed-policy path, uniqueness, and isolation theorem. |
-| CL-054 | Canonical regeneration is schedule-dependent on `S_7`. The lexicographic schedule has one exact return to `S_1`; a reverse-lexicographic complete coordinated schedule has no `{16,21,26}` seed shell and no factor-two/factor-four exact return to any `S_1,...,S_10`. The seed-producing centers are not root-forced. | Exact two-policy finite theorem. |
-| CL-055 | Reverse lexicographic deletion avoids canonical regeneration but has over `75` times the lexicographic middle-fiber occurrence mass, over `744` times the duplicate mass, `2252` terminal steps, `2374` shells, and a `286`-label SCC. Avoiding regeneration is not a sufficient policy objective. | Exact two-policy finite theorem. |
+| CL-054 | Canonical regeneration is schedule-dependent on `S_7`. The lexicographic schedule has one exact return to `S_1`; a reverse-lexicographic complete schedule has no seed shell and no factor-two/factor-four exact return to any `S_1,...,S_10`. | Exact two-policy finite theorem. |
+| CL-055 | Reverse lexicographic deletion avoids canonical regeneration but has over `75` times the lexicographic middle-fiber occurrence mass, over `744` times the duplicate mass, `2252` terminal steps, `2374` shells, and a `286`-label SCC. | Exact two-policy finite theorem. |
 | CL-056 | Delaying only the three unforced seed-producing `q=1` actions removes canonical regeneration while reducing shell count, occurrence mass, union mass, duplicate mass, harmonic-average multiplicity, and maximum multiplicity relative to lexicographic deletion. Terminal mass rises and residual error increases by exactly `1/4096`. | Exact finite Pareto-tradeoff theorem. |
-| CL-057 | Exact policy-weight thresholds separate lexicographic and delayed-seed preferences: `2.384<lambda_*<2.385` for `T+lambda O+E`, `4.356<kappa_*<4.357` for `T+U+kappa D+E`, `0.021<gamma_*<0.022` when charging the lexicographic regenerative path, and `0.418<a_*<0.419` for `aT+O+E`. Unit terminal plus unit recursive-mass scores prefer lexicographic deletion. | Exact finite rational half-space theorem. |
-| CL-058 | The score `C_lambda=T+lambda O+E` has a certified common policy subcone `477/200<lambda<260/63`. Every such weight ranks lexicographic below reverse lexicographic deletion on `S_1,...,S_7`, while ranking the delayed-seed policy below lexicographic deletion on `S_7`. The witness `lambda=3` gives the tested policy family `S_1,...,S_6` lexicographic and `S_7` delayed-seed. | Exact finite multi-state policy-ranking theorem. |
-| CL-059 | The uniform policy that delays every step-5 action ties lexicographic deletion under `C_3=T+3O+E` on `S_1` and is strictly cheaper on every `S_2,...,S_7`. At `S_7` it still contains the isolated canonical return `{16,21,26}->S_1`. | Exact finite uniform-policy theorem. |
-| CL-060 | A hybrid delaying step-5 and the three seed-producing `q=1` actions removes canonical regeneration but has higher raw `C_3` than the step-5 policy. For `C_{3,gamma}=T+3O+E+gamma G_regen`, the hybrid beats step-5 when `gamma>gamma_5`, where `0.057<gamma_5<0.058`; `gamma=1/16` is a valid witness for that pairwise comparison. | Exact finite continuation-weight theorem. |
-| CL-061 | In the enlarged finite policy family, `C_{3,1/10}=T+3O+E+(1/10)G_regen` selects `step5/step540` on `S_2`, `step540` on `S_3,...,S_6`, and the non-regenerative `hybrid5` policy on `S_7`; reverse deletion is never selected. The active S7 constraint is `0.0837<gamma_540<0.0838`, so `gamma=1/16` fails and `gamma=1/10` succeeds. | Exact finite two-coordinate ranking theorem. |
-| CL-062 | Delaying step `30` alone improves `C_3` relative to lexicographic deletion on every `S_2,...,S_7`, but adding the same delay after steps `5` and `40` reverses sign and worsens `C_3` on every `S_2,...,S_7`. Favorable local policy perturbations are not composable. | Exact finite interaction/no-greedy theorem. |
-| CL-063 | The current policy comparisons export to `60` exact rational half-spaces in features `(lambda,gamma)`. The existing LP harness verifies `(3,1/10)` feasible. The only zero-slack rows are seven `S_1` ties and the `S_2` `step5/step540` tie; the active `S_7` continuation boundary is `hybrid5<=step540`. | Exact finite policy-LP feasibility theorem. |
-| CL-064 | Expanding `S_1,...,S_6` to all `32` subsets of delayed steps `{5,40,30,161,142}` produces `198` exact policy half-spaces. `(lambda,gamma)=(3,1/10)` remains feasible. The unique `S_3` optimum changes to `delay_5_161_142`; `S_4,...,S_6` retain `delay_5_40` up to inactive `142/161` ties. The `S_7` side remains the current `13`-policy family and is not subset-exhaustive. | Exact finite subset-lattice policy-LP theorem. |
-| CL-065 | Exhausting all `32` subsets of `{5,40,30,161,142}` on `S_7`, both with and without the seed-delay switch, plus reverse deletion, enlarges the exact policy LP to `250` constraints. `(lambda,gamma)=(3,1/10)` remains feasible. The unique `S_7` winner changes from `seed_5` to the non-regenerative `seed_5_142`; its exact advantage over `seed_5` lies between `3/2000` and `751/500000`. | Exact finite full five-step subset-lattice theorem through `S_7`. |
-| CL-066 | A seed-delayed `S_7` policy with `37` delayed progression steps resolves to `9323` selected actions, residual size `517`, `28` terminal step classes, `9295` middle-fiber occurrences, and no canonical regeneration. In the exact one-toggle neighborhood given by its terminal-step set union delayed-step set (`59` candidates), it has no improving toggle, two zero-slack toggles, and minimum strict slack `384/111292259161`. Its exact score improves on `seed_5_142` by a value between `1915/1000` and `1916/1000`. | Exact finite terminal-step local-optimality theorem. |
-| CL-067 | The raw transition of the 37-step local optimum has `131` shell occurrences, `87` exact state classes, `22` duplicate groups, `229` strict containments, `390` partial overlaps, maximum point multiplicity `18`, and an acyclic terminal-fiber incidence graph. Its recursive occurrence mass is between `254/1000` and `255/1000` of the lexicographic value. Relative to lexicographic deletion it removes the cyclic SCC and lowers harmonic load, but partial overlaps rise from `214` to `390` and maximum multiplicity from `16` to `18`. | Exact finite transition-profile and retention-obstruction theorem. |
-| CL-068 | Exact-state quotienting with deterministic provenance representatives, followed by componentwise maximum-harmonic independent-set selection in the same-shell intersection graph, produces a unique `21`-state point-disjoint retained family from the local-optimum transition. The graph has `87` classes, `290` edges, `20` components, and largest component `13`; every component has a unique optimum. The retained family carries `11753` distinct labels and between `731/1000` and `732/1000` of the raw-union harmonic mass. | Exact finite one-generation provenance-preserving retained-child theorem. |
-| CL-069 | Propagating the `21` retained states by lexicographic coordinated deletion and reapplying the global quotient produces a unique `27`-state, `7925`-label point-disjoint descendant family. Original `S_7` provenance has multiplicity spectrum `7376` labels once, `267` twice, and `5` three times; repeated-provenance harmonic overhead is between `40/1000` and `41/1000`. Nevertheless second-generation retained harmonic mass is between `6828/1000` and `6829/1000` of first-generation retained mass. | Exact finite second-generation provenance-reuse and scale-expansion theorem. |
-| CL-070 | Across all `7925` second-generation retained points, every floor-log contraction `floor(log2(p/u))>=8` carries repeated root provenance. Repeated provenance carries only `7.6%`–`7.7%` of occurrence-weighted root mass but produces `94.8%`–`94.9%` of descendant harmonic mass; its descendant/root expansion is between `4928` and `4929`. Unit shell-depth, floor-log, and ceil-log root charges fail: the intergeneration debt is respectively more than `86`, `99`, and `77` times those charges. The four points with floor-log contraction at least `16` carry `69.8%`–`69.9%` of descendant mass, and the single `u=1`, `p=1354066` point carries `51.2%`–`51.3%`. | Exact finite provenance-times-scale concentration and no-go theorem. |
-| CL-071 | The `27` second-generation retained states split into `13` three-term-progression-free terminal states with `43` labels and `14` recursive states with `7882` labels. Terminal states carry `86.2%`–`86.3%` of total second retained harmonic mass. Recursive second-generation mass is only `93.7%`–`93.8%` of first-generation retained mass, giving exact recursive contraction of `6.2%`–`6.3%`. All four points with floor-log contraction at least `16`, including `u=1`, are terminal and create no further coordinated-deletion children. | Exact finite terminal-sink decomposition and two-generation recursive contraction theorem. |
+| CL-057 | Exact policy-weight thresholds separate lexicographic and delayed-seed preferences: `2.384<lambda_*<2.385`, `4.356<kappa_*<4.357`, `0.021<gamma_*<0.022`, and `0.418<a_*<0.419` for the recorded score families. | Exact finite rational half-space theorem. |
+| CL-058 | `C_lambda=T+lambda O+E` has a common tested subcone `477/200<lambda<260/63`; `lambda=3` ranks lexicographic below reverse through `S_7` and delayed seed below lexicographic at `S_7`. | Exact finite multi-state policy-ranking theorem. |
+| CL-059 | Delaying every step-5 action ties lexicographic under `C_3` on `S_1` and is strictly cheaper on `S_2,...,S_7`, but retains the canonical return. | Exact finite uniform-policy theorem. |
+| CL-060 | Adding the seed delay removes regeneration; under `C_{3,gamma}`, it beats step-5 when `0.057<gamma_5<0.058`. | Exact finite continuation-weight theorem. |
+| CL-061 | In the enlarged finite family, `C_{3,1/10}` selects step-5/40 variants through `S_6` and the non-regenerative hybrid at `S_7`; `gamma=1/16` fails and `gamma=1/10` succeeds. | Exact finite two-coordinate ranking theorem. |
+| CL-062 | Delaying step `30` helps alone but hurts after steps `5` and `40`; favorable local policy perturbations are not composable. | Exact finite interaction/no-greedy theorem. |
+| CL-063 | The first policy comparison exports `60` exact rational half-spaces and verifies `(lambda,gamma)=(3,1/10)` feasible. | Exact finite policy-LP theorem. |
+| CL-064 | All `32` subsets of `{5,40,30,161,142}` on `S_1,...,S_6` produce `198` exact half-spaces. The witness remains feasible and the unique `S_3` optimum becomes `delay_5_161_142`. | Exact finite subset-lattice theorem. |
+| CL-065 | Exhausting those subsets on `S_7` with and without seed delay, plus reverse deletion, gives `250` constraints. The unique `S_7` winner is non-regenerative `seed_5_142`. | Exact finite full five-step subset-lattice theorem. |
+| CL-066 | A seed-delayed 37-step `S_7` policy has `9323` selected actions, residual `517`, `28` terminal classes, `9295` middle-fiber occurrences, and no canonical regeneration. It has no improving move in its exact 59-toggle neighborhood. | Exact finite local-optimality theorem. |
+| CL-067 | The 37-step policy raw transition has `131` shells, `87` exact classes, `22` duplicate groups, `229` containments, `390` partial overlaps, maximum point multiplicity `18`, and no cyclic terminal-fiber SCC. | Exact finite transition-profile theorem. |
+| CL-068 | Exact-state quotienting plus componentwise maximum-harmonic same-shell conflict selection produces a unique `21`-state, `11753`-label point-disjoint retained family carrying `73.1%`–`73.2%` of raw-union harmonic mass. | Exact finite one-generation retained-child theorem. |
+| CL-069 | Propagating the 21 retained states and reapplying the quotient produces a unique `27`-state, `7925`-label point-disjoint family. Root provenance multiplicity is at most three, but total retained mass expands by `6.828`–`6.829`. | Exact finite second-generation provenance theorem. |
+| CL-070 | Every floor-log contraction at least eight carries repeated root provenance. Repeated roots carry `7.6%`–`7.7%` of root occurrence mass but produce `94.8%`–`94.9%` of descendant mass. Unit depth/log charges fail by factors greater than `77`. | Exact finite provenance-times-scale theorem. |
+| CL-071 | The 27 second-generation retained states split into 13 terminal states with 43 labels and 14 recursive states with 7882 labels. Terminal states carry `86.2%`–`86.3%` of second retained mass. Recursive mass is `93.7%`–`93.8%` of first retained mass, giving `6.2%`–`6.3%` contraction. | Exact finite terminal decomposition and recursive-contraction theorem. |
+| CL-072 | The 13 terminal states admit an exact identity export anchored to the certified retained-family and 7925-point provenance hashes. Their 43 numerical labels are pairwise unique, disjoint from recursive retained labels, and their 43 `(u,p)` point tokens are unique within the recorded family. | Exact finite terminal-sink identity theorem. |
+| CL-073 | For any fixed terminal-token map on a finite or locally finite rooted tree, assigning each token to its first node in a deterministic total order gives pairwise disjoint first-appearance ledgers whose weighted sum equals the weighted global token union. | Elementary whole-tree accounting lemma; token soundness and union bound remain open. |
 
-Primary references for CL-050 through CL-071:
+Primary latest references:
 
-- `docs/s7-cyclic-scc-output-load.md`;
-- `docs/s7-cyclic-scc-local-completion-credit.md`;
-- `docs/s7-cyclic-scc-small-state-affine-frontier.md`;
-- `docs/s7-cyclic-output-seed-regeneration.md`;
-- `docs/s7-regenerative-seed-policy-dependence.md`;
-- `docs/s7-policy-transition-tradeoff.md`;
-- `docs/s7-delayed-seed-policy.md`;
-- `docs/s7-policy-weight-regions.md`;
-- `docs/policy-occurrence-cone-s1-s7.md`;
-- `docs/step5-policy-regeneration-weight.md`;
-- `docs/two-coordinate-policy-family.md`;
-- `docs/policy-halfspace-lp.md`;
-- `docs/expanded-policy-subset-lp.md`;
-- `docs/policy-subset-lattice-s1-s7.md`;
-- `docs/s7-terminal-step-local-optimum.md`;
-- `docs/s7-local-optimum-transition-profile.md`;
-- `docs/s7-provenance-retained-quotient.md`;
-- `docs/retained-provenance-second-generation.md`;
+- `docs/retained-terminal-sink-identity-ledger.md`;
+- `docs/terminal-sink-first-appearance-ledger.md`;
 - `docs/retained-terminal-recursive-split.md`;
 - `docs/retained-provenance-scale-profile.md`;
-- `src/verify_s7_provenance_retained_quotient.py`;
-- `src/verify_retained_provenance_second_generation.py`;
-- `src/verify_retained_provenance_scale_profile.py`;
+- `docs/retained-provenance-second-generation.md`;
+- `src/export_retained_terminal_sink_ledger.py`;
 - `src/verify_retained_terminal_split.py`.
 
 ---
@@ -122,77 +107,70 @@ Primary references for CL-050 through CL-071:
 
 Do not use without materially new hypotheses:
 
-1. universal local `3/4` contraction;
-2. fixed short-window contraction;
-3. universal two-generation recovery;
-4. extrapolating one path or one exact fan to the whole tree;
-5. replay siblings as simultaneous children;
-6. pathwise summability as sufficient;
-7. rectangle radius without target demand;
-8. raw novelty as schedule independent;
-9. `P Psi` as a standalone Bellman potential;
-10. raw occurrences copied directly into an LP child sum;
-11. exact-state quotienting as a containment solution by itself;
-12. a uniform maximum-overlap constant;
-13. a strict decreasing terminal-label rank;
-14. latest- or historical-separation-only state;
-15. unit harmonic SCC capacity;
-16. any positive linear SCC capacity with contraction factor at most two on the recorded `S_7` component;
-17. treating the numerical union of cyclic output as unit-weight stored capacity;
-18. treating layer collisions and same-layer completions as sufficient repayment for the `S_7` cyclic output;
-19. treating complete one-generation affine testing as sufficient repayment on small cyclic-output children;
-20. interpreting absence from the deterministic first-witness histogram as absence from all witnesses;
-21. treating all small surviving states as negligible terminal errors;
-22. inferring whole-tree divergence from the isolated regenerative path;
-23. treating lexicographic regeneration as parent-intrinsic or schedule-independent;
-24. using one policy witness as a minimax or all-policy theorem;
-25. treating avoidance of canonical regeneration as sufficient policy optimization;
-26. ranking policies by raw occurrence count or distinct-label count without harmonic and provenance weights;
-27. treating the delayed-seed Pareto tradeoff as a completed Bellman contraction;
-28. treating one finite weight threshold or common cone as global validation of its raw coordinate;
-29. treating `T+3O+E` as sufficient after it chooses a known regenerative schedule;
-30. assuming `gamma=1/16` survives enlargement of the policy family;
-31. greedily composing individually favorable policy delays;
-32. treating the earlier `S_3` or `S_7` policy choices as stable under family enlargement;
-33. treating one-toggle local optimality as global policy optimality;
-34. treating the 59-toggle neighborhood as exhaustive over arbitrary delayed progression steps;
-35. inferring disjoint retained children from acyclic terminal-fiber incidence;
-36. inferring Bellman contraction from lower raw harmonic occurrence mass;
-37. treating one-generation point-disjoint retention as a bound on indefinite provenance reuse;
-38. treating maximum provenance multiplicity three as a contraction theorem;
-39. treating low repeated-provenance overhead as payment for scale-driven harmonic growth;
-40. treating unit shell-depth or logarithmic root charge as sufficient repayment;
-41. treating the full `6.828`–`6.829` second-generation ratio as recursive load;
-42. discarding terminal three-term-progression-free mass instead of charging it exactly once;
-43. treating the `6.2%`–`6.3%` recursive contraction as universal;
-44. treating a coefficient greater than `77` as globally valid merely because it fits this transition;
-45. treating repeated provenance and scale contraction as independent coordinates after CL-070;
-46. treating maximum-harmonic local retention as globally Bellman-optimal;
-47. treating policy-half-space LP feasibility as branching Bellman-LP feasibility;
-48. inserting the recorded path charge directly into a Bellman child sum without a terminal-sink accounting theorem;
-49. treating the tested policy family as globally optimal over all complete schedules;
-50. random sampling as a finite certificate;
-51. the rejected depth-ten anchor reduction.
+1. universal local or fixed-window contraction;
+2. replay siblings as simultaneous children;
+3. pathwise summability as whole-tree summability;
+4. raw novelty as schedule independent;
+5. `P Psi` as a standalone Bellman potential;
+6. raw occurrences copied directly into a Bellman child sum;
+7. exact-state quotienting alone as a containment theorem;
+8. a uniform overlap constant or decreasing terminal-label rank;
+9. unit harmonic or factor-two linear SCC capacity;
+10. raw numerical union as stored repayment;
+11. local affine obstruction coverage as complete repayment;
+12. absence from a first-witness histogram as absence from all witnesses;
+13. all small surviving states as negligible errors;
+14. one regenerative path as whole-tree divergence;
+15. regeneration as parent-intrinsic;
+16. one finite policy witness as an all-policy theorem;
+17. avoidance of regeneration as sufficient optimization;
+18. raw occurrence or label count without harmonic/provenance weights;
+19. one finite weight cone as global validation;
+20. greedy composition of favorable policy delays;
+21. one-toggle local optimality as global policy optimality;
+22. lower raw harmonic occurrence mass as Bellman contraction;
+23. one-generation retention as a bound on indefinite reuse;
+24. maximum provenance multiplicity three as contraction;
+25. unit depth/log charge as repayment for total second-generation mass;
+26. the full `6.828`–`6.829` ratio as recursive load;
+27. discarding terminal mass instead of charging it once;
+28. within-family terminal-token uniqueness as global uniqueness;
+29. `(u,p)` as globally collision-sound without proof;
+30. the `6.2%`–`6.3%` recursive contraction as universal;
+31. first-appearance deduplication as a bound on token-union mass;
+32. maximum-harmonic local retention as globally optimal;
+33. policy-LP feasibility as branching Bellman-LP feasibility;
+34. the tested policy family as globally optimal;
+35. random sampling as a finite certificate;
+36. the rejected depth-ten anchor reduction.
 
 ---
 
-# Open bottleneck OB-001: Recursive contraction plus terminal-sink accounting
+# Open bottleneck OB-001: terminal-token soundness and recursive propagation
 
-Within-generation point-disjoint retention is solved for the adversarial local-optimum transition. The second retained generation has an exact terminal/recursive partition. The recursive branch contracts by `6.2%`–`6.3%`; the apparent large expansion is concentrated in terminal three-term-progression-free states.
+The adversarial local-optimum transition now has:
 
-The next task is to define a global terminal-sink ledger that charges each numerical or provenance-supported terminal output at most once, while propagating only recursive retained states. The scale profile remains relevant because it identifies the high-mass sinks, but unit scale charges are not the active debt.
+- a legitimate point-disjoint retained-child quotient;
+- an exact two-generation terminal/recursive split;
+- `6.2%`–`6.3%` contraction on the recursively continuing branch;
+- a complete 43-point terminal identity ledger;
+- and an exact first-appearance bookkeeping lemma for any fixed token map.
 
-The target remains
+The next theorem must determine whether `(u,p)` is collision-sound across branches and generations, or whether an affine/path signature is required. After choosing the correct token resolution, the weighted first-appearance token union must be bounded while only the 14 recursive states are propagated.
+
+The target is
 
 ```math
 \Delta(S)
 +
-\operatorname{TermSink}(S)
+\operatorname{TermSink}_{\rm first}(S)
 +
 \sum_{S'\in\operatorname{RecChild}_\pi(S)}
 \operatorname{RecPack}(S')
 \le
-\operatorname{RecPack}(S)+
-\Phi_{\rm obs}(S)+
+\operatorname{RecPack}(S)
++
+\Phi_{\rm obs}(S)
++
 \operatorname{controlled\ error}.
 ```

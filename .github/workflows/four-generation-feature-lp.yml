@@ -26,6 +26,8 @@ jobs:
         shell: bash
         run: |
           set +e
+          echo "phase=started" > data/four_generation_feature_lp_status.txt
+          echo "commit=${GITHUB_SHA}" >> data/four_generation_feature_lp_status.txt
           python3 src/run_exact_python.py \
             src/probe_four_generation_feature_lp.py \
             > /tmp/four_generation_feature_lp.json \
@@ -33,10 +35,10 @@ jobs:
           status=$?
           {
             echo "exit_status=$status"
-            echo "commit=${GITHUB_SHA}"
+            echo "phase=completed"
             echo "--- stderr ---"
             cat /tmp/four_generation_feature_lp.err
-          } > data/four_generation_feature_lp_status.txt
+          } >> data/four_generation_feature_lp_status.txt
           if [[ "$status" == "0" ]]; then
             cp /tmp/four_generation_feature_lp.json \
               data/four_generation_feature_lp_probe.json
@@ -46,10 +48,17 @@ jobs:
           exit 0
 
       - name: Commit deterministic LP result
+        if: always()
         shell: bash
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if [[ ! -f data/four_generation_feature_lp_status.txt ]]; then
+            {
+              echo "phase=workflow_failed_before_solver_status"
+              echo "commit=${GITHUB_SHA}"
+            } > data/four_generation_feature_lp_status.txt
+          fi
           git add data/four_generation_feature_lp_status.txt
           git add -A data/four_generation_feature_lp_probe.json
           if git diff --cached --quiet; then

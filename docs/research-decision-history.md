@@ -367,6 +367,14 @@ The pair-resource test was moved one level earlier. All fourteen `R_3` recursive
 
 The finite obstruction prefix is now restricted to `R_1 -> F_2` and `R_2 -> F_3`; the later transitions are closed.
 
+### Residual-sponsor backbone refinement
+
+The first workflow attempt did not test the mathematics: it imported a nonexistent module, and an unsafe named `git add -A` pathspec masked that exception. After the repository-wide workflow hardening pass, the original error was preserved and the probe was rewritten against the certified lexicographic propagation APIs.
+
+The corrected exact test partitions only the already-existing translated minimum backbone. It inserts no unshifted residual output and preserves raw support, point occurrences, and harmonic occurrence mass exactly. Under the same retained quotient, the residual-root shells are terminal, recursive points fall by `151`, recursive mass falls by `0.168809631114...`, and union pair-resource mass falls by `404.536054734914...`.
+
+This closes the finite question of whether the symbolic residual-sponsor split is useful on the recorded failing transition. It is strongly favorable. The remaining analytical target is a state-independent sponsor-core activation bound.
+
 **Decisions:**
 
 - current-generation multiplicity is not persistent reserve;
@@ -442,16 +450,15 @@ H_g^{\mathrm{rec}}
 
 Here `A_g` must be a state-independent ancestor-path capacity, `T^{first}` is newly terminal first-appearance credit, and `Phi_obs` records completion, rectangle, or cheap-extension exclusion created when capacity is released.
 
-The next exact work is to:
+The next exact and analytical work is to:
 
-1. certify affine root references and exact pivot updates on the existing retained frontier;
-2. test the exact minimum-translation reserve on the four existing transitions;
-3. quantify entering pair energy and identify a noncircular payment source;
-4. prove affine entry/purification or charge non-affine recursive output to terminal or arithmetic obstruction;
-5. distinguish provenance-valid release from numerical coverage among the `673` dropped roots with raw descendants;
-6. formulate the resulting transfer lemma before propagating another generation.
+1. measure sponsor-core size, selected-progression incidence, and pair-energy exposure on the first two retained transitions;
+2. prove a weighted bound for the activated star pairs `(a,s)` and internal sponsor pairs `binom(Sigma,2)`;
+3. charge popular or short sponsor differences to terminal first appearance, completion support, rectangle transport, or cheap-extension exclusion;
+4. determine whether policy selection can minimize sponsor-core pair energy while preserving the one-generation harmonic lower bound;
+5. formulate the sponsor-core transfer lemma before propagating another generation.
 
-No current theorem closes this gap. Generation six and further feature fitting are explicitly deferred.
+No current theorem pays for sponsor-core activation from the original root at all scales. Generation six and further feature fitting remain explicitly deferred.
 
 ---
 

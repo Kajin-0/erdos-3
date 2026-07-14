@@ -1,0 +1,12 @@
+schema=cl088_documentation_status_v1
+compile_exit_status=0
+patch_exit_status=0
+source_commit=689aae2f1040c946399a45a442a101e3cb151c9d
+source_ref=refs/heads/main
+workflow_run_id=29349698893
+workflow_run_attempt=1
+--- stderr ---
+src/patch_cl088_residual_sponsor_split.py:41: SyntaxWarning: invalid escape sequence '\s'
+  section = """---
+/home/runner/work/erdos-3/erdos-3/src/patch_cl088_residual_sponsor_split.py:41: SyntaxWarning: invalid escape sequence '\s'
+  section = """---

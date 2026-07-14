@@ -31,6 +31,7 @@ The repository has established:
 16. an exact pair-resource partition proving containment and zero repeated payment at the fifth frontier.
 17. a symbolic affine-closure theorem and universal union-valued pair-resource containment for every coordinated deletion output.
 18. exact occurrence- and union-valued pair-resource contraction from the third to fourth retained frontier.
+19. a certified residual-sponsor backbone split that terminalizes translated residual roots and reduces the fifth recursive pair-resource load without changing raw support or harmonic occurrence mass.
 
 The strongest state-specific closure is
 
@@ -56,7 +57,7 @@ At the first failing transition all `1015` recursive survivors are minimum-trans
 \frac1{u-m}-\frac1u.
 ```
 
-Affine closure and union-valued pair containment now control reuse exactly across the whole retained tree. The decisive missing theorem is an economical activation or multiscale exposure bound for the pair tokens actually used. The intended inequality is schematically
+Affine closure and union-valued pair containment now control reuse exactly across the whole retained tree. The certified residual-sponsor split further terminalizes translated residual roots, so the continuing resource universe is concentrated on deleted sponsor roots. The decisive missing theorem is an economical activation or multiscale exposure bound for sponsor-core pair tokens. The intended inequality is schematically
 
 ```math
 H_{g+1}^{\rm rec}
@@ -89,6 +90,7 @@ A valid theorem must still handle policy dependence, terminal-recursive interact
 - [`docs/fifth-generation-pair-resource-partition.md`](docs/fifth-generation-pair-resource-partition.md) — explicit fifth-child to fourth-pair ownership and unused-capacity theorem.
 - [`docs/affine-output-closure-and-pair-containment.md`](docs/affine-output-closure-and-pair-containment.md) — universal affine descendant and pair-resource containment theorem.
 - [`docs/third-to-fourth-pair-resource-contraction.md`](docs/third-to-fourth-pair-resource-contraction.md) — exact affine pair contraction before root uniqueness.
+- [`docs/residual-sponsor-backbone-refinement.md`](docs/residual-sponsor-backbone-refinement.md) — symbolic and exact finite sponsor-core refinement of the minimum backbone.
 - [`docs/branching-reserve-lp.md`](docs/branching-reserve-lp.md) — exact retained-child LP contract and current packing requirements.
 
 ## Main completed theorem families

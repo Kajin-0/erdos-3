@@ -310,3 +310,37 @@ The next exact and analytical questions are:
 6. do large sponsor cores necessarily create completion, rectangle, or cheap-extension exclusion?
 
 The refinement is useful only if one of these questions yields a state-independent transfer law.
+
+---
+
+## 11. Certified retained-frontier result
+
+The exact `R_4 -> F_5` probe verifies the symbolic refinement under the recorded lexicographic policy and maximum-harmonic same-shell retained quotient.
+
+It inserts no unshifted residual output and preserves exactly:
+
+```text
+raw support union       = 1,489 labels
+raw point occurrences   = 2,972
+raw harmonic mass       = 25.589294609269...
+```
+
+The retained comparison is:
+
+| quantity | baseline | refined split | delta |
+|---|---:|---:|---:|
+| terminal points | 17 | 232 | +215 |
+| recursive points | 1,015 | 864 | -151 |
+| terminal mass | 2.043863226048 | 2.413546690714 | +0.369683464666 |
+| recursive mass | 2.042771729559 | 1.873962098445 | -0.168809631114 |
+| latent pair occurrences | 106,381 | 74,191 | -32,190 |
+| union pair-resource mass | 1,586.466623468978 | 1,181.930568734065 | -404.536054734914 |
+
+Fifteen retained residual-backbone states carry `211` points and mass `1.928005934870...`; all are terminal. The refined family has only three repeated pair tokens, with repeated mass `0.019917616169...`.
+
+Verifier and certificate:
+
+- `src/verify_residual_sponsor_backbone_split.py`;
+- `data/residual_sponsor_backbone_split_certificate_2026-07-14.txt`;
+- certificate SHA-256 `28266cae2b603b7a2490d547ef96d429e06e31cba4706ccc1f0fe0dbdc7bc986`.
+

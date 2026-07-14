@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - src/probe_fourth_to_fifth_root_transfer.py
+      - src/verify_fourth_to_fifth_root_transfer.py
       - .github/workflows/fourth-to-fifth-root-transfer.yml
 
 permissions:
@@ -22,7 +23,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Run exact root-transfer probe
+      - name: Run and verify exact root-transfer identity
         shell: bash
         run: |
           set +e
@@ -30,22 +31,40 @@ jobs:
             src/probe_fourth_to_fifth_root_transfer.py \
             > /tmp/fourth_to_fifth_root_transfer.json \
             2> /tmp/fourth_to_fifth_root_transfer.err
-          status=$?
-          {
-            echo "exit_status=$status"
-            echo "commit=${GITHUB_SHA}"
-            echo "--- stderr ---"
-            cat /tmp/fourth_to_fifth_root_transfer.err
-          } > data/fourth_to_fifth_root_transfer_status.txt
-          if [[ "$status" == "0" ]]; then
+          probe_status=$?
+          verifier_status=not_run
+          : > /tmp/fourth_to_fifth_root_transfer_verifier.err
+          if [[ "$probe_status" == "0" ]]; then
             cp /tmp/fourth_to_fifth_root_transfer.json \
               data/fourth_to_fifth_root_transfer_probe.json
+            python3 src/run_exact_python.py \
+              src/verify_fourth_to_fifth_root_transfer.py \
+              /tmp/fourth_to_fifth_root_transfer_certificate.txt \
+              > /tmp/fourth_to_fifth_root_transfer_verifier.stdout \
+              2> /tmp/fourth_to_fifth_root_transfer_verifier.err
+            verifier_status=$?
+            if [[ "$verifier_status" == "0" ]]; then
+              cp /tmp/fourth_to_fifth_root_transfer_certificate.txt \
+                data/fourth_to_fifth_root_transfer_certificate_2026-07-14.txt
+            else
+              rm -f data/fourth_to_fifth_root_transfer_certificate_2026-07-14.txt
+            fi
           else
             rm -f data/fourth_to_fifth_root_transfer_probe.json
+            rm -f data/fourth_to_fifth_root_transfer_certificate_2026-07-14.txt
           fi
+          {
+            echo "probe_exit_status=$probe_status"
+            echo "verifier_exit_status=$verifier_status"
+            echo "commit=${GITHUB_SHA}"
+            echo "--- probe stderr ---"
+            cat /tmp/fourth_to_fifth_root_transfer.err
+            echo "--- verifier stderr ---"
+            cat /tmp/fourth_to_fifth_root_transfer_verifier.err
+          } > data/fourth_to_fifth_root_transfer_status.txt
           exit 0
 
-      - name: Commit deterministic probe result
+      - name: Commit deterministic result
         if: always()
         shell: bash
         run: |
@@ -60,11 +79,12 @@ jobs:
           fi
           git add data/fourth_to_fifth_root_transfer_status.txt
           git add -A data/fourth_to_fifth_root_transfer_probe.json
+          git add -A data/fourth_to_fifth_root_transfer_certificate_2026-07-14.txt
           if git diff --cached --quiet; then
             echo "No root-transfer output change"
             exit 0
           fi
-          git commit -m "Record fourth-to-fifth root transfer [skip ci]"
+          git commit -m "Record fourth-to-fifth root-transfer certificate [skip ci]"
           for attempt in 1 2 3; do
             git fetch origin main
             git rebase origin/main

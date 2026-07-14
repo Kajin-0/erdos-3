@@ -3,10 +3,10 @@
 from __future__ import annotations
 
 from fractions import Fraction
+from itertools import combinations
 import hashlib
 import json
 import sys
-from pathlib import Path
 
 from probe_shelled_oriented_full_edge_pair_persistence import shelled_family
 from verify_full_edge_coordinated_branching import contains_four_ap, pair_weight, three_aps
@@ -27,9 +27,6 @@ def canonical_hash(value: object) -> str:
 
 
 def main() -> int:
-    if len(sys.argv) != 2:
-        raise SystemExit("usage: verify_shelled_pair_reuse_gadget.py OUTPUT")
-    output = Path(sys.argv[1])
     if contains_four_ap(SUPPORT):
         raise AssertionError("reuse gadget support contains a four-AP")
 
@@ -56,8 +53,8 @@ def main() -> int:
         if len(three_aps(shells[key])) != 1:
             raise AssertionError(f"shell {key} is not exactly one recursive three-AP")
 
-    first_pairs = {tuple(pair) for pair in __import__("itertools").combinations(sorted(roots[FIRST_KEY]), 2)}
-    second_pairs = {tuple(pair) for pair in __import__("itertools").combinations(sorted(roots[SECOND_KEY]), 2)}
+    first_pairs = set(combinations(sorted(roots[FIRST_KEY]), 2))
+    second_pairs = set(combinations(sorted(roots[SECOND_KEY]), 2))
     intersection = first_pairs & second_pairs
     if intersection != {SHARED_PAIR}:
         raise AssertionError(f"unexpected latent-pair intersection: {intersection}")
@@ -83,7 +80,7 @@ def main() -> int:
         "latent_pair_reuse_multiplicity": 2,
     }
     record["payload_sha256"] = canonical_hash(record)
-    output.write_text(json.dumps(record, indent=2, sort_keys=True) + "\n")
+    print(json.dumps(record, indent=2, sort_keys=True))
     return 0
 
 

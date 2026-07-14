@@ -1,0 +1,33 @@
+EXPANDED POLICY SUBSET-LATTICE LP
+
+subset_steps=5,40,30,161,142
+subsets_per_state_S1_S6=32
+S7_policy_family=current_13_policy_family
+features=lambda,gamma
+weights=lambda:3,gamma:1/10
+constraints=198
+jsonl_bytes=417334
+jsonl_sha256=9181fd97362560cdb10001063df140b88465740f025620c3d2c4c92650d2d79f
+lp_bytes=464574
+lp_lines=206
+lp_sha256=e1b0a00c2472110c9133cc79a844256211b5e0ed0e27c04acfc8f2a236026936
+
+result=FEASIBLE
+active_equalities=47
+active_equalities_sha256=d6913498d788323c69bade7513294c758022f439108f535675cfe495c4814027
+strict_minimum_constraint=S3:delay_5_161_142<=delay_5_40
+strict_minimum_slack_sha256=f63047846da4fbe9897d75156ec8ec2386709bc6a64d40c9305e7a03f7e2358c
+strict_minimum_slack_numerator_digits=10
+strict_minimum_slack_denominator_digits=11
+
+S1_chosen=delay_none
+S2_chosen=delay_5
+S3_chosen=delay_5_161_142
+S4_chosen=delay_5_40
+S5_chosen=delay_5_40
+S6_chosen=delay_5_40
+S7_chosen=hybrid5
+
+conclusion: the exact witness lambda=3,gamma=1/10 remains feasible after expanding S1 through S6 to all 32
+subsets of delay steps {5,40,30,161,142}. The expansion changes the unique S3 optimum to delay {5,161,142}.
+This is a finite policy-ranking LP and still does not encode retained simultaneous Bellman children.

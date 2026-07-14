@@ -18,6 +18,7 @@ FORCED_FORK_NO_GO_SHA256="771c144b3c08cc186d2613eae314b2d0712d18933094323307b146
 POLICY_SUBSET_SHA256="85667125996eb7d3f33d6bdf6ddd78ad1cefbad8c229d57402711e20d17a2287"
 S7_LOCAL_OPTIMUM_SHA256="8bd93afd6ed9bcd856ff23b5eb671b2963d5aa8b8e47df19f726b38760085211"
 S7_TRANSITION_PROFILE_SHA256="1bf8d15efd7c8cb1f9b04fba769d19e43d2b630d9fe36f141bbcc4466f9bb19e"
+S7_RETAINED_QUOTIENT_SHA256="2a1dd14ee54a9a1b39cc19d4fefc70f54b1157be82f496e2107d3a717052ff92"
 
 mkdir -p "$WORK"
 
@@ -143,7 +144,16 @@ cmp "$S7_PROFILE_RECORDED" "$S7_PROFILE_GENERATED"
 verify_sha256 "$S7_PROFILE_GENERATED" "$S7_TRANSITION_PROFILE_SHA256" \
   "s7_local_optimum_transition_profile"
 
+S7_RETAINED_GENERATED="$WORK/s7_provenance_retained_quotient_certificate.txt"
+S7_RETAINED_RECORDED="$ROOT/data/s7_provenance_retained_quotient_certificate_2026-07-13.txt"
+python3 "$ROOT/src/run_exact_python.py" \
+  "$ROOT/src/verify_s7_provenance_retained_quotient.py" \
+  "$S7_RETAINED_GENERATED"
+cmp "$S7_RETAINED_RECORDED" "$S7_RETAINED_GENERATED"
+verify_sha256 "$S7_RETAINED_GENERATED" "$S7_RETAINED_QUOTIENT_SHA256" \
+  "s7_provenance_retained_quotient"
+
 python3 "$ROOT/src/certified_contaminated_states.py" > /dev/null
 python3 "$ROOT/src/branching_reserve_lp.py" self-test
 
-echo "verified: transport, reserve diagnostics, transition frontier through S7, full policy subset lattice, exact S7 local optimum and transition profile, forced-fork reserve/no-go, and LP harness"
+echo "verified: transport, reserve diagnostics, transition frontier through S7, full policy subset lattice, exact S7 local optimum, transition profile and retained quotient, forced-fork reserve/no-go, and LP harness"

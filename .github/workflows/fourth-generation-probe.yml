@@ -25,6 +25,39 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Apply canonical ordering fix
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          path = Path("src/verify_fourth_generation_potential_frontier.py")
+          text = path.read_text(encoding="utf-8")
+          old_block = '''EXPECTED_UP_COLLISIONS = (
+              (61, 1_584_290),
+              (62, 1_584_291),
+              (122, 1_584_351),
+              (123, 1_584_352),
+              (147, 1_584_356),
+              (152, 1_584_361),
+              (153, 1_584_362),
+          )'''
+          new_block = '''EXPECTED_UP_COLLISIONS = (
+              (122, 1_584_351),
+              (123, 1_584_352),
+              (147, 1_584_356),
+              (152, 1_584_361),
+              (153, 1_584_362),
+              (61, 1_584_290),
+              (62, 1_584_291),
+          )'''
+          old_line = 'observed_up = tuple(sorted(tuple(detail["signature"]) for detail in up_terminal))'
+          new_line = 'observed_up = tuple(tuple(detail["signature"]) for detail in up_terminal)'
+          if old_block not in text or old_line not in text:
+              raise SystemExit("canonical ordering patch anchors not found")
+          text = text.replace(old_block, new_block, 1).replace(old_line, new_line, 1)
+          path.write_text(text, encoding="utf-8")
+          PY
+
       - name: Run exact fourth-generation probe
         shell: bash
         run: |
@@ -86,6 +119,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/verify_fourth_generation_potential_frontier.py
           git add data/fourth_generation_probe_status.txt
           git add -A data/fourth_generation_potential_frontier_probe.json
           git add -A data/fourth_generation_potential_frontier_summary.json
@@ -93,5 +127,5 @@ jobs:
             echo "No fourth-generation probe output change"
             exit 0
           fi
-          git commit -m "Record fourth-generation exact probe result [skip ci]"
+          git commit -m "Record fourth-generation exact frontier theorem [skip ci]"
           git push

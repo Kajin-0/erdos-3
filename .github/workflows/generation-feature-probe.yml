@@ -9,6 +9,7 @@ on:
       - src/summarize_generation_aware_feature_probe.py
       - src/probe_candidate_generation_potentials.py
       - src/verify_generation_aware_retained_potentials.py
+      - src/patch_certainty_ledger_cl076.py
       - data/generation_aware_retained_potentials_certificate_2026-07-13.txt
       - .github/workflows/generation-feature-probe.yml
 
@@ -38,9 +39,11 @@ jobs:
           summary_status=not_run
           candidate_status=not_run
           verifier_status=not_run
+          patch_status=not_run
           : > /tmp/generation_feature_summary.err
           : > /tmp/candidate_generation_potentials.err
           : > /tmp/generation_potential_verifier.err
+          : > /tmp/certainty_ledger_patch.err
           if [[ "$probe_status" == "0" ]]; then
             cp /tmp/generation_feature_probe.json \
               data/generation_aware_feature_profiles_probe.json
@@ -77,6 +80,11 @@ jobs:
                 /tmp/generation_aware_retained_potentials_certificate.txt
               verifier_status=$?
             fi
+            if [[ "$verifier_status" == "0" ]]; then
+              python3 src/patch_certainty_ledger_cl076.py \
+                2> /tmp/certainty_ledger_patch.err
+              patch_status=$?
+            fi
           else
             rm -f data/generation_aware_feature_profiles_probe.json
             rm -f data/generation_aware_feature_profiles_summary.json
@@ -87,6 +95,7 @@ jobs:
             echo "summary_exit_status=$summary_status"
             echo "candidate_exit_status=$candidate_status"
             echo "verifier_exit_status=$verifier_status"
+            echo "patch_exit_status=$patch_status"
             echo "commit=${GITHUB_SHA}"
             echo "--- probe stderr ---"
             cat /tmp/generation_feature_probe.err
@@ -96,6 +105,8 @@ jobs:
             cat /tmp/candidate_generation_potentials.err
             echo "--- verifier stderr ---"
             cat /tmp/generation_potential_verifier.err
+            echo "--- patch stderr ---"
+            cat /tmp/certainty_ledger_patch.err
           } > data/generation_aware_feature_probe_status.txt
           exit 0
 
@@ -108,9 +119,10 @@ jobs:
           git add -A data/generation_aware_feature_profiles_probe.json
           git add -A data/generation_aware_feature_profiles_summary.json
           git add -A data/candidate_generation_potentials_probe.json
+          git add docs/certainty-ledger.md
           if git diff --cached --quiet; then
             echo "No probe output change"
             exit 0
           fi
-          git commit -m "Record generation-aware feature probe result [skip ci]"
+          git commit -m "Record generation-aware retained potential theorem [skip ci]"
           git push

@@ -1,13 +1,9 @@
-schema=cl089_cl092_frontier_status_v2
+schema=cl089_cl092_frontier_status_v3
 compile_exit_status=0
 patch_exit_status=0
 idempotence_exit_status=0
-source_commit=307b4c016b8ee508316b8defc1dc945487da476e
+source_commit=422f4b70c871212ba6fdb1dc2355483a4ed8b0ca
 source_ref=refs/heads/main
-workflow_run_id=29375131484
+workflow_run_id=29375273580
 workflow_run_attempt=1
 --- stderr ---
-src/patch_cl089_cl092_frontier.py:144: SyntaxWarning: invalid escape sequence '\m'
-  OLD_MASS = """Let `H_g^rec` denote recursively continuing retained harmonic mass. The four recorded ratios are:
-src/patch_cl089_cl092_frontier.py:230: SyntaxWarning: invalid escape sequence '\s'
-  README_ACTIVE = """A rigorous finite retained quotient exists, but terminal stopping changes its active first transition. The first family contains six terminal states carrying `44.4642947826%` of its mass and fifteen recursive states. Recomputing from only those recursive parents gives a corrected ordinary second recursive ratio `2.624517171606...`; residual-sponsor refinement lowers it to `2.030802800232...`.

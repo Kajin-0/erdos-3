@@ -2,5 +2,7 @@ compile_exit_status=0
 probe_exit_status=0
 summary_exit_status=0
 verifier_exit_status=0
-commit=b2213f4b055af16f8df12cd0300f3da50cb812ab
+anchor_probe_exit_status=0
+anchor_summary_exit_status=0
+commit=1d6992174b062dab978bd05c47e77c4ee2542b10
 --- stderr ---

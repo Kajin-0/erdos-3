@@ -148,11 +148,11 @@ Do not use without materially new hypotheses:
 33. the third-generation expansion as universal over all policies or quotients;
 34. immediate provenance as globally sufficient after one finite collision test;
 35. `H+2R` or `H+4T` as a universal Bellman potential after two finite transitions;
-35. maximum-harmonic local retention as globally optimal;
-36. policy-LP feasibility as branching Bellman-LP feasibility;
-37. the tested policy family as globally optimal;
-38. random sampling as a finite certificate;
-39. the rejected depth-ten anchor reduction.
+36. maximum-harmonic local retention as globally optimal;
+37. policy-LP feasibility as branching Bellman-LP feasibility;
+38. the tested policy family as globally optimal;
+39. random sampling as a finite certificate;
+40. the rejected depth-ten anchor reduction.
 
 ---
 

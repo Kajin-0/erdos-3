@@ -7,6 +7,7 @@ on:
       - main
     paths:
       - src/patch_cl088_residual_sponsor_split.py
+      - src/canonicalize_cl088_docs.py
       - .github/workflows/record-cl088-residual-sponsor-split.yml
 
 permissions:
@@ -25,22 +26,26 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Patch authoritative documents and preserve status
+      - name: Patch and canonicalize authoritative documents
         shell: bash
         run: |
           set +e
           : > /tmp/cl088_documentation.err
-          python3 -m py_compile src/patch_cl088_residual_sponsor_split.py \
+          python3 -m py_compile \
+            src/patch_cl088_residual_sponsor_split.py \
+            src/canonicalize_cl088_docs.py \
             2> /tmp/cl088_documentation.err
           compile_status=$?
           patch_status=not_run
           if [[ "$compile_status" == "0" ]]; then
             python3 src/patch_cl088_residual_sponsor_split.py \
+              2>> /tmp/cl088_documentation.err && \
+            python3 src/canonicalize_cl088_docs.py \
               2>> /tmp/cl088_documentation.err
             patch_status=$?
           fi
           {
-            echo "schema=cl088_documentation_status_v1"
+            echo "schema=cl088_documentation_status_v2"
             echo "compile_exit_status=$compile_status"
             echo "patch_exit_status=$patch_status"
             echo "source_commit=${GITHUB_SHA}"
@@ -82,10 +87,11 @@ jobs:
           if git diff --cached --quiet; then
             exit 0
           fi
-          git commit -m "Record CL-088 documentation status [skip ci]"
+          git commit -m "Record canonical CL-088 documentation [skip ci]"
           git fetch origin main
           if ! git diff --quiet "$GITHUB_SHA" origin/main -- \
               src/patch_cl088_residual_sponsor_split.py \
+              src/canonicalize_cl088_docs.py \
               .github/workflows/record-cl088-residual-sponsor-split.yml; then
             echo "error: CL-088 patch source changed; refusing stale documentation" >&2
             exit 1

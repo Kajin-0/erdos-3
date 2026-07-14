@@ -1,5 +1,6 @@
 compile_exit_status=0
 probe_exit_status=0
 summary_exit_status=0
-commit=c96b9e667cddad9599264972c19824ad463af77a
+verifier_exit_status=0
+commit=09bf47f0713d866d9031b9566a91614efafa1998
 --- stderr ---

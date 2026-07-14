@@ -6,7 +6,7 @@ root-disjoint children,
 
     H(F5_total) + J(R5_recursive) <= J(R4_recursive),
 
-where J is reciprocal root-pair energy.  This probe computes every term exactly,
+where J is reciprocal root-pair energy. This probe computes every term exactly,
 checks root and pair multiplicities, and records the unused pair-energy surplus.
 It does not propagate generation six.
 """
@@ -173,8 +173,18 @@ def main() -> int:
     if occurrence_surplus < 0 or union_surplus < 0:
         raise AssertionError("pair-energy Bellman row fails")
     if j4_occ != j4_union or j5_occ != j5_union:
-        raise AssertionError("occurrence and union pair energy differ despite uniqueness")
+        raise AssertionError(
+            "occurrence and union pair energy differ despite uniqueness"
+        )
 
+    bellman_hash_payload = {
+        "occurrence_left": serialize_mass(occurrence_left),
+        "occurrence_right": serialize_mass(j4_occ),
+        "occurrence_surplus": serialize_mass(occurrence_surplus),
+        "union_left": serialize_mass(union_left),
+        "union_right": serialize_mass(j4_union),
+        "union_surplus": serialize_mass(union_surplus),
+    }
     output = {
         "schema": "pair_energy_frontier_probe_v1",
         "scope": "certified_R4_recursive_to_F5_retained_transition",
@@ -238,16 +248,7 @@ def main() -> int:
                     for profile in (profile4, profile5)
                 ]
             ),
-            "bellman_rows": canonical_hash(
-                {
-                    "occurrence_left": occurrence_left,
-                    "occurrence_right": j4_occ,
-                    "occurrence_surplus": occurrence_surplus,
-                    "union_left": union_left,
-                    "union_right": j4_union,
-                    "union_surplus": union_surplus,
-                }
-            ),
+            "bellman_rows": canonical_hash(bellman_hash_payload),
         },
     }
     canonical = json.dumps(output, sort_keys=True, separators=(",", ":"))

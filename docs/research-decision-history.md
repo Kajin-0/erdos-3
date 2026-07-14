@@ -347,6 +347,12 @@ with ratio `0.578188259610...` and surplus `1157.391621834512...`.
 
 This is the first exact retained-child Bellman row with a state-independent symbolic potential and no fitted coefficient. The fourth-to-fifth expansion is closed. The unresolved frontier moves to earlier generations, where root and pair reuse may still occur and affine coverage has not yet been certified.
 
+### Pair-resource ownership certification
+
+The fifth pair-energy row was strengthened from a numerical inequality to an exact token partition. All `107413` fifth current and latent resources are distinct members of the fourth latent pair universe. None uses a fourth current pair, and `264809` fourth resources remain unused.
+
+The recorded transition therefore satisfies an exact set-valued conservation identity, not only a scalar bound. The open problem moves entirely to the earlier retained prefix where affine coverage and pair multiplicity have not yet been classified.
+
 **Decisions:**
 
 - current-generation multiplicity is not persistent reserve;
@@ -360,6 +366,7 @@ This is the first exact retained-child Bellman row with a state-independent symb
 - the fourth-to-fifth retained expansion is closed by pair energy and is no longer an open obstruction;
 - pair energy, not scalar translation reserve, is the principal cumulative affine potential;
 - generation six is unnecessary until earlier-generation affine entry and pair reuse are resolved;
+- the fifth-frontier pair row has exact token ownership and no repeated payment; future work should reuse this resource schema rather than fit scalar surrogates;
 - generation six is blocked until a state-independent transfer lemma is proposed;
 - a new feature is admissible only with a transition recurrence, bounded-reuse interpretation, and telescoping role.
 

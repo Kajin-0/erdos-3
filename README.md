@@ -28,6 +28,7 @@ The repository has established:
 13. an exact unique-root lineage identity at the first failing retained transition;
 14. an exact backbone-only survivor classification and minimum-anchor transfer decomposition.
 15. an exact pair-energy Bellman row closing the recorded fourth-to-fifth retained expansion.
+16. an exact pair-resource partition proving containment and zero repeated payment at the fifth frontier.
 
 The strongest state-specific closure is
 
@@ -83,6 +84,7 @@ A valid theorem must still handle policy dependence, terminal-recursive interact
 - [`docs/research-decision-history.md`](docs/research-decision-history.md) — chronological decisions and permanent stops.
 - [`docs/backbone-anchor-root-transfer.md`](docs/backbone-anchor-root-transfer.md) — exact backbone-only survivor and minimum-anchor transfer theorem.
 - [`docs/fifth-generation-pair-energy-bellman-row.md`](docs/fifth-generation-pair-energy-bellman-row.md) — exact affine pair-energy Bellman row at the first failing retained transition.
+- [`docs/fifth-generation-pair-resource-partition.md`](docs/fifth-generation-pair-resource-partition.md) — explicit fifth-child to fourth-pair ownership and unused-capacity theorem.
 - [`docs/branching-reserve-lp.md`](docs/branching-reserve-lp.md) — exact retained-child LP contract and current packing requirements.
 
 ## Main completed theorem families

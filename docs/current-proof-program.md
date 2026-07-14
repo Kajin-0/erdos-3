@@ -170,6 +170,52 @@ Primary reference: `docs/fifth-generation-pair-energy-bellman-row.md`.
 
 ---
 
+## Exact pair-resource ownership at the fifth frontier
+
+The scalar pair-energy row has been upgraded to an explicit set-valued resource partition.
+
+The fourth recursive frontier contains
+
+```text
+1,717 current pairs
+370,505 latent pairs
+372,222 total pair resources.
+```
+
+The complete fifth retained family uses
+
+```text
+1,032 current pairs
+106,381 recursive latent pairs
+107,413 total pair resources.
+```
+
+Every fifth resource is a distinct fourth **latent** pair. No fifth resource uses a fourth current pair and no pair is paid twice.
+
+```math
+\boxed{
+\operatorname{Used}(F_5)
++
+\operatorname{Unused}(R_4\to F_5)
+=
+H(R_4)+J(R_4).
+}
+```
+
+Exact masses:
+
+```text
+used   = 1586.466623468978...
+unused = 1158.927755372724...
+total  = 2745.394378841703...
+```
+
+This closes containment, terminal-recursive interaction, and repeated-payment semantics on the recorded transition.
+
+Primary reference: `docs/fifth-generation-pair-resource-partition.md`.
+
+---
+
 ## 1. Foundation and recorded exact path
 
 For

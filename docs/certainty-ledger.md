@@ -101,9 +101,13 @@ Statuses marked **exact finite** are computational statements for recorded objec
 | CL-082 | For an affine state `S_r(P)={p-r:p in P}`, pivot `a=min(P)`, and pairwise root-disjoint children `S_a(Q_i)`, the root-pair energy `J(P)=sum_{x<y in P}1/(y-x)` satisfies `sum_i(H(S_a(Q_i))+J(Q_i))<=J(P)`. Hence every root pair pays at most once in an affine pivot forest, and terminal harmonic mass plus frontier pair energy is bounded by the entering pair energy. | Symbolic treewise packing theorem; no AP hypothesis. Initial pair-energy control and affine-entry theorem remain open. |
 | CL-083 | In an affine root forest, `(u,p)` is bijective with the root pair `(p-u,p)` and has weight `1/u=1/(p-(p-u))`. The global first-appearance mass of coarse point tokens is therefore at most the entering pair energy `J(P_0)`. A repeated `(u,p)` is genuine reuse of one pair resource; adding immediate provenance distinguishes histories but cannot create additional pair capacity. | Symbolic affine first-appearance and pair-reuse theorem. Affine coverage and entering `J(P_0)` payment remain open. |
 | CL-084 | The certified `R_4 -> F_5` retained transition has 12/12 affine fourth recursive states and 13/13 affine fifth recursive states, with root and pair multiplicity exactly one. Exact pair energy satisfies `H(F_5)+J(R_5^rec)<=J(R_4^rec)`: left `1586.466623468978...`, right `2743.858245303490...`, surplus `1157.391621834512...`, ratio `0.578188259610...`. | Exact finite retained-child Bellman theorem; fixed policy and quotient, no generation six. |
+| CL-085 | The complete fifth retained current-plus-latent pair resource set is an exact multiplicity-one subset of the fourth latent root-pair set. Counts: 372222 fourth resources, 107413 used fifth resources, 264809 unused; all 17 terminal current pairs, 1015 recursive current pairs, and 106381 recursive latent pairs come from fourth latent pairs, with zero child pair reuse. Exact resource identity: used `1586.466623468978...` plus unused `1158.927755372724...` equals parent `H(R_4)+J(R_4)=2745.394378841703...`. | Exact finite pair-resource containment and partition theorem; fixed policy and quotient. |
 
 Primary latest references:
 
+- `docs/fifth-generation-pair-resource-partition.md`;
+- `src/verify_pair_resource_ownership.py`;
+- `data/pair_resource_ownership_certificate_2026-07-14.txt`;
 - `docs/fifth-generation-pair-energy-bellman-row.md`;
 - `src/verify_pair_energy_frontier.py`;
 - `data/pair_energy_frontier_certificate_2026-07-14.txt`;

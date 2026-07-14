@@ -23,6 +23,21 @@ Primary files:
 
 ---
 
+## Resource-ownership strengthening
+
+The companion theorem `docs/fifth-generation-pair-resource-partition.md` proves explicit token ownership:
+
+```text
+all 107,413 fifth current/latent resources
+are distinct fourth latent root pairs;
+no fourth current pair is used;
+264,809 fourth resources remain unused.
+```
+
+Thus the Bellman inequality in this note is an exact pair-resource partition, not merely a true comparison of two rational numbers.
+
+---
+
 ## 1. Pair energy
 
 For a retained state whose distinct original root labels form `P`, define

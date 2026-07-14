@@ -1,0 +1,10 @@
+schema=ap_occurrence_light_heavy_transfer_probe_v1
+compile_exit_status=0
+probe_exit_status=0
+summary_exit_status=0
+verifier_exit_status=not_applicable
+source_commit=0be9012dc567c283c5143e39db8024dfd33dc016
+source_ref=refs/heads/main
+workflow_run_id=29372612194
+workflow_run_attempt=1
+--- stderr ---

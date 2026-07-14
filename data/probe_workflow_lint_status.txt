@@ -1,12 +1,16 @@
 schema=probe_workflow_hardening_status_v2
 lint_exit_status=1
 helper_test_exit_status=0
-source_commit=35e52ea1ad28183af591a3d2009d6eb157566b84
+source_commit=065b4e9b39f13848b90bbbe4e4f84721c935a8c6
 source_ref=refs/heads/main
-workflow_run_id=29370777178
+workflow_run_id=29371456146
 workflow_run_attempt=1
 --- workflow lint ---
 probe workflow lint failed:
+- .github/workflows/one-time-scale-transfer-docs.yml: probe writer must use concurrency group probe-result-writers-main
+- .github/workflows/one-time-scale-transfer-docs.yml:112: status workflows may not suppress failures with || true
+- .github/workflows/one-time-scale-transfer-docs.yml:60: status header is missing required metadata field source_ref
+- .github/workflows/one-time-scale-transfer-docs.yml:60: status header is missing required metadata field workflow_run_attempt
 - .github/workflows/record-cl089-cl096-collision-frontier.yml:139: status workflows may not suppress failures with || true
 --- helper tests ---
 probe workflow helper tests passed

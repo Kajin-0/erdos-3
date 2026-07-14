@@ -1,0 +1,49 @@
+name: Apply CL-078 documentation
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - src/patch_cl078_fifth_generation_frontier.py
+      - .github/workflows/apply-cl078-documentation.yml
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Apply idempotent patch
+        run: python3 src/patch_cl078_fifth_generation_frontier.py
+
+      - name: Commit and push documentation
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/certainty-ledger.md docs/current-proof-program.md
+          if git diff --cached --quiet; then
+            echo "No documentation change"
+            exit 0
+          fi
+          git commit -m "Record fifth-generation frontier in authoritative docs [skip ci]"
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git rebase origin/main
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            sleep $((attempt * 2))
+          done
+          echo "error: failed to push after rebasing and three attempts" >&2
+          exit 1

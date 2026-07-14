@@ -1,10 +1,10 @@
-schema=residual_sponsor_backbone_split_probe_v1
+schema=residual_sponsor_backbone_split_probe_v2
 compile_exit_status=0
 probe_exit_status=0
 summary_exit_status=0
 verifier_exit_status=not_applicable
-source_commit=119e0ad167c2d188dc266b726730ceb31d26f456
+source_commit=fa64e064ffb39c5e1d99c8ec6982fa3e57745922
 source_ref=refs/heads/main
-workflow_run_id=29348921841
+workflow_run_id=29348970649
 workflow_run_attempt=1
 --- stderr ---

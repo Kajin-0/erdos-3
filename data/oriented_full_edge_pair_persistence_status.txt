@@ -1,10 +1,10 @@
-schema=oriented_full_edge_pair_persistence_probe_v1
+schema=oriented_full_edge_pair_persistence_probe_v2
 compile_exit_status=0
 probe_exit_status=0
 summary_exit_status=0
 verifier_exit_status=not_applicable
-source_commit=520b8d4095db37d6ee721ce9e9de0a004a638bd2
+source_commit=bb705236a7222d242adf36bd9fd6c53b6efd5f03
 source_ref=refs/heads/main
-workflow_run_id=29368973737
+workflow_run_id=29369075843
 workflow_run_attempt=1
 --- stderr ---

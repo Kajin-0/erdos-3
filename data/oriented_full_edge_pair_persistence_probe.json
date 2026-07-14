@@ -2,170 +2,294 @@
   "extrema": {
     "latent_occurrence_over_latent_union": {
       "latent_occurrence_mass": {
-        "decimal": "0.000000000000",
-        "fraction": "0/1",
-        "sha256": "a93875fe509ac2fae0e0939d3ec71c4d978244c7398dd7185ca68c393426a5a6"
+        "decimal": "1.250000000000",
+        "fraction": "5/4",
+        "sha256": "ff060f43ada244fcedb7073528f9137c7a181b5ad54fffa2c749988cc3f423b2"
       },
       "latent_union_mass": {
-        "decimal": "0.000000000000",
-        "fraction": "0/1",
-        "sha256": "a93875fe509ac2fae0e0939d3ec71c4d978244c7398dd7185ca68c393426a5a6"
+        "decimal": "1.250000000000",
+        "fraction": "5/4",
+        "sha256": "ff060f43ada244fcedb7073528f9137c7a181b5ad54fffa2c749988cc3f423b2"
       },
-      "maximum_latent_pair_multiplicity": 0,
+      "maximum_latent_pair_multiplicity": 1,
       "parent_pair_energy": {
-        "decimal": "0.000000000000",
-        "fraction": "0/1",
-        "sha256": "a93875fe509ac2fae0e0939d3ec71c4d978244c7398dd7185ca68c393426a5a6"
+        "decimal": "6.751923076923",
+        "fraction": "3511/520",
+        "sha256": "18c942b50cce07ff174d352b4b7990107f867fb0efb85d0f2df6e2c9ddcf3837"
       },
       "ratio": {
-        "decimal": "0.000000000000",
-        "fraction": "0/1",
-        "sha256": "a93875fe509ac2fae0e0939d3ec71c4d978244c7398dd7185ca68c393426a5a6"
+        "decimal": "1.000000000000",
+        "fraction": "1/1",
+        "sha256": "253d950f11ebdbeb4c2d54c57803deb69869b832a2e03010620d462a85d15290"
       },
-      "recursive_children": 0,
+      "recursive_children": 2,
       "total_occurrence_mass": {
-        "decimal": "0.000000000000",
-        "fraction": "0/1",
-        "sha256": "a93875fe509ac2fae0e0939d3ec71c4d978244c7398dd7185ca68c393426a5a6"
-      },
-      "values": []
-    },
-    "latent_occurrence_over_parent_energy": {
-      "latent_occurrence_mass": {
-        "decimal": "0.000000000000",
-        "fraction": "0/1",
-        "sha256": "a93875fe509ac2fae0e0939d3ec71c4d978244c7398dd7185ca68c393426a5a6"
-      },
-      "latent_union_mass": {
-        "decimal": "0.000000000000",
-        "fraction": "0/1",
-        "sha256": "a93875fe509ac2fae0e0939d3ec71c4d978244c7398dd7185ca68c393426a5a6"
-      },
-      "maximum_latent_pair_multiplicity": 0,
-      "parent_pair_energy": {
-        "decimal": "0.000000000000",
-        "fraction": "0/1",
-        "sha256": "a93875fe509ac2fae0e0939d3ec71c4d978244c7398dd7185ca68c393426a5a6"
-      },
-      "ratio": {
-        "decimal": "0.000000000000",
-        "fraction": "0/1",
-        "sha256": "a93875fe509ac2fae0e0939d3ec71c4d978244c7398dd7185ca68c393426a5a6"
-      },
-      "recursive_children": 0,
-      "total_occurrence_mass": {
-        "decimal": "0.000000000000",
-        "fraction": "0/1",
-        "sha256": "a93875fe509ac2fae0e0939d3ec71c4d978244c7398dd7185ca68c393426a5a6"
-      },
-      "values": []
-    },
-    "total_occurrence_over_parent_energy": {
-      "latent_occurrence_mass": {
-        "decimal": "0.000000000000",
-        "fraction": "0/1",
-        "sha256": "a93875fe509ac2fae0e0939d3ec71c4d978244c7398dd7185ca68c393426a5a6"
-      },
-      "latent_union_mass": {
-        "decimal": "0.000000000000",
-        "fraction": "0/1",
-        "sha256": "a93875fe509ac2fae0e0939d3ec71c4d978244c7398dd7185ca68c393426a5a6"
-      },
-      "maximum_latent_pair_multiplicity": 0,
-      "parent_pair_energy": {
-        "decimal": "3.583333333333",
-        "fraction": "43/12",
-        "sha256": "de38c3f0796a1019b5e582a0db30b1aadb047ed7c49d87ac83a48e78c9d2d1e4"
-      },
-      "ratio": {
-        "decimal": "1.046511627907",
-        "fraction": "45/43",
-        "sha256": "35865a7969d5b6b5b3ad18ee6c083856b02ce5ba29514d76564c1eb1dd64e3aa"
-      },
-      "recursive_children": 0,
-      "total_occurrence_mass": {
-        "decimal": "3.750000000000",
-        "fraction": "15/4",
-        "sha256": "a97e26cbadb12427859091fbf484af356319d1ece9fde15251ae05890c2fe5bd"
+        "decimal": "7.232142857143",
+        "fraction": "405/56",
+        "sha256": "007ee686fdac8b9296574b1a50ff04d49ef7edaac0a17566cc9a341f7b373e53"
       },
       "values": [
         1,
         2,
         3,
-        5
+        5,
+        8,
+        9,
+        15
+      ]
+    },
+    "latent_occurrence_over_parent_energy": {
+      "latent_occurrence_mass": {
+        "decimal": "1.875000000000",
+        "fraction": "15/8",
+        "sha256": "98d4074af8e29044715fe987ef0dc90e17cf2a92c21f0c3166a670efdad7204d"
+      },
+      "latent_union_mass": {
+        "decimal": "1.875000000000",
+        "fraction": "15/8",
+        "sha256": "98d4074af8e29044715fe987ef0dc90e17cf2a92c21f0c3166a670efdad7204d"
+      },
+      "maximum_latent_pair_multiplicity": 1,
+      "parent_pair_energy": {
+        "decimal": "6.243686868687",
+        "fraction": "4945/792",
+        "sha256": "9a0132ccc43a84d4d6f9ae157d1c735a7c64f27c98b3924cbbfcc855cfae3102"
+      },
+      "ratio": {
+        "decimal": "0.300303336704",
+        "fraction": "297/989",
+        "sha256": "fd29f5b4d8ad79722e72963d9bb25a68e80c5573642a0e95b11bea2becee67ae"
+      },
+      "recursive_children": 2,
+      "total_occurrence_mass": {
+        "decimal": "7.940476190476",
+        "fraction": "667/84",
+        "sha256": "c1711a91ddd77ff8945104b91185703afaf5f64112f07682c24132a45bbeb5da"
+      },
+      "values": [
+        1,
+        4,
+        6,
+        7,
+        8,
+        11,
+        15
+      ]
+    },
+    "total_occurrence_over_parent_energy": {
+      "latent_occurrence_mass": {
+        "decimal": "1.875000000000",
+        "fraction": "15/8",
+        "sha256": "98d4074af8e29044715fe987ef0dc90e17cf2a92c21f0c3166a670efdad7204d"
+      },
+      "latent_union_mass": {
+        "decimal": "1.875000000000",
+        "fraction": "15/8",
+        "sha256": "98d4074af8e29044715fe987ef0dc90e17cf2a92c21f0c3166a670efdad7204d"
+      },
+      "maximum_latent_pair_multiplicity": 1,
+      "parent_pair_energy": {
+        "decimal": "6.243686868687",
+        "fraction": "4945/792",
+        "sha256": "9a0132ccc43a84d4d6f9ae157d1c735a7c64f27c98b3924cbbfcc855cfae3102"
+      },
+      "ratio": {
+        "decimal": "1.271760797342",
+        "fraction": "1914/1505",
+        "sha256": "5b7981903dfdeff72e78aab909578d4a0ae1927992780b57075dd696c90d5fa0"
+      },
+      "recursive_children": 2,
+      "total_occurrence_mass": {
+        "decimal": "7.940476190476",
+        "fraction": "667/84",
+        "sha256": "c1711a91ddd77ff8945104b91185703afaf5f64112f07682c24132a45bbeb5da"
+      },
+      "values": [
+        1,
+        4,
+        6,
+        7,
+        8,
+        11,
+        15
       ]
     }
   },
   "interval": [
     1,
-    14
+    16
   ],
   "maximum_multiplicity_witness": {
-    "children": 18,
-    "children_sha256": "9911261552767f2f13c86d045026c44161fa58c1d25ac5d08442fd61fa432ec0",
+    "children": 27,
+    "children_sha256": "ecc540eae65e52be84bc46704737dbbe50d86848127a4111306ef3dd0c51dbf2",
     "current_mass": {
-      "decimal": "10.416666666667",
-      "fraction": "125/12",
-      "sha256": "704d1e08fd06b9da93d5fd8ae7462cb863ac3143592bf7117401f05ca8729c99"
+      "decimal": "12.047619047619",
+      "fraction": "253/21",
+      "sha256": "8eaa287d610385f48ff34486ec4cdbe2bcaa87df5bdb1b140845a9488e67eec3"
     },
-    "current_occurrences": 24,
+    "current_occurrences": 36,
     "latent_occurrence_mass": {
-      "decimal": "0.000000000000",
-      "fraction": "0/1",
-      "sha256": "a93875fe509ac2fae0e0939d3ec71c4d978244c7398dd7185ca68c393426a5a6"
+      "decimal": "1.875000000000",
+      "fraction": "15/8",
+      "sha256": "98d4074af8e29044715fe987ef0dc90e17cf2a92c21f0c3166a670efdad7204d"
     },
-    "latent_pair_occurrences": 0,
-    "latent_pair_union": 0,
+    "latent_pair_occurrences": 6,
+    "latent_pair_union": 6,
     "latent_union_mass": {
-      "decimal": "0.000000000000",
-      "fraction": "0/1",
-      "sha256": "a93875fe509ac2fae0e0939d3ec71c4d978244c7398dd7185ca68c393426a5a6"
+      "decimal": "1.875000000000",
+      "fraction": "15/8",
+      "sha256": "98d4074af8e29044715fe987ef0dc90e17cf2a92c21f0c3166a670efdad7204d"
     },
-    "maximum_latent_pair_multiplicity": 0,
-    "maximum_reference_count": 0,
-    "maximum_total_resource_multiplicity": 2,
+    "maximum_latent_pair_multiplicity": 1,
+    "maximum_reference_count": 1,
+    "maximum_total_resource_multiplicity": 3,
     "parent_pair_energy": {
-      "decimal": "11.056349206349",
-      "fraction": "13931/1260",
-      "sha256": "c03f9ac6fa75703263d23ded5b389f608e0418466fb7a20ea9b3506b27930d9c"
+      "decimal": "12.882886557887",
+      "fraction": "663211/51480",
+      "sha256": "a6cd20334d7318cc28e3ec00127d348f68ae4366f915000c151df6cc80a84d57"
     },
-    "recursive_children": 0,
-    "three_aps": 8,
+    "recursive_children": 2,
+    "three_aps": 12,
     "total_occurrence_mass": {
-      "decimal": "10.416666666667",
-      "fraction": "125/12",
-      "sha256": "704d1e08fd06b9da93d5fd8ae7462cb863ac3143592bf7117401f05ca8729c99"
+      "decimal": "13.922619047619",
+      "fraction": "2339/168",
+      "sha256": "87725e9821d8ef4e00e70cea0a4a912525682093ed3762553695e319780b3be6"
     },
     "total_union_mass": {
-      "decimal": "8.916666666667",
-      "fraction": "107/12",
-      "sha256": "2dad484decc8dfec62669595812e92d8afc6a7fbd372fc165bb1048ecac64688"
+      "decimal": "10.380952380952",
+      "fraction": "218/21",
+      "sha256": "ee1198053ec25d6ef5c6ff751f0245b7efb1fef16b1c8799c0344b08c8d409e5"
     },
     "values": [
+      1,
+      2,
       5,
-      6,
       7,
+      8,
       9,
-      10,
       12,
-      13,
-      14
+      14,
+      15,
+      16
     ],
-    "worst_pairs": []
+    "worst_pairs": [
+      {
+        "gap": 2,
+        "occurrences": [
+          {
+            "child_key": [
+              "side_first",
+              2,
+              null
+            ],
+            "reference": 2
+          }
+        ],
+        "pair": [
+          5,
+          7
+        ]
+      },
+      {
+        "gap": 4,
+        "occurrences": [
+          {
+            "child_key": [
+              "side_first",
+              2,
+              null
+            ],
+            "reference": 2
+          }
+        ],
+        "pair": [
+          5,
+          9
+        ]
+      },
+      {
+        "gap": 2,
+        "occurrences": [
+          {
+            "child_key": [
+              "side_first",
+              2,
+              null
+            ],
+            "reference": 2
+          }
+        ],
+        "pair": [
+          7,
+          9
+        ]
+      },
+      {
+        "gap": 4,
+        "occurrences": [
+          {
+            "child_key": [
+              "double_first",
+              2,
+              null
+            ],
+            "reference": 2
+          }
+        ],
+        "pair": [
+          8,
+          12
+        ]
+      },
+      {
+        "gap": 8,
+        "occurrences": [
+          {
+            "child_key": [
+              "double_first",
+              2,
+              null
+            ],
+            "reference": 2
+          }
+        ],
+        "pair": [
+          8,
+          16
+        ]
+      },
+      {
+        "gap": 4,
+        "occurrences": [
+          {
+            "child_key": [
+              "double_first",
+              2,
+              null
+            ],
+            "reference": 2
+          }
+        ],
+        "pair": [
+          12,
+          16
+        ]
+      }
+    ]
   },
   "metrics": {
-    "children": 35928,
-    "four_ap_free_subsets": 7138,
-    "latent_pair_occurrences": 0,
-    "latent_pair_union": 0,
-    "maximum_latent_pair_multiplicity": 0,
-    "maximum_reference_count": 0,
-    "maximum_total_resource_multiplicity": 2,
-    "recursive_children": 0,
-    "subsets_with_recursive_children": 0,
-    "three_aps": 12558
+    "children": 139872,
+    "four_ap_free_subsets": 22601,
+    "latent_pair_occurrences": 288,
+    "latent_pair_union": 288,
+    "maximum_latent_pair_multiplicity": 1,
+    "maximum_reference_count": 1,
+    "maximum_total_resource_multiplicity": 3,
+    "recursive_children": 96,
+    "subsets_with_recursive_children": 48,
+    "three_aps": 49514
   },
-  "records_sha256": "00e87f926e2a03c565e0e601b53701c9dbfb32d6f4c0b4ab0c0b82450664d6aa",
+  "records_sha256": "1e729f7204d941b8bcee4631ff4312ae04b0eff58daf51e025ef685298089e7f",
   "schema": "oriented_full_edge_pair_persistence_probe_v1",
   "verified": {
     "all_child_resources_contained_in_parent_pairs": true,

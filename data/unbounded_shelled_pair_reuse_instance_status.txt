@@ -1,0 +1,10 @@
+schema=unbounded_shelled_pair_reuse_instance_v1
+compile_exit_status=0
+probe_exit_status=0
+summary_exit_status=0
+verifier_exit_status=not_applicable
+source_commit=540646bdc4720bcab694b3bd33634a17d84005f3
+source_ref=refs/heads/main
+workflow_run_id=29370619120
+workflow_run_attempt=1
+--- stderr ---

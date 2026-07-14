@@ -1,0 +1,19 @@
+Multiplicity-four shell-valid latent-pair reuse
+================================================
+
+m=4
+reference_set=2,6,18,54
+d=64
+K=1024
+translation=4096
+parent_block=4096,8192
+parent_support_size=19
+parent_four_ap_free=true
+child_shell=1024,2048
+recursive_children=4
+common_root_triple=5175,5239,5303
+maximum_certified_latent_pair_multiplicity=4
+common_pair=5175,5239;weight=1/64;multiplicity=4
+common_pair=5175,5303;weight=1/128;multiplicity=4
+common_pair=5239,5303;weight=1/64;multiplicity=4
+payload_sha256=ed9e3d1042111c49dc2d0b00467438e1d22fc5966aa74e8ca505341b794fabe2

@@ -1,0 +1,109 @@
+{
+  "K": 1024,
+  "c": 55,
+  "child_shell": [
+    1024,
+    2048
+  ],
+  "common_pair_multiplicities": [
+    {
+      "multiplicity": 4,
+      "pair": [
+        5175,
+        5239
+      ],
+      "weight": "1/64"
+    },
+    {
+      "multiplicity": 4,
+      "pair": [
+        5175,
+        5303
+      ],
+      "weight": "1/128"
+    },
+    {
+      "multiplicity": 4,
+      "pair": [
+        5239,
+        5303
+      ],
+      "weight": "1/64"
+    }
+  ],
+  "common_root_triple": [
+    5175,
+    5239,
+    5303
+  ],
+  "common_root_triple_raw": [
+    1079,
+    1143,
+    1207
+  ],
+  "d": 64,
+  "m": 4,
+  "maximum_certified_latent_pair_multiplicity": 4,
+  "parent_block": [
+    4096,
+    8192
+  ],
+  "parent_four_ap_free": true,
+  "parent_support": [
+    4098,
+    4102,
+    4114,
+    4150,
+    5175,
+    5239,
+    5303,
+    6200,
+    6236,
+    6248,
+    6252,
+    6328,
+    6364,
+    6376,
+    6380,
+    6456,
+    6492,
+    6504,
+    6508
+  ],
+  "parent_support_size": 19,
+  "payload_sha256": "ed9e3d1042111c49dc2d0b00467438e1d22fc5966aa74e8ca505341b794fabe2",
+  "recursive_child_keys": [
+    [
+      "side_first",
+      4098,
+      null,
+      10
+    ],
+    [
+      "side_first",
+      4102,
+      null,
+      10
+    ],
+    [
+      "side_first",
+      4114,
+      null,
+      10
+    ],
+    [
+      "side_first",
+      4150,
+      null,
+      10
+    ]
+  ],
+  "reference_set": [
+    2,
+    6,
+    18,
+    54
+  ],
+  "schema": "unbounded_shelled_pair_reuse_instance_v1",
+  "translation": 4096
+}

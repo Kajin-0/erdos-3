@@ -1,0 +1,30 @@
+name: Base-six three-AP-rich family
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - src/verify_base_six_three_ap_rich_family.py
+      - src/summarize_base_six_three_ap_rich_family.py
+      - .github/workflows/base-six-three-ap-rich-family.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: probe-result-writers-main
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    uses: ./.github/workflows/reusable-python-probe-recorder.yml
+    with:
+      schema: base_six_three_ap_rich_family_certificate_v1
+      probe_script: src/verify_base_six_three_ap_rich_family.py
+      probe_output: data/base_six_three_ap_rich_family_certificate_2026-07-14.json
+      summary_script: src/summarize_base_six_three_ap_rich_family.py
+      summary_output: data/base_six_three_ap_rich_family_summary.txt
+      status_output: data/base_six_three_ap_rich_family_status.txt
+      commit_message: Certify base-six AP-rich no-go [skip ci]

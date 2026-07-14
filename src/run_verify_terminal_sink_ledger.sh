@@ -9,6 +9,8 @@ THIRD_SHA256="efdd41c014104f328f28c3d13b097335fd2b1730859b74134344329251b135d0"
 POTENTIAL_SHA256="0e1b81e3562990e6071db64c4d6544aab1bb0c78aaae08eee780f3f9d6f81063"
 FOURTH_SHA256="2c2f2103de57bd8fdcc4c32448ea9e1cf662b325e590da5e1b0758c62298c9e5"
 FIFTH_SHA256="74120626dcf65e06beae044f37ff570be8113c494ab81ad3bdeba3aa67378bfb"
+POLICY_SHA256="996d444724e5081986509fe539542ab19508c648ca9f8158650b387b542d6769"
+ROOT_TRANSFER_SHA256="460bbf1a5b21a662353041b8e576fc8809a4823553fa63cc8ae7dc9ce469564a"
 mkdir -p "$WORK"
 
 verify_certificate() {
@@ -80,5 +82,17 @@ verify_certificate \
   "$WORK/fifth_generation_feature_frontier_certificate.txt" \
   "$FIFTH_SHA256" \
   "fifth_generation_feature_frontier"
+verify_certificate \
+  "verify_fourth_to_fifth_policy_sensitivity.py" \
+  "fourth_to_fifth_policy_sensitivity_certificate_2026-07-14.txt" \
+  "$WORK/fourth_to_fifth_policy_sensitivity_certificate.txt" \
+  "$POLICY_SHA256" \
+  "fourth_to_fifth_policy_sensitivity"
+verify_certificate \
+  "verify_fourth_to_fifth_root_transfer.py" \
+  "fourth_to_fifth_root_transfer_certificate_2026-07-14.txt" \
+  "$WORK/fourth_to_fifth_root_transfer_certificate.txt" \
+  "$ROOT_TRANSFER_SHA256" \
+  "fourth_to_fifth_root_transfer"
 
-echo "verified: terminal identities, recursive frontiers through generation five, exact reserve failures, and refined token survival"
+echo "verified: terminal identities, recursive frontiers through generation five, local policy sensitivity, root-lineage transfer, and refined token survival"

@@ -8,6 +8,7 @@ on:
     paths:
       - src/probe_residual_sponsor_backbone_split.py
       - src/summarize_residual_sponsor_backbone_split.py
+      - src/verify_residual_sponsor_backbone_split.py
       - .github/workflows/residual-sponsor-backbone-split-probe.yml
 
 permissions:
@@ -27,4 +28,6 @@ jobs:
       summary_script: src/summarize_residual_sponsor_backbone_split.py
       summary_output: data/residual_sponsor_backbone_split_summary.txt
       status_output: data/residual_sponsor_backbone_split_status.txt
-      commit_message: Record corrected residual-sponsor backbone split probe [skip ci]
+      verifier_script: src/verify_residual_sponsor_backbone_split.py
+      certificate_output: data/residual_sponsor_backbone_split_certificate_2026-07-14.txt
+      commit_message: Record certified residual-sponsor backbone split [skip ci]

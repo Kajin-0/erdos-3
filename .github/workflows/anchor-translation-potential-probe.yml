@@ -12,80 +12,18 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: probe-result-writers-main
+  cancel-in-progress: false
+
 jobs:
   probe:
-    if: github.actor != 'github-actions[bot]'
-    runs-on: ubuntu-latest
-    timeout-minutes: 30
-    env:
-      PROBE_SCHEMA: anchor_translation_potential_probe_v1
-    steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Run exact anchor-translation test
-        shell: bash
-        run: |
-          set +e
-          python3 -m py_compile \
-            src/probe_anchor_translation_potential.py \
-            src/summarize_anchor_translation_potential.py
-          compile_status=$?
-          probe_status=not_run
-          summary_status=not_run
-          : > /tmp/anchor_translation_potential.err
-          if [[ "$compile_status" == "0" ]]; then
-            python3 src/run_exact_python.py \
-              src/probe_anchor_translation_potential.py \
-              > data/anchor_translation_potential_probe.json \
-              2> /tmp/anchor_translation_potential.err
-            probe_status=$?
-            if [[ "$probe_status" == "0" ]]; then
-              python3 src/summarize_anchor_translation_potential.py \
-                data/anchor_translation_potential_probe.json \
-                data/anchor_translation_potential_summary.txt \
-                2>> /tmp/anchor_translation_potential.err
-              summary_status=$?
-            else
-              rm -f data/anchor_translation_potential_probe.json
-              rm -f data/anchor_translation_potential_summary.txt
-            fi
-          fi
-          {
-            echo "schema=$PROBE_SCHEMA"
-            echo "compile_exit_status=$compile_status"
-            echo "probe_exit_status=$probe_status"
-            echo "summary_exit_status=$summary_status"
-            echo "commit=${GITHUB_SHA}"
-            echo "--- stderr ---"
-            cat /tmp/anchor_translation_potential.err
-          } > data/anchor_translation_potential_status.txt
-          exit 0
-
-      - name: Commit deterministic result
-        if: always()
-        shell: bash
-        run: |
-          set -euo pipefail
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/anchor_translation_potential_status.txt
-          git add -A data/anchor_translation_potential_probe.json
-          git add -A data/anchor_translation_potential_summary.txt
-          if git diff --cached --quiet; then
-            echo "No anchor-translation output change"
-            exit 0
-          fi
-          git commit -m "Record anchor-translation potential probe [skip ci]"
-          for attempt in 1 2 3; do
-            git fetch origin main
-            git rebase origin/main
-            if git push origin HEAD:main; then
-              exit 0
-            fi
-            sleep $((attempt * 2))
-          done
-          echo "error: failed to push after rebasing and three attempts" >&2
-          exit 1
+    uses: ./.github/workflows/reusable-python-probe-recorder.yml
+    with:
+      schema: anchor_translation_potential_probe_v1
+      probe_script: src/probe_anchor_translation_potential.py
+      probe_output: data/anchor_translation_potential_probe.json
+      summary_script: src/summarize_anchor_translation_potential.py
+      summary_output: data/anchor_translation_potential_summary.txt
+      status_output: data/anchor_translation_potential_status.txt
+      commit_message: Record anchor-translation potential probe [skip ci]

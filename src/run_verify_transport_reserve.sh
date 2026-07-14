@@ -15,6 +15,7 @@ S2_ZERO_SHA256="e5d7a3bbefea78c7c5eeb85ec9155e947d00443e8c279ba6cfc72978267bf972
 LEX_NOVELTY_SHA256="6fe0b27e20284a93ef13c4a738122c4889432c2e673d63794ccec6a7ba36c2e1"
 FORCED_FORK_SHA256="032307354597d531340a4dc87c9646a9b4bde6b6f7f7cc2a427719cbe7be8190"
 FORCED_FORK_NO_GO_SHA256="771c144b3c08cc186d2613eae314b2d0712d18933094323307b1468a4577d6ef"
+POLICY_SUBSET_SHA256="85667125996eb7d3f33d6bdf6ddd78ad1cefbad8c229d57402711e20d17a2287"
 
 mkdir -p "$WORK"
 
@@ -113,7 +114,16 @@ verify_sha256 "$FORCED_FORK_NO_GO_GENERATED" "$FORCED_FORK_NO_GO_SHA256" "forced
 bash "$ROOT/src/run_verify_transition_frontier.sh" \
   "$WORK/transition_frontier"
 
+POLICY_SUBSET_GENERATED="$WORK/policy_subset_lattice_s1_s7_certificate.txt"
+POLICY_SUBSET_RECORDED="$ROOT/data/policy_subset_lattice_s1_s7_certificate_2026-07-13.txt"
+python3 "$ROOT/src/run_exact_python.py" \
+  "$ROOT/src/verify_policy_subset_lattice_s1_s7.py" \
+  "$POLICY_SUBSET_GENERATED"
+cmp "$POLICY_SUBSET_RECORDED" "$POLICY_SUBSET_GENERATED"
+verify_sha256 "$POLICY_SUBSET_GENERATED" "$POLICY_SUBSET_SHA256" \
+  "policy_subset_lattice_s1_s7"
+
 python3 "$ROOT/src/certified_contaminated_states.py" > /dev/null
 python3 "$ROOT/src/branching_reserve_lp.py" self-test
 
-echo "verified: transport, reserve diagnostics, transition frontier through S7, forced-fork reserve/no-go, and LP harness"
+echo "verified: transport, reserve diagnostics, transition frontier through S7, full policy subset lattice, forced-fork reserve/no-go, and LP harness"

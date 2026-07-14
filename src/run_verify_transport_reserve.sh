@@ -16,6 +16,7 @@ LEX_NOVELTY_SHA256="6fe0b27e20284a93ef13c4a738122c4889432c2e673d63794ccec6a7ba36
 FORCED_FORK_SHA256="032307354597d531340a4dc87c9646a9b4bde6b6f7f7cc2a427719cbe7be8190"
 FORCED_FORK_NO_GO_SHA256="771c144b3c08cc186d2613eae314b2d0712d18933094323307b1468a4577d6ef"
 POLICY_SUBSET_SHA256="85667125996eb7d3f33d6bdf6ddd78ad1cefbad8c229d57402711e20d17a2287"
+S7_LOCAL_OPTIMUM_SHA256="8bd93afd6ed9bcd856ff23b5eb671b2963d5aa8b8e47df19f726b38760085211"
 
 mkdir -p "$WORK"
 
@@ -123,7 +124,16 @@ cmp "$POLICY_SUBSET_RECORDED" "$POLICY_SUBSET_GENERATED"
 verify_sha256 "$POLICY_SUBSET_GENERATED" "$POLICY_SUBSET_SHA256" \
   "policy_subset_lattice_s1_s7"
 
+S7_LOCAL_OPTIMUM_GENERATED="$WORK/s7_terminal_step_local_optimum_certificate.txt"
+S7_LOCAL_OPTIMUM_RECORDED="$ROOT/data/s7_terminal_step_local_optimum_certificate_2026-07-13.txt"
+python3 "$ROOT/src/run_exact_python.py" \
+  "$ROOT/src/verify_s7_terminal_step_local_optimum.py" \
+  "$S7_LOCAL_OPTIMUM_GENERATED"
+cmp "$S7_LOCAL_OPTIMUM_RECORDED" "$S7_LOCAL_OPTIMUM_GENERATED"
+verify_sha256 "$S7_LOCAL_OPTIMUM_GENERATED" "$S7_LOCAL_OPTIMUM_SHA256" \
+  "s7_terminal_step_local_optimum"
+
 python3 "$ROOT/src/certified_contaminated_states.py" > /dev/null
 python3 "$ROOT/src/branching_reserve_lp.py" self-test
 
-echo "verified: transport, reserve diagnostics, transition frontier through S7, full policy subset lattice, forced-fork reserve/no-go, and LP harness"
+echo "verified: transport, reserve diagnostics, transition frontier through S7, full policy subset lattice, exact S7 local optimum, forced-fork reserve/no-go, and LP harness"

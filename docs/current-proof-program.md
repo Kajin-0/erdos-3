@@ -1,4 +1,4 @@
-# Current proof program: policy-aware whole-tree packing
+# Current proof program: scale-aware provenance packing
 
 ## Status
 
@@ -96,7 +96,7 @@ Its numerically deduplicated output/input harmonic ratio exceeds `7/5`. Raw outp
 
 ---
 
-## 4. Policy coordinates and finite optimization
+## 4. Policy optimization
 
 Lexicographic deletion produces the isolated return
 
@@ -124,15 +124,15 @@ with exact witness
 \boxed{\lambda=3,\qquad\gamma=\frac1{10}}.
 ```
 
-The full five-step lattice `{5,40,30,161,142}` is certified through `S_7`. The resulting policy LP has `250` exact inequalities and the witness satisfies every row.
+The complete five-step subset lattice `{5,40,30,161,142}` is certified through `S_7`, including both seed-delay modes and reverse deletion. The resulting policy LP has `250` exact inequalities and the witness satisfies every row. Its five-step `S_7` winner is the non-regenerative policy `seed_5_142`.
 
-A broader deterministic search gives a seed-delayed `S_7` policy with `37` delayed steps:
+A broader deterministic search gives a seed-delayed `S_7` policy with `37` delayed progression steps:
 
 ```text
-selected actions = 9323
+selected actions = 9,323
 terminal residual = 517
 terminal step classes = 28
-middle-fiber occurrences = 9295
+middle-fiber occurrences = 9,295
 canonical regeneration = false.
 ```
 
@@ -163,7 +163,7 @@ The local policy removes the recorded SCC and cuts complete recursive occurrence
 
 ---
 
-## 6. First provenance-preserving retained quotient
+## 6. Provenance-preserving retention
 
 The local-optimum raw family is reduced by a deterministic rule:
 
@@ -172,18 +172,9 @@ The local-optimum raw family is reduced by a deterministic rule:
 3. connect exact state classes that intersect within the same dyadic shell;
 4. solve every conflict component for a maximum-harmonic independent set.
 
-Exact results:
+The exact graph has `87` state classes, `290` edges, `20` components, and largest component `13`. Every component has a unique optimum.
 
-```text
-raw shell occurrences = 131
-exact state classes = 87
-conflict edges = 290
-conflict components = 20
-largest component = 13
-components with nonunique optimum = 0.
-```
-
-The unique retained family has
+The first retained family has
 
 ```text
 retained state classes = 21
@@ -193,25 +184,7 @@ dropped distinct labels = 5,018.
 
 The retained states are pairwise point-disjoint and carry explicit representative provenance. Their harmonic mass is between `73.1%` and `73.2%` of the raw numerical-union mass.
 
-This is the first legitimate one-generation retained-child quotient in the program.
-
----
-
-## 7. Second-generation provenance reuse
-
-The 21 retained states are resolved by lexicographic coordinated deletion. Their descendant occurrences are aggregated globally and the same quotient is applied again.
-
-```text
-child selected actions = 10,426
-child terminal residual points = 1,327
-raw descendant shell occurrences = 442
-exact descendant state classes = 173
-conflict edges = 1,046
-conflict components = 22
-largest component = 21.
-```
-
-Every component again has a unique optimum. The second retained family has
+The 21 retained states are then resolved by lexicographic coordinated deletion and the same quotient is applied globally. The second retained family has
 
 ```text
 retained state classes = 27
@@ -219,9 +192,7 @@ retained distinct labels = 7,925
 dropped distinct labels = 5,900.
 ```
 
-### Provenance reuse
-
-The 7,925 retained descendant points use 7,648 distinct original `S_7` provenance labels.
+Original `S_7` root provenance has multiplicity spectrum
 
 | multiplicity | provenance labels |
 |---:|---:|
@@ -229,11 +200,7 @@ The 7,925 retained descendant points use 7,648 distinct original `S_7` provenanc
 | 2 | 267 |
 | 3 | 5 |
 
-Thus maximum provenance multiplicity is `3`. The repeated-provenance harmonic overhead is only between `4.0%` and `4.1%` of unique-provenance mass.
-
-### Harmonic scale expansion
-
-Despite that small reuse overhead,
+Repeated-provenance harmonic overhead is only between `4.0%` and `4.1%` of unique-provenance mass, yet
 
 ```math
 \frac{6828}{1000}
@@ -243,22 +210,131 @@ Despite that small reuse overhead,
 \frac{6829}{1000}.
 ```
 
-The retained harmonic mass expands by approximately `6.82863`.
+Bounded multiplicity alone is therefore not a Bellman coordinate.
 
-This separates the two mechanisms:
+---
 
-```text
-provenance reuse: modest in this finite propagation
-scale-driven harmonic growth: large.
+## 7. Exact scale-concentration theorem
+
+For each of the `7,925` retained descendant points `u`, the new certificate records its original root-provenance label `p`, immediate provenance, source, source step, and shell.
+
+Define
+
+```math
+d_-(p,u)=\left\lfloor\log_2\frac pu\right\rfloor,
+\qquad
+d_+(p,u)=\left\lceil\log_2\frac pu\right\rceil.
 ```
 
-Bounded multiplicity alone is therefore not a Bellman coordinate.
+The pointwise contraction range is
+
+```math
+\frac{505417}{112004}
+\le
+\frac pu
+\le
+1354066.
+```
+
+### Unit depth charges fail
+
+Let `D=H_2-H_1` be the intergeneration retained-mass debt. Exact arithmetic gives
+
+```math
+86
+<
+\frac{D}{\sum d_{\rm shell}(p,u)/p}
+<
+87,
+```
+
+```math
+99
+<
+\frac{D}{\sum d_-(p,u)/p}
+<
+100,
+```
+
+and even
+
+```math
+77
+<
+\frac{D}{\sum d_+(p,u)/p}
+<
+78.
+```
+
+Thus unit dyadic-depth and logarithmic charges fail by large factors. Even the optimistic ceil-log charge would need coefficient greater than `77` on this transition.
+
+### Repeated provenance contains the dangerous tail
+
+There are `272` repeated root labels, producing `549` retained occurrences. The remaining `7,376` occurrences have unique root provenance.
+
+The exact implication is
+
+```math
+d_-(p,u)\ge8
+\quad\Longrightarrow\quad
+p\text{ is repeated provenance}.
+```
+
+Repeated provenance carries only
+
+```math
+0.076
+<
+\frac{H_{\rm root,repeat}}{H_{\rm root,all}}
+<
+0.077
+```
+
+of occurrence-weighted root mass, but produces
+
+```math
+0.948
+<
+\frac{H_{\rm descendant,repeat}}{H_2}
+<
+0.949
+```
+
+of second retained harmonic mass.
+
+Its descendant/root expansion lies between `4928` and `4929`; unique provenance expansion lies only between `22` and `23`.
+
+The scale tail is extremely concentrated:
+
+```math
+0.943
+<
+\frac{H_2[d_-\ge8]}{H_2}
+<
+0.944,
+```
+
+```math
+0.698
+<
+\frac{H_2[d_-\ge16]}{H_2}
+<
+0.699.
+```
+
+A single repeated-provenance point with `u=1`, `p=1,354,066`, and `d_-=20` contributes between `51.2%` and `51.3%` of the entire second retained harmonic mass.
+
+The dangerous mechanism is therefore
+
+```text
+repeated provenance × extreme scale contraction.
+```
 
 Primary references:
 
+- `docs/retained-provenance-scale-profile.md`;
 - `docs/retained-provenance-second-generation.md`;
-- `docs/s7-provenance-retained-quotient.md`;
-- `docs/s7-local-optimum-transition-profile.md`.
+- `docs/s7-provenance-retained-quotient.md`.
 
 ---
 
@@ -282,30 +358,29 @@ The required whole-tree inequality remains
 }
 ```
 
-Within-generation point-disjoint retention is solved for the adversarial transition, and one-step root-provenance reuse is exactly bounded in its first propagation. The remaining coordinate must couple provenance with **scale contraction and obstruction credit**.
+Within-generation point-disjoint retention is solved for the adversarial transition. Two-generation root-provenance reuse and scale ratios are now exact. The next coordinate must be **jointly provenance- and scale-sensitive**.
 
-A plausible state variable must distinguish a retained point at label `u` from the much larger root provenance label `p` that generated it. Candidate charges include:
+A natural finite feature family is
 
 ```math
-\log_2(p/u),
-\qquad
-\frac{p}{u},
-\qquad
-\text{dyadic depth drop},
+R_k
+=
+\sum_{(p,u)}
+\frac{\mathbf 1_{\{m(p)>1\}}\mathbf 1_{\{d_-(p,u)\ge k\}}}{u},
 ```
 
-combined with completion or cheap-extension exclusion. These are candidates only; none is yet a theorem.
+or a root-weighted stored-capacity analogue whose release occurs only after repeated provenance crosses depth `k`. This is a candidate family, not yet a theorem. It must be shown to be stored at the parent, released at most once, and compatible with completion or cheap-extension exclusion.
 
 ---
 
 ## 9. Approved next targets
 
-1. Export the exact root-provenance-to-descendant scale ratios for all 7,925 second-generation retained points.
-2. Test dyadic depth-drop and logarithmic scale charges against the `6.828`–`6.829` harmonic expansion.
-3. Identify whether repeated provenance concentrates at small depth drops or large contractions.
-4. Add the first scale-aware provenance coordinate to the rational LP harness.
-5. Export a genuine two-generation retained-child Bellman row.
-6. Prove a branching Carleson inequality or extract the smallest exact failure.
+1. Add exact repeated-provenance depth-tail coordinates `R_k` to the rational LP harness, starting with `k=8,16,20`.
+2. Separate stored root capacity from released descendant charge so the same repeated provenance cannot pay more than once.
+3. Attach completion, rectangle, or future cheap-extension exclusion credit to the extreme-contraction descendants.
+4. Export the first genuine two-generation retained-child Bellman row.
+5. Test the scale-aware feature family on another exact parent transition or extract the smallest exact failure.
+6. Prove a branching Carleson inequality or identify the next missing coordinate.
 
 ---
 
@@ -322,6 +397,9 @@ Do not infer:
 - one-generation point-disjoint retention bounds indefinite provenance reuse;
 - maximum provenance multiplicity three implies contraction;
 - low provenance-overhead mass pays for scale-driven harmonic growth;
+- unit dyadic-depth or logarithmic charge repays the retained-mass debt;
+- a coefficient above `77` is globally legitimate merely because it fits this transition;
+- all repeated provenance is dangerous, or all unique provenance is harmless, outside the recorded family;
 - maximum-harmonic local retention is globally Bellman-optimal;
 - policy-LP feasibility implies Bellman-LP feasibility;
 - the recorded continuation charge is justified without scale-aware packing;
@@ -343,17 +421,18 @@ Complete extended suite:
 bash src/run_verify_transport_reserve.sh
 ```
 
-Standalone second-generation check:
+Standalone scale-profile check:
 
 ```bash
 python3 src/run_exact_python.py \
-  src/verify_retained_provenance_second_generation.py \
-  /tmp/retained_provenance_second_generation_certificate.txt
+  src/verify_retained_provenance_scale_profile.py \
+  /tmp/retained_provenance_scale_profile_certificate.txt
 ```
 
 Current detailed notes:
 
 - `docs/certainty-ledger.md`;
+- `docs/retained-provenance-scale-profile.md`;
 - `docs/retained-provenance-second-generation.md`;
 - `docs/s7-provenance-retained-quotient.md`;
 - `docs/s7-local-optimum-transition-profile.md`;

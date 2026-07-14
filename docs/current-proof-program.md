@@ -42,7 +42,7 @@ Every recursive output is resolved into standard dyadic shells. These are local 
 
 ---
 
-## 2. Exact benchmark and recorded closure
+## 2. Exact recorded path
 
 The uncontaminated equal-translate model is summable:
 
@@ -56,27 +56,21 @@ The certified contaminated path reaches `S_10` with scale word
 4,8,4,4,8,4,8,8,8
 ```
 
-and satisfies
+and has `W_5/W_1=91/32>1`, disproving universal local and fixed-window contraction.
 
-```math
-\frac{W_5}{W_1}=\frac{91}{32}>1.
-```
-
-Universal local contraction, fixed short-window contraction, and universal two-generation recovery are false.
-
-At `S_10`, inheritance, lifted completion support, and direct rectangle transport exclude every factor-two and factor-four candidate:
+At `S_10`, inheritance, lifted completion support, and direct rectangle transport prove
 
 ```math
 \boxed{N_{10,2}=N_{10,4}=0.}
 ```
 
-The exact transport closure margin is `5`. Every valid exact factor-eight child has a certified summable exact tail. This closes the recorded state, not the full deletion tree.
+Every valid exact factor-eight child has a certified summable exact tail. This closes the recorded state, not the full deletion tree.
 
 ---
 
-## 3. Raw transition obstruction
+## 3. Why raw simultaneous output is insufficient
 
-The lexicographic raw simultaneous transition frontier is certified through `S_7`.
+The lexicographic raw transition frontier is certified through `S_7`.
 
 | parent | occurrences | state classes | duplicate classes | containments | partial overlaps |
 |---:|---:|---:|---:|---:|---:|
@@ -90,25 +84,21 @@ The lexicographic raw simultaneous transition frontier is certified through `S_7
 
 Replay siblings are alternative choices, not simultaneous Bellman children.
 
-At lexicographic `S_7`, the terminal-fiber graph contains
+Lexicographic `S_7` also contains the cyclic terminal-fiber component
 
 ```math
 C=\{1,5,61,303,1597,8195,323640\},
-```
-
-with
-
-```math
+\qquad
 \frac{23}{9}<\rho(A)<\frac83.
 ```
 
-Its numerically deduplicated output/input harmonic ratio exceeds `7/5`. Local and affine obstruction export is substantial but incomplete. A provenance-preserving retention quotient remains missing.
+Its numerically deduplicated output/input harmonic ratio exceeds `7/5`. Raw output is recursive load, not stored repayment.
 
 ---
 
-## 4. Regeneration and policy coordinates
+## 4. Policy coordinates and exact finite search
 
-Lexicographic deletion produces the isolated child
+Lexicographic deletion produces the isolated return
 
 ```math
 \{16,21,26\}\xrightarrow[f=4]{R=1}S_1
@@ -120,8 +110,6 @@ with recorded continuation charge
 G=\frac{36953}{4096}.
 ```
 
-The seed-producing actions are not root-forced. Reverse deletion avoids the return but creates severe terminal, cyclic, and duplicate load.
-
 The current finite policy score is
 
 ```math
@@ -130,9 +118,7 @@ C_{\lambda,\gamma}(\pi)
 T_\pi+\lambda O_\pi+E_\pi+\gamma G_\pi,
 ```
 
-where `T` is terminal-step harmonic mass, `O` is middle-fiber occurrence mass, `E` is normalized residual error, and `G` is the recorded regenerative continuation charge.
-
-The current exact witness is
+with exact witness
 
 ```math
 \boxed{\lambda=3,\qquad\gamma=\frac1{10}}.
@@ -140,47 +126,13 @@ The current exact witness is
 
 The continuation coordinate is necessary, and favorable local priority changes are not greedily composable.
 
----
-
-## 5. Full five-step policy lattice
-
-All `32` subsets of
-
-```text
-{5,40,30,161,142}
-```
-
-are certified on `S_1,...,S_7`; all `32` seed-delayed versions and reverse deletion are also included on `S_7`.
-
-The exact policy-ranking LP contains
-
-```text
-250 rational constraints
-2 features: lambda, gamma
-47 active equalities at the witness.
-```
-
-The witness `(3,1/10)` satisfies every row. Representative selected policies are:
-
-| state | selected policy |
-|---:|---|
-| `S_1` | `plain_none`, representative of a tie |
-| `S_2` | `plain_5`, representative of a tie |
-| `S_3` | `plain_5_161_142`, unique |
-| `S_4` | `plain_5_40`, modulo inactive ties |
-| `S_5` | `plain_5_40`, modulo inactive ties |
-| `S_6` | `plain_5_40`, modulo inactive ties |
-| `S_7` | `seed_5_142`, unique in this lattice |
-
-This completes the explicit five-step subset lattice, not arbitrary policy search.
+The full five-step lattice `{5,40,30,161,142}` is certified through `S_7`, including all seed-delayed versions on `S_7`. The exact policy LP has `250` rational inequalities and the witness satisfies every row.
 
 ---
 
-## 6. Exact S7 terminal-step local optimum
+## 5. Exact S7 local policy optimum
 
-A deterministic search outside the five-step lattice produced a seed-delayed policy with `37` delayed progression steps. The final theorem independently recomputes the policy and every neighbor with exact rational arithmetic.
-
-Complete resolution gives
+A deterministic search outside the five-step lattice produced a seed-delayed policy with `37` delayed progression steps. Exact recomputation gives
 
 ```text
 selected actions = 9323
@@ -190,7 +142,7 @@ middle-fiber occurrences = 9295
 canonical regeneration = false.
 ```
 
-Its exact one-toggle neighborhood is the union of its terminal-step set and delayed-step set, containing `59` labels. The result is
+Its exact one-toggle neighborhood is the union of its terminal and delayed step sets, containing `59` labels:
 
 ```text
 improving toggles = 0
@@ -198,7 +150,7 @@ zero-slack toggles = 384, 323640
 strictly worsening toggles = 57.
 ```
 
-The smallest strict slack is
+The minimum strict slack is
 
 ```math
 \boxed{\frac{384}{111292259161}}
@@ -206,25 +158,13 @@ The smallest strict slack is
 
 at toggle `333432`.
 
-Relative to the five-step-lattice winner,
-
-```math
-\frac{1915}{1000}
-<
-C_{3,1/10}(\texttt{seed\_5\_142})-C_{3,1/10}(\pi_*)
-<
-\frac{1916}{1000}.
-```
-
-This is exact local optimality only in the stated neighborhood.
+This is local optimality in the stated neighborhood, not global schedule optimality.
 
 ---
 
-## 7. Raw transition of the local optimum
+## 6. Raw transition of the local optimum
 
-The complete raw occurrence family of the local optimum is compared with lexicographic deletion and `seed_5_142`.
-
-| coordinate | lexicographic | `seed_5_142` | local optimum |
+| coordinate | lexicographic | five-step winner | local optimum |
 |---|---:|---:|---:|
 | terminal step classes | 25 | 50 | 28 |
 | shell occurrences | 127 | 227 | 131 |
@@ -233,47 +173,77 @@ The complete raw occurrence family of the local optimum is compared with lexicog
 | strict containments | 345 | 1,028 | 229 |
 | partial overlaps | 214 | 1,180 | 390 |
 | maximum point multiplicity | 16 | 34 | 18 |
-| terminal-fiber incidence edges | 75 | 141 | 83 |
-| cyclic SCCs | 1 | 1 | **0** |
-| largest SCC | 7 | 2 | **1** |
+| cyclic terminal-fiber SCCs | 1 | 1 | **0** |
 
-The local-optimum terminal-fiber graph is acyclic.
+The local policy removes the recorded SCC and cuts complete recursive occurrence mass to between `25.4%` and `25.5%` of the lexicographic value. It still has substantial exact duplicates, containment, and partial overlap.
 
-Its middle-fiber occurrence mass satisfies
+---
 
-```math
-\frac{247}{1000}
-<
-\frac{O_{\rm mid}^{\rm local}}{O_{\rm mid}^{\rm lex}}
-<
-\frac{248}{1000},
+## 7. First provenance-preserving retained-child quotient
+
+The local-optimum raw family is converted into a legitimate one-generation retained family by the following deterministic rule:
+
+1. quotient exact numerical duplicate states;
+2. retain a representative ordered by backbone first, then source step, then raw occurrence index;
+3. connect exact state classes that intersect numerically within the same dyadic shell;
+4. solve each conflict component for a maximum-harmonic independent set.
+
+Exact results:
+
+```text
+raw shell occurrences = 131
+exact state classes = 87
+conflict edges = 290
+conflict components = 20
+largest component = 13
+components with nonunique optimum = 0.
 ```
 
-and its complete recursive shell occurrence mass satisfies
+The unique retained family has
 
-```math
-\frac{254}{1000}
-<
-\frac{O_{\rm raw}^{\rm local}}{O_{\rm raw}^{\rm lex}}
-<
-\frac{255}{1000}.
+```text
+retained state classes = 21
+backbone representatives = 2
+middle-fiber representatives = 19
+retained distinct labels = 11,753
+dropped distinct labels = 5,018.
 ```
 
-Thus the optimized policy eliminates the recorded SCC obstruction and sharply lowers harmonic occurrence load. It still does not produce a disjoint family: relative to lexicographic deletion, partial overlaps rise from `214` to `390` and maximum point multiplicity rises from `16` to `18`.
+The retained states are pairwise point-disjoint and every retained point has explicit representative provenance.
 
-This mixed profile is now the principal adversarial test for retention.
+Its harmonic mass satisfies
+
+```math
+\frac{731}{1000}
+<
+\frac{H_{\rm ret}}{H_{\rm raw\ union}}
+<
+\frac{732}{1000},
+```
+
+and
+
+```math
+\frac{582}{1000}
+<
+\frac{H_{\rm ret}}{H_{\rm raw\ occurrences}}
+<
+\frac{583}{1000}.
+```
+
+This is the first certified one-generation retained-child quotient in the program. It resolves duplicate, containment, and partial-overlap conflicts for this recorded transition.
 
 Primary references:
 
-- `docs/s7-terminal-step-local-optimum.md`;
+- `docs/s7-provenance-retained-quotient.md`;
 - `docs/s7-local-optimum-transition-profile.md`;
-- `docs/policy-subset-lattice-s1-s7.md`.
+- `docs/s7-terminal-step-local-optimum.md`.
 
 ---
 
 ## 8. Active theorem
 
-The required whole-tree object remains
+The required whole-tree inequality remains
 
 ```math
 \boxed{
@@ -291,19 +261,21 @@ The required whole-tree object remains
 }
 ```
 
-Policy optimization can remove cyclic terminal-label reuse and reduce raw harmonic load, but exact duplicates, containment, partial overlap, and point multiplicity remain. The dominant missing theorem is a provenance-preserving retention quotient.
+Within-generation retention is now solved for the adversarial local-optimum transition. The unresolved issue is **cross-generation provenance reuse**: a parent or sponsor label chosen as provenance may reappear in retained descendants and be charged repeatedly.
+
+The next theorem must establish a Carleson-type bound on retained provenance, or produce the smallest exact reuse cycle that requires another packing coordinate.
 
 ---
 
 ## 9. Approved next targets
 
-1. Define a deterministic retained-child rule on shell occurrences with explicit point provenance.
-2. Test exact-duplicate quotienting followed by containment pruning on `S_1,...,S_7` and the local-optimum transition.
-3. Measure the remaining partial-overlap conflict graph and exact retained harmonic mass.
-4. Prove bounded provenance reuse or extract the smallest exact counterexample.
-5. Add the required packing coordinate to the rational LP harness.
+1. Propagate the 21 retained states one generation with their representative provenance labels.
+2. Apply the same exact duplicate quotient and conflict selection to every retained child transition that is computationally tractable.
+3. Build the provenance-reuse graph from parent/sponsor labels to retained descendant representatives.
+4. Prove bounded reuse, or extract the smallest exact directed cycle or multiplicity blow-up.
+5. Add the resulting provenance-capacity coordinate to the rational LP harness.
 6. Export the first legitimate retained-child Bellman row.
-7. Establish a policy-aware or minimax branching Carleson inequality.
+7. Establish a policy-aware branching Carleson inequality.
 
 ---
 
@@ -315,16 +287,14 @@ Do not infer:
 - replay siblings are simultaneous children;
 - raw novelty is schedule-independent;
 - one-generation affine coverage repays cyclic output;
-- canonical regeneration is forced by `S_7`;
-- avoiding regeneration makes a policy cheaper;
-- raw occurrence or distinct-label count ranks policies correctly;
-- locally favorable policy moves compose greedily;
 - one-toggle local optimality implies global policy optimality;
 - acyclic terminal-fiber incidence implies disjoint retained children;
-- lower harmonic occurrence mass implies a Bellman contraction;
-- exact duplicate quotienting alone resolves containment or partial overlap;
+- lower raw harmonic occurrence mass implies Bellman contraction;
+- exact duplicate quotienting alone resolves all overlap;
+- one-generation point-disjoint retention bounds cross-generation reuse;
+- maximum-harmonic local retention is globally Bellman-optimal;
 - policy-LP feasibility implies Bellman-LP feasibility;
-- adding the recorded path charge is justified without retention;
+- the recorded continuation charge is justified without cross-generation packing;
 - one finite witness proves an all-policy theorem.
 
 ---
@@ -343,23 +313,19 @@ Complete extended suite:
 bash src/run_verify_transport_reserve.sh
 ```
 
-Standalone local-optimum checks:
+Standalone retained quotient:
 
 ```bash
 python3 src/run_exact_python.py \
-  src/verify_s7_terminal_step_local_optimum.py \
-  /tmp/s7_terminal_step_local_optimum_certificate.txt
-
-python3 src/run_exact_python.py \
-  src/verify_s7_local_optimum_transition_profile.py \
-  /tmp/s7_local_optimum_transition_profile_certificate.txt
+  src/verify_s7_provenance_retained_quotient.py \
+  /tmp/s7_provenance_retained_quotient_certificate.txt
 ```
 
 Current detailed notes:
 
 - `docs/certainty-ledger.md`;
-- `docs/s7-terminal-step-local-optimum.md`;
+- `docs/s7-provenance-retained-quotient.md`;
 - `docs/s7-local-optimum-transition-profile.md`;
+- `docs/s7-terminal-step-local-optimum.md`;
 - `docs/policy-subset-lattice-s1-s7.md`;
-- `docs/s7-cyclic-scc-output-load.md`;
 - `docs/branching-reserve-lp.md`.

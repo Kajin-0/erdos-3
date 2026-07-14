@@ -1,3 +1,5 @@
-exit_status=0
-commit=163dc426f0b38302318799641468ad4fb6ba80aa
---- stderr ---
+probe_exit_status=0
+summary_exit_status=0
+commit=7e471fd7eeaa282be5184a8eca424a871450d3a9
+--- probe stderr ---
+--- summary stderr ---

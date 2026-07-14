@@ -1,0 +1,283 @@
+{
+  "difference_decimals": {
+    "generation2_minus_generation1": {
+      "current_mass": "-0.017804608911",
+      "immediate_depth_charge": "0.064805372718",
+      "immediate_occurrence_mass": "0.039011223553",
+      "immediate_repeat_descendant_mass": "-0.272749423160",
+      "immediate_repeat_occurrence_mass": "-0.002486228472",
+      "immediate_tail_ge4_descendant_mass": "-0.193531573583",
+      "root_depth_charge": "0.005087831311",
+      "root_occurrence_mass": "-0.002300510439",
+      "root_repeat_descendant_mass": "-0.105281434731",
+      "root_repeat_occurrence_mass": "-0.002168710456",
+      "root_tail_ge4_descendant_mass": "-0.019794909419",
+      "root_tail_ge8_descendant_mass": "-0.079070238728"
+    },
+    "generation3_minus_generation2": {
+      "current_mass": "0.271113526037",
+      "immediate_depth_charge": "0.105979127545",
+      "immediate_occurrence_mass": "0.079510104468",
+      "immediate_repeat_descendant_mass": "0.000000000000",
+      "immediate_repeat_occurrence_mass": "0.000000000000",
+      "immediate_tail_ge4_descendant_mass": "-0.067955942235",
+      "root_depth_charge": "-0.003036090104",
+      "root_occurrence_mass": "-0.001992210260",
+      "root_repeat_descendant_mass": "-0.153813242236",
+      "root_repeat_occurrence_mass": "-0.000298683563",
+      "root_tail_ge4_descendant_mass": "0.280288084814",
+      "root_tail_ge8_descendant_mass": "0.278156974608"
+    }
+  },
+  "difference_hashes": {
+    "generation2_minus_generation1": {
+      "current_mass": "1c0e54068d14791df4ea25d6bd74d66d0d9209afcf58d65176ec637c3b2014df",
+      "immediate_depth_charge": "f90ef3135c51aad6e9019546419efb9ee49839bc3f31aeb7df44d0f6eb074424",
+      "immediate_occurrence_mass": "6a8ad12bbde53b25b9503f90d14b494ad4d15e5808de81373f522cee9a06fa9d",
+      "immediate_repeat_descendant_mass": "cf93f599bce99fcda7c1e3c3e860ee83a3cac54d47b8bdc2268f1dda693e0371",
+      "immediate_repeat_occurrence_mass": "158e385969149f51497a700d5e423b2ae5d94a710f534456fe3d4a9d90d850f1",
+      "immediate_tail_ge4_descendant_mass": "7fe5ee61bdc08618e2020e98c84a62125c6c3bb3538fd76865511fe353e70441",
+      "root_depth_charge": "e114ae62a12fcfbf3a9e44f5c05518490de73083899d0feb1419bb8920730b0d",
+      "root_occurrence_mass": "a33c27f9790993daba5ca5b2892c12de69aa1db84c5a0e7f936fe49958767e10",
+      "root_repeat_descendant_mass": "00e9de9d43b329824591976e754ed2497bd7a0764472e8c783b5b5f5609fb783",
+      "root_repeat_occurrence_mass": "6a19613c4e38254a1e95315c65acb7884c75ada1eb9ba291ac9214d7be99ed71",
+      "root_tail_ge4_descendant_mass": "9e160ab2f7c38213374771b70869019cb468d93051516dc60d9741f154a48f63",
+      "root_tail_ge8_descendant_mass": "eeb7c2591c2ac109a6d4e6f737e3a63ad40cca2da5ea910d3913b4c5faacbe08"
+    },
+    "generation3_minus_generation2": {
+      "current_mass": "3dd62396938d0f15d31d6bcf4ea90d9b4ced9d632adf8d06f7c001bd3226ef28",
+      "immediate_depth_charge": "9beed3b94d50c3026cf20b7fde1837fe5ebcf2835bcac0204f52abc4d6e1d871",
+      "immediate_occurrence_mass": "876c5075aa0275bc7c10775632d8d1a8e16bcb4daf18550305fe774ba8f182bd",
+      "immediate_repeat_descendant_mass": "a93875fe509ac2fae0e0939d3ec71c4d978244c7398dd7185ca68c393426a5a6",
+      "immediate_repeat_occurrence_mass": "a93875fe509ac2fae0e0939d3ec71c4d978244c7398dd7185ca68c393426a5a6",
+      "immediate_tail_ge4_descendant_mass": "73ebef31dee3e353e3bd0433ee0b463ba260e7c593e44ac18a517e80acbc3caf",
+      "root_depth_charge": "3062220ab8cef6374abb34761097049a92914c6f9b5c5abcbbfb5359417f721f",
+      "root_occurrence_mass": "38601192066cec48cd3bd7f336d58b56f20919eeb71060be8005af7f04879248",
+      "root_repeat_descendant_mass": "869c7baab21619b007eac2daa73833fc4fefbc2bd16ee48377edf681b2be0cde",
+      "root_repeat_occurrence_mass": "bf6e2532e22d056d7b9120d4aa2bbf6d3a50557c73bb819c648d13aa54687937",
+      "root_tail_ge4_descendant_mass": "78076c691573d13717f4385fa6ee490954fc0a077e7b96f550cb7696461d6927",
+      "root_tail_ge8_descendant_mass": "6bc16bce59424d20ef41df618fd306c72396541a45ec800e9c9f557bf58bee5d"
+    }
+  },
+  "family_counts": {
+    "generation1_retained": {
+      "points": 11753,
+      "states": 21
+    },
+    "generation2_recursive": {
+      "points": 7882,
+      "states": 14
+    },
+    "generation3_recursive": {
+      "points": 4789,
+      "states": 14
+    }
+  },
+  "feasible_features": [
+    "immediate_tail_ge4_descendant_mass",
+    "root_occurrence_mass",
+    "root_repeat_descendant_mass",
+    "root_repeat_occurrence_mass"
+  ],
+  "feature_decimals": {
+    "generation1_retained": {
+      "current_mass": "0.285821566728",
+      "immediate_depth_charge": "0.011207531950",
+      "immediate_occurrence_mass": "0.007158923945",
+      "immediate_repeat_descendant_mass": "0.272749423160",
+      "immediate_repeat_occurrence_mass": "0.002486228472",
+      "immediate_tail_ge4_descendant_mass": "0.261731522414",
+      "root_depth_charge": "0.011207531950",
+      "root_occurrence_mass": "0.007158923945",
+      "root_repeat_descendant_mass": "0.272749423160",
+      "root_repeat_occurrence_mass": "0.002486228472",
+      "root_tail_ge4_descendant_mass": "0.261731522414",
+      "root_tail_ge8_descendant_mass": "0.237691974448"
+    },
+    "generation2_recursive": {
+      "current_mass": "0.268016957817",
+      "immediate_depth_charge": "0.076012904669",
+      "immediate_occurrence_mass": "0.046170147498",
+      "immediate_repeat_descendant_mass": "0.000000000000",
+      "immediate_repeat_occurrence_mass": "0.000000000000",
+      "immediate_tail_ge4_descendant_mass": "0.068199948831",
+      "root_depth_charge": "0.016295363261",
+      "root_occurrence_mass": "0.004858413506",
+      "root_repeat_descendant_mass": "0.167467988429",
+      "root_repeat_occurrence_mass": "0.000317518016",
+      "root_tail_ge4_descendant_mass": "0.241936612995",
+      "root_tail_ge8_descendant_mass": "0.158621735719"
+    },
+    "generation3_recursive": {
+      "current_mass": "0.539130483855",
+      "immediate_depth_charge": "0.181992032214",
+      "immediate_occurrence_mass": "0.125680251966",
+      "immediate_repeat_descendant_mass": "0.000000000000",
+      "immediate_repeat_occurrence_mass": "0.000000000000",
+      "immediate_tail_ge4_descendant_mass": "0.000244006596",
+      "root_depth_charge": "0.013259273158",
+      "root_occurrence_mass": "0.002866203247",
+      "root_repeat_descendant_mass": "0.013654746193",
+      "root_repeat_occurrence_mass": "0.000018834453",
+      "root_tail_ge4_descendant_mass": "0.522224697809",
+      "root_tail_ge8_descendant_mass": "0.436778710328"
+    }
+  },
+  "feature_hashes": {
+    "generation1_retained": {
+      "current_mass": "29f9f139dcdf764a486022f152d7ab0cacc8f40cd4af353f4a5e5f6bea843446",
+      "immediate_depth_charge": "029b268e7a370dad7f8f72e2a976dded4d04bd7cb5784bf1418acef1e6fbcbeb",
+      "immediate_occurrence_mass": "65b76e3ba79dabed786552b1adbb45c7b801c1463c56b9c692202bf25389cb75",
+      "immediate_repeat_descendant_mass": "543d8bd71c223f034a1c2e02636888caa509e72203d9199a0ca982aad096b975",
+      "immediate_repeat_occurrence_mass": "7061aaf538b64bc07cb79482031f8bdf1a274b3dd441d65f2b4cf2d582766ebe",
+      "immediate_tail_ge4_descendant_mass": "ab3ebd705645c19d14fe9715c5658421f59a5e3e01ba3393cadf4fdf6d846499",
+      "root_depth_charge": "029b268e7a370dad7f8f72e2a976dded4d04bd7cb5784bf1418acef1e6fbcbeb",
+      "root_occurrence_mass": "65b76e3ba79dabed786552b1adbb45c7b801c1463c56b9c692202bf25389cb75",
+      "root_repeat_descendant_mass": "543d8bd71c223f034a1c2e02636888caa509e72203d9199a0ca982aad096b975",
+      "root_repeat_occurrence_mass": "7061aaf538b64bc07cb79482031f8bdf1a274b3dd441d65f2b4cf2d582766ebe",
+      "root_tail_ge4_descendant_mass": "ab3ebd705645c19d14fe9715c5658421f59a5e3e01ba3393cadf4fdf6d846499",
+      "root_tail_ge8_descendant_mass": "7c7a3d33e5a1c62f0e0e429bfa6a38678af0ea2eb28d2cdc95da8539b2846cbb"
+    },
+    "generation2_recursive": {
+      "current_mass": "539dfbe1e345d4e6f1e0ed1c08cfedd1eba8c3f9d195fc078ae9ac0d5e391775",
+      "immediate_depth_charge": "d24166efaf7fc31894dcb72e65bf0dc5c821f1138c213dae8ef673d401f74dba",
+      "immediate_occurrence_mass": "86f1b88297314acebbf2210f7e22e9bb87bf7c1b01c7e3169d3ef933aa0b0d7e",
+      "immediate_repeat_descendant_mass": "a93875fe509ac2fae0e0939d3ec71c4d978244c7398dd7185ca68c393426a5a6",
+      "immediate_repeat_occurrence_mass": "a93875fe509ac2fae0e0939d3ec71c4d978244c7398dd7185ca68c393426a5a6",
+      "immediate_tail_ge4_descendant_mass": "36d46dd437435683d277d7bc538ac2eb08ff82bcc1adb71b116181b88df1d288",
+      "root_depth_charge": "245a007eb29724bc0870e7b0004c25666c5165aeb2c502e35653426997a8c8c8",
+      "root_occurrence_mass": "2aacc913677fd3aabad13a04ed36acf5fd91928b4e9f3f8ed87b04ef4e25c595",
+      "root_repeat_descendant_mass": "b990ee4d972d408a1775b2e62adc5c1e58d3d8737b7486a8a92a00d376bda690",
+      "root_repeat_occurrence_mass": "a6460adc6e251262b3f5f123fd92ca72509bd11c3ddc56329b4b823645aaabe1",
+      "root_tail_ge4_descendant_mass": "b4ee2361fbd1618c637d611df273ac8323222a8c59317f2f8e253a3b23b583be",
+      "root_tail_ge8_descendant_mass": "283fa46fd4b630cc128df46b21e43c6ec98cb4ada31c1e2bcdd2068939796737"
+    },
+    "generation3_recursive": {
+      "current_mass": "ea01006a6cee2ea0c2cb23704e253b5871c528357b3698b4ca2076ddc7233210",
+      "immediate_depth_charge": "7efa14f19429bab9ba071cd8e06fbfcbbea7ed9ee3f5144e006ad4713c4a2282",
+      "immediate_occurrence_mass": "65036fbdb4a298ed10dd70059b149100bfe0e5e0cf89768558a8d4630222d158",
+      "immediate_repeat_descendant_mass": "a93875fe509ac2fae0e0939d3ec71c4d978244c7398dd7185ca68c393426a5a6",
+      "immediate_repeat_occurrence_mass": "a93875fe509ac2fae0e0939d3ec71c4d978244c7398dd7185ca68c393426a5a6",
+      "immediate_tail_ge4_descendant_mass": "7832a2e6e15f94ba05e176523037f84367f966e45f79d067bf760ba214f0620b",
+      "root_depth_charge": "0d573e2c2228235dcbe1896396a4a406152f765d22d795b83b1d67e7dd39fc06",
+      "root_occurrence_mass": "21d499363d184088c9c0d22d2f9cf6dd6e32a785dd8921993acf199f04d827ab",
+      "root_repeat_descendant_mass": "66810024432052aa1d66120407feeeca0f551553805400f6f9a0910b81a963b9",
+      "root_repeat_occurrence_mass": "a958dd54f5e5962e081342a1c1339f1d79690a266ff748751dc9c4761d19e1ba",
+      "root_tail_ge4_descendant_mass": "dac55473f581626afac63c983110e405ce0356ca5a4ce3d4c233efb042692690",
+      "root_tail_ge8_descendant_mass": "82c2c78d94986bfe37a56c422857e7cc34f4ddbc6713cfa6331a196cfba12c8c"
+    }
+  },
+  "infeasible_features": [
+    "immediate_depth_charge",
+    "immediate_occurrence_mass",
+    "immediate_repeat_descendant_mass",
+    "immediate_repeat_occurrence_mass",
+    "root_depth_charge",
+    "root_tail_ge4_descendant_mass",
+    "root_tail_ge8_descendant_mass"
+  ],
+  "schema": "generation_aware_feature_profiles_summary_v1",
+  "single_feature_intervals": {
+    "immediate_depth_charge": {
+      "feasible": false,
+      "lower_decimal": "0.000000000000",
+      "lower_sha256": "a93875fe509ac2fae0e0939d3ec71c4d978244c7398dd7185ca68c393426a5a6",
+      "upper_decimal": "-2.558178504739",
+      "upper_sha256": "05b757c14b80dead73a192653445601dd8cc8347b231ab9aa51b20da59419449",
+      "witness_decimal": null,
+      "witness_sha256": null
+    },
+    "immediate_occurrence_mass": {
+      "feasible": false,
+      "lower_decimal": "0.000000000000",
+      "lower_sha256": "a93875fe509ac2fae0e0939d3ec71c4d978244c7398dd7185ca68c393426a5a6",
+      "upper_decimal": "-3.409799645604",
+      "upper_sha256": "7150d5cfafcda3383ae4cd3bc6a05c71835d893a78203164e69f3c897f6b7b22",
+      "witness_decimal": null,
+      "witness_sha256": null
+    },
+    "immediate_repeat_descendant_mass": {
+      "feasible": false,
+      "lower_decimal": "0.000000000000",
+      "lower_sha256": "a93875fe509ac2fae0e0939d3ec71c4d978244c7398dd7185ca68c393426a5a6",
+      "upper_decimal": null,
+      "upper_sha256": null,
+      "witness_decimal": null,
+      "witness_sha256": null
+    },
+    "immediate_repeat_occurrence_mass": {
+      "feasible": false,
+      "lower_decimal": "0.000000000000",
+      "lower_sha256": "a93875fe509ac2fae0e0939d3ec71c4d978244c7398dd7185ca68c393426a5a6",
+      "upper_decimal": null,
+      "upper_sha256": null,
+      "witness_decimal": null,
+      "witness_sha256": null
+    },
+    "immediate_tail_ge4_descendant_mass": {
+      "feasible": true,
+      "lower_decimal": "3.989548479821",
+      "lower_sha256": "3de3519393ce3cda90cf0b27027790495f4e8d9d6fe010b7a7a2c4f26c7bb769",
+      "upper_decimal": null,
+      "upper_sha256": null,
+      "witness_decimal": "3.989548479821",
+      "witness_sha256": "3de3519393ce3cda90cf0b27027790495f4e8d9d6fe010b7a7a2c4f26c7bb769"
+    },
+    "root_depth_charge": {
+      "feasible": false,
+      "lower_decimal": "89.296930189596",
+      "lower_sha256": "a33400cba1a78a1be69566df81db5533946cd7a755b3d95520aff4843a5622e5",
+      "upper_decimal": "3.499449534338",
+      "upper_sha256": "778013a80ad90076e71ee838d6ce52fff8cfbf591fdc22fe739190cff487a7d3",
+      "witness_decimal": null,
+      "witness_sha256": null
+    },
+    "root_occurrence_mass": {
+      "feasible": true,
+      "lower_decimal": "136.086803432420",
+      "lower_sha256": "0878a97dc5c5fe8aa9e305c50fe85afeb72ed78dc42509c698a1c78744e81130",
+      "upper_decimal": null,
+      "upper_sha256": null,
+      "witness_decimal": "136.086803432420",
+      "witness_sha256": "0878a97dc5c5fe8aa9e305c50fe85afeb72ed78dc42509c698a1c78744e81130"
+    },
+    "root_repeat_descendant_mass": {
+      "feasible": true,
+      "lower_decimal": "1.762614987479",
+      "lower_sha256": "74da4b77b34d5b38df7acb7ff03244ee5a87e605c01d64c98dff846bba9c4260",
+      "upper_decimal": null,
+      "upper_sha256": null,
+      "witness_decimal": "1.762614987479",
+      "witness_sha256": "74da4b77b34d5b38df7acb7ff03244ee5a87e605c01d64c98dff846bba9c4260"
+    },
+    "root_repeat_occurrence_mass": {
+      "feasible": true,
+      "lower_decimal": "907.694830882849",
+      "lower_sha256": "4186b1e4d5b0d214060ab39cfb8d24a91eb8613234aacf425c6b5bedd4aa9130",
+      "upper_decimal": null,
+      "upper_sha256": null,
+      "witness_decimal": "907.694830882849",
+      "witness_sha256": "4186b1e4d5b0d214060ab39cfb8d24a91eb8613234aacf425c6b5bedd4aa9130"
+    },
+    "root_tail_ge4_descendant_mass": {
+      "feasible": false,
+      "lower_decimal": "0.000000000000",
+      "lower_sha256": "a93875fe509ac2fae0e0939d3ec71c4d978244c7398dd7185ca68c393426a5a6",
+      "upper_decimal": "-0.967267396390",
+      "upper_sha256": "09e7efd6eeb9f391c97d91613775a280cfdd824118ed0c27cf7ff07f984a11cd",
+      "witness_decimal": null,
+      "witness_sha256": null
+    },
+    "root_tail_ge8_descendant_mass": {
+      "feasible": false,
+      "lower_decimal": "0.000000000000",
+      "lower_sha256": "a93875fe509ac2fae0e0939d3ec71c4d978244c7398dd7185ca68c393426a5a6",
+      "upper_decimal": "-0.974678152217",
+      "upper_sha256": "35e58c2f5dc9b61b3cf49d80cb19d9283ac9ab805a317e6248c48832300b0d4d",
+      "witness_decimal": null,
+      "witness_sha256": null
+    }
+  },
+  "source_probe_payload_sha256": "8ecba6de0904da134ba85b92b1f3a03f1ab19ff911ac151e7d8ec658bada957c",
+  "summary_payload_sha256": "5a3dc162bb61e2b1089ee2f9d456bec3504c6b6d0b9f8faf1b765b4ed8f44190"
+}

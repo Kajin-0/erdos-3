@@ -7,6 +7,7 @@ on:
     paths:
       - src/probe_pair_resource_third_to_fourth.py
       - src/summarize_pair_resource_third_to_fourth.py
+      - src/verify_pair_resource_third_to_fourth.py
       - .github/workflows/pair-resource-third-to-fourth-probe.yml
 
 permissions:
@@ -28,10 +29,12 @@ jobs:
           set +e
           python3 -m py_compile \
             src/probe_pair_resource_third_to_fourth.py \
-            src/summarize_pair_resource_third_to_fourth.py
+            src/summarize_pair_resource_third_to_fourth.py \
+            src/verify_pair_resource_third_to_fourth.py
           compile_status=$?
           probe_status=not_run
           summary_status=not_run
+          verifier_status=not_run
           : > /tmp/pair_resource_third_to_fourth.err
           if [[ "$compile_status" == "0" ]]; then
             python3 src/run_exact_python.py \
@@ -45,9 +48,15 @@ jobs:
                 data/pair_resource_third_to_fourth_summary.txt \
                 2>> /tmp/pair_resource_third_to_fourth.err
               summary_status=$?
+              python3 src/run_exact_python.py \
+                src/verify_pair_resource_third_to_fourth.py \
+                data/pair_resource_third_to_fourth_certificate_2026-07-14.txt \
+                2>> /tmp/pair_resource_third_to_fourth.err
+              verifier_status=$?
             else
               rm -f data/pair_resource_third_to_fourth_probe.json
               rm -f data/pair_resource_third_to_fourth_summary.txt
+              rm -f data/pair_resource_third_to_fourth_certificate_2026-07-14.txt
             fi
           fi
           {
@@ -55,6 +64,7 @@ jobs:
             echo "compile_exit_status=$compile_status"
             echo "probe_exit_status=$probe_status"
             echo "summary_exit_status=$summary_status"
+            echo "verifier_exit_status=$verifier_status"
             echo "commit=${GITHUB_SHA}"
             echo "--- stderr ---"
             cat /tmp/pair_resource_third_to_fourth.err
@@ -69,8 +79,9 @@ jobs:
           git add data/pair_resource_third_to_fourth_status.txt
           git add -A data/pair_resource_third_to_fourth_probe.json
           git add -A data/pair_resource_third_to_fourth_summary.txt
+          git add -A data/pair_resource_third_to_fourth_certificate_2026-07-14.txt
           if git diff --cached --quiet; then exit 0; fi
-          git commit -m "Record R3-to-F4 pair-resource diagnostic [skip ci]"
+          git commit -m "Record R3-to-F4 pair-resource certificate [skip ci]"
           for attempt in 1 2 3; do
             git fetch origin main
             git rebase origin/main

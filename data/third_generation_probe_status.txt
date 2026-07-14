@@ -1,5 +1,7 @@
 probe_exit_status=0
 summary_exit_status=0
-commit=3ab19bbb8745c529ffdbec8c45334fc1e418fcd3
+signature_exit_status=0
+commit=a9e05b175cd410451c93a0b72001e14c7a9e7a40
 --- probe stderr ---
 --- summary stderr ---
+--- signature stderr ---

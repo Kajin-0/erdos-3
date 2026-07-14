@@ -1,0 +1,245 @@
+{
+  "collisions": {
+    "u_p": {
+      "all_count": 1,
+      "all_signatures": [
+        [
+          60,
+          1354490
+        ]
+      ],
+      "details": [
+        {
+          "earlier": [
+            {
+              "class_index": 7,
+              "exponent": 5,
+              "generation": 2,
+              "immediate": 2810,
+              "p": 1354490,
+              "parent_class": 21,
+              "representative": 46,
+              "source": "middle_fiber",
+              "source_step": 5,
+              "state_values": [
+                60
+              ],
+              "u": 60
+            }
+          ],
+          "later": [
+            {
+              "class_index": 9,
+              "exponent": 5,
+              "generation": 3,
+              "immediate": 440,
+              "p": 1354490,
+              "parent_class": 23,
+              "representative": 11,
+              "source": "middle_fiber",
+              "source_step": 5,
+              "state_values": [
+                60
+              ],
+              "u": 60
+            }
+          ],
+          "signature": [
+            60,
+            1354490
+          ]
+        }
+      ],
+      "recursive_count": 0,
+      "recursive_details": [],
+      "recursive_signatures": [],
+      "terminal_count": 1,
+      "terminal_details": [
+        {
+          "earlier": [
+            {
+              "class_index": 7,
+              "exponent": 5,
+              "generation": 2,
+              "immediate": 2810,
+              "p": 1354490,
+              "parent_class": 21,
+              "representative": 46,
+              "source": "middle_fiber",
+              "source_step": 5,
+              "state_values": [
+                60
+              ],
+              "u": 60
+            }
+          ],
+          "later": [
+            {
+              "class_index": 9,
+              "exponent": 5,
+              "generation": 3,
+              "immediate": 440,
+              "p": 1354490,
+              "parent_class": 23,
+              "representative": 11,
+              "source": "middle_fiber",
+              "source_step": 5,
+              "state_values": [
+                60
+              ],
+              "u": 60
+            }
+          ],
+          "signature": [
+            60,
+            1354490
+          ]
+        }
+      ],
+      "terminal_signatures": [
+        [
+          60,
+          1354490
+        ]
+      ]
+    },
+    "u_p_immediate": {
+      "all_count": 0,
+      "all_signatures": [],
+      "details": [],
+      "recursive_count": 0,
+      "recursive_details": [],
+      "recursive_signatures": [],
+      "terminal_count": 0,
+      "terminal_details": [],
+      "terminal_signatures": []
+    },
+    "u_p_immediate_source": {
+      "all_count": 0,
+      "all_signatures": [],
+      "details": [],
+      "recursive_count": 0,
+      "recursive_details": [],
+      "recursive_signatures": [],
+      "terminal_count": 0,
+      "terminal_details": [],
+      "terminal_signatures": []
+    },
+    "u_p_source": {
+      "all_count": 1,
+      "all_signatures": [
+        [
+          60,
+          1354490,
+          "middle_fiber",
+          5
+        ]
+      ],
+      "details": [
+        {
+          "earlier": [
+            {
+              "class_index": 7,
+              "exponent": 5,
+              "generation": 2,
+              "immediate": 2810,
+              "p": 1354490,
+              "parent_class": 21,
+              "representative": 46,
+              "source": "middle_fiber",
+              "source_step": 5,
+              "state_values": [
+                60
+              ],
+              "u": 60
+            }
+          ],
+          "later": [
+            {
+              "class_index": 9,
+              "exponent": 5,
+              "generation": 3,
+              "immediate": 440,
+              "p": 1354490,
+              "parent_class": 23,
+              "representative": 11,
+              "source": "middle_fiber",
+              "source_step": 5,
+              "state_values": [
+                60
+              ],
+              "u": 60
+            }
+          ],
+          "signature": [
+            60,
+            1354490,
+            "middle_fiber",
+            5
+          ]
+        }
+      ],
+      "recursive_count": 0,
+      "recursive_details": [],
+      "recursive_signatures": [],
+      "terminal_count": 1,
+      "terminal_details": [
+        {
+          "earlier": [
+            {
+              "class_index": 7,
+              "exponent": 5,
+              "generation": 2,
+              "immediate": 2810,
+              "p": 1354490,
+              "parent_class": 21,
+              "representative": 46,
+              "source": "middle_fiber",
+              "source_step": 5,
+              "state_values": [
+                60
+              ],
+              "u": 60
+            }
+          ],
+          "later": [
+            {
+              "class_index": 9,
+              "exponent": 5,
+              "generation": 3,
+              "immediate": 440,
+              "p": 1354490,
+              "parent_class": 23,
+              "representative": 11,
+              "source": "middle_fiber",
+              "source_step": 5,
+              "state_values": [
+                60
+              ],
+              "u": 60
+            }
+          ],
+          "signature": [
+            60,
+            1354490,
+            "middle_fiber",
+            5
+          ]
+        }
+      ],
+      "terminal_signatures": [
+        [
+          60,
+          1354490,
+          "middle_fiber",
+          5
+        ]
+      ]
+    }
+  },
+  "probe_payload_sha256": "b7f2b8dde4593e95511ce2f96161e3deba28dbd2da63c1b248686971de4148f3",
+  "schema": "terminal_token_collision_signature_probe_v1",
+  "second_terminal_records": 43,
+  "third_recursive_records": 4789,
+  "third_terminal_records": 110
+}

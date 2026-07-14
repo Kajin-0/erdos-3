@@ -11,6 +11,7 @@ FOURTH_SHA256="2c2f2103de57bd8fdcc4c32448ea9e1cf662b325e590da5e1b0758c62298c9e5"
 FIFTH_SHA256="74120626dcf65e06beae044f37ff570be8113c494ab81ad3bdeba3aa67378bfb"
 POLICY_SHA256="996d444724e5081986509fe539542ab19508c648ca9f8158650b387b542d6769"
 ROOT_TRANSFER_SHA256="460bbf1a5b21a662353041b8e576fc8809a4823553fa63cc8ae7dc9ce469564a"
+PAIR_ENERGY_SHA256="8cbda92325c346cff0e203350f55aaedc976d3995f5b4c734c3f431775bd3d2f"
 mkdir -p "$WORK"
 
 verify_certificate() {
@@ -94,5 +95,11 @@ verify_certificate \
   "$WORK/fourth_to_fifth_root_transfer_certificate.txt" \
   "$ROOT_TRANSFER_SHA256" \
   "fourth_to_fifth_root_transfer"
+verify_certificate \
+  "verify_pair_energy_frontier.py" \
+  "pair_energy_frontier_certificate_2026-07-14.txt" \
+  "$WORK/pair_energy_frontier_certificate.txt" \
+  "$PAIR_ENERGY_SHA256" \
+  "pair_energy_frontier"
 
-echo "verified: terminal identities, recursive frontiers through generation five, local policy sensitivity, root-lineage transfer, and refined token survival"
+echo "verified: terminal identities, recursive frontiers through generation five, local policy sensitivity, root-lineage transfer, and the exact affine pair-energy Bellman row"

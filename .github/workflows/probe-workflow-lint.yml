@@ -46,7 +46,7 @@ jobs:
           bash src/test_probe_workflow_helpers.sh > /tmp/probe_workflow_helpers.out 2>&1
           helper_status=$?
           {
-            echo "schema=probe_workflow_hardening_status_v1"
+            echo "schema=probe_workflow_hardening_status_v2"
             echo "lint_exit_status=$lint_status"
             echo "helper_test_exit_status=$helper_status"
             echo "source_commit=${GITHUB_SHA}"
@@ -79,7 +79,7 @@ jobs:
             "Record probe workflow lint status [skip ci]" \
             data/probe_workflow_lint_status.txt
 
-      - name: Report original check failure
+      - name: Report top-level check failure
         if: always()
         shell: bash
         run: bash src/assert_probe_status.sh data/probe_workflow_lint_status.txt

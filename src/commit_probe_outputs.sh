@@ -38,7 +38,9 @@ for attempt in 1 2 3; do
   fi
 
   if ! git rebase origin/main; then
-    git rebase --abort || true
+    if ! git rebase --abort; then
+      echo "warning: failed to abort the unsuccessful generated-output rebase" >&2
+    fi
     echo "error: generated-output commit could not be rebased cleanly" >&2
     exit 1
   fi

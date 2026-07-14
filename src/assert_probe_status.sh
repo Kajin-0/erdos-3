@@ -14,25 +14,41 @@ fi
 
 found=0
 failed=0
-while IFS='=' read -r key value; do
-  case "$key" in
-    *_exit_status)
-      found=1
-      case "$value" in
-        0|not_applicable) ;;
-        *)
-          echo "error: $key=$value" >&2
-          failed=1
-          ;;
-      esac
-      ;;
-  esac
+while IFS= read -r line || [[ -n "$line" ]]; do
+  # The first diagnostic separator terminates the machine-readable header.
+  # Legacy status files without a separator are parsed in full.
+  if [[ "$line" == ---* ]]; then
+    break
+  fi
+
+  if [[ "$line" == *_exit_status=* ]]; then
+    key="${line%%=*}"
+    value="${line#*=}"
+    found=1
+
+    if [[ ! "$key" =~ ^[A-Za-z_][A-Za-z0-9_]*_exit_status$ ]]; then
+      echo "error: malformed status field: $line" >&2
+      failed=1
+      continue
+    fi
+
+    case "$value" in
+      0|not_applicable) ;;
+      *)
+        echo "error: $key=$value" >&2
+        failed=1
+        ;;
+    esac
+  elif [[ "$line" == *_exit_status* ]]; then
+    found=1
+    echo "error: malformed status field: $line" >&2
+    failed=1
+  fi
 done < "$status_file"
 
 if [[ "$found" == "0" ]]; then
-  echo "error: no *_exit_status fields found in $status_file" >&2
-  cat "$status_file" >&2
-  exit 1
+  echo "error: no top-level *_exit_status fields found in $status_file" >&2
+  failed=1
 fi
 
 if [[ "$failed" != "0" ]]; then

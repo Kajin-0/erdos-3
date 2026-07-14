@@ -1,0 +1,28 @@
+schema=parity_oriented_selected_edge_flow_certificate_v1
+compile_exit_status=0
+probe_exit_status=1
+summary_exit_status=not_run
+verifier_exit_status=not_applicable
+source_commit=2dcc23753fd5f176f0d7d443e0fd087836bcfddb
+source_ref=refs/heads/main
+workflow_run_id=29373839883
+workflow_run_attempt=1
+--- stderr ---
+Traceback (most recent call last):
+  File "/home/runner/work/erdos-3/erdos-3/src/run_exact_python.py", line 34, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/home/runner/work/erdos-3/erdos-3/src/run_exact_python.py", line 29, in main
+    runpy.run_path(str(target), run_name="__main__")
+  File "<frozen runpy>", line 286, in run_path
+  File "<frozen runpy>", line 98, in _run_module_code
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/runner/work/erdos-3/erdos-3/src/verify_parity_oriented_selected_edge_flow.py", line 196, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/home/runner/work/erdos-3/erdos-3/src/verify_parity_oriented_selected_edge_flow.py", line 147, in main
+    row = run_schedule(values)
+          ^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/erdos-3/erdos-3/src/verify_parity_oriented_selected_edge_flow.py", line 107, in run_schedule
+    raise AssertionError("direct edge mass identity failed")
+AssertionError: direct edge mass identity failed

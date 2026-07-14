@@ -3,23 +3,24 @@ set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 WORK="${1:-${TMPDIR:-/tmp}/erdos_terminal_sink_ledger}"
-EXPECTED_SHA256="1f25e54d10d73c0130535d12f264405f0e5adb954820725395deb7c86ac19bf9"
+IDENTITY_SHA256="1f25e54d10d73c0130535d12f264405f0e5adb954820725395deb7c86ac19bf9"
+BELLMAN_SHA256="7da70d79f271080a66d3f8ed1aa517d95bf321eb5d618822440fefdfa8504e14"
 mkdir -p "$WORK"
 
-GENERATED="$WORK/retained_terminal_sink_identity_certificate.txt"
-RECORDED="$ROOT/data/retained_terminal_sink_identity_certificate_2026-07-13.txt"
+IDENTITY_GENERATED="$WORK/retained_terminal_sink_identity_certificate.txt"
+IDENTITY_RECORDED="$ROOT/data/retained_terminal_sink_identity_certificate_2026-07-13.txt"
 LEDGER="$WORK/retained_terminal_sink_identity_ledger.jsonl"
 
 python3 "$ROOT/src/run_exact_python.py" \
   "$ROOT/src/export_retained_terminal_sink_ledger.py" \
-  "$GENERATED" "$LEDGER"
+  "$IDENTITY_GENERATED" "$LEDGER"
 
-cmp "$RECORDED" "$GENERATED"
-ACTUAL_SHA256="$(sha256sum "$GENERATED" | awk '{print $1}')"
-if [[ "$ACTUAL_SHA256" != "$EXPECTED_SHA256" ]]; then
+cmp "$IDENTITY_RECORDED" "$IDENTITY_GENERATED"
+IDENTITY_ACTUAL="$(sha256sum "$IDENTITY_GENERATED" | awk '{print $1}')"
+if [[ "$IDENTITY_ACTUAL" != "$IDENTITY_SHA256" ]]; then
   echo "error: retained terminal sink identity certificate SHA-256 mismatch" >&2
-  echo "expected=$EXPECTED_SHA256" >&2
-  echo "actual=$ACTUAL_SHA256" >&2
+  echo "expected=$IDENTITY_SHA256" >&2
+  echo "actual=$IDENTITY_ACTUAL" >&2
   exit 1
 fi
 
@@ -29,6 +30,22 @@ if [[ "$LEDGER_ROWS" != "13" ]]; then
   exit 1
 fi
 
-echo "retained_terminal_sink_identity_sha256=$ACTUAL_SHA256"
+BELLMAN_GENERATED="$WORK/two_generation_recursive_bellman_row_certificate.txt"
+BELLMAN_RECORDED="$ROOT/data/two_generation_recursive_bellman_row_certificate_2026-07-13.txt"
+python3 "$ROOT/src/run_exact_python.py" \
+  "$ROOT/src/verify_two_generation_recursive_bellman_row.py" \
+  "$BELLMAN_GENERATED"
+
+cmp "$BELLMAN_RECORDED" "$BELLMAN_GENERATED"
+BELLMAN_ACTUAL="$(sha256sum "$BELLMAN_GENERATED" | awk '{print $1}')"
+if [[ "$BELLMAN_ACTUAL" != "$BELLMAN_SHA256" ]]; then
+  echo "error: two-generation recursive Bellman certificate SHA-256 mismatch" >&2
+  echo "expected=$BELLMAN_SHA256" >&2
+  echo "actual=$BELLMAN_ACTUAL" >&2
+  exit 1
+fi
+
+echo "retained_terminal_sink_identity_sha256=$IDENTITY_ACTUAL"
 echo "retained_terminal_sink_ledger_rows=$LEDGER_ROWS"
-echo "verified: exact numerical and provenance identities for 13 retained terminal sinks"
+echo "two_generation_recursive_bellman_sha256=$BELLMAN_ACTUAL"
+echo "verified: terminal sink identities and strict two-generation recursive Bellman row"

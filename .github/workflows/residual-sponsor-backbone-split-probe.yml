@@ -21,10 +21,10 @@ jobs:
   probe:
     uses: ./.github/workflows/reusable-python-probe-recorder.yml
     with:
-      schema: residual_sponsor_backbone_split_probe_v1
+      schema: residual_sponsor_backbone_split_probe_v2
       probe_script: src/probe_residual_sponsor_backbone_split.py
       probe_output: data/residual_sponsor_backbone_split_probe.json
       summary_script: src/summarize_residual_sponsor_backbone_split.py
       summary_output: data/residual_sponsor_backbone_split_summary.txt
       status_output: data/residual_sponsor_backbone_split_status.txt
-      commit_message: Record residual-sponsor backbone split probe [skip ci]
+      commit_message: Record corrected residual-sponsor backbone split probe [skip ci]

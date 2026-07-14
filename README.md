@@ -1,433 +1,233 @@
-# Erdős Problem #3: harmonic arithmetic progressions
+# Erdős Problem #3: the four-term reciprocal-sum case
 
-This repository develops partial progress on Erdős Problem #3:
+This repository develops computer-assisted and symbolic partial progress on Erdős Problem #3:
 
 > If `A subseteq N` and `sum_{n in A} 1/n = infinity`, must `A` contain arbitrarily long arithmetic progressions?
 
-The full problem remains open. The active project studies the four-term-progression-free case.
+The full problem remains open. The active project studies the four-term case: whether every four-term-progression-free subset of the positive integers has convergent reciprocal sum.
 
-## Strongest one-generation recursion
+## Current status
 
-Fix a four-term-progression-free block
+The repository has established:
 
-```math
-D\subseteq[N,2N).
-```
-
-Run coordinated side-anchor deletion until a three-term-progression-free residual of size
-
-```math
-s\le r_3(N)
-```
-
-remains, and put
-
-```math
-K=|D|-s.
-```
-
-Let
-
-```math
-m=\min D
-```
-
-and define the minimum-translation backbone
-
-```math
-\mathcal B(D)
-=
-\{d-m:d\in D,\ d>m\}.
-```
-
-Then `B(D)` is four-term-progression-free, lies in `[1,N)`, has size `|D|-1`, and every associated output satisfies
-
-```math
-d-m\le d/2.
-```
-
-### Raw occurrence factor three
-
-Keeping every selected middle occurrence and the backbone gives a binary genealogy with
-
-```math
-\boxed{
-H(\mathcal B(D))
-+
-\sum_xH(M_x)
-\ge
-3H(D)
--
-2\frac{r_3(N)}N
--
-\frac1N.
-}
-```
-
-Equal numerical labels are counted repeatedly.
-
-### Multiplicity-resolving factor two
-
-Let `Q` be the set of distinct selected middle steps. Repeated copies of each `q in Q` are converted exactly into lower-scale center-difference children `Xi_q` satisfying
-
-```math
-\boxed{
-|Q|+
-\sum_q|\Xi_q|
-=K.
-}
-```
-
-Combining these fibers with the backbone gives
-
-```math
-\boxed{
-H(Q)
-+
-\sum_qH(\Xi_q)
-+
-H(\mathcal B(D))
-\ge
-2H(D)
--
-\frac{r_3(N)}N
--
-\frac1N.
-}
-```
-
-The genealogy remains binary.
-
-## Half-contraction potential
-
-Every retained output associated with parent label `a` is at most `a/2`, and every parent creates at most two outputs. Hence, for every real `p>=1`,
-
-```math
-\boxed{
-\sum_{u\text{ output of }a}u^p
-\le
-2^{1-p}a^p.
-}
-```
-
-Across all generations,
-
-```math
-\boxed{
-\sum_q\mu(q)q^p
-\le
-2^{1-p}
-\sum_{a\text{ root}}a^p.
-}
-```
-
-Recursive depth is logarithmic.
-
-## Exact multiplicity compression
-
-Every recursive state has the form
-
-```math
-S=B-t,
-\qquad
-B\subseteq D_{\mathrm{root}},
-\qquad
-t\in\{0\}\cup D_{\mathrm{root}}.
-```
-
-Repeated terminal copies are compressed in stages:
-
-1. Different lifted centers are exported by center-difference layers.
-2. For one exact lifted progression, different root anchors are exported by anchor-difference layers.
-3. Different predecessor anchors are exported by predecessor-difference layers.
-4. Same-anchor copies obey the antichain budget
+1. strong one-generation harmonic recursions from coordinated side-anchor deletion;
+2. exact middle-multiplicity resolution and mandatory dyadic shelling;
+3. an infinite self-replicating four-AP-free scale-eight family with persistence
    ```math
-   \lambda_{x,q}(t)(a-t)\le a.
+   P_h=2^h=\frac12L_h^{1/3};
    ```
+4. a sharp summability theorem for the exact equal-translate replication model;
+5. contaminated constructions disproving universal local and fixed-window contraction;
+6. an exact Bellman debt identity for cheap replication;
+7. complete factor-two and factor-four exclusion from the recorded state `S_10`;
+8. a complete infinite exact-tail classification for every valid factor-eight child of `S_10`;
+9. exact raw simultaneous deletion transitions through `S_7`;
+10. exact no-go theorems for several naive packing potentials and SCC capacities;
+11. a policy-aware exact rational LP for finite deletion-policy families.
 
-After iterating through the anchor history, the residual consists of identical local progressions produced by state occurrences with the same complete anchor history.
-
-## Self-replicating aligned diamonds
-
-That final residual can grow polynomially.
-
-The scale-eight base state
-
-```math
-S_1
-=
-64+
-\{0,1,2,16,17,18,21,22,23,26,27,28\}
-```
-
-is four-term-progression-free and produces two copies of the terminal progression
+The strongest state-specific closure is
 
 ```math
-16,21,26
+\boxed{N_{10,2}=N_{10,4}=0.}
 ```
 
-with step `5` and the same root anchor.
+The factor-four proof partitions all `348012826` layer-disjoint candidates into inherited obstruction, lifted completion support, and rectangle-transport classes.
 
-An alternating base-eight three-translate construction doubles the number of identical-history copies at every level. There are computer-certified four-term-progression-free blocks `S_h` with
+This closes the recorded depth-ten state, not the full deletion tree.
+
+## Active theorem
+
+The decisive missing object is a provenance-preserving retention quotient converting raw overlapping simultaneous outputs into legitimate Bellman children.
+
+The intended whole-tree inequality is schematically
 
 ```math
-\boxed{
-\text{identical-history terminal multiplicity}=2^h
-}
-```
-
-and
-
-```math
-\boxed{
-|S_h|
-=
-\frac{9\cdot3^h-3}{2}.
-}
-```
-
-The ambient scale is exact:
-
-```math
-\boxed{
-S_h\subseteq[L_h,2L_h),
-\qquad
-L_h=8^{h+1}.
-}
-```
-
-Therefore
-
-```math
-\boxed{
-\text{persistence}
-=
-2^h
-=
-\frac12L_h^{1/3}.
-}
-```
-
-The full infinite family is certified four-term-progression-free by a 34-state base-eight automaton and a 17,238-state product/carry search. Absolute, logarithmic, polylogarithmic, and sufficiently small subpower persistence bounds are false without additional hypotheses.
-
-The certificate is reproduced by
-
-```text
-src/verify_scale_eight_aligned_diamond.py
-```
-
-and documented in
-
-```text
-docs/scale-eight-self-replicating-aligned-diamond.md
-```
-
-### Sharp exact-model theorems
-
-The canonical equal-translate obstruction is quantitatively classified when the backbone reproduces the previous state exactly.
-
-If one exact replication step has
-
-```math
-S\subseteq[L,2L),
-\qquad
-A=\{0\}\cup S,
-```
-
-```math
-G=A\cup(A+R)\cup(A+2R),
-```
-
-and is translated into a standard dyadic shell
-
-```math
-L'+G\subseteq[L',2L'),
-```
-
-then uncontaminated backbone reproduction requires `R>=2L`. Since `2R in G`, one has `L'>4L`; because `L'/L` is a power of two,
-
-```math
-\boxed{L'\ge8L.}
-```
-
-Also, four equal translate layers are impossible because `0,R,2R,3R` would be a four-term progression. Thus three layers are maximal. Since the occurrence genealogy is binary, two persistent children are maximal. The exact architecture has one-step efficiency
-
-```math
-\boxed{
-\rho_{\mathrm{exact}}
-=
-\frac{2\cdot3}{8}
-=
-\frac34.
-}
-```
-
-After `h` exact generations,
-
-```math
-\boxed{
-P_h\le\left(\frac{L_h}{L_0}\right)^{1/3}.
-}
-```
-
-The exact cardinality recurrence is
-
-```math
-n_{h+1}=3(n_h+1),
-```
-
-so every exact equal-translate genealogy satisfies
-
-```math
-\boxed{
-P_h\alpha_h
+\Delta(S)
++
+\sum_{S'\in\operatorname{Child}_\pi(S)}
+\left(
+\operatorname{Pack}(S')+\Phi_{\rm obs}(S')
+\right)
 \le
-C_0P_h^{\log_2 3-2}
-}
+\operatorname{Pack}(S)+\Phi_{\rm obs}(S)
++
+\operatorname{controlled\ error}.
 ```
 
-and
+A valid theorem must handle:
 
-```math
-\boxed{
-\sum_hP_h\alpha_h
-\le
-4C_0,
-\qquad
-C_0=\frac{n_0+3/2}{L_0}.
-}
-```
+- duplicate states;
+- strict containments;
+- partial overlaps;
+- terminal-recursive overlap;
+- cyclic terminal-fiber incidence;
+- policy-dependent regeneration;
+- cross-generation provenance reuse.
 
-The scale-eight family attains the exponents `1/3` and `2-log_2(3)`.
-
-### Contaminated-backbone finite chain
-
-Exact reproduction is not the only way persistence can continue. It is enough for the relevant backbone shell to contain a replayable copy of the previous state.
-
-A certified depth-five chain uses dyadic scale factors
-
-```math
-\boxed{4,8,4,4}
-```
-
-and separations
-
-```math
-61,303,1597,8195.
-```
-
-Every state is four-term-progression-free. At each outer step:
-
-1. the middle multiplicity fiber is exactly the previous state;
-2. the backbone shell contains the previous state plus contaminating points;
-3. the previous deletion schedule can be replayed inside that subset;
-4. certified identical-history persistence doubles.
-
-For
-
-```math
-W_h
-=
-2^h\frac{|S_h|}{L_h},
-```
-
-the chain satisfies
-
-```math
-W_1=\frac38,
-\qquad
-W_5=\frac{273}{256},
-```
-
-and therefore
-
-```math
-\boxed{
-\frac{W_5}{W_1}
-=
-\frac{91}{32}
-=2.84375.
-}
-```
-
-Thus the exact-model `3/4` contraction does not extend to contaminated backbones one step at a time, or over every window of four steps.
-
-The construction is documented in
-
-```text
-docs/contaminated-backbone-depth-five-chain.md
-```
-
-and verified by
-
-```text
-src/verify_contaminated_backbone_depth5.py
-```
-
-## Current bottleneck
-
-The remaining theorem must control the **long-run behavior** of contaminated, overlapping, or interacting persistence genealogies.
-
-A local near-exact/defective contraction dichotomy is insufficient: the depth-five chain contains three scale-factor `4` steps and increases multiplicity-weighted density over four outer generations.
-
-The active target is now
-
-```math
-\boxed{
-\text{prove long-run compensation for cheap contaminated-backbone replication.}
-}
-```
-
-Useful forms would include:
-
-1. cumulative scale expansion eventually exceeding the `6`-per-level threshold required to offset `3`-for-`2` replication;
-2. a monotone contamination or overlap potential that forces later expensive recovery steps;
-3. export of contaminating points into additional lower-scale difference structure;
-4. a finite-state or spectral classification of indefinitely repeatable contaminated patterns;
-5. a proof that repeated cheap factors force a four-term progression.
-
-The immediate computational question is whether the scale pattern can be extended indefinitely or only in bounded bursts. The immediate proof question is what quantity stores the debt created by a factor-four step.
-
-## Supporting deletion-DAG theory
-
-The deletion-DAG merge and spanning-component identities remain valid:
-
-```math
-\sum_v|\Delta_v|=K-s+\rho,
-```
-
-```math
-\sum_j|\Theta_j|=K+s-ho,
-```
-
-and
-
-```math
-\sum_v|\Delta_v|+
-\sum_j|\Theta_j|=2K.
-```
-
-They are no longer needed for the strongest one-generation constants, but remain possible ingredients in a density-sensitive replication theorem.
+Pathwise summability, replay catalogs, and policy-ranking LP feasibility do not by themselves imply this treewise inequality.
 
 ## Start here
 
-- `docs/current-proof-program.md` — authoritative theorem chain and current gap.
-- `docs/certainty-ledger.md` — claim status, confidence, and audit state.
-- `docs/research-decision-history.md` — audited PR history, superseded routes, permanent stop list, and documentation protocol.
-- `docs/minimum-translation-backbone-recursion.md` — raw factor `3` and hybrid factor `2`.
-- `docs/middle-multiplicity-fiber-five-thirds-recursion.md` — exact within-state middle multiplicity fibers.
-- `docs/global-lifted-center-layer-resolution.md` — different-center compression.
-- `docs/state-anchor-layer-and-antichain-budget.md` — different-anchor compression and same-anchor budget.
-- `docs/predecessor-anchor-layer-resolution.md` — predecessor and anchor-history compression.
-- `docs/self-replicating-aligned-diamond.md` — original arbitrary-depth persistence construction.
-- `docs/scale-eight-self-replicating-aligned-diamond.md` — exact scale-eight refinement and density benchmark.
-- `docs/three-translate-dyadic-scale-barrier.md` — sharp `L' >= 8L` theorem for exact replication.
-- `docs/exact-three-translate-weighted-density-theorem.md` — sharp weighted-density decay and summability in the exact model.
-- `docs/contaminated-backbone-depth-five-chain.md` — finite cheap-replication chain defeating local contraction.
-- `src/verify_contaminated_backbone_depth5.py` — exact depth-five certificate.
-- `src/verify_scale_eight_aligned_diamond.py` — infinite-family automaton certificate.
-- `src/verify_self_replicating_aligned_diamond_depth2.py` — original depth-two verifier.
-- `docs/half-contraction-multiscale-label-potential.md` — all-generation moment potential.
-- `docs/side-anchor-deletion-dag.md` — supporting affine deletion DAG.
+- [`docs/comprehensive-research-landscape.md`](docs/comprehensive-research-landscape.md) — expert strategic map of positive results, negative theorems, explored model classes, dependency graph, stop list, and prioritized roadmap.
+- [`docs/current-proof-program.md`](docs/current-proof-program.md) — authoritative active theorem chain and immediate frontier.
+- [`docs/certainty-ledger.md`](docs/certainty-ledger.md) — atomic claim status and exact theorem/certificate ledger.
+- [`docs/research-decision-history.md`](docs/research-decision-history.md) — chronological decisions and permanent stops.
+- [`docs/branching-reserve-lp.md`](docs/branching-reserve-lp.md) — exact retained-child LP contract and current packing requirements.
 
-All recent theorem-style claims are proved internally but await independent expert review.
+## Main completed theorem families
+
+### One-generation deletion recursion
+
+For a four-AP-free block `D subseteq [N,2N)`, coordinated deletion and the minimum-translation backbone give
+
+```math
+H(\mathcal B(D))+\sum_xH(M_x)
+\ge
+3H(D)-2\frac{r_3(N)}N-\frac1N,
+```
+
+and, after exact middle-multiplicity resolution,
+
+```math
+H(Q)+\sum_qH(\Xi_q)+H(\mathcal B(D))
+\ge
+2H(D)-\frac{r_3(N)}N-\frac1N.
+```
+
+Primary references:
+
+- [`docs/minimum-translation-backbone-recursion.md`](docs/minimum-translation-backbone-recursion.md)
+- [`docs/middle-multiplicity-fiber-five-thirds-recursion.md`](docs/middle-multiplicity-fiber-five-thirds-recursion.md)
+
+### Exact scale-eight benchmark
+
+The aligned-diamond family satisfies
+
+```math
+|S_h|=\frac{9\cdot3^h-3}{2},
+\qquad
+P_h=2^h,
+\qquad
+L_h=8^{h+1}.
+```
+
+A 34-state base-eight automaton and a 17,238-state carry-product certificate prove that the infinite family is four-AP-free.
+
+Primary references:
+
+- [`docs/scale-eight-self-replicating-aligned-diamond.md`](docs/scale-eight-self-replicating-aligned-diamond.md)
+- [`src/verify_scale_eight_aligned_diamond.py`](src/verify_scale_eight_aligned_diamond.py)
+
+### Sharp exact-model summability
+
+Exact uncontaminated equal-translate reproduction requires
+
+```math
+L'\ge8L.
+```
+
+The exact model has one-step efficiency `3/4` and summable multiplicity-weighted density.
+
+Primary references:
+
+- [`docs/three-translate-dyadic-scale-barrier.md`](docs/three-translate-dyadic-scale-barrier.md)
+- [`docs/exact-three-translate-weighted-density-theorem.md`](docs/exact-three-translate-weighted-density-theorem.md)
+
+### Contaminated debt and delayed recovery
+
+The certified contaminated branch begins
+
+```text
+4,8,4,4,8,4,8,8,8
+```
+
+and disproves universal one-step contraction, fixed short-window contraction, and universal two-generation recovery.
+
+The exact debt accounting is
+
+```math
+\Delta_c
+=
+\frac{P(3N+4)}L\left(\frac8c-1\right).
+```
+
+Primary references:
+
+- [`docs/contaminated-backbone-depth-five-chain.md`](docs/contaminated-backbone-depth-five-chain.md)
+- [`docs/current-proof-program.md`](docs/current-proof-program.md)
+
+### Complete depth-ten cheap-extension closure
+
+The complete factor-four domain from `S_10` is eliminated by:
+
+1. inherited depth-nine obstruction;
+2. lifted completion support;
+3. complete direct rectangle support;
+4. exact transport at ratios `1,2,3,4`.
+
+Primary references:
+
+- [`docs/complete-depth-ten-factor-four-exclusion.md`](docs/complete-depth-ten-factor-four-exclusion.md)
+- [`docs/four-ratio-rectangle-transport-and-residual-profile.md`](docs/four-ratio-rectangle-transport-and-residual-profile.md)
+- [`src/run_verify_s10_factor4_rectangle_closure.sh`](src/run_verify_s10_factor4_rectangle_closure.sh)
+
+### Simultaneous transition and policy frontier
+
+Raw simultaneous deletion output is exported through `S_7`, including duplicates, containments, partial overlaps, provenance, and terminal-fiber SCC structure.
+
+The current policy family uses exact rational scores of the form
+
+```math
+C_{\lambda,\gamma}(\pi)
+=
+T_\pi+\lambda O_\pi+E_\pi+\gamma G_\pi.
+```
+
+The witness
+
+```math
+(\lambda,\gamma)=\left(3,\frac1{10}\right)
+```
+
+remains feasible after a 198-half-space subset-lattice expansion on `S_1,...,S_6`. This ranks finite policies but is not yet a retained-child Bellman theorem.
+
+Primary references:
+
+- [`docs/simultaneous-deletion-transition-exporter.md`](docs/simultaneous-deletion-transition-exporter.md)
+- [`docs/terminal-fiber-scc-spectral-growth.md`](docs/terminal-fiber-scc-spectral-growth.md)
+- [`docs/expanded-policy-subset-lp.md`](docs/expanded-policy-subset-lp.md)
+- [`docs/branching-reserve-lp.md`](docs/branching-reserve-lp.md)
+
+## Reproduction
+
+Lightweight push-gating suite:
+
+```bash
+bash src/run_verify_ci_lightweight.sh
+```
+
+Extended transport and reserve suite:
+
+```bash
+bash src/run_verify_transport_reserve.sh
+```
+
+Transition and policy frontier:
+
+```bash
+bash src/run_verify_transition_frontier.sh
+```
+
+## Claim discipline
+
+The repository distinguishes:
+
+- symbolic theorems;
+- exact finite computer-assisted theorems;
+- exact infinite theorems from finite certification plus induction;
+- no-go theorems;
+- experimental evidence;
+- conjectures;
+- superseded claims.
+
+See [`docs/certainty-ledger.md`](docs/certainty-ledger.md) for authoritative status. The full four-term reciprocal-sum problem remains unresolved.

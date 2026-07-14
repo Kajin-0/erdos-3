@@ -1,8 +1,17 @@
-schema=cl088_documentation_status_v1
+schema=cl088_documentation_status_v2
 compile_exit_status=0
-patch_exit_status=0
-source_commit=a35a2621192a60cde03ff1d89b33fe0b347cca2f
+patch_exit_status=1
+source_commit=493d6b893a7b84c0dda3e7f38879d4cf33dafb59
 source_ref=refs/heads/main
-workflow_run_id=29350760185
+workflow_run_id=29350901418
 workflow_run_attempt=1
 --- stderr ---
+Traceback (most recent call last):
+  File "/home/runner/work/erdos-3/erdos-3/src/patch_cl088_residual_sponsor_split.py", line 224, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/home/runner/work/erdos-3/erdos-3/src/patch_cl088_residual_sponsor_split.py", line 216, in main
+    patch_current_program()
+  File "/home/runner/work/erdos-3/erdos-3/src/patch_cl088_residual_sponsor_split.py", line 173, in patch_current_program
+    raise AssertionError("missing foundation marker")
+AssertionError: missing foundation marker

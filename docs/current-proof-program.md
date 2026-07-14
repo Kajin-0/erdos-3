@@ -95,9 +95,9 @@ The exact transport closure margin is `5`. Every valid exact factor-eight child 
 
 ---
 
-## 4. Raw simultaneous transition frontier
+## 4. Raw transition and retention obstruction
 
-The lexicographic exporter records complete raw occurrence families before any retention quotient.
+The lexicographic raw transition frontier is certified through `S_7`.
 
 | parent | occurrences | state classes | duplicate classes | containments | partial overlaps |
 |---:|---:|---:|---:|---:|---:|
@@ -111,43 +111,23 @@ The lexicographic exporter records complete raw occurrence families before any r
 
 Replay siblings are alternative choices, not simultaneous Bellman children.
 
----
-
-## 5. Cyclic output and retention obstruction
-
 At `S_7`, the terminal-fiber graph contains
 
 ```math
-C=\{1,5,61,303,1597,8195,323640\}.
+C=\{1,5,61,303,1597,8195,323640\},
 ```
 
-Its internal adjacency matrix satisfies
+with
 
 ```math
 \frac{23}{9}<\rho(A)<\frac83.
 ```
 
-The component emits `6,020` distinct novel labels. Even after numerical deduplication, its output/input harmonic ratio exceeds `7/5`. Raw output is recursive load, not stored repayment.
-
-Local and affine obstruction export is substantial but incomplete:
-
-```text
-140,352 of 950,202 factor-two candidates removed locally
-398,745 of 4,986,696 factor-four candidates removed locally
-```
-
-On the `33` exact cyclic-source states of size at most `50`, complete one-generation four-AP testing still leaves
-
-```text
-15,160 of 21,724 factor-two candidates
-75,723 of 87,829 factor-four candidates.
-```
-
-A provenance-preserving retention quotient remains missing.
+The component emits `6,020` distinct novel labels, and its numerically deduplicated output/input harmonic ratio exceeds `7/5`. Local and affine obstruction export is substantial but incomplete. A provenance-preserving retention quotient remains missing.
 
 ---
 
-## 6. Regeneration and policy dependence
+## 5. Regeneration and policy dependence
 
 Under lexicographic deletion, the isolated child
 
@@ -161,27 +141,17 @@ satisfies
 X\xrightarrow[f=4]{R=1}S_1.
 ```
 
-It is the unique exact factor-two/factor-four return from the `62` cyclic-source states to any canonical `S_1,...,S_10`. Its recorded path charge is
+Its recorded continuation charge is
 
 ```math
 G=\frac{36953}{4096}.
 ```
 
-The seed-producing actions are not root-forced. Reverse lexicographic deletion avoids the return but creates a severe load explosion:
-
-| coordinate | lexicographic | reverse lexicographic |
-|---|---:|---:|
-| terminal steps | `25` | `2,252` |
-| middle-fiber shells | `124` | `2,374` |
-| largest SCC | `7` | `286` |
-| maximum label multiplicity | `15` | `160` |
-| residual error | `15/256` | `165/2048` |
-
-Avoiding a recognizable descendant is not a sufficient policy objective.
+The seed-producing actions are not root-forced. Reverse lexicographic deletion avoids the return but creates severe terminal, cyclic, and duplicate load. Avoiding a recognizable descendant is not a sufficient policy objective.
 
 ---
 
-## 7. First occurrence-weight cone
+## 6. Occurrence and continuation coordinates
 
 For
 
@@ -189,23 +159,7 @@ For
 C_\lambda(\pi)=T_\pi+\lambda O_\pi+E_\pi,
 ```
 
-where `T` is terminal-step harmonic mass, `O` is middle-fiber occurrence mass, and `E` is normalized terminal-residual error, the targeted delayed-seed policy beats lexicographic deletion at `S_7` exactly when
-
-```math
-\lambda>\lambda_*;
-\qquad
-\frac{298}{125}<\lambda_*<\frac{477}{200}.
-```
-
-On `S_1`, lexicographic deletion beats reverse deletion exactly when
-
-```math
-\lambda<\frac{260}{63}.
-```
-
-On every `S_2,...,S_6`, reverse deletion has larger terminal mass, larger occurrence mass, and no smaller residual error.
-
-Therefore the tested family has the nonempty common subcone
+the tested lexicographic, reverse, and delayed-seed policies admit the common subcone
 
 ```math
 \boxed{
@@ -213,35 +167,9 @@ Therefore the tested family has the nonempty common subcone
 }.
 ```
 
-The exact witness is
+The witness `lambda=3` is exact.
 
-```math
-\boxed{\lambda=3}.
-```
-
-**Primary reference:** `docs/policy-occurrence-cone-s1-s7.md`.
-
----
-
-## 8. Uniform step-5 policy exposes continuation cost
-
-Let `pi_5` delay every progression-step-5 action and preserve lexicographic order otherwise.
-
-Exact recomputation gives
-
-```math
-C_3(\pi_5)=C_3(\pi_{\rm lex})
-```
-
-on `S_1`, and
-
-```math
-C_3(\pi_5)<C_3(\pi_{\rm lex})
-```
-
-on every `S_2,...,S_7`.
-
-At `S_7`, `pi_5` retains the isolated canonical return. A hybrid delaying both step `5` and the three seed-producing `q=1` actions removes regeneration but has higher raw `C_3`.
+A uniform policy `pi_5` delaying all step-5 actions ties lexicographic deletion on `S_1` and lowers `C_3` on every `S_2,...,S_7`, but retains the canonical return. Therefore occurrence cost alone is insufficient.
 
 Introduce
 
@@ -251,23 +179,19 @@ C_{3,\gamma}(\pi)
 T_\pi+3O_\pi+E_\pi+\gamma G_\pi.
 ```
 
-In the pairwise `pi_5` versus hybrid comparison, the hybrid wins once
+The pairwise `pi_5` versus non-regenerative hybrid comparison has threshold
 
 ```math
-\gamma>\gamma_5,
-\qquad
-\frac{57}{1000}<\gamma_5<\frac{29}{500}.
+0.057<\gamma_5<0.058,
 ```
 
-The witness `gamma=1/16` is valid only for that pairwise comparison.
-
-**Primary reference:** `docs/step5-policy-regeneration-weight.md`.
+but that threshold is not stable under policy-family enlargement.
 
 ---
 
-## 9. Two-coordinate finite policy family
+## 7. Current finite policy family
 
-The policy family was enlarged to include:
+The enlarged family contains:
 
 ```text
 lexicographic
@@ -276,7 +200,7 @@ single-step delays 30, 40, 142, 161
 step5
 step540
 step54030
-S7 seed-delayed hybrids of the cumulative policies.
+S7 seed-delayed hybrids of cumulative policies.
 ```
 
 At
@@ -301,48 +225,64 @@ the exact winners are:
 | `S_6` | `step540` |
 | `S_7` | non-regenerative `hybrid5` |
 
-The stronger regenerative `step540` policy tightens the continuation constraint. The hybrid beats it exactly when
+The stronger regenerative `step540` policy raises the active continuation threshold to
 
 ```math
-\gamma>\gamma_{540},
-\qquad
-\frac{837}{10000}<\gamma_{540}<\frac{419}{5000}.
+\frac{837}{10000}
+<
+\gamma_{540}
+<
+\frac{419}{5000}.
 ```
 
-Thus
+Thus `gamma=1/16` fails after family enlargement, while `gamma=1/10` succeeds.
+
+Delaying step `30` alone improves `C_3` on `S_2,...,S_7`, but adding the same delay after steps `5` and `40` worsens `C_3` on every one of those states. Favorable local policy changes are not greedily composable.
+
+Primary references:
+
+- `docs/two-coordinate-policy-family.md`;
+- `docs/step5-policy-regeneration-weight.md`;
+- `docs/policy-occurrence-cone-s1-s7.md`.
+
+---
+
+## 8. Exact policy half-space LP
+
+Every current chosen-policy comparison is exported as
+
+```math
+\Delta O\,\lambda
++
+\Delta G\,\gamma
+\ge
+-(\Delta T+\Delta E).
+```
+
+The exact finite system contains
 
 ```text
-gamma = 1/16 fails
-gamma = 1/10 succeeds.
+60 constraints
+2 features: lambda, gamma.
 ```
 
-This is the first stable finite two-coordinate witness for the present policy family.
-
-**Primary reference:** `docs/two-coordinate-policy-family.md`.
-
----
-
-## 10. Policy improvements are not composable
-
-Delaying step `30` alone improves `C_3` relative to lexicographic deletion on every `S_2,...,S_7`.
-
-After steps `5` and `40` are already delayed, the same modification reverses sign:
+The existing rational LP harness verifies
 
 ```math
-C_3(\pi_{5,40,30})
->
-C_3(\pi_{5,40})
+(\lambda,\gamma)=\left(3,\frac1{10}\right)
 ```
 
-on every `S_2,...,S_7`.
+exactly. The only zero-slack constraints are the expected `S_1` policy ties and the `S_2` `step5/step540` tie. The active `S_7` continuation boundary is `hybrid5 <= step540`.
 
-Therefore independently favorable local policy moves cannot be greedily combined. The policy objective is interaction-sensitive, and every candidate priority set must be recomputed as a complete schedule or controlled by a new structural theorem.
+This completes the finite policy-ranking LP export. It is **not** the branching Bellman LP because the rows compare complete policies on recorded parents and do not yet encode retained simultaneous children.
+
+**Primary reference:** `docs/policy-halfspace-lp.md`.
 
 ---
 
-## 11. Active theorem
+## 9. Active theorem
 
-The required object remains policy-aware:
+The required whole-tree object remains
 
 ```math
 \boxed{
@@ -360,7 +300,7 @@ The required object remains policy-aware:
 }
 ```
 
-The current finite policy score needs at least
+The finite policy score currently needs at least
 
 ```text
 terminal mass
@@ -373,19 +313,18 @@ A retention theorem is still required before raw shell or path charges can enter
 
 ---
 
-## 12. Approved next targets
+## 10. Approved next targets
 
-1. Export all current policy comparisons as exact rational half-spaces in `(lambda,gamma)`.
-2. Intersect them in the branching-reserve LP harness.
-3. Add additional deterministic priority families and update the feasible cone.
-4. Extract the first exact infeasible subsystem if the two-coordinate cone collapses.
-5. Add the coordinate identified by that subsystem.
-6. Prove a provenance-preserving retention quotient.
-7. Establish a policy-aware or minimax branching Carleson inequality.
+1. Add further deterministic priority families to the exact policy LP.
+2. Extract the first exact infeasible subsystem if the two-coordinate cone collapses.
+3. Add the coordinate identified by that subsystem.
+4. Prove a provenance-preserving retention quotient.
+5. Export the first legitimate retained-child Bellman row.
+6. Establish a policy-aware or minimax branching Carleson inequality.
 
 ---
 
-## 13. Stop list
+## 11. Stop list
 
 Do not infer:
 
@@ -399,13 +338,14 @@ Do not infer:
 - a nonempty occurrence-weight cone makes continuation cost unnecessary;
 - `gamma=1/16` survives enlarged policy families;
 - locally favorable policy moves compose greedily;
+- policy-LP feasibility implies Bellman-LP feasibility;
 - adding the recorded path charge is justified without retention;
 - the tested policy family is globally optimal;
 - one finite witness proves an all-policy theorem.
 
 ---
 
-## 14. Reproduction
+## 12. Reproduction
 
 Push-gating lightweight suite:
 
@@ -439,4 +379,5 @@ Current detailed notes:
 - `docs/policy-occurrence-cone-s1-s7.md`;
 - `docs/step5-policy-regeneration-weight.md`;
 - `docs/two-coordinate-policy-family.md`;
+- `docs/policy-halfspace-lp.md`;
 - `docs/branching-reserve-lp.md`.

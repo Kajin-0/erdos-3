@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
 """Canonicalize and record the certified residual/sponsor refinement as CL-088.
 
-This patcher is intentionally idempotent. It removes every prior copy of each
-CL-088 insertion before writing exactly one canonical copy.
+The patcher is intentionally idempotent. Every documentation target is reduced
+to one canonical CL-088 insertion, including when the current proof program is
+already in canonical form.
 """
 from __future__ import annotations
 
 from pathlib import Path
+import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -66,6 +68,7 @@ Primary reference: `docs/residual-sponsor-backbone-refinement.md`.
 
 """
 FOUNDATION = "## 1. Foundation and recorded exact path"
+CURRENT_HEADING = "## Certified residual-sponsor backbone refinement"
 
 README_ITEM18 = "18. exact occurrence- and union-valued pair-resource contraction from the third to fourth retained frontier."
 README_ITEM19 = "19. a certified residual-sponsor backbone split that terminalizes translated residual roots and reduces the fifth recursive pair-resource load without changing raw support or harmonic occurrence mass."
@@ -149,6 +152,57 @@ def write(path: Path, text: str) -> None:
     path.write_text(text.rstrip() + "\n", encoding="utf-8")
 
 
+def canonicalize_current_program_text(text: str) -> str:
+    """Replace every CL-088 current-program variant with one canonical block."""
+    foundation = text.find(FOUNDATION)
+    if foundation < 0:
+        raise AssertionError("missing foundation heading")
+
+    heading = text.find(CURRENT_HEADING)
+    separator = "---\n\n"
+    if 0 <= heading < foundation:
+        start = heading
+        if text[max(0, heading - len(separator)):heading] == separator:
+            start -= len(separator)
+    else:
+        start = foundation
+        if text[max(0, foundation - len(separator)):foundation] == separator:
+            start -= len(separator)
+
+    prefix = text[:start].rstrip()
+    suffix = text[foundation:].lstrip()
+    result = CURRENT_BLOCK + suffix
+    if prefix:
+        result = prefix + "\n\n" + result
+    return result.rstrip() + "\n"
+
+
+def self_test() -> int:
+    prefix = "# Test program\n\nPrior section."
+    foundation = FOUNDATION + "\n\nBody.\n"
+    canonical = prefix + "\n\n" + CURRENT_BLOCK + foundation
+    if canonicalize_current_program_text(canonical) != canonical:
+        raise AssertionError("canonical current-program text is not idempotent")
+
+    duplicated = prefix + "\n\n" + CURRENT_BLOCK + CURRENT_BLOCK + foundation
+    collapsed = canonicalize_current_program_text(duplicated)
+    if collapsed != canonical or collapsed.count(CURRENT_HEADING) != 1:
+        raise AssertionError("duplicate current-program blocks were not collapsed")
+
+    absent = prefix + "\n\n---\n\n" + foundation
+    inserted = canonicalize_current_program_text(absent)
+    if inserted != canonical or inserted.count(CURRENT_HEADING) != 1:
+        raise AssertionError("missing current-program block was not inserted")
+
+    legacy = prefix + "\n\n---\n\n" + CURRENT_HEADING + "\n\nlegacy\n\n---\n\n" + foundation
+    repaired = canonicalize_current_program_text(legacy)
+    if repaired != canonical or "legacy" in repaired:
+        raise AssertionError("legacy current-program block was not replaced")
+
+    print("CL-088 patcher self-test passed")
+    return 0
+
+
 def patch_ledger() -> None:
     path = ROOT / "docs/certainty-ledger.md"
     text = path.read_text(encoding="utf-8")
@@ -167,11 +221,7 @@ def patch_ledger() -> None:
 
 def patch_current_program() -> None:
     path = ROOT / "docs/current-proof-program.md"
-    text = remove_all_exact(path.read_text(encoding="utf-8"), CURRENT_BLOCK)
-    marker = "---\n\n" + FOUNDATION
-    if marker not in text:
-        raise AssertionError("missing foundation marker")
-    text = text.replace(marker, CURRENT_BLOCK + FOUNDATION, 1)
+    text = canonicalize_current_program_text(path.read_text(encoding="utf-8"))
     write(path, text)
 
 
@@ -221,4 +271,8 @@ def main() -> int:
 
 
 if __name__ == "__main__":
+    if sys.argv[1:] == ["--self-test"]:
+        raise SystemExit(self_test())
+    if sys.argv[1:]:
+        raise SystemExit("usage: patch_cl088_residual_sponsor_split.py [--self-test]")
     raise SystemExit(main())

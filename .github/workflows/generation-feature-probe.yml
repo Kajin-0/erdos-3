@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - src/probe_generation_aware_feature_profiles.py
+      - src/summarize_generation_aware_feature_probe.py
       - .github/workflows/generation-feature-probe.yml
 
 permissions:
@@ -30,19 +31,36 @@ jobs:
             src/probe_generation_aware_feature_profiles.py \
             > /tmp/generation_feature_probe.json \
             2> /tmp/generation_feature_probe.err
-          status=$?
-          {
-            echo "exit_status=$status"
-            echo "commit=${GITHUB_SHA}"
-            echo "--- stderr ---"
-            cat /tmp/generation_feature_probe.err
-          } > data/generation_aware_feature_probe_status.txt
-          if [[ "$status" == "0" ]]; then
+          probe_status=$?
+          summary_status=not_run
+          : > /tmp/generation_feature_summary.err
+          if [[ "$probe_status" == "0" ]]; then
             cp /tmp/generation_feature_probe.json \
               data/generation_aware_feature_profiles_probe.json
+            python3 src/summarize_generation_aware_feature_probe.py \
+              /tmp/generation_feature_probe.json \
+              > /tmp/generation_feature_summary.json \
+              2> /tmp/generation_feature_summary.err
+            summary_status=$?
+            if [[ "$summary_status" == "0" ]]; then
+              cp /tmp/generation_feature_summary.json \
+                data/generation_aware_feature_profiles_summary.json
+            else
+              rm -f data/generation_aware_feature_profiles_summary.json
+            fi
           else
             rm -f data/generation_aware_feature_profiles_probe.json
+            rm -f data/generation_aware_feature_profiles_summary.json
           fi
+          {
+            echo "probe_exit_status=$probe_status"
+            echo "summary_exit_status=$summary_status"
+            echo "commit=${GITHUB_SHA}"
+            echo "--- probe stderr ---"
+            cat /tmp/generation_feature_probe.err
+            echo "--- summary stderr ---"
+            cat /tmp/generation_feature_summary.err
+          } > data/generation_aware_feature_probe_status.txt
           exit 0
 
       - name: Commit deterministic probe output
@@ -52,6 +70,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/generation_aware_feature_probe_status.txt
           git add -A data/generation_aware_feature_profiles_probe.json
+          git add -A data/generation_aware_feature_profiles_summary.json
           if git diff --cached --quiet; then
             echo "No probe output change"
             exit 0

@@ -99,7 +99,9 @@ jobs:
             exit 1
           fi
           if ! git rebase origin/main; then
-            git rebase --abort || true
+            if ! git rebase --abort; then
+              echo "warning: failed to abort the unsuccessful CL-088 rebase" >&2
+            fi
             exit 1
           fi
           git push origin HEAD:main

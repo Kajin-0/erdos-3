@@ -1,5 +1,25 @@
 probe_exit_status=0
 summary_exit_status=0
-commit=75c16fb581eeb2651006e739cf98c229ba435e21
+verifier_exit_status=1
+commit=77bae6acad15d0cc8e1b5f3402a5db960143e761
 --- probe stderr ---
 --- summary stderr ---
+--- verifier stderr ---
+Traceback (most recent call last):
+  File "/home/runner/work/erdos-3/erdos-3/src/run_exact_python.py", line 34, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/home/runner/work/erdos-3/erdos-3/src/run_exact_python.py", line 29, in main
+    runpy.run_path(str(target), run_name="__main__")
+  File "<frozen runpy>", line 286, in run_path
+  File "<frozen runpy>", line 98, in _run_module_code
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/runner/work/erdos-3/erdos-3/src/verify_fourth_generation_potential_frontier.py", line 367, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/home/runner/work/erdos-3/erdos-3/src/verify_fourth_generation_potential_frontier.py", line 358, in main
+    certificate = build_certificate()
+                  ^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/erdos-3/erdos-3/src/verify_fourth_generation_potential_frontier.py", line 230, in build_certificate
+    raise AssertionError("fourth (u,p) collision hash mismatch")
+AssertionError: fourth (u,p) collision hash mismatch

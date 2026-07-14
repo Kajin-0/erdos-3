@@ -2,8 +2,12 @@ probe_exit_status=0
 summary_exit_status=0
 candidate_exit_status=0
 verifier_exit_status=0
-commit=38fc6197b0af174cf57fd236610753374686a639
+patch_exit_status=0
+commit=5035cd7619c87413cc5e426a227901a19b7f1900
 --- probe stderr ---
 --- summary stderr ---
 --- candidate stderr ---
 --- verifier stderr ---
+--- patch stderr ---
+/home/runner/work/erdos-3/erdos-3/src/patch_certainty_ledger_cl076.py:11: SyntaxWarning: invalid escape sequence '\m'
+  TAIL = """# Open bottleneck OB-001: provenance-reserve validation

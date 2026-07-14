@@ -8,152 +8,25 @@ on:
       - src/probe_root_lineage_transfer_classification.py
       - src/summarize_root_lineage_transfer_classification.py
       - src/verify_root_lineage_transfer_classification.py
-      - src/probe_backbone_anchor_transfer.py
-      - src/summarize_backbone_anchor_transfer.py
-      - src/probe_anchor_translation_potential.py
-      - src/summarize_anchor_translation_potential.py
       - .github/workflows/root-lineage-transfer-classification-probe.yml
 
 permissions:
   contents: write
 
+concurrency:
+  group: probe-result-writers-main
+  cancel-in-progress: false
+
 jobs:
   classify:
-    if: github.actor != 'github-actions[bot]'
-    runs-on: ubuntu-latest
-    timeout-minutes: 30
-    steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Run exact root-lineage classification
-        shell: bash
-        run: |
-          set +e
-          python3 -m py_compile \
-            src/probe_root_lineage_transfer_classification.py \
-            src/summarize_root_lineage_transfer_classification.py \
-            src/verify_root_lineage_transfer_classification.py \
-            src/probe_backbone_anchor_transfer.py \
-            src/summarize_backbone_anchor_transfer.py \
-            src/probe_anchor_translation_potential.py \
-            src/summarize_anchor_translation_potential.py
-          compile_status=$?
-          probe_status=not_run
-          summary_status=not_run
-          verifier_status=not_run
-          anchor_probe_status=not_run
-          anchor_summary_status=not_run
-          potential_probe_status=not_run
-          potential_summary_status=not_run
-          : > /tmp/root_lineage_transfer_classification.err
-          if [[ "$compile_status" == "0" ]]; then
-            python3 src/run_exact_python.py \
-              src/probe_root_lineage_transfer_classification.py \
-              > data/root_lineage_transfer_classification_probe.json \
-              2> /tmp/root_lineage_transfer_classification.err
-            probe_status=$?
-            if [[ "$probe_status" == "0" ]]; then
-              python3 src/summarize_root_lineage_transfer_classification.py \
-                data/root_lineage_transfer_classification_probe.json \
-                data/root_lineage_transfer_classification_summary.txt \
-                2>> /tmp/root_lineage_transfer_classification.err
-              summary_status=$?
-              python3 src/run_exact_python.py \
-                src/verify_root_lineage_transfer_classification.py \
-                data/root_lineage_transfer_classification_certificate_2026-07-14.txt \
-                2>> /tmp/root_lineage_transfer_classification.err
-              verifier_status=$?
-              python3 src/run_exact_python.py \
-                src/probe_backbone_anchor_transfer.py \
-                > data/backbone_anchor_transfer_probe.json \
-                2>> /tmp/root_lineage_transfer_classification.err
-              anchor_probe_status=$?
-              if [[ "$anchor_probe_status" == "0" ]]; then
-                python3 src/summarize_backbone_anchor_transfer.py \
-                  data/backbone_anchor_transfer_probe.json \
-                  data/backbone_anchor_transfer_summary.txt \
-                  2>> /tmp/root_lineage_transfer_classification.err
-                anchor_summary_status=$?
-              else
-                rm -f data/backbone_anchor_transfer_probe.json
-                rm -f data/backbone_anchor_transfer_summary.txt
-              fi
-              python3 src/run_exact_python.py \
-                src/probe_anchor_translation_potential.py \
-                > data/anchor_translation_potential_probe.json \
-                2>> /tmp/root_lineage_transfer_classification.err
-              potential_probe_status=$?
-              if [[ "$potential_probe_status" == "0" ]]; then
-                python3 src/summarize_anchor_translation_potential.py \
-                  data/anchor_translation_potential_probe.json \
-                  data/anchor_translation_potential_summary.txt \
-                  2>> /tmp/root_lineage_transfer_classification.err
-                potential_summary_status=$?
-              else
-                rm -f data/anchor_translation_potential_probe.json
-                rm -f data/anchor_translation_potential_summary.txt
-              fi
-            else
-              rm -f data/root_lineage_transfer_classification_probe.json
-              rm -f data/root_lineage_transfer_classification_summary.txt
-              rm -f data/root_lineage_transfer_classification_certificate_2026-07-14.txt
-              rm -f data/backbone_anchor_transfer_probe.json
-              rm -f data/backbone_anchor_transfer_summary.txt
-              rm -f data/anchor_translation_potential_probe.json
-              rm -f data/anchor_translation_potential_summary.txt
-            fi
-          fi
-          {
-            echo "compile_exit_status=$compile_status"
-            echo "probe_exit_status=$probe_status"
-            echo "summary_exit_status=$summary_status"
-            echo "verifier_exit_status=$verifier_status"
-            echo "anchor_probe_exit_status=$anchor_probe_status"
-            echo "anchor_summary_exit_status=$anchor_summary_status"
-            echo "potential_probe_exit_status=$potential_probe_status"
-            echo "potential_summary_exit_status=$potential_summary_status"
-            echo "commit=${GITHUB_SHA}"
-            echo "--- stderr ---"
-            cat /tmp/root_lineage_transfer_classification.err
-          } > data/root_lineage_transfer_classification_status.txt
-          exit 0
-
-      - name: Commit deterministic probe result
-        if: always()
-        shell: bash
-        run: |
-          set -euo pipefail
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          if [[ ! -f data/root_lineage_transfer_classification_status.txt ]]; then
-            {
-              echo "phase=workflow_failed_before_status"
-              echo "commit=${GITHUB_SHA}"
-            } > data/root_lineage_transfer_classification_status.txt
-          fi
-          git add data/root_lineage_transfer_classification_status.txt
-          git add -A data/root_lineage_transfer_classification_probe.json
-          git add -A data/root_lineage_transfer_classification_summary.txt
-          git add -A data/root_lineage_transfer_classification_certificate_2026-07-14.txt
-          git add -A data/backbone_anchor_transfer_probe.json
-          git add -A data/backbone_anchor_transfer_summary.txt
-          git add -A data/anchor_translation_potential_probe.json
-          git add -A data/anchor_translation_potential_summary.txt
-          if git diff --cached --quiet; then
-            echo "No root-lineage classification output change"
-            exit 0
-          fi
-          git commit -m "Record anchor-translation potential probe [skip ci]"
-          for attempt in 1 2 3; do
-            git fetch origin main
-            git rebase origin/main
-            if git push origin HEAD:main; then
-              exit 0
-            fi
-            sleep $((attempt * 2))
-          done
-          echo "error: failed to push after rebasing and three attempts" >&2
-          exit 1
+    uses: ./.github/workflows/reusable-python-probe-recorder.yml
+    with:
+      schema: root_lineage_transfer_classification_probe_v1
+      probe_script: src/probe_root_lineage_transfer_classification.py
+      probe_output: data/root_lineage_transfer_classification_probe.json
+      summary_script: src/summarize_root_lineage_transfer_classification.py
+      summary_output: data/root_lineage_transfer_classification_summary.txt
+      status_output: data/root_lineage_transfer_classification_status.txt
+      verifier_script: src/verify_root_lineage_transfer_classification.py
+      certificate_output: data/root_lineage_transfer_classification_certificate_2026-07-14.txt
+      commit_message: Record root-lineage transfer classification [skip ci]

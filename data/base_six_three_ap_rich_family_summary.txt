@@ -1,0 +1,17 @@
+Base-six three-AP-rich four-AP-free family
+===========================================
+
+schema=base_six_three_ap_rich_family_certificate_v2
+max_n=6
+all_digit_families_four_ap_free=true
+unit_step_three_ap_count_equals_3n_minus_1=true
+standard_dyadic_placement_valid=true
+load_over_harmonic_at_least_dyadic_base_over_three=true
+
+n=1;size=3;N=8;unit_3aps=1;all_3aps=1;load=1.000000000000;harmonic=0.336111111111;ratio=2.975206611570;linear_ratio_lower=2.666666666667
+n=2;size=9;N=64;unit_3aps=3;all_3aps=8;load=3.842857142857;harmonic=0.127385661297;ratio=30.167109105685;linear_ratio_lower=21.333333333333
+n=3;size=27;N=256;unit_3aps=9;all_3aps=49;load=12.231182247788;harmonic=0.091212964469;ratio=134.094778291800;linear_ratio_lower=85.333333333333
+n=4;size=81;N=2048;unit_3aps=27;all_3aps=272;load=37.279061086897;harmonic=0.035323613211;ratio=1055.358093296337;linear_ratio_lower=682.666666666667
+n=5;size=243;N=8192;unit_3aps=81;all_3aps=1441;load=112.325112003626;harmonic=0.025238898788;ratio=4450.475947808222;linear_ratio_lower=2730.666666666667
+n=6;size=729;N=65536;unit_3aps=243;all_3aps=7448;load=337.381943299514;harmonic=0.009810150308;ratio=34391.108463764547;linear_ratio_lower=21845.333333333332
+payload_sha256=7a6256d688129c66110d8686577bf682610101f0e5d2bae2117d671102926006

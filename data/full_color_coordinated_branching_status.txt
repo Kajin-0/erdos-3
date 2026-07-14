@@ -1,0 +1,10 @@
+schema=full_color_coordinated_branching_exhaustive_v1
+compile_exit_status=0
+probe_exit_status=0
+summary_exit_status=0
+verifier_exit_status=not_applicable
+source_commit=8053741e71ef536b2cc803f39427392f64845526
+source_ref=refs/heads/main
+workflow_run_id=29359196243
+workflow_run_attempt=1
+--- stderr ---

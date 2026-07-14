@@ -1,0 +1,20 @@
+{
+  "all_children_four_ap_free": true,
+  "all_children_have_disjoint_first_three_dilates": true,
+  "exact_harmonic_identity": "sum_children_H=2*weighted_three_AP_load",
+  "exact_two_memberships_per_progression": true,
+  "four_ap_free_subsets_tested": 2233,
+  "interval": [
+    1,
+    12
+  ],
+  "maximum_children_in_one_subset": 12,
+  "maximum_three_aps_in_one_subset": 8,
+  "payload_sha256": "4a8148d268db1e31c1d1b7ce292be16af194d0ef0f2fc1b92f986d3c6a185099",
+  "records_sha256": "79bb96e5fbf7f24ee79a95d4bdbb66e40589b41b5228e9f177c739d74df54b56",
+  "schema": "full_color_coordinated_branching_exhaustive_v1",
+  "subsets_with_three_aps": 1528,
+  "total_child_memberships": 6348,
+  "total_child_states": 6053,
+  "total_three_ap_occurrences": 3174
+}

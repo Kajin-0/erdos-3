@@ -1,0 +1,6 @@
+schema=cl088_one_time_cleanup_v1
+compile_exit_status=0
+cleanup_exit_status=0
+source_commit=9705faae9a2bbbc33fc46513346d9c45099df044
+--- output ---
+CL-088 documentation canonicalized

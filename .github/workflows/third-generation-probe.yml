@@ -8,6 +8,8 @@ on:
       - src/probe_third_generation_recursive_frontier.py
       - src/summarize_third_generation_probe.py
       - src/probe_terminal_token_collision_signature.py
+      - src/verify_third_generation_recursive_frontier.py
+      - data/third_generation_recursive_frontier_certificate_2026-07-13.txt
       - .github/workflows/third-generation-probe.yml
 
 permissions:
@@ -35,8 +37,10 @@ jobs:
           probe_status=$?
           summary_status=not_run
           signature_status=not_run
+          verifier_status=not_run
           : > /tmp/third_generation_summary.err
           : > /tmp/terminal_signature.err
+          : > /tmp/third_generation_verifier.err
           if [[ "$probe_status" == "0" ]]; then
             cp /tmp/third_generation_probe.json \
               data/third_generation_recursive_frontier_probe.json
@@ -62,6 +66,17 @@ jobs:
             else
               rm -f data/terminal_token_collision_signature_probe.json
             fi
+            python3 src/run_exact_python.py \
+              src/verify_third_generation_recursive_frontier.py \
+              /tmp/third_generation_certificate.txt \
+              > /tmp/third_generation_verifier.stdout \
+              2> /tmp/third_generation_verifier.err
+            verifier_status=$?
+            if [[ "$verifier_status" == "0" ]]; then
+              cmp data/third_generation_recursive_frontier_certificate_2026-07-13.txt \
+                /tmp/third_generation_certificate.txt
+              verifier_status=$?
+            fi
           else
             rm -f data/third_generation_recursive_frontier_probe.json
             rm -f data/third_generation_recursive_frontier_summary.json
@@ -71,6 +86,7 @@ jobs:
             echo "probe_exit_status=$probe_status"
             echo "summary_exit_status=$summary_status"
             echo "signature_exit_status=$signature_status"
+            echo "verifier_exit_status=$verifier_status"
             echo "commit=${GITHUB_SHA}"
             echo "--- probe stderr ---"
             cat /tmp/third_generation_probe.err
@@ -78,6 +94,8 @@ jobs:
             cat /tmp/third_generation_summary.err
             echo "--- signature stderr ---"
             cat /tmp/terminal_signature.err
+            echo "--- verifier stderr ---"
+            cat /tmp/third_generation_verifier.err
           } > data/third_generation_probe_status.txt
           exit 0
 

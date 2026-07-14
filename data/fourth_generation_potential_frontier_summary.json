@@ -1,0 +1,267 @@
+{
+  "family_counts": {
+    "generation1_retained": {
+      "points": 11753,
+      "states": 21
+    },
+    "generation2_recursive": {
+      "points": 7882,
+      "states": 14
+    },
+    "generation3_recursive": {
+      "points": 4789,
+      "states": 14
+    },
+    "generation4_recursive": {
+      "points": 1717,
+      "states": 12
+    }
+  },
+  "feature_decimals": {
+    "generation1_retained": {
+      "current_mass": "0.285821566728",
+      "immediate_tail_ge4_descendant_mass": "0.261731522414",
+      "root_repeat_descendant_mass": "0.272749423160"
+    },
+    "generation2_recursive": {
+      "current_mass": "0.268016957817",
+      "immediate_tail_ge4_descendant_mass": "0.068199948831",
+      "root_repeat_descendant_mass": "0.167467988429"
+    },
+    "generation3_recursive": {
+      "current_mass": "0.539130483855",
+      "immediate_tail_ge4_descendant_mass": "0.000244006596",
+      "root_repeat_descendant_mass": "0.013654746193"
+    },
+    "generation4_recursive": {
+      "current_mass": "1.536133538213",
+      "immediate_tail_ge4_descendant_mass": "0.917165670132",
+      "root_repeat_descendant_mass": "0.000000000000"
+    }
+  },
+  "feature_hashes": {
+    "generation1_retained": {
+      "current_mass": "29f9f139dcdf764a486022f152d7ab0cacc8f40cd4af353f4a5e5f6bea843446",
+      "immediate_tail_ge4_descendant_mass": "ab3ebd705645c19d14fe9715c5658421f59a5e3e01ba3393cadf4fdf6d846499",
+      "root_repeat_descendant_mass": "543d8bd71c223f034a1c2e02636888caa509e72203d9199a0ca982aad096b975"
+    },
+    "generation2_recursive": {
+      "current_mass": "539dfbe1e345d4e6f1e0ed1c08cfedd1eba8c3f9d195fc078ae9ac0d5e391775",
+      "immediate_tail_ge4_descendant_mass": "36d46dd437435683d277d7bc538ac2eb08ff82bcc1adb71b116181b88df1d288",
+      "root_repeat_descendant_mass": "b990ee4d972d408a1775b2e62adc5c1e58d3d8737b7486a8a92a00d376bda690"
+    },
+    "generation3_recursive": {
+      "current_mass": "ea01006a6cee2ea0c2cb23704e253b5871c528357b3698b4ca2076ddc7233210",
+      "immediate_tail_ge4_descendant_mass": "7832a2e6e15f94ba05e176523037f84367f966e45f79d067bf760ba214f0620b",
+      "root_repeat_descendant_mass": "66810024432052aa1d66120407feeeca0f551553805400f6f9a0910b81a963b9"
+    },
+    "generation4_recursive": {
+      "current_mass": "03cac9573c3d61ac9c8a0c4066cbb8d6ea9ece01606602cacc9604634f9b1ba9",
+      "immediate_tail_ge4_descendant_mass": "bd15677ca84a8944d52f276ae3587b2b92d4344e4bfc4db1c04b674fe7623d62",
+      "root_repeat_descendant_mass": "a93875fe509ac2fae0e0939d3ec71c4d978244c7398dd7185ca68c393426a5a6"
+    }
+  },
+  "generation4_metrics": {
+    "child_selected_actions": 4120,
+    "child_terminal_residual_points": 669,
+    "components_with_nonunique_optimum": 0,
+    "conflict_components": 20,
+    "conflict_edges": 407,
+    "dp_states_examined": 126,
+    "exact_state_classes": 103,
+    "immediate_provenance_distinct": 1717,
+    "immediate_provenance_max_multiplicity": 1,
+    "immediate_provenance_repeated": 0,
+    "largest_conflict_component": 17,
+    "raw_occurrence_points": 8807,
+    "raw_occurrences": 408,
+    "recursive_points": 1717,
+    "recursive_second_parent_points": 4789,
+    "recursive_second_parent_states": 14,
+    "recursive_states": 12,
+    "retained_points": 1794,
+    "retained_states": 23,
+    "root_provenance_distinct": 1717,
+    "root_provenance_max_multiplicity": 1,
+    "root_provenance_repeated": 0,
+    "terminal_points": 77,
+    "terminal_states": 11
+  },
+  "hashes": {
+    "child_transition_summary": "e868c32e2fefb685dbd3a514a3d345b76651e44da1a8fa8db91d3277feb1cab8",
+    "fourth_all_tokens": "230db9786af30645166c2e3a928d8de3120a364bd680bb0e3796e7be1a9a9af0",
+    "fourth_raw_occurrences": "3779c87338136c33faa782a0cb37c48e7f76ac4935307dffaa42a10557417b18",
+    "fourth_recursive_family": "19a6afd4fa54c7af7e91b8241366c34db3d15cefadba470e2a897746c9d1bc25",
+    "fourth_recursive_tokens": "79092f11822890b8bc19bc536351ca1b040eaff32b3a48d67dffb946b1912a20",
+    "fourth_retained_family": "0a07682c357a189d75a592b72e1f3df67371d6eca38fa3cb4be4690d780e5129",
+    "fourth_terminal_family": "f0dfdff932b1746d2678b466eac6266dca3c0103ba5c6b00e03d35a993903b1b",
+    "fourth_terminal_tokens": "88869f3a08f48bbea69de13d98a48c2cf91bad34285e2c0ed049f30e298522f8"
+  },
+  "mass_ratios": {
+    "fourth_recursive_over_fourth_total": {
+      "bracket_millionth": [
+        "203629/500000",
+        "407259/1000000"
+      ],
+      "decimal": "0.407258144406",
+      "hash": "f8f5484e507a9a6e8d4cf4e08b6efa903b7ff40c25c588450970a42f5af19553"
+    },
+    "fourth_recursive_over_third_recursive": {
+      "bracket_millionth": [
+        "2849279/1000000",
+        "8904/3125"
+      ],
+      "decimal": "2.849279690568",
+      "hash": "5dc632de3dd681a5dfa9f0e01de3303735873f922cf34d0dc6e6231ccec03c66"
+    },
+    "fourth_terminal_over_fourth_total": {
+      "bracket_millionth": [
+        "592741/1000000",
+        "296371/500000"
+      ],
+      "decimal": "0.592741855594",
+      "hash": "af2bd88697e044610a2cc3d30fe6fdaf81409b479fecc098e75904697b8645cc"
+    },
+    "fourth_total_over_third_recursive": {
+      "bracket_millionth": [
+        "6996249/1000000",
+        "5597/800"
+      ],
+      "decimal": "6.996249748978",
+      "hash": "a2c62ce7a02037a7ff3910dddb932e3b6a97fc38fcc4198f5d73b6a6dd4428ac"
+    }
+  },
+  "numerical_recreation": {
+    "exact_state_regeneration_count": 6,
+    "exact_state_regeneration_sha256": "9bc4a2141040924f2eb96274ad456e82d74adb370c8990b75ebbee84cc743c8a",
+    "recursive_value_count": 31,
+    "recursive_values_sha256": "c59425de5653c68ae3de1e752416e0580510c9f4f143ba18180b20b0d44d4ee5",
+    "terminal_value_count": 73,
+    "terminal_values_sha256": "2ffd618af868420ee1af41c9edb6cab743d2a8f605f2e64ea3d9fcbf3da12090"
+  },
+  "potentials": {
+    "immediate_tail_ge4_weight_4": {
+      "decimals": {
+        "delta34": "4.664689708499",
+        "generation1_retained": "1.332747656385",
+        "generation2_recursive": "0.540816753141",
+        "generation3_recursive": "0.540106510240",
+        "generation4_recursive": "5.204796218739",
+        "margin34": "-8.636610779652",
+        "ratio14": "3.905312602728",
+        "ratio34": "9.636610779652"
+      },
+      "hashes": {
+        "delta34": "111647e4e9372cb7c55d5b0908290b52d654dc6a9bcf368dc4966cd6f40a03b4",
+        "generation1_retained": "0c07ecf90ec48c2cfe871c6fffda3de55eeee0a3f47df4c719991cae8fbaeba8",
+        "generation2_recursive": "a4f69bb95c5cc52ba2bda5e5ab3d4cb048e0b359fad091f46a91828afdbd8b02",
+        "generation3_recursive": "fc4313c41049a997bfc59ed34b38b1fd6449c5597cc920242b093356882a2899",
+        "generation4_recursive": "77b432097d16359afe45c1a8efc4575002da6b8ad168e0e2dd01a492e53d59e8",
+        "margin34": "b906bba851726dd10425a47da1b40d53b4b1dc722d044aa63f87d4f415854207",
+        "ratio14": "19d09fca9a80dc8ae26d310e179bc9e49a77bafac47aafc70a1f90e1a6f7fd5e",
+        "ratio34": "c19f9d7acea812d6f235f8026b35597c835b4b87c6c934c522165780767008d3"
+      },
+      "margin34_bracket_millionth": [
+        "-8636611/1000000",
+        "-863661/100000"
+      ],
+      "ratio34_bracket_millionth": [
+        "963661/100000",
+        "9636611/1000000"
+      ],
+      "strict_fourth_contraction": false
+    },
+    "root_repeat_descendant_weight_2": {
+      "decimals": {
+        "delta34": "0.969693561971",
+        "generation1_retained": "0.831320413049",
+        "generation2_recursive": "0.602952934675",
+        "generation3_recursive": "0.566439976241",
+        "generation4_recursive": "1.536133538213",
+        "margin34": "-1.711908768173",
+        "ratio14": "1.847823671957",
+        "ratio34": "2.711908768173"
+      },
+      "hashes": {
+        "delta34": "6f1c3aede9e643b58953ba8c350533172976aadcee02fe182c27ddfd430ed782",
+        "generation1_retained": "1951c62fa974c03d3a147308d1cee742fc54ae4bc3d022b31d5be9ee7306fd1b",
+        "generation2_recursive": "11145c7be0217c0949a12d851df828fd46fdeecad63060ce95dc6adc1e548f01",
+        "generation3_recursive": "6a9cf1cd77f7e61014c7e5b10534e6edbeaecc92376d760189c39ce1608caf1f",
+        "generation4_recursive": "03cac9573c3d61ac9c8a0c4066cbb8d6ea9ece01606602cacc9604634f9b1ba9",
+        "margin34": "e2abe8db50a9e81195d38ddbc17940771c56fb24c368a31070e800f6ec11c506",
+        "ratio14": "77475ac4a956b1ae8bb82cc7085a569c64295daaf82671098ee48bc32781e596",
+        "ratio34": "5b31d5d9232ac157d2c760bee5ff7b685515198522b51e63db50feb4a388de5b"
+      },
+      "margin34_bracket_millionth": [
+        "-1711909/1000000",
+        "-427977/250000"
+      ],
+      "ratio34_bracket_millionth": [
+        "677977/250000",
+        "2711909/1000000"
+      ],
+      "strict_fourth_contraction": false
+    }
+  },
+  "schema": "fourth_generation_potential_frontier_summary_v1",
+  "source_probe_payload_sha256": "bec9079589ea0649dc943924e064ba0057565c399371eb58686d27cdd74ec1d0",
+  "summary_payload_sha256": "98a77f8545efc2b33c22962d681d66b6aac2b37c18e2b797a06b66856b57cf0b",
+  "terminal_collisions": {
+    "u_p": {
+      "all_count": 7,
+      "recursive_count": 0,
+      "recursive_signatures": [],
+      "recursive_signatures_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "terminal_count": 7,
+      "terminal_signatures": [
+        [
+          122,
+          1584351
+        ],
+        [
+          123,
+          1584352
+        ],
+        [
+          147,
+          1584356
+        ],
+        [
+          152,
+          1584361
+        ],
+        [
+          153,
+          1584362
+        ],
+        [
+          61,
+          1584290
+        ],
+        [
+          62,
+          1584291
+        ]
+      ],
+      "terminal_signatures_sha256": "805e6d77c44f7301ccf4d8b9e77e2a245e04f242b6abe4acca9008a58d11862d"
+    },
+    "u_p_i": {
+      "all_count": 0,
+      "recursive_count": 0,
+      "recursive_signatures": [],
+      "recursive_signatures_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "terminal_count": 0,
+      "terminal_signatures": [],
+      "terminal_signatures_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "u_p_i_source": {
+      "all_count": 0,
+      "recursive_count": 0,
+      "recursive_signatures": [],
+      "recursive_signatures_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "terminal_count": 0,
+      "terminal_signatures": [],
+      "terminal_signatures_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    }
+  }
+}

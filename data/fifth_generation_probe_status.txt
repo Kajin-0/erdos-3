@@ -1,5 +1,0 @@
-probe_exit_status=0
-verifier_exit_status=0
-commit=2a86ef4948e6c07194eab3ac3702e3df9fdf8014
---- probe stderr ---
---- verifier stderr ---

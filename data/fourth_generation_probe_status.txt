@@ -1,5 +1,0 @@
-verifier_exit_status=0
-patch_exit_status=0
-commit=d219e59432ae88a2251b1995aa1014e0e5a299dd
---- verifier stderr ---
---- patch stderr ---

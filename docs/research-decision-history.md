@@ -333,6 +333,20 @@ In an affine state, `(u,p)` determines reference root `r=p-u` and therefore iden
 
 Immediate provenance may distinguish histories, but it cannot manufacture another copy of root-pair capacity. Pair-resource accounting should therefore merge repeated `(u,p)` tokens and track the excess as pair-reuse mass.
 
+### Exact fifth-frontier pair-energy row
+
+The pair-energy potential was tested on the first previously failing retained transition. Every fourth and fifth recursive state is affine, every root and pair has multiplicity one, and
+
+```math
+H(F_5)+J(R_5^{\rm rec})
+\le
+J(R_4^{\rm rec})
+```
+
+with ratio `0.578188259610...` and surplus `1157.391621834512...`.
+
+This is the first exact retained-child Bellman row with a state-independent symbolic potential and no fitted coefficient. The fourth-to-fifth expansion is closed. The unresolved frontier moves to earlier generations, where root and pair reuse may still occur and affine coverage has not yet been certified.
+
 **Decisions:**
 
 - current-generation multiplicity is not persistent reserve;
@@ -343,6 +357,9 @@ Immediate provenance may distinguish histories, but it cannot manufacture anothe
 - affine pivot forests admit an exact pair-energy Bellman potential, so root-pair reuse is controlled once affine coordinates and root-disjoint children are established;
 - the new bottleneck is the entering pair energy and an affine-entry theorem, not another local reuse coefficient;
 - `(u,p)` is the capacity-level token in the affine regime; `(u,p,i)` is history metadata unless a separate resource is proved;
+- the fourth-to-fifth retained expansion is closed by pair energy and is no longer an open obstruction;
+- pair energy, not scalar translation reserve, is the principal cumulative affine potential;
+- generation six is unnecessary until earlier-generation affine entry and pair reuse are resolved;
 - generation six is blocked until a state-independent transfer lemma is proposed;
 - a new feature is admissible only with a transition recurrence, bounded-reuse interpretation, and telescoping role.
 

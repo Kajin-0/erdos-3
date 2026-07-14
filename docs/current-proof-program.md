@@ -132,6 +132,44 @@ Primary reference: `docs/affine-root-pair-token-ledger.md`.
 
 ---
 
+## First exact pair-energy Bellman row
+
+The adversarial fourth-to-fifth retained transition is now closed by a state-independent symbolic potential.
+
+Both recursive frontiers are fully affine and have no root or pair duplication:
+
+```text
+R4: 12 states, 1717 roots, 370505 distinct pairs
+R5: 13 states, 1015 roots, 106381 distinct pairs
+```
+
+The complete fifth output satisfies
+
+```math
+\boxed{
+H(F_5)+J(R_5^{\rm rec})
+\le
+J(R_4^{\rm rec}).
+}
+```
+
+Exact values:
+
+```text
+H(F5)+J(R5_rec) = 1586.466623468978...
+J(R4_rec)       = 2743.858245303490...
+surplus          = 1157.391621834512...
+ratio            = 0.578188259610...
+```
+
+This is a legitimate retained-child Bellman row with no fitted coefficient. It explains why raw recursive harmonic mass may expand while cumulative affine capacity contracts strongly.
+
+The active frontier moves earlier: determine where affine coordinates and pair uniqueness first emerge, and control occurrence-versus-union pair energy before generation four.
+
+Primary reference: `docs/fifth-generation-pair-energy-bellman-row.md`.
+
+---
+
 ## 1. Foundation and recorded exact path
 
 For
@@ -465,13 +503,14 @@ LP correlation alone is insufficient.
 
 ## 9. Approved next targets
 
-1. Certify the affine root-coordinate hypotheses on the existing retained frontier: one common reference root per state and exact pivot update `p-r -> p-a`.
-2. Compute occurrence and first-appearance root-pair mass by generation, including exact `(u,p)` collision/reuse ledgers.
-3. Test the exact translation reserve `A(S)=sum_{u>min(S)}(1/(u-min(S))-1/u)` on the existing four transitions; record either a coefficient theorem or the smallest exact no-go subsystem.
-4. Compute entering root-pair energy `J(P)` by generation and identify which earlier production, terminal, completion, rectangle, or exclusion terms can pay it.
-5. Prove an affine-entry or affine-purification theorem for recursively continuing states, separating non-affine middle-fiber structure as terminal or obstruction output.
-6. Refine the 673 dropped roots with raw descendants by provenance, distinguishing valid retained coverage from numerical coverage by unrelated lineages.
-7. Test any proposed lemma on the existing four transitions before adding another generation.
+1. Export affine-state coverage and occurrence/union pair-energy profiles for `R_1,R_2,R_3`.
+2. Test the exact Bellman rows `H(F_{g+1})+J_union(R_{g+1})<=J_union(R_g)+reuse_charge_g` for `g=1,2,3`.
+3. Compute exact first-appearance and reused `(u,p)` mass by transition; immediate provenance remains metadata, not additional pair credit.
+4. Prove an affine-entry or affine-purification theorem for recursively continuing states, separating non-affine middle-fiber structure as terminal or obstruction output.
+5. Identify a structural payment for entering pair energy from parent production, terminalization, completion, rectangle support, or cheap-extension exclusion.
+6. Test the exact translation reserve only as a diagnostic comparison; pair energy is now the principal candidate potential.
+7. Refine the 673 dropped roots with raw descendants by provenance, distinguishing valid retained coverage from numerical coverage by unrelated lineages.
+8. Do not propagate generation six.
 
 Generation six is blocked until a specific state-independent transfer lemma exists.
 

@@ -100,9 +100,13 @@ Statuses marked **exact finite** are computational statements for recorded objec
 | CL-081 | At the certified fourth-to-fifth baseline transition, all `1015` recursively surviving roots are carried by minimum-translation backbone occurrences and none by middle fibers. The twelve parent minima are exactly the twelve roots with no raw descendant output. Surviving shell drops are `1,2,5,7,9,10`; classes `77,68,24` carry `87.7945%`–`87.7946%` of gain. Aggregate full translation reserve is `9.928706884742...`, retained gain is `1.816777911848...`, and minimum-anchor release is only `0.364729899662...`. | Exact finite backbone-anchor transfer theorem; fixed policy and retention. |
 | CL-082 | For an affine state `S_r(P)={p-r:p in P}`, pivot `a=min(P)`, and pairwise root-disjoint children `S_a(Q_i)`, the root-pair energy `J(P)=sum_{x<y in P}1/(y-x)` satisfies `sum_i(H(S_a(Q_i))+J(Q_i))<=J(P)`. Hence every root pair pays at most once in an affine pivot forest, and terminal harmonic mass plus frontier pair energy is bounded by the entering pair energy. | Symbolic treewise packing theorem; no AP hypothesis. Initial pair-energy control and affine-entry theorem remain open. |
 | CL-083 | In an affine root forest, `(u,p)` is bijective with the root pair `(p-u,p)` and has weight `1/u=1/(p-(p-u))`. The global first-appearance mass of coarse point tokens is therefore at most the entering pair energy `J(P_0)`. A repeated `(u,p)` is genuine reuse of one pair resource; adding immediate provenance distinguishes histories but cannot create additional pair capacity. | Symbolic affine first-appearance and pair-reuse theorem. Affine coverage and entering `J(P_0)` payment remain open. |
+| CL-084 | The certified `R_4 -> F_5` retained transition has 12/12 affine fourth recursive states and 13/13 affine fifth recursive states, with root and pair multiplicity exactly one. Exact pair energy satisfies `H(F_5)+J(R_5^rec)<=J(R_4^rec)`: left `1586.466623468978...`, right `2743.858245303490...`, surplus `1157.391621834512...`, ratio `0.578188259610...`. | Exact finite retained-child Bellman theorem; fixed policy and quotient, no generation six. |
 
 Primary latest references:
 
+- `docs/fifth-generation-pair-energy-bellman-row.md`;
+- `src/verify_pair_energy_frontier.py`;
+- `data/pair_energy_frontier_certificate_2026-07-14.txt`;
 - `docs/affine-root-pair-token-ledger.md`;
 - `docs/affine-pivot-pair-energy.md`;
 - `src/probe_affine_root_pivot.py`;
@@ -177,6 +181,7 @@ Do not use without materially new hypotheses:
 43. scalar minimum-anchor mass `1/min(S)` as complete payment for all enabled backbone intervals.
 44. root-pair energy `J(P)` as automatically bounded by current harmonic mass or by four-AP-freeness alone.
 45. immediate provenance as a second copy of harmonic pair capacity when the coarse affine token `(u,p)` repeats.
+46. the fourth-to-fifth raw harmonic expansion as an obstruction after root-pair energy is included.
 
 ---
 
@@ -223,4 +228,4 @@ H_g^{\mathrm{rec}}
 
 A new coordinate is admissible only if it has a transfer identity or one-sided recurrence, a bounded-reuse interpretation, and a telescoping role. Finite LP correlation is diagnostic only.
 
-The source and shell classification is complete on the baseline transition: all `1015` survivors are backbone translations. The affine pivot pair-energy theorem now gives an exact no-reuse potential whenever recursive states have one common root reference and child root sets are disjoint. Generation six remains blocked. The next concrete targets are to certify the affine hypotheses on the retained frontier, control the entering pair energy `J(P)`, and determine what terminal or arithmetic credit is created before or when non-affine structure enters that regime.
+The fourth-to-fifth frontier is now closed exactly: every recursive state on both sides is affine, root and pair multiplicities are one, and `H(F_5)+J(R_5^rec)` is only `57.8189%` of `J(R_4^rec)`. Generation six remains blocked and unnecessary. The next concrete targets are the earlier transitions: certify affine coverage, measure occurrence-versus-union pair energy, and control repeated `(u,p)` pair tokens before the unique-root regime begins.

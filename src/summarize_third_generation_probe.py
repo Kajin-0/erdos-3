@@ -7,6 +7,9 @@ from pathlib import Path
 import json
 import sys
 
+if hasattr(sys, "set_int_max_str_digits"):
+    sys.set_int_max_str_digits(0)
+
 
 def parse_fraction(text: str) -> Fraction:
     numerator, denominator = text.split("/", 1)

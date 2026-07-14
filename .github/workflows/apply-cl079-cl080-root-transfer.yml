@@ -1,0 +1,49 @@
+name: Apply CL-079 and CL-080
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - src/patch_cl079_cl080_root_transfer.py
+      - .github/workflows/apply-cl079-cl080-root-transfer.yml
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Apply idempotent patch
+        run: python3 src/patch_cl079_cl080_root_transfer.py
+
+      - name: Commit and push ledger
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/certainty-ledger.md
+          if git diff --cached --quiet; then
+            echo "No ledger change"
+            exit 0
+          fi
+          git commit -m "Record policy sensitivity and root transfer in certainty ledger [skip ci]"
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git rebase origin/main
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            sleep $((attempt * 2))
+          done
+          echo "error: failed to push after rebasing and three attempts" >&2
+          exit 1

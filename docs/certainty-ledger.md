@@ -94,6 +94,7 @@ Statuses marked **exact finite** are computational statements for recorded objec
 | CL-075 | The 43 second-generation terminal `(u,p)` tokens have no collision with first-generation raw or retained tokens, but `(60,1354490)` recurs as a third-generation terminal sink. Both occurrences are step-5 middle fibers; immediate provenance differs (`2810` versus `440`) and separates the collision. Numerical identity is much coarser: 28 labels and seven complete terminal numerical states recur. | Exact finite cross-generation token-collision and signature-refinement theorem. |
 | CL-076 | With current harmonic mass coefficient fixed to one, an exact 11-feature screen finds four feasible standalone nonnegative corrections. In particular, `Phi_rep=H+2R`, where `R` is descendant harmonic mass on points whose root provenance repeats within the retained generation, contracts by `27.4704%`-`27.4705%` and then `6.0556%`-`6.0557%`. Independently, `Phi_tail=H+4T`, where `T` is descendant mass with immediate-provenance depth drop at least four, contracts on both transitions and has second-transition margin `0.1313%`-`0.1314%`. | Exact finite three-generation retained-potential theorem. |
 | CL-077 | Propagating the 14 third-generation recursive states and reapplying the same quotient produces a unique point-disjoint fourth family with 23 states and 1794 points, split into 11 terminal states with 77 points and 12 recursive states with 1717 points. `H4_rec/H3_rec` is `2.849279`-`2.849280`. The CL-076 candidates fail: `H+2R` expands by `2.711908`-`2.711909` because repeated-root reserve vanishes, and `H+4T` expands by `9.636610`-`9.636611` because the immediate depth-four tail regenerates. Seven `(u,p)` terminal collisions occur, but no `(u,p,i)` collision is recorded through generation four. | Exact finite fourth-generation potential no-go and refined-token survival theorem. |
+| CL-078 | Propagating the 12 fourth-generation recursive states and reapplying the same quotient produces a unique point-disjoint fifth family with 21 states and 1032 points, split into 8 terminal states with 17 points and 13 recursive states with 1015 points. `H5_rec/H4_rec` is `1.329813`-`1.329814`. Repeated-root descendant mass is exactly zero at both levels, so no finite coefficient in `H+kR` can repair this transition. Two `(u,p)` terminal collisions occur, but no `(u,p,i)` collision is recorded through generation five. | Exact finite fifth-generation repeated-root no-go and refined-token survival theorem. |
 
 Primary latest references:
 
@@ -152,6 +153,7 @@ Do not use without materially new hypotheses:
 34. immediate provenance as globally sufficient after one finite collision test;
 35. `H+2R` or `H+4T` as a universal Bellman potential after two finite transitions;
 36. `H+2R` or `H+4T` as an iterating potential after the fourth-generation failure;
+42. `H+kR` as an iterating potential after the fifth-generation zero-reserve failure;
 37. maximum-harmonic local retention as globally optimal;
 38. policy-LP feasibility as branching Bellman-LP feasibility;
 39. the tested policy family as globally optimal;

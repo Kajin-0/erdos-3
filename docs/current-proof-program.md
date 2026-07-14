@@ -317,24 +317,26 @@ The whole-tree target remains
 The current frontier supplies:
 
 ```text
-legitimate point-disjoint retained children through generation four
+legitimate point-disjoint retained children through generation five
 exact terminal/recursive partitions
-three alternating recursive-mass transitions
+four recorded recursive-mass transitions
 an exact first-appearance terminal ledger
-an (u,p) token failure and an (u,p,i) finite repair
+an (u,p) token failure and an (u,p,i) finite repair through generation five
 two three-generation reserve witnesses
-a fourth-generation exact failure of both witnesses.
+a fourth-generation failure of both small witnesses
+and a fifth-generation no-go for every finite H+kR potential.
 ```
 
-The next mathematical object is an exact rational feature LP over all three recursive transitions:
+The next mathematical object is an exact rational feature LP over all four recursive transitions:
 
 ```text
 generation 1 -> generation 2 recursive
 generation 2 recursive -> generation 3 recursive
-generation 3 recursive -> generation 4 recursive.
+generation 3 recursive -> generation 4 recursive
+generation 4 recursive -> generation 5 recursive.
 ```
 
-The LP must test whether any nonnegative combination of the existing feature family makes every transition nonexpanding. If infeasible, the smallest exact Farkas/dual obstruction becomes the next theorem. New coordinates should be introduced only after that exhaustion.
+The LP must test whether any nonnegative combination of the existing eleven-feature family makes every transition nonexpanding. Its exact outcome is still pending. If infeasible, the smallest exact Farkas/dual obstruction becomes the next theorem. New coordinates should be introduced only after that exhaustion.
 
 Likely missing mechanisms are cumulative rather than within-generation:
 
@@ -350,14 +352,12 @@ multi-transition amortization rather than one-step monotonicity.
 
 ## 8. Approved next targets
 
-1. Export the three recursive transitions into one exact rational feature matrix.
-2. Solve the nonnegative feature-feasibility LP with current harmonic coefficient fixed to one.
-3. Extract a sparse rational witness or the smallest exact dual obstruction.
-4. Test refined terminal token `(u,p,i)` in the same first-appearance accounting schema.
-5. Add cumulative provenance or path-capacity coordinates only if the current LP is infeasible.
-6. Test policy sensitivity on the smallest retained families before propagating generation five.
-7. Attach completion, rectangle, or cheap-extension exclusion credit to reserve release.
-8. Prove a branching terminal-output Carleson bound or isolate the first unbounded refined-token reuse mechanism.
+1. Complete the exact eleven-feature LP over all four recorded recursive transitions.
+2. Extract a sparse rational witness or the smallest exact Farkas/dual obstruction.
+3. Add cumulative provenance or ancestor-path capacity only if the current LP is infeasible.
+4. Test policy sensitivity on the smallest retained families before propagating generation six.
+5. Attach completion, rectangle, or cheap-extension exclusion credit to reserve release.
+6. Prove a branching terminal-output Carleson bound or isolate the first unbounded refined-token reuse mechanism.
 
 ---
 
@@ -399,7 +399,7 @@ Established extended frontier:
 bash src/run_verify_transport_reserve.sh
 ```
 
-Terminal identities and retained generations through the fourth frontier:
+Terminal identities and retained generations through the fifth frontier:
 
 ```bash
 bash src/run_verify_terminal_sink_ledger.sh

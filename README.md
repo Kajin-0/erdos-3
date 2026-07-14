@@ -29,6 +29,7 @@ The repository has established:
 14. an exact backbone-only survivor classification and minimum-anchor transfer decomposition.
 15. an exact pair-energy Bellman row closing the recorded fourth-to-fifth retained expansion.
 16. an exact pair-resource partition proving containment and zero repeated payment at the fifth frontier.
+17. a symbolic affine-closure theorem and universal union-valued pair-resource containment for every coordinated deletion output.
 
 The strongest state-specific closure is
 
@@ -54,7 +55,7 @@ At the first failing transition all `1015` recursive survivors are minimum-trans
 \frac1{u-m}-\frac1u.
 ```
 
-The decisive missing theorem is now a cumulative provenance-preserving transfer law controlling reuse of these anchor-survivor intervals across the whole retained tree. The intended inequality is schematically
+Affine closure and union-valued pair containment now control reuse exactly across the whole retained tree. The decisive missing theorem is an economical activation or multiscale exposure bound for the pair tokens actually used. The intended inequality is schematically
 
 ```math
 H_{g+1}^{\rm rec}
@@ -85,6 +86,7 @@ A valid theorem must still handle policy dependence, terminal-recursive interact
 - [`docs/backbone-anchor-root-transfer.md`](docs/backbone-anchor-root-transfer.md) — exact backbone-only survivor and minimum-anchor transfer theorem.
 - [`docs/fifth-generation-pair-energy-bellman-row.md`](docs/fifth-generation-pair-energy-bellman-row.md) — exact affine pair-energy Bellman row at the first failing retained transition.
 - [`docs/fifth-generation-pair-resource-partition.md`](docs/fifth-generation-pair-resource-partition.md) — explicit fifth-child to fourth-pair ownership and unused-capacity theorem.
+- [`docs/affine-output-closure-and-pair-containment.md`](docs/affine-output-closure-and-pair-containment.md) — universal affine descendant and pair-resource containment theorem.
 - [`docs/branching-reserve-lp.md`](docs/branching-reserve-lp.md) — exact retained-child LP contract and current packing requirements.
 
 ## Main completed theorem families

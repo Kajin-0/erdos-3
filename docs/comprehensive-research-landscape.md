@@ -10,7 +10,7 @@ The ambient problem is:
 
 The full problem remains open. The repository studies the four-term case: whether every four-term-progression-free subset of the positive integers has convergent reciprocal sum.
 
-This overview is **repository-comprehensive**, not literature-comprehensive. It records the mathematical territory explored here through claim `CL-081`: proved positive results, exact finite and infinite certificates, failed proof principles, model boundaries, and the current roadmap. External novelty and priority still require a separate literature audit before publication.
+This overview is **repository-comprehensive**, not literature-comprehensive. It records the mathematical territory explored here through claim `CL-086`: proved positive results, exact finite and infinite certificates, failed proof principles, model boundaries, and the current roadmap. External novelty and priority still require a separate literature audit before publication.
 
 Authoritative sources remain:
 
@@ -110,7 +110,7 @@ The current objective is a policy-aware retained-child inequality of the schemat
 \mathrm{controlled\ error}.
 ```
 
-The decisive missing object is now a **state-independent cumulative root-lineage transfer law** controlling how provenance-labeled anchor-survivor intervals are created, reused, terminalized, discarded, or converted into arithmetic obstruction. The finite quotient supplies legitimate test rows but not the whole-tree theorem.
+Affine closure and universal pair-resource containment now provide a state-independent whole-tree quotient at the level of distinct root pairs. Creation, reuse, terminalization, and recursive continuation are exact pair-token operations. The decisive missing object is an **economical pair-activation theorem** controlling only the pair tokens actually exposed, rather than prepaying the full latent pair energy.
 
 ---
 

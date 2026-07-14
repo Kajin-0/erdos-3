@@ -102,9 +102,11 @@ Statuses marked **exact finite** are computational statements for recorded objec
 | CL-083 | In an affine root forest, `(u,p)` is bijective with the root pair `(p-u,p)` and has weight `1/u=1/(p-(p-u))`. The global first-appearance mass of coarse point tokens is therefore at most the entering pair energy `J(P_0)`. A repeated `(u,p)` is genuine reuse of one pair resource; adding immediate provenance distinguishes histories but cannot create additional pair capacity. | Symbolic affine first-appearance and pair-reuse theorem. Affine coverage and entering `J(P_0)` payment remain open. |
 | CL-084 | The certified `R_4 -> F_5` retained transition has 12/12 affine fourth recursive states and 13/13 affine fifth recursive states, with root and pair multiplicity exactly one. Exact pair energy satisfies `H(F_5)+J(R_5^rec)<=J(R_4^rec)`: left `1586.466623468978...`, right `2743.858245303490...`, surplus `1157.391621834512...`, ratio `0.578188259610...`. | Exact finite retained-child Bellman theorem; fixed policy and quotient, no generation six. |
 | CL-085 | The complete fifth retained current-plus-latent pair resource set is an exact multiplicity-one subset of the fourth latent root-pair set. Counts: 372222 fourth resources, 107413 used fifth resources, 264809 unused; all 17 terminal current pairs, 1015 recursive current pairs, and 106381 recursive latent pairs come from fourth latent pairs, with zero child pair reuse. Exact resource identity: used `1586.466623468978...` plus unused `1158.927755372724...` equals parent `H(R_4)+J(R_4)=2745.394378841703...`. | Exact finite pair-resource containment and partition theorem; fixed policy and quotient. |
+| CL-086 | Coordinated deletion preserves affine root coordinates: terminal residuals remain `S_r(P_R)`, backbone shells are `S_a(Q)`, and a step-`q` middle fiber is `S_{t_0}(T_q\{t_0})`, where `t_0` is the sponsor root of the minimum center. Consequently every child current/latent pair is a parent current or latent pair, and union-valued pair capacity is nonincreasing for arbitrary simultaneous output and retention. Occurrence expansion equals exact repeated-pair mass. | Symbolic whole-family affine closure and pair-resource containment theorem. Entering/economically activated pair energy remains open. |
 
 Primary latest references:
 
+- `docs/affine-output-closure-and-pair-containment.md`;
 - `docs/fifth-generation-pair-resource-partition.md`;
 - `src/verify_pair_resource_ownership.py`;
 - `data/pair_resource_ownership_certificate_2026-07-14.txt`;
@@ -186,6 +188,7 @@ Do not use without materially new hypotheses:
 44. root-pair energy `J(P)` as automatically bounded by current harmonic mass or by four-AP-freeness alone.
 45. immediate provenance as a second copy of harmonic pair capacity when the coarse affine token `(u,p)` repeats.
 46. the fourth-to-fifth raw harmonic expansion as an obstruction after root-pair energy is included.
+47. non-affine middle-fiber structure as an unavoidable feature of the coordinated deletion descendants under the recorded root-provenance convention.
 
 ---
 

@@ -353,6 +353,14 @@ The fifth pair-energy row was strengthened from a numerical inequality to an exa
 
 The recorded transition therefore satisfies an exact set-valued conservation identity, not only a scalar bound. The open problem moves entirely to the earlier retained prefix where affine coverage and pair multiplicity have not yet been classified.
 
+### Universal affine closure and pair containment
+
+The finite affine observations were generalized symbolically. Terminal residuals, backbone shells, and middle-fiber shells of every affine parent are affine. In particular, a fixed-step middle fiber has values `t-t_0` in sponsor-root coordinates.
+
+Every child current or latent pair is therefore already a parent pair resource. Union-valued pair capacity is nonincreasing for arbitrary simultaneous output and retained subfamilies, while occurrence-valued excess is exactly repeated pair-token mass.
+
+This resolves the long-standing overlap/provenance bookkeeping bottleneck at the level of distinct resources. The active analytical bottleneck is now economical pair activation or a summable bound on the activated pair universe, not another retention rule.
+
 **Decisions:**
 
 - current-generation multiplicity is not persistent reserve;
@@ -367,6 +375,9 @@ The recorded transition therefore satisfies an exact set-valued conservation ide
 - pair energy, not scalar translation reserve, is the principal cumulative affine potential;
 - generation six is unnecessary until earlier-generation affine entry and pair reuse are resolved;
 - the fifth-frontier pair row has exact token ownership and no repeated payment; future work should reuse this resource schema rather than fit scalar surrogates;
+- affine entry is automatic from the initial state under terminal, backbone, and middle-fiber output;
+- union-valued pair containment resolves duplicate, containment, partial-overlap, and cross-generation payment semantics;
+- the active theorem is economical pair activation, not another retained-child quotient or affine-purification lemma;
 - generation six is blocked until a state-independent transfer lemma is proposed;
 - a new feature is admissible only with a transition recurrence, bounded-reuse interpretation, and telescoping role.
 

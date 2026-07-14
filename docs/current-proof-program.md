@@ -1,10 +1,10 @@
-# Current proof program: root-lineage reserve transfer
+# Current proof program: affine pair-resource activation
 
 ## Status
 
 This is the authoritative overview for the four-term case of Erdős Problem #3. The full reciprocal-sum problem remains open. Durable claims are tracked in `docs/certainty-ledger.md`.
 
-The project is no longer searching for another finite-depth fitted feature. The active theorem target is a cumulative ancestor-path capacity that explains where harmonic reserve goes when provenance multiplicity disappears and unique lineages continue contracting.
+The project is no longer searching for another finite-depth fitted feature or a new overlap quotient. Affine closure and pair-token containment now give exact whole-tree no-double-payment semantics. The active theorem target is an economical pair-activation or multiscale exposure bound that avoids paying the full latent root-pair energy of the initial dyadic block.
 
 ## Latest exact refinement: backbone-anchor transfer
 
@@ -213,6 +213,70 @@ total  = 2745.394378841703...
 This closes containment, terminal-recursive interaction, and repeated-payment semantics on the recorded transition.
 
 Primary reference: `docs/fifth-generation-pair-resource-partition.md`.
+
+---
+
+## Universal affine closure and pair-resource containment
+
+Affine structure is not a late-generation accident. It is preserved exactly by every output type in the coordinated deletion construction.
+
+For an affine parent
+
+```math
+S_r(P)=\{p-r:p\in P\},
+```
+
+one has:
+
+```text
+terminal residual: S_r(P_R)
+backbone shell:    S_a(Q), a=min(P)
+middle-fiber shell:S_{t_0}(Q),
+```
+
+where `t_0` is the sponsor root attached to the minimum selected center for that step.
+
+For the middle fiber, if centers are `c_j=p_j-r` and sponsors have roots `t_j=p_j+epsilon(q)q`, then
+
+```math
+c_j-c_0
+=p_j-p_0
+=t_j-t_0.
+```
+
+Thus every descendant remains affine under the repository provenance convention.
+
+Define the parent resource universe
+
+```math
+\mathcal U_r(P)
+=
+\{(r,p):p\in P\}
+\cup
+\binom P2.
+```
+
+Every terminal current pair, recursive current pair, and recursive latent pair emitted by the parent belongs to `\mathcal U_r(P)`. Therefore for any simultaneous retained family,
+
+```math
+\boxed{
+\mathcal U_\cup(\mathrm{Child}(\mathcal F))
+\subseteq
+\mathcal U_\cup(\mathcal F).
+}
+```
+
+The global overlap and repeated-payment problem is therefore solved at the level of distinct pair tokens. Occurrence-valued expansion is exactly
+
+```math
+R_{\rm pair}
+=
+W_{\rm occ}-W_\cup.
+```
+
+The remaining theorem is no longer a retention quotient or cross-generation reuse theorem. It is an economical **pair-activation theorem**: avoid prepaying the full latent pair energy, or charge activated pair mass to summable production, terminal, or arithmetic obstruction terms.
+
+Primary reference: `docs/affine-output-closure-and-pair-containment.md`.
 
 ---
 
@@ -549,13 +613,13 @@ LP correlation alone is insufficient.
 
 ## 9. Approved next targets
 
-1. Export affine-state coverage and occurrence/union pair-energy profiles for `R_1,R_2,R_3`.
-2. Test the exact Bellman rows `H(F_{g+1})+J_union(R_{g+1})<=J_union(R_g)+reuse_charge_g` for `g=1,2,3`.
-3. Compute exact first-appearance and reused `(u,p)` mass by transition; immediate provenance remains metadata, not additional pair credit.
-4. Prove an affine-entry or affine-purification theorem for recursively continuing states, separating non-affine middle-fiber structure as terminal or obstruction output.
-5. Identify a structural payment for entering pair energy from parent production, terminalization, completion, rectangle support, or cheap-extension exclusion.
-6. Test the exact translation reserve only as a diagnostic comparison; pair energy is now the principal candidate potential.
-7. Refine the 673 dropped roots with raw descendants by provenance, distinguishing valid retained coverage from numerical coverage by unrelated lineages.
+1. Quantify occurrence versus union pair resources on `R_1,R_2,R_3` and isolate exact repeated-pair mass.
+2. Replace full latent `J(P)` by an activated-pair ledger that opens a token only when a pivot, terminal point, or recursive child actually uses it.
+3. Prove a multiscale bound for activated pair mass using four-AP-freeness, fixed-step run structure, coordinated deletion, or stopping-time sparsity.
+4. Relate activated pair mass to the existing one-generation harmonic production and summable `r_3(N)/N` error.
+5. Determine whether completion, rectangle support, and cheap-extension exclusion pay for dense clusters of short root pairs.
+6. Compute exact first-appearance and reused `(u,p)` mass by transition; immediate provenance remains metadata, not additional pair credit.
+7. Use earlier-generation finite diagnostics only to discover the activation law or its smallest obstruction.
 8. Do not propagate generation six.
 
 Generation six is blocked until a specific state-independent transfer lemma exists.

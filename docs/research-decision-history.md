@@ -249,7 +249,47 @@ Hence
 
 ---
 
-## 10. Permanent stop list
+## 10. Retained propagation and root-lineage transfer phase
+
+The retained quotient was propagated through five recorded levels. Static current-generation features produced exact finite witnesses, including `H+74R` through generation four, but generation five has
+
+```math
+R_4=R_5=0
+```
+
+while recursive harmonic mass expands by a factor between `1.329813` and `1.329814`. No finite coefficient in `H+kR` repairs that transition.
+
+The first failing transition was then tested under all-lexicographic deletion, all-reverse deletion, and each single-parent lexicographic-to-reverse flip. All fourteen tested policies expand under every maximum-harmonic retention tie. The best tested policy, `reverse_parent_82`, lowers the ratio to `1.197375982982...` but does not contract.
+
+At the baseline transition all root provenance is unique. The exact lineage identity is
+
+```math
+H_5^{\mathrm{rec}}-H_4^{\mathrm{rec}}
+=G_{4\to5}-L_{4\to5},
+```
+
+with
+
+```text
+surviving-lineage scale gain = 1.816777911848...
+exiting parent release       = 1.310139720502...
+net recursive increase       = 0.506638191346...
+```
+
+Of `1717` fourth recursive roots, `1015` survive and `702` exit; `17` terminalize and `685` disappear from the retained family. No root splits between recursive and terminal output.
+
+**Decisions:**
+
+- current-generation multiplicity is not persistent reserve;
+- finite feature-LP witnesses are diagnostics, not theorem candidates without a transfer law;
+- nearby deletion-policy changes do not remove the first failing expansion, although policy remains quantitatively important;
+- the missing resource is cumulative ancestor-path scale capacity plus terminal/drop/obstruction release;
+- generation six is blocked until a state-independent transfer lemma is proposed;
+- a new feature is admissible only with a transition recurrence, bounded-reuse interpretation, and telescoping role.
+
+---
+
+## 11. Permanent stop list
 
 Do not restart these routes without explicitly identifying which obstruction is avoided:
 
@@ -278,43 +318,41 @@ Do not restart these routes without explicitly identifying which obstruction is 
 23. positive linear SCC contraction with factor at most two at `S_7`;
 24. further `S_10` prefix certification;
 25. the rejected depth-ten anchor reduction.
+28. generation-six propagation without a predeclared conceptual test.
+27. another feature-fit/one-more-generation loop without a transfer lemma;
+26. current-generation multiplicity as persistent reserve;
 
 ---
 
-## 11. Active closing target
+## 12. Active closing target
 
-The current bottleneck is a cyclic-component retention and whole-tree packing theorem:
+The active target is a cumulative root-lineage reserve-transfer theorem:
 
 ```math
-\Delta(S)
-+
-\sum_{S'\in\mathrm{Child}(S)}
-\left(
-\mathrm{Pack}(S')+
-\Phi_{\rm obs}(S')
-\right)
+H_{g+1}^{\mathrm{rec}}
++A_{g+1}
++T_{g+1}^{\mathrm{first}}
 \le
-\mathrm{Pack}(S)+
-\Phi_{\rm obs}(S)+
-\mathrm{controlled\ error}.
+H_g^{\mathrm{rec}}
++A_g
++\Phi_{\mathrm{obs},g}
++\varepsilon_g.
 ```
 
-The next finite experiment must quantify how the high-growth `S_7` cyclic component exports mass into:
+Here `A_g` must be a state-independent ancestor-path capacity, `T^{first}` is newly terminal first-appearance credit, and `Phi_obs` records completion, rectangle, or cheap-extension exclusion created when capacity is released.
 
-1. nonterminal recursive fibers;
-2. affine obstruction classes;
-3. completion support;
-4. rectangle support;
-5. outgoing condensation components;
-6. provenance capacity consumed across generations.
+The next exact work is to:
 
-A candidate retention rule must preserve duplicate, containment, partial-overlap, terminal-recursive, and SCC-internal provenance and emit the smallest exact failing transition.
+1. classify survivor scale gain by parent state, source type, shell, and immediate provenance;
+2. attach the `17` terminalized roots injectively to first-appearance `(u,p,i)` tokens;
+3. determine what completion, rectangle, or future-extension exclusion is created by the `685` dropped lineages;
+4. formulate a transfer lemma before propagating another generation.
 
-No current theorem closes this gap.
+No current theorem closes this gap. Generation six and further feature fitting are explicitly deferred.
 
 ---
 
-## 12. Documentation protocol
+## 13. Documentation protocol
 
 Every substantive theorem, counterexample, or finite certificate should update:
 

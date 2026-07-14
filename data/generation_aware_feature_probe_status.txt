@@ -1,7 +1,9 @@
 probe_exit_status=0
 summary_exit_status=0
 candidate_exit_status=0
-commit=7ba80e4cff5d94d9ee9463bebf8a20bfcdb7bb59
+verifier_exit_status=0
+commit=38fc6197b0af174cf57fd236610753374686a639
 --- probe stderr ---
 --- summary stderr ---
 --- candidate stderr ---
+--- verifier stderr ---

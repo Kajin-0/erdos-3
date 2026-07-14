@@ -1,0 +1,61 @@
+# Inactive reference template. Do not copy this into .github/workflows unless the
+# documentation operation is genuinely recurring and has one exclusive owner.
+name: Canonical documentation patch example
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: probe-result-writers-main
+  cancel-in-progress: false
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Run patch atomically and capture status
+        shell: bash
+        run: |
+          bash src/run_atomic_documentation_patch.sh \
+            canonical_documentation_patch_v1 \
+            data/canonical_documentation_patch_status.txt \
+            "${RUNNER_TEMP}/canonical_documentation_patch.err" \
+            src/patch_documentation.py \
+            README.md \
+            docs/certainty-ledger.md \
+            docs/current-proof-program.md \
+            docs/research-decision-history.md
+
+      - name: Upload diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: canonical-documentation-patch-${{ github.run_id }}-${{ github.run_attempt }}
+          retention-days: 30
+          path: |
+            data/canonical_documentation_patch_status.txt
+            ${{ runner.temp }}/canonical_documentation_patch.err
+
+      - name: Preserve status and validated documentation
+        if: always()
+        shell: bash
+        run: |
+          bash src/commit_probe_outputs.sh \
+            "Record canonical documentation patch [skip ci]" \
+            data/canonical_documentation_patch_status.txt \
+            README.md \
+            docs/certainty-ledger.md \
+            docs/current-proof-program.md \
+            docs/research-decision-history.md
+
+      - name: Report original patch failure
+        if: always()
+        shell: bash
+        run: bash src/assert_probe_status.sh data/canonical_documentation_patch_status.txt

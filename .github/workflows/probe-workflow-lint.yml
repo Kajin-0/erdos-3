@@ -6,18 +6,26 @@ on:
       - main
     paths:
       - .github/workflows/**
+      - AGENTS.md
+      - docs/github-actions-workflow-contract.md
+      - docs/examples/canonical-documentation-patch-workflow.yml
       - src/lint_probe_workflows.py
       - src/stage_optional_probe_outputs.sh
       - src/run_atomic_python_probe.sh
+      - src/run_atomic_documentation_patch.sh
       - src/assert_probe_status.sh
       - src/commit_probe_outputs.sh
       - src/test_probe_workflow_helpers.sh
   pull_request:
     paths:
       - .github/workflows/**
+      - AGENTS.md
+      - docs/github-actions-workflow-contract.md
+      - docs/examples/canonical-documentation-patch-workflow.yml
       - src/lint_probe_workflows.py
       - src/stage_optional_probe_outputs.sh
       - src/run_atomic_python_probe.sh
+      - src/run_atomic_documentation_patch.sh
       - src/assert_probe_status.sh
       - src/commit_probe_outputs.sh
       - src/test_probe_workflow_helpers.sh
@@ -41,12 +49,12 @@ jobs:
         shell: bash
         run: |
           set +e
-          python3 src/lint_probe_workflows.py > /tmp/probe_workflow_lint.out 2>&1
+          python3 src/lint_probe_workflows.py --inventory > /tmp/probe_workflow_lint.out 2>&1
           lint_status=$?
           bash src/test_probe_workflow_helpers.sh > /tmp/probe_workflow_helpers.out 2>&1
           helper_status=$?
           {
-            echo "schema=probe_workflow_hardening_status_v2"
+            echo "schema=probe_workflow_hardening_status_v3"
             echo "lint_exit_status=$lint_status"
             echo "helper_test_exit_status=$helper_status"
             echo "source_commit=${GITHUB_SHA}"

@@ -36,6 +36,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: probe-result-writers-main
+  cancel-in-progress: false
+
 jobs:
   probe:
     if: github.actor != 'github-actions[bot]'

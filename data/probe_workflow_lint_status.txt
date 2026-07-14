@@ -1,12 +1,13 @@
 schema=probe_workflow_hardening_status_v1
-lint_exit_status=0
+lint_exit_status=1
 helper_test_exit_status=0
-source_commit=00214c71e3c38302fbf3ab3a0b29098cc3c5150a
+source_commit=a0fae37a3d41a85d91d00cf9cf296c5a2f93932a
 source_ref=refs/heads/main
-workflow_run_id=29349427328
+workflow_run_id=29349546787
 workflow_run_attempt=1
 --- workflow lint ---
-probe workflow lint passed
+probe workflow lint failed:
+- .github/workflows/record-cl088-residual-sponsor-split.yml: probe writer must use the shared hardened recorder
 --- helper tests ---
 D	data/tracked.txt
 A	data/new.txt
@@ -24,7 +25,7 @@ summary_exit_status=not_run
 verifier_exit_status=not_applicable
 source_commit=test-source
 source_ref=refs/heads/main
-workflow_run_id=29349427328
+workflow_run_id=29349546787
 workflow_run_attempt=1
 --- stderr ---
 probe workflow helper tests passed

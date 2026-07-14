@@ -43,6 +43,57 @@ Primary reference: `docs/backbone-anchor-root-transfer.md`.
 
 ---
 
+## Symbolic affine pivot packing theorem
+
+For an affine root state
+
+```math
+S_r(P)=\{p-r:p\in P\},
+\qquad
+r<\min P,
+```
+
+minimum translation at `a=min(P)` is exactly the reference pivot
+
+```math
+r\longrightarrow a,
+\qquad
+p-r\longrightarrow p-a.
+```
+
+Define root-pair energy
+
+```math
+J(P)
+=
+\sum_{x<y,\ x,y\in P}
+\frac1{y-x}.
+```
+
+For pairwise root-disjoint retained children `S_a(Q_i)`,
+
+```math
+\boxed{
+\sum_i
+\left(
+H(S_a(Q_i))+J(Q_i)
+\right)
+\le
+J(P).
+}
+```
+
+Every harmonic child term is charged to one ordered pivot pair `(a,p)`, while each child pair energy uses a distinct pair internal to one `Q_i`. Thus cross-generation reuse is exactly controlled inside an affine pivot forest.
+
+This does **not** bound the entering `J(P)`. The active theorem has separated into two tasks:
+
+1. certify and generalize entry into the affine root-pivot regime;
+2. pay for entering pair energy through earlier recursive production, terminal first appearance, or arithmetic obstruction export.
+
+Primary reference: `docs/affine-pivot-pair-energy.md`.
+
+---
+
 ## 1. Foundation and recorded exact path
 
 For
@@ -376,11 +427,11 @@ LP correlation alone is insufficient.
 
 ## 9. Approved next targets
 
-1. Define a provenance-labeled anchor-survivor interval state for `(u-min(S),u]` and state exactly when that interval is created, retained, released, or reused.
+1. Certify the affine root-coordinate hypotheses on the existing retained frontier: one common reference root per state and exact pivot update `p-r -> p-a`.
 2. Test the exact translation reserve `A(S)=sum_{u>min(S)}(1/(u-min(S))-1/u)` on the existing four transitions; record either a coefficient theorem or the smallest exact no-go subsystem.
-3. Attach the 17 terminalized roots injectively to first-appearance `(u,p,i)` terminal tokens.
-4. Refine the 673 dropped roots with raw descendants by provenance, distinguishing valid retained coverage from numerical coverage by unrelated lineages.
-5. Prove a bounded-reuse or obstruction-export lemma for anchor-survivor intervals.
+3. Compute entering root-pair energy `J(P)` by generation and identify which earlier production, terminal, completion, rectangle, or exclusion terms can pay it.
+4. Prove an affine-entry or affine-purification theorem for recursively continuing states, separating non-affine middle-fiber structure as terminal or obstruction output.
+5. Refine the 673 dropped roots with raw descendants by provenance, distinguishing valid retained coverage from numerical coverage by unrelated lineages.
 6. Test any proposed lemma on the existing four transitions before adding another generation.
 
 Generation six is blocked until a specific state-independent transfer lemma exists.

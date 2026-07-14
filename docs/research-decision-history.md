@@ -303,6 +303,30 @@ minimum-anchor release    = 0.364729899662...
 
 Six parent states expand and six contract. Classes `77`, `68`, and `24` carry `87.7945%`–`87.7946%` of survivor gain. The correct local object is therefore a provenance-labeled anchor-survivor interval, not scalar minimum-anchor mass.
 
+### Affine pivot pair-energy theorem
+
+For an affine root state `S_r(P)={p-r:p in P}`, minimum translation at `a=min(P)` changes the common root reference from `r` to `a`. For pairwise root-disjoint children `S_a(Q_i)`, define
+
+```math
+J(P)
+=
+\sum_{x<y,\ x,y\in P}
+\frac1{y-x}.
+```
+
+Exact pair bookkeeping gives
+
+```math
+\sum_i
+\left(
+H(S_a(Q_i))+J(Q_i)
+\right)
+\le
+J(P).
+```
+
+Therefore every root pair is used at most once in an affine pivot forest. Cross-generation reuse is not the unresolved issue inside this model. The unresolved issues are entry into the affine regime and payment for the entering pair energy.
+
 **Decisions:**
 
 - current-generation multiplicity is not persistent reserve;
@@ -310,6 +334,8 @@ Six parent states expand and six contract. Classes `77`, `68`, and `24` carry `8
 - nearby deletion-policy changes do not remove the first failing expansion, although policy remains quantitatively important;
 - the missing resource is cumulative ancestor-path scale capacity plus terminal/drop/obstruction release;
 - the baseline failing survivor family is backbone-only, and scalar minimum-anchor release is not sufficient payment for enabled translation intervals;
+- affine pivot forests admit an exact pair-energy Bellman potential, so root-pair reuse is controlled once affine coordinates and root-disjoint children are established;
+- the new bottleneck is the entering pair energy and an affine-entry theorem, not another local reuse coefficient;
 - generation six is blocked until a state-independent transfer lemma is proposed;
 - a new feature is admissible only with a transition recurrence, bounded-reuse interpretation, and telescoping role.
 
@@ -369,11 +395,12 @@ Here `A_g` must be a state-independent ancestor-path capacity, `T^{first}` is ne
 
 The next exact work is to:
 
-1. define provenance-labeled anchor-survivor interval state and its one-step transfer semantics;
+1. certify affine root references and exact pivot updates on the existing retained frontier;
 2. test the exact minimum-translation reserve on the four existing transitions;
-3. attach the `17` terminalized roots injectively to first-appearance `(u,p,i)` tokens;
-4. distinguish provenance-valid release from numerical coverage among the `673` dropped roots with raw descendants;
-5. formulate a bounded-reuse or obstruction-export lemma before propagating another generation.
+3. quantify entering pair energy and identify a noncircular payment source;
+4. prove affine entry/purification or charge non-affine recursive output to terminal or arithmetic obstruction;
+5. distinguish provenance-valid release from numerical coverage among the `673` dropped roots with raw descendants;
+6. formulate the resulting transfer lemma before propagating another generation.
 
 No current theorem closes this gap. Generation six and further feature fitting are explicitly deferred.
 

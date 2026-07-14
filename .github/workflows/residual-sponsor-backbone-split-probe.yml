@@ -1,6 +1,7 @@
 name: Residual-sponsor backbone split probe
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main

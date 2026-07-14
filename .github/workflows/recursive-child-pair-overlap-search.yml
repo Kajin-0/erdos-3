@@ -1,0 +1,30 @@
+name: Recursive child pair-overlap search
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - src/search_recursive_child_pair_overlap.py
+      - src/summarize_recursive_child_pair_overlap.py
+      - .github/workflows/recursive-child-pair-overlap-search.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: probe-result-writers-main
+  cancel-in-progress: false
+
+jobs:
+  search:
+    uses: ./.github/workflows/reusable-python-probe-recorder.yml
+    with:
+      schema: recursive_child_pair_overlap_search_v1
+      probe_script: src/search_recursive_child_pair_overlap.py
+      probe_output: data/recursive_child_pair_overlap_search.json
+      summary_script: src/summarize_recursive_child_pair_overlap.py
+      summary_output: data/recursive_child_pair_overlap_summary.txt
+      status_output: data/recursive_child_pair_overlap_status.txt
+      commit_message: Record recursive child overlap search [skip ci]

@@ -1,0 +1,30 @@
+name: Multiplicity-four shelled pair reuse
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - src/verify_unbounded_shelled_pair_reuse_instance.py
+      - src/summarize_unbounded_shelled_pair_reuse_instance.py
+      - .github/workflows/unbounded-shelled-pair-reuse-instance.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: probe-result-writers-main
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    uses: ./.github/workflows/reusable-python-probe-recorder.yml
+    with:
+      schema: unbounded_shelled_pair_reuse_instance_v1
+      probe_script: src/verify_unbounded_shelled_pair_reuse_instance.py
+      probe_output: data/unbounded_shelled_pair_reuse_instance_certificate_2026-07-14.json
+      summary_script: src/summarize_unbounded_shelled_pair_reuse_instance.py
+      summary_output: data/unbounded_shelled_pair_reuse_instance_summary.txt
+      status_output: data/unbounded_shelled_pair_reuse_instance_status.txt
+      commit_message: Certify multiplicity-four shelled reuse [skip ci]

@@ -1,8 +1,8 @@
-# Current proof program: retained recursive contraction and terminal sinks
+# Current proof program: recursive contraction and terminal-sink accounting
 
 ## Status
 
-This is the authoritative overview for the four-term case of Erdős Problem #3. The full reciprocal-sum problem remains open. Durable exact claims are recorded in `docs/certainty-ledger.md`.
+This is the authoritative overview for the four-term case of Erdős Problem #3. The full reciprocal-sum problem remains open. Durable exact claims are tracked in `docs/certainty-ledger.md`.
 
 ---
 
@@ -22,7 +22,7 @@ reciprocal divergence is equivalent up to constants to
 \sum_j\alpha_j=\infty.
 ```
 
-Coordinated side-anchor deletion gives a three-term-progression-free residual and recursive middle/backbone outputs. The exact local accounting inequalities are
+Coordinated side-anchor deletion gives a three-term-progression-free residual and recursive middle/backbone outputs. The exact local inequalities are
 
 ```math
 H(\mathcal B(D))+\sum_xH(M_x)
@@ -56,9 +56,9 @@ Every valid exact factor-eight child has a certified summable tail. This closes 
 
 ---
 
-## 2. Policy and retention frontier
+## 2. Policy and retained-child frontier
 
-Lexicographic `S_7` contains both an isolated canonical return
+Lexicographic `S_7` contains an isolated canonical return
 
 ```math
 \{16,21,26\}\xrightarrow[f=4]{R=1}S_1
@@ -66,7 +66,7 @@ Lexicographic `S_7` contains both an isolated canonical return
 
 and a cyclic terminal-fiber component with spectral radius greater than `23/9`. Raw output is therefore not a Bellman child family.
 
-The exact policy score
+The finite policy score
 
 ```math
 C_{\lambda,\gamma}(\pi)
@@ -74,13 +74,13 @@ C_{\lambda,\gamma}(\pi)
 T_\pi+\lambda O_\pi+E_\pi+\gamma G_\pi
 ```
 
-has finite witness
+has witness
 
 ```math
 \boxed{\lambda=3,\qquad\gamma=\frac1{10}}.
 ```
 
-A complete five-step subset lattice is certified through `S_7`, and a broader deterministic search produces a seed-delayed 37-step `S_7` policy with
+A complete five-step subset lattice is certified through `S_7`. A broader deterministic search produces a seed-delayed 37-step `S_7` policy with
 
 ```text
 selected actions = 9,323
@@ -108,9 +108,9 @@ second retained labels = 7,925.
 
 ---
 
-## 3. Provenance and scale profile
+## 3. Provenance, scale, and the terminal correction
 
-Original `S_7` provenance multiplicity in the 7,925 retained descendant points is
+Original `S_7` provenance multiplicity among the 7,925 second-generation points is
 
 | multiplicity | root labels |
 |---:|---:|
@@ -118,30 +118,12 @@ Original `S_7` provenance multiplicity in the 7,925 retained descendant points i
 | 2 | 267 |
 | 3 | 5 |
 
-Despite modest multiplicity, total second retained harmonic mass is between `6.828` and `6.829` times first retained mass.
+Total second retained harmonic mass is between `6.828` and `6.829` times first retained mass. The scale profile explains that apparent expansion:
 
-For every retained descendant `u`, the exact scale certificate records its root-provenance label `p`. Every contraction
-
-```math
-\left\lfloor\log_2(p/u)\right\rfloor\ge8
-```
-
-has repeated root provenance. Repeated roots carry only `7.6%`–`7.7%` of occurrence-weighted root mass but produce `94.8%`–`94.9%` of second retained harmonic mass.
-
-Unit root-weighted shell-depth, floor-log, and ceil-log charges fail: the intergeneration debt is respectively more than `86`, `99`, and `77` times those charges.
-
-The extreme tail is concentrated:
-
-```text
-floor-log depth >= 16: 69.8%–69.9% of second retained mass
-single point u=1, p=1,354,066: 51.2%–51.3%.
-```
-
-This identifies the mechanism as repeated provenance combined with extreme scale contraction. It does not yet identify which output continues recursively.
-
----
-
-## 4. Terminal/recursive split
+- every contraction with `floor(log2(p/u)) >= 8` has repeated root provenance;
+- repeated roots carry only `7.6%`–`7.7%` of root occurrence mass;
+- they produce `94.8%`–`94.9%` of second retained harmonic mass;
+- unit root-weighted depth or logarithmic charges fail by factors greater than `77`.
 
 The 27 second-generation retained states divide exactly into
 
@@ -150,9 +132,7 @@ The 27 second-generation retained states divide exactly into
 | terminal, three-term-progression-free | 13 | 43 |
 | recursive | 14 | 7,882 |
 
-The terminal states have no coordinated-deletion action. They carry between `86.2%` and `86.3%` of total second retained harmonic mass.
-
-After removing those terminal sinks,
+The terminal states have no coordinated-deletion action and carry `86.2%`–`86.3%` of total second retained harmonic mass. After removing them,
 
 ```math
 \boxed{
@@ -164,7 +144,7 @@ After removing those terminal sinks,
 }
 ```
 
-Therefore the genuinely recursive retained branch contracts by
+Thus the genuinely recursive retained branch contracts by
 
 ```math
 \boxed{
@@ -176,12 +156,51 @@ Therefore the genuinely recursive retained branch contracts by
 }
 ```
 
-All points with at least sixteen binary orders of contraction, including `u=1`, are terminal. The apparent `6.828`–`6.829` expansion is predominantly terminal sink mass, not persistent recursive load.
+All points with at least sixteen binary orders of contraction, including `u=1`, are terminal. The full `6.828`–`6.829` ratio is predominantly terminal sink mass, not persistent recursive load.
 
-This is the first exact two-generation contraction of the recursive retained branch for the adversarial `S_7` transition.
+---
+
+## 4. Exact terminal-sink identity ledger
+
+The 13 terminal states now have a deterministic identity export. Each state record contains:
+
+```text
+numerical value set
+root-provenance vector
+immediate-provenance vector
+parent retained class
+source type and source step
+dyadic shell
+pointwise (u,p) scale records.
+```
+
+The export is anchored to the certified second-generation retained-family hash
+
+```text
+dbb6d888c790cf5a67f2e3a6ed86400506c93baac3701f39d15d858c19b21596
+```
+
+and the complete 7,925-point provenance record hash
+
+```text
+904b0b9f8906d196ea02369cb60153341eda5a562340ba8615dbcdb769dc92e3.
+```
+
+Within the certified family:
+
+```text
+terminal sink states = 13
+terminal sink points = 43
+terminal numerical labels are pairwise unique
+terminal labels are disjoint from recursive retained labels
+terminal point tokens (u,p) are pairwise unique.
+```
+
+Therefore every terminal point can be charged exactly once **inside this recorded family**. This is not yet a global terminal-sink theorem: another branch or later generation could recreate the same numerical or provenance-supported sink.
 
 Primary references:
 
+- `docs/retained-terminal-sink-identity-ledger.md`;
 - `docs/retained-terminal-recursive-split.md`;
 - `docs/retained-provenance-scale-profile.md`;
 - `docs/retained-provenance-second-generation.md`;
@@ -191,46 +210,45 @@ Primary references:
 
 ## 5. Active theorem
 
-The required whole-tree inequality remains
+The target whole-tree inequality is now separated into recursive and terminal coordinates:
 
 ```math
 \boxed{
 \Delta(S)
 +
-\sum_{S'\in\operatorname{Child}_\pi(S)}
-\left(
-\operatorname{Pack}(S')+
-\Phi_{\rm obs}(S')
-\right)
+\operatorname{TermSink}(S)
++
+\sum_{S'\in\operatorname{RecChild}_\pi(S)}
+\operatorname{RecPack}(S')
 \le
-\operatorname{Pack}(S)+
-\Phi_{\rm obs}(S)+
+\operatorname{RecPack}(S)
++
+\Phi_{\rm obs}(S)
++
 \operatorname{controlled\ error}.
 }
 ```
 
-The current exact transition suggests two separate ledgers:
+`RecPack` must contract under retained recursive propagation. `TermSink` must charge three-term-progression-free outputs once and prevent recreation through another numerical, provenance, or affine path.
 
-```math
-\operatorname{RecPack}
-\qquad\text{and}\qquad
-\operatorname{TermSink}.
+The exact two-generation transition establishes the first part locally:
+
+```text
+recursive retained ratio < 0.938.
 ```
 
-`RecPack` must contract under retained recursive propagation. `TermSink` must record three-term-progression-free output exactly once and prevent numerical or provenance-supported terminal mass from being charged again elsewhere in the tree.
-
-The scale profile remains relevant for identifying which sinks carry the large mass, but the full scale tail must not be treated as recursive debt.
+The unresolved theorem is the second part: bound the global multiplicity of terminal sink identities.
 
 ---
 
 ## 6. Approved next targets
 
-1. Export the terminal sink family with exact numerical-state and root-provenance identities.
-2. Define a global terminal-sink ledger that charges each retained terminal state or point at most once.
-3. Propagate only the 14 recursive second-generation states and test third-generation retained contraction.
-4. Export the first two-generation Bellman row with separate recursive and terminal-sink coordinates.
-5. Attach completion, rectangle, or future cheap-extension exclusion credit to terminal sinks that can reappear.
-6. Prove a terminal-output Carleson bound or extract the smallest exact failure.
+1. Compare the 43 terminal `(u,p)` tokens with all earlier raw and retained point tokens.
+2. Propagate only the 14 recursive second-generation states and test third-generation contraction and terminal-token recreation.
+3. Test whether `(root provenance, descendant label)` is sufficient globally or requires a path/affine signature.
+4. Export the first Bellman row with separate recursive and first-appearance terminal coordinates.
+5. Attach completion, rectangle, or future cheap-extension exclusion credit to recreated sinks.
+6. Prove a terminal-output Carleson bound or extract the smallest exact collision.
 
 ---
 
@@ -241,15 +259,15 @@ Do not infer:
 - pathwise summability implies whole-tree summability;
 - replay siblings are simultaneous children;
 - local policy optimality is global;
-- acyclic terminal-fiber incidence implies disjoint retained children;
 - raw harmonic reduction alone gives Bellman contraction;
 - duplicate quotienting alone resolves overlap;
 - one-generation retention bounds indefinite provenance reuse;
 - maximum provenance multiplicity three implies contraction;
-- low provenance-overhead mass pays for scale-driven growth;
-- unit depth or logarithmic root charge repays the debt;
+- unit depth or logarithmic root charge repays the full second-generation mass;
 - the full `6.828`–`6.829` ratio is recursive load;
 - terminal mass may be discarded rather than charged once;
+- within-family terminal-token uniqueness implies global uniqueness;
+- `(u,p)` is globally injective without a collision theorem;
 - the `6.2%`–`6.3%` recursive contraction is universal;
 - maximum-harmonic retention is globally Bellman-optimal;
 - policy-LP feasibility implies Bellman-LP feasibility;
@@ -265,20 +283,16 @@ Push-gating lightweight suite:
 bash src/run_verify_ci_lightweight.sh
 ```
 
-Complete extended suite:
+Complete established extended suite:
 
 ```bash
 bash src/run_verify_transport_reserve.sh
 ```
 
-Standalone latest checks:
+Terminal identity export and verification:
 
 ```bash
-python3 src/run_exact_python.py \
-  src/verify_retained_provenance_scale_profile.py \
-  /tmp/retained_provenance_scale_profile_certificate.txt
-
-python3 src/run_exact_python.py \
-  src/verify_retained_terminal_split.py \
-  /tmp/retained_terminal_split_certificate.txt
+bash src/run_verify_terminal_sink_ledger.sh
 ```
+
+The manually triggered extended workflow runs both commands. The terminal identity check is not part of push-gating lightweight CI.

@@ -1,3 +1,16 @@
-exit_status=0
-commit=7a9163522285bd66f0890e08452e5288aba3bc4e
---- stderr ---
+probe_exit_status=0
+summary_exit_status=1
+commit=8936adcfb1fb8c02b44352f0e654e0edecd2b26f
+--- probe stderr ---
+--- summary stderr ---
+Traceback (most recent call last):
+  File "/home/runner/work/erdos-3/erdos-3/src/summarize_third_generation_probe.py", line 108, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/home/runner/work/erdos-3/erdos-3/src/summarize_third_generation_probe.py", line 39, in main
+    name: parse_fraction(text)
+          ^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/erdos-3/erdos-3/src/summarize_third_generation_probe.py", line 13, in parse_fraction
+    return Fraction(int(numerator), int(denominator))
+                    ^^^^^^^^^^^^^^
+ValueError: Exceeds the limit (4300 digits) for integer string conversion: value has 27326 digits; use sys.set_int_max_str_digits() to increase the limit

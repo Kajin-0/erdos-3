@@ -1,0 +1,30 @@
+name: Parity-oriented selected-edge flow
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - src/verify_parity_oriented_selected_edge_flow.py
+      - src/summarize_parity_oriented_selected_edge_flow.py
+      - .github/workflows/parity-oriented-selected-edge-flow.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: probe-result-writers-main
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    uses: ./.github/workflows/reusable-python-probe-recorder.yml
+    with:
+      schema: parity_oriented_selected_edge_flow_certificate_v1
+      probe_script: src/verify_parity_oriented_selected_edge_flow.py
+      probe_output: data/parity_oriented_selected_edge_flow_certificate_2026-07-14.json
+      summary_script: src/summarize_parity_oriented_selected_edge_flow.py
+      summary_output: data/parity_oriented_selected_edge_flow_summary.txt
+      status_output: data/parity_oriented_selected_edge_flow_status.txt
+      commit_message: Certify parity-oriented selected-edge flow [skip ci]

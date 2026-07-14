@@ -1,0 +1,42 @@
+{
+  "dyadic_bases": [
+    2,
+    4,
+    8
+  ],
+  "dyadic_metrics": {
+    "dyadic_child_occurrences": 348,
+    "dyadic_child_states": 348,
+    "dyadic_four_ap_free_subsets": 211,
+    "dyadic_three_ap_occurrences": 116
+  },
+  "interval": [
+    1,
+    12
+  ],
+  "metrics": {
+    "child_occurrences": 9522,
+    "child_states": 9030,
+    "four_ap_free_subsets": 2233,
+    "maximum_child_states": 18,
+    "maximum_pair_multiplicity": 2,
+    "maximum_three_aps": 8,
+    "repeated_physical_pairs": 680,
+    "subsets_with_three_aps": 1528,
+    "three_ap_occurrences": 3174
+  },
+  "payload_sha256": "cf623b2e72db0f36f2c39771bac88c5dd8a7805e80b4314298eba4157c9588c5",
+  "records_sha256": "c1f420bf3e6e6f0e3c295a13180e598ae6ec04f1bbdc9aeb303052cd011e90e0",
+  "schema": "full_edge_coordinated_branching_exhaustive_v1",
+  "verified": {
+    "all_children_four_ap_free": true,
+    "all_children_have_disjoint_first_three_dilates": true,
+    "child_occurrence_mass_equals_five_halves_load": true,
+    "exact_three_memberships_per_progression": true,
+    "maximum_physical_pair_multiplicity_two": true,
+    "pair_occurrence_mass_equals_child_occurrence_mass": true,
+    "pair_union_at_least_five_fourths_load": true,
+    "pair_union_at_least_half_occurrence": true,
+    "strict_dyadic_scale_descent": true
+  }
+}

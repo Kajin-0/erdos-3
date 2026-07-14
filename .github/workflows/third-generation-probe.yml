@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - src/probe_third_generation_recursive_frontier.py
+      - src/summarize_third_generation_probe.py
       - .github/workflows/third-generation-probe.yml
 
 permissions:
@@ -40,8 +41,12 @@ jobs:
           if [[ "$status" == "0" ]]; then
             cp /tmp/third_generation_probe.json \
               data/third_generation_recursive_frontier_probe.json
+            python3 src/summarize_third_generation_probe.py \
+              /tmp/third_generation_probe.json \
+              > data/third_generation_recursive_frontier_summary.json
           else
             rm -f data/third_generation_recursive_frontier_probe.json
+            rm -f data/third_generation_recursive_frontier_summary.json
           fi
           exit 0
 
@@ -53,6 +58,9 @@ jobs:
           git add data/third_generation_probe_status.txt
           if [[ -f data/third_generation_recursive_frontier_probe.json ]]; then
             git add data/third_generation_recursive_frontier_probe.json
+          fi
+          if [[ -f data/third_generation_recursive_frontier_summary.json ]]; then
+            git add data/third_generation_recursive_frontier_summary.json
           fi
           if git diff --cached --quiet; then
             echo "No probe output change"

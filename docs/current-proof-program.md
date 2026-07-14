@@ -390,6 +390,49 @@ Primary reference: `docs/residual-sponsor-backbone-refinement.md`.
 
 ---
 
+## Certified residual-sponsor backbone refinement
+
+A completed deletion schedule partitions each affine parent root set as
+
+```math
+P=Q\sqcup\Sigma,
+```
+
+where `Q` is the three-AP-free residual and `Sigma` is the deleted sponsor core. Splitting the minimum backbone before dyadic shelling into translated residual-root and sponsor-root pieces preserves the complete raw numerical and harmonic output. Every residual-root shell is terminal.
+
+On the certified `R_4 -> F_5` transition the exact split preserves
+
+```text
+raw support union          = 1,489
+raw point occurrences      = 2,972
+raw harmonic occurrence    = 25.589294609269...
+```
+
+while changing the retained recursive frontier by
+
+```text
+recursive points           1,015 -> 864
+recursive harmonic mass    2.042771729559... -> 1.873962098445...
+latent pair occurrences    106,381 -> 74,191
+union pair-resource mass   1,586.466623468978... -> 1,181.930568734065...
+```
+
+Terminal mass rises by `0.369683464666...`; recursive mass falls by `0.168809631114...`. The refinement therefore exposes additional terminal support without importing a new unshifted residual output and removes `404.536054734914...` of union-valued continuing pair capacity.
+
+The active analytical object is now the sponsor core. Future transfer inequalities should charge
+
+```math
+\{(a,s):s\in\Sigma\}
+\cup
+\binom\Sigma2
+```
+
+to selected-progression incidence, terminal first appearance, or arithmetic obstruction export, rather than prepaying all pairs in the original root set.
+
+Primary reference: `docs/residual-sponsor-backbone-refinement.md`.
+
+---
+
 ## 1. Foundation and recorded exact path
 
 For

@@ -189,9 +189,9 @@ but that threshold is not stable under policy-family enlargement.
 
 ---
 
-## 7. Current finite policy family
+## 7. Two-coordinate deterministic policy family
 
-The enlarged family contains:
+The first enlarged family contains:
 
 ```text
 lexicographic
@@ -213,7 +213,7 @@ At
 }
 ```
 
-the exact winners are:
+the exact winners in that family were:
 
 | state | winner |
 |---:|---|
@@ -239,17 +239,19 @@ Thus `gamma=1/16` fails after family enlargement, while `gamma=1/10` succeeds.
 
 Delaying step `30` alone improves `C_3` on `S_2,...,S_7`, but adding the same delay after steps `5` and `40` worsens `C_3` on every one of those states. Favorable local policy changes are not greedily composable.
 
-Primary references:
-
-- `docs/two-coordinate-policy-family.md`;
-- `docs/step5-policy-regeneration-weight.md`;
-- `docs/policy-occurrence-cone-s1-s7.md`.
-
 ---
 
-## 8. Exact policy half-space LP
+## 8. Expanded subset-lattice policy LP
 
-Every current chosen-policy comparison is exported as
+The policy family is now exhaustive over all `32` subsets of
+
+```text
+{5,40,30,161,142}
+```
+
+on each of `S_1,...,S_6`. The current `S_7` side remains the certified `13`-policy family; the full `S_7` subset lattice has **not** been exhausted.
+
+Every chosen-policy comparison is exported as
 
 ```math
 \Delta O\,\lambda
@@ -259,24 +261,55 @@ Every current chosen-policy comparison is exported as
 -(\Delta T+\Delta E).
 ```
 
-The exact finite system contains
+The expanded exact system contains
 
 ```text
-60 constraints
-2 features: lambda, gamma.
+198 rational constraints
+2 features: lambda, gamma
+47 active equalities at the witness.
 ```
 
-The existing rational LP harness verifies
+The rational LP harness verifies
 
 ```math
+\boxed{
 (\lambda,\gamma)=\left(3,\frac1{10}\right)
+}
 ```
 
-exactly. The only zero-slack constraints are the expected `S_1` policy ties and the `S_2` `step5/step540` tie. The active `S_7` continuation boundary is `hybrid5 <= step540`.
+exactly.
 
-This completes the finite policy-ranking LP export. It is **not** the branching Bellman LP because the rows compare complete policies on recorded parents and do not yet encode retained simultaneous children.
+The selected policies are now:
 
-**Primary reference:** `docs/policy-halfspace-lp.md`.
+| state | selected policy |
+|---:|---|
+| `S_1` | `delay_none` representative of a tie |
+| `S_2` | `delay_5` representative of a tie |
+| `S_3` | `delay_5_161_142` uniquely |
+| `S_4` | `delay_5_40` up to inactive `142/161` ties |
+| `S_5` | `delay_5_40` up to inactive `142/161` ties |
+| `S_6` | `delay_5_40` up to inactive `142/161` ties |
+| `S_7` | non-regenerative `hybrid5` in the current family |
+
+The family expansion changes the unique `S_3` optimum from `{5,40}` to
+
+```text
+{5,161,142}.
+```
+
+Its closest competitor is `{5,40}`, with exact positive score gap approximately
+
+```text
+0.0226102848.
+```
+
+The witness survives the adversarial subset-lattice expansion, but the selected policy is not stable under family enlargement. Policy-ranking LP feasibility is still **not** branching Bellman-LP feasibility because retained simultaneous children are undefined.
+
+Primary references:
+
+- `docs/expanded-policy-subset-lp.md`;
+- `docs/policy-halfspace-lp.md`;
+- `docs/two-coordinate-policy-family.md`.
 
 ---
 
@@ -315,12 +348,13 @@ A retention theorem is still required before raw shell or path charges can enter
 
 ## 10. Approved next targets
 
-1. Add further deterministic priority families to the exact policy LP.
-2. Extract the first exact infeasible subsystem if the two-coordinate cone collapses.
-3. Add the coordinate identified by that subsystem.
-4. Prove a provenance-preserving retention quotient.
-5. Export the first legitimate retained-child Bellman row.
-6. Establish a policy-aware or minimax branching Carleson inequality.
+1. Expand the `S_7` policy family with a tractable exact or certifiable search method.
+2. Add every new comparison to the exact policy LP and monitor the feasible cone.
+3. Extract the first exact infeasible subsystem if the two-coordinate cone collapses.
+4. Add the coordinate identified by that subsystem.
+5. Prove a provenance-preserving retention quotient.
+6. Export the first legitimate retained-child Bellman row.
+7. Establish a policy-aware or minimax branching Carleson inequality.
 
 ---
 
@@ -338,6 +372,8 @@ Do not infer:
 - a nonempty occurrence-weight cone makes continuation cost unnecessary;
 - `gamma=1/16` survives enlarged policy families;
 - locally favorable policy moves compose greedily;
+- the earlier `S_3` `{5,40}` policy remains optimal after family expansion;
+- the `S_7` subset lattice has been exhausted;
 - policy-LP feasibility implies Bellman-LP feasibility;
 - adding the recorded path charge is justified without retention;
 - the tested policy family is globally optimal;
@@ -380,4 +416,5 @@ Current detailed notes:
 - `docs/step5-policy-regeneration-weight.md`;
 - `docs/two-coordinate-policy-family.md`;
 - `docs/policy-halfspace-lp.md`;
+- `docs/expanded-policy-subset-lp.md`;
 - `docs/branching-reserve-lp.md`.

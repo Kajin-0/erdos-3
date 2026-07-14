@@ -1,9 +1,9 @@
 schema=probe_workflow_hardening_status_v3
-lint_exit_status=1
+lint_exit_status=0
 helper_test_exit_status=0
-source_commit=6610f7eca317e529f9bdf683868bd23f5366614d
+source_commit=905dbe51ed0341a66f40318fd85c7f19f7923a3c
 source_ref=refs/heads/main
-workflow_run_id=29377469979
+workflow_run_id=29377507638
 workflow_run_attempt=1
 --- workflow lint ---
 writable workflow inventory:
@@ -34,13 +34,7 @@ path | name | purpose | owned files | concurrency | schema | artifact | commit h
 .github/workflows/sponsor-core-activation-frontier-probe.yml | Sponsor-core activation frontier probe | probe trigger delegating to reusable recorder | data/sponsor_core_activation_frontier_probe.json,data/sponsor_core_activation_frontier_status.txt,data/sponsor_core_activation_frontier_summary.txt | probe-result-writers-main | delegated/dynamic | no | none | no
 .github/workflows/terminal-basin-overflow-transfer.yml | Terminal-basin overflow transfer | probe trigger delegating to reusable recorder | data/terminal_basin_overflow_transfer_certificate_2026-07-14.json,data/terminal_basin_overflow_transfer_status.txt,data/terminal_basin_overflow_transfer_summary.txt | probe-result-writers-main | delegated/dynamic | no | none | no
 .github/workflows/unbounded-shelled-pair-reuse-instance.yml | Multiplicity-four shelled pair reuse | probe trigger delegating to reusable recorder | data/unbounded_shelled_pair_reuse_instance_certificate_2026-07-14.json,data/unbounded_shelled_pair_reuse_instance_status.txt,data/unbounded_shelled_pair_reuse_instance_summary.txt | probe-result-writers-main | delegated/dynamic | no | none | no
-.github/workflows/update-cl081-strategic-overviews.yml | Update CL-081 strategic overviews | documentation patch | README.md,docs/comprehensive-research-landscape.md | probe-result-writers-main | delegated/dynamic | no | none | no
-.github/workflows/verify-first-frontier-terminal-correction.yml | Verify first-frontier terminal correction | probe trigger delegating to reusable recorder | data/first_frontier_terminal_correction_certificate.json,data/first_frontier_terminal_correction_certificate.txt,data/first_frontier_terminal_correction_verifier_status.txt | probe-result-writers-main | delegated/dynamic | no | none | noprobe workflow lint failed:
-- .github/workflows/update-cl081-strategic-overviews.yml: direct writer must use the shared recorder or commit helper
-- .github/workflows/update-cl081-strategic-overviews.yml: permanent documentation-patch workflow is not canonical; retain the script and delete the workflow
-- .github/workflows/update-cl081-strategic-overviews.yml: documentation writer must use src/run_atomic_documentation_patch.sh
-- .github/workflows/update-cl081-strategic-overviews.yml: documentation writer must use src/commit_probe_outputs.sh
-- .github/workflows/update-cl081-strategic-overviews.yml:45: status/result workflows may not use || true
-
+.github/workflows/verify-first-frontier-terminal-correction.yml | Verify first-frontier terminal correction | probe trigger delegating to reusable recorder | data/first_frontier_terminal_correction_certificate.json,data/first_frontier_terminal_correction_certificate.txt,data/first_frontier_terminal_correction_verifier_status.txt | probe-result-writers-main | delegated/dynamic | no | none | no
+probe workflow lint passed
 --- helper tests ---
 probe workflow helper tests passed

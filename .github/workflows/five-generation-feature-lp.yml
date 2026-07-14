@@ -38,8 +38,7 @@ jobs:
             cat /tmp/five_generation_feature_lp.err
           } > data/five_generation_feature_lp_status.txt
           if [[ "$status" == "0" ]]; then
-            cp /tmp/five_generation_feature_lp.json \
-              data/five_generation_feature_lp_probe.json
+            cp /tmp/five_generation_feature_lp.json data/five_generation_feature_lp_probe.json
           else
             rm -f data/five_generation_feature_lp_probe.json
           fi
@@ -49,6 +48,7 @@ jobs:
         if: always()
         shell: bash
         run: |
+          set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           if [[ ! -f data/five_generation_feature_lp_status.txt ]]; then
@@ -64,4 +64,13 @@ jobs:
             exit 0
           fi
           git commit -m "Record five-generation feature LP result [skip ci]"
-          git push
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git rebase origin/main
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            sleep $((attempt * 2))
+          done
+          echo "error: failed to push after rebasing and three attempts" >&2
+          exit 1

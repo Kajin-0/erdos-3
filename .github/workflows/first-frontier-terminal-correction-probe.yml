@@ -10,6 +10,7 @@ on:
       - src/summarize_first_frontier_terminal_correction.py
       - src/probe_residual_sponsor_backbone_split.py
       - src/probe_third_generation_recursive_frontier.py
+      - src/verify_retained_terminal_split.py
       - .github/workflows/first-frontier-terminal-correction-probe.yml
 
 permissions:

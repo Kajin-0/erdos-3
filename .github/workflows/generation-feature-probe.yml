@@ -8,6 +8,8 @@ on:
       - src/probe_generation_aware_feature_profiles.py
       - src/summarize_generation_aware_feature_probe.py
       - src/probe_candidate_generation_potentials.py
+      - src/verify_generation_aware_retained_potentials.py
+      - data/generation_aware_retained_potentials_certificate_2026-07-13.txt
       - .github/workflows/generation-feature-probe.yml
 
 permissions:
@@ -35,8 +37,10 @@ jobs:
           probe_status=$?
           summary_status=not_run
           candidate_status=not_run
+          verifier_status=not_run
           : > /tmp/generation_feature_summary.err
           : > /tmp/candidate_generation_potentials.err
+          : > /tmp/generation_potential_verifier.err
           if [[ "$probe_status" == "0" ]]; then
             cp /tmp/generation_feature_probe.json \
               data/generation_aware_feature_profiles_probe.json
@@ -62,6 +66,17 @@ jobs:
             else
               rm -f data/candidate_generation_potentials_probe.json
             fi
+            python3 src/run_exact_python.py \
+              src/verify_generation_aware_retained_potentials.py \
+              /tmp/generation_aware_retained_potentials_certificate.txt \
+              > /tmp/generation_potential_verifier.stdout \
+              2> /tmp/generation_potential_verifier.err
+            verifier_status=$?
+            if [[ "$verifier_status" == "0" ]]; then
+              cmp data/generation_aware_retained_potentials_certificate_2026-07-13.txt \
+                /tmp/generation_aware_retained_potentials_certificate.txt
+              verifier_status=$?
+            fi
           else
             rm -f data/generation_aware_feature_profiles_probe.json
             rm -f data/generation_aware_feature_profiles_summary.json
@@ -71,6 +86,7 @@ jobs:
             echo "probe_exit_status=$probe_status"
             echo "summary_exit_status=$summary_status"
             echo "candidate_exit_status=$candidate_status"
+            echo "verifier_exit_status=$verifier_status"
             echo "commit=${GITHUB_SHA}"
             echo "--- probe stderr ---"
             cat /tmp/generation_feature_probe.err
@@ -78,6 +94,8 @@ jobs:
             cat /tmp/generation_feature_summary.err
             echo "--- candidate stderr ---"
             cat /tmp/candidate_generation_potentials.err
+            echo "--- verifier stderr ---"
+            cat /tmp/generation_potential_verifier.err
           } > data/generation_aware_feature_probe_status.txt
           exit 0
 

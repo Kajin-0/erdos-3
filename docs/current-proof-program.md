@@ -1,12 +1,14 @@
-# Current proof program: four-generation retained-feature LP
+# Current proof program: root-lineage reserve transfer
 
 ## Status
 
-This is the authoritative overview for the four-term case of Erdős Problem #3. The full reciprocal-sum problem remains open. Durable exact claims are tracked in `docs/certainty-ledger.md`.
+This is the authoritative overview for the four-term case of Erdős Problem #3. The full reciprocal-sum problem remains open. Durable claims are tracked in `docs/certainty-ledger.md`.
+
+The project is no longer searching for another finite-depth fitted feature. The active theorem target is a cumulative ancestor-path capacity that explains where harmonic reserve goes when provenance multiplicity disappears and unique lineages continue contracting.
 
 ---
 
-## 1. Foundation and recorded path
+## 1. Foundation and recorded exact path
 
 For
 
@@ -22,7 +24,7 @@ reciprocal divergence is equivalent up to constants to
 \sum_j\alpha_j=\infty.
 ```
 
-Coordinated side-anchor deletion gives a three-term-progression-free residual and recursive middle/backbone outputs. The exact local inequalities are
+Coordinated side-anchor deletion produces a three-term-progression-free residual and recursive backbone/middle-fiber outputs. The exact local inequalities are
 
 ```math
 H(\mathcal B(D))+\sum_xH(M_x)
@@ -44,7 +46,7 @@ The uncontaminated equal-translate model is summable, but the certified contamin
 4,8,4,4,8,4,8,8,8
 ```
 
-and `W_5/W_1=91/32>1`, so universal local and fixed-window contraction are false.
+and `W_5/W_1=91/32>1`. Universal local and fixed-window contraction are false.
 
 At `S_10`, exact inheritance, completion support, and rectangle transport prove
 
@@ -52,34 +54,20 @@ At `S_10`, exact inheritance, completion support, and rectangle transport prove
 \boxed{N_{10,2}=N_{10,4}=0.}
 ```
 
-Every valid exact factor-eight child has a certified summable tail. This closes the recorded state, not the full tree.
+Every valid exact factor-eight child has a certified summable tail. This closes the recorded state, not the full branching tree.
 
 ---
 
-## 2. Policy and retained-child construction
+## 2. Retained-child construction
 
-Lexicographic `S_7` contains an isolated canonical return and a cyclic terminal-fiber component, so raw outputs cannot be inserted directly into a Bellman child sum.
+The retained quotient used on the adversarial `S_7` construction is:
 
-A deterministic policy search gives a seed-delayed 37-step `S_7` policy with
+1. quotient numerically identical states;
+2. retain deterministic provenance representatives;
+3. form same-shell point-intersection conflict graphs;
+4. choose a maximum-total-harmonic independent set in each component.
 
-```text
-selected actions = 9,323
-terminal residual = 517
-terminal step classes = 28
-middle-fiber occurrences = 9,295
-canonical regeneration = false.
-```
-
-It has no improving move in its exact 59-toggle neighborhood. This is local, not global, policy optimality.
-
-For every generation the retained quotient is defined by:
-
-1. exact numerical state quotienting;
-2. deterministic provenance representatives;
-3. same-shell intersection conflicts;
-4. componentwise maximum-harmonic independent-set selection.
-
-The resulting retained frontier is:
+The resulting certified frontier is:
 
 | retained level | total states | total points | terminal states | terminal points | recursive states | recursive points |
 |---|---:|---:|---:|---:|---:|---:|
@@ -87,72 +75,61 @@ The resulting retained frontier is:
 | second | 27 | 7,925 | 13 | 43 | 14 | 7,882 |
 | third | 32 | 4,899 | 18 | 110 | 14 | 4,789 |
 | fourth | 23 | 1,794 | 11 | 77 | 12 | 1,717 |
+| fifth | 21 | 1,032 | 8 | 17 | 13 | 1,015 |
 
-Every recorded retained family is point-disjoint within its generation. Every second-, third-, and fourth-generation conflict component has a unique optimum.
+Every recorded family is point-disjoint within its generation. The baseline retention optimum is unique through generation five. Nearby policy tests include two nonunique components, but their tied maximum-harmonic optima have identical recursive mass.
+
+This quotient is a rigorous finite test object. It is not proved globally optimal or canonical.
 
 ---
 
-## 3. Raw recursive mass alternates
+## 3. Recursive and terminal mass
 
-Let `H_g^rec` denote recursively continuing retained harmonic mass.
-
-The second generation contracts:
+Let `H_g^rec` denote recursively continuing retained harmonic mass. The four recorded ratios are:
 
 ```math
 0.937
 <
 \frac{H_2^{\mathrm{rec}}}{H_1}
 <
-0.938.
+0.938,
 ```
 
-This yields the valid local row
-
 ```math
-\frac{31}{500}H_1+H_2^{\mathrm{rec}}<H_1.
-```
-
-The third generation expands:
-
-```math
-\boxed{
 2.011553
 <
 \frac{H_3^{\mathrm{rec}}}{H_2^{\mathrm{rec}}}
 <
-2.011554.
-}
+2.011554,
 ```
 
-The fourth generation expands again:
-
 ```math
-\boxed{
 2.849279
 <
 \frac{H_4^{\mathrm{rec}}}{H_3^{\mathrm{rec}}}
 <
-2.849280.
-}
+2.849280,
 ```
 
-Raw recursive harmonic mass is therefore not a one-step or short observed-window Bellman potential under the fixed policy and quotient.
+and
 
-Terminal output remains substantial but changes by generation:
-
-```text
-second retained terminal share: 86.2%–86.3%
-third retained terminal share:  78.8208%–78.8209%
-fourth retained terminal share: 59.2741%–59.2742%.
+```math
+1.329813
+<
+\frac{H_5^{\mathrm{rec}}}{H_4^{\mathrm{rec}}}
+<
+1.329814.
 ```
 
-Terminal mass must be accounted through a separate first-appearance ledger; it cannot be discarded or treated as persistent recursive load.
+Raw recursive harmonic mass is not an iterating Bellman potential.
+
+Terminal output must be carried separately through a first-appearance ledger. It cannot be discarded, and it must not be counted as persistent recursive debt.
 
 ---
 
-## 4. Terminal identities and refined tokens
+## 4. Terminal identities
 
-Each terminal point carries:
+Each terminal point carries
 
 ```text
 current label u
@@ -163,142 +140,158 @@ source type and source step
 dyadic shell.
 ```
 
-The token
+The coarse token `(u,p)` collides across generations. The refined token
 
 ```math
-\tau(u)=(u,p)
+\tau^+(u)=(u,p,i)
 ```
 
-fails across generations:
+has no recorded collision through generation five. This is finite evidence, not a global injectivity theorem.
 
-- one collision appears at generation three;
-- seven prior-terminal collisions appear in generation-four terminal output;
-- no recorded `(u,p)` collision appears in generation-four recursive output.
-
-The refined token
-
-```math
-\boxed{\tau^+(u)=(u,p,i)}
-```
-
-has no recorded collision through generation four, terminal or recursive.
-
-Numerical identity alone is far too coarse:
-
-```text
-generation 3: 28 prior terminal labels and 7 complete terminal states recur
-generation 4: 104 prior terminal labels recur across terminal/recursive output and 6 complete states recur.
-```
-
-Immediate provenance is therefore the first successful finite collision refinement. It is not yet a global injectivity theorem.
+For any fixed token map, deterministic first appearance gives an exact disjoint global bookkeeping ledger. The unresolved theorem is to prove that a bounded natural token is collision-sound and that its weighted union is summable.
 
 ---
 
-## 5. Three-generation reserve witnesses
+## 5. Static reserve witnesses are exhausted
 
-An exact 11-feature screen over the first three recursive levels found four feasible single-coordinate corrections to current harmonic mass.
-
-Two simple integer witnesses were certified.
-
-### Repeated-root descendant reserve
-
-Let
-
-```math
-R_g
-=
-\sum_{(u,p)\in F_g\,:\,m_g(p)>1}\frac1u.
-```
-
-Then
+Two small three-generation witnesses were exact:
 
 ```math
 \Phi_g^{\mathrm{rep}}=H_g+2R_g
 ```
 
-contracts by `27.4704%–27.4705%` and then `6.0556%–6.0557%` across the first two recorded recursive transitions.
-
-### Immediate-depth-tail reserve
-
-Let
+and
 
 ```math
-T_g
+\Phi_g^{\mathrm{tail}}=H_g+4T_g.
+```
+
+Both fail at generation four.
+
+The exact four-generation feature LP found a sparse witness
+
+```math
+H_g+74R_g
+```
+
+with ratios approximately
+
+```text
+0.618519
+0.122394
+0.991321.
+```
+
+The minimum fitted coefficient is approximately `73.015129`, so the final margin is already small.
+
+Generation five gives the decisive no-go:
+
+```math
+R_4=R_5=0,
+```
+
+while
+
+```math
+\frac{H_5^{\mathrm{rec}}}{H_4^{\mathrm{rec}}}>1.329813.
+```
+
+Therefore no finite coefficient in `H+kR` can repair the fourth-to-fifth transition.
+
+The exact eleven-feature four-transition LP may be retained as a diagnostic, but it is no longer the strategic driver. Another fitted feature without a state-independent transfer law would repeat the same failure pattern.
+
+---
+
+## 6. Fourth-to-fifth policy sensitivity
+
+The first failing transition was tested under fourteen exact local deletion policies:
+
+```text
+all lexicographic
+all reverse lexicographic
+one single-parent reverse flip for each of the 12 fourth recursive parents.
+```
+
+Every raw family was passed through the same maximum-harmonic retention quotient, including all tied optima.
+
+All tested policies expand recursively. The best is `reverse_parent_82`:
+
+```math
+\boxed{
+\frac{9579}{8000}
+<
+\frac{H_{5,82\text{-reverse}}^{\mathrm{rec}}}
+     {H_4^{\mathrm{rec}}}
+<
+\frac{18709}{15625}
+}
+```
+
+or `1.197375982982...`.
+
+Thus the failure is quantitatively policy-sensitive but is not removed by the nearest natural lexicographic/reverse perturbations. This is not an all-policy theorem.
+
+---
+
+## 7. Root-lineage transfer identity
+
+At generations four and five, every retained root provenance has multiplicity one. Let `S` be the roots that survive recursively and `E` the roots that exit. If `u_g(p)` is the unique current descendant of root `p`, then
+
+```math
+\boxed{
+H_{g+1}^{\mathrm{rec}}-H_g^{\mathrm{rec}}
 =
-\sum_{(u,i)\in F_g\,:\,\lfloor\log_2(i/u)\rfloor\ge4}\frac1u.
-```
-
-Then
-
-```math
-\Phi_g^{\mathrm{tail}}=H_g+4T_g
-```
-
-also contracts across those transitions, with a second-transition margin of `0.1313%–0.1314%`.
-
-These are exact three-level witnesses, not iterating potentials.
-
----
-
-## 6. Fourth-generation reserve failure
-
-At the fourth recursive level:
-
-```text
-recursive points = 1,717
-root provenance labels = 1,717
-repeated root labels = 0
-immediate provenance labels = 1,717
-repeated immediate labels = 0.
-```
-
-The repeated-root reserve vanishes:
-
-```math
-R_4=0.
-```
-
-Consequently,
-
-```math
-\boxed{
-2.711908
-<
-\frac{\Phi_4^{\mathrm{rep}}}{\Phi_3^{\mathrm{rep}}}
-<
-2.711909.
+\sum_{p\in S}
+\left(\frac1{u_{g+1}(p)}-\frac1{u_g(p)}\right)
+-
+\sum_{p\in E}\frac1{u_g(p)}.
 }
 ```
 
-The immediate depth-four tail instead regenerates from approximately `0.000244` to `0.917166`, giving
-
-```math
-\boxed{
-9.636610
-<
-\frac{\Phi_4^{\mathrm{tail}}}{\Phi_3^{\mathrm{tail}}}
-<
-9.636611.
-}
-```
-
-The two candidates fail for complementary reasons:
+Define survivor scale gain `G` and exiting parent release `L` by the two sums. The certified fourth-to-fifth decomposition is
 
 ```text
-repeated-root capacity disappears before new growth
-immediate-depth capacity is recreated during new growth.
+surviving roots = 1,015
+exiting roots = 702
+  terminalized = 17
+  dropped      = 685
 ```
 
-This supersedes the three-generation candidates as possible one-step iterating potentials. Their three-generation certificate remains valid as a finite positive result.
+and
+
+```text
+G_4→5 = 1.816777911848...
+L_4→5 = 1.310139720502...
+H5_rec-H4_rec = 0.506638191346...
+```
+
+with
+
+```math
+1.386705
+<
+\frac{G_{4\to5}}{L_{4\to5}}
+<
+1.386706.
+```
+
+No root splits between recursive and terminal output, and the complete fifth retained family has root multiplicity one.
+
+The failure mechanism is therefore:
+
+```text
+unique-lineage scale gain > released parent mass.
+```
+
+It is not repeated-root branching.
 
 ---
 
-## 7. Active theorem
+## 8. Active theorem target
 
-The whole-tree target remains
+The whole-tree objective remains
 
 ```math
-\boxed{
 \Delta(S)
 +
 \mathrm{TermSink}_{\mathrm{first}}(S)
@@ -311,57 +304,55 @@ The whole-tree target remains
 \Phi_{\mathrm{obs}}(S)
 +
 \mathrm{controlled\ error}.
-}
 ```
 
-The current frontier supplies:
+The missing coordinate must be cumulative and path-aware. It must remember future scale-gain capacity after local multiplicity disappears.
 
-```text
-legitimate point-disjoint retained children through generation five
-exact terminal/recursive partitions
-four recorded recursive-mass transitions
-an exact first-appearance terminal ledger
-an (u,p) token failure and an (u,p,i) finite repair through generation five
-two three-generation reserve witnesses
-a fourth-generation failure of both small witnesses
-and a fifth-generation no-go for every finite H+kR potential.
+The desired transition law has the form
+
+```math
+H_{g+1}^{\mathrm{rec}}
++A_{g+1}
++T_{g+1}^{\mathrm{first}}
+\le
+H_g^{\mathrm{rec}}
++A_g
++\Phi_{\mathrm{obs},g}
++\varepsilon_g,
 ```
 
-The next mathematical object is an exact rational feature LP over all four recursive transitions:
+where:
 
-```text
-generation 1 -> generation 2 recursive
-generation 2 recursive -> generation 3 recursive
-generation 3 recursive -> generation 4 recursive
-generation 4 recursive -> generation 5 recursive.
-```
+- `A_g` is state-independent ancestor-path capacity;
+- `T_{g+1}^{first}` is newly terminal first-appearance credit;
+- `Phi_obs` is completion, rectangle, or cheap-extension exclusion credit;
+- `sum_g epsilon_g` must be controlled.
 
-The LP must test whether any nonnegative combination of the existing eleven-feature family makes every transition nonexpanding. Its exact outcome is still pending. If infeasible, the smallest exact Farkas/dual obstruction becomes the next theorem. New coordinates should be introduced only after that exhaustion.
+A candidate `A` is admissible only if it has:
 
-Likely missing mechanisms are cumulative rather than within-generation:
+1. a state-independent definition;
+2. a one-step transfer identity or inequality;
+3. a bounded-reuse interpretation;
+4. a clear telescoping role.
 
-```text
-first-appearance provenance reuse
-ancestor-chain/path capacity
-terminal credit released when reserve disappears
-completion or rectangle obstruction created by reserve release
-multi-transition amortization rather than one-step monotonicity.
-```
+LP correlation alone is insufficient.
 
 ---
 
-## 8. Approved next targets
+## 9. Approved next targets
 
-1. Complete the exact eleven-feature LP over all four recorded recursive transitions.
-2. Extract a sparse rational witness or the smallest exact Farkas/dual obstruction.
-3. Add cumulative provenance or ancestor-path capacity only if the current LP is infeasible.
-4. Test policy sensitivity on the smallest retained families before propagating generation six.
-5. Attach completion, rectangle, or cheap-extension exclusion credit to reserve release.
-6. Prove a branching terminal-output Carleson bound or isolate the first unbounded refined-token reuse mechanism.
+1. Classify the certified survivor scale gain by parent state, source type, shell, and immediate provenance.
+2. Prove a reserve-transfer lemma that charges lost or created scale capacity to terminalization, discarded lineages, or arithmetic obstruction.
+3. Attach the 17 terminalized roots injectively to first-appearance `(u,p,i)` terminal tokens.
+4. Test whether the 685 dropped lineages create completion, rectangle, or future-extension exclusion credit.
+5. Define cumulative ancestor-path capacity only after the transfer decomposition identifies its conserved quantity.
+6. Test any proposed lemma on the existing four transitions before adding another generation.
+
+Generation six is blocked until a specific state-independent transfer lemma exists.
 
 ---
 
-## 9. Stop list
+## 10. Stop list
 
 Do not infer:
 
@@ -369,23 +360,20 @@ Do not infer:
 - replay siblings are simultaneous children;
 - local policy optimality is global;
 - duplicate quotienting alone resolves overlap;
-- one-generation retention bounds indefinite reuse;
-- maximum provenance multiplicity implies contraction by itself;
-- unit depth or logarithmic charge repays total retained mass;
+- maximum-harmonic retention is globally optimal;
 - terminal mass may be discarded;
-- `(u,p)` is collision-sound;
-- `(u,p,i)` is globally collision-sound after four finite levels;
+- `(u,p,i)` is globally collision-sound;
 - first-appearance bookkeeping bounds token-union mass;
 - the `31/500` row iterates;
 - raw recursive mass follows a stable short-period pattern;
-- `H+2R` or `H+4T` survives beyond generation three;
-- maximum-harmonic retention is globally optimal;
-- policy-LP feasibility implies branching Bellman-LP feasibility;
-- one finite path proves the whole theorem.
+- any finite `H+kR` witness iterates;
+- nearby-policy expansion is an all-policy theorem;
+- a fitted feature is a theorem without a transfer law;
+- another retained generation is useful without a predeclared conceptual test.
 
 ---
 
-## 10. Reproduction
+## 11. Reproduction
 
 Push-gating lightweight suite:
 
@@ -399,19 +387,19 @@ Established extended frontier:
 bash src/run_verify_transport_reserve.sh
 ```
 
-Terminal identities and retained generations through the fifth frontier:
+Retained-generation, policy-sensitivity, and root-transfer frontier:
 
 ```bash
 bash src/run_verify_terminal_sink_ledger.sh
 ```
 
-The manually triggered extended workflow runs both extended suites. None of the retained-generation work is part of push-gating lightweight CI.
+None of the retained-generation work is part of push-gating lightweight CI.
 
 Primary recent references:
 
+- `docs/fourth-to-fifth-root-transfer.md`;
+- `docs/fourth-to-fifth-policy-sensitivity.md`;
+- `docs/fifth-generation-repeated-root-no-go.md`;
 - `docs/fourth-generation-provenance-reserve-frontier.md`;
-- `docs/generation-aware-retained-potentials.md`;
-- `docs/third-generation-recursive-frontier.md`;
-- `docs/two-generation-recursive-bellman-row.md`;
 - `docs/terminal-sink-first-appearance-ledger.md`;
 - `docs/retained-terminal-sink-identity-ledger.md`.

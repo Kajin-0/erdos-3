@@ -10,7 +10,7 @@ The ambient problem is:
 
 The full problem remains open. The repository studies the four-term case: whether every four-term-progression-free subset of the positive integers has convergent reciprocal sum.
 
-This overview is **repository-comprehensive**, not literature-comprehensive. It records the mathematical territory explored here through claim `CL-065`: proved positive results, exact finite and infinite certificates, failed proof principles, model boundaries, and the current roadmap. External novelty and priority still require a separate literature audit before publication.
+This overview is **repository-comprehensive**, not literature-comprehensive. It records the mathematical territory explored here through claim `CL-081`: proved positive results, exact finite and infinite certificates, failed proof principles, model boundaries, and the current roadmap. External novelty and priority still require a separate literature audit before publication.
 
 Authoritative sources remain:
 
@@ -93,6 +93,8 @@ The factor-four proof replaces direct enumeration of `348012826` candidates by i
 
 The project then moved from selected paths and replay catalogs to the actual simultaneous deletion output. This exposed duplicate states, strict containments, partial overlaps, terminal-recursive overlap, cyclic terminal-fiber components, schedule dependence, and regeneration.
 
+A rigorous finite retained quotient has now been propagated through five levels of the recorded adversarial construction. The quotient is point-disjoint and exact, but it is not proved globally canonical or optimal.
+
 The current objective is a policy-aware retained-child inequality of the schematic form
 
 ```math
@@ -108,7 +110,7 @@ The current objective is a policy-aware retained-child inequality of the schemat
 \mathrm{controlled\ error}.
 ```
 
-The decisive missing object is a **provenance-preserving retention quotient** converting raw overlapping simultaneous output into legitimate Bellman children.
+The decisive missing object is now a **state-independent cumulative root-lineage transfer law** controlling how provenance-labeled anchor-survivor intervals are created, reused, terminalized, discarded, or converted into arithmetic obstruction. The finite quotient supplies legitimate test rows but not the whole-tree theorem.
 
 ---
 
@@ -502,9 +504,9 @@ Primary references:
 | Replay catalogs | exact finite catalogs | replay siblings are alternative choices, not simultaneous children |
 | Raw simultaneous deletion output | exported through `S_7` | provenance, overlap, and cyclic structure are essential |
 | Finite policy optimization | full five-step subset lattice through `S_7` | a stable two-coordinate witness exists, but winners change under enlargement |
-| Retained-child packing | open | decisive missing theorem |
+| Retained-child packing | finite point-disjoint quotient through generation five; global theorem open | cumulative ancestor-path transfer and bounded reuse remain missing |
 
-Earlier models remain benchmarks, counterexamples, or infrastructure. The active route is retained-child packing.
+Earlier models remain benchmarks, counterexamples, or infrastructure. The active route is retained-child packing plus cumulative backbone-anchor interval transfer.
 
 ---
 
@@ -606,9 +608,11 @@ No scalar decreasing rank or positive linear factor-two capacity can control its
 
 The schedule affects terminal mass, recursive occurrences, duplicates, residual error, SCC structure, canonical regeneration, and future obstruction structure. A final theorem may specify a constructive policy, prove a minimax policy exists, or dominate all policies with a stronger potential.
 
-## 8.5 The retention theorem comes before the final LP
+## 8.5 Finite retention exists; the global transfer theorem comes before the final LP
 
-The exact LP harness accepts only legitimate retained-child rows. A valid retention contract must specify:
+The recorded construction now has legitimate point-disjoint retained families through generation five. This proves that the overlap problem can be resolved on the finite adversarial frontier. It does not prove that maximum-harmonic retention is globally canonical, optimal, or compatible with a telescoping whole-tree potential.
+
+The exact LP harness accepts only mathematically legitimate retained-child rows. A global retention and transfer contract must specify:
 
 1. whether the potential is occurrence-, support-, state-, provenance-, or component-valued;
 2. duplicate merging;
@@ -623,7 +627,7 @@ The exact LP harness accepts only legitimate retained-child rows. A valid retent
 11. controlled error for discarded mass;
 12. completeness of the emitted child family.
 
-Without this contract, an exactly feasible LP can encode the wrong inequality.
+Without this global contract and a bounded-reuse law, an exactly feasible LP can encode the wrong inequality even though the recorded finite retained rows are legitimate.
 
 Primary reference:
 
@@ -664,19 +668,20 @@ The theorem must survive duplicate states, containments, partial overlaps, cycli
 
 ## Tier I: decisive
 
-### I.1 Provenance-preserving retention quotient
+### I.1 State-independent retention and ancestor-transfer contract
 
-Define a canonical or policy-dependent map from raw simultaneous output to retained children and prove:
+Generalize the certified finite retained quotient and define a cumulative anchor/root-lineage state. Prove:
 
 - support completeness;
 - no unaccounted recursive output;
 - bounded or explicitly charged overlap;
 - preservation of required provenance;
-- prevention of repeated payment.
+- prevention of repeated payment;
+- bounded reuse or obstruction export for anchor-survivor intervals.
 
-### I.2 First legitimate retained-child Bellman row
+### I.2 First state-independent transfer row
 
-Construct one exact row, beginning with `S_1` or `S_2`, from the proved retention quotient. The children must come from mathematics, not from a fitted surrogate.
+The recorded construction already supplies exact finite retained rows. The next target is one symbolic row whose ancestor-path capacity and release terms are defined independently of the recorded generation and whose children come from the proved retention semantics.
 
 ### I.3 State-independent branching Carleson inequality
 
@@ -781,9 +786,11 @@ Raw simultaneous transition semantics
     |
 Policy dependence and cyclic-component analysis
     |
-Provenance-preserving retention quotient          [OPEN]
+Finite point-disjoint retained quotient          [DONE ON RECORDED FRONTIER]
     |
-Legitimate retained-child Bellman rows            [OPEN]
+Global retention / anchor-interval transfer       [OPEN]
+    |
+State-independent retained-child Bellman rows     [OPEN]
     |
 Policy-aware branching Carleson inequality        [OPEN]
     |
@@ -873,11 +880,11 @@ This result does not yet exist because the retention quotient and whole-tree ine
 # 14. Recommended immediate program
 
 1. **Freeze state-specific `S_10` work.** Reopen it only to test a general reserve recurrence.
-2. **Define retention on `S_1` and `S_2`.** Specify support ownership, provenance ownership, duplicate merging, containment, partial overlap, terminal-recursive overlap, and discarded mass.
-3. **Export the first real Bellman row.** Use `src/branching_reserve_lp.py` only after the theorem determines the children.
-4. **Add one structurally motivated coordinate at a time.** Candidate features include demand-aware completion deficit, rectangle deficit, outgoing SCC capacity, provenance reuse capacity, regeneration charge, and nonlinear internal capacity.
-5. **Test one definition through `S_3,...,S_7`.** The objective is a stable theorem, not a fit at any cost.
-6. **Stop or reformulate if the state dimension does not stabilize.** An indefinitely expanding feature list is evidence that the architecture is missing a deeper invariant.
+2. **Use the certified five-level retained quotient as the adversarial test frontier.** Do not reopen raw child semantics unless a precise global retention defect is identified.
+3. **Develop anchor-survivor interval transfer.** For each backbone continuation, track the provenance-labeled interval `(u-min(S),u]`, its first use, release, and possible arithmetic obstruction export.
+4. **Test the exact translation reserve on `R_1,...,R_5`.** Record either a fixed-coefficient theorem or the smallest exact no-go subsystem; do not propagate generation six.
+5. **Refine dropped-lineage release by provenance.** Numerical coverage alone is not payment.
+6. **Stop or reformulate if interval state does not compress.** An indefinitely expanding provenance signature is evidence that a deeper invariant is missing.
 
 ---
 
@@ -961,16 +968,19 @@ The repository now contains a substantial body of exact mathematics:
 - a complete exact-tail fan;
 - raw simultaneous transition semantics through `S_7`;
 - exact cyclic-component and policy no-go theorems;
-- a stable two-coordinate policy witness across a 250-constraint full five-step subset lattice through `S_7`.
+- a stable two-coordinate policy witness across a 250-constraint full five-step subset lattice through `S_7`;
+- a point-disjoint retained quotient propagated through generation five;
+- an exact unique-root transfer identity;
+- and an exact backbone-only minimum-anchor transfer classification.
 
-The decisive open problem is not another candidate search, another selected path, or another finite policy ranking. It is
+The decisive open problem is not another candidate search, another selected path, another finite policy ranking, or another arbitrary feature fit. It is
 
 ```math
 \boxed{
-\text{construct a provenance-preserving retained-child packing theorem}
+\text{control provenance-labeled backbone intervals across the retained tree}
 }
 ```
 
-and use it to prove a policy-aware branching Bellman or Carleson inequality.
+through a state-independent retention, bounded-reuse, and obstruction-export theorem, then use it to prove a policy-aware branching Bellman or Carleson inequality.
 
 That is the shortest currently credible route from the repository's positive results to a major theorem on the four-term reciprocal-sum problem.

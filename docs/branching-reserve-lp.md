@@ -125,7 +125,7 @@ A valid raw-payload-to-LP conversion must state:
 11. any discarded mass entered as controlled error;
 12. proof that the emitted retained family is complete.
 
-Without this contract, an exactly solved LP can represent the wrong inequality.
+The recorded adversarial construction now has exact point-disjoint retained rows through generation five. Without a state-independent global version of this contract and bounded cross-generation reuse, an exactly solved LP can still represent the wrong whole-tree inequality.
 
 ---
 
@@ -302,7 +302,7 @@ bash src/run_verify_transport_reserve.sh
 
 ## 10. Active next LP input
 
-The next dataset must include external export from the high-growth cyclic component. Candidate variables are:
+The cyclic-component variables remain relevant to the raw `S_7` frontier, but the five-generation retained frontier isolates a newer transfer object: provenance-labeled minimum-anchor intervals `(u-min(S),u]`. The next theorem-level dataset must include exact creation, retention, release, and reuse of these intervals. Candidate variables are:
 
 - internal SCC capacity;
 - outgoing condensation capacity;
@@ -311,7 +311,11 @@ The next dataset must include external export from the high-growth cyclic compon
 - completion and rectangle-support growth;
 - imported-label reuse capacity;
 - target interval demand;
-- dyadic slack as an auxiliary term.
+- dyadic slack as an auxiliary term;
+- anchor-survivor interval mass;
+- first-use versus repeated-use interval capacity;
+- minimum-anchor release;
+- provenance-valid coverage of dropped raw descendants.
 
 The adapter should test
 
@@ -337,7 +341,7 @@ Every candidate convention must emit the smallest exact failing transition.
 
 The harness and exporters establish exact bookkeeping. They do not establish:
 
-- a valid retention quotient;
+- a globally canonical or state-independent retention theorem;
 - sufficient nonlinear or external SCC capacity;
 - bounded cross-generation reuse;
 - feasible whole-tree weights;

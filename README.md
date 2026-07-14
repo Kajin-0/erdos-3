@@ -23,7 +23,10 @@ The repository has established:
 8. a complete infinite exact-tail classification for every valid factor-eight child of `S_10`;
 9. exact raw simultaneous deletion transitions through `S_7`;
 10. exact no-go theorems for several naive packing potentials and SCC capacities;
-11. a policy-aware exact rational LP over a full five-step subset lattice through `S_7`.
+11. a policy-aware exact rational LP over a full five-step subset lattice through `S_7`;
+12. a rigorous point-disjoint retained quotient propagated through five levels;
+13. an exact unique-root lineage identity at the first failing retained transition;
+14. an exact backbone-only survivor classification and minimum-anchor transfer decomposition.
 
 The strongest state-specific closure is
 
@@ -37,34 +40,39 @@ This closes the recorded depth-ten state, not the full deletion tree.
 
 ## Active theorem
 
-The decisive missing object is a provenance-preserving retention quotient converting raw overlapping simultaneous outputs into legitimate Bellman children.
+A rigorous finite retained quotient now exists for the recorded adversarial construction. It has been propagated through five retained levels and produces point-disjoint recursive and terminal families. It is a certified finite test object, not a globally canonical or optimal quotient.
 
-The intended whole-tree inequality is schematically
+At the first failing transition all `1015` recursive survivors are minimum-translation backbone points. For a parent state `S`, `m=min(S)`, their gain is drawn from harmonic intervals
 
 ```math
-\Delta(S)
-+
-\sum_{S'\in\mathrm{Child}_\pi(S)}
-\left(
-\mathrm{Pack}(S')+\Phi_{\rm obs}(S')
-\right)
-\le
-\mathrm{Pack}(S)+\Phi_{\rm obs}(S)
-+
-\mathrm{controlled\ error}.
+(u-m,u],
+\qquad
+\mu_H((u-m,u])
+=
+\frac1{u-m}-\frac1u.
 ```
 
-A valid theorem must handle:
+The decisive missing theorem is now a cumulative provenance-preserving transfer law controlling reuse of these anchor-survivor intervals across the whole retained tree. The intended inequality is schematically
 
-- duplicate states;
-- strict containments;
-- partial overlaps;
-- terminal-recursive overlap;
-- cyclic terminal-fiber incidence;
-- policy-dependent regeneration;
-- cross-generation provenance reuse.
+```math
+H_{g+1}^{\rm rec}
++
+A_{g+1}
++
+T_{g+1}^{\rm first}
+\le
+H_g^{\rm rec}
++
+A_g
++
+\Phi_{\rm obs,g}
++
+\varepsilon_g,
+```
 
-Pathwise summability, replay catalogs, and policy-ranking LP feasibility do not by themselves imply this treewise inequality.
+where `A_g` is state-independent ancestor-path capacity, terminal mass is charged once, obstruction credit records completion/rectangle/extension exclusion, and `sum_g epsilon_g` is finite.
+
+A valid theorem must still handle policy dependence, terminal-recursive interaction, bounded cross-generation provenance reuse, and the distinction between numerical coverage and provenance-valid payment. Pathwise summability and finite LP feasibility do not imply this treewise inequality.
 
 ## Start here
 
@@ -72,6 +80,7 @@ Pathwise summability, replay catalogs, and policy-ranking LP feasibility do not 
 - [`docs/current-proof-program.md`](docs/current-proof-program.md) — authoritative active theorem chain and immediate frontier.
 - [`docs/certainty-ledger.md`](docs/certainty-ledger.md) — atomic claim status and exact theorem/certificate ledger.
 - [`docs/research-decision-history.md`](docs/research-decision-history.md) — chronological decisions and permanent stops.
+- [`docs/backbone-anchor-root-transfer.md`](docs/backbone-anchor-root-transfer.md) — exact backbone-only survivor and minimum-anchor transfer theorem.
 - [`docs/branching-reserve-lp.md`](docs/branching-reserve-lp.md) — exact retained-child LP contract and current packing requirements.
 
 ## Main completed theorem families

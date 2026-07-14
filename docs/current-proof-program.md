@@ -56,7 +56,7 @@ The certified contaminated path reaches `S_10` with scale word
 4,8,4,4,8,4,8,8,8
 ```
 
-and
+and satisfies
 
 ```math
 \frac{W_5}{W_1}=\frac{91}{32}>1.
@@ -127,7 +127,7 @@ The component emits `6,020` distinct novel labels, and its numerically deduplica
 
 ---
 
-## 5. Regeneration and policy dependence
+## 5. Regeneration and policy coordinates
 
 Under lexicographic deletion, the isolated child
 
@@ -149,107 +149,50 @@ G=\frac{36953}{4096}.
 
 The seed-producing actions are not root-forced. Reverse lexicographic deletion avoids the return but creates severe terminal, cyclic, and duplicate load. Avoiding a recognizable descendant is not a sufficient policy objective.
 
----
-
-## 6. Occurrence and continuation coordinates
-
-For
+The current finite policy score is
 
 ```math
-C_\lambda(\pi)=T_\pi+\lambda O_\pi+E_\pi,
-```
-
-the tested lexicographic, reverse, and delayed-seed policies admit the common subcone
-
-```math
-\boxed{
-\frac{477}{200}<\lambda<\frac{260}{63}
-}.
-```
-
-The witness `lambda=3` is exact.
-
-A uniform policy `pi_5` delaying all step-5 actions ties lexicographic deletion on `S_1` and lowers `C_3` on every `S_2,...,S_7`, but retains the canonical return. Therefore occurrence cost alone is insufficient.
-
-Introduce
-
-```math
-C_{3,\gamma}(\pi)
+C_{\lambda,\gamma}(\pi)
 =
-T_\pi+3O_\pi+E_\pi+\gamma G_\pi.
+T_\pi+\lambda O_\pi+E_\pi+\gamma G_\pi,
 ```
 
-The pairwise `pi_5` versus non-regenerative hybrid comparison has threshold
-
-```math
-0.057<\gamma_5<0.058,
-```
-
-but that threshold is not stable under policy-family enlargement.
-
----
-
-## 7. Two-coordinate deterministic policy family
-
-The first enlarged family contains:
+where:
 
 ```text
-lexicographic
-reverse lexicographic
-single-step delays 30, 40, 142, 161
-step5
-step540
-step54030
-S7 seed-delayed hybrids of cumulative policies.
+T = terminal-step harmonic mass
+O = middle-fiber occurrence/provenance mass
+E = normalized terminal residual error
+G = certified regenerative continuation charge.
 ```
 
-At
+The exact witness used throughout the current finite frontier is
 
 ```math
 \boxed{
 \lambda=3,
 \qquad
-\gamma=\frac1{10},
+\gamma=\frac1{10}.
 }
 ```
 
-the exact winners in that family were:
-
-| state | winner |
-|---:|---|
-| `S_1` | all tested non-reverse policies tie |
-| `S_2` | `step5`, `step540` tie |
-| `S_3` | `step540` |
-| `S_4` | `step540` |
-| `S_5` | `step540` |
-| `S_6` | `step540` |
-| `S_7` | non-regenerative `hybrid5` |
-
-The stronger regenerative `step540` policy raises the active continuation threshold to
-
-```math
-\frac{837}{10000}
-<
-\gamma_{540}
-<
-\frac{419}{5000}.
-```
-
-Thus `gamma=1/16` fails after family enlargement, while `gamma=1/10` succeeds.
-
-Delaying step `30` alone improves `C_3` on `S_2,...,S_7`, but adding the same delay after steps `5` and `40` worsens `C_3` on every one of those states. Favorable local policy changes are not greedily composable.
+The continuation coordinate is necessary: `T+3O+E` alone prefers a policy retaining the canonical return. Favorable local priority changes are not greedily composable.
 
 ---
 
-## 8. Expanded subset-lattice policy LP
+## 6. Full five-step policy subset lattice through S7
 
-The policy family is now exhaustive over all `32` subsets of
+The delayed-step universe is
 
 ```text
-{5,40,30,161,142}
+{5,40,30,161,142}.
 ```
 
-on each of `S_1,...,S_6`. The current `S_7` side remains the certified `13`-policy family; the full `S_7` subset lattice has **not** been exhausted.
+The exact finite family contains:
+
+- all `32` delayed-step subsets on each of `S_1,...,S_7`;
+- all `32` seed-delayed versions on `S_7`;
+- reverse lexicographic deletion on `S_7`.
 
 Every chosen-policy comparison is exported as
 
@@ -261,10 +204,10 @@ Every chosen-policy comparison is exported as
 -(\Delta T+\Delta E).
 ```
 
-The expanded exact system contains
+The resulting exact policy-ranking LP contains
 
 ```text
-198 rational constraints
+250 rational constraints
 2 features: lambda, gamma
 47 active equalities at the witness.
 ```
@@ -277,43 +220,55 @@ The rational LP harness verifies
 }
 ```
 
-exactly.
+against every row.
 
-The selected policies are now:
+Representative selected policies are:
 
 | state | selected policy |
 |---:|---|
-| `S_1` | `delay_none` representative of a tie |
-| `S_2` | `delay_5` representative of a tie |
-| `S_3` | `delay_5_161_142` uniquely |
-| `S_4` | `delay_5_40` up to inactive `142/161` ties |
-| `S_5` | `delay_5_40` up to inactive `142/161` ties |
-| `S_6` | `delay_5_40` up to inactive `142/161` ties |
-| `S_7` | non-regenerative `hybrid5` in the current family |
+| `S_1` | `plain_none`, representative of a complete tie |
+| `S_2` | `plain_5`, representative of an eight-policy tie |
+| `S_3` | `plain_5_161_142`, unique |
+| `S_4` | `plain_5_40`, modulo inactive-step ties |
+| `S_5` | `plain_5_40`, modulo inactive-step ties |
+| `S_6` | `plain_5_40`, modulo inactive-step ties |
+| `S_7` | `seed_5_142`, unique |
 
-The family expansion changes the unique `S_3` optimum from `{5,40}` to
-
-```text
-{5,161,142}.
-```
-
-Its closest competitor is `{5,40}`, with exact positive score gap approximately
+The `S_7` winner is non-regenerative and has
 
 ```text
-0.0226102848.
+selected actions = 9347
+terminal residual = 493
+terminal step classes = 50
+middle-fiber occurrences = 9297.
 ```
 
-The witness survives the adversarial subset-lattice expansion, but the selected policy is not stable under family enlargement. Policy-ranking LP feasibility is still **not** branching Bellman-LP feasibility because retained simultaneous children are undefined.
+The previous finite winner `seed_5` is now the runner-up. The exact positive gap satisfies
+
+```math
+\frac3{2000}
+<
+C_{3,1/10}(\texttt{seed\_5})
+-
+C_{3,1/10}(\texttt{seed\_5\_142})
+<
+\frac{751}{500000}.
+```
+
+Thus the gap is approximately `0.0015010996`. This is the smallest positive slack in the 250-row system.
 
 Primary references:
 
+- `docs/policy-subset-lattice-s1-s7.md`;
 - `docs/expanded-policy-subset-lp.md`;
 - `docs/policy-halfspace-lp.md`;
 - `docs/two-coordinate-policy-family.md`.
 
+This completes the explicit five-step subset lattice through `S_7`. It does not establish global optimality over arbitrary delayed steps or over all complete coordinated schedules.
+
 ---
 
-## 9. Active theorem
+## 7. Active theorem
 
 The required whole-tree object remains
 
@@ -333,23 +288,19 @@ The required whole-tree object remains
 }
 ```
 
-The finite policy score currently needs at least
+The finite policy score now has a stable exact witness on a substantial deterministic family, but a retention theorem is still required before raw shell or path charges can enter a Bellman child sum.
 
-```text
-terminal mass
-recursive occurrence/provenance load
-terminal residual error
-regenerative continuation charge.
-```
+The active bottleneck has two parts:
 
-A retention theorem is still required before raw shell or path charges can enter a Bellman child sum.
+1. enlarge the delayed-step universe around `seed_5_142` with a deterministic exact neighborhood search;
+2. prove a provenance-preserving retained-child quotient that bounds duplicate, containment, and cyclic reuse across generations.
 
 ---
 
-## 10. Approved next targets
+## 8. Approved next targets
 
-1. Expand the `S_7` policy family with a tractable exact or certifiable search method.
-2. Add every new comparison to the exact policy LP and monitor the feasible cone.
+1. Compute exact one-step add/remove neighborhoods around `seed_5_142` using a deterministic candidate-step universe.
+2. Add every new policy comparison to the exact policy LP and monitor the feasible cone.
 3. Extract the first exact infeasible subsystem if the two-coordinate cone collapses.
 4. Add the coordinate identified by that subsystem.
 5. Prove a provenance-preserving retention quotient.
@@ -358,7 +309,7 @@ A retention theorem is still required before raw shell or path charges can enter
 
 ---
 
-## 11. Stop list
+## 9. Stop list
 
 Do not infer:
 
@@ -373,7 +324,8 @@ Do not infer:
 - `gamma=1/16` survives enlarged policy families;
 - locally favorable policy moves compose greedily;
 - the earlier `S_3` `{5,40}` policy remains optimal after family expansion;
-- the `S_7` subset lattice has been exhausted;
+- the earlier `S_7` `seed_5` policy remains optimal after subset-lattice expansion;
+- the five-step lattice represents all possible delayed-step policies;
 - policy-LP feasibility implies Bellman-LP feasibility;
 - adding the recorded path charge is justified without retention;
 - the tested policy family is globally optimal;
@@ -381,7 +333,7 @@ Do not infer:
 
 ---
 
-## 12. Reproduction
+## 10. Reproduction
 
 Push-gating lightweight suite:
 
@@ -395,26 +347,27 @@ Complete extended suite:
 bash src/run_verify_transport_reserve.sh
 ```
 
-Transition and policy frontier only:
+Transition frontier without the full five-step `S_7` lattice:
 
 ```bash
 bash src/run_verify_transition_frontier.sh
 ```
 
+Standalone full subset-lattice certificate:
+
+```bash
+python3 src/run_exact_python.py \
+  src/verify_policy_subset_lattice_s1_s7.py \
+  /tmp/policy_subset_lattice_s1_s7_certificate.txt
+```
+
 Current detailed notes:
 
 - `docs/certainty-ledger.md`;
-- `docs/s7-cyclic-scc-output-load.md`;
-- `docs/s7-cyclic-scc-local-completion-credit.md`;
-- `docs/s7-cyclic-scc-small-state-affine-frontier.md`;
-- `docs/s7-cyclic-output-seed-regeneration.md`;
-- `docs/s7-regenerative-seed-policy-dependence.md`;
-- `docs/s7-policy-transition-tradeoff.md`;
-- `docs/s7-delayed-seed-policy.md`;
-- `docs/s7-policy-weight-regions.md`;
-- `docs/policy-occurrence-cone-s1-s7.md`;
-- `docs/step5-policy-regeneration-weight.md`;
-- `docs/two-coordinate-policy-family.md`;
-- `docs/policy-halfspace-lp.md`;
+- `docs/policy-subset-lattice-s1-s7.md`;
 - `docs/expanded-policy-subset-lp.md`;
+- `docs/policy-halfspace-lp.md`;
+- `docs/two-coordinate-policy-family.md`;
+- `docs/s7-cyclic-scc-output-load.md`;
+- `docs/s7-regenerative-seed-policy-dependence.md`;
 - `docs/branching-reserve-lp.md`.

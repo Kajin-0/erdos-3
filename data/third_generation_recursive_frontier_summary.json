@@ -1,0 +1,135 @@
+{
+  "exact_terminal_state_regeneration": [
+    [
+      1
+    ],
+    [
+      5
+    ],
+    [
+      10
+    ],
+    [
+      60
+    ],
+    [
+      61,
+      62
+    ],
+    [
+      122,
+      123
+    ],
+    [
+      147,
+      152,
+      153
+    ]
+  ],
+  "hashes": {
+    "child_transition_summary": "68113df9bd71febce4d510139532bafd90686accd594cdcc811aa988779e3173",
+    "third_all_tokens": "849ba7d47dc60fbed4a62b0548f821a14ee7d5b119e4de60bdca1ead6f3e16af",
+    "third_raw_occurrences": "304a230fb27f5d7755032e1fe79fdd38f8b2692a8b615c572e5181da73f7480a",
+    "third_recursive_family": "5413108594c47f2f4a549d9ef6658fe7311fc4478b99d6f0bc463355d50d106a",
+    "third_recursive_tokens": "d6e91367d85fa1a644db20208d0e7235143ab99446f305a77b233312e81a0ea8",
+    "third_retained_family": "099f05089e7e5e27b99dad99eb6a1ee88f4134882c613d317ae416d7381746e8",
+    "third_terminal_family": "85df2cd8f67f4a011a2ac38b970c384c89ff07098cc579b4842b6cc63a7109c4",
+    "third_terminal_tokens": "5519a9c96dbdcc08bee919853396808b0edc4db352aba7cacf8c337c1058dfd1"
+  },
+  "mass_hashes": {
+    "first_retained": "29f9f139dcdf764a486022f152d7ab0cacc8f40cd4af353f4a5e5f6bea843446",
+    "second_recursive": "539dfbe1e345d4e6f1e0ed1c08cfedd1eba8c3f9d195fc078ae9ac0d5e391775",
+    "third_recursive": "ea01006a6cee2ea0c2cb23704e253b5871c528357b3698b4ca2076ddc7233210",
+    "third_terminal": "d28a961f10033c83879024fba1e32936f068472708bb5e92eb971f9ee8a260ca",
+    "third_total": "00c7e790b4e4e0bb25c8d3f0d597efe84617ae790a34fbe3e4c5fc7a5942ff0b"
+  },
+  "metrics": {
+    "child_selected_actions": 6858,
+    "child_terminal_residual_points": 1024,
+    "components_with_nonunique_optimum": 0,
+    "conflict_components": 29,
+    "conflict_edges": 386,
+    "dp_states_examined": 137,
+    "earlier_raw_token_collision_count": 0,
+    "earlier_retained_token_collision_count": 0,
+    "exact_state_classes": 108,
+    "largest_conflict_component": 15,
+    "raw_occurrence_points": 14639,
+    "raw_occurrences": 474,
+    "recursive_second_parent_points": 7882,
+    "recursive_second_parent_states": 14,
+    "recursive_third_points": 4789,
+    "recursive_third_states": 14,
+    "retained_points": 4899,
+    "retained_states": 32,
+    "terminal_third_points": 110,
+    "terminal_third_states": 18,
+    "third_exact_terminal_state_regeneration_count": 7,
+    "third_numerical_recreation_count": 28,
+    "third_recursive_numerical_recreation_count": 11,
+    "third_recursive_same_token_recreation_count": 0,
+    "third_root_provenance_distinct": 4840,
+    "third_root_provenance_max_multiplicity": 2,
+    "third_root_provenance_repeated": 59,
+    "third_same_token_recreation_count": 1,
+    "third_terminal_numerical_recreation_count": 17,
+    "third_terminal_same_token_recreation_count": 1
+  },
+  "ratio_brackets_millionth": {
+    "third_recursive_over_first_retained": [
+      "235781/125000",
+      "1886249/1000000"
+    ],
+    "third_recursive_over_second_recursive": [
+      "2011553/1000000",
+      "1005777/500000"
+    ],
+    "third_recursive_over_third_total": [
+      "211791/1000000",
+      "13237/62500"
+    ],
+    "third_terminal_over_third_total": [
+      "49263/62500",
+      "788209/1000000"
+    ],
+    "third_total_over_second_recursive": [
+      "4748899/500000",
+      "9497799/1000000"
+    ],
+    "three_generation_recursive_margin_from_second": [
+      "-505777/500000",
+      "-1011553/1000000"
+    ]
+  },
+  "ratio_decimals": {
+    "third_recursive_over_first_retained": "1.886248438233",
+    "third_recursive_over_second_recursive": "2.011553627970",
+    "third_recursive_over_third_total": "0.211791563670",
+    "third_terminal_over_third_total": "0.788208436330",
+    "third_total_over_second_recursive": "9.497798652186",
+    "three_generation_recursive_margin_from_second": "-2.988446372030"
+  },
+  "ratio_hashes": {
+    "third_recursive_over_first_retained": "23fc3338217ba11c2169abdf98240920ea4c10ea33e9a95c6f1a008650b30c0d",
+    "third_recursive_over_second_recursive": "9b1185a81986e29249785f20682932a1be1b59c0349f4b15670c99a68f5483f4",
+    "third_recursive_over_third_total": "4c6e98bf775d34abd3698a12b5e8dec804cb1c78e737800623bdda51c3a92258",
+    "third_terminal_over_third_total": "b23699ff40f580b5a45d470136cbf314c57100ee3c005e181b59c21d028e045a",
+    "third_total_over_second_recursive": "36189e373a8a9927c5b9268d381556db22367da5425587436a06a2b53389aca8",
+    "three_generation_recursive_margin_from_second": "2fa9825281a7674061010738845a26f3dccba06fa16f921c21d535256f4bf8f4"
+  },
+  "same_token_recreation": [
+    [
+      60,
+      1354490
+    ]
+  ],
+  "same_token_recreation_recursive": [],
+  "same_token_recreation_terminal": [
+    [
+      60,
+      1354490
+    ]
+  ],
+  "schema": "third_generation_recursive_frontier_probe_summary_v1",
+  "source_probe_payload_sha256": "87e76042f78314ed693e3aad460f9e278646d4374b80051548f04b36a25427dc"
+}

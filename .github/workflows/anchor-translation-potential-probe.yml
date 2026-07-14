@@ -17,6 +17,8 @@ jobs:
     if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    env:
+      PROBE_SCHEMA: anchor_translation_potential_probe_v1
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -52,6 +54,7 @@ jobs:
             fi
           fi
           {
+            echo "schema=$PROBE_SCHEMA"
             echo "compile_exit_status=$compile_status"
             echo "probe_exit_status=$probe_status"
             echo "summary_exit_status=$summary_status"

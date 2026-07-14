@@ -69,7 +69,8 @@ jobs:
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -- data/cl088_documentation_status.txt
+          bash src/stage_optional_probe_outputs.sh \
+            data/cl088_documentation_status.txt
           if grep -Fxq 'patch_exit_status=0' data/cl088_documentation_status.txt; then
             git add -- \
               README.md \

@@ -93,9 +93,12 @@ Statuses marked **exact finite** are computational statements for recorded objec
 | CL-074 | Propagating only the 14 recursive second-generation states and reapplying the same global retained quotient produces a unique point-disjoint third family with 32 states and 4899 points: 18 terminal states with 110 points and 14 recursive states with 4789 points. Recursive third-generation mass is `2.011553`–`2.011554` times second-generation recursive mass and `1.886248`–`1.886249` times first retained mass. The `31/500` two-generation Bellman credit therefore does not iterate under this fixed policy and quotient. | Exact finite third-generation recursive-expansion and Bellman no-go theorem. |
 | CL-075 | The 43 second-generation terminal `(u,p)` tokens have no collision with first-generation raw or retained tokens, but `(60,1354490)` recurs as a third-generation terminal sink. Both occurrences are step-5 middle fibers; immediate provenance differs (`2810` versus `440`) and separates the collision. Numerical identity is much coarser: 28 labels and seven complete terminal numerical states recur. | Exact finite cross-generation token-collision and signature-refinement theorem. |
 | CL-076 | With current harmonic mass coefficient fixed to one, an exact 11-feature screen finds four feasible standalone nonnegative corrections. In particular, `Phi_rep=H+2R`, where `R` is descendant harmonic mass on points whose root provenance repeats within the retained generation, contracts by `27.4704%`-`27.4705%` and then `6.0556%`-`6.0557%`. Independently, `Phi_tail=H+4T`, where `T` is descendant mass with immediate-provenance depth drop at least four, contracts on both transitions and has second-transition margin `0.1313%`-`0.1314%`. | Exact finite three-generation retained-potential theorem. |
+| CL-077 | Propagating the 14 third-generation recursive states and reapplying the same quotient produces a unique point-disjoint fourth family with 23 states and 1794 points, split into 11 terminal states with 77 points and 12 recursive states with 1717 points. `H4_rec/H3_rec` is `2.849279`-`2.849280`. The CL-076 candidates fail: `H+2R` expands by `2.711908`-`2.711909` because repeated-root reserve vanishes, and `H+4T` expands by `9.636610`-`9.636611` because the immediate depth-four tail regenerates. Seven `(u,p)` terminal collisions occur, but no `(u,p,i)` collision is recorded through generation four. | Exact finite fourth-generation potential no-go and refined-token survival theorem. |
 
 Primary latest references:
 
+- `docs/fourth-generation-provenance-reserve-frontier.md`;
+- `src/verify_fourth_generation_potential_frontier.py`;
 - `docs/generation-aware-retained-potentials.md`;
 - `src/verify_generation_aware_retained_potentials.py`;
 - `docs/third-generation-recursive-frontier.md`;
@@ -148,42 +151,32 @@ Do not use without materially new hypotheses:
 33. the third-generation expansion as universal over all policies or quotients;
 34. immediate provenance as globally sufficient after one finite collision test;
 35. `H+2R` or `H+4T` as a universal Bellman potential after two finite transitions;
-36. maximum-harmonic local retention as globally optimal;
-37. policy-LP feasibility as branching Bellman-LP feasibility;
-38. the tested policy family as globally optimal;
-39. random sampling as a finite certificate;
-40. the rejected depth-ten anchor reduction.
+36. `H+2R` or `H+4T` as an iterating potential after the fourth-generation failure;
+37. maximum-harmonic local retention as globally optimal;
+38. policy-LP feasibility as branching Bellman-LP feasibility;
+39. the tested policy family as globally optimal;
+40. random sampling as a finite certificate;
+41. the rejected depth-ten anchor reduction.
 
 ---
 
-# Open bottleneck OB-001: provenance-reserve validation
+# Open bottleneck OB-001: exact four-generation feature LP
 
-The adversarial local-optimum transition now has:
+The adversarial retained construction now has:
 
-- a legitimate point-disjoint retained-child quotient;
-- exact terminal/recursive partitions through generation three;
-- an explicit raw recursive-mass failure at generation three;
-- a complete terminal identity and first-appearance ledger;
-- an explicit failure of `(u,p)` repaired locally by immediate provenance;
-- and two same-form retained potentials that contract across both observed recursive transitions.
+- legitimate point-disjoint retained families through generation four;
+- exact terminal/recursive partitions at generations two, three, and four;
+- recursive mass ratios below one, above two, and above 2.84 on successive transitions;
+- a complete first-appearance terminal ledger;
+- failure of `(u,p)` and finite survival of `(u,p,i)`;
+- two exact three-generation reserve witnesses;
+- and an exact fourth-generation failure of both witnesses.
 
-The primary candidate is
+The next theorem is an exact nonnegative feature-feasibility problem. Export the three recursive transitions into a common rational matrix with current harmonic coefficient fixed to one. Test whether any nonnegative combination of the existing provenance, multiplicity, and depth features makes all three rows nonpositive.
 
-```math
-\mathrm{RecPack}(F)=H(F)+2R(F),
-```
+If feasible, record a sparse rational witness. If infeasible, extract the smallest exact Farkas or dual obstruction before introducing cumulative provenance, ancestor-path, terminal-release, or affine-obstruction coordinates.
 
-where `R(F)` is current harmonic mass on points whose original root provenance repeats within the retained generation. The secondary candidate is
-
-```math
-\mathrm{RecPack}_{\mathrm{tail}}(F)=H(F)+4T(F),
-```
-
-where `T(F)` is current harmonic mass on points with immediate-provenance depth drop at least four.
-
-The next theorem must test these same coordinates on the fourth retained recursive generation, across alternative policies, and under branching terminal recreation. A finite success is not yet a whole-tree Carleson or Bellman theorem.
-
-The target remains
+The whole-tree target remains
 
 ```math
 \Delta(S)

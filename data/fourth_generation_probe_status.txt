@@ -1,7 +1,5 @@
-probe_exit_status=0
-summary_exit_status=0
 verifier_exit_status=0
-commit=93a87ee781bc6da27e248322ecb2714a967503c9
---- probe stderr ---
---- summary stderr ---
+patch_exit_status=0
+commit=d219e59432ae88a2251b1995aa1014e0e5a299dd
 --- verifier stderr ---
+--- patch stderr ---

@@ -17,6 +17,8 @@ jobs:
     if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    env:
+      PROBE_SCHEMA: pair_resource_third_to_fourth_probe_v1
     steps:
       - uses: actions/checkout@v4
         with:
@@ -49,6 +51,7 @@ jobs:
             fi
           fi
           {
+            echo "schema=$PROBE_SCHEMA"
             echo "compile_exit_status=$compile_status"
             echo "probe_exit_status=$probe_status"
             echo "summary_exit_status=$summary_status"

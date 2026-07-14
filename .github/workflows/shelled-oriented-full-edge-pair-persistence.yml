@@ -1,0 +1,30 @@
+name: Shelled oriented full-edge pair persistence
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - src/probe_shelled_oriented_full_edge_pair_persistence.py
+      - src/summarize_shelled_oriented_full_edge_pair_persistence.py
+      - .github/workflows/shelled-oriented-full-edge-pair-persistence.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: probe-result-writers-main
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    uses: ./.github/workflows/reusable-python-probe-recorder.yml
+    with:
+      schema: shelled_oriented_full_edge_pair_persistence_probe_v1
+      probe_script: src/probe_shelled_oriented_full_edge_pair_persistence.py
+      probe_output: data/shelled_oriented_full_edge_pair_persistence_probe.json
+      summary_script: src/summarize_shelled_oriented_full_edge_pair_persistence.py
+      summary_output: data/shelled_oriented_full_edge_pair_persistence_summary.txt
+      status_output: data/shelled_oriented_full_edge_pair_persistence_status.txt
+      commit_message: Record shelled oriented pair persistence [skip ci]

@@ -1,9 +1,9 @@
 schema=probe_workflow_hardening_status_v1
 lint_exit_status=0
 helper_test_exit_status=0
-source_commit=27c9157e2a944364a59cb23184aa2243dd8e9487
+source_commit=00214c71e3c38302fbf3ab3a0b29098cc3c5150a
 source_ref=refs/heads/main
-workflow_run_id=29349088668
+workflow_run_id=29349427328
 workflow_run_attempt=1
 --- workflow lint ---
 probe workflow lint passed
@@ -24,7 +24,7 @@ summary_exit_status=not_run
 verifier_exit_status=not_applicable
 source_commit=test-source
 source_ref=refs/heads/main
-workflow_run_id=29349088668
+workflow_run_id=29349427328
 workflow_run_attempt=1
 --- stderr ---
 probe workflow helper tests passed

@@ -1,0 +1,30 @@
+name: Sponsor-core activation frontier probe
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - src/probe_sponsor_core_activation_frontier.py
+      - src/summarize_sponsor_core_activation_frontier.py
+      - .github/workflows/sponsor-core-activation-frontier-probe.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: probe-result-writers-main
+  cancel-in-progress: false
+
+jobs:
+  probe:
+    uses: ./.github/workflows/reusable-python-probe-recorder.yml
+    with:
+      schema: sponsor_core_activation_frontier_probe_v1
+      probe_script: src/probe_sponsor_core_activation_frontier.py
+      probe_output: data/sponsor_core_activation_frontier_probe.json
+      summary_script: src/summarize_sponsor_core_activation_frontier.py
+      summary_output: data/sponsor_core_activation_frontier_summary.txt
+      status_output: data/sponsor_core_activation_frontier_status.txt
+      commit_message: Record sponsor-core activation frontier [skip ci]

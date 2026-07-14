@@ -1,0 +1,44 @@
+POLICY SUBSET-LATTICE LP S1-S7
+
+subset_steps=5,40,30,161,142
+S1_S6_plain_subsets_per_state=32
+S7_plain_subsets=32
+S7_seed_subsets=32
+S7_reverse_policy=1
+features=lambda,gamma
+weights=lambda:3,gamma:1/10
+constraints=250
+jsonl_bytes=1295230
+jsonl_sha256=e439db76aef083e35239386c040d9fca934508d53a383836f4c78efa74ea85af
+lp_bytes=1543499
+lp_lines=257
+lp_sha256=f3775bccfcfea11783e9777fa5b402f6f86b4d58b431b700509373cd35ef8f70
+
+result=FEASIBLE
+active_equalities=47
+active_equalities_sha256=14d4538f638b69ca5763abb9c9f1e8cc3756d1e56105eb0ebf29d212ec953fb0
+strict_minimum_constraint=S7:seed_5_142<=seed_5
+strict_minimum_slack_sha256=94b80ff019f4ba5a4e740db7a11dfb5be412dae92c5ad6a3f863692ce5018d38
+strict_minimum_slack_numerator_digits=615
+strict_minimum_slack_denominator_digits=617
+
+S1_chosen=plain_none
+S2_chosen=plain_5
+S3_chosen=plain_5_161_142
+S4_chosen=plain_5_40
+S5_chosen=plain_5_40
+S6_chosen=plain_5_40
+S7_chosen=seed_5_142
+S7_runner_up=seed_5
+S7_chosen_selected=9347
+S7_chosen_residual=493
+S7_chosen_terminal_steps=50
+S7_chosen_occurrences=9297
+S7_chosen_regeneration=False
+S7_chosen_terminal_mass_sha256=35da913066b9bafd4496f57528781b57384989eeb2d2f1f4855320c54d8831a6
+S7_chosen_occurrence_mass_sha256=a8ed8fe436bc596559bf0ff41e5a590a03122eae5f2d8f301151fbc383a22f21
+S7_score_gap_bracket=3/2000,751/500000
+
+conclusion: exhaustive enumeration of the five-step subset lattice on S7, with and without the seed delay, changes the exact non-regenerative winner from seed_5 to seed_5_142.
+The witness lambda=3,gamma=1/10 remains feasible after adding all 64 S7 subset policies and reverse deletion, for 250 exact policy-ranking constraints.
+This finite result still does not establish global schedule optimality or a provenance-preserving retained-child Bellman inequality.

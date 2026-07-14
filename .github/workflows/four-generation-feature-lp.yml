@@ -41,16 +41,14 @@ jobs:
           : > /tmp/four_generation_integer_witness.err
           : > /tmp/four_generation_feature_verifier.err
           if [[ "$lp_status" == "0" ]]; then
-            cp /tmp/four_generation_feature_lp.json \
-              data/four_generation_feature_lp_probe.json
+            cp /tmp/four_generation_feature_lp.json data/four_generation_feature_lp_probe.json
             python3 src/run_exact_python.py \
               src/probe_four_generation_integer_witness.py \
               > /tmp/four_generation_integer_witness.json \
               2> /tmp/four_generation_integer_witness.err
             witness_status=$?
             if [[ "$witness_status" == "0" ]]; then
-              cp /tmp/four_generation_integer_witness.json \
-                data/four_generation_integer_witness_probe.json
+              cp /tmp/four_generation_integer_witness.json data/four_generation_integer_witness_probe.json
             else
               rm -f data/four_generation_integer_witness_probe.json
             fi
@@ -87,6 +85,7 @@ jobs:
         if: always()
         shell: bash
         run: |
+          set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           if [[ ! -f data/four_generation_feature_lp_status.txt ]]; then
@@ -103,4 +102,13 @@ jobs:
             exit 0
           fi
           git commit -m "Record four-generation feature LP result [skip ci]"
-          git push
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git rebase origin/main
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            sleep $((attempt * 2))
+          done
+          echo "error: failed to push after rebasing and three attempts" >&2
+          exit 1

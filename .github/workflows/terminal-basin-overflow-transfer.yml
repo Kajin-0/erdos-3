@@ -1,0 +1,30 @@
+name: Terminal-basin overflow transfer
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - src/verify_terminal_basin_overflow_transfer.py
+      - src/summarize_terminal_basin_overflow_transfer.py
+      - .github/workflows/terminal-basin-overflow-transfer.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: probe-result-writers-main
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    uses: ./.github/workflows/reusable-python-probe-recorder.yml
+    with:
+      schema: terminal_basin_overflow_transfer_certificate_v1
+      probe_script: src/verify_terminal_basin_overflow_transfer.py
+      probe_output: data/terminal_basin_overflow_transfer_certificate_2026-07-14.json
+      summary_script: src/summarize_terminal_basin_overflow_transfer.py
+      summary_output: data/terminal_basin_overflow_transfer_summary.txt
+      status_output: data/terminal_basin_overflow_transfer_status.txt
+      commit_message: Certify terminal-basin overflow transfer [skip ci]

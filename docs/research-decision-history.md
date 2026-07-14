@@ -317,10 +317,10 @@ Do not restart these routes without explicitly identifying which obstruction is 
 22. unit harmonic SCC capacity;
 23. positive linear SCC contraction with factor at most two at `S_7`;
 24. further `S_10` prefix certification;
-25. the rejected depth-ten anchor reduction.
-28. generation-six propagation without a predeclared conceptual test.
-27. another feature-fit/one-more-generation loop without a transfer lemma;
+25. the rejected depth-ten anchor reduction;
 26. current-generation multiplicity as persistent reserve;
+27. another feature-fit/one-more-generation loop without a transfer lemma;
+28. generation-six propagation without a predeclared conceptual test.
 
 ---
 

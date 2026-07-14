@@ -1,0 +1,44 @@
+First-frontier terminal correction
+==================================
+
+scope: certified_F1_terminal_split_and_corrected_F2_reconstruction
+probe_payload_sha256: e851db899415304ff4f137b3b76b5db7cff26753397e75a72d6c9ddcad3c0d94
+
+F1 all: states=21 points=11753 terminal=6/52 recursive=15/11701 total_mass=0.285821566728 terminal_mass=0.127088543982 recursive_mass=0.158733022746
+F1 terminal: states=6 points=52 terminal=6/52 recursive=0/0 total_mass=0.127088543982 terminal_mass=0.127088543982 recursive_mass=0.000000000000
+F1 recursive: states=15 points=11701 terminal=0/0 recursive=15/11701 total_mass=0.158733022746 terminal_mass=0.000000000000 recursive_mass=0.158733022746
+terminal_parent_indices=0,1,2,8,74,86
+
+historical F2: states=27 points=7925 terminal=13/43 recursive=14/7882 total_mass=1.951768493045 terminal_mass=1.683751535228 recursive_mass=0.268016957817
+corrected ordinary F2: states=27 points=7923 terminal=12/38 recursive=15/7885 total_mass=1.895392770002 terminal_mass=1.478795226105 recursive_mass=0.416597543898
+corrected refined F2: states=45 points=8164 terminal=33/944 recursive=12/7220 total_mass=1.923394543750 terminal_mass=1.601039076668 recursive_mass=0.322355467082
+
+Historical F2 minus corrected ordinary F2
+-------------------------------------------
+states=+0
+points=+2
+terminal_states=+1
+terminal_points=+5
+recursive_states=-1
+recursive_points=-3
+total_mass=0.056375723042
+terminal_mass=0.204956309123
+recursive_mass=-0.148580586081
+
+Residual/sponsor refinement minus corrected ordinary F2
+--------------------------------------------------------
+states=+18
+points=+241
+terminal_states=+21
+terminal_points=+906
+recursive_states=-3
+recursive_points=-665
+total_mass=0.028001773747
+terminal_mass=0.122243850563
+recursive_mass=-0.094242076816
+
+historical_equals_corrected_ordinary=false
+corrected_ordinary_equals_refined=false
+corrected_raw_support_preserved_by_split=true
+corrected_raw_occurrences_preserved_by_split=true
+corrected_raw_harmonic_mass_preserved_by_split=true

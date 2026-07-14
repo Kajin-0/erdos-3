@@ -6,6 +6,7 @@ WORK="${1:-${TMPDIR:-/tmp}/erdos_terminal_sink_ledger}"
 IDENTITY_SHA256="1f25e54d10d73c0130535d12f264405f0e5adb954820725395deb7c86ac19bf9"
 BELLMAN_SHA256="7da70d79f271080a66d3f8ed1aa517d95bf321eb5d618822440fefdfa8504e14"
 THIRD_SHA256="efdd41c014104f328f28c3d13b097335fd2b1730859b74134344329251b135d0"
+POTENTIAL_SHA256="0e1b81e3562990e6071db64c4d6544aab1bb0c78aaae08eee780f3f9d6f81063"
 mkdir -p "$WORK"
 
 IDENTITY_GENERATED="$WORK/retained_terminal_sink_identity_certificate.txt"
@@ -61,8 +62,24 @@ if [[ "$THIRD_ACTUAL" != "$THIRD_SHA256" ]]; then
   exit 1
 fi
 
+POTENTIAL_GENERATED="$WORK/generation_aware_retained_potentials_certificate.txt"
+POTENTIAL_RECORDED="$ROOT/data/generation_aware_retained_potentials_certificate_2026-07-13.txt"
+python3 "$ROOT/src/run_exact_python.py" \
+  "$ROOT/src/verify_generation_aware_retained_potentials.py" \
+  "$POTENTIAL_GENERATED"
+
+cmp "$POTENTIAL_RECORDED" "$POTENTIAL_GENERATED"
+POTENTIAL_ACTUAL="$(sha256sum "$POTENTIAL_GENERATED" | awk '{print $1}')"
+if [[ "$POTENTIAL_ACTUAL" != "$POTENTIAL_SHA256" ]]; then
+  echo "error: generation-aware retained potential certificate SHA-256 mismatch" >&2
+  echo "expected=$POTENTIAL_SHA256" >&2
+  echo "actual=$POTENTIAL_ACTUAL" >&2
+  exit 1
+fi
+
 echo "retained_terminal_sink_identity_sha256=$IDENTITY_ACTUAL"
 echo "retained_terminal_sink_ledger_rows=$LEDGER_ROWS"
 echo "two_generation_recursive_bellman_sha256=$BELLMAN_ACTUAL"
 echo "third_generation_recursive_frontier_sha256=$THIRD_ACTUAL"
-echo "verified: terminal sink identities, strict two-generation row, and exact third-generation expansion/collision no-go"
+echo "generation_aware_retained_potentials_sha256=$POTENTIAL_ACTUAL"
+echo "verified: terminal identities, transition no-go, and two generation-aware retained potential witnesses"

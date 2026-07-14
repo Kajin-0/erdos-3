@@ -32,6 +32,7 @@ The repository has established:
 17. a symbolic affine-closure theorem and universal union-valued pair-resource containment for every coordinated deletion output.
 18. exact occurrence- and union-valued pair-resource contraction from the third to fourth retained frontier.
 19. a certified residual-sponsor backbone split that terminalizes translated residual roots and reduces the fifth recursive pair-resource load without changing raw support or harmonic occurrence mass.
+19. a certified residual-sponsor backbone split that terminalizes translated residual roots and reduces the fifth recursive pair-resource load without changing raw support or harmonic occurrence mass.
 
 The strongest state-specific closure is
 
@@ -90,6 +91,7 @@ A valid theorem must still handle policy dependence, terminal-recursive interact
 - [`docs/fifth-generation-pair-resource-partition.md`](docs/fifth-generation-pair-resource-partition.md) — explicit fifth-child to fourth-pair ownership and unused-capacity theorem.
 - [`docs/affine-output-closure-and-pair-containment.md`](docs/affine-output-closure-and-pair-containment.md) — universal affine descendant and pair-resource containment theorem.
 - [`docs/third-to-fourth-pair-resource-contraction.md`](docs/third-to-fourth-pair-resource-contraction.md) — exact affine pair contraction before root uniqueness.
+- [`docs/residual-sponsor-backbone-refinement.md`](docs/residual-sponsor-backbone-refinement.md) — symbolic and exact finite sponsor-core refinement of the minimum backbone.
 - [`docs/residual-sponsor-backbone-refinement.md`](docs/residual-sponsor-backbone-refinement.md) — symbolic and exact finite sponsor-core refinement of the minimum backbone.
 - [`docs/branching-reserve-lp.md`](docs/branching-reserve-lp.md) — exact retained-child LP contract and current packing requirements.
 

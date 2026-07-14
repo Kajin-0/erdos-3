@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - src/probe_four_generation_feature_lp.py
+      - src/probe_four_generation_integer_witness.py
       - .github/workflows/four-generation-feature-lp.yml
 
 permissions:
@@ -32,19 +33,36 @@ jobs:
             src/probe_four_generation_feature_lp.py \
             > /tmp/four_generation_feature_lp.json \
             2> /tmp/four_generation_feature_lp.err
-          status=$?
-          {
-            echo "exit_status=$status"
-            echo "phase=completed"
-            echo "--- stderr ---"
-            cat /tmp/four_generation_feature_lp.err
-          } >> data/four_generation_feature_lp_status.txt
-          if [[ "$status" == "0" ]]; then
+          lp_status=$?
+          witness_status=not_run
+          : > /tmp/four_generation_integer_witness.err
+          if [[ "$lp_status" == "0" ]]; then
             cp /tmp/four_generation_feature_lp.json \
               data/four_generation_feature_lp_probe.json
+            python3 src/run_exact_python.py \
+              src/probe_four_generation_integer_witness.py \
+              > /tmp/four_generation_integer_witness.json \
+              2> /tmp/four_generation_integer_witness.err
+            witness_status=$?
+            if [[ "$witness_status" == "0" ]]; then
+              cp /tmp/four_generation_integer_witness.json \
+                data/four_generation_integer_witness_probe.json
+            else
+              rm -f data/four_generation_integer_witness_probe.json
+            fi
           else
             rm -f data/four_generation_feature_lp_probe.json
+            rm -f data/four_generation_integer_witness_probe.json
           fi
+          {
+            echo "lp_exit_status=$lp_status"
+            echo "witness_exit_status=$witness_status"
+            echo "phase=completed"
+            echo "--- LP stderr ---"
+            cat /tmp/four_generation_feature_lp.err
+            echo "--- witness stderr ---"
+            cat /tmp/four_generation_integer_witness.err
+          } >> data/four_generation_feature_lp_status.txt
           exit 0
 
       - name: Commit deterministic LP result
@@ -61,6 +79,7 @@ jobs:
           fi
           git add data/four_generation_feature_lp_status.txt
           git add -A data/four_generation_feature_lp_probe.json
+          git add -A data/four_generation_integer_witness_probe.json
           if git diff --cached --quiet; then
             echo "No feature LP output change"
             exit 0

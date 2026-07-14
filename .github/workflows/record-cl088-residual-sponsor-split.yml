@@ -26,7 +26,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Patch and canonicalize authoritative documents
+      - name: Canonicalize, patch, and revalidate authoritative documents
         shell: bash
         run: |
           set +e
@@ -38,6 +38,8 @@ jobs:
           compile_status=$?
           patch_status=not_run
           if [[ "$compile_status" == "0" ]]; then
+            python3 src/canonicalize_cl088_docs.py \
+              2>> /tmp/cl088_documentation.err && \
             python3 src/patch_cl088_residual_sponsor_split.py \
               2>> /tmp/cl088_documentation.err && \
             python3 src/canonicalize_cl088_docs.py \

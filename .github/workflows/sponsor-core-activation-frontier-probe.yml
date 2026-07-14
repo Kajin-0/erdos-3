@@ -7,6 +7,7 @@ on:
       - main
     paths:
       - src/probe_sponsor_core_activation_frontier.py
+      - src/probe_sponsor_core_activation_frontier_v2.py
       - src/summarize_sponsor_core_activation_frontier.py
       - .github/workflows/sponsor-core-activation-frontier-probe.yml
 
@@ -22,7 +23,7 @@ jobs:
     uses: ./.github/workflows/reusable-python-probe-recorder.yml
     with:
       schema: sponsor_core_activation_frontier_probe_v1
-      probe_script: src/probe_sponsor_core_activation_frontier.py
+      probe_script: src/probe_sponsor_core_activation_frontier_v2.py
       probe_output: data/sponsor_core_activation_frontier_probe.json
       summary_script: src/summarize_sponsor_core_activation_frontier.py
       summary_output: data/sponsor_core_activation_frontier_summary.txt

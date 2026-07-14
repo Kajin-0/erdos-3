@@ -1,0 +1,83 @@
+name: One-time CL-088 documentation cleanup
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/one-time-cl088-canonicalize.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: one-time-cl088-documentation-cleanup
+  cancel-in-progress: false
+
+jobs:
+  cleanup:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Canonicalize CL-088 documentation
+        shell: bash
+        run: |
+          set +e
+          python3 -m py_compile src/canonicalize_cl088_docs.py \
+            > /tmp/cl088_cleanup.out 2>&1
+          compile_status=$?
+          cleanup_status=not_run
+          if [[ "$compile_status" == "0" ]]; then
+            python3 src/canonicalize_cl088_docs.py \
+              >> /tmp/cl088_cleanup.out 2>&1
+            cleanup_status=$?
+          fi
+          {
+            echo "schema=cl088_one_time_cleanup_v1"
+            echo "compile_exit_status=$compile_status"
+            echo "cleanup_exit_status=$cleanup_status"
+            echo "source_commit=${GITHUB_SHA}"
+            echo "--- output ---"
+            cat /tmp/cl088_cleanup.out
+          } > data/cl088_cleanup_result.log
+          exit 0
+
+      - name: Commit cleanup and diagnostics
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- data/cl088_cleanup_result.log
+          if grep -Fxq 'cleanup_exit_status=0' data/cl088_cleanup_result.log; then
+            git add -- docs/current-proof-program.md
+          fi
+          if git diff --cached --quiet; then
+            exit 0
+          fi
+          git commit -m "Canonicalize CL-088 proof documentation [skip ci]"
+          for attempt in 1 2 3; do
+            git fetch origin main
+            if ! git rebase origin/main; then
+              git rebase --abort || true
+              exit 1
+            fi
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            sleep $((attempt * 2))
+          done
+          exit 1
+
+      - name: Report cleanup failure
+        if: always()
+        shell: bash
+        run: |
+          grep -Fxq 'compile_exit_status=0' data/cl088_cleanup_result.log
+          grep -Fxq 'cleanup_exit_status=0' data/cl088_cleanup_result.log

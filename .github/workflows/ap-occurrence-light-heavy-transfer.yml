@@ -1,0 +1,30 @@
+name: AP occurrence light-heavy transfer
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - src/probe_ap_occurrence_light_heavy_transfer.py
+      - src/summarize_ap_occurrence_light_heavy_transfer.py
+      - .github/workflows/ap-occurrence-light-heavy-transfer.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: probe-result-writers-main
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    uses: ./.github/workflows/reusable-python-probe-recorder.yml
+    with:
+      schema: ap_occurrence_light_heavy_transfer_probe_v1
+      probe_script: src/probe_ap_occurrence_light_heavy_transfer.py
+      probe_output: data/ap_occurrence_light_heavy_transfer_probe.json
+      summary_script: src/summarize_ap_occurrence_light_heavy_transfer.py
+      summary_output: data/ap_occurrence_light_heavy_transfer_summary.txt
+      status_output: data/ap_occurrence_light_heavy_transfer_status.txt
+      commit_message: Record AP light-heavy transfer probe [skip ci]

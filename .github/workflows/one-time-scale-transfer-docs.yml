@@ -1,5 +1,6 @@
 name: One-time scale-transfer documentation
 
+# One-time trigger after the workflow became active on main.
 on:
   workflow_dispatch:
   push:

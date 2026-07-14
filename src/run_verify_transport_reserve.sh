@@ -17,6 +17,7 @@ FORCED_FORK_SHA256="032307354597d531340a4dc87c9646a9b4bde6b6f7f7cc2a427719cbe7be
 FORCED_FORK_NO_GO_SHA256="771c144b3c08cc186d2613eae314b2d0712d18933094323307b1468a4577d6ef"
 POLICY_SUBSET_SHA256="85667125996eb7d3f33d6bdf6ddd78ad1cefbad8c229d57402711e20d17a2287"
 S7_LOCAL_OPTIMUM_SHA256="8bd93afd6ed9bcd856ff23b5eb671b2963d5aa8b8e47df19f726b38760085211"
+S7_TRANSITION_PROFILE_SHA256="1bf8d15efd7c8cb1f9b04fba769d19e43d2b630d9fe36f141bbcc4466f9bb19e"
 
 mkdir -p "$WORK"
 
@@ -133,7 +134,16 @@ cmp "$S7_LOCAL_OPTIMUM_RECORDED" "$S7_LOCAL_OPTIMUM_GENERATED"
 verify_sha256 "$S7_LOCAL_OPTIMUM_GENERATED" "$S7_LOCAL_OPTIMUM_SHA256" \
   "s7_terminal_step_local_optimum"
 
+S7_PROFILE_GENERATED="$WORK/s7_local_optimum_transition_profile_certificate.txt"
+S7_PROFILE_RECORDED="$ROOT/data/s7_local_optimum_transition_profile_certificate_2026-07-13.txt"
+python3 "$ROOT/src/run_exact_python.py" \
+  "$ROOT/src/verify_s7_local_optimum_transition_profile.py" \
+  "$S7_PROFILE_GENERATED"
+cmp "$S7_PROFILE_RECORDED" "$S7_PROFILE_GENERATED"
+verify_sha256 "$S7_PROFILE_GENERATED" "$S7_TRANSITION_PROFILE_SHA256" \
+  "s7_local_optimum_transition_profile"
+
 python3 "$ROOT/src/certified_contaminated_states.py" > /dev/null
 python3 "$ROOT/src/branching_reserve_lp.py" self-test
 
-echo "verified: transport, reserve diagnostics, transition frontier through S7, full policy subset lattice, exact S7 local optimum, forced-fork reserve/no-go, and LP harness"
+echo "verified: transport, reserve diagnostics, transition frontier through S7, full policy subset lattice, exact S7 local optimum and transition profile, forced-fork reserve/no-go, and LP harness"

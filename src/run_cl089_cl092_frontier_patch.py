@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
-"""Run the CL-089--CL-092 documentation patch without Python escape corruption.
+"""Run the CL-089--CL-092 documentation patch without escape corruption.
 
 The original patch module stores LaTeX-bearing Markdown in ordinary string
-literals.  At runtime, ``\f`` in ``\frac`` and ``\r`` in ``\rm`` become
-control characters.  This runner installs raw canonical strings and replaces
-the recursive-mass section by heading boundaries, making repeated runs
-idempotent even after partial documentation updates.
+literals. At runtime, ``\f`` in ``\frac`` and ``\r`` in ``\rm`` become control
+characters. It also locates the README active theorem by its pre-patch opening
+sentence, so a second run cannot be idempotent. This runner installs raw
+canonical strings and replaces both mutable document sections by heading
+boundaries.
 """
 from __future__ import annotations
 
@@ -161,11 +162,61 @@ def safe_patch_program() -> None:
     path.write_text(text.rstrip() + "\n", encoding="utf-8")
 
 
+def safe_patch_readme() -> None:
+    path = Path(frontier.ROOT) / "README.md"
+    text = path.read_text(encoding="utf-8")
+
+    items = [
+        "20. an exact terminal-stopping correction showing that six first-frontier states were terminal and that the corrected recursive second frontier expands;",
+        "21. a residual-sponsor corrected second frontier reducing recursive mass by `22.6218512798%`;",
+        "22. a full-color coordinated branching theorem with exact raw factor `4` and exactly two child memberships per three-AP;",
+        "23. an exact side/middle/doubled-side pair-edge capacity dictionary and monotone sponsor-pair transport theorem.",
+    ]
+    lines = [line for line in text.splitlines() if line not in items]
+    text = "\n".join(lines) + "\n"
+    marker = (
+        "19. a certified residual-sponsor backbone split that terminalizes "
+        "translated residual roots and reduces the fifth recursive pair-resource "
+        "load without changing raw support or harmonic occurrence mass.\n"
+    )
+    if marker not in text:
+        raise AssertionError("missing README claim marker")
+    text = text.replace(marker, marker + "\n".join(items) + "\n", 1)
+
+    active_heading = "## Active theorem"
+    next_heading = "## Start here"
+    start = text.find(active_heading)
+    end = text.find(next_heading, start + len(active_heading))
+    if start < 0 or end < 0:
+        raise AssertionError("cannot locate README active theorem section")
+    active_block = active_heading + "\n\n" + README_ACTIVE.rstrip()
+    text = text[:start] + active_block + "\n\n" + text[end:]
+
+    link_marker = (
+        "- [`docs/residual-sponsor-backbone-refinement.md`]"
+        "(docs/residual-sponsor-backbone-refinement.md) — symbolic and exact "
+        "finite sponsor-core refinement of the minimum backbone.\n"
+    )
+    links = (
+        "- [`docs/terminal-parent-stopping-lemma.md`](docs/terminal-parent-stopping-lemma.md) — structural terminal stopping and corrected first-frontier semantics.\n"
+        "- [`docs/full-color-coordinated-branching.md`](docs/full-color-coordinated-branching.md) — exact factor-four role-color branching theorem.\n"
+        "- [`docs/full-color-pair-edge-capacity.md`](docs/full-color-pair-edge-capacity.md) — exact pair-edge capacity dictionary.\n"
+        "- [`docs/sponsor-pair-forward-transport.md`](docs/sponsor-pair-forward-transport.md) — monotone activated-pair transport theorem.\n"
+    )
+    for line in links.splitlines():
+        text = text.replace(line + "\n", "")
+    if link_marker not in text:
+        raise AssertionError("missing README link marker")
+    text = text.replace(link_marker, link_marker + links, 1)
+    path.write_text(text.rstrip() + "\n", encoding="utf-8")
+
+
 def install_runtime_fixes() -> None:
     frontier.OLD_MASS = OLD_MASS
     frontier.NEW_MASS = NEW_MASS
     frontier.README_ACTIVE = README_ACTIVE
     frontier.patch_program = safe_patch_program
+    frontier.patch_readme = safe_patch_readme
 
 
 def main() -> int:

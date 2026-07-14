@@ -24,29 +24,78 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Patch authoritative documents
+
+      - name: Patch authoritative documents and preserve status
+        shell: bash
         run: |
-          python3 -m py_compile src/patch_cl088_residual_sponsor_split.py
-          python3 src/patch_cl088_residual_sponsor_split.py
-      - name: Commit update
+          set +e
+          : > /tmp/cl088_documentation.err
+          python3 -m py_compile src/patch_cl088_residual_sponsor_split.py \
+            2> /tmp/cl088_documentation.err
+          compile_status=$?
+          patch_status=not_run
+          if [[ "$compile_status" == "0" ]]; then
+            python3 src/patch_cl088_residual_sponsor_split.py \
+              2>> /tmp/cl088_documentation.err
+            patch_status=$?
+          fi
+          {
+            echo "schema=cl088_documentation_status_v1"
+            echo "compile_exit_status=$compile_status"
+            echo "patch_exit_status=$patch_status"
+            echo "source_commit=${GITHUB_SHA}"
+            echo "source_ref=${GITHUB_REF}"
+            echo "workflow_run_id=${GITHUB_RUN_ID}"
+            echo "workflow_run_attempt=${GITHUB_RUN_ATTEMPT}"
+            echo "--- stderr ---"
+            cat /tmp/cl088_documentation.err
+          } > data/cl088_documentation_status.txt
+          exit 0
+
+      - name: Upload documentation diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cl088-documentation-${{ github.run_id }}-${{ github.run_attempt }}
+          retention-days: 30
+          path: |
+            data/cl088_documentation_status.txt
+            /tmp/cl088_documentation.err
+
+      - name: Commit documentation or failure status
+        if: always()
+        shell: bash
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add \
-            README.md \
-            docs/certainty-ledger.md \
-            docs/current-proof-program.md \
-            docs/research-decision-history.md \
-            docs/residual-sponsor-backbone-refinement.md
+          git add -- data/cl088_documentation_status.txt
+          if grep -Fxq 'patch_exit_status=0' data/cl088_documentation_status.txt; then
+            git add -- \
+              README.md \
+              docs/certainty-ledger.md \
+              docs/current-proof-program.md \
+              docs/research-decision-history.md \
+              docs/residual-sponsor-backbone-refinement.md
+          fi
           if git diff --cached --quiet; then
-            echo "CL-088 documentation already current"
             exit 0
           fi
-          git commit -m "Record CL-088 residual-sponsor backbone refinement [skip ci]"
+          git commit -m "Record CL-088 documentation status [skip ci]"
           git fetch origin main
+          if ! git diff --quiet "$GITHUB_SHA" origin/main -- \
+              src/patch_cl088_residual_sponsor_split.py \
+              .github/workflows/record-cl088-residual-sponsor-split.yml; then
+            echo "error: CL-088 patch source changed; refusing stale documentation" >&2
+            exit 1
+          fi
           if ! git rebase origin/main; then
             git rebase --abort || true
             exit 1
           fi
           git push origin HEAD:main
+
+      - name: Report original patch failure
+        if: always()
+        shell: bash
+        run: bash src/assert_probe_status.sh data/cl088_documentation_status.txt

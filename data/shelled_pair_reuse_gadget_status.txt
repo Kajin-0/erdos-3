@@ -1,0 +1,11 @@
+schema=shelled_pair_reuse_gadget_certificate_v1
+compile_exit_status=0
+probe_exit_status=1
+summary_exit_status=not_run
+verifier_exit_status=not_applicable
+source_commit=75ff79d7de724963e9113d071515ae501e4568b3
+source_ref=refs/heads/main
+workflow_run_id=29369919648
+workflow_run_attempt=1
+--- stderr ---
+usage: verify_shelled_pair_reuse_gadget.py OUTPUT

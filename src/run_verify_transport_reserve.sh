@@ -19,6 +19,7 @@ POLICY_SUBSET_SHA256="85667125996eb7d3f33d6bdf6ddd78ad1cefbad8c229d57402711e20d1
 S7_LOCAL_OPTIMUM_SHA256="8bd93afd6ed9bcd856ff23b5eb671b2963d5aa8b8e47df19f726b38760085211"
 S7_TRANSITION_PROFILE_SHA256="1bf8d15efd7c8cb1f9b04fba769d19e43d2b630d9fe36f141bbcc4466f9bb19e"
 S7_RETAINED_QUOTIENT_SHA256="2a1dd14ee54a9a1b39cc19d4fefc70f54b1157be82f496e2107d3a717052ff92"
+SECOND_GENERATION_PROVENANCE_SHA256="79fca7aa04469adefdd855d08a63b4bbefd7621c6c324d54cd6748f54e734caa"
 
 mkdir -p "$WORK"
 
@@ -153,7 +154,17 @@ cmp "$S7_RETAINED_RECORDED" "$S7_RETAINED_GENERATED"
 verify_sha256 "$S7_RETAINED_GENERATED" "$S7_RETAINED_QUOTIENT_SHA256" \
   "s7_provenance_retained_quotient"
 
+SECOND_GENERATION_GENERATED="$WORK/retained_provenance_second_generation_certificate.txt"
+SECOND_GENERATION_RECORDED="$ROOT/data/retained_provenance_second_generation_certificate_2026-07-13.txt"
+python3 "$ROOT/src/run_exact_python.py" \
+  "$ROOT/src/verify_retained_provenance_second_generation.py" \
+  "$SECOND_GENERATION_GENERATED"
+cmp "$SECOND_GENERATION_RECORDED" "$SECOND_GENERATION_GENERATED"
+verify_sha256 "$SECOND_GENERATION_GENERATED" \
+  "$SECOND_GENERATION_PROVENANCE_SHA256" \
+  "retained_provenance_second_generation"
+
 python3 "$ROOT/src/certified_contaminated_states.py" > /dev/null
 python3 "$ROOT/src/branching_reserve_lp.py" self-test
 
-echo "verified: transport, reserve diagnostics, transition frontier through S7, full policy subset lattice, exact S7 local optimum, transition profile and retained quotient, forced-fork reserve/no-go, and LP harness"
+echo "verified: transport, reserve diagnostics, transition frontier through S7, full policy subset lattice, exact S7 local optimum, retained quotient and second-generation provenance reuse, forced-fork reserve/no-go, and LP harness"

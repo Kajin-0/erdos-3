@@ -26,6 +26,8 @@ jobs:
         shell: bash
         run: |
           set +e
+          echo "phase=started" > data/five_generation_feature_lp_status.txt
+          echo "commit=${GITHUB_SHA}" >> data/five_generation_feature_lp_status.txt
           python3 src/run_exact_python.py \
             src/probe_five_generation_feature_lp.py \
             > /tmp/five_generation_feature_lp.json \
@@ -33,10 +35,10 @@ jobs:
           status=$?
           {
             echo "exit_status=$status"
-            echo "commit=${GITHUB_SHA}"
+            echo "phase=completed"
             echo "--- stderr ---"
             cat /tmp/five_generation_feature_lp.err
-          } > data/five_generation_feature_lp_status.txt
+          } >> data/five_generation_feature_lp_status.txt
           if [[ "$status" == "0" ]]; then
             cp /tmp/five_generation_feature_lp.json data/five_generation_feature_lp_probe.json
           else

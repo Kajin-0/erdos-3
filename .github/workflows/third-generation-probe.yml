@@ -1,0 +1,62 @@
+name: Third-generation exact probe
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - src/probe_third_generation_recursive_frontier.py
+      - .github/workflows/third-generation-probe.yml
+
+permissions:
+  contents: write
+
+jobs:
+  probe:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Run exact third-generation probe
+        shell: bash
+        run: |
+          set +e
+          python3 src/run_exact_python.py \
+            src/probe_third_generation_recursive_frontier.py \
+            > /tmp/third_generation_probe.json \
+            2> /tmp/third_generation_probe.err
+          status=$?
+          {
+            echo "exit_status=$status"
+            echo "commit=${GITHUB_SHA}"
+            echo "--- stderr ---"
+            cat /tmp/third_generation_probe.err
+          } > data/third_generation_probe_status.txt
+          if [[ "$status" == "0" ]]; then
+            cp /tmp/third_generation_probe.json \
+              data/third_generation_recursive_frontier_probe.json
+          else
+            rm -f data/third_generation_recursive_frontier_probe.json
+          fi
+          exit 0
+
+      - name: Commit deterministic probe output
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/third_generation_probe_status.txt
+          if [[ -f data/third_generation_recursive_frontier_probe.json ]]; then
+            git add data/third_generation_recursive_frontier_probe.json
+          fi
+          if git diff --cached --quiet; then
+            echo "No probe output change"
+            exit 0
+          fi
+          git commit -m "Record third-generation exact probe result [skip ci]"
+          git push

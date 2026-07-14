@@ -183,7 +183,7 @@ At the baseline fourth-to-fifth transition,
 
 ```math
 H_5^{\mathrm{rec}}-H_4^{\mathrm{rec}}
-=G_{4	o5}-L_{4	o5},
+=G_{4\to5}-L_{4\to5},
 ```
 
 where `G` is harmonic scale gain along unique surviving root lineages and `L` is parent mass released by exiting lineages. The certified values satisfy
@@ -206,7 +206,7 @@ H_{g+1}^{\mathrm{rec}}
 H_g^{\mathrm{rec}}
 +A_g
 +\Phi_{\mathrm{obs},g}
-+arepsilon_g.
++\varepsilon_g.
 ```
 
 A new coordinate is admissible only if it has a transfer identity or one-sided recurrence, a bounded-reuse interpretation, and a telescoping role. Finite LP correlation is diagnostic only.

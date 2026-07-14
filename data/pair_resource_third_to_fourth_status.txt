@@ -1,5 +1,7 @@
+schema=pair_resource_third_to_fourth_probe_v1
 compile_exit_status=0
 probe_exit_status=0
 summary_exit_status=0
-commit=f25adce6c58f63013d25aacac796c13ed26bd984
+verifier_exit_status=0
+commit=2b2cc5c3bb016c105bc1b543c9fc43e6e7c85d9d
 --- stderr ---

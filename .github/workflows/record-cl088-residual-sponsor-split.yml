@@ -36,8 +36,14 @@ jobs:
             src/canonicalize_cl088_docs.py \
             2> /tmp/cl088_documentation.err
           compile_status=$?
+          self_test_status=not_run
           patch_status=not_run
           if [[ "$compile_status" == "0" ]]; then
+            python3 src/patch_cl088_residual_sponsor_split.py --self-test \
+              2>> /tmp/cl088_documentation.err
+            self_test_status=$?
+          fi
+          if [[ "$self_test_status" == "0" ]]; then
             python3 src/canonicalize_cl088_docs.py \
               2>> /tmp/cl088_documentation.err && \
             python3 src/patch_cl088_residual_sponsor_split.py \
@@ -47,8 +53,9 @@ jobs:
             patch_status=$?
           fi
           {
-            echo "schema=cl088_documentation_status_v2"
+            echo "schema=cl088_documentation_status_v3"
             echo "compile_exit_status=$compile_status"
+            echo "self_test_exit_status=$self_test_status"
             echo "patch_exit_status=$patch_status"
             echo "source_commit=${GITHUB_SHA}"
             echo "source_ref=${GITHUB_REF}"
@@ -78,7 +85,8 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           bash src/stage_optional_probe_outputs.sh \
             data/cl088_documentation_status.txt
-          if grep -Fxq 'patch_exit_status=0' data/cl088_documentation_status.txt; then
+          if grep -Fxq 'self_test_exit_status=0' data/cl088_documentation_status.txt && \
+             grep -Fxq 'patch_exit_status=0' data/cl088_documentation_status.txt; then
             git add -- \
               README.md \
               docs/certainty-ledger.md \

@@ -7,6 +7,8 @@ on:
     paths:
       - src/probe_fourth_generation_potential_frontier.py
       - src/summarize_fourth_generation_probe.py
+      - src/verify_fourth_generation_potential_frontier.py
+      - data/fourth_generation_potential_frontier_certificate_2026-07-13.txt
       - .github/workflows/fourth-generation-probe.yml
 
 permissions:
@@ -33,7 +35,9 @@ jobs:
             2> /tmp/fourth_generation_probe.err
           probe_status=$?
           summary_status=not_run
+          verifier_status=not_run
           : > /tmp/fourth_generation_summary.err
+          : > /tmp/fourth_generation_verifier.err
           if [[ "$probe_status" == "0" ]]; then
             cp /tmp/fourth_generation_probe.json \
               data/fourth_generation_potential_frontier_probe.json
@@ -48,6 +52,17 @@ jobs:
             else
               rm -f data/fourth_generation_potential_frontier_summary.json
             fi
+            python3 src/run_exact_python.py \
+              src/verify_fourth_generation_potential_frontier.py \
+              /tmp/fourth_generation_certificate.txt \
+              > /tmp/fourth_generation_verifier.stdout \
+              2> /tmp/fourth_generation_verifier.err
+            verifier_status=$?
+            if [[ "$verifier_status" == "0" ]]; then
+              cmp data/fourth_generation_potential_frontier_certificate_2026-07-13.txt \
+                /tmp/fourth_generation_certificate.txt
+              verifier_status=$?
+            fi
           else
             rm -f data/fourth_generation_potential_frontier_probe.json
             rm -f data/fourth_generation_potential_frontier_summary.json
@@ -55,11 +70,14 @@ jobs:
           {
             echo "probe_exit_status=$probe_status"
             echo "summary_exit_status=$summary_status"
+            echo "verifier_exit_status=$verifier_status"
             echo "commit=${GITHUB_SHA}"
             echo "--- probe stderr ---"
             cat /tmp/fourth_generation_probe.err
             echo "--- summary stderr ---"
             cat /tmp/fourth_generation_summary.err
+            echo "--- verifier stderr ---"
+            cat /tmp/fourth_generation_verifier.err
           } > data/fourth_generation_probe_status.txt
           exit 0
 

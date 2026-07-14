@@ -1,3 +1,0 @@
-exit_status=0
-commit=7da824f33b324fcc342f92d15bea509f6fb36aeb
---- stderr ---

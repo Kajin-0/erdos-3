@@ -1,0 +1,10 @@
+schema=first_frontier_terminal_correction_certificate_v1
+compile_exit_status=0
+probe_exit_status=0
+summary_exit_status=0
+verifier_exit_status=not_applicable
+source_commit=2999b4983ac9359511f2ec41ed8528a4fbc2fdaa
+source_ref=refs/heads/main
+workflow_run_id=29359453545
+workflow_run_attempt=1
+--- stderr ---

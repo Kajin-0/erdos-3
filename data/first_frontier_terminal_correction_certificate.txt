@@ -1,0 +1,29 @@
+First-frontier terminal correction certificate
+==============================================
+
+terminal_parent_indices=0,1,2,8,74,86
+F1 states=21 points=11753 terminal=6/52 recursive=15/11701
+historical_F2 states=27 points=7925 terminal=13/43 recursive=14/7882
+corrected_F2 states=27 points=7923 terminal=12/38 recursive=15/7885
+refined_F2 states=45 points=8164 terminal=33/944 recursive=12/7220
+
+F1_terminal_mass=0.127088543982
+F1_recursive_mass=0.158733022746
+F1_terminal_share=0.444642947826
+historical_F2_recursive_mass=0.268016957817
+corrected_F2_recursive_mass=0.416597543898
+refined_F2_recursive_mass=0.322355467082
+
+historical_recursive/F1_recursive=1.688476368563
+corrected_recursive/F1_recursive=2.624517171606
+refined_recursive/F1_recursive=2.030802800232
+refinement_recursive_reduction_share=0.226218512798
+
+historical_minus_corrected_total=0.056375723042
+historical_minus_corrected_terminal=0.204956309123
+historical_minus_corrected_recursive=-0.148580586081
+refined_minus_corrected_total=0.028001773747
+refined_minus_corrected_terminal=0.122243850563
+refined_minus_corrected_recursive=-0.094242076816
+
+certificate_payload_sha256=405dd8060848a8240f048da41d72b5bbfb9b33e2e746339e28c18a2c0af42c57

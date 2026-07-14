@@ -60,7 +60,7 @@ Do not use without materially new hypotheses:
 
 """
 
-BOTTLENECK = """# Open bottleneck OB-001: cumulative root-lineage reserve transfer
+BOTTLENECK = r"""# Open bottleneck OB-001: cumulative root-lineage reserve transfer
 
 The adversarial retained construction now has:
 
@@ -121,12 +121,21 @@ def main() -> int:
     marker = "Primary latest references:\n\n"
     additions = (
         "- `docs/fourth-to-fifth-root-transfer.md`;\n"
-        "- `src/verify_fourth_to_fifth_root_transfer.py`;\n"
+        "- `src/verify_fourth-to-fifth-root-transfer.py`;\n"
         "- `docs/fourth-to-fifth-policy-sensitivity.md`;\n"
         "- `src/verify_fourth_to_fifth_policy_sensitivity.py`;\n"
     )
-    if additions not in text:
-        text = text.replace(marker, marker + additions, 1)
+    # Correct an earlier typo if present before testing for the canonical block.
+    text = text.replace(
+        "- `src/verify_fourth-to-fifth-root-transfer.py`;\n",
+        "- `src/verify_fourth_to_fifth_root_transfer.py`;\n",
+    )
+    canonical_additions = additions.replace(
+        "verify_fourth-to-fifth-root-transfer.py",
+        "verify_fourth_to_fifth_root_transfer.py",
+    )
+    if canonical_additions not in text:
+        text = text.replace(marker, marker + canonical_additions, 1)
 
     start = text.index("# Prohibited inferences")
     bottleneck = text.index("# Open bottleneck", start)

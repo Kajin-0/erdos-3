@@ -1,0 +1,30 @@
+name: Shelled pair reuse gadget
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - src/verify_shelled_pair_reuse_gadget.py
+      - src/summarize_shelled_pair_reuse_gadget.py
+      - .github/workflows/shelled-pair-reuse-gadget.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: probe-result-writers-main
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    uses: ./.github/workflows/reusable-python-probe-recorder.yml
+    with:
+      schema: shelled_pair_reuse_gadget_certificate_v1
+      probe_script: src/verify_shelled_pair_reuse_gadget.py
+      probe_output: data/shelled_pair_reuse_gadget_certificate_2026-07-14.json
+      summary_script: src/summarize_shelled_pair_reuse_gadget.py
+      summary_output: data/shelled_pair_reuse_gadget_summary.txt
+      status_output: data/shelled_pair_reuse_gadget_status.txt
+      commit_message: Certify shelled pair reuse gadget [skip ci]

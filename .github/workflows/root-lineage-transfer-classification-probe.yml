@@ -1,0 +1,81 @@
+name: Root-lineage transfer classification probe
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - src/probe_root_lineage_transfer_classification.py
+      - .github/workflows/root-lineage-transfer-classification-probe.yml
+
+permissions:
+  contents: write
+
+jobs:
+  classify:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Run exact root-lineage classification
+        shell: bash
+        run: |
+          set +e
+          python3 -m py_compile src/probe_root_lineage_transfer_classification.py
+          compile_status=$?
+          probe_status=not_run
+          : > /tmp/root_lineage_transfer_classification.err
+          if [[ "$compile_status" == "0" ]]; then
+            python3 src/run_exact_python.py \
+              src/probe_root_lineage_transfer_classification.py \
+              > data/root_lineage_transfer_classification_probe.json \
+              2> /tmp/root_lineage_transfer_classification.err
+            probe_status=$?
+            if [[ "$probe_status" != "0" ]]; then
+              rm -f data/root_lineage_transfer_classification_probe.json
+            fi
+          fi
+          {
+            echo "compile_exit_status=$compile_status"
+            echo "probe_exit_status=$probe_status"
+            echo "commit=${GITHUB_SHA}"
+            echo "--- stderr ---"
+            cat /tmp/root_lineage_transfer_classification.err
+          } > data/root_lineage_transfer_classification_status.txt
+          exit 0
+
+      - name: Commit deterministic probe result
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if [[ ! -f data/root_lineage_transfer_classification_status.txt ]]; then
+            {
+              echo "phase=workflow_failed_before_status"
+              echo "commit=${GITHUB_SHA}"
+            } > data/root_lineage_transfer_classification_status.txt
+          fi
+          git add data/root_lineage_transfer_classification_status.txt
+          git add -A data/root_lineage_transfer_classification_probe.json
+          if git diff --cached --quiet; then
+            echo "No root-lineage classification output change"
+            exit 0
+          fi
+          git commit -m "Record root-lineage transfer classification probe [skip ci]"
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git rebase origin/main
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            sleep $((attempt * 2))
+          done
+          echo "error: failed to push after rebasing and three attempts" >&2
+          exit 1

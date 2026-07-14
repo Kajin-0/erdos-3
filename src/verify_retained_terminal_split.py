@@ -1,0 +1,307 @@
+#!/usr/bin/env python3
+"""Certify the terminal/recursive split of the second retained family."""
+from __future__ import annotations
+
+from fractions import Fraction
+from pathlib import Path
+from typing import Iterable
+import hashlib
+import sys
+
+from verify_retained_provenance_scale_profile import (
+    build_ratio_rows,
+    reconstruct_retained_families,
+)
+
+if hasattr(sys, "set_int_max_str_digits"):
+    sys.set_int_max_str_digits(0)
+
+EXPECTED = {
+    "second_generation_retained_states": 27,
+    "second_generation_retained_labels": 7_925,
+    "terminal_retained_states": 13,
+    "terminal_retained_labels": 43,
+    "recursive_retained_states": 14,
+    "recursive_retained_labels": 7_882,
+    "floor_log_at_least_8_points": 196,
+    "floor_log_at_least_8_terminal_points": 42,
+    "floor_log_at_least_8_recursive_points": 154,
+    "floor_log_at_least_16_points": 4,
+    "floor_log_at_least_16_recursive_points": 0,
+    "floor_log_20_points": 1,
+    "floor_log_20_recursive_points": 0,
+}
+EXPECTED_FAMILY_SHA256 = {
+    "terminal": "0aa2aca9246119f832bb3b58dcc090683c41fb85ed3c47d5c73d0b398dfc672e",
+    "recursive": "925220ccdebe7629cdbe480752b6525d7b06bf794922b1573b7b93ef0064d47d",
+}
+EXPECTED_MASS_SHA256 = {
+    "first": "29f9f139dcdf764a486022f152d7ab0cacc8f40cd4af353f4a5e5f6bea843446",
+    "terminal": "b9c790f6e8be18382848adb9e66fecc01ad26ee0e2ca77e31f93326fb5d1765e",
+    "recursive": "539dfbe1e345d4e6f1e0ed1c08cfedd1eba8c3f9d195fc078ae9ac0d5e391775",
+}
+EXPECTED_RATIOS = {
+    "recursive_over_first": (
+        Fraction(937, 1_000), Fraction(938, 1_000),
+        "7feeb528abcb66253383e448fa50a19043a86c7059331a21f92432e09bded610",
+    ),
+    "recursive_contraction_margin": (
+        Fraction(62, 1_000), Fraction(63, 1_000),
+        "019f9b58c3addc0182870a02e40a616a953b3bfec09131d8d6e3024baf030bc1",
+    ),
+    "terminal_over_second": (
+        Fraction(862, 1_000), Fraction(863, 1_000),
+        "8ae960689b3e914503e78b8b86b8f1425defe38f40281112f317db00c000cb55",
+    ),
+    "recursive_over_second": (
+        Fraction(137, 1_000), Fraction(138, 1_000),
+        "2e8e438468259059326c956e8af6c8b34b53d3aa3ed2d85c6c4f24e8bc2c5c5a",
+    ),
+    "floor_log_at_least_8_terminal_share_of_tail": (
+        Fraction(913, 1_000), Fraction(914, 1_000),
+        "a1344891dd641c0de4ecc623fc57ba2ae171b1d85715deef2a6c0bb2e8d698a1",
+    ),
+    "floor_log_at_least_8_recursive_share_of_second": (
+        Fraction(81, 1_000), Fraction(82, 1_000),
+        "180464f37e611788c0d4a1c7ebf4c1f2801458d3da9801d36a64b7793664e85d",
+    ),
+}
+CERTIFICATE_SHA256 = (
+    "9027800d0646568eea1d673d7dd597bf3d5129837f79006452e6e33c984d96ff"
+)
+
+
+def fraction_text(value: Fraction) -> str:
+    return f"{value.numerator}/{value.denominator}"
+
+
+def fraction_hash(value: Fraction) -> str:
+    return hashlib.sha256(fraction_text(value).encode("utf-8")).hexdigest()
+
+
+def contains_three_term_ap(values: Iterable[int]) -> bool:
+    ordered = sorted(set(values))
+    present = set(ordered)
+    for index, left in enumerate(ordered):
+        for middle in ordered[index + 1 :]:
+            if middle + (middle - left) in present:
+                return True
+    return False
+
+
+def family_hash(states: tuple[object, ...]) -> str:
+    payload = "".join(
+        f"{state.index}:{','.join(map(str, state.values))}\n"
+        for state in states
+    )
+    return hashlib.sha256(payload.encode("utf-8")).hexdigest()
+
+
+def assert_ratio(name: str, value: Fraction) -> None:
+    lower, upper, expected_hash = EXPECTED_RATIOS[name]
+    if not lower < value < upper:
+        raise AssertionError(f"{name} outside compact bracket: {value}")
+    digest = fraction_hash(value)
+    if digest != expected_hash:
+        raise AssertionError(f"{name} hash mismatch: {digest}")
+
+
+def build_certificate() -> str:
+    retained_first, retained_second = reconstruct_retained_families()
+    terminal = tuple(
+        state for state in retained_second
+        if not contains_three_term_ap(state.values)
+    )
+    recursive = tuple(
+        state for state in retained_second
+        if contains_three_term_ap(state.values)
+    )
+    if set(terminal) & set(recursive):
+        raise AssertionError("terminal and recursive retained states overlap")
+    if len(terminal) + len(recursive) != len(retained_second):
+        raise AssertionError("terminal/recursive partition mismatch")
+
+    rows = build_ratio_rows(retained_second)
+    terminal_indices = {state.index for state in terminal}
+    recursive_indices = {state.index for state in recursive}
+
+    tail_8 = [row for row in rows if int(row["floor_log"]) >= 8]
+    tail_16 = [row for row in rows if int(row["floor_log"]) >= 16]
+    tail_20 = [row for row in rows if int(row["floor_log"]) == 20]
+    observed = {
+        "second_generation_retained_states": len(retained_second),
+        "second_generation_retained_labels": sum(
+            len(state.values) for state in retained_second
+        ),
+        "terminal_retained_states": len(terminal),
+        "terminal_retained_labels": sum(len(state.values) for state in terminal),
+        "recursive_retained_states": len(recursive),
+        "recursive_retained_labels": sum(len(state.values) for state in recursive),
+        "floor_log_at_least_8_points": len(tail_8),
+        "floor_log_at_least_8_terminal_points": sum(
+            int(row["class"]) in terminal_indices for row in tail_8
+        ),
+        "floor_log_at_least_8_recursive_points": sum(
+            int(row["class"]) in recursive_indices for row in tail_8
+        ),
+        "floor_log_at_least_16_points": len(tail_16),
+        "floor_log_at_least_16_recursive_points": sum(
+            int(row["class"]) in recursive_indices for row in tail_16
+        ),
+        "floor_log_20_points": len(tail_20),
+        "floor_log_20_recursive_points": sum(
+            int(row["class"]) in recursive_indices for row in tail_20
+        ),
+    }
+    if observed != EXPECTED:
+        raise AssertionError(f"terminal-split metric mismatch: {observed!r}")
+
+    observed_family_hashes = {
+        "terminal": family_hash(terminal),
+        "recursive": family_hash(recursive),
+    }
+    if observed_family_hashes != EXPECTED_FAMILY_SHA256:
+        raise AssertionError("terminal/recursive family hash mismatch")
+
+    first_mass = sum((state.weight for state in retained_first), Fraction())
+    second_mass = sum((state.weight for state in retained_second), Fraction())
+    terminal_mass = sum((state.weight for state in terminal), Fraction())
+    recursive_mass = sum((state.weight for state in recursive), Fraction())
+    if terminal_mass + recursive_mass != second_mass:
+        raise AssertionError("terminal/recursive mass partition mismatch")
+
+    observed_mass_hashes = {
+        "first": fraction_hash(first_mass),
+        "terminal": fraction_hash(terminal_mass),
+        "recursive": fraction_hash(recursive_mass),
+    }
+    if observed_mass_hashes != EXPECTED_MASS_SHA256:
+        raise AssertionError("terminal-split mass hash mismatch")
+
+    tail_8_terminal_mass = sum(
+        (
+            Fraction(1, int(row["u"]))
+            for row in tail_8
+            if int(row["class"]) in terminal_indices
+        ),
+        Fraction(),
+    )
+    tail_8_recursive_mass = sum(
+        (
+            Fraction(1, int(row["u"]))
+            for row in tail_8
+            if int(row["class"]) in recursive_indices
+        ),
+        Fraction(),
+    )
+    tail_8_mass = tail_8_terminal_mass + tail_8_recursive_mass
+
+    ratios = {
+        "recursive_over_first": recursive_mass / first_mass,
+        "recursive_contraction_margin": (
+            (first_mass - recursive_mass) / first_mass
+        ),
+        "terminal_over_second": terminal_mass / second_mass,
+        "recursive_over_second": recursive_mass / second_mass,
+        "floor_log_at_least_8_terminal_share_of_tail": (
+            tail_8_terminal_mass / tail_8_mass
+        ),
+        "floor_log_at_least_8_recursive_share_of_second": (
+            tail_8_recursive_mass / second_mass
+        ),
+    }
+    for name, value in ratios.items():
+        assert_ratio(name, value)
+
+    lines = [
+        "SECOND-GENERATION RETAINED TERMINAL SPLIT",
+        "",
+        "first_generation_policy=local37",
+        "child_transition_policy=lexicographic_coordinated_deletion",
+        (
+            "retention=global_exact_duplicate_quotient_plus_"
+            "maximum_harmonic_conflict_selection"
+        ),
+        "",
+        "second_generation_retained_states=27",
+        "second_generation_retained_labels=7925",
+        "terminal_retained_states=13",
+        "terminal_retained_labels=43",
+        "recursive_retained_states=14",
+        "recursive_retained_labels=7882",
+        "terminal_states_have_three_term_AP=False",
+        "terminal_states_have_selected_actions=False",
+        f"terminal_family_sha256={observed_family_hashes['terminal']}",
+        f"recursive_family_sha256={observed_family_hashes['recursive']}",
+        "",
+        f"first_generation_retained_mass_sha256={observed_mass_hashes['first']}",
+        f"terminal_second_generation_mass_sha256={observed_mass_hashes['terminal']}",
+        f"recursive_second_generation_mass_sha256={observed_mass_hashes['recursive']}",
+        "",
+        "recursive_over_first_retained_mass_bracket=937/1000,938/1000",
+        f"recursive_over_first_retained_mass_sha256={EXPECTED_RATIOS['recursive_over_first'][2]}",
+        "recursive_contraction_margin_bracket=62/1000,63/1000",
+        f"recursive_contraction_margin_sha256={EXPECTED_RATIOS['recursive_contraction_margin'][2]}",
+        "terminal_over_second_retained_mass_bracket=862/1000,863/1000",
+        f"terminal_over_second_retained_mass_sha256={EXPECTED_RATIOS['terminal_over_second'][2]}",
+        "recursive_over_second_retained_mass_bracket=137/1000,138/1000",
+        f"recursive_over_second_retained_mass_sha256={EXPECTED_RATIOS['recursive_over_second'][2]}",
+        "",
+        "floor_log_at_least_8_points=196",
+        "floor_log_at_least_8_terminal_points=42",
+        "floor_log_at_least_8_recursive_points=154",
+        "floor_log_at_least_8_terminal_mass_share_of_tail_bracket=913/1000,914/1000",
+        f"floor_log_at_least_8_terminal_mass_share_of_tail_sha256={EXPECTED_RATIOS['floor_log_at_least_8_terminal_share_of_tail'][2]}",
+        "floor_log_at_least_8_recursive_mass_share_of_second_bracket=81/1000,82/1000",
+        f"floor_log_at_least_8_recursive_mass_share_of_second_sha256={EXPECTED_RATIOS['floor_log_at_least_8_recursive_share_of_second'][2]}",
+        "floor_log_at_least_16_points=4",
+        "floor_log_at_least_16_recursive_points=0",
+        "floor_log_20_points=1",
+        "floor_log_20_recursive_points=0",
+        "",
+        (
+            "conclusion: the apparent 6.828-to-6.829 retained-mass expansion is "
+            "dominated by three-term-progression-free terminal states."
+        ),
+        (
+            "After removing terminal retained states, recursive second-generation "
+            "harmonic mass is between 93.7% and 93.8% of first-generation retained mass."
+        ),
+        (
+            "The recursive retained branch therefore contracts by between 6.2% "
+            "and 6.3% on this exact two-generation transition."
+        ),
+        (
+            "All contractions of at least 16 binary orders, including the u=1 "
+            "point, are terminal and create no further coordinated-deletion children."
+        ),
+        (
+            "The remaining whole-tree problem is to account for terminal sink mass "
+            "globally without double counting, not to pay the full 6.828 expansion "
+            "as recursive load."
+        ),
+        "",
+    ]
+    certificate = "\n".join(lines)
+    digest = hashlib.sha256(certificate.encode("utf-8")).hexdigest()
+    if digest != CERTIFICATE_SHA256:
+        raise AssertionError(f"certificate SHA-256 mismatch: {digest}")
+    return certificate
+
+
+def main() -> int:
+    if len(sys.argv) > 2:
+        raise SystemExit("usage: verify_retained_terminal_split.py [OUTPUT]")
+    certificate = build_certificate()
+    if len(sys.argv) == 2:
+        Path(sys.argv[1]).write_text(certificate, encoding="utf-8")
+    print(certificate, end="")
+    print(
+        "certificate_sha256="
+        + hashlib.sha256(certificate.encode("utf-8")).hexdigest()
+    )
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

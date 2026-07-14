@@ -38,7 +38,7 @@ def patch_current_program() -> None:
     path = ROOT / "docs/current-proof-program.md"
     text = path.read_text(encoding="utf-8")
     marker = "---\n\n## 1. Foundation and recorded exact path"
-    section = """---
+    section = r"""---
 
 ## Certified residual-sponsor backbone refinement
 

@@ -1,4 +1,4 @@
-# Current proof program: provenance-reserve retained potential
+# Current proof program: four-generation retained-feature LP
 
 ## Status
 
@@ -56,17 +56,11 @@ Every valid exact factor-eight child has a certified summable tail. This closes 
 
 ---
 
-## 2. Policy and retained-child frontier
+## 2. Policy and retained-child construction
 
-Lexicographic `S_7` contains both an isolated return
+Lexicographic `S_7` contains an isolated canonical return and a cyclic terminal-fiber component, so raw outputs cannot be inserted directly into a Bellman child sum.
 
-```math
-\{16,21,26\}\xrightarrow[f=4]{R=1}S_1
-```
-
-and a cyclic terminal-fiber component with spectral radius greater than `23/9`. Raw outputs cannot therefore be inserted directly into a Bellman child sum.
-
-A deterministic policy search produces a seed-delayed 37-step `S_7` policy with
+A deterministic policy search gives a seed-delayed 37-step `S_7` policy with
 
 ```text
 selected actions = 9,323
@@ -78,53 +72,47 @@ canonical regeneration = false.
 
 It has no improving move in its exact 59-toggle neighborhood. This is local, not global, policy optimality.
 
-Its raw transition has `131` shell occurrences and `87` exact state classes. Exact duplicate quotienting followed by maximum-harmonic independent-set selection in the same-shell conflict graph gives a unique point-disjoint first retained family:
+For every generation the retained quotient is defined by:
 
-```text
-first retained states = 21
-first retained labels = 11,753.
-```
+1. exact numerical state quotienting;
+2. deterministic provenance representatives;
+3. same-shell intersection conflicts;
+4. componentwise maximum-harmonic independent-set selection.
 
-Lexicographic propagation and the same global quotient give:
+The resulting retained frontier is:
 
-| retained level | states | points |
-|---|---:|---:|
-| first retained | 21 | 11,753 |
-| second total | 27 | 7,925 |
-| second recursive | 14 | 7,882 |
-| third total | 32 | 4,899 |
-| third recursive | 14 | 4,789 |
+| retained level | total states | total points | terminal states | terminal points | recursive states | recursive points |
+|---|---:|---:|---:|---:|---:|---:|
+| first | 21 | 11,753 | — | — | 21 | 11,753 |
+| second | 27 | 7,925 | 13 | 43 | 14 | 7,882 |
+| third | 32 | 4,899 | 18 | 110 | 14 | 4,789 |
+| fourth | 23 | 1,794 | 11 | 77 | 12 | 1,717 |
 
-All retained families are point-disjoint within their generation, and every conflict component used in the second and third quotient has a unique optimum.
+Every recorded retained family is point-disjoint within its generation. Every second-, third-, and fourth-generation conflict component has a unique optimum.
 
 ---
 
-## 3. Terminal sinks and the raw-mass no-go
+## 3. Raw recursive mass alternates
 
-The second retained family splits into
+Let `H_g^rec` denote recursively continuing retained harmonic mass.
 
-| type | states | points |
-|---|---:|---:|
-| terminal, three-term-progression-free | 13 | 43 |
-| recursive | 14 | 7,882 |
-
-Terminal output carries `86.2%`–`86.3%` of total second retained harmonic mass. Removing it gives
+The second generation contracts:
 
 ```math
 0.937
 <
 \frac{H_2^{\mathrm{rec}}}{H_1}
 <
-0.938,
+0.938.
 ```
 
-and the local row
+This yields the valid local row
 
 ```math
 \frac{31}{500}H_1+H_2^{\mathrm{rec}}<H_1.
 ```
 
-That row does not iterate. Propagating only the 14 recursive second-generation states yields
+The third generation expands:
 
 ```math
 \boxed{
@@ -136,61 +124,85 @@ That row does not iterate. Propagating only the 14 recursive second-generation s
 }
 ```
 
-Thus raw recursive harmonic mass contracts once and then expands by more than a factor of two under the same fixed policy and retained quotient.
+The fourth generation expands again:
 
-The third retained family again has substantial terminal output:
+```math
+\boxed{
+2.849279
+<
+\frac{H_4^{\mathrm{rec}}}{H_3^{\mathrm{rec}}}
+<
+2.849280.
+}
+```
 
-| type | states | points |
-|---|---:|---:|
-| terminal | 18 | 110 |
-| recursive | 14 | 4,789 |
+Raw recursive harmonic mass is therefore not a one-step or short observed-window Bellman potential under the fixed policy and quotient.
 
-Terminal mass must be carried through a separate first-appearance ledger; it cannot be discarded or counted as persistent recursive load.
+Terminal output remains substantial but changes by generation:
+
+```text
+second retained terminal share: 86.2%–86.3%
+third retained terminal share:  78.8208%–78.8209%
+fourth retained terminal share: 59.2741%–59.2742%.
+```
+
+Terminal mass must be accounted through a separate first-appearance ledger; it cannot be discarded or treated as persistent recursive load.
 
 ---
 
-## 4. Terminal identity correction
+## 4. Terminal identities and refined tokens
 
-The 43 second-generation terminal points have exact numerical, root-provenance, immediate-provenance, source, and shell identities.
+Each terminal point carries:
 
-Within that family, all tokens
+```text
+current label u
+original S7 root provenance p
+immediate provenance i
+parent retained class
+source type and source step
+dyadic shell.
+```
+
+The token
 
 ```math
 \tau(u)=(u,p)
 ```
 
-are unique, where `p` is original `S_7` root provenance. Across the third generation, however, exactly one token recurs:
+fails across generations:
 
-```text
-(u,p) = (60, 1,354,490).
-```
+- one collision appears at generation three;
+- seven prior-terminal collisions appear in generation-four terminal output;
+- no recorded `(u,p)` collision appears in generation-four recursive output.
 
-Both occurrences are step-5 middle fibers. Their immediate provenance differs:
-
-```text
-generation 2: i = 2,810
-generation 3: i = 440.
-```
-
-Therefore `(u,p)` and `(u,p,source,source_step)` are too coarse, while
+The refined token
 
 ```math
-\tau^+(u)=(u,p,i)
+\boxed{\tau^+(u)=(u,p,i)}
 ```
 
-separates the first recorded collision. Immediate provenance is a viable next signature component, not yet a global injectivity theorem.
+has no recorded collision through generation four, terminal or recursive.
 
-Numerical identity alone is much worse: 28 earlier terminal labels and seven complete terminal numerical states recur.
+Numerical identity alone is far too coarse:
+
+```text
+generation 3: 28 prior terminal labels and 7 complete terminal states recur
+generation 4: 104 prior terminal labels recur across terminal/recursive output and 6 complete states recur.
+```
+
+Immediate provenance is therefore the first successful finite collision refinement. It is not yet a global injectivity theorem.
 
 ---
 
-## 5. Provenance-reserve potential
+## 5. Three-generation reserve witnesses
 
-Raw recursive harmonic mass fails, but the exact feature screen found two simple same-form potentials that decrease across both recorded recursive transitions.
+An exact 11-feature screen over the first three recursive levels found four feasible single-coordinate corrections to current harmonic mass.
+
+Two simple integer witnesses were certified.
 
 ### Repeated-root descendant reserve
 
-Let `m_g(p)` be the number of retained recursive points in generation `g` carrying root provenance `p`. Define
+Let
 
 ```math
 R_g
@@ -198,114 +210,86 @@ R_g
 \sum_{(u,p)\in F_g\,:\,m_g(p)>1}\frac1u.
 ```
 
-The primary candidate is
+Then
 
 ```math
-\boxed{
-\Phi_g^{\mathrm{rep}}=H_g+2R_g.
-}
+\Phi_g^{\mathrm{rep}}=H_g+2R_g
 ```
 
-It satisfies
-
-```math
-\frac{145059}{200000}
-<
-\frac{\Phi_2^{\mathrm{rep}}}{\Phi_1^{\mathrm{rep}}}
-<
-\frac{45331}{62500},
-```
-
-and
-
-```math
-\boxed{
-\frac{939443}{1000000}
-<
-\frac{\Phi_3^{\mathrm{rep}}}{\Phi_2^{\mathrm{rep}}}
-<
-\frac{234861}{250000}.
-}
-```
-
-Hence the same potential contracts by `27.4704%–27.4705%` and then `6.0556%–6.0557%`.
-
-The mechanism is reserve release: repeated-root descendant mass falls from approximately
-
-```text
-0.272749423160
-0.167467988429
-0.013654746193
-```
-
-across the three retained recursive levels, absorbing the third-generation increase in raw harmonic mass.
+contracts by `27.4704%–27.4705%` and then `6.0556%–6.0557%` across the first two recorded recursive transitions.
 
 ### Immediate-depth-tail reserve
 
 Let
 
 ```math
-d_i(u)=\left\lfloor\log_2\frac{i}{u}\right\rfloor
-```
-
-for immediate provenance `i`, and define
-
-```math
 T_g
 =
-\sum_{(u,i)\in F_g\,:\,d_i(u)\ge4}\frac1u.
+\sum_{(u,i)\in F_g\,:\,\lfloor\log_2(i/u)\rfloor\ge4}\frac1u.
 ```
 
-The secondary candidate is
+Then
 
 ```math
-\boxed{
-\Phi_g^{\mathrm{tail}}=H_g+4T_g.
-}
+\Phi_g^{\mathrm{tail}}=H_g+4T_g
 ```
 
-It satisfies
+also contracts across those transitions, with a second-transition margin of `0.1313%–0.1314%`.
 
-```math
-\frac{499343}{500000}
-<
-\frac{\Phi_3^{\mathrm{tail}}}{\Phi_2^{\mathrm{tail}}}
-<
-\frac{998687}{1000000},
-```
-
-so the difficult transition still contracts by `0.1313%–0.1314%`.
-
-This coordinate is path-aware and uses the same immediate-provenance information that repaired the first terminal-token collision.
+These are exact three-level witnesses, not iterating potentials.
 
 ---
 
-## 6. Exact single-feature screen
+## 6. Fourth-generation reserve failure
 
-With current harmonic mass coefficient fixed to one, eleven nonnegative single-coordinate corrections were tested against both recursive transitions.
-
-Exactly four are feasible:
+At the fourth recursive level:
 
 ```text
-immediate_tail_ge4_descendant_mass
-root_occurrence_mass
-root_repeat_descendant_mass
-root_repeat_occurrence_mass.
+recursive points = 1,717
+root provenance labels = 1,717
+repeated root labels = 0
+immediate provenance labels = 1,717
+repeated immediate labels = 0.
 ```
 
-The following are infeasible as standalone corrections:
+The repeated-root reserve vanishes:
+
+```math
+R_4=0.
+```
+
+Consequently,
+
+```math
+\boxed{
+2.711908
+<
+\frac{\Phi_4^{\mathrm{rep}}}{\Phi_3^{\mathrm{rep}}}
+<
+2.711909.
+}
+```
+
+The immediate depth-four tail instead regenerates from approximately `0.000244` to `0.917166`, giving
+
+```math
+\boxed{
+9.636610
+<
+\frac{\Phi_4^{\mathrm{tail}}}{\Phi_3^{\mathrm{tail}}}
+<
+9.636611.
+}
+```
+
+The two candidates fail for complementary reasons:
 
 ```text
-immediate_depth_charge
-immediate_occurrence_mass
-immediate_repeat_descendant_mass
-immediate_repeat_occurrence_mass
-root_depth_charge
-root_tail_ge4_descendant_mass
-root_tail_ge8_descendant_mass.
+repeated-root capacity disappears before new growth
+immediate-depth capacity is recreated during new growth.
 ```
 
-The simple integer witnesses are coefficient `2` for repeated-root descendant mass and coefficient `4` for the immediate depth-four tail.
+This supersedes the three-generation candidates as possible one-step iterating potentials. Their three-generation certificate remains valid as a finite positive result.
 
 ---
 
@@ -330,42 +314,50 @@ The whole-tree target remains
 }
 ```
 
-The first concrete candidate for `RecPack` is now
-
-```math
-\mathrm{RecPack}(F)=H(F)+2R(F).
-```
-
-A secondary candidate is
-
-```math
-\mathrm{RecPack}_{\mathrm{tail}}(F)=H(F)+4T(F).
-```
-
-The recorded frontier supplies:
+The current frontier supplies:
 
 ```text
-legitimate point-disjoint retained children
-terminal/recursive partitions through generation three
-an explicit raw-mass failure
-an exact terminal-token collision and immediate-provenance repair
-two same-form retained potentials that contract across both observed transitions.
+legitimate point-disjoint retained children through generation four
+exact terminal/recursive partitions
+three alternating recursive-mass transitions
+an exact first-appearance terminal ledger
+an (u,p) token failure and an (u,p,i) finite repair
+two three-generation reserve witnesses
+a fourth-generation exact failure of both witnesses.
 ```
 
-These are fixed-policy, fixed-retention finite witnesses. The missing theorem is uniform control across later generations, policies, and branches.
+The next mathematical object is an exact rational feature LP over all three recursive transitions:
+
+```text
+generation 1 -> generation 2 recursive
+generation 2 recursive -> generation 3 recursive
+generation 3 recursive -> generation 4 recursive.
+```
+
+The LP must test whether any nonnegative combination of the existing feature family makes every transition nonexpanding. If infeasible, the smallest exact Farkas/dual obstruction becomes the next theorem. New coordinates should be introduced only after that exhaustion.
+
+Likely missing mechanisms are cumulative rather than within-generation:
+
+```text
+first-appearance provenance reuse
+ancestor-chain/path capacity
+terminal credit released when reserve disappears
+completion or rectangle obstruction created by reserve release
+multi-transition amortization rather than one-step monotonicity.
+```
 
 ---
 
 ## 8. Approved next targets
 
-1. Propagate the 14 third-generation recursive states to a fourth retained generation.
-2. Test `H+2R` and `H+4T` before introducing any new coordinate.
-3. Record terminal recreation under the refined token `(u,p,i)`.
-4. Export the two candidate potentials into the exact rational LP schema.
-5. Test policy sensitivity of repeated-root reserve on the smallest retained families.
-6. Prove bounded release/recreation of repeated-root capacity or extract the first exact failure.
-7. Attach completion, rectangle, or cheap-extension exclusion credit if either potential fails.
-8. Prove a branching terminal-output Carleson bound using first-appearance refined tokens.
+1. Export the three recursive transitions into one exact rational feature matrix.
+2. Solve the nonnegative feature-feasibility LP with current harmonic coefficient fixed to one.
+3. Extract a sparse rational witness or the smallest exact dual obstruction.
+4. Test refined terminal token `(u,p,i)` in the same first-appearance accounting schema.
+5. Add cumulative provenance or path-capacity coordinates only if the current LP is infeasible.
+6. Test policy sensitivity on the smallest retained families before propagating generation five.
+7. Attach completion, rectangle, or cheap-extension exclusion credit to reserve release.
+8. Prove a branching terminal-output Carleson bound or isolate the first unbounded refined-token reuse mechanism.
 
 ---
 
@@ -380,16 +372,16 @@ Do not infer:
 - one-generation retention bounds indefinite reuse;
 - maximum provenance multiplicity implies contraction by itself;
 - unit depth or logarithmic charge repays total retained mass;
-- the full `6.828`–`6.829` ratio is recursive load;
 - terminal mass may be discarded;
 - `(u,p)` is collision-sound;
-- immediate provenance is globally sufficient after one finite success;
+- `(u,p,i)` is globally collision-sound after four finite levels;
 - first-appearance bookkeeping bounds token-union mass;
-- raw harmonic contraction or expansion persists to later generations;
-- `H+2R` or `H+4T` is a universal Bellman potential after two finite transitions;
+- the `31/500` row iterates;
+- raw recursive mass follows a stable short-period pattern;
+- `H+2R` or `H+4T` survives beyond generation three;
 - maximum-harmonic retention is globally optimal;
 - policy-LP feasibility implies branching Bellman-LP feasibility;
-- one finite transition proves the whole theorem.
+- one finite path proves the whole theorem.
 
 ---
 
@@ -407,19 +399,19 @@ Established extended frontier:
 bash src/run_verify_transport_reserve.sh
 ```
 
-Terminal identities, third-generation frontier, and provenance-reserve potentials:
+Terminal identities and retained generations through the fourth frontier:
 
 ```bash
 bash src/run_verify_terminal_sink_ledger.sh
 ```
 
-The manually triggered extended workflow runs both extended suites. None of the generation-aware potential work is part of push-gating lightweight CI.
+The manually triggered extended workflow runs both extended suites. None of the retained-generation work is part of push-gating lightweight CI.
 
 Primary recent references:
 
+- `docs/fourth-generation-provenance-reserve-frontier.md`;
 - `docs/generation-aware-retained-potentials.md`;
 - `docs/third-generation-recursive-frontier.md`;
 - `docs/two-generation-recursive-bellman-row.md`;
 - `docs/terminal-sink-first-appearance-ledger.md`;
-- `docs/retained-terminal-sink-identity-ledger.md`;
-- `docs/retained-terminal-recursive-split.md`.
+- `docs/retained-terminal-sink-identity-ledger.md`.

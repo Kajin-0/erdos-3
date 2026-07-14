@@ -1,0 +1,47 @@
+name: Record CL-081 backbone-anchor theorem
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - src/patch_cl081_backbone_anchor.py
+      - .github/workflows/record-cl081-backbone-anchor.yml
+
+permissions:
+  contents: write
+
+jobs:
+  record:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Patch authoritative research documents
+        run: |
+          python3 -m py_compile src/patch_cl081_backbone_anchor.py
+          python3 src/patch_cl081_backbone_anchor.py
+
+      - name: Commit documentation update
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/certainty-ledger.md docs/current-proof-program.md docs/research-decision-history.md
+          if git diff --cached --quiet; then
+            echo "CL-081 documentation already current"
+            exit 0
+          fi
+          git commit -m "Record CL-081 backbone-anchor research pivot [skip ci]"
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git rebase origin/main
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            sleep $((attempt * 2))
+          done
+          exit 1

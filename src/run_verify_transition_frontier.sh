@@ -153,4 +153,11 @@ run_check two_coordinate_policy_family \
   python3 "$EXACT_PYTHON" "$ROOT/src/verify_two_coordinate_policy_family.py" \
   "$WORK/two_coordinate_policy_family_certificate.txt"
 
-echo "verified: simultaneous transition, SCC, obstruction, regeneration, policy tradeoff, common cone, and two-coordinate policy frontier through S7"
+run_check policy_halfspace_lp \
+  7721d5c933fa04b3a2d9efec2ea29f1d0ebc540df6a602d78323bd390eb279d1 \
+  "$ROOT/data/policy_halfspace_lp_certificate_2026-07-13.txt" \
+  "$WORK/policy_halfspace_lp_certificate.txt" \
+  python3 "$EXACT_PYTHON" "$ROOT/src/verify_policy_halfspace_lp.py" \
+  "$WORK/policy_halfspace_lp_certificate.txt"
+
+echo "verified: simultaneous transition, SCC, obstruction, regeneration, policy tradeoff, and exact two-coordinate halfspace LP through S7"

@@ -104,6 +104,34 @@ A token that is too coarse can merge genuinely distinct contributions. A token t
 
 ---
 
+## Affine pair-capacity interpretation
+
+When a terminal point belongs to an affine root state, its coarse token
+
+```math
+(u,p)
+```
+
+already determines the affine reference
+
+```math
+r=p-u.
+```
+
+Therefore `(u,p)` is the root pair `(r,p)` with weight `1/(p-r)=1/u`. In a fixed root universe `P_0`, first-appearance terminal pair mass satisfies
+
+```math
+\sum_{\text{first terminal }(u,p)}\frac1u
+\le
+J(P_0).
+```
+
+A collision of `(u,p)` is genuine pair-resource reuse. Refining the token to `(u,p,i)` may distinguish genealogical histories, but does not create another pair credit. The refined token should be treated as metadata unless a separate non-pair resource is proved.
+
+This interpretation applies only after the affine root-reference hypotheses are verified.
+
+---
+
 ## 5. Candidate Bellman form
 
 For a collision-sound token map, define

@@ -94,6 +94,44 @@ Primary reference: `docs/affine-pivot-pair-energy.md`.
 
 ---
 
+## Affine pair-token first-appearance theorem
+
+For every affine point with current label `u` and root provenance `p`,
+
+```math
+r=p-u
+```
+
+is its root reference. Thus the coarse point token `(u,p)` is exactly the root pair `(r,p)` and has pair weight `1/(p-r)=1/u`.
+
+For any affine forest over root universe `P_0`,
+
+```math
+\boxed{
+\sum_{\text{first-appearance }(u,p)}\frac1u
+\le
+J(P_0).
+}
+```
+
+A repeated coarse token is true reuse of the same pair capacity. Immediate provenance may distinguish occurrence histories, but it must not be treated as a second copy of the pair resource.
+
+This gives a precise decomposition
+
+```text
+raw point mass
+=
+first-appearance pair mass
++
+pair-reuse mass.
+```
+
+The first term is controlled by `J(P_0)`. The remaining structural target is pair-reuse mass plus payment for the entering pair energy.
+
+Primary reference: `docs/affine-root-pair-token-ledger.md`.
+
+---
+
 ## 1. Foundation and recorded exact path
 
 For
@@ -428,11 +466,12 @@ LP correlation alone is insufficient.
 ## 9. Approved next targets
 
 1. Certify the affine root-coordinate hypotheses on the existing retained frontier: one common reference root per state and exact pivot update `p-r -> p-a`.
-2. Test the exact translation reserve `A(S)=sum_{u>min(S)}(1/(u-min(S))-1/u)` on the existing four transitions; record either a coefficient theorem or the smallest exact no-go subsystem.
-3. Compute entering root-pair energy `J(P)` by generation and identify which earlier production, terminal, completion, rectangle, or exclusion terms can pay it.
-4. Prove an affine-entry or affine-purification theorem for recursively continuing states, separating non-affine middle-fiber structure as terminal or obstruction output.
-5. Refine the 673 dropped roots with raw descendants by provenance, distinguishing valid retained coverage from numerical coverage by unrelated lineages.
-6. Test any proposed lemma on the existing four transitions before adding another generation.
+2. Compute occurrence and first-appearance root-pair mass by generation, including exact `(u,p)` collision/reuse ledgers.
+3. Test the exact translation reserve `A(S)=sum_{u>min(S)}(1/(u-min(S))-1/u)` on the existing four transitions; record either a coefficient theorem or the smallest exact no-go subsystem.
+4. Compute entering root-pair energy `J(P)` by generation and identify which earlier production, terminal, completion, rectangle, or exclusion terms can pay it.
+5. Prove an affine-entry or affine-purification theorem for recursively continuing states, separating non-affine middle-fiber structure as terminal or obstruction output.
+6. Refine the 673 dropped roots with raw descendants by provenance, distinguishing valid retained coverage from numerical coverage by unrelated lineages.
+7. Test any proposed lemma on the existing four transitions before adding another generation.
 
 Generation six is blocked until a specific state-independent transfer lemma exists.
 

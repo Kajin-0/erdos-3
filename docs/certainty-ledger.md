@@ -99,9 +99,11 @@ Statuses marked **exact finite** are computational statements for recorded objec
 | CL-080 | At the baseline fourth-to-fifth transition, all root provenance is unique. Of 1717 fourth recursive roots, 1015 survive recursively and 702 exit; 17 terminalize and 685 disappear from the retained family. The exact identity `H5_rec-H4_rec=G_4->5-L_4->5` has survivor scale gain `1.816777911848...`, exiting parent release `1.310139720502...`, and net recursive increase `0.506638191346...`; `1.386705<G/L<1.386706`. No root splits between recursive and terminal output and fifth retained root multiplicity is one. | Elementary root-lineage identity plus exact finite decomposition. |
 | CL-081 | At the certified fourth-to-fifth baseline transition, all `1015` recursively surviving roots are carried by minimum-translation backbone occurrences and none by middle fibers. The twelve parent minima are exactly the twelve roots with no raw descendant output. Surviving shell drops are `1,2,5,7,9,10`; classes `77,68,24` carry `87.7945%`–`87.7946%` of gain. Aggregate full translation reserve is `9.928706884742...`, retained gain is `1.816777911848...`, and minimum-anchor release is only `0.364729899662...`. | Exact finite backbone-anchor transfer theorem; fixed policy and retention. |
 | CL-082 | For an affine state `S_r(P)={p-r:p in P}`, pivot `a=min(P)`, and pairwise root-disjoint children `S_a(Q_i)`, the root-pair energy `J(P)=sum_{x<y in P}1/(y-x)` satisfies `sum_i(H(S_a(Q_i))+J(Q_i))<=J(P)`. Hence every root pair pays at most once in an affine pivot forest, and terminal harmonic mass plus frontier pair energy is bounded by the entering pair energy. | Symbolic treewise packing theorem; no AP hypothesis. Initial pair-energy control and affine-entry theorem remain open. |
+| CL-083 | In an affine root forest, `(u,p)` is bijective with the root pair `(p-u,p)` and has weight `1/u=1/(p-(p-u))`. The global first-appearance mass of coarse point tokens is therefore at most the entering pair energy `J(P_0)`. A repeated `(u,p)` is genuine reuse of one pair resource; adding immediate provenance distinguishes histories but cannot create additional pair capacity. | Symbolic affine first-appearance and pair-reuse theorem. Affine coverage and entering `J(P_0)` payment remain open. |
 
 Primary latest references:
 
+- `docs/affine-root-pair-token-ledger.md`;
 - `docs/affine-pivot-pair-energy.md`;
 - `src/probe_affine_root_pivot.py`;
 - `docs/backbone-anchor-root-transfer.md`;
@@ -174,6 +176,7 @@ Do not use without materially new hypotheses:
 42. generation-six propagation without a predeclared conceptual test.
 43. scalar minimum-anchor mass `1/min(S)` as complete payment for all enabled backbone intervals.
 44. root-pair energy `J(P)` as automatically bounded by current harmonic mass or by four-AP-freeness alone.
+45. immediate provenance as a second copy of harmonic pair capacity when the coarse affine token `(u,p)` repeats.
 
 ---
 

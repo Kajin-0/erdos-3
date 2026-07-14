@@ -327,6 +327,12 @@ J(P).
 
 Therefore every root pair is used at most once in an affine pivot forest. Cross-generation reuse is not the unresolved issue inside this model. The unresolved issues are entry into the affine regime and payment for the entering pair energy.
 
+### Affine pair-token interpretation
+
+In an affine state, `(u,p)` determines reference root `r=p-u` and therefore identifies one root pair `(r,p)` of weight `1/u`. First-appearance coarse-token mass is a sub-sum of entering pair energy. A recurrence of `(u,p)` is exact reuse of the same pair resource, not merely an inadequate signature.
+
+Immediate provenance may distinguish histories, but it cannot manufacture another copy of root-pair capacity. Pair-resource accounting should therefore merge repeated `(u,p)` tokens and track the excess as pair-reuse mass.
+
 **Decisions:**
 
 - current-generation multiplicity is not persistent reserve;
@@ -336,6 +342,7 @@ Therefore every root pair is used at most once in an affine pivot forest. Cross-
 - the baseline failing survivor family is backbone-only, and scalar minimum-anchor release is not sufficient payment for enabled translation intervals;
 - affine pivot forests admit an exact pair-energy Bellman potential, so root-pair reuse is controlled once affine coordinates and root-disjoint children are established;
 - the new bottleneck is the entering pair energy and an affine-entry theorem, not another local reuse coefficient;
+- `(u,p)` is the capacity-level token in the affine regime; `(u,p,i)` is history metadata unless a separate resource is proved;
 - generation six is blocked until a state-independent transfer lemma is proposed;
 - a new feature is admissible only with a transition recurrence, bounded-reuse interpretation, and telescoping role.
 

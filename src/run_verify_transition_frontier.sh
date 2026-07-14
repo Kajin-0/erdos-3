@@ -160,4 +160,11 @@ run_check policy_halfspace_lp \
   python3 "$EXACT_PYTHON" "$ROOT/src/verify_policy_halfspace_lp.py" \
   "$WORK/policy_halfspace_lp_certificate.txt"
 
-echo "verified: simultaneous transition, SCC, obstruction, regeneration, policy tradeoff, and exact two-coordinate halfspace LP through S7"
+run_check expanded_policy_subset_lp \
+  296e171145d54aed0425ffd14ea2065096106112c45094f0044e5962e3fe1829 \
+  "$ROOT/data/expanded_policy_subset_lp_certificate_2026-07-13.txt" \
+  "$WORK/expanded_policy_subset_lp_certificate.txt" \
+  python3 "$EXACT_PYTHON" "$ROOT/src/verify_expanded_policy_subset_lp.py" \
+  "$WORK/expanded_policy_subset_lp_certificate.txt"
+
+echo "verified: simultaneous transition, SCC, obstruction, regeneration, and expanded 198-row policy LP through S7"

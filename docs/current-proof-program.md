@@ -68,7 +68,7 @@ Every valid exact factor-eight child has a certified summable exact tail. This c
 
 ---
 
-## 3. Why raw simultaneous output is insufficient
+## 3. Raw simultaneous-output obstruction
 
 The lexicographic raw transition frontier is certified through `S_7`.
 
@@ -96,7 +96,7 @@ Its numerically deduplicated output/input harmonic ratio exceeds `7/5`. Raw outp
 
 ---
 
-## 4. Policy coordinates and exact finite search
+## 4. Policy coordinates and finite optimization
 
 Lexicographic deletion produces the isolated return
 
@@ -110,7 +110,7 @@ with recorded continuation charge
 G=\frac{36953}{4096}.
 ```
 
-The current finite policy score is
+The finite policy score is
 
 ```math
 C_{\lambda,\gamma}(\pi)
@@ -124,15 +124,9 @@ with exact witness
 \boxed{\lambda=3,\qquad\gamma=\frac1{10}}.
 ```
 
-The continuation coordinate is necessary, and favorable local priority changes are not greedily composable.
+The full five-step lattice `{5,40,30,161,142}` is certified through `S_7`. The resulting policy LP has `250` exact inequalities and the witness satisfies every row.
 
-The full five-step lattice `{5,40,30,161,142}` is certified through `S_7`, including all seed-delayed versions on `S_7`. The exact policy LP has `250` rational inequalities and the witness satisfies every row.
-
----
-
-## 5. Exact S7 local policy optimum
-
-A deterministic search outside the five-step lattice produced a seed-delayed policy with `37` delayed progression steps. Exact recomputation gives
+A broader deterministic search gives a seed-delayed `S_7` policy with `37` delayed steps:
 
 ```text
 selected actions = 9323
@@ -142,27 +136,17 @@ middle-fiber occurrences = 9295
 canonical regeneration = false.
 ```
 
-Its exact one-toggle neighborhood is the union of its terminal and delayed step sets, containing `59` labels:
-
-```text
-improving toggles = 0
-zero-slack toggles = 384, 323640
-strictly worsening toggles = 57.
-```
-
-The minimum strict slack is
+Within its exact 59-toggle terminal/delayed neighborhood it has no improving move. The minimum strict slack is
 
 ```math
-\boxed{\frac{384}{111292259161}}
+\boxed{\frac{384}{111292259161}}.
 ```
-
-at toggle `333432`.
 
 This is local optimality in the stated neighborhood, not global schedule optimality.
 
 ---
 
-## 6. Raw transition of the local optimum
+## 5. Raw transition of the local optimum
 
 | coordinate | lexicographic | five-step winner | local optimum |
 |---|---:|---:|---:|
@@ -175,18 +159,18 @@ This is local optimality in the stated neighborhood, not global schedule optimal
 | maximum point multiplicity | 16 | 34 | 18 |
 | cyclic terminal-fiber SCCs | 1 | 1 | **0** |
 
-The local policy removes the recorded SCC and cuts complete recursive occurrence mass to between `25.4%` and `25.5%` of the lexicographic value. It still has substantial exact duplicates, containment, and partial overlap.
+The local policy removes the recorded SCC and cuts complete recursive occurrence mass to between `25.4%` and `25.5%` of the lexicographic value. It still has substantial duplicate, containment, and overlap structure.
 
 ---
 
-## 7. First provenance-preserving retained-child quotient
+## 6. First provenance-preserving retained quotient
 
-The local-optimum raw family is converted into a legitimate one-generation retained family by the following deterministic rule:
+The local-optimum raw family is reduced by a deterministic rule:
 
 1. quotient exact numerical duplicate states;
-2. retain a representative ordered by backbone first, then source step, then raw occurrence index;
-3. connect exact state classes that intersect numerically within the same dyadic shell;
-4. solve each conflict component for a maximum-harmonic independent set.
+2. choose representatives by backbone first, then source step, then raw occurrence index;
+3. connect exact state classes that intersect within the same dyadic shell;
+4. solve every conflict component for a maximum-harmonic independent set.
 
 Exact results:
 
@@ -203,41 +187,78 @@ The unique retained family has
 
 ```text
 retained state classes = 21
-backbone representatives = 2
-middle-fiber representatives = 19
 retained distinct labels = 11,753
 dropped distinct labels = 5,018.
 ```
 
-The retained states are pairwise point-disjoint and every retained point has explicit representative provenance.
+The retained states are pairwise point-disjoint and carry explicit representative provenance. Their harmonic mass is between `73.1%` and `73.2%` of the raw numerical-union mass.
 
-Its harmonic mass satisfies
+This is the first legitimate one-generation retained-child quotient in the program.
 
-```math
-\frac{731}{1000}
-<
-\frac{H_{\rm ret}}{H_{\rm raw\ union}}
-<
-\frac{732}{1000},
+---
+
+## 7. Second-generation provenance reuse
+
+The 21 retained states are resolved by lexicographic coordinated deletion. Their descendant occurrences are aggregated globally and the same quotient is applied again.
+
+```text
+child selected actions = 10,426
+child terminal residual points = 1,327
+raw descendant shell occurrences = 442
+exact descendant state classes = 173
+conflict edges = 1,046
+conflict components = 22
+largest component = 21.
 ```
 
-and
+Every component again has a unique optimum. The second retained family has
 
-```math
-\frac{582}{1000}
-<
-\frac{H_{\rm ret}}{H_{\rm raw\ occurrences}}
-<
-\frac{583}{1000}.
+```text
+retained state classes = 27
+retained distinct labels = 7,925
+dropped distinct labels = 5,900.
 ```
 
-This is the first certified one-generation retained-child quotient in the program. It resolves duplicate, containment, and partial-overlap conflicts for this recorded transition.
+### Provenance reuse
+
+The 7,925 retained descendant points use 7,648 distinct original `S_7` provenance labels.
+
+| multiplicity | provenance labels |
+|---:|---:|
+| 1 | 7,376 |
+| 2 | 267 |
+| 3 | 5 |
+
+Thus maximum provenance multiplicity is `3`. The repeated-provenance harmonic overhead is only between `4.0%` and `4.1%` of unique-provenance mass.
+
+### Harmonic scale expansion
+
+Despite that small reuse overhead,
+
+```math
+\frac{6828}{1000}
+<
+\frac{H_{\rm retained}^{(2)}}{H_{\rm retained}^{(1)}}
+<
+\frac{6829}{1000}.
+```
+
+The retained harmonic mass expands by approximately `6.82863`.
+
+This separates the two mechanisms:
+
+```text
+provenance reuse: modest in this finite propagation
+scale-driven harmonic growth: large.
+```
+
+Bounded multiplicity alone is therefore not a Bellman coordinate.
 
 Primary references:
 
+- `docs/retained-provenance-second-generation.md`;
 - `docs/s7-provenance-retained-quotient.md`;
-- `docs/s7-local-optimum-transition-profile.md`;
-- `docs/s7-terminal-step-local-optimum.md`.
+- `docs/s7-local-optimum-transition-profile.md`.
 
 ---
 
@@ -261,21 +282,30 @@ The required whole-tree inequality remains
 }
 ```
 
-Within-generation retention is now solved for the adversarial local-optimum transition. The unresolved issue is **cross-generation provenance reuse**: a parent or sponsor label chosen as provenance may reappear in retained descendants and be charged repeatedly.
+Within-generation point-disjoint retention is solved for the adversarial transition, and one-step root-provenance reuse is exactly bounded in its first propagation. The remaining coordinate must couple provenance with **scale contraction and obstruction credit**.
 
-The next theorem must establish a Carleson-type bound on retained provenance, or produce the smallest exact reuse cycle that requires another packing coordinate.
+A plausible state variable must distinguish a retained point at label `u` from the much larger root provenance label `p` that generated it. Candidate charges include:
+
+```math
+\log_2(p/u),
+\qquad
+\frac{p}{u},
+\qquad
+\text{dyadic depth drop},
+```
+
+combined with completion or cheap-extension exclusion. These are candidates only; none is yet a theorem.
 
 ---
 
 ## 9. Approved next targets
 
-1. Propagate the 21 retained states one generation with their representative provenance labels.
-2. Apply the same exact duplicate quotient and conflict selection to every retained child transition that is computationally tractable.
-3. Build the provenance-reuse graph from parent/sponsor labels to retained descendant representatives.
-4. Prove bounded reuse, or extract the smallest exact directed cycle or multiplicity blow-up.
-5. Add the resulting provenance-capacity coordinate to the rational LP harness.
-6. Export the first legitimate retained-child Bellman row.
-7. Establish a policy-aware branching Carleson inequality.
+1. Export the exact root-provenance-to-descendant scale ratios for all 7,925 second-generation retained points.
+2. Test dyadic depth-drop and logarithmic scale charges against the `6.828`–`6.829` harmonic expansion.
+3. Identify whether repeated provenance concentrates at small depth drops or large contractions.
+4. Add the first scale-aware provenance coordinate to the rational LP harness.
+5. Export a genuine two-generation retained-child Bellman row.
+6. Prove a branching Carleson inequality or extract the smallest exact failure.
 
 ---
 
@@ -285,16 +315,16 @@ Do not infer:
 
 - pathwise summability implies whole-tree summability;
 - replay siblings are simultaneous children;
-- raw novelty is schedule-independent;
-- one-generation affine coverage repays cyclic output;
 - one-toggle local optimality implies global policy optimality;
 - acyclic terminal-fiber incidence implies disjoint retained children;
 - lower raw harmonic occurrence mass implies Bellman contraction;
 - exact duplicate quotienting alone resolves all overlap;
-- one-generation point-disjoint retention bounds cross-generation reuse;
+- one-generation point-disjoint retention bounds indefinite provenance reuse;
+- maximum provenance multiplicity three implies contraction;
+- low provenance-overhead mass pays for scale-driven harmonic growth;
 - maximum-harmonic local retention is globally Bellman-optimal;
 - policy-LP feasibility implies Bellman-LP feasibility;
-- the recorded continuation charge is justified without cross-generation packing;
+- the recorded continuation charge is justified without scale-aware packing;
 - one finite witness proves an all-policy theorem.
 
 ---
@@ -313,19 +343,19 @@ Complete extended suite:
 bash src/run_verify_transport_reserve.sh
 ```
 
-Standalone retained quotient:
+Standalone second-generation check:
 
 ```bash
 python3 src/run_exact_python.py \
-  src/verify_s7_provenance_retained_quotient.py \
-  /tmp/s7_provenance_retained_quotient_certificate.txt
+  src/verify_retained_provenance_second_generation.py \
+  /tmp/retained_provenance_second_generation_certificate.txt
 ```
 
 Current detailed notes:
 
 - `docs/certainty-ledger.md`;
+- `docs/retained-provenance-second-generation.md`;
 - `docs/s7-provenance-retained-quotient.md`;
 - `docs/s7-local-optimum-transition-profile.md`;
 - `docs/s7-terminal-step-local-optimum.md`;
-- `docs/policy-subset-lattice-s1-s7.md`;
 - `docs/branching-reserve-lp.md`.

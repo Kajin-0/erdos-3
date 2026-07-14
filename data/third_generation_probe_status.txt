@@ -1,9 +1,0 @@
-probe_exit_status=0
-summary_exit_status=0
-signature_exit_status=0
-verifier_exit_status=0
-commit=e1dc6cc06004faab9febb3ea25bda0f98706b1d1
---- probe stderr ---
---- summary stderr ---
---- signature stderr ---
---- verifier stderr ---

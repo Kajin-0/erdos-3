@@ -129,7 +129,7 @@ four-term arithmetic progression having exactly three points in `A`.
 If
 
 ```math
-c\in\operatorname{Comp}(A_X),
+c\in\mathrm{Comp}(A_X),
 \qquad
 a\in A_X,
 ```

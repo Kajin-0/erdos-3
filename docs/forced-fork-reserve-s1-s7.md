@@ -162,12 +162,12 @@ The forced-fork reserve remains useful only as:
 The current target is a scale-compensated packing inequality preventing repeated payment by the same forced-fork labels. A useful form would compare the complete simultaneous child family:
 
 ```math
-\sum_{S'\in\operatorname{Child}(S)}
-\operatorname{Pack}(S')
+\sum_{S'\in\mathrm{Child}(S)}
+\mathrm{Pack}(S')
 +
 \text{new obstruction charge}
 \le
-\operatorname{Pack}(S)
+\mathrm{Pack}(S)
 +
 C\,P\Psi(S)
 +

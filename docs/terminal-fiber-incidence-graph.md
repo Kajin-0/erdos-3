@@ -143,7 +143,7 @@ ddedf75bd52a6cc67cef6ecb0a635b836e9a1c7c5094a860449dd35dd2651c18
 A potential of the form
 
 ```math
-\Phi(q)=f(\operatorname{rank}(q))
+\Phi(q)=f(\mathrm{rank}(q))
 ```
 
 with strict decrease along every edge cannot exist once the incidence graph contains a directed cycle.

@@ -342,7 +342,7 @@ The required transition statement must be branching-compatible. A plausible targ
 ```math
 W(B)
 +
-\sum_{B'\in\operatorname{Child}(B)}
+\sum_{B'\in\mathrm{Child}(B)}
 \left(\mathfrak B(B')+\Phi(B')\right)
 \le
 \mathfrak B(B)+\Phi(B)

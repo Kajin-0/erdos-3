@@ -44,14 +44,14 @@ The intended whole-tree inequality is schematically
 ```math
 \Delta(S)
 +
-\sum_{S'\in\operatorname{Child}_\pi(S)}
+\sum_{S'\in\mathrm{Child}_\pi(S)}
 \left(
-\operatorname{Pack}(S')+\Phi_{\rm obs}(S')
+\mathrm{Pack}(S')+\Phi_{\rm obs}(S')
 \right)
 \le
-\operatorname{Pack}(S)+\Phi_{\rm obs}(S)
+\mathrm{Pack}(S)+\Phi_{\rm obs}(S)
 +
-\operatorname{controlled\ error}.
+\mathrm{controlled\ error}.
 ```
 
 A valid theorem must handle:

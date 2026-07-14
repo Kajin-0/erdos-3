@@ -27,7 +27,7 @@ For parent `S`, the intended inequality is
 ```math
 D(S)
 +
-\sum_{S'\in\operatorname{Child}(S)}\Phi(S')
+\sum_{S'\in\mathrm{Child}(S)}\Phi(S')
 \le
 \Phi(S)+E(S),
 ```

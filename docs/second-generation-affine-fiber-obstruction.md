@@ -330,9 +330,9 @@ Equivalently,
 
 ```math
 \boxed{
-\sum_q\operatorname{dens}(E_q(D))
+\sum_q\mathrm{dens}(E_q(D))
 \ge
-2\bigl(\operatorname{dens}(D)-r_3(M)/M\bigr).
+2\bigl(\mathrm{dens}(D)-r_3(M)/M\bigr).
 }
 ```
 

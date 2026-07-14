@@ -175,13 +175,13 @@ The target remains
 ```math
 \Delta(S)
 +
-\sum_{S'\in\operatorname{Child}_\pi(S)}
+\sum_{S'\in\mathrm{Child}_\pi(S)}
 \left(
-\operatorname{Pack}(S')+
+\mathrm{Pack}(S')+
 \Phi_{\rm obs}(S')
 \right)
 \le
-\operatorname{Pack}(S)+
+\mathrm{Pack}(S)+
 \Phi_{\rm obs}(S)+
-\operatorname{controlled\ error}.
+\mathrm{controlled\ error}.
 ```

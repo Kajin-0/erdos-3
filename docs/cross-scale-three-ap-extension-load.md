@@ -58,7 +58,7 @@ then
 Therefore
 
 ```math
-\operatorname{supp}F_j
+\mathrm{supp}F_j
 \subseteq
 [N/2,2N),
 ```

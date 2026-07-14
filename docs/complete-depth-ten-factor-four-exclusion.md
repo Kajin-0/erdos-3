@@ -367,7 +367,7 @@ It does **not** prove that every arbitrary contaminated state eventually reaches
 ```math
 W(S)
 +
-\sum_{S'\in\operatorname{Child}(S)}
+\sum_{S'\in\mathrm{Child}(S)}
 \left(\mathfrak B(S')+\Phi(S')\right)
 \le
 \mathfrak B(S)+\Phi(S)

@@ -1,0 +1,179 @@
+{
+  "extrema": {
+    "latent_occurrence_over_latent_union": {
+      "latent_occurrence_mass": {
+        "decimal": "0.000000000000",
+        "fraction": "0/1",
+        "sha256": "a93875fe509ac2fae0e0939d3ec71c4d978244c7398dd7185ca68c393426a5a6"
+      },
+      "latent_union_mass": {
+        "decimal": "0.000000000000",
+        "fraction": "0/1",
+        "sha256": "a93875fe509ac2fae0e0939d3ec71c4d978244c7398dd7185ca68c393426a5a6"
+      },
+      "maximum_latent_pair_multiplicity": 0,
+      "parent_pair_energy": {
+        "decimal": "0.000000000000",
+        "fraction": "0/1",
+        "sha256": "a93875fe509ac2fae0e0939d3ec71c4d978244c7398dd7185ca68c393426a5a6"
+      },
+      "ratio": {
+        "decimal": "0.000000000000",
+        "fraction": "0/1",
+        "sha256": "a93875fe509ac2fae0e0939d3ec71c4d978244c7398dd7185ca68c393426a5a6"
+      },
+      "recursive_children": 0,
+      "total_occurrence_mass": {
+        "decimal": "0.000000000000",
+        "fraction": "0/1",
+        "sha256": "a93875fe509ac2fae0e0939d3ec71c4d978244c7398dd7185ca68c393426a5a6"
+      },
+      "values": []
+    },
+    "latent_occurrence_over_parent_energy": {
+      "latent_occurrence_mass": {
+        "decimal": "0.000000000000",
+        "fraction": "0/1",
+        "sha256": "a93875fe509ac2fae0e0939d3ec71c4d978244c7398dd7185ca68c393426a5a6"
+      },
+      "latent_union_mass": {
+        "decimal": "0.000000000000",
+        "fraction": "0/1",
+        "sha256": "a93875fe509ac2fae0e0939d3ec71c4d978244c7398dd7185ca68c393426a5a6"
+      },
+      "maximum_latent_pair_multiplicity": 0,
+      "parent_pair_energy": {
+        "decimal": "0.000000000000",
+        "fraction": "0/1",
+        "sha256": "a93875fe509ac2fae0e0939d3ec71c4d978244c7398dd7185ca68c393426a5a6"
+      },
+      "ratio": {
+        "decimal": "0.000000000000",
+        "fraction": "0/1",
+        "sha256": "a93875fe509ac2fae0e0939d3ec71c4d978244c7398dd7185ca68c393426a5a6"
+      },
+      "recursive_children": 0,
+      "total_occurrence_mass": {
+        "decimal": "0.000000000000",
+        "fraction": "0/1",
+        "sha256": "a93875fe509ac2fae0e0939d3ec71c4d978244c7398dd7185ca68c393426a5a6"
+      },
+      "values": []
+    },
+    "total_occurrence_over_parent_energy": {
+      "latent_occurrence_mass": {
+        "decimal": "0.000000000000",
+        "fraction": "0/1",
+        "sha256": "a93875fe509ac2fae0e0939d3ec71c4d978244c7398dd7185ca68c393426a5a6"
+      },
+      "latent_union_mass": {
+        "decimal": "0.000000000000",
+        "fraction": "0/1",
+        "sha256": "a93875fe509ac2fae0e0939d3ec71c4d978244c7398dd7185ca68c393426a5a6"
+      },
+      "maximum_latent_pair_multiplicity": 0,
+      "parent_pair_energy": {
+        "decimal": "3.583333333333",
+        "fraction": "43/12",
+        "sha256": "de38c3f0796a1019b5e582a0db30b1aadb047ed7c49d87ac83a48e78c9d2d1e4"
+      },
+      "ratio": {
+        "decimal": "1.046511627907",
+        "fraction": "45/43",
+        "sha256": "35865a7969d5b6b5b3ad18ee6c083856b02ce5ba29514d76564c1eb1dd64e3aa"
+      },
+      "recursive_children": 0,
+      "total_occurrence_mass": {
+        "decimal": "3.750000000000",
+        "fraction": "15/4",
+        "sha256": "a97e26cbadb12427859091fbf484af356319d1ece9fde15251ae05890c2fe5bd"
+      },
+      "values": [
+        1,
+        2,
+        3,
+        5
+      ]
+    }
+  },
+  "interval": [
+    1,
+    14
+  ],
+  "maximum_multiplicity_witness": {
+    "children": 18,
+    "children_sha256": "9911261552767f2f13c86d045026c44161fa58c1d25ac5d08442fd61fa432ec0",
+    "current_mass": {
+      "decimal": "10.416666666667",
+      "fraction": "125/12",
+      "sha256": "704d1e08fd06b9da93d5fd8ae7462cb863ac3143592bf7117401f05ca8729c99"
+    },
+    "current_occurrences": 24,
+    "latent_occurrence_mass": {
+      "decimal": "0.000000000000",
+      "fraction": "0/1",
+      "sha256": "a93875fe509ac2fae0e0939d3ec71c4d978244c7398dd7185ca68c393426a5a6"
+    },
+    "latent_pair_occurrences": 0,
+    "latent_pair_union": 0,
+    "latent_union_mass": {
+      "decimal": "0.000000000000",
+      "fraction": "0/1",
+      "sha256": "a93875fe509ac2fae0e0939d3ec71c4d978244c7398dd7185ca68c393426a5a6"
+    },
+    "maximum_latent_pair_multiplicity": 0,
+    "maximum_reference_count": 0,
+    "maximum_total_resource_multiplicity": 2,
+    "parent_pair_energy": {
+      "decimal": "11.056349206349",
+      "fraction": "13931/1260",
+      "sha256": "c03f9ac6fa75703263d23ded5b389f608e0418466fb7a20ea9b3506b27930d9c"
+    },
+    "recursive_children": 0,
+    "three_aps": 8,
+    "total_occurrence_mass": {
+      "decimal": "10.416666666667",
+      "fraction": "125/12",
+      "sha256": "704d1e08fd06b9da93d5fd8ae7462cb863ac3143592bf7117401f05ca8729c99"
+    },
+    "total_union_mass": {
+      "decimal": "8.916666666667",
+      "fraction": "107/12",
+      "sha256": "2dad484decc8dfec62669595812e92d8afc6a7fbd372fc165bb1048ecac64688"
+    },
+    "values": [
+      5,
+      6,
+      7,
+      9,
+      10,
+      12,
+      13,
+      14
+    ],
+    "worst_pairs": []
+  },
+  "metrics": {
+    "children": 35928,
+    "four_ap_free_subsets": 7138,
+    "latent_pair_occurrences": 0,
+    "latent_pair_union": 0,
+    "maximum_latent_pair_multiplicity": 0,
+    "maximum_reference_count": 0,
+    "maximum_total_resource_multiplicity": 2,
+    "recursive_children": 0,
+    "subsets_with_recursive_children": 0,
+    "three_aps": 12558
+  },
+  "records_sha256": "00e87f926e2a03c565e0e601b53701c9dbfb32d6f4c0b4ab0c0b82450664d6aa",
+  "schema": "oriented_full_edge_pair_persistence_probe_v1",
+  "verified": {
+    "all_child_resources_contained_in_parent_pairs": true,
+    "all_children_four_ap_free": true,
+    "all_children_have_disjoint_first_three_dilates": true,
+    "all_persistent_pair_references_outside_pair_interval": true,
+    "middle_children_split_by_orientation": true,
+    "same_type_doubled_reference_gap_2D_forbidden": true,
+    "same_type_side_middle_reference_gap_D_forbidden": true
+  }
+}

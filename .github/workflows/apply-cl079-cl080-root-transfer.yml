@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - src/patch_cl079_cl080_root_transfer.py
+      - src/fix_root_transfer_history_order.py
       - .github/workflows/apply-cl079-cl080-root-transfer.yml
 
 permissions:
@@ -17,13 +18,15 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - name: Check out repository
+      - name: Apply authoritative patches
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Apply idempotent patch
-        run: python3 src/patch_cl079_cl080_root_transfer.py
+      - name: Apply idempotent patches
+        run: |
+          python3 src/patch_cl079_cl080_root_transfer.py
+          python3 src/fix_root_transfer_history_order.py
 
       - name: Commit and push authoritative history
         shell: bash
@@ -36,7 +39,7 @@ jobs:
             echo "No authoritative documentation change"
             exit 0
           fi
-          git commit -m "Record root-transfer pivot in research history [skip ci]"
+          git commit -m "Normalize root-transfer research history [skip ci]"
           for attempt in 1 2 3; do
             git fetch origin main
             git rebase origin/main

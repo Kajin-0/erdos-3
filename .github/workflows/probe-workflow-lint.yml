@@ -1,0 +1,36 @@
+name: Probe workflow hardening checks
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/**
+      - src/lint_probe_workflows.py
+      - src/stage_optional_probe_outputs.sh
+      - src/run_atomic_python_probe.sh
+      - src/assert_probe_status.sh
+      - src/commit_probe_outputs.sh
+      - src/test_probe_workflow_helpers.sh
+  pull_request:
+    paths:
+      - .github/workflows/**
+      - src/lint_probe_workflows.py
+      - src/stage_optional_probe_outputs.sh
+      - src/run_atomic_python_probe.sh
+      - src/assert_probe_status.sh
+      - src/commit_probe_outputs.sh
+      - src/test_probe_workflow_helpers.sh
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Lint workflow templates
+        run: python3 src/lint_probe_workflows.py
+      - name: Test shared helpers
+        run: bash src/test_probe_workflow_helpers.sh

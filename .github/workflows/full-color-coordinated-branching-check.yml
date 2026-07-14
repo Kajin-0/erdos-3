@@ -1,0 +1,30 @@
+name: Full-color coordinated branching check
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - src/verify_full_color_coordinated_branching.py
+      - src/summarize_full_color_coordinated_branching.py
+      - .github/workflows/full-color-coordinated-branching-check.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: probe-result-writers-main
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    uses: ./.github/workflows/reusable-python-probe-recorder.yml
+    with:
+      schema: full_color_coordinated_branching_exhaustive_v1
+      probe_script: src/verify_full_color_coordinated_branching.py
+      probe_output: data/full_color_coordinated_branching_probe.json
+      summary_script: src/summarize_full_color_coordinated_branching.py
+      summary_output: data/full_color_coordinated_branching_summary.txt
+      status_output: data/full_color_coordinated_branching_status.txt
+      commit_message: Record full-color branching check [skip ci]

@@ -20,6 +20,9 @@ SEPARATOR_ECHO = re.compile(r"^\s*echo\s+(['\"])---.*\1\s*$")
 STATUS_FIELD_ECHO = re.compile(
     r"^\s*echo\s+(['\"])([A-Za-z_][A-Za-z0-9_]*_exit_status)=.*\1\s*$"
 )
+ASSERT_CALL = re.compile(
+    r"(?m)^\s*(?:run:\s*)?.*\bbash\s+src/assert_probe_status\.sh\b"
+)
 PROBE_WRITER_MARKERS = (
     "_probe.json",
     "_summary.txt",
@@ -177,7 +180,7 @@ def lint_workflow(path: Path, text: str) -> list[str]:
     for start_line, body in status_blocks(text):
         failures.extend(lint_status_block(path, start_line, body))
 
-    for assert_match in re.finditer(r"assert_probe_status\.sh", text):
+    for assert_match in ASSERT_CALL.finditer(text):
         assert_pos = assert_match.start()
         upload_pos = text.rfind("actions/upload-artifact", 0, assert_pos)
         if upload_pos < 0:

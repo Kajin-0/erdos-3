@@ -85,8 +85,9 @@ Statuses marked **exact finite** are computational statements for recorded objec
 | CL-066 | A seed-delayed `S_7` policy with `37` delayed progression steps resolves to `9323` selected actions, residual size `517`, `28` terminal step classes, `9295` middle-fiber occurrences, and no canonical regeneration. In the exact one-toggle neighborhood given by its terminal-step set union delayed-step set (`59` candidates), it has no improving toggle, two zero-slack toggles, and minimum strict slack `384/111292259161`. Its exact score improves on `seed_5_142` by a value between `1915/1000` and `1916/1000`. | Exact finite terminal-step local-optimality theorem. |
 | CL-067 | The raw transition of the 37-step local optimum has `131` shell occurrences, `87` exact state classes, `22` duplicate groups, `229` strict containments, `390` partial overlaps, maximum point multiplicity `18`, and an acyclic terminal-fiber incidence graph. Its recursive occurrence mass is between `254/1000` and `255/1000` of the lexicographic value. Relative to lexicographic deletion it removes the cyclic SCC and lowers harmonic load, but partial overlaps rise from `214` to `390` and maximum multiplicity from `16` to `18`. | Exact finite transition-profile and retention-obstruction theorem. |
 | CL-068 | Exact-state quotienting with deterministic provenance representatives, followed by componentwise maximum-harmonic independent-set selection in the same-shell intersection graph, produces a unique `21`-state point-disjoint retained family from the local-optimum transition. The graph has `87` classes, `290` edges, `20` components, and largest component `13`; every component has a unique optimum. The retained family carries `11753` distinct labels and between `731/1000` and `732/1000` of the raw-union harmonic mass. | Exact finite one-generation provenance-preserving retained-child theorem. |
+| CL-069 | Propagating the `21` retained states by lexicographic coordinated deletion and reapplying the global quotient produces a unique `27`-state, `7925`-label point-disjoint descendant family. Original `S_7` provenance has multiplicity spectrum `7376` labels once, `267` twice, and `5` three times; repeated-provenance harmonic overhead is between `40/1000` and `41/1000`. Nevertheless second-generation retained harmonic mass is between `6828/1000` and `6829/1000` of first-generation retained mass. | Exact finite second-generation provenance-reuse and scale-expansion theorem. |
 
-Primary references for CL-050 through CL-068:
+Primary references for CL-050 through CL-069:
 
 - `docs/s7-cyclic-scc-output-load.md`;
 - `docs/s7-cyclic-scc-local-completion-credit.md`;
@@ -105,15 +106,9 @@ Primary references for CL-050 through CL-068:
 - `docs/s7-terminal-step-local-optimum.md`;
 - `docs/s7-local-optimum-transition-profile.md`;
 - `docs/s7-provenance-retained-quotient.md`;
-- `src/verify_policy_occurrence_cone_s1_s7.py`;
-- `src/verify_step5_policy_regeneration_weight.py`;
-- `src/verify_two_coordinate_policy_family.py`;
-- `src/verify_policy_halfspace_lp.py`;
-- `src/verify_expanded_policy_subset_lp.py`;
-- `src/verify_policy_subset_lattice_s1_s7.py`;
-- `src/verify_s7_terminal_step_local_optimum.py`;
-- `src/verify_s7_local_optimum_transition_profile.py`;
-- `src/verify_s7_provenance_retained_quotient.py`.
+- `docs/retained-provenance-second-generation.md`;
+- `src/verify_s7_provenance_retained_quotient.py`;
+- `src/verify_retained_provenance_second_generation.py`.
 
 ---
 
@@ -152,27 +147,28 @@ Do not use without materially new hypotheses:
 29. treating `T+3O+E` as sufficient after it chooses a known regenerative schedule;
 30. assuming `gamma=1/16` survives enlargement of the policy family;
 31. greedily composing individually favorable policy delays;
-32. treating the earlier `S_3` `delay_5_40` choice as optimal after subset-lattice expansion;
-33. treating the earlier `S_7` `seed_5` or `seed_5_142` choice as optimal after neighborhood expansion;
-34. treating one-toggle local optimality as global policy optimality;
-35. treating the 59-toggle neighborhood as exhaustive over arbitrary delayed progression steps;
-36. inferring disjoint retained children from acyclic terminal-fiber incidence;
-37. inferring Bellman contraction from lower raw harmonic occurrence mass;
-38. treating one-generation point-disjoint retention as a bound on cross-generation provenance reuse;
-39. treating maximum-harmonic local retention as globally Bellman-optimal;
-40. treating policy-half-space LP feasibility as branching Bellman-LP feasibility;
-41. inserting the recorded path charge directly into a Bellman child sum without a cross-generation packing theorem;
-42. treating the tested policy family as globally optimal over all complete schedules;
-43. random sampling as a finite certificate;
-44. the rejected depth-ten anchor reduction.
+32. treating the earlier `S_3` or `S_7` policy choices as stable under family enlargement;
+33. treating one-toggle local optimality as global policy optimality;
+34. treating the 59-toggle neighborhood as exhaustive over arbitrary delayed progression steps;
+35. inferring disjoint retained children from acyclic terminal-fiber incidence;
+36. inferring Bellman contraction from lower raw harmonic occurrence mass;
+37. treating one-generation point-disjoint retention as a bound on indefinite provenance reuse;
+38. treating maximum provenance multiplicity three as a contraction theorem;
+39. treating low repeated-provenance overhead as payment for scale-driven harmonic growth;
+40. treating maximum-harmonic local retention as globally Bellman-optimal;
+41. treating policy-half-space LP feasibility as branching Bellman-LP feasibility;
+42. inserting the recorded path charge directly into a Bellman child sum without a scale-aware packing theorem;
+43. treating the tested policy family as globally optimal over all complete schedules;
+44. random sampling as a finite certificate;
+45. the rejected depth-ten anchor reduction.
 
 ---
 
-# Open bottleneck OB-001: Cross-generation provenance packing
+# Open bottleneck OB-001: Scale-aware provenance packing
 
-Within-generation retention is now solved for the adversarial local-optimum `S_7` transition: the certified quotient is exact, point-disjoint, maximum-harmonic componentwise, and carries explicit representative provenance.
+Within-generation point-disjoint retention is solved for the adversarial local-optimum transition, and the first propagated generation has an exact root-provenance multiplicity bound. The propagation separates modest provenance reuse from large scale-driven harmonic expansion.
 
-The next task is to propagate the `21` retained states, apply the same quotient where tractable, and build the provenance-reuse graph from parent and sponsor labels to retained descendant representatives. A valid theorem must bound repeated reuse across generations, or identify the smallest exact reuse cycle that requires another packing coordinate.
+The next task is to export root-provenance-to-descendant scale ratios, test dyadic depth-drop or logarithmic scale charges, and couple those charges to obstruction or future cheap-extension exclusion. A valid coordinate must pay for the `6.828`–`6.829` retained-mass expansion without double-counting repeated provenance.
 
 The target remains
 

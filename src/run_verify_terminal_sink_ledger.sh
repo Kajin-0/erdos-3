@@ -5,6 +5,7 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 WORK="${1:-${TMPDIR:-/tmp}/erdos_terminal_sink_ledger}"
 IDENTITY_SHA256="1f25e54d10d73c0130535d12f264405f0e5adb954820725395deb7c86ac19bf9"
 BELLMAN_SHA256="7da70d79f271080a66d3f8ed1aa517d95bf321eb5d618822440fefdfa8504e14"
+THIRD_SHA256="efdd41c014104f328f28c3d13b097335fd2b1730859b74134344329251b135d0"
 mkdir -p "$WORK"
 
 IDENTITY_GENERATED="$WORK/retained_terminal_sink_identity_certificate.txt"
@@ -45,7 +46,23 @@ if [[ "$BELLMAN_ACTUAL" != "$BELLMAN_SHA256" ]]; then
   exit 1
 fi
 
+THIRD_GENERATED="$WORK/third_generation_recursive_frontier_certificate.txt"
+THIRD_RECORDED="$ROOT/data/third_generation_recursive_frontier_certificate_2026-07-13.txt"
+python3 "$ROOT/src/run_exact_python.py" \
+  "$ROOT/src/verify_third_generation_recursive_frontier.py" \
+  "$THIRD_GENERATED"
+
+cmp "$THIRD_RECORDED" "$THIRD_GENERATED"
+THIRD_ACTUAL="$(sha256sum "$THIRD_GENERATED" | awk '{print $1}')"
+if [[ "$THIRD_ACTUAL" != "$THIRD_SHA256" ]]; then
+  echo "error: third-generation recursive frontier certificate SHA-256 mismatch" >&2
+  echo "expected=$THIRD_SHA256" >&2
+  echo "actual=$THIRD_ACTUAL" >&2
+  exit 1
+fi
+
 echo "retained_terminal_sink_identity_sha256=$IDENTITY_ACTUAL"
 echo "retained_terminal_sink_ledger_rows=$LEDGER_ROWS"
 echo "two_generation_recursive_bellman_sha256=$BELLMAN_ACTUAL"
-echo "verified: terminal sink identities and strict two-generation recursive Bellman row"
+echo "third_generation_recursive_frontier_sha256=$THIRD_ACTUAL"
+echo "verified: terminal sink identities, strict two-generation row, and exact third-generation expansion/collision no-go"

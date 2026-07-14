@@ -95,9 +95,15 @@ Statuses marked **exact finite** are computational statements for recorded objec
 | CL-076 | With current harmonic mass coefficient fixed to one, an exact 11-feature screen finds four feasible standalone nonnegative corrections. In particular, `Phi_rep=H+2R`, where `R` is descendant harmonic mass on points whose root provenance repeats within the retained generation, contracts by `27.4704%`-`27.4705%` and then `6.0556%`-`6.0557%`. Independently, `Phi_tail=H+4T`, where `T` is descendant mass with immediate-provenance depth drop at least four, contracts on both transitions and has second-transition margin `0.1313%`-`0.1314%`. | Exact finite three-generation retained-potential theorem. |
 | CL-077 | Propagating the 14 third-generation recursive states and reapplying the same quotient produces a unique point-disjoint fourth family with 23 states and 1794 points, split into 11 terminal states with 77 points and 12 recursive states with 1717 points. `H4_rec/H3_rec` is `2.849279`-`2.849280`. The CL-076 candidates fail: `H+2R` expands by `2.711908`-`2.711909` because repeated-root reserve vanishes, and `H+4T` expands by `9.636610`-`9.636611` because the immediate depth-four tail regenerates. Seven `(u,p)` terminal collisions occur, but no `(u,p,i)` collision is recorded through generation four. | Exact finite fourth-generation potential no-go and refined-token survival theorem. |
 | CL-078 | Propagating the 12 fourth-generation recursive states and reapplying the same quotient produces a unique point-disjoint fifth family with 21 states and 1032 points, split into 8 terminal states with 17 points and 13 recursive states with 1015 points. `H5_rec/H4_rec` is `1.329813`-`1.329814`. Repeated-root descendant mass is exactly zero at both levels, so no finite coefficient in `H+kR` can repair this transition. Two `(u,p)` terminal collisions occur, but no `(u,p,i)` collision is recorded through generation five. | Exact finite fifth-generation repeated-root no-go and refined-token survival theorem. |
+| CL-079 | On the certified fourth recursive family, all-lexicographic deletion, all-reverse deletion, and each of the twelve single-parent lexicographic-to-reverse flips expand recursively under every maximum-total-harmonic retention tie choice. The best tested policy is `reverse_parent_82`, with ratio `1.197375982982...`; the baseline ratio is `1.329813898820...`. The two nonunique policies each have two tied optima with identical recursive mass. | Exact finite local policy-sensitivity theorem; not universal over all policies or retention rules. |
+| CL-080 | At the baseline fourth-to-fifth transition, all root provenance is unique. Of 1717 fourth recursive roots, 1015 survive recursively and 702 exit; 17 terminalize and 685 disappear from the retained family. The exact identity `H5_rec-H4_rec=G_4->5-L_4->5` has survivor scale gain `1.816777911848...`, exiting parent release `1.310139720502...`, and net recursive increase `0.506638191346...`; `1.386705<G/L<1.386706`. No root splits between recursive and terminal output and fifth retained root multiplicity is one. | Elementary root-lineage identity plus exact finite decomposition. |
 
 Primary latest references:
 
+- `docs/fourth-to-fifth-root-transfer.md`;
+- `src/verify_fourth_to_fifth_root_transfer.py`;
+- `docs/fourth-to-fifth-policy-sensitivity.md`;
+- `src/verify_fourth_to_fifth_policy_sensitivity.py`;
 - `docs/fourth-generation-provenance-reserve-frontier.md`;
 - `src/verify_fourth_generation_potential_frontier.py`;
 - `docs/generation-aware-retained-potentials.md`;
@@ -140,57 +146,69 @@ Do not use without materially new hypotheses:
 21. one-toggle local optimality as global policy optimality;
 22. lower raw harmonic occurrence mass as Bellman contraction;
 23. one-generation retention as a bound on indefinite reuse;
-24. maximum provenance multiplicity three as contraction;
+24. maximum provenance multiplicity as contraction;
 25. unit depth/log charge as repayment for total retained mass;
-26. the full `6.828`–`6.829` ratio as recursive load;
+26. the full `6.828`-`6.829` ratio as recursive load;
 27. discarding terminal mass instead of charging it once;
 28. within-family terminal-token uniqueness as global uniqueness;
 29. `(u,p)` as a collision-sound cross-generation terminal token;
 30. source type and source step as sufficient collision refinement;
 31. first-appearance deduplication as a bound on token-union mass;
-32. the `6.2%`–`6.3%` recursive contraction or `31/500` credit as an iterating invariant;
-33. the third-generation expansion as universal over all policies or quotients;
-34. immediate provenance as globally sufficient after one finite collision test;
-35. `H+2R` or `H+4T` as a universal Bellman potential after two finite transitions;
-36. `H+2R` or `H+4T` as an iterating potential after the fourth-generation failure;
-42. `H+kR` as an iterating potential after the fifth-generation zero-reserve failure;
+32. the `6.2%`-`6.3%` recursive contraction or `31/500` credit as an iterating invariant;
+33. a recorded recursive expansion as universal over all policies or quotients;
+34. immediate provenance as globally sufficient after finite collision tests;
+35. `H+2R`, `H+4T`, or `H+74R` as an iterating Bellman potential;
+36. any finite `H+kR` potential after the fifth-generation zero-reserve failure;
 37. maximum-harmonic local retention as globally optimal;
 38. policy-LP feasibility as branching Bellman-LP feasibility;
 39. the tested policy family as globally optimal;
 40. random sampling as a finite certificate;
-41. the rejected depth-ten anchor reduction.
+41. another fitted feature without a state-independent transfer law;
+42. generation-six propagation without a predeclared conceptual test.
 
 ---
 
-# Open bottleneck OB-001: exact four-generation feature LP
+# Open bottleneck OB-001: cumulative root-lineage reserve transfer
 
 The adversarial retained construction now has:
 
-- legitimate point-disjoint retained families through generation four;
-- exact terminal/recursive partitions at generations two, three, and four;
-- recursive mass ratios below one, above two, and above 2.84 on successive transitions;
-- a complete first-appearance terminal ledger;
-- failure of `(u,p)` and finite survival of `(u,p,i)`;
-- two exact three-generation reserve witnesses;
-- and an exact fourth-generation failure of both witnesses.
+- legitimate point-disjoint retained families through generation five;
+- exact terminal/recursive partitions;
+- refined terminal identities and first-appearance bookkeeping;
+- exact failure of current-generation repeated-root reserve;
+- local policy sensitivity at the first failing transition;
+- and an exact root-lineage decomposition of that failure.
 
-The next theorem is an exact nonnegative feature-feasibility problem. Export the three recursive transitions into a common rational matrix with current harmonic coefficient fixed to one. Test whether any nonnegative combination of the existing provenance, multiplicity, and depth features makes all three rows nonpositive.
-
-If feasible, record a sparse rational witness. If infeasible, extract the smallest exact Farkas or dual obstruction before introducing cumulative provenance, ancestor-path, terminal-release, or affine-obstruction coordinates.
-
-The whole-tree target remains
+At the baseline fourth-to-fifth transition,
 
 ```math
-\Delta(S)
-+
-\mathrm{TermSink}_{\mathrm{first}}(S)
-+
-\sum_{S'\in\mathrm{RecChild}_\pi(S)}
-\mathrm{RecPack}(S')
-\le
-\mathrm{RecPack}(S)
-+
-\Phi_{\mathrm{obs}}(S)
-+
-\mathrm{controlled\ error}.
+H_5^{\mathrm{rec}}-H_4^{\mathrm{rec}}
+=G_{4	o5}-L_{4	o5},
 ```
+
+where `G` is harmonic scale gain along unique surviving root lineages and `L` is parent mass released by exiting lineages. The certified values satisfy
+
+```text
+G_4->5 = 1.816777911848...
+L_4->5 = 1.310139720502...
+G_4->5/L_4->5 = 1.386705466156...
+```
+
+Thus the first failing transition is not driven by repeated-root branching. It is driven by scale contraction along unique surviving lineages exceeding released parent mass.
+
+The next theorem must define a state-independent cumulative ancestor-path capacity `A` and prove a transition inequality of the form
+
+```math
+H_{g+1}^{\mathrm{rec}}
++A_{g+1}
++T_{g+1}^{\mathrm{first}}
+\le
+H_g^{\mathrm{rec}}
++A_g
++\Phi_{\mathrm{obs},g}
++arepsilon_g.
+```
+
+A new coordinate is admissible only if it has a transfer identity or one-sided recurrence, a bounded-reuse interpretation, and a telescoping role. Finite LP correlation is diagnostic only.
+
+Generation six is blocked until such a lemma exists. The next concrete tasks are to classify survivor scale gain by source/shell/immediate provenance, attach terminalized roots to first-appearance `(u,p,i)` tokens, and determine what arithmetic credit is created by the 685 dropped lineages.

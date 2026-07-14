@@ -1,0 +1,45 @@
+FIFTH-GENERATION REPEATED-ROOT NO-GO
+
+policy=local37_then_lexicographic_recursive_only
+retention=global_exact_duplicate_quotient_plus_maximum_harmonic_same_shell_independent_set
+
+generation4_recursive_states=12
+generation4_recursive_points=1717
+generation5_raw_occurrences=246
+generation5_raw_occurrence_points=2972
+generation5_exact_state_classes=95
+generation5_conflict_edges=366
+generation5_conflict_components=17
+generation5_largest_conflict_component=17
+generation5_components_with_nonunique_optimum=0
+generation5_retained_states=21
+generation5_retained_points=1032
+generation5_terminal_states=8
+generation5_terminal_points=17
+generation5_recursive_states=13
+generation5_recursive_points=1015
+
+generation4_root_repeat_descendant_mass=0
+generation5_root_repeat_descendant_mass=0
+generation4_current_mass_sha256=03cac9573c3d61ac9c8a0c4066cbb8d6ea9ece01606602cacc9604634f9b1ba9
+generation5_current_mass_sha256=90efd54b32c03599ff6243202ab3c7b33ab66eb5d4049e690d4a011e414e5300
+generation5_over_generation4_recursive_mass_bracket=1329813/1000000,664907/500000
+generation5_over_generation4_recursive_mass_sha256=8d55faef41edb883a3d2d229690ef16db69bd1be23f85871c21c3206319e0534
+
+finite_coefficient_repeated_root_potential_can_contract=False
+reason=Delta_root_repeat_descendant_mass_is_zero_and_Delta_current_mass_is_positive
+coefficient_74_ratio_bracket=1329813/1000000,664907/500000
+coefficient_74_strict_contraction=False
+
+terminal_u_p_collisions=2
+terminal_u_p_collision_signatures=(122,1584351);(123,1584352)
+terminal_u_p_i_collisions=0
+terminal_u_p_i_source_collisions=0
+numerical_terminal_recreation_count=16
+numerical_recursive_recreation_count=34
+exact_terminal_state_regeneration_count=7
+
+conclusion: the four-generation sparse witness H+74R fails at generation five.
+More strongly, every finite H+kappa*R potential fails on the generation4-to-generation5 transition because R is zero at both endpoints while H increases.
+The immediate-provenance terminal signature (u,p,i) remains collision-free through generation five.
+This is a fixed-policy, fixed-retention finite no-go theorem.

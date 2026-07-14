@@ -1,0 +1,30 @@
+name: Exact activated-pair union transfer
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - src/probe_exact_activated_pair_union_transfer.py
+      - src/summarize_exact_activated_pair_union_transfer.py
+      - .github/workflows/exact-activated-pair-union-transfer.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: probe-result-writers-main
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    uses: ./.github/workflows/reusable-python-probe-recorder.yml
+    with:
+      schema: exact_activated_pair_union_transfer_probe_v1
+      probe_script: src/probe_exact_activated_pair_union_transfer.py
+      probe_output: data/exact_activated_pair_union_transfer_probe.json
+      summary_script: src/summarize_exact_activated_pair_union_transfer.py
+      summary_output: data/exact_activated_pair_union_transfer_summary.txt
+      status_output: data/exact_activated_pair_union_transfer_status.txt
+      commit_message: Record exact activated-pair union transfer [skip ci]

@@ -103,9 +103,13 @@ Statuses marked **exact finite** are computational statements for recorded objec
 | CL-084 | The certified `R_4 -> F_5` retained transition has 12/12 affine fourth recursive states and 13/13 affine fifth recursive states, with root and pair multiplicity exactly one. Exact pair energy satisfies `H(F_5)+J(R_5^rec)<=J(R_4^rec)`: left `1586.466623468978...`, right `2743.858245303490...`, surplus `1157.391621834512...`, ratio `0.578188259610...`. | Exact finite retained-child Bellman theorem; fixed policy and quotient, no generation six. |
 | CL-085 | The complete fifth retained current-plus-latent pair resource set is an exact multiplicity-one subset of the fourth latent root-pair set. Counts: 372222 fourth resources, 107413 used fifth resources, 264809 unused; all 17 terminal current pairs, 1015 recursive current pairs, and 106381 recursive latent pairs come from fourth latent pairs, with zero child pair reuse. Exact resource identity: used `1586.466623468978...` plus unused `1158.927755372724...` equals parent `H(R_4)+J(R_4)=2745.394378841703...`. | Exact finite pair-resource containment and partition theorem; fixed policy and quotient. |
 | CL-086 | Coordinated deletion preserves affine root coordinates: terminal residuals remain `S_r(P_R)`, backbone shells are `S_a(Q)`, and a step-`q` middle fiber is `S_{t_0}(T_q\{t_0})`, where `t_0` is the sponsor root of the minimum center. Consequently every child current/latent pair is a parent current or latent pair, and union-valued pair capacity is nonincreasing for arbitrary simultaneous output and retention. Occurrence expansion equals exact repeated-pair mass. | Symbolic whole-family affine closure and pair-resource containment theorem. Entering/economically activated pair energy remains open. |
+| CL-087 | The certified `R_3 -> F_4` transition has 14/14 affine parents. Exact pair containment has zero missing current or latent resources. Parent pair multiplicity is at most 2 with repeated mass `7.711618836980...`; child multiplicity is at most 2 with repeated mass `0.133953757799...`. Both resource conventions contract: occurrence `2747.630136815823... < 7828.862146571999...`, union `2747.496183058024... < 7821.150527735019...`. | Exact finite affine pair-resource contraction theorem; fixed policy and quotient. |
 
 Primary latest references:
 
+- `docs/third-to-fourth-pair-resource-contraction.md`;
+- `src/verify_pair_resource_third_to_fourth.py`;
+- `data/pair_resource_third_to_fourth_certificate_2026-07-14.txt`;
 - `docs/affine-output-closure-and-pair-containment.md`;
 - `docs/fifth-generation-pair-resource-partition.md`;
 - `src/verify_pair_resource_ownership.py`;

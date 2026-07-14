@@ -280,6 +280,30 @@ Primary reference: `docs/affine-output-closure-and-pair-containment.md`.
 
 ---
 
+## Third-to-fourth pair-resource contraction
+
+The affine pair-resource regime already holds before root uniqueness. All fourteen third recursive parents are affine, every fourth current or latent resource is contained, and pair multiplicity is at most two.
+
+```text
+R3 occurrence resource = 7828.862146571999...
+F4 occurrence resource = 2747.630136815823...
+
+R3 union resource      = 7821.150527735019...
+F4 union resource      = 2747.496183058024...
+```
+
+Repeated-pair mass contracts from
+
+```text
+7.711618836980... -> 0.133953757799...
+```
+
+with zero missing resource tokens. Therefore `R_3 -> F_4` is removed from the obstruction frontier in both occurrence and union conventions.
+
+Primary reference: `docs/third-to-fourth-pair-resource-contraction.md`.
+
+---
+
 ## 1. Foundation and recorded exact path
 
 For

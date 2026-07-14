@@ -361,6 +361,12 @@ Every child current or latent pair is therefore already a parent pair resource. 
 
 This resolves the long-standing overlap/provenance bookkeeping bottleneck at the level of distinct resources. The active analytical bottleneck is now economical pair activation or a summable bound on the activated pair universe, not another retention rule.
 
+### Third-to-fourth pair-resource contraction
+
+The pair-resource test was moved one level earlier. All fourteen `R_3` recursive states are affine. Every `F_4` current or latent pair is contained in the parent resource universe. Pair multiplicity is at most two, and both occurrence and union potentials contract by more than `5000` units of exact pair mass.
+
+The finite obstruction prefix is now restricted to `R_1 -> F_2` and `R_2 -> F_3`; the later transitions are closed.
+
 **Decisions:**
 
 - current-generation multiplicity is not persistent reserve;
@@ -378,6 +384,7 @@ This resolves the long-standing overlap/provenance bookkeeping bottleneck at the
 - affine entry is automatic from the initial state under terminal, backbone, and middle-fiber output;
 - union-valued pair containment resolves duplicate, containment, partial-overlap, and cross-generation payment semantics;
 - the active theorem is economical pair activation, not another retained-child quotient or affine-purification lemma;
+- `R_3 -> F_4` is closed in both occurrence and union pair-resource conventions; only the first two retained transitions remain as finite diagnostics;
 - generation six is blocked until a state-independent transfer lemma is proposed;
 - a new feature is admissible only with a transition recurrence, bounded-reuse interpretation, and telescoping role.
 

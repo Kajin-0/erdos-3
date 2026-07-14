@@ -30,6 +30,7 @@ The repository has established:
 15. an exact pair-energy Bellman row closing the recorded fourth-to-fifth retained expansion.
 16. an exact pair-resource partition proving containment and zero repeated payment at the fifth frontier.
 17. a symbolic affine-closure theorem and universal union-valued pair-resource containment for every coordinated deletion output.
+18. exact occurrence- and union-valued pair-resource contraction from the third to fourth retained frontier.
 
 The strongest state-specific closure is
 
@@ -87,6 +88,7 @@ A valid theorem must still handle policy dependence, terminal-recursive interact
 - [`docs/fifth-generation-pair-energy-bellman-row.md`](docs/fifth-generation-pair-energy-bellman-row.md) — exact affine pair-energy Bellman row at the first failing retained transition.
 - [`docs/fifth-generation-pair-resource-partition.md`](docs/fifth-generation-pair-resource-partition.md) — explicit fifth-child to fourth-pair ownership and unused-capacity theorem.
 - [`docs/affine-output-closure-and-pair-containment.md`](docs/affine-output-closure-and-pair-containment.md) — universal affine descendant and pair-resource containment theorem.
+- [`docs/third-to-fourth-pair-resource-contraction.md`](docs/third-to-fourth-pair-resource-contraction.md) — exact affine pair contraction before root uniqueness.
 - [`docs/branching-reserve-lp.md`](docs/branching-reserve-lp.md) — exact retained-child LP contract and current packing requirements.
 
 ## Main completed theorem families

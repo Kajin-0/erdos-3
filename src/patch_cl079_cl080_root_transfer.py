@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
-"""Idempotently record CL-079/080 and the root-transfer bottleneck."""
+"""Idempotently record CL-079/080 and the root-transfer research pivot."""
 from __future__ import annotations
 
 from pathlib import Path
 
 LEDGER = Path("docs/certainty-ledger.md")
+HISTORY = Path("docs/research-decision-history.md")
 
 ROW_079 = "| CL-079 | On the certified fourth recursive family, all-lexicographic deletion, all-reverse deletion, and each of the twelve single-parent lexicographic-to-reverse flips expand recursively under every maximum-total-harmonic retention tie choice. The best tested policy is `reverse_parent_82`, with ratio `1.197375982982...`; the baseline ratio is `1.329813898820...`. The two nonunique policies each have two tied optima with identical recursive mass. | Exact finite local policy-sensitivity theorem; not universal over all policies or retention rules. |"
 ROW_080 = "| CL-080 | At the baseline fourth-to-fifth transition, all root provenance is unique. Of 1717 fourth recursive roots, 1015 survive recursively and 702 exit; 17 terminalize and 685 disappear from the retained family. The exact identity `H5_rec-H4_rec=G_4->5-L_4->5` has survivor scale gain `1.816777911848...`, exiting parent release `1.310139720502...`, and net recursive increase `0.506638191346...`; `1.386705<G/L<1.386706`. No root splits between recursive and terminal output and fifth retained root multiplicity is one. | Elementary root-lineage identity plus exact finite decomposition. |"
@@ -106,8 +107,80 @@ A new coordinate is admissible only if it has a transfer identity or one-sided r
 Generation six is blocked until such a lemma exists. The next concrete tasks are to classify survivor scale gain by source/shell/immediate provenance, attach terminalized roots to first-appearance `(u,p,i)` tokens, and determine what arithmetic credit is created by the 685 dropped lineages.
 """
 
+HISTORY_PHASE = r"""## 10. Retained propagation and root-lineage transfer phase
 
-def main() -> int:
+The retained quotient was propagated through five recorded levels. Static current-generation features produced exact finite witnesses, including `H+74R` through generation four, but generation five has
+
+```math
+R_4=R_5=0
+```
+
+while recursive harmonic mass expands by a factor between `1.329813` and `1.329814`. No finite coefficient in `H+kR` repairs that transition.
+
+The first failing transition was then tested under all-lexicographic deletion, all-reverse deletion, and each single-parent lexicographic-to-reverse flip. All fourteen tested policies expand under every maximum-harmonic retention tie. The best tested policy, `reverse_parent_82`, lowers the ratio to `1.197375982982...` but does not contract.
+
+At the baseline transition all root provenance is unique. The exact lineage identity is
+
+```math
+H_5^{\mathrm{rec}}-H_4^{\mathrm{rec}}
+=G_{4\to5}-L_{4\to5},
+```
+
+with
+
+```text
+surviving-lineage scale gain = 1.816777911848...
+exiting parent release       = 1.310139720502...
+net recursive increase       = 0.506638191346...
+```
+
+Of `1717` fourth recursive roots, `1015` survive and `702` exit; `17` terminalize and `685` disappear from the retained family. No root splits between recursive and terminal output.
+
+**Decisions:**
+
+- current-generation multiplicity is not persistent reserve;
+- finite feature-LP witnesses are diagnostics, not theorem candidates without a transfer law;
+- nearby deletion-policy changes do not remove the first failing expansion, although policy remains quantitatively important;
+- the missing resource is cumulative ancestor-path scale capacity plus terminal/drop/obstruction release;
+- generation six is blocked until a state-independent transfer lemma is proposed;
+- a new feature is admissible only with a transition recurrence, bounded-reuse interpretation, and telescoping role.
+
+---
+
+"""
+
+HISTORY_ACTIVE = r"""## 12. Active closing target
+
+The active target is a cumulative root-lineage reserve-transfer theorem:
+
+```math
+H_{g+1}^{\mathrm{rec}}
++A_{g+1}
++T_{g+1}^{\mathrm{first}}
+\le
+H_g^{\mathrm{rec}}
++A_g
++\Phi_{\mathrm{obs},g}
++\varepsilon_g.
+```
+
+Here `A_g` must be a state-independent ancestor-path capacity, `T^{first}` is newly terminal first-appearance credit, and `Phi_obs` records completion, rectangle, or cheap-extension exclusion created when capacity is released.
+
+The next exact work is to:
+
+1. classify survivor scale gain by parent state, source type, shell, and immediate provenance;
+2. attach the `17` terminalized roots injectively to first-appearance `(u,p,i)` tokens;
+3. determine what completion, rectangle, or future-extension exclusion is created by the `685` dropped lineages;
+4. formulate a transfer lemma before propagating another generation.
+
+No current theorem closes this gap. Generation six and further feature fitting are explicitly deferred.
+
+---
+
+"""
+
+
+def patch_ledger() -> None:
     text = LEDGER.read_text(encoding="utf-8")
     lines = text.splitlines()
     if ROW_079 not in lines:
@@ -121,21 +194,16 @@ def main() -> int:
     marker = "Primary latest references:\n\n"
     additions = (
         "- `docs/fourth-to-fifth-root-transfer.md`;\n"
-        "- `src/verify_fourth-to-fifth-root-transfer.py`;\n"
+        "- `src/verify_fourth_to_fifth_root_transfer.py`;\n"
         "- `docs/fourth-to-fifth-policy-sensitivity.md`;\n"
         "- `src/verify_fourth_to_fifth_policy_sensitivity.py`;\n"
     )
-    # Correct an earlier typo if present before testing for the canonical block.
     text = text.replace(
         "- `src/verify_fourth-to-fifth-root-transfer.py`;\n",
         "- `src/verify_fourth_to_fifth_root_transfer.py`;\n",
     )
-    canonical_additions = additions.replace(
-        "verify_fourth-to-fifth-root-transfer.py",
-        "verify_fourth_to_fifth_root_transfer.py",
-    )
-    if canonical_additions not in text:
-        text = text.replace(marker, marker + canonical_additions, 1)
+    if additions not in text:
+        text = text.replace(marker, marker + additions, 1)
 
     start = text.index("# Prohibited inferences")
     bottleneck = text.index("# Open bottleneck", start)
@@ -143,6 +211,39 @@ def main() -> int:
     start = text.index("# Open bottleneck")
     text = text[:start] + BOTTLENECK.rstrip() + "\n"
     LEDGER.write_text(text, encoding="utf-8")
+
+
+def patch_history() -> None:
+    text = HISTORY.read_text(encoding="utf-8")
+    if "## 10. Retained propagation and root-lineage transfer phase" not in text:
+        anchor = "## 10. Permanent stop list"
+        if anchor not in text:
+            raise AssertionError("decision-history stop-list anchor not found")
+        text = text.replace(anchor, HISTORY_PHASE + "## 11. Permanent stop list", 1)
+    else:
+        text = text.replace("## 10. Permanent stop list", "## 11. Permanent stop list", 1)
+
+    for item in (
+        "26. current-generation multiplicity as persistent reserve;",
+        "27. another feature-fit/one-more-generation loop without a transfer lemma;",
+        "28. generation-six propagation without a predeclared conceptual test.",
+    ):
+        if item not in text:
+            needle = "25. the rejected depth-ten anchor reduction."
+            replacement = needle + "\n" + item
+            text = text.replace(needle, replacement, 1)
+
+    active_start = text.index("## 11. Active closing target") if "## 11. Active closing target" in text else text.index("## 12. Active closing target")
+    protocol_marker = "## 12. Documentation protocol" if "## 12. Documentation protocol" in text else "## 13. Documentation protocol"
+    protocol_start = text.index(protocol_marker, active_start)
+    text = text[:active_start] + HISTORY_ACTIVE + text[protocol_start:]
+    text = text.replace("## 12. Documentation protocol", "## 13. Documentation protocol", 1)
+    HISTORY.write_text(text, encoding="utf-8")
+
+
+def main() -> int:
+    patch_ledger()
+    patch_history()
     return 0
 
 

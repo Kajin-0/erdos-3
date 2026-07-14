@@ -1,0 +1,32 @@
+FULL S7 DELAY-SUBSET POLICY LP
+
+subset_steps=5,40,30,161,142
+S1_S6_policies_per_state=32
+S7_policies=64
+features=lambda,gamma
+weights=lambda:3,gamma:1/10
+constraints=249
+jsonl_bytes=1257772
+jsonl_sha256=c8986841eb8e936848d26ef769e6314052987b42a59a0f6430dfcf2bc01b4f4d
+lp_bytes=1511038
+lp_lines=256
+lp_sha256=45c1f50bbac2b9d50a6b3d5dd99ff874f24ef965e046e476567fa2d9b3375985
+
+result=FEASIBLE
+active_equalities=47
+active_equalities_sha256=d6913498d788323c69bade7513294c758022f439108f535675cfe495c4814027
+strict_minimum_constraint=S7:seed_delay_5_142<=seed_delay_5
+strict_minimum_slack_sha256=94b80ff019f4ba5a4e740db7a11dfb5be412dae92c5ad6a3f863692ce5018d38
+strict_minimum_slack_numerator_digits=615
+strict_minimum_slack_denominator_digits=617
+
+S1_chosen=delay_none
+S2_chosen=delay_5
+S3_chosen=delay_5_161_142
+S4_chosen=delay_5_40
+S5_chosen=delay_5_40
+S6_chosen=delay_5_40
+S7_chosen=seed_delay_5_142
+
+conclusion: lambda=3,gamma=1/10 remains feasible after exact enumeration of all 64 S7 policies formed by the 32 delay subsets, with and without seed delay.
+The S7 optimum changes from seed_delay_5 to seed_delay_5_142. This remains a finite policy-ranking LP, not a retained-child Bellman theorem.

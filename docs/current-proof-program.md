@@ -1,4 +1,4 @@
-# Current proof program: recursive contraction and terminal-sink accounting
+# Current proof program: recursive Bellman contraction and terminal sinks
 
 ## Status
 
@@ -58,13 +58,13 @@ Every valid exact factor-eight child has a certified summable tail. This closes 
 
 ## 2. Policy and retained-child frontier
 
-Lexicographic `S_7` contains an isolated canonical return
+Lexicographic `S_7` contains an isolated return
 
 ```math
 \{16,21,26\}\xrightarrow[f=4]{R=1}S_1
 ```
 
-and a cyclic terminal-fiber component with spectral radius greater than `23/9`. Raw output is therefore not a Bellman child family.
+and a cyclic terminal-fiber component with spectral radius greater than `23/9`. Raw outputs cannot therefore be inserted directly into a Bellman child sum.
 
 The finite policy score
 
@@ -80,7 +80,7 @@ has witness
 \boxed{\lambda=3,\qquad\gamma=\frac1{10}}.
 ```
 
-A complete five-step subset lattice is certified through `S_7`. A broader deterministic search produces a seed-delayed 37-step `S_7` policy with
+A complete five-step subset lattice is certified through `S_7`. A broader deterministic search gives a seed-delayed 37-step `S_7` policy with
 
 ```text
 selected actions = 9,323
@@ -108,7 +108,7 @@ second retained labels = 7,925.
 
 ---
 
-## 3. Provenance, scale, and the terminal correction
+## 3. Provenance, scale, and terminal correction
 
 Original `S_7` provenance multiplicity among the 7,925 second-generation points is
 
@@ -118,21 +118,21 @@ Original `S_7` provenance multiplicity among the 7,925 second-generation points 
 | 2 | 267 |
 | 3 | 5 |
 
-Total second retained harmonic mass is between `6.828` and `6.829` times first retained mass. The scale profile explains that apparent expansion:
+Total second retained harmonic mass is between `6.828` and `6.829` times first retained mass. The scale profile explains the concentration:
 
 - every contraction with `floor(log2(p/u)) >= 8` has repeated root provenance;
 - repeated roots carry only `7.6%`–`7.7%` of root occurrence mass;
 - they produce `94.8%`–`94.9%` of second retained harmonic mass;
 - unit root-weighted depth or logarithmic charges fail by factors greater than `77`.
 
-The 27 second-generation retained states divide exactly into
+The 27 states divide exactly into
 
 | type | states | labels |
 |---|---:|---:|
 | terminal, three-term-progression-free | 13 | 43 |
 | recursive | 14 | 7,882 |
 
-The terminal states have no coordinated-deletion action and carry `86.2%`–`86.3%` of total second retained harmonic mass. After removing them,
+Terminal states have no coordinated-deletion action and carry `86.2%`–`86.3%` of second retained mass. Removing them gives
 
 ```math
 \boxed{
@@ -144,7 +144,7 @@ The terminal states have no coordinated-deletion action and carry `86.2%`–`86.
 }
 ```
 
-Thus the genuinely recursive retained branch contracts by
+Thus the recursively continuing branch contracts by
 
 ```math
 \boxed{
@@ -160,14 +160,13 @@ All points with at least sixteen binary orders of contraction, including `u=1`, 
 
 ---
 
-## 4. Exact terminal-sink identity ledger
+## 4. Exact terminal identities
 
-The 13 terminal states now have a deterministic identity export. Each state record contains:
+The 13 terminal states have a deterministic identity export. Each record contains:
 
 ```text
 numerical value set
-root-provenance vector
-immediate-provenance vector
+root- and immediate-provenance vectors
 parent retained class
 source type and source step
 dyadic shell
@@ -180,7 +179,7 @@ The export is anchored to the certified second-generation retained-family hash
 dbb6d888c790cf5a67f2e3a6ed86400506c93baac3701f39d15d858c19b21596
 ```
 
-and the complete 7,925-point provenance record hash
+and the complete 7,925-point provenance-record hash
 
 ```text
 904b0b9f8906d196ea02369cb60153341eda5a562340ba8615dbcdb769dc92e3.
@@ -189,34 +188,88 @@ and the complete 7,925-point provenance record hash
 Within the certified family:
 
 ```text
-terminal sink states = 13
-terminal sink points = 43
+terminal states = 13
+terminal points = 43
 terminal numerical labels are pairwise unique
-terminal labels are disjoint from recursive retained labels
+terminal labels are disjoint from recursive labels
 terminal point tokens (u,p) are pairwise unique.
 ```
 
-Therefore every terminal point can be charged exactly once **inside this recorded family**. This is not yet a global terminal-sink theorem: another branch or later generation could recreate the same numerical or provenance-supported sink.
-
-Primary references:
-
-- `docs/retained-terminal-sink-identity-ledger.md`;
-- `docs/retained-terminal-recursive-split.md`;
-- `docs/retained-provenance-scale-profile.md`;
-- `docs/retained-provenance-second-generation.md`;
-- `docs/s7-provenance-retained-quotient.md`.
+Every terminal point can therefore be charged once inside this family. Global recreation by another branch or generation remains open.
 
 ---
 
-## 5. Active theorem
+## 5. First-appearance terminal ledger
 
-The target whole-tree inequality is now separated into recursive and terminal coordinates:
+For any fixed terminal-token map on a finite or locally finite rooted tree, assign each token to the first node containing it in a deterministic total order. The first-appearance sets are pairwise disjoint and their weighted sum equals the weighted global token union.
+
+For the recorded family, use
+
+```math
+\tau(u)=(u,p),
+```
+
+where `p` is original `S_7` root provenance. All 43 tokens are unique, so the full recorded terminal charge is a first-appearance charge under every node order.
+
+This solves bookkeeping once a collision-sound token map is fixed. It does not prove that `(u,p)` is globally collision-sound or that the global token-union mass is bounded.
+
+---
+
+## 6. First strict retained Bellman row
+
+The certified recursive ratio implies
+
+```math
+H_2^{\rm rec}<\frac{469}{500}H_1.
+```
+
+Therefore
+
+```math
+\boxed{
+\frac{31}{500}H_1+H_2^{\rm rec}<H_1.
+}
+```
+
+This is the first strict rational Bellman row for the genuinely recursive retained output of the adversarial transition.
+
+Carrying the first-appearance terminal coordinate separately gives
+
+```math
+\boxed{
+\frac{31}{500}H_1
++
+H_2^{\rm rec}
++
+\operatorname{TermSink}_{\rm first}
+<
+H_1
++
+\operatorname{TermSink}_{\rm first}.
+}
+```
+
+Terminal mass is neither discarded nor counted as recursive load. The row is fixed-policy and fixed-retention, not universal.
+
+Primary references:
+
+- `docs/two-generation-recursive-bellman-row.md`;
+- `docs/terminal-sink-first-appearance-ledger.md`;
+- `docs/retained-terminal-sink-identity-ledger.md`;
+- `docs/retained-terminal-recursive-split.md`;
+- `docs/retained-provenance-scale-profile.md`.
+
+---
+
+## 7. Active theorem
+
+The whole-tree target is
 
 ```math
 \boxed{
 \Delta(S)
 +
-\operatorname{TermSink}(S)
+\operatorname{TermSink}_{\rm first}(S)
 +
 \sum_{S'\in\operatorname{RecChild}_\pi(S)}
 \operatorname{RecPack}(S')
@@ -229,53 +282,55 @@ The target whole-tree inequality is now separated into recursive and terminal co
 }
 ```
 
-`RecPack` must contract under retained recursive propagation. `TermSink` must charge three-term-progression-free outputs once and prevent recreation through another numerical, provenance, or affine path.
-
-The exact two-generation transition establishes the first part locally:
+The recorded transition now supplies:
 
 ```text
-recursive retained ratio < 0.938.
+legitimate retained children
+separate terminal and recursive families
+strict recursive credit 31/500 of parent retained mass
+exact terminal identities
+first-appearance no-double-counting bookkeeping.
 ```
 
-The unresolved theorem is the second part: bound the global multiplicity of terminal sink identities.
+The unresolved structural theorem is terminal-token collision control across branches and generations.
 
 ---
 
-## 6. Approved next targets
+## 8. Approved next targets
 
-1. Compare the 43 terminal `(u,p)` tokens with all earlier raw and retained point tokens.
-2. Propagate only the 14 recursive second-generation states and test third-generation contraction and terminal-token recreation.
-3. Test whether `(root provenance, descendant label)` is sufficient globally or requires a path/affine signature.
-4. Export the first Bellman row with separate recursive and first-appearance terminal coordinates.
-5. Attach completion, rectangle, or future cheap-extension exclusion credit to recreated sinks.
-6. Prove a terminal-output Carleson bound or extract the smallest exact collision.
+1. Compare the 43 terminal `(u,p)` tokens with all earlier raw and retained tokens.
+2. Propagate only the 14 recursive second-generation states and apply the quotient a third time.
+3. Measure third-generation recursive contraction and recreation of the 43 recorded terminal tokens.
+4. Test whether `(u,p)` requires an affine/path signature to be collision-sound.
+5. Export a three-generation Bellman row or the smallest exact failure.
+6. Prove a terminal-output Carleson bound or extract the first unbounded collision mechanism.
 
 ---
 
-## 7. Stop list
+## 9. Stop list
 
 Do not infer:
 
 - pathwise summability implies whole-tree summability;
 - replay siblings are simultaneous children;
 - local policy optimality is global;
-- raw harmonic reduction alone gives Bellman contraction;
 - duplicate quotienting alone resolves overlap;
 - one-generation retention bounds indefinite provenance reuse;
 - maximum provenance multiplicity three implies contraction;
-- unit depth or logarithmic root charge repays the full second-generation mass;
+- unit depth or logarithmic root charge repays total second-generation mass;
 - the full `6.828`–`6.829` ratio is recursive load;
-- terminal mass may be discarded rather than charged once;
+- terminal mass may be discarded;
 - within-family terminal-token uniqueness implies global uniqueness;
 - `(u,p)` is globally injective without a collision theorem;
-- the `6.2%`–`6.3%` recursive contraction is universal;
-- maximum-harmonic retention is globally Bellman-optimal;
-- policy-LP feasibility implies Bellman-LP feasibility;
+- first-appearance bookkeeping bounds token-union mass;
+- the `31/500` Bellman credit is universal;
+- maximum-harmonic retention is globally optimal;
+- policy-LP feasibility implies branching Bellman-LP feasibility;
 - one finite transition proves the whole theorem.
 
 ---
 
-## 8. Reproduction
+## 10. Reproduction
 
 Push-gating lightweight suite:
 
@@ -283,16 +338,16 @@ Push-gating lightweight suite:
 bash src/run_verify_ci_lightweight.sh
 ```
 
-Complete established extended suite:
+Established extended frontier:
 
 ```bash
 bash src/run_verify_transport_reserve.sh
 ```
 
-Terminal identity export and verification:
+Terminal identity and Bellman-row checks:
 
 ```bash
 bash src/run_verify_terminal_sink_ledger.sh
 ```
 
-The manually triggered extended workflow runs both commands. The terminal identity check is not part of push-gating lightweight CI.
+The manually triggered extended workflow runs both commands. None of the terminal-ledger or Bellman-row work is part of push-gating lightweight CI.

@@ -81,8 +81,9 @@ Statuses marked **exact finite** are computational statements for recorded objec
 | CL-062 | Delaying step `30` alone improves `C_3` relative to lexicographic deletion on every `S_2,...,S_7`, but adding the same delay after steps `5` and `40` reverses sign and worsens `C_3` on every `S_2,...,S_7`. Favorable local policy perturbations are not composable. | Exact finite interaction/no-greedy theorem. |
 | CL-063 | The current policy comparisons export to `60` exact rational half-spaces in features `(lambda,gamma)`. The existing LP harness verifies `(3,1/10)` feasible. The only zero-slack rows are seven `S_1` ties and the `S_2` `step5/step540` tie; the active `S_7` continuation boundary is `hybrid5<=step540`. | Exact finite policy-LP feasibility theorem. |
 | CL-064 | Expanding `S_1,...,S_6` to all `32` subsets of delayed steps `{5,40,30,161,142}` produces `198` exact policy half-spaces. `(lambda,gamma)=(3,1/10)` remains feasible. The unique `S_3` optimum changes to `delay_5_161_142`; `S_4,...,S_6` retain `delay_5_40` up to inactive `142/161` ties. The `S_7` side remains the current `13`-policy family and is not subset-exhaustive. | Exact finite subset-lattice policy-LP theorem. |
+| CL-065 | Exhausting all `32` subsets of `{5,40,30,161,142}` on `S_7`, both with and without the seed-delay switch, plus reverse deletion, enlarges the exact policy LP to `250` constraints. `(lambda,gamma)=(3,1/10)` remains feasible. The unique `S_7` winner changes from `seed_5` to the non-regenerative `seed_5_142`; its exact advantage over `seed_5` lies between `3/2000` and `751/500000`. | Exact finite full five-step subset-lattice theorem through `S_7`. |
 
-Primary references for CL-050 through CL-064:
+Primary references for CL-050 through CL-065:
 
 - `docs/s7-cyclic-scc-output-load.md`;
 - `docs/s7-cyclic-scc-local-completion-credit.md`;
@@ -97,11 +98,13 @@ Primary references for CL-050 through CL-064:
 - `docs/two-coordinate-policy-family.md`;
 - `docs/policy-halfspace-lp.md`;
 - `docs/expanded-policy-subset-lp.md`;
+- `docs/policy-subset-lattice-s1-s7.md`;
 - `src/verify_policy_occurrence_cone_s1_s7.py`;
 - `src/verify_step5_policy_regeneration_weight.py`;
 - `src/verify_two_coordinate_policy_family.py`;
 - `src/verify_policy_halfspace_lp.py`;
-- `src/verify_expanded_policy_subset_lp.py`.
+- `src/verify_expanded_policy_subset_lp.py`;
+- `src/verify_policy_subset_lattice_s1_s7.py`.
 
 ---
 
@@ -141,16 +144,17 @@ Do not use without materially new hypotheses:
 30. assuming `gamma=1/16` survives enlargement of the policy family;
 31. greedily composing individually favorable policy delays;
 32. treating the earlier `S_3` `delay_5_40` choice as optimal after subset-lattice expansion;
-33. claiming exhaustive `S_7` subset enumeration;
-34. treating policy-half-space LP feasibility as branching Bellman-LP feasibility;
-35. inserting the recorded path charge directly into a Bellman child sum without a retention theorem;
-36. treating the tested policy family as globally optimal over all complete schedules;
-37. random sampling as a finite certificate;
-38. the rejected depth-ten anchor reduction.
+33. treating the earlier `S_7` `seed_5` choice as optimal after full five-step subset-lattice expansion;
+34. treating the five-step subset lattice as exhaustive over arbitrary delayed progression steps or all complete schedules;
+35. treating policy-half-space LP feasibility as branching Bellman-LP feasibility;
+36. inserting the recorded path charge directly into a Bellman child sum without a retention theorem;
+37. treating the tested policy family as globally optimal over all complete schedules;
+38. random sampling as a finite certificate;
+39. the rejected depth-ten anchor reduction.
 
 ---
 
-# Open bottleneck OB-001: Expanded policy LP and retained-child Bellman rows
+# Open bottleneck OB-001: Enlarged delayed-step universe and retained-child Bellman rows
 
 The state-specific cheap-extension problem at `S_10` is closed. Raw simultaneous transition generation is certified through `S_7`. Exact policy experiments now establish:
 
@@ -158,10 +162,10 @@ The state-specific cheap-extension problem at `S_10` is closed. Raw simultaneous
 2. a necessary continuation-sensitive regeneration coordinate;
 3. a stable finite witness `(lambda,gamma)=(3,1/10)`;
 4. non-composable interactions between local priority modifications;
-5. exact feasibility of `198` policy-ranking half-spaces after exhaustive subset expansion on `S_1,...,S_6`;
-6. policy-selection instability under family enlargement, first appearing at `S_3`.
+5. exact feasibility of `250` policy-ranking half-spaces after full five-step subset expansion through `S_7`;
+6. policy-selection instability under family enlargement, now appearing at both `S_3` and `S_7`.
 
-The next task is to expand the `S_7` family with a tractable certifiable search, monitor the exact feasible cone, then prove a provenance-preserving retention quotient and export the first legitimate retained-child Bellman row. Policy-ranking feasibility alone does not control the simultaneous deletion tree.
+The next finite task is an exact deterministic add/remove neighborhood around `seed_5_142` using a larger candidate-step universe. The structural task is still to prove a provenance-preserving retention quotient and export the first legitimate retained-child Bellman row. Policy-ranking feasibility alone does not control the simultaneous deletion tree.
 
 The target remains
 

@@ -23,14 +23,63 @@ on:
       - src/test_probe_workflow_helpers.sh
 
 permissions:
-  contents: read
+  contents: write
+
+concurrency:
+  group: probe-result-writers-main
+  cancel-in-progress: false
 
 jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Lint workflow templates
-        run: python3 src/lint_probe_workflows.py
-      - name: Test shared helpers
-        run: bash src/test_probe_workflow_helpers.sh
+        with:
+          fetch-depth: 0
+
+      - name: Run checks and preserve diagnostics
+        shell: bash
+        run: |
+          set +e
+          python3 src/lint_probe_workflows.py > /tmp/probe_workflow_lint.out 2>&1
+          lint_status=$?
+          bash src/test_probe_workflow_helpers.sh > /tmp/probe_workflow_helpers.out 2>&1
+          helper_status=$?
+          {
+            echo "schema=probe_workflow_hardening_status_v1"
+            echo "lint_exit_status=$lint_status"
+            echo "helper_test_exit_status=$helper_status"
+            echo "source_commit=${GITHUB_SHA}"
+            echo "source_ref=${GITHUB_REF}"
+            echo "workflow_run_id=${GITHUB_RUN_ID}"
+            echo "workflow_run_attempt=${GITHUB_RUN_ATTEMPT}"
+            echo "--- workflow lint ---"
+            cat /tmp/probe_workflow_lint.out
+            echo "--- helper tests ---"
+            cat /tmp/probe_workflow_helpers.out
+          } > data/probe_workflow_lint_status.txt
+          exit 0
+
+      - name: Upload lint diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: probe-workflow-lint-${{ github.run_id }}-${{ github.run_attempt }}
+          retention-days: 30
+          path: |
+            data/probe_workflow_lint_status.txt
+            /tmp/probe_workflow_lint.out
+            /tmp/probe_workflow_helpers.out
+
+      - name: Record push diagnostics
+        if: always() && github.event_name == 'push'
+        shell: bash
+        run: |
+          bash src/commit_probe_outputs.sh \
+            "Record probe workflow lint status [skip ci]" \
+            data/probe_workflow_lint_status.txt
+
+      - name: Report original check failure
+        if: always()
+        shell: bash
+        run: bash src/assert_probe_status.sh data/probe_workflow_lint_status.txt

@@ -297,7 +297,7 @@ of an outer replication parameter. They are not, merely by being valid, four
 disjoint children that should all appear in
 
 ```math
-\sum_{S'\in\operatorname{Child}(S)}\Phi(S').
+\sum_{S'\in\mathrm{Child}(S)}\Phi(S').
 ```
 
 Summing the entire separation catalog as one child family would therefore be

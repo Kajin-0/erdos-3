@@ -186,9 +186,9 @@ The useful target is a provenance-sensitive Carleson estimate:
 \sum_{
  \text{descendant occurrences of }u
 }
-\operatorname{weight}(u,\text{origin})
+\mathrm{weight}(u,\text{origin})
 \le
-C\,\operatorname{capacity}(u,\text{root origin}).
+C\,\mathrm{capacity}(u,\text{root origin}).
 ```
 
 Local multiplicity is one slice of this desired estimate. The missing issue is cross-generation reuse.

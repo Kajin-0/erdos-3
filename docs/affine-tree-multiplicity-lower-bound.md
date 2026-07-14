@@ -419,7 +419,7 @@ To close the argument, one needs an upper bound for fixed-terminal affine-path m
 ```math
 m_h(d)
 \le
-C^h\operatorname{poly}(M)
+C^h\mathrm{poly}(M)
 ```
 
 with an effective growth rate below the forced branching rate, or an overlap estimate

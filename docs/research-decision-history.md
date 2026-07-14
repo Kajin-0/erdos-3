@@ -288,15 +288,15 @@ The current bottleneck is a cyclic-component retention and whole-tree packing th
 ```math
 \Delta(S)
 +
-\sum_{S'\in\operatorname{Child}(S)}
+\sum_{S'\in\mathrm{Child}(S)}
 \left(
-\operatorname{Pack}(S')+
+\mathrm{Pack}(S')+
 \Phi_{\rm obs}(S')
 \right)
 \le
-\operatorname{Pack}(S)+
+\mathrm{Pack}(S)+
 \Phi_{\rm obs}(S)+
-\operatorname{controlled\ error}.
+\mathrm{controlled\ error}.
 ```
 
 The next finite experiment must quantify how the high-growth `S_7` cyclic component exports mass into:

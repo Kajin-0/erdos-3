@@ -234,7 +234,7 @@ The last inequality is weak for small reciprocal mass, but it is an exact struct
 For a positive integer `n`, define its `6`-free core by
 
 ```math
-\operatorname{core}_{2,3}(n)
+\mathrm{core}_{2,3}(n)
 =
 \frac{n}{2^{v_2(n)}3^{v_3(n)}}.
 ```
@@ -245,9 +245,9 @@ Every edge of a chain multiplies by either `3` or `3/2`.  Therefore
 
 ```math
 \boxed{
-\operatorname{core}_{2,3}(\phi(d))
+\mathrm{core}_{2,3}(\phi(d))
 =
-\operatorname{core}_{2,3}(d).
+\mathrm{core}_{2,3}(d).
 }
 ```
 
@@ -278,7 +278,7 @@ Consequently, for any set `X subseteq N`,
 \boxed{
 \sum_{n\in X}\frac1n
 \le
-3\sum_{c\in\operatorname{Core}(X)}\frac1c,
+3\sum_{c\in\mathrm{Core}(X)}\frac1c,
 }
 ```
 
@@ -294,7 +294,7 @@ implies
 
 ```math
 \boxed{
-\sum_{c\in\operatorname{Core}(X)}\frac1c=\infty.
+\sum_{c\in\mathrm{Core}(X)}\frac1c=\infty.
 }
 ```
 

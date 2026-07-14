@@ -98,14 +98,14 @@ The current objective is a policy-aware retained-child inequality of the schemat
 ```math
 \Delta(S)
 +
-\sum_{S'\in\operatorname{Child}_\pi(S)}
+\sum_{S'\in\mathrm{Child}_\pi(S)}
 \left(
-\operatorname{Pack}(S')+\Phi_{\rm obs}(S')
+\mathrm{Pack}(S')+\Phi_{\rm obs}(S')
 \right)
 \le
-\operatorname{Pack}(S)+\Phi_{\rm obs}(S)
+\mathrm{Pack}(S)+\Phi_{\rm obs}(S)
 +
-\operatorname{controlled\ error}.
+\mathrm{controlled\ error}.
 ```
 
 The decisive missing object is a **provenance-preserving retention quotient** converting raw overlapping simultaneous output into legitimate Bellman children.
@@ -638,14 +638,14 @@ The target is a policy-aware branching inequality
 ```math
 \Delta(S)
 +
-\sum_{S'\in\operatorname{Child}_\pi(S)}
+\sum_{S'\in\mathrm{Child}_\pi(S)}
 \left(
-\operatorname{Pack}(S')+\Phi_{\rm obs}(S')
+\mathrm{Pack}(S')+\Phi_{\rm obs}(S')
 \right)
 \le
-\operatorname{Pack}(S)+\Phi_{\rm obs}(S)
+\mathrm{Pack}(S)+\Phi_{\rm obs}(S)
 +
-\operatorname{controlled\ error}.
+\mathrm{controlled\ error}.
 ```
 
 Here:

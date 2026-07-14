@@ -2,9 +2,9 @@ schema=residual_sponsor_backbone_split_probe_v2
 compile_exit_status=0
 probe_exit_status=0
 summary_exit_status=0
-verifier_exit_status=not_applicable
-source_commit=fa64e064ffb39c5e1d99c8ec6982fa3e57745922
+verifier_exit_status=0
+source_commit=27c9157e2a944364a59cb23184aa2243dd8e9487
 source_ref=refs/heads/main
-workflow_run_id=29348970649
+workflow_run_id=29349088981
 workflow_run_attempt=1
 --- stderr ---

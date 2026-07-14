@@ -1,15 +1,12 @@
 schema=probe_workflow_hardening_status_v2
 lint_exit_status=1
 helper_test_exit_status=0
-source_commit=422f4b70c871212ba6fdb1dc2355483a4ed8b0ca
+source_commit=117962f71f076e30cfd673950acad35279962d48
 source_ref=refs/heads/main
-workflow_run_id=29375273587
+workflow_run_id=29375314792
 workflow_run_attempt=1
 --- workflow lint ---
 probe workflow lint failed:
-- .github/workflows/fix-cl089-patch-source.yml:130: status workflows may not suppress failures with || true
-- .github/workflows/fix-cl089-patch-source.yml:66: status header is missing required metadata field source_ref
-- .github/workflows/fix-cl089-patch-source.yml:66: status header is missing required metadata field workflow_run_attempt
 - .github/workflows/one-time-scale-transfer-docs.yml: probe writer must use concurrency group probe-result-writers-main
 - .github/workflows/one-time-scale-transfer-docs.yml:113: status workflows may not suppress failures with || true
 - .github/workflows/one-time-scale-transfer-docs.yml:61: status header is missing required metadata field source_ref

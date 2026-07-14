@@ -82,8 +82,9 @@ Statuses marked **exact finite** are computational statements for recorded objec
 | CL-063 | The current policy comparisons export to `60` exact rational half-spaces in features `(lambda,gamma)`. The existing LP harness verifies `(3,1/10)` feasible. The only zero-slack rows are seven `S_1` ties and the `S_2` `step5/step540` tie; the active `S_7` continuation boundary is `hybrid5<=step540`. | Exact finite policy-LP feasibility theorem. |
 | CL-064 | Expanding `S_1,...,S_6` to all `32` subsets of delayed steps `{5,40,30,161,142}` produces `198` exact policy half-spaces. `(lambda,gamma)=(3,1/10)` remains feasible. The unique `S_3` optimum changes to `delay_5_161_142`; `S_4,...,S_6` retain `delay_5_40` up to inactive `142/161` ties. The `S_7` side remains the current `13`-policy family and is not subset-exhaustive. | Exact finite subset-lattice policy-LP theorem. |
 | CL-065 | Exhausting all `32` subsets of `{5,40,30,161,142}` on `S_7`, both with and without the seed-delay switch, plus reverse deletion, enlarges the exact policy LP to `250` constraints. `(lambda,gamma)=(3,1/10)` remains feasible. The unique `S_7` winner changes from `seed_5` to the non-regenerative `seed_5_142`; its exact advantage over `seed_5` lies between `3/2000` and `751/500000`. | Exact finite full five-step subset-lattice theorem through `S_7`. |
+| CL-066 | A seed-delayed `S_7` policy with `37` delayed progression steps resolves to `9323` selected actions, residual size `517`, `28` terminal step classes, `9295` middle-fiber occurrences, and no canonical regeneration. In the exact one-toggle neighborhood given by its terminal-step set union delayed-step set (`59` candidates), it has no improving toggle, two zero-slack toggles, and minimum strict slack `384/111292259161`. Its exact score improves on `seed_5_142` by a value between `1915/1000` and `1916/1000`. | Exact finite terminal-step local-optimality theorem. |
 
-Primary references for CL-050 through CL-065:
+Primary references for CL-050 through CL-066:
 
 - `docs/s7-cyclic-scc-output-load.md`;
 - `docs/s7-cyclic-scc-local-completion-credit.md`;
@@ -99,12 +100,14 @@ Primary references for CL-050 through CL-065:
 - `docs/policy-halfspace-lp.md`;
 - `docs/expanded-policy-subset-lp.md`;
 - `docs/policy-subset-lattice-s1-s7.md`;
+- `docs/s7-terminal-step-local-optimum.md`;
 - `src/verify_policy_occurrence_cone_s1_s7.py`;
 - `src/verify_step5_policy_regeneration_weight.py`;
 - `src/verify_two_coordinate_policy_family.py`;
 - `src/verify_policy_halfspace_lp.py`;
 - `src/verify_expanded_policy_subset_lp.py`;
-- `src/verify_policy_subset_lattice_s1_s7.py`.
+- `src/verify_policy_subset_lattice_s1_s7.py`;
+- `src/verify_s7_terminal_step_local_optimum.py`.
 
 ---
 
@@ -144,28 +147,28 @@ Do not use without materially new hypotheses:
 30. assuming `gamma=1/16` survives enlargement of the policy family;
 31. greedily composing individually favorable policy delays;
 32. treating the earlier `S_3` `delay_5_40` choice as optimal after subset-lattice expansion;
-33. treating the earlier `S_7` `seed_5` choice as optimal after full five-step subset-lattice expansion;
-34. treating the five-step subset lattice as exhaustive over arbitrary delayed progression steps or all complete schedules;
-35. treating policy-half-space LP feasibility as branching Bellman-LP feasibility;
-36. inserting the recorded path charge directly into a Bellman child sum without a retention theorem;
-37. treating the tested policy family as globally optimal over all complete schedules;
-38. random sampling as a finite certificate;
-39. the rejected depth-ten anchor reduction.
+33. treating the earlier `S_7` `seed_5` or `seed_5_142` choice as optimal after neighborhood expansion;
+34. treating one-toggle local optimality as global policy optimality;
+35. treating the 59-toggle neighborhood as exhaustive over arbitrary delayed progression steps;
+36. treating policy-half-space LP feasibility as branching Bellman-LP feasibility;
+37. inserting the recorded path charge directly into a Bellman child sum without a retention theorem;
+38. treating the tested policy family as globally optimal over all complete schedules;
+39. random sampling as a finite certificate;
+40. the rejected depth-ten anchor reduction.
 
 ---
 
-# Open bottleneck OB-001: Enlarged delayed-step universe and retained-child Bellman rows
+# Open bottleneck OB-001: Retained-child Bellman rows under an adversarial local optimum
 
 The state-specific cheap-extension problem at `S_10` is closed. Raw simultaneous transition generation is certified through `S_7`. Exact policy experiments now establish:
 
-1. a nonempty occurrence-weight subcone;
-2. a necessary continuation-sensitive regeneration coordinate;
-3. a stable finite witness `(lambda,gamma)=(3,1/10)`;
-4. non-composable interactions between local priority modifications;
-5. exact feasibility of `250` policy-ranking half-spaces after full five-step subset expansion through `S_7`;
-6. policy-selection instability under family enlargement, now appearing at both `S_3` and `S_7`.
+1. a necessary continuation-sensitive regeneration coordinate;
+2. exact feasibility of `250` policy-ranking half-spaces through the five-step subset lattice;
+3. policy-selection instability under family enlargement at both `S_3` and `S_7`;
+4. a substantially lower exact `S_7` policy that is locally optimal in a deterministic 59-toggle terminal/delayed neighborhood;
+5. continued absence of a theorem converting raw occurrence and continuation costs into retained simultaneous-child capacity.
 
-The next finite task is an exact deterministic add/remove neighborhood around `seed_5_142` using a larger candidate-step universe. The structural task is still to prove a provenance-preserving retention quotient and export the first legitimate retained-child Bellman row. Policy-ranking feasibility alone does not control the simultaneous deletion tree.
+The next task is to export the raw transition of the 37-step local optimum, compare its duplicate, containment, overlap, and SCC profile with the earlier policies, and test a provenance-preserving retention quotient. Policy-ranking feasibility and local optimality alone do not control the simultaneous deletion tree.
 
 The target remains
 

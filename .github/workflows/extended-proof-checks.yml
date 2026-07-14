@@ -16,3 +16,6 @@ jobs:
 
       - name: Verify full exact certificate frontier
         run: bash src/run_verify_transport_reserve.sh
+
+      - name: Verify retained terminal sink identities
+        run: bash src/run_verify_terminal_sink_ledger.sh

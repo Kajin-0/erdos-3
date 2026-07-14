@@ -1,0 +1,5 @@
+compile_exit_status=0
+probe_exit_status=0
+summary_exit_status=0
+commit=f25adce6c58f63013d25aacac796c13ed26bd984
+--- stderr ---

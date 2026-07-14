@@ -1,0 +1,37 @@
+S7 TERMINAL-STEP LOCAL OPTIMUM
+
+score=lambda:3,gamma:1/10
+seed_delay=True
+delayed_steps=4,5,6,19,62,71,81,141,142,161,162,365,384,400,1526,1592,1962,5946,8190,9773,9792,10157,42638,42643,49158,50838,87530,93471,103249,103268,103633,135162,142634,228638,230159,333413,333797
+delayed_step_count=37
+delayed_steps_sha256=3b04593d5685b1b2238e3cfe41213356000108c6a0e0009513cd34ce501e77bc
+selected=9323
+residual=517
+terminal_steps=28
+occurrences=9295
+regeneration=False
+schedule_sha256=2a4df51cdf4c33263ff09fee2b39f3bd0e74277de2d6d2fa2904752ae14f2267
+residual_sha256=c22896814dcec5e644db1c77dbab257faba4dd61742226b02ae89c06bdba0b7d
+terminal_steps_sha256=a00f1eae48ed0bb18fdf7f4ba33c9e1a70fc5a827385b8113304eb57dd1e0501
+score_sha256=e29d184f2e3218b6819d79fb17e97662b66f5f562bbad49368c678d5cd3b7825
+terminal_mass_sha256=500f670a644078e5a5343b6575576202c4ad2754d833634f5a75ad8ead55cce9
+occurrence_mass_sha256=0fb178165e31b923167454e38fa144f83e35819e3af2277d521195eeb7ed4850
+
+candidate_rule=terminal_step_set_union_delayed_step_set
+candidate_count=59
+candidate_sha256=00dbe691a994feb6e6723c1d43a03984fd01fdba671a8fc4b972c2a81275dcef
+improving_toggles=0
+zero_slack_toggles=384,323640
+minimum_strict_toggle=333432
+minimum_strict_slack=384/111292259161
+minimum_strict_slack_sha256=7f3f48508675369f486df98cdd7141d8bff66e9da6c8e5b534066aa5ef990e56
+neighbor_ranking_sha256=46e29b7e6c688b1d58bfcd066507df04f86318d9cf9f3b0780988feb838515e7
+
+seed_5_142_score_sha256=248d997189a633d7f24a7ca89c5e4a59a391cbd2fd215001b6cb514b78c39ff2
+seed_5_142_minus_local_optimum_gap_bracket=1915/1000,1916/1000
+seed_5_142_minus_local_optimum_gap_sha256=1a640959e7851f94963570ed1371d3242dd32719d5748afebf48a461e0b19e8b
+
+conclusion: the recorded 37-step seed-delayed S7 policy is an exact one-toggle local optimum
+within the deterministic neighborhood consisting of its terminal-step set union its delayed-step set.
+It has no improving toggle, two zero-slack toggles, and strictly positive slack for every other toggle.
+This is not a global policy optimum and does not supply a provenance-preserving retained-child Bellman inequality.

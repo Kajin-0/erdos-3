@@ -157,14 +157,7 @@ C_{\lambda,\gamma}(\pi)
 T_\pi+\lambda O_\pi+E_\pi+\gamma G_\pi,
 ```
 
-where:
-
-```text
-T = terminal-step harmonic mass
-O = middle-fiber occurrence/provenance mass
-E = normalized terminal residual error
-G = certified regenerative continuation charge.
-```
+where `T` is terminal-step harmonic mass, `O` is middle-fiber occurrence mass, `E` is normalized residual error, and `G` is the recorded regenerative continuation charge.
 
 The exact witness used throughout the current finite frontier is
 
@@ -182,45 +175,23 @@ The continuation coordinate is necessary: `T+3O+E` alone prefers a policy retain
 
 ## 6. Full five-step policy subset lattice through S7
 
-The delayed-step universe is
+The delayed-step universe
 
 ```text
-{5,40,30,161,142}.
+{5,40,30,161,142}
 ```
 
-The exact finite family contains:
+is exhausted on `S_1,...,S_7`, with all `32` seed-delayed versions and reverse deletion added on `S_7`.
 
-- all `32` delayed-step subsets on each of `S_1,...,S_7`;
-- all `32` seed-delayed versions on `S_7`;
-- reverse lexicographic deletion on `S_7`.
-
-Every chosen-policy comparison is exported as
-
-```math
-\Delta O\,\lambda
-+
-\Delta G\,\gamma
-\ge
--(\Delta T+\Delta E).
-```
-
-The resulting exact policy-ranking LP contains
+The resulting policy-ranking LP contains
 
 ```text
-250 rational constraints
+250 exact rational constraints
 2 features: lambda, gamma
 47 active equalities at the witness.
 ```
 
-The rational LP harness verifies
-
-```math
-\boxed{
-(\lambda,\gamma)=\left(3,\frac1{10}\right)
-}
-```
-
-against every row.
+The rational LP harness verifies `(lambda,gamma)=(3,1/10)` against every row.
 
 Representative selected policies are:
 
@@ -232,43 +203,84 @@ Representative selected policies are:
 | `S_4` | `plain_5_40`, modulo inactive-step ties |
 | `S_5` | `plain_5_40`, modulo inactive-step ties |
 | `S_6` | `plain_5_40`, modulo inactive-step ties |
-| `S_7` | `seed_5_142`, unique |
+| `S_7` | `seed_5_142`, unique in this lattice |
 
-The `S_7` winner is non-regenerative and has
+The five-step `S_7` winner is non-regenerative. Its advantage over `seed_5` is approximately `0.0015010996`.
 
-```text
-selected actions = 9347
-terminal residual = 493
-terminal step classes = 50
-middle-fiber occurrences = 9297.
-```
-
-The previous finite winner `seed_5` is now the runner-up. The exact positive gap satisfies
-
-```math
-\frac3{2000}
-<
-C_{3,1/10}(\texttt{seed\_5})
--
-C_{3,1/10}(\texttt{seed\_5\_142})
-<
-\frac{751}{500000}.
-```
-
-Thus the gap is approximately `0.0015010996`. This is the smallest positive slack in the 250-row system.
-
-Primary references:
-
-- `docs/policy-subset-lattice-s1-s7.md`;
-- `docs/expanded-policy-subset-lp.md`;
-- `docs/policy-halfspace-lp.md`;
-- `docs/two-coordinate-policy-family.md`.
-
-This completes the explicit five-step subset lattice through `S_7`. It does not establish global optimality over arbitrary delayed steps or over all complete coordinated schedules.
+This completes the explicit five-step subset lattice. It does not establish optimality over arbitrary delayed steps or all complete coordinated schedules.
 
 ---
 
-## 7. Active theorem
+## 7. Exact S7 terminal-step local optimum
+
+A deterministic coordinate search outside the five-step lattice produced a seed-delayed policy with `37` delayed progression steps. The theorem does not rely on the search arithmetic: the final policy and its neighborhood are recomputed exactly.
+
+Complete coordinated resolution gives
+
+```text
+selected actions = 9323
+terminal residual = 517
+terminal step classes = 28
+middle-fiber occurrences = 9295
+canonical regeneration = false.
+```
+
+The exact one-toggle neighborhood is
+
+```math
+\mathcal Q
+=
+\{\text{terminal steps}\}
+\cup
+\{\text{delayed steps}\},
+```
+
+with `|Q|=59`. Every toggle is resolved as a complete schedule and scored exactly.
+
+The result is
+
+```text
+improving toggles = 0
+zero-slack toggles = 384, 323640
+strictly worsening toggles = 57.
+```
+
+The smallest strict positive slack is
+
+```math
+\boxed{
+\frac{384}{111292259161}
+}
+```
+
+at toggle `333432`. Thus the local certificate is close at one boundary but exact.
+
+Relative to the five-step-lattice winner,
+
+```math
+\frac{1915}{1000}
+<
+C_{3,1/10}(\texttt{seed\_5\_142})
+-
+C_{3,1/10}(\pi_*)
+<
+\frac{1916}{1000}.
+```
+
+The new policy reduces terminal step classes from `50` to `28` and remains non-regenerative.
+
+This is only a local optimum in the explicit 59-toggle neighborhood. It is not a global policy theorem.
+
+Primary references:
+
+- `docs/s7-terminal-step-local-optimum.md`;
+- `docs/policy-subset-lattice-s1-s7.md`;
+- `docs/expanded-policy-subset-lp.md`;
+- `docs/policy-halfspace-lp.md`.
+
+---
+
+## 8. Active theorem
 
 The required whole-tree object remains
 
@@ -288,28 +300,25 @@ The required whole-tree object remains
 }
 ```
 
-The finite policy score now has a stable exact witness on a substantial deterministic family, but a retention theorem is still required before raw shell or path charges can enter a Bellman child sum.
+The finite score can now be optimized to a complex exact local fixed point. That does not validate the score as a Bellman potential. The dominant missing theorem is a retention quotient that assigns simultaneous raw outputs without unbounded duplicate, containment, or cyclic reuse.
 
-The active bottleneck has two parts:
-
-1. enlarge the delayed-step universe around `seed_5_142` with a deterministic exact neighborhood search;
-2. prove a provenance-preserving retained-child quotient that bounds duplicate, containment, and cyclic reuse across generations.
+The local optimum should next be used as an adversarial transition for testing retention rules, rather than as evidence that continued policy search alone will close the proof.
 
 ---
 
-## 8. Approved next targets
+## 9. Approved next targets
 
-1. Compute exact one-step add/remove neighborhoods around `seed_5_142` using a deterministic candidate-step universe.
-2. Add every new policy comparison to the exact policy LP and monitor the feasible cone.
-3. Extract the first exact infeasible subsystem if the two-coordinate cone collapses.
-4. Add the coordinate identified by that subsystem.
-5. Prove a provenance-preserving retention quotient.
+1. Export the complete raw transition for the 37-step local optimum with point provenance, duplicates, strict containments, partial overlaps, and SCC structure.
+2. Compare that transition exactly with lexicographic and `seed_5_142` transitions.
+3. Define a provenance-preserving retained-child quotient and test it on `S_1,...,S_7` and the local-optimum transition.
+4. If the quotient fails, extract the smallest exact duplicate/containment/cycle obstruction.
+5. Add the missing packing coordinate identified by that obstruction.
 6. Export the first legitimate retained-child Bellman row.
 7. Establish a policy-aware or minimax branching Carleson inequality.
 
 ---
 
-## 9. Stop list
+## 10. Stop list
 
 Do not infer:
 
@@ -324,8 +333,9 @@ Do not infer:
 - `gamma=1/16` survives enlarged policy families;
 - locally favorable policy moves compose greedily;
 - the earlier `S_3` `{5,40}` policy remains optimal after family expansion;
-- the earlier `S_7` `seed_5` policy remains optimal after subset-lattice expansion;
-- the five-step lattice represents all possible delayed-step policies;
+- the earlier `S_7` `seed_5` or `seed_5_142` policies remain optimal after neighborhood expansion;
+- one-toggle local optimality implies global policy optimality;
+- the 59-step neighborhood covers arbitrary delayed progression steps;
 - policy-LP feasibility implies Bellman-LP feasibility;
 - adding the recorded path charge is justified without retention;
 - the tested policy family is globally optimal;
@@ -333,7 +343,7 @@ Do not infer:
 
 ---
 
-## 10. Reproduction
+## 11. Reproduction
 
 Push-gating lightweight suite:
 
@@ -347,27 +357,21 @@ Complete extended suite:
 bash src/run_verify_transport_reserve.sh
 ```
 
-Transition frontier without the full five-step `S_7` lattice:
-
-```bash
-bash src/run_verify_transition_frontier.sh
-```
-
-Standalone full subset-lattice certificate:
+Standalone local-optimum certificate:
 
 ```bash
 python3 src/run_exact_python.py \
-  src/verify_policy_subset_lattice_s1_s7.py \
-  /tmp/policy_subset_lattice_s1_s7_certificate.txt
+  src/verify_s7_terminal_step_local_optimum.py \
+  /tmp/s7_terminal_step_local_optimum_certificate.txt
 ```
 
 Current detailed notes:
 
 - `docs/certainty-ledger.md`;
+- `docs/s7-terminal-step-local-optimum.md`;
 - `docs/policy-subset-lattice-s1-s7.md`;
 - `docs/expanded-policy-subset-lp.md`;
 - `docs/policy-halfspace-lp.md`;
-- `docs/two-coordinate-policy-family.md`;
 - `docs/s7-cyclic-scc-output-load.md`;
 - `docs/s7-regenerative-seed-policy-dependence.md`;
 - `docs/branching-reserve-lp.md`.

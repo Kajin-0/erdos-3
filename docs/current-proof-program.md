@@ -4,7 +4,286 @@
 
 This is the authoritative overview for the four-term case of Erdős Problem #3. The full reciprocal-sum problem remains open. Durable claims are tracked in `docs/certainty-ledger.md`.
 
-The project is no longer searching for another finite-depth fitted feature or a new overlap quotient. Affine closure and pair-token containment now give exact whole-tree no-double-payment semantics. The active theorem target is an economical pair-activation or multiscale exposure bound that avoids paying the full latent root-pair energy of the initial dyadic block.
+The active program now has a scale-critical three-AP transfer row. First side, middle, and doubled preimages partition one parent target with capacities `1/2,1/4,1/4`; unbounded collisions transfer to lower-scale reference-gap and rectangle-aspect tokens. The remaining theorem is global first-appearance control of the critical collision excess, plus external-completion and terminal release.
+
+## Corrected first retained frontier
+
+Terminal stopping is structural. A retained state with no three-term progression selects no deletion action, has no middle fibers, and emits only three-AP-free translated backbone shells. It must be recorded once as terminal and never propagated recursively.
+
+The certified first retained family is therefore
+
+```text
+all states        = 21, points = 11,753, mass = 0.285821566728...
+terminal states   =  6, points =     52, mass = 0.127088543982...
+recursive states  = 15, points = 11,701, mass = 0.158733022746...
+```
+
+The six terminal parent classes are
+
+```text
+0, 1, 2, 8, 74, 86.
+```
+
+Recomputing the second frontier from only the fifteen recursive parents gives
+
+```text
+ordinary corrected F2: 27 states, 7,923 points
+  terminal: 12 states, 38 points, mass 1.478795226105...
+  recursive: 15 states, 7,885 points, mass 0.416597543898...
+
+residual-sponsor F2: 45 states, 8,164 points
+  terminal: 33 states, 944 points, mass 1.601039076668...
+  recursive: 12 states, 7,220 points, mass 0.322355467082...
+```
+
+Thus the corrected ordinary recursive ratio is `2.624517171606...`, while residual-sponsor refinement lowers it to `2.030802800232...`, a `22.6218512798%` reduction. The historical second-to-fifth chain remains an exact finite diagnostic of the old construction, but it is not the continuation of the terminal-stopped tree.
+
+Primary references:
+
+- `docs/terminal-parent-stopping-lemma.md`;
+- `data/first_frontier_terminal_correction_certificate.txt`;
+- `src/verify_first_frontier_terminal_correction.py`.
+
+---
+
+## Full-color branching and pair-edge capacity
+
+The middle-role factor-three loss was artificial. Split every middle star into all three classes
+
+```math
+\chi(s)=v_2(s)-v_3(s)\pmod3
+```
+
+and emit all nonempty color children. Every progression then has exactly two child memberships:
+
+```text
+one parity-selected side child;
+one uniquely colored middle child.
+```
+
+Every child is four-AP-free and has pairwise-disjoint first three dilates. Therefore
+
+```math
+\boxed{
+\sum_{\rm children}H(C)
+=
+2\mathcal L(B)
+\ge
+4H(B)-4\frac{r_3(N)}N.
+}
+```
+
+The side token `d`, doubled side reserve `2d`, and middle token `d` correspond exactly to the three pair edges of one progression. Hence
+
+```math
+\boxed{
+\sum_{\rm side}\left(H(C)+H(2C)\right)
++
+\sum_{\rm middle}H(C)
+=
+\frac52\mathcal L(B).
+}
+```
+
+This closes the local coefficient gap for distinct completed in-parent pair targets. The whole-tree obligations are now edge-capacity first appearance, transport-target collision reuse, parent-external ambient completions, and genuine ambient holes.
+
+Primary references:
+
+- `docs/full-color-coordinated-branching.md`;
+- `data/full_color_coordinated_branching_summary.txt`;
+- `docs/full-color-pair-edge-capacity.md`;
+- `docs/sponsor-pair-forward-transport.md`;
+- `docs/terminal-pair-ap-witness-bound.md`.
+
+---
+
+## Full-edge collision frontier
+
+The full-edge construction emits the three edge weights of every parent
+three-AP:
+
+```math
+\frac1d,\qquad\frac1d,\qquad\frac1{2d}.
+```
+
+Consequently
+
+```math
+\sum_{
+m full\mbox{-}edge\ children}H(C)
+=
+\frac52\mathcal L(B)
+\ge
+5H(B)-5\frac{r_3(N)}N.
+```
+
+A physical parent pair belongs to at most two three-APs, so the distinct
+current pair union satisfies
+
+```math
+W_\cup(E(B))
+\ge
+\frac54\mathcal L(B)
+\ge
+\frac52H(B)-\frac52\frac{r_3(N)}N.
+```
+
+This does not imply bounded recursive latent reuse. Uniform finite
+multiplicity is false. For every `m`, there is a four-AP-free parent in one
+standard dyadic block with `m` recursive side shells sharing one root
+three-AP. The certified `m=4` instance uses a 19-point parent in
+`[4096,8192)` and four recursive children in `[1024,2048)`.
+
+The reuse geometry is nevertheless rigid. Fix a transported parent witness
+`T` and its collision reference set `R_T`. The complete child witness fiber is
+one of
+
+```math
+\frac12(R_T+T),
+\qquad
+2R_T-T,
+\qquad
+2T-R_T,
+```
+
+for side, middle, and doubled-side transport. Each expression is three equal
+translates of an affine image of `R_T`. Fixed-step witnesses are pairwise
+disjoint, so the layer family has exactly `3|R_T|` points.
+
+Mandatory shelling supplies a path coordinate. If a physical pair has gap `D`
+in a shell of base `M`, then `D<M`; along every descendant lineage `D/M` at
+least doubles. Thus every latent lineage terminates, although arbitrarily many
+branches may carry the pair at one scale.
+
+The active theorem is now a weighted three-translate exposure inequality that
+charges collision multiplicity to the forced reference-set layers and their
+later scale descent. Neither another constant-overlap lemma nor another
+retained generation is admissible.
+
+Primary references:
+
+- `docs/full-edge-coordinated-branching.md`;
+- `data/full_edge_coordinated_branching_summary.txt`;
+- `docs/full-edge-dyadic-gap-monotonicity.md`;
+- `docs/full-edge-collision-fiber-theorem.md`;
+- `docs/parametric-shelled-pair-reuse-gadget.md`;
+- `docs/unbounded-shelled-latent-pair-reuse.md`;
+- `data/shelled_pair_reuse_gadget_summary.txt`;
+- `data/unbounded_shelled_pair_reuse_instance_summary.txt`.
+
+---
+
+## Scale-critical three-AP transfer
+
+The collision frontier admits an exact scalar first-appearance allocation.
+For a child three-AP `Q` transported to a parent target `T`, use
+
+```math
+\alpha_{\rm side}=\frac12,
+\qquad
+\alpha_{\rm middle}=1,
+\qquad
+\alpha_{\rm double}=2.
+```
+
+Then
+
+```math
+\frac{\alpha_t}{d(Q)}
+=
+\frac1{d(T)}.
+```
+
+For one fixed type this gives
+
+```math
+\alpha_t\sum_C\mathcal L_3(C)
+\le
+\mathcal L_3(P)+X_t,
+```
+
+where `X_t` is exactly the excess target multiplicity written as
+rectangle-aspect tokens.
+
+Shell scale removes the apparent triple spending. Weight each child witness by
+`M(C)/d(Q)`. For a parent target of step `h` in a block of base `N`, one first
+preimage of each type costs at most
+
+```math
+\frac{N}{2h},
+\qquad
+\frac{N}{4h},
+\qquad
+\frac{N}{4h}.
+```
+
+Therefore
+
+```math
+\boxed{
+\Psi_1(\text{first child witnesses})
+\le
+N\mathcal L_3(P).
+}
+```
+
+At general scale moment `p`, the first-appearance coefficient is
+
+```math
+c_p
+=
+\frac3{4^p}
++
+\frac1{2^{p+1}}.
+```
+
+The exponent-one row is exactly critical and every `p>1` row contracts before
+collision excess.
+
+Unbounded collision multiplicity is transferred to a strictly lower-scale
+reference reserve. If one root configuration `Q` of span `Delta` is carried by
+references `R` in `[M,2M)`, then
+
+```math
+\operatorname{diam}(R)<M-\Delta
+```
+
+and
+
+```math
+D(R)=\{r-r_0:r\in R,\ r>r_0\}
+```
+
+is four-AP-free below scale `M`. For every repeated pair gap `D_e`,
+
+```math
+\frac{|R|-1}{D_e}
+<
+\frac{M-\Delta}{D_e}H(D(R)).
+```
+
+Pointwise, each extra reference gives the exact rectangle identity
+
+```math
+\frac1{D_e}
+=
+\frac\delta{D_e}\frac1\delta.
+```
+
+The sole unresolved scalar term is the scale-critical collision excess
+`Y(P)`: reuse of reference-difference and rectangle tokens across distinct
+root configurations. This is the next theorem. It is narrower than the former
+full pair-activation problem and has explicit first-appearance, scale, and
+aspect coordinates.
+
+Primary references:
+
+- `docs/reference-gap-collision-charge.md`;
+- `docs/collision-rectangle-aspect-identity.md`;
+- `docs/type-weighted-ap-transport.md`;
+- `docs/scale-weighted-ap-load-criticality.md`.
+
+---
 
 ## Latest exact refinement: backbone-anchor transfer
 
@@ -406,63 +685,62 @@ The retained quotient used on the adversarial `S_7` construction is:
 3. form same-shell point-intersection conflict graphs;
 4. choose a maximum-total-harmonic independent set in each component.
 
-The resulting certified frontier is:
+Terminal stopping changes the first retained transition. The active certified frontiers are:
 
-| retained level | total states | total points | terminal states | terminal points | recursive states | recursive points |
+| frontier | total states | total points | terminal states | terminal points | recursive states | recursive points | status |
+|---|---:|---:|---:|---:|---:|---:|---|
+| first | 21 | 11,753 | 6 | 52 | 15 | 11,701 | active parent frontier |
+| corrected ordinary second | 27 | 7,923 | 12 | 38 | 15 | 7,885 | active exact comparison |
+| corrected residual-sponsor second | 45 | 8,164 | 33 | 944 | 12 | 7,220 | active refined frontier |
+
+The earlier construction propagated all twenty-one first states, including six terminal parents. Its exact diagnostic continuation is:
+
+| historical retained level | total states | total points | terminal states | terminal points | recursive states | recursive points |
 |---|---:|---:|---:|---:|---:|---:|
-| first | 21 | 11,753 | — | — | 21 | 11,753 |
 | second | 27 | 7,925 | 13 | 43 | 14 | 7,882 |
 | third | 32 | 4,899 | 18 | 110 | 14 | 4,789 |
 | fourth | 23 | 1,794 | 11 | 77 | 12 | 1,717 |
 | fifth | 21 | 1,032 | 8 | 17 | 13 | 1,015 |
 
-Every recorded family is point-disjoint within its generation. The baseline retention optimum is unique through generation five. Nearby policy tests include two nonunique components, but their tied maximum-harmonic optima have identical recursive mass.
-
-This quotient is a rigorous finite test object. It is not proved globally optimal or canonical.
+These historical families remain point-disjoint exact finite test objects, and all theorems stated specifically about their recorded transitions remain valid. They must not be interpreted as the terminal-stopped recursive tree or spliced onto either corrected second frontier.
 
 ---
 
 ## 3. Recursive and terminal mass
 
-Let `H_g^rec` denote recursively continuing retained harmonic mass. The four recorded ratios are:
+Let `H_1^rec` denote the mass of the fifteen genuinely recursive first-frontier states. The corrected first transition satisfies
+
+```math
+\frac{H_{2,\rm ordinary}^{\rm rec}}{H_1^{\rm rec}}
+=
+2.624517171606...,
+```
+
+and the residual-sponsor refinement gives
+
+```math
+\frac{H_{2,\rm sponsor}^{\rm rec}}{H_1^{\rm rec}}
+=
+2.030802800232....
+```
+
+The refinement removes `0.094242076816...` of recursive mass, or `22.6218512798%` of the corrected ordinary recursive load, while increasing terminal mass by `0.122243850563...`.
+
+The formerly quoted ratio
 
 ```math
 0.937
 <
-\frac{H_2^{\mathrm{rec}}}{H_1}
+\frac{H_{2,\rm historical}^{\rm rec}}{H_1^{\rm total}}
 <
-0.938,
+0.938
 ```
 
-```math
-2.011553
-<
-\frac{H_3^{\mathrm{rec}}}{H_2^{\mathrm{rec}}}
-<
-2.011554,
-```
+compared a historical child to total first-frontier mass and arose from propagating six terminal parents. It is not a recursive contraction theorem.
 
-```math
-2.849279
-<
-\frac{H_4^{\mathrm{rec}}}{H_3^{\mathrm{rec}}}
-<
-2.849280,
-```
+The later historical ratios `2.011553...`, `2.849279...`, and `1.329813...` remain exact statements for the old diagnostic chain only. No corrected third frontier has been constructed, and none should be constructed before a state-independent activation-transfer lemma is fixed.
 
-and
-
-```math
-1.329813
-<
-\frac{H_5^{\mathrm{rec}}}{H_4^{\mathrm{rec}}}
-<
-1.329814.
-```
-
-Raw recursive harmonic mass is not an iterating Bellman potential.
-
-Terminal output must be carried separately through a first-appearance ledger. It cannot be discarded, and it must not be counted as persistent recursive debt.
+Raw recursive harmonic mass remains nonmonotone and is not an iterating Bellman potential. Terminal output must be charged once through a first-appearance ledger and must never be propagated as recursive debt.
 
 ---
 
@@ -680,16 +958,15 @@ LP correlation alone is insufficient.
 
 ## 9. Approved next targets
 
-1. Quantify occurrence versus union pair resources on `R_1,R_2,R_3` and isolate exact repeated-pair mass.
-2. Replace full latent `J(P)` by an activated-pair ledger that opens a token only when a pivot, terminal point, or recursive child actually uses it.
-3. Prove a multiscale bound for activated pair mass using four-AP-freeness, fixed-step run structure, coordinated deletion, or stopping-time sparsity.
-4. Relate activated pair mass to the existing one-generation harmonic production and summable `r_3(N)/N` error.
-5. Determine whether completion, rectangle support, and cheap-extension exclusion pay for dense clusters of short root pairs.
-6. Compute exact first-appearance and reused `(u,p)` mass by transition; immediate provenance remains metadata, not additional pair credit.
-7. Use earlier-generation finite diagnostics only to discover the activation law or its smallest obstruction.
-8. Do not propagate generation six.
+1. Define a first-appearance ledger for collision rectangle tokens `(T,{r_0,r},type,M)` and reference-difference tokens `(delta,D_e,k)`.
+2. Prove a bound for the critical excess `Y(P)` in the scale-weighted row, using unused role capacity, strict shell slack, and terminal/external-completion release.
+3. Quantify reuse of one reference pair across distinct repeated root configurations; this is now the only unidentified multiplicity layer.
+4. Use the exact aspect identity `1/D=(delta/D)(1/delta)` to separate near rectangles, far rectangles, and dyadic aspect bands.
+5. Merge sponsor direct/backward/residual targets into the same rectangle/external-completion ledger rather than maintaining a separate scalar pair-energy reserve.
+6. Resolve the independent CL-087 generation-consistency audit before using those finite metrics.
+7. Do not propagate the corrected second frontier, and do not generate generation six.
 
-Generation six is blocked until a specific state-independent transfer lemma exists.
+The predeclared transfer architecture now exists. Further finite propagation remains deferred because the scale-critical collision excess has not yet been proved summable.
 
 ---
 

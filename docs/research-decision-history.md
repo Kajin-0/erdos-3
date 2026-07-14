@@ -375,6 +375,62 @@ The corrected exact test partitions only the already-existing translated minimum
 
 This closes the finite question of whether the symbolic residual-sponsor split is useful on the recorded failing transition. It is strongly favorable. The remaining analytical target is a state-independent sponsor-core activation bound.
 
+### Terminal-parent stopping correction
+
+The first retained family was historically propagated wholesale, but exact classification shows six of its twenty-one states are already three-AP-free. A terminal parent selects no action, has no middle fiber, and can emit only terminal translated-backbone shells. Propagating it is semantically invalid as recursive continuation.
+
+The independent correction certificate gives:
+
+```text
+F1 terminal:  6 states,    52 points, mass 0.127088543982...
+F1 recursive: 15 states, 11701 points, mass 0.158733022746...
+```
+
+Stopping those parents changes the maximum-harmonic second optimum. Ordinary corrected recursive mass is `0.416597543898...`; residual-sponsor refinement lowers it to `0.322355467082...`. The historical `0.937...` ratio is not a recursive contraction theorem.
+
+### Full-color branching correction
+
+The middle role need not discard two valuation colors. Emitting all three classes `v_2-v_3 mod 3` preserves every middle incidence while every color child remains four-AP-free with disjoint first three dilates. Together with parity-selected side children, every three-AP has exactly two memberships and total child mass is exactly `2 L(B)`, giving raw branching factor `4` up to Roth error.
+
+An exhaustive regression checked all `2233` four-AP-free subsets of `[1,12]`, including `3174` three-AP occurrences.
+
+### Sponsor transport and edge capacity
+
+Every activated sponsor pair has a monotone deletion-rank transport to a direct edge, backward obstruction, or residual target. Full-color branching supplies an exact three-edge dictionary: side `d`, doubled side `2d`, and middle `d` carry the two adjacent and one outer pair edge of each progression. Completed in-parent distinct targets therefore have exact child-located capacity.
+
+The unresolved terms are transport collisions, parent-external ambient completions, genuine ambient holes, and reuse of edge capacity across retained branches.
+
+### Full-edge collision and unbounded reuse
+
+Full-edge branching closes the local edge-production coefficient: occurrence
+mass has factor `5`, and current pair-union mass has factor at least `5/2`.
+Mandatory shelling makes every latent-pair lineage finite because normalized
+gap `D/M` at least doubles.
+
+Cross-branch reuse is nevertheless unbounded. A parametric three-layer family
+produces arbitrarily many recursive side shells sharing one root progression.
+The `m=4` certificate gives four copies of all three common latent pairs in one
+transition.
+
+Fixing one transported parent witness reveals the exact collision geometry:
+all preimage child witnesses are three affine translates of their reference
+set. The correct reserve is therefore weighted three-translate exposure, not
+a uniform overlap constant.
+
+### Scale-critical three-AP transfer
+
+Completion transport preserves three-AP load after the exact type weights
+`1/2,1,2`. Dyadic shell scale then allocates one first preimage of each type
+with fractions `1/2,1/4,1/4` of one parent target. The exponent-one
+scale-weighted row is exactly critical; all higher scale moments contract
+before collision excess.
+
+Unbounded collision multiplicity is converted to a lower-scale four-AP-free
+reference-difference set. Each extra branch has an exact completion rectangle
+and aspect ratio. The unresolved object is no longer pair activation itself,
+but reuse of reference-gap and rectangle tokens across different repeated root
+configurations.
+
 **Decisions:**
 
 - current-generation multiplicity is not persistent reserve;
@@ -395,6 +451,20 @@ This closes the finite question of whether the symbolic residual-sponsor split i
 - `R_3 -> F_4` is closed in both occurrence and union pair-resource conventions; only the first two retained transitions remain as finite diagnostics;
 - generation six is blocked until a state-independent transfer lemma is proposed;
 - a new feature is admissible only with a transition recurrence, bounded-reuse interpretation, and telescoping role.
+- terminal parents must stop immediately and may never be reintroduced as recursive production;
+- the historical second-to-fifth chain is an exact diagnostic, not the terminal-stopped recursive tree;
+- all three middle valuation colors are retained; choosing one color discards valid production without reducing per-progression multiplicity;
+- completed in-parent pair targets use explicit full-color edge capacity rather than prepaid full latent pair energy;
+- parent-external ambient roots and genuine ambient holes are different obstruction classes and must not be conflated;
+- recursive latent-pair multiplicity has no universal finite bound;
+- pairwise latent-pair disjointness is false even after mandatory dyadic shelling;
+- dyadic gap growth proves pathwise termination but does not control branch count;
+- every fixed-witness collision fiber must be accounted for as three affine translates of a reference set;
+- the active reserve is weighted three-translate exposure, not scalar overlap multiplicity;
+- the three full-edge types are allocated by shell-scaled capacities `1/2,1/4,1/4`, not by spending parent three-AP load three times;
+- collision multiplicity transfers to lower-scale reference differences and explicit rectangle-aspect tokens;
+- the remaining scalar obstruction is the critical excess `Y(P)`, not the local branching coefficient;
+- higher scale moments contract before collisions but do not by themselves prove reciprocal summability;
 
 ---
 
@@ -430,35 +500,39 @@ Do not restart these routes without explicitly identifying which obstruction is 
 26. current-generation multiplicity as persistent reserve;
 27. another feature-fit/one-more-generation loop without a transfer lemma;
 28. generation-six propagation without a predeclared conceptual test.
+29. a universal finite recursive latent-pair overlap constant;
+30. pairwise recursive-shell latent-pair disjointness;
+31. dyadic gap monotonicity without a cross-branch exposure charge.
 
 ---
 
 ## 12. Active closing target
 
-The active target is a cumulative root-lineage reserve-transfer theorem:
+The active scalar row is
 
 ```math
-H_{g+1}^{\mathrm{rec}}
-+A_{g+1}
-+T_{g+1}^{\mathrm{first}}
+\Psi_1(\text{child witnesses})
 \le
-H_g^{\mathrm{rec}}
-+A_g
-+\Phi_{\mathrm{obs},g}
-+\varepsilon_g.
+N\mathcal L_3(P)
++
+Y(P),
 ```
 
-Here `A_g` must be a state-independent ancestor-path capacity, `T^{first}` is newly terminal first-appearance credit, and `Phi_obs` records completion, rectangle, or cheap-extension exclusion created when capacity is released.
+where first appearances are paid by exact role capacities `1/2,1/4,1/4` and
+`Y(P)` is the scale-critical collision excess.
 
-The next exact and analytical work is to:
+Every term of `Y(P)` has two exact exports:
 
-1. measure sponsor-core size, selected-progression incidence, and pair-energy exposure on the first two retained transitions;
-2. prove a weighted bound for the activated star pairs `(a,s)` and internal sponsor pairs `binom(Sigma,2)`;
-3. charge popular or short sponsor differences to terminal first appearance, completion support, rectangle transport, or cheap-extension exclusion;
-4. determine whether policy selection can minimize sponsor-core pair energy while preserving the one-generation harmonic lower bound;
-5. formulate the sponsor-core transfer lemma before propagating another generation.
+```text
+lower-scale four-AP-free reference-difference reserve;
+completion rectangle with aspect ratio delta/D.
+```
 
-No current theorem pays for sponsor-core activation from the original root at all scales. Generation six and further feature fitting remain explicitly deferred.
+The immediate task is a first-appearance theorem for those exported tokens,
+including unused shell slack, terminal release, and ambient
+external-completion/genuine-hole separation. CL-087 must be audited before its
+finite values are used. Corrected-third-frontier and generation-six
+propagation remain blocked.
 
 ---
 

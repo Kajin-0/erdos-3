@@ -32,6 +32,18 @@ The repository has established:
 17. a symbolic affine-closure theorem and universal union-valued pair-resource containment for every coordinated deletion output.
 18. exact occurrence- and union-valued pair-resource contraction from the third to fourth retained frontier.
 19. a certified residual-sponsor backbone split that terminalizes translated residual roots and reduces the fifth recursive pair-resource load without changing raw support or harmonic occurrence mass.
+20. an exact terminal-stopping correction showing that six first-frontier states were terminal and that the corrected recursive second frontier expands;
+21. a residual-sponsor corrected second frontier reducing recursive mass by `22.6218512798%`;
+22. a full-color coordinated branching theorem with exact raw factor `4` and exactly two child memberships per three-AP;
+23. an exact side/middle/doubled-side pair-edge capacity dictionary and monotone sponsor-pair transport theorem.
+24. a full-edge branching theorem with exact occurrence factor `5` and current pair-union factor at least `5/2`;
+25. a dyadic gap-monotonicity theorem proving every latent physical-pair lineage terminates;
+26. an unbounded shell-valid latent-pair reuse theorem, with a certified multiplicity-four instance;
+27. a collision-fiber theorem identifying every fixed-witness reuse family as three affine translates of its reference set.
+28. a lower-scale reference-gap collision charge for every repeated oriented root configuration;
+29. a pointwise rectangle-aspect identity naming the exact resource behind every extra branch;
+30. a type-weighted three-AP transport row with coefficients `1/2,1,2`;
+31. a scale-critical scalar allocation in which first side, middle, and doubled witnesses consume `1/2,1/4,1/4` of one parent target.
 
 The strongest state-specific closure is
 
@@ -45,39 +57,23 @@ This closes the recorded depth-ten state, not the full deletion tree.
 
 ## Active theorem
 
-A rigorous finite retained quotient now exists for the recorded adversarial construction. It has been propagated through five retained levels and produces point-disjoint recursive and terminal families. It is a certified finite test object, not a globally canonical or optimal quotient.
+A rigorous finite retained quotient exists, but terminal stopping changes its active first transition. The first family contains six terminal states carrying `44.4642947826%` of its mass and fifteen recursive states. Recomputing from only those recursive parents gives a corrected ordinary second recursive ratio `2.624517171606...`; residual-sponsor refinement lowers it to `2.030802800232...`.
 
-At the first failing transition all `1015` recursive survivors are minimum-translation backbone points. For a parent state `S`, `m=min(S)`, their gain is drawn from harmonic intervals
+The historical second-to-fifth retained chain remains an exact finite diagnostic of the old all-parent construction. It is not the continuation of the correctly terminal-stopped tree.
+
+The local production theorem has also strengthened. Retaining all three middle colors gives exactly two child memberships per three-AP and
 
 ```math
-(u-m,u],
-\qquad
-\mu_H((u-m,u])
+\sum_{\rm children}H(C)
 =
-\frac1{u-m}-\frac1u.
+2\mathcal L(B)
+\ge
+4H(B)-4\frac{r_3(N)}N.
 ```
 
-Affine closure and union-valued pair containment now control reuse exactly across the whole retained tree. The certified residual-sponsor split further terminalizes translated residual roots, so the continuing resource universe is concentrated on deleted sponsor roots. The decisive missing theorem is an economical activation or multiscale exposure bound for sponsor-core pair tokens. The intended inequality is schematically
+The side token `d`, doubled side reserve `2d`, and middle token `d` form an exact weight-preserving dictionary for the three pair edges of the progression. Completed in-parent target pairs therefore pack into explicit scale-descending edge capacity.
 
-```math
-H_{g+1}^{\rm rec}
-+
-A_{g+1}
-+
-T_{g+1}^{\rm first}
-\le
-H_g^{\rm rec}
-+
-A_g
-+
-\Phi_{\rm obs,g}
-+
-\varepsilon_g,
-```
-
-where `A_g` is state-independent ancestor-path capacity, terminal mass is charged once, obstruction credit records completion/rectangle/extension exclusion, and `sum_g epsilon_g` is finite.
-
-A valid theorem must still handle policy dependence, terminal-recursive interaction, bounded cross-generation provenance reuse, and the distinction between numerical coverage and provenance-valid payment. Pathwise summability and finite LP feasibility do not imply this treewise inequality.
+Uniform bounded reuse is false, but a scale-critical transfer row now exists. First side, middle, and doubled preimages use `1/2`, `1/4`, and `1/4` of one parent target; every extra preimage becomes a lower-scale reference-gap and rectangle-aspect token. The active theorem is global first-appearance control of this collision excess. Generation six and propagation of the corrected second frontier remain blocked.
 
 ## Start here
 
@@ -91,6 +87,18 @@ A valid theorem must still handle policy dependence, terminal-recursive interact
 - [`docs/affine-output-closure-and-pair-containment.md`](docs/affine-output-closure-and-pair-containment.md) — universal affine descendant and pair-resource containment theorem.
 - [`docs/third-to-fourth-pair-resource-contraction.md`](docs/third-to-fourth-pair-resource-contraction.md) — exact affine pair contraction before root uniqueness.
 - [`docs/residual-sponsor-backbone-refinement.md`](docs/residual-sponsor-backbone-refinement.md) — symbolic and exact finite sponsor-core refinement of the minimum backbone.
+- [`docs/terminal-parent-stopping-lemma.md`](docs/terminal-parent-stopping-lemma.md) — structural terminal stopping and corrected first-frontier semantics.
+- [`docs/full-color-coordinated-branching.md`](docs/full-color-coordinated-branching.md) — exact factor-four role-color branching theorem.
+- [`docs/full-color-pair-edge-capacity.md`](docs/full-color-pair-edge-capacity.md) — exact pair-edge capacity dictionary.
+- [`docs/sponsor-pair-forward-transport.md`](docs/sponsor-pair-forward-transport.md) — monotone activated-pair transport theorem.
+- [`docs/full-edge-coordinated-branching.md`](docs/full-edge-coordinated-branching.md) — exact occurrence-factor-five and current pair-union theorem.
+- [`docs/full-edge-dyadic-gap-monotonicity.md`](docs/full-edge-dyadic-gap-monotonicity.md) — pathwise latent-pair termination under mandatory shelling.
+- [`docs/full-edge-collision-fiber-theorem.md`](docs/full-edge-collision-fiber-theorem.md) — exact three-translate collision geometry.
+- [`docs/unbounded-shelled-latent-pair-reuse.md`](docs/unbounded-shelled-latent-pair-reuse.md) — arbitrary one-generation latent-pair multiplicity.
+- [`docs/reference-gap-collision-charge.md`](docs/reference-gap-collision-charge.md) — lower-scale harmonic payment for unbounded reuse.
+- [`docs/collision-rectangle-aspect-identity.md`](docs/collision-rectangle-aspect-identity.md) — pointwise rectangle token and aspect factorization.
+- [`docs/type-weighted-ap-transport.md`](docs/type-weighted-ap-transport.md) — first-appearance plus collision three-AP row.
+- [`docs/scale-weighted-ap-load-criticality.md`](docs/scale-weighted-ap-load-criticality.md) — critical `1/2+1/4+1/4` shell allocation.
 - [`docs/branching-reserve-lp.md`](docs/branching-reserve-lp.md) — exact retained-child LP contract and current packing requirements.
 
 ## Main completed theorem families

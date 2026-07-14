@@ -345,8 +345,6 @@ to selected-progression incidence, terminal first appearance, or arithmetic obst
 
 Primary reference: `docs/residual-sponsor-backbone-refinement.md`.
 
----
-
 ## Certified residual-sponsor backbone refinement
 
 A completed deletion schedule partitions each affine parent root set as

@@ -343,4 +343,3 @@ Verifier and certificate:
 - `src/verify_residual_sponsor_backbone_split.py`;
 - `data/residual_sponsor_backbone_split_certificate_2026-07-14.txt`;
 - certificate SHA-256 `28266cae2b603b7a2490d547ef96d429e06e31cba4706ccc1f0fe0dbdc7bc986`.
-

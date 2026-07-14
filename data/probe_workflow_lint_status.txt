@@ -1,20 +1,16 @@
-schema=probe_workflow_hardening_status_v2
+schema=probe_workflow_hardening_status_v3
 lint_exit_status=1
-helper_test_exit_status=0
-source_commit=117962f71f076e30cfd673950acad35279962d48
+helper_test_exit_status=1
+source_commit=3ce4d97a674bb5a830f68a0c923c67bf9452ff00
 source_ref=refs/heads/main
-workflow_run_id=29375314792
+workflow_run_id=29377334453
 workflow_run_attempt=1
 --- workflow lint ---
-probe workflow lint failed:
-- .github/workflows/one-time-scale-transfer-docs.yml: probe writer must use concurrency group probe-result-writers-main
-- .github/workflows/one-time-scale-transfer-docs.yml:113: status workflows may not suppress failures with || true
-- .github/workflows/one-time-scale-transfer-docs.yml:61: status header is missing required metadata field source_ref
-- .github/workflows/one-time-scale-transfer-docs.yml:61: status header is missing required metadata field workflow_run_attempt
-- .github/workflows/record-cl089-cl096-collision-frontier.yml:139: status workflows may not suppress failures with || true
-- .github/workflows/scale-transfer-docs-patch.yml: probe writer must use concurrency group probe-result-writers-main
-- .github/workflows/scale-transfer-docs-patch.yml:48: status header is missing required metadata field source_ref
-- .github/workflows/scale-transfer-docs-patch.yml:48: status header is missing required metadata field workflow_run_attempt
-- .github/workflows/scale-transfer-docs-patch.yml:81: status assertion must run only after diagnostic artifacts are uploaded
+SyntaxError: Non-UTF-8 code starting with '\xca' in file /home/runner/work/erdos-3/erdos-3/src/lint_probe_workflows.py on line 201, but no encoding declared; see https://peps.python.org/pep-0263/ for details
 --- helper tests ---
-probe workflow helper tests passed
+Traceback (most recent call last):
+  File "<stdin>", line 2, in <module>
+  File "/home/runner/work/erdos-3/erdos-3/src/lint_probe_workflows.py", line 201
+    failures.extend(lint_status_blob�]�\���JJB��܈X]�[�T��T���S��[�]\�^
+                                    ^
+SyntaxError: (unicode error) 'utf-8' codec can't decode byte 0xca in position 16: unexpected end of data

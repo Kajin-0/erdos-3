@@ -3,10 +3,10 @@
 ## Status
 
 Symbolic one-generation theorem for oriented full-edge recursion after affine
-root reconstruction.  It identifies the exact geometry behind transport
+root reconstruction. It identifies the exact geometry behind transport
 collisions of active three-AP edge resources.
 
-The theorem does not bound collision multiplicity.  It shows that every
+The theorem does not bound collision multiplicity. It shows that every
 collision fiber is a three-translate affine image of its reference set.
 
 ---
@@ -50,7 +50,7 @@ Q=\{x,x+d,x+2d\}
 ```
 
 is a child three-term progression, then `F_r(Q)` is a parent three-term
-progression.  Its step is respectively
+progression. Its step is respectively
 
 ```text
 side:         2d;
@@ -155,7 +155,7 @@ for an affine image `A` of the reference set.
 
 All `Q_r` for fixed `T` and fixed child type have the same common difference.
 Distinct fixed-step three-term progressions inside a four-AP-free set are
-pairwise disjoint.  Indeed, two such progressions sharing a point have starts
+pairwise disjoint. Indeed, two such progressions sharing a point have starts
 differing by one or two steps, and their union contains four consecutive
 points of that step.
 
@@ -172,7 +172,7 @@ The collision multiplicity `|R_T|` is exactly one third of the size of the
 forced three-translate layer family.
 
 Both `R_T` and the forced layer family are subsets of the four-AP-free parent
-root set.  In particular, both are four-AP-free.
+root set. In particular, both are four-AP-free.
 
 ---
 
@@ -188,7 +188,7 @@ E_3(s)
 \frac5{2s}.
 ```
 
-Let `m=|R_T|`.  Since the parent witness `T` has step `h`, its edge energy is
+Let `m=|R_T|`. Since the parent witness `T` has step `h`, its edge energy is
 
 ```math
 E(T)=\frac5{2h}.
@@ -223,21 +223,22 @@ pair at any of the differences
 \boxed{d,2d,4d,8d.}
 ```
 
-For a middle collision fiber, the analogous forbidden differences are
+For a middle collision fiber, applying the same test to both pair gaps gives
 
 ```math
-\boxed{d,d/2,d/4}
+\boxed{d/4,d/2,d,2d}
 ```
 
 whenever the displayed quantities are integral.
 
-For a doubled-side collision fiber they are
+For a doubled-side collision fiber the corresponding forbidden differences
+are
 
 ```math
-\boxed{d,2d,4d}
+\boxed{d/2,d,2d,4d}
 ```
 
-in the corresponding integral cases.
+in the integral cases.
 
 These exclusions strengthen the bare fact that `R_T` is four-AP-free, but do
 not force bounded cardinality.
@@ -246,7 +247,7 @@ not force bounded cardinality.
 
 ## 6. Consequence
 
-Transport collisions are not arbitrary reuse.  Every multiplicity `m` creates
+Transport collisions are not arbitrary reuse. Every multiplicity `m` creates
 three affine copies of an `m`-point reference set inside the parent root set.
 Thus the collision problem has been reduced to the same three-translate
 geometry as the aligned-diamond obstruction.
@@ -258,5 +259,5 @@ mE(T)
 ```
 
 against the scale, support, or future termination cost of the forced layer
-family.  A uniform collision-multiplicity constant is neither proved nor
+family. A uniform collision-multiplicity constant is neither proved nor
 needed by this identity—and is in fact false by the parametric reuse theorem.

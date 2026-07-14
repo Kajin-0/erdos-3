@@ -8,6 +8,8 @@ on:
     paths:
       - src/probe_first_frontier_terminal_correction.py
       - src/summarize_first_frontier_terminal_correction.py
+      - src/probe_residual_sponsor_backbone_split.py
+      - src/probe_third_generation_recursive_frontier.py
       - .github/workflows/first-frontier-terminal-correction-probe.yml
 
 permissions:

@@ -1,0 +1,61 @@
+{
+  "K": 16,
+  "first_roots": [
+    19,
+    23,
+    27
+  ],
+  "first_shell_key": [
+    "side_first",
+    2,
+    null,
+    4
+  ],
+  "first_tokens": [
+    17,
+    21,
+    25
+  ],
+  "latent_pair_reuse_multiplicity": 2,
+  "payload_sha256": "95615199993f669b00909e6e9a8aa2f7e0bb4e110df6215b45a6f13c73283ce0",
+  "recursive_shells": 2,
+  "schema": "shelled_pair_reuse_gadget_certificate_v1",
+  "second_roots": [
+    23,
+    25,
+    27
+  ],
+  "second_shell_key": [
+    "side_first",
+    0,
+    null,
+    4
+  ],
+  "second_tokens": [
+    23,
+    25,
+    27
+  ],
+  "shared_latent_pair": [
+    23,
+    27
+  ],
+  "shared_pair_weight": "1/4",
+  "support": [
+    0,
+    2,
+    19,
+    23,
+    25,
+    27,
+    36,
+    44,
+    46,
+    50,
+    52,
+    54
+  ],
+  "support_four_ap_free": true,
+  "support_size": 12,
+  "support_span": 54
+}

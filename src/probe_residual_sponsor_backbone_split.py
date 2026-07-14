@@ -1,19 +1,23 @@
 #!/usr/bin/env python3
 """Test residual/sponsor splitting of the R4->F5 backbone outputs.
 
-For each recursive parent, the coordinated deletion schedule partitions parent
-points into:
+For each recursive parent, lexicographic coordinated deletion partitions the
+parent points into:
+
 - a three-AP-free residual Q;
-- deleted sponsor points S.
+- deleted sponsor points Sigma.
 
-The ordinary minimum backbone translates all parent points except the minimum.
-This probe partitions that backbone occurrence into the translated residual
-part and translated sponsor part before dyadic shelling.  The residual part is
-terminal by translation invariance of three-AP-freeness.  Fibers are unchanged.
+The ordinary minimum backbone translates every parent point except its minimum.
+This probe partitions that translated backbone into residual-root and
+sponsor-root parts *before* dyadic shelling.  The translated residual-root part
+is terminal by translation invariance and heredity of three-AP-freeness.
+Middle fibers are unchanged.
 
-The complete split raw family is passed through the same exact-state quotient
-and componentwise maximum-harmonic conflict retention as the baseline.  The
-probe compares retained terminal/recursive mass and exact pair-resource load.
+No unshifted residual is inserted into the recursive-output family.  Therefore
+the split construction preserves exactly the raw numerical support, point
+occurrences, and harmonic occurrence mass of the certified baseline transition.
+The split raw family is then passed through the same exact-state quotient and
+componentwise maximum-harmonic same-shell retention rule.
 """
 from __future__ import annotations
 
@@ -24,22 +28,26 @@ from itertools import combinations
 import json
 import sys
 
-from exact_s1_child_ledger import coordinated_schedule, v2
 from probe_root_lineage_transfer_classification import canonical_hash, serialize_mass
-from verify_retained_provenance_second_generation import (
-    DescendantClass,
-    Occurrence,
-    dyadic_shells,
-    fibers_by_step,
-    harmonic,
-    retained_children,
-)
 from probe_third_generation_recursive_frontier import propagate_recursive_states
 from verify_retained_provenance_scale_profile import reconstruct_retained_families
+from verify_retained_provenance_second_generation import (
+    DescendantClass,
+    DescendantOccurrence,
+    components,
+    descendant_classes,
+    descendant_conflict_graph,
+    maximum_weight_independent_set_dp,
+    resolve_lexicographic,
+    selected_middle_resolution,
+    shell_partition,
+)
 from verify_retained_terminal_split import contains_three_term_ap
+from verify_s1_deletion_dag_adapter import harmonic
 
 if hasattr(sys, "set_int_max_str_digits"):
     sys.set_int_max_str_digits(0)
+sys.setrecursionlimit(20_000)
 
 Pair = tuple[int, int]
 
@@ -81,6 +89,7 @@ def resource_profile(states: tuple[DescendantClass, ...]) -> dict[str, object]:
     recursive_points = 0
     terminal_mass = Fraction()
     recursive_mass = Fraction()
+
     for state in states:
         reference = affine_reference(state)
         roots = tuple(state.representative.provenance)
@@ -99,7 +108,10 @@ def resource_profile(states: tuple[DescendantClass, ...]) -> dict[str, object]:
             recursive_points += len(state.values)
             recursive_mass += state.weight
             latent.update(combinations(sorted(roots), 2))
+
     all_resources = current + latent
+    occurrence_mass = counter_mass(all_resources, union=False)
+    union_mass = counter_mass(all_resources, union=True)
     return {
         "states": len(states),
         "points": sum(len(state.values) for state in states),
@@ -118,16 +130,9 @@ def resource_profile(states: tuple[DescendantClass, ...]) -> dict[str, object]:
         "total_distinct_resources": len(all_resources),
         "maximum_resource_multiplicity": max(all_resources.values(), default=0),
         "repeated_resource_tokens": sum(count > 1 for count in all_resources.values()),
-        "occurrence_resource_mass": serialize_mass(
-            counter_mass(all_resources, union=False)
-        ),
-        "union_resource_mass": serialize_mass(
-            counter_mass(all_resources, union=True)
-        ),
-        "repeated_resource_mass": serialize_mass(
-            counter_mass(all_resources, union=False)
-            - counter_mass(all_resources, union=True)
-        ),
+        "occurrence_resource_mass": serialize_mass(occurrence_mass),
+        "union_resource_mass": serialize_mass(union_mass),
+        "repeated_resource_mass": serialize_mass(occurrence_mass - union_mass),
         "hashes": {
             "current_resources": canonical_hash(
                 [(left, right, count) for (left, right), count in sorted(current.items())]
@@ -142,28 +147,74 @@ def resource_profile(states: tuple[DescendantClass, ...]) -> dict[str, object]:
     }
 
 
+def retain_occurrences(
+    occurrences: tuple[DescendantOccurrence, ...],
+) -> tuple[tuple[DescendantClass, ...], dict[str, int]]:
+    classes = descendant_classes(occurrences)
+    adjacency = descendant_conflict_graph(classes)
+    component_family = sorted(
+        components(adjacency),
+        key=lambda item: (classes[item[0]].representative.exponent, item),
+    )
+
+    retained_indices: list[int] = []
+    total_dp_states = 0
+    nonunique_components = 0
+    largest_component = 0
+    for component in component_family:
+        _weight, count, choice, dp_states = maximum_weight_independent_set_dp(
+            component, classes, adjacency
+        )
+        if count != 1:
+            nonunique_components += 1
+        retained_indices.extend(choice)
+        total_dp_states += dp_states
+        largest_component = max(largest_component, len(component))
+
+    retained = tuple(classes[index] for index in sorted(retained_indices))
+    retained_union = {value for state in retained for value in state.values}
+    if sum(len(state.values) for state in retained) != len(retained_union):
+        raise AssertionError("split retained states are not point-disjoint")
+
+    metrics = {
+        "raw_occurrences": len(occurrences),
+        "raw_occurrence_points": sum(len(item.values) for item in occurrences),
+        "exact_state_classes": len(classes),
+        "conflict_edges": sum(len(targets) for targets in adjacency.values()) // 2,
+        "conflict_components": len(component_family),
+        "largest_conflict_component": largest_component,
+        "components_with_nonunique_optimum": nonunique_components,
+        "dp_states_examined": total_dp_states,
+        "retained_states": len(retained),
+        "retained_points": len(retained_union),
+    }
+    return retained, metrics
+
+
 def build_split_occurrences(
     parents: tuple[DescendantClass, ...],
-) -> tuple[Occurrence, ...]:
-    occurrences: list[Occurrence] = []
-    next_index = 0
+) -> tuple[DescendantOccurrence, ...]:
+    rows: list[
+        tuple[
+            int,
+            str,
+            int | None,
+            int,
+            tuple[int, ...],
+            tuple[int, ...],
+            tuple[int, ...],
+        ]
+    ] = []
+
     for parent in parents:
         values = tuple(parent.values)
         representative = parent.representative
-        immediate_map = dict(zip(values, representative.immediate_provenance, strict=True))
         root_map = dict(zip(values, representative.provenance, strict=True))
-        schedule = coordinated_schedule(values)
-        residual = set(schedule.residual)
-        sponsor_points: set[int] = set()
-        for action in schedule.actions:
-            sponsor_is_right = v2(action.q) % 2 == 0
-            for center in action.centers:
-                sponsor = center + action.q if sponsor_is_right else center - action.q
-                if sponsor not in values:
-                    raise AssertionError("schedule sponsor absent from parent")
-                if sponsor in sponsor_points:
-                    raise AssertionError("sponsor selected more than once")
-                sponsor_points.add(sponsor)
+
+        selected, residual_frozen = resolve_lexicographic(frozenset(values))
+        residual = set(residual_frozen)
+        sponsor_points = {row[0] for row in selected}
+
         if residual & sponsor_points:
             raise AssertionError("residual/sponsor partition overlaps")
         if residual | sponsor_points != set(values):
@@ -171,26 +222,8 @@ def build_split_occurrences(
         if contains_three_term_ap(tuple(sorted(residual))):
             raise AssertionError("coordinated residual is not three-AP-free")
 
-        if residual:
-            residual_values = tuple(sorted(residual))
-            occurrences.append(
-                Occurrence(
-                    index=next_index,
-                    parent_class=parent.index,
-                    parent_representative=representative.index,
-                    source="terminal_residual",
-                    source_step=None,
-                    exponent=None,
-                    values=residual_values,
-                    immediate_provenance=tuple(immediate_map[value] for value in residual_values),
-                    provenance=tuple(root_map[value] for value in residual_values),
-                    weight=harmonic(residual_values),
-                )
-            )
-            next_index += 1
-
         minimum = min(values)
-        backbone_by_role = {
+        backbone_by_role: dict[str, dict[int, int]] = {
             "backbone_residual": {},
             "backbone_sponsor": {},
         }
@@ -201,59 +234,75 @@ def build_split_occurrences(
             role = "backbone_residual" if point in residual else "backbone_sponsor"
             backbone_by_role[role][difference] = point
 
-        for role, difference_to_parent in backbone_by_role.items():
-            differences = tuple(sorted(difference_to_parent))
-            for exponent, shell_values in dyadic_shells(differences):
+        for role in ("backbone_residual", "backbone_sponsor"):
+            difference_to_parent = backbone_by_role[role]
+            for exponent, shell_values in shell_partition(
+                difference_to_parent
+            ).items():
                 if role == "backbone_residual" and contains_three_term_ap(shell_values):
-                    raise AssertionError("translated residual backbone shell is not terminal")
-                immediate = tuple(difference_to_parent[value] for value in shell_values)
+                    raise AssertionError(
+                        "translated residual backbone shell is not terminal"
+                    )
+                immediate = tuple(
+                    difference_to_parent[value] for value in shell_values
+                )
                 roots = tuple(root_map[value] for value in immediate)
-                occurrences.append(
-                    Occurrence(
-                        index=next_index,
-                        parent_class=parent.index,
-                        parent_representative=representative.index,
-                        source=role,
-                        source_step=None,
-                        exponent=exponent,
-                        values=shell_values,
-                        immediate_provenance=immediate,
-                        provenance=roots,
-                        weight=harmonic(shell_values),
+                rows.append(
+                    (
+                        parent.index,
+                        role,
+                        None,
+                        exponent,
+                        shell_values,
+                        roots,
+                        immediate,
                     )
                 )
-                next_index += 1
 
-        fibers = fibers_by_step(schedule)
+        fibers, fiber_provenance = selected_middle_resolution(selected)
         for step in sorted(fibers):
-            values_by_sponsor = fibers[step]
-            sponsor_values = set(values_by_sponsor.values())
-            if not sponsor_values <= sponsor_points:
-                raise AssertionError("middle fiber contains a non-sponsor root")
-            fiber_values = tuple(sorted(values_by_sponsor))
-            for exponent, shell_values in dyadic_shells(fiber_values):
-                immediate = tuple(values_by_sponsor[value] for value in shell_values)
+            for exponent, shell_values in shell_partition(fibers[step]).items():
+                immediate = tuple(
+                    fiber_provenance[(step, value)] for value in shell_values
+                )
+                if not set(immediate) <= sponsor_points:
+                    raise AssertionError("middle fiber contains a non-sponsor point")
                 roots = tuple(root_map[value] for value in immediate)
-                occurrences.append(
-                    Occurrence(
-                        index=next_index,
-                        parent_class=parent.index,
-                        parent_representative=representative.index,
-                        source="middle_fiber",
-                        source_step=step,
-                        exponent=exponent,
-                        values=shell_values,
-                        immediate_provenance=immediate,
-                        provenance=roots,
-                        weight=harmonic(shell_values),
+                rows.append(
+                    (
+                        parent.index,
+                        "middle_fiber",
+                        step,
+                        exponent,
+                        shell_values,
+                        roots,
+                        immediate,
                     )
                 )
-                next_index += 1
-    return tuple(occurrences)
+
+    return tuple(
+        DescendantOccurrence(
+            index=index,
+            parent_class=row[0],
+            source=row[1],
+            source_step=row[2],
+            exponent=row[3],
+            values=row[4],
+            provenance=row[5],
+            immediate_provenance=row[6],
+        )
+        for index, row in enumerate(rows)
+    )
 
 
-def support_union(occurrences: tuple[Occurrence, ...]) -> set[int]:
+def support_union(occurrences: tuple[DescendantOccurrence, ...]) -> set[int]:
     return {value for occurrence in occurrences for value in occurrence.values}
+
+
+def occurrence_harmonic_mass(
+    occurrences: tuple[DescendantOccurrence, ...],
+) -> Fraction:
+    return sum((harmonic(item.values) for item in occurrences), Fraction())
 
 
 def main() -> int:
@@ -273,17 +322,27 @@ def main() -> int:
     recursive_fourth = tuple(
         state for state in retained_fourth if contains_three_term_ap(state.values)
     )
-    baseline_occurrences, baseline_retained, baseline_metrics, _rows5 = propagate_recursive_states(
-        recursive_fourth
+    baseline_occurrences, baseline_retained, baseline_metrics, _rows5 = (
+        propagate_recursive_states(recursive_fourth)
     )
 
     split_occurrences = build_split_occurrences(recursive_fourth)
-    split_retained, split_metrics = retained_children(split_occurrences)
+    split_retained, split_metrics = retain_occurrences(split_occurrences)
 
     baseline_union = support_union(baseline_occurrences)
     split_union = support_union(split_occurrences)
     if baseline_union != split_union:
         raise AssertionError("role split changed the raw numerical support union")
+
+    baseline_points = sum(len(item.values) for item in baseline_occurrences)
+    split_points = sum(len(item.values) for item in split_occurrences)
+    if baseline_points != split_points:
+        raise AssertionError("role split changed raw point-occurrence count")
+
+    baseline_occurrence_mass = occurrence_harmonic_mass(baseline_occurrences)
+    split_occurrence_mass = occurrence_harmonic_mass(split_occurrences)
+    if baseline_occurrence_mass != split_occurrence_mass:
+        raise AssertionError("role split changed raw harmonic occurrence mass")
 
     baseline_profile = resource_profile(baseline_retained)
     split_profile = resource_profile(split_retained)
@@ -303,20 +362,24 @@ def main() -> int:
         raise AssertionError("retained residual-backbone state is recursive")
 
     output = {
-        "schema": "residual_sponsor_backbone_split_probe_v1",
+        "schema": "residual_sponsor_backbone_split_probe_v2",
         "scope": "certified_R4_recursive_to_complete_F5_retained_transition",
         "generation_six_propagated": False,
+        "unshifted_residual_inserted": False,
         "raw_support_union_preserved": True,
+        "raw_point_occurrences_preserved": True,
+        "raw_harmonic_occurrence_mass_preserved": True,
         "raw_support_union_size": len(split_union),
+        "raw_harmonic_occurrence_mass": serialize_mass(split_occurrence_mass),
         "baseline": {
             "raw_occurrences": len(baseline_occurrences),
-            "raw_occurrence_points": sum(len(item.values) for item in baseline_occurrences),
+            "raw_occurrence_points": baseline_points,
             "retention_metrics": baseline_metrics,
             "profile": baseline_profile,
         },
         "split": {
             "raw_occurrences": len(split_occurrences),
-            "raw_occurrence_points": sum(len(item.values) for item in split_occurrences),
+            "raw_occurrence_points": split_points,
             "raw_source_counts": dict(sorted(split_source_counts.items())),
             "retention_metrics": split_metrics,
             "retained_source_counts": dict(sorted(retained_source_counts.items())),

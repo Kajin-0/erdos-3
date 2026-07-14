@@ -79,8 +79,9 @@ Statuses marked **exact finite** are computational statements for recorded objec
 | CL-060 | A hybrid delaying step-5 and the three seed-producing `q=1` actions removes canonical regeneration but has higher raw `C_3` than the step-5 policy. For `C_{3,gamma}=T+3O+E+gamma G_regen`, the hybrid beats step-5 when `gamma>gamma_5`, where `0.057<gamma_5<0.058`; `gamma=1/16` is a valid witness for that pairwise comparison. | Exact finite continuation-weight theorem. |
 | CL-061 | In the enlarged finite policy family, `C_{3,1/10}=T+3O+E+(1/10)G_regen` selects `step5/step540` on `S_2`, `step540` on `S_3,...,S_6`, and the non-regenerative `hybrid5` policy on `S_7`; reverse deletion is never selected. The active S7 constraint is `0.0837<gamma_540<0.0838`, so `gamma=1/16` fails and `gamma=1/10` succeeds. | Exact finite two-coordinate ranking theorem. |
 | CL-062 | Delaying step `30` alone improves `C_3` relative to lexicographic deletion on every `S_2,...,S_7`, but adding the same delay after steps `5` and `40` reverses sign and worsens `C_3` on every `S_2,...,S_7`. Favorable local policy perturbations are not composable. | Exact finite interaction/no-greedy theorem. |
+| CL-063 | The current policy comparisons export to `60` exact rational half-spaces in features `(lambda,gamma)`. The existing LP harness verifies `(3,1/10)` feasible. The only zero-slack rows are seven `S_1` ties and the `S_2` `step5/step540` tie; the active `S_7` continuation boundary is `hybrid5<=step540`. | Exact finite policy-LP feasibility theorem. |
 
-Primary references for CL-050 through CL-062:
+Primary references for CL-050 through CL-063:
 
 - `docs/s7-cyclic-scc-output-load.md`;
 - `docs/s7-cyclic-scc-local-completion-credit.md`;
@@ -93,9 +94,11 @@ Primary references for CL-050 through CL-062:
 - `docs/policy-occurrence-cone-s1-s7.md`;
 - `docs/step5-policy-regeneration-weight.md`;
 - `docs/two-coordinate-policy-family.md`;
+- `docs/policy-halfspace-lp.md`;
 - `src/verify_policy_occurrence_cone_s1_s7.py`;
 - `src/verify_step5_policy_regeneration_weight.py`;
-- `src/verify_two_coordinate_policy_family.py`.
+- `src/verify_two_coordinate_policy_family.py`;
+- `src/verify_policy_halfspace_lp.py`.
 
 ---
 
@@ -134,23 +137,25 @@ Do not use without materially new hypotheses:
 29. treating `T+3O+E` as sufficient after it chooses a known regenerative schedule;
 30. assuming `gamma=1/16` survives enlargement of the policy family;
 31. greedily composing individually favorable policy delays;
-32. inserting the recorded path charge directly into a Bellman child sum without a retention theorem;
-33. treating the tested policy family as globally optimal over all complete schedules;
-34. random sampling as a finite certificate;
-35. the rejected depth-ten anchor reduction.
+32. treating policy-half-space LP feasibility as branching Bellman-LP feasibility;
+33. inserting the recorded path charge directly into a Bellman child sum without a retention theorem;
+34. treating the tested policy family as globally optimal over all complete schedules;
+35. random sampling as a finite certificate;
+36. the rejected depth-ten anchor reduction.
 
 ---
 
-# Open bottleneck OB-001: Two-coordinate policy cone and retention
+# Open bottleneck OB-001: From policy LP to retained-child Bellman rows
 
 The state-specific cheap-extension problem at `S_10` is closed. Raw simultaneous transition generation is certified through `S_7`. Exact policy experiments now establish:
 
 1. a nonempty occurrence-weight subcone;
 2. a necessary continuation-sensitive regeneration coordinate;
 3. a stable finite witness `(lambda,gamma)=(3,1/10)` for the current deterministic policy family;
-4. a non-composability obstruction showing that independently favorable priority changes can interact destructively.
+4. non-composable interactions between local priority modifications;
+5. exact feasibility of all current policy-ranking half-spaces in the rational LP harness.
 
-The next task is to export the current comparisons as exact rational half-spaces in `(lambda,gamma)`, intersect them in the LP harness, and add further deterministic policy families. A first infeasible subsystem should identify the next missing coordinate. A provenance-preserving retention quotient is still required before raw shell or path charges can be treated as Bellman children.
+The next task is to add further deterministic policies until the finite cone stabilizes or fails, then prove a provenance-preserving retention quotient and export the first legitimate retained-child Bellman row. Policy-ranking feasibility alone does not control the simultaneous deletion tree.
 
 The target remains
 

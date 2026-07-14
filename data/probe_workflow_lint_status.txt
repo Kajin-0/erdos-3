@@ -1,30 +1,11 @@
-schema=probe_workflow_hardening_status_v1
+schema=probe_workflow_hardening_status_v2
 lint_exit_status=0
 helper_test_exit_status=0
-source_commit=a8ae459509d63edfb5abd54b0f5d8590971ef223
+source_commit=29b631d4e26a3fe069d483d8ffc5756cb07f9a93
 source_ref=refs/heads/main
-workflow_run_id=29351078630
+workflow_run_id=29352608323
 workflow_run_attempt=1
 --- workflow lint ---
 probe workflow lint passed
 --- helper tests ---
-D	data/tracked.txt
-A	data/new.txt
-probe_exit_status=0
-summary_exit_status=0
-ok=true
-probe_exit_status=3
-error: probe_exit_status=3
-error: summary_exit_status=not_run
---- preserved probe status ---
-schema=helper_test_failure_v1
-compile_exit_status=0
-probe_exit_status=3
-summary_exit_status=not_run
-verifier_exit_status=not_applicable
-source_commit=test-source
-source_ref=refs/heads/main
-workflow_run_id=29351078630
-workflow_run_attempt=1
---- stderr ---
 probe workflow helper tests passed

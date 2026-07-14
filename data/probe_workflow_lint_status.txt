@@ -1,11 +1,12 @@
 schema=probe_workflow_hardening_status_v2
-lint_exit_status=0
+lint_exit_status=1
 helper_test_exit_status=0
-source_commit=540646bdc4720bcab694b3bd33634a17d84005f3
+source_commit=35e52ea1ad28183af591a3d2009d6eb157566b84
 source_ref=refs/heads/main
-workflow_run_id=29370619031
+workflow_run_id=29370777178
 workflow_run_attempt=1
 --- workflow lint ---
-probe workflow lint passed
+probe workflow lint failed:
+- .github/workflows/record-cl089-cl096-collision-frontier.yml:139: status workflows may not suppress failures with || true
 --- helper tests ---
 probe workflow helper tests passed

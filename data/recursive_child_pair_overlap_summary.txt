@@ -1,0 +1,23 @@
+Recursive oriented-child pair-overlap search
+============================================
+
+max_value=64
+descriptor_count=3684
+shared_pair_descriptor_pairs_tested=128922
+viable_four_ap_free_overlap_unions=37281
+descriptor_kind_double_first=1488
+descriptor_kind_double_last=236
+descriptor_kind_middle_left=13
+descriptor_kind_middle_right=223
+descriptor_kind_side_first=1488
+descriptor_kind_side_last=236
+minimum_counterexample_pair=7,11
+minimum_counterexample_support=0,2,3,4,7,9,11,12,14,18,20,22
+minimum_counterexample_support_size=12
+minimum_counterexample_support_span=22
+minimum_counterexample_first_key=side_first,2,None
+minimum_counterexample_second_key=side_first,0,None
+minimum_counterexample_first_roots=3,7,11
+minimum_counterexample_second_roots=7,9,11
+descriptors_sha256=f139fa7a6b590ee11a52fb80b9da321939c4682c8f51f250a0b3a1a07f29c409
+counterexample_family_sha256=96838e5548f55bc05db955454b5467763a77f5c19d76c0dcb56f71ea3807482c

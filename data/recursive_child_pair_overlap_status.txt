@@ -1,0 +1,10 @@
+schema=recursive_child_pair_overlap_search_v1
+compile_exit_status=0
+probe_exit_status=0
+summary_exit_status=0
+verifier_exit_status=not_applicable
+source_commit=a46e20b9f87e4598b76373ebd887fcc9d9ae2fa9
+source_ref=refs/heads/main
+workflow_run_id=29369523743
+workflow_run_attempt=1
+--- stderr ---

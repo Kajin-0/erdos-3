@@ -1,0 +1,107 @@
+{
+  "counterexample_family_sha256": "96838e5548f55bc05db955454b5467763a77f5c19d76c0dcb56f71ea3807482c",
+  "descriptor_count": 3684,
+  "descriptor_kind_counts": {
+    "double_first": 1488,
+    "double_last": 236,
+    "middle_left": 13,
+    "middle_right": 223,
+    "side_first": 1488,
+    "side_last": 236
+  },
+  "descriptors_sha256": "f139fa7a6b590ee11a52fb80b9da321939c4682c8f51f250a0b3a1a07f29c409",
+  "max_value": 64,
+  "minimum_counterexample": {
+    "first": {
+      "child_key": [
+        "side_first",
+        2,
+        null
+      ],
+      "color": null,
+      "kind": "side_first",
+      "reference": 2,
+      "roots": [
+        3,
+        7,
+        11
+      ],
+      "support": [
+        2,
+        3,
+        4,
+        7,
+        11,
+        12,
+        20
+      ]
+    },
+    "first_actual_roots": [
+      3,
+      7,
+      11
+    ],
+    "first_actual_tokens": [
+      1,
+      5,
+      9
+    ],
+    "pair": [
+      7,
+      11
+    ],
+    "second": {
+      "child_key": [
+        "side_first",
+        0,
+        null
+      ],
+      "color": null,
+      "kind": "side_first",
+      "reference": 0,
+      "roots": [
+        7,
+        9,
+        11
+      ],
+      "support": [
+        0,
+        7,
+        9,
+        11,
+        14,
+        18,
+        22
+      ]
+    },
+    "second_actual_roots": [
+      7,
+      9,
+      11
+    ],
+    "second_actual_tokens": [
+      7,
+      9,
+      11
+    ],
+    "support": [
+      0,
+      2,
+      3,
+      4,
+      7,
+      9,
+      11,
+      12,
+      14,
+      18,
+      20,
+      22
+    ],
+    "support_size": 12,
+    "support_span": 22
+  },
+  "schema": "recursive_child_pair_overlap_search_v1",
+  "shared_pair_descriptor_pairs_tested": 128922,
+  "viable_four_ap_free_overlap_unions": 37281
+}

@@ -87,8 +87,9 @@ Statuses marked **exact finite** are computational statements for recorded objec
 | CL-068 | Exact-state quotienting with deterministic provenance representatives, followed by componentwise maximum-harmonic independent-set selection in the same-shell intersection graph, produces a unique `21`-state point-disjoint retained family from the local-optimum transition. The graph has `87` classes, `290` edges, `20` components, and largest component `13`; every component has a unique optimum. The retained family carries `11753` distinct labels and between `731/1000` and `732/1000` of the raw-union harmonic mass. | Exact finite one-generation provenance-preserving retained-child theorem. |
 | CL-069 | Propagating the `21` retained states by lexicographic coordinated deletion and reapplying the global quotient produces a unique `27`-state, `7925`-label point-disjoint descendant family. Original `S_7` provenance has multiplicity spectrum `7376` labels once, `267` twice, and `5` three times; repeated-provenance harmonic overhead is between `40/1000` and `41/1000`. Nevertheless second-generation retained harmonic mass is between `6828/1000` and `6829/1000` of first-generation retained mass. | Exact finite second-generation provenance-reuse and scale-expansion theorem. |
 | CL-070 | Across all `7925` second-generation retained points, every floor-log contraction `floor(log2(p/u))>=8` carries repeated root provenance. Repeated provenance carries only `7.6%`–`7.7%` of occurrence-weighted root mass but produces `94.8%`–`94.9%` of descendant harmonic mass; its descendant/root expansion is between `4928` and `4929`. Unit shell-depth, floor-log, and ceil-log root charges fail: the intergeneration debt is respectively more than `86`, `99`, and `77` times those charges. The four points with floor-log contraction at least `16` carry `69.8%`–`69.9%` of descendant mass, and the single `u=1`, `p=1354066` point carries `51.2%`–`51.3%`. | Exact finite provenance-times-scale concentration and no-go theorem. |
+| CL-071 | The `27` second-generation retained states split into `13` three-term-progression-free terminal states with `43` labels and `14` recursive states with `7882` labels. Terminal states carry `86.2%`–`86.3%` of total second retained harmonic mass. Recursive second-generation mass is only `93.7%`–`93.8%` of first-generation retained mass, giving exact recursive contraction of `6.2%`–`6.3%`. All four points with floor-log contraction at least `16`, including `u=1`, are terminal and create no further coordinated-deletion children. | Exact finite terminal-sink decomposition and two-generation recursive contraction theorem. |
 
-Primary references for CL-050 through CL-070:
+Primary references for CL-050 through CL-071:
 
 - `docs/s7-cyclic-scc-output-load.md`;
 - `docs/s7-cyclic-scc-local-completion-credit.md`;
@@ -108,10 +109,12 @@ Primary references for CL-050 through CL-070:
 - `docs/s7-local-optimum-transition-profile.md`;
 - `docs/s7-provenance-retained-quotient.md`;
 - `docs/retained-provenance-second-generation.md`;
+- `docs/retained-terminal-recursive-split.md`;
 - `docs/retained-provenance-scale-profile.md`;
 - `src/verify_s7_provenance_retained_quotient.py`;
 - `src/verify_retained_provenance_second_generation.py`;
-- `src/verify_retained_provenance_scale_profile.py`.
+- `src/verify_retained_provenance_scale_profile.py`;
+- `src/verify_retained_terminal_split.py`.
 
 ---
 
@@ -159,37 +162,37 @@ Do not use without materially new hypotheses:
 38. treating maximum provenance multiplicity three as a contraction theorem;
 39. treating low repeated-provenance overhead as payment for scale-driven harmonic growth;
 40. treating unit shell-depth or logarithmic root charge as sufficient repayment;
-41. treating a coefficient greater than `77` as globally valid merely because it fits this transition;
-42. treating repeated provenance and scale contraction as independent coordinates after CL-070;
-43. treating maximum-harmonic local retention as globally Bellman-optimal;
-44. treating policy-half-space LP feasibility as branching Bellman-LP feasibility;
-45. inserting the recorded path charge directly into a Bellman child sum without a scale-aware packing theorem;
-46. treating the tested policy family as globally optimal over all complete schedules;
-47. random sampling as a finite certificate;
-48. the rejected depth-ten anchor reduction.
+41. treating the full `6.828`–`6.829` second-generation ratio as recursive load;
+42. discarding terminal three-term-progression-free mass instead of charging it exactly once;
+43. treating the `6.2%`–`6.3%` recursive contraction as universal;
+44. treating a coefficient greater than `77` as globally valid merely because it fits this transition;
+45. treating repeated provenance and scale contraction as independent coordinates after CL-070;
+46. treating maximum-harmonic local retention as globally Bellman-optimal;
+47. treating policy-half-space LP feasibility as branching Bellman-LP feasibility;
+48. inserting the recorded path charge directly into a Bellman child sum without a terminal-sink accounting theorem;
+49. treating the tested policy family as globally optimal over all complete schedules;
+50. random sampling as a finite certificate;
+51. the rejected depth-ten anchor reduction.
 
 ---
 
-# Open bottleneck OB-001: Repeated-provenance scale-tail packing
+# Open bottleneck OB-001: Recursive contraction plus terminal-sink accounting
 
-Within-generation point-disjoint retention is solved for the adversarial local-optimum transition. The first propagated generation has exact root-provenance multiplicity and pointwise scale-ratio certificates.
+Within-generation point-disjoint retention is solved for the adversarial local-optimum transition. The second retained generation has an exact terminal/recursive partition. The recursive branch contracts by `6.2%`–`6.3%`; the apparent large expansion is concentrated in terminal three-term-progression-free states.
 
-The dangerous harmonic output is concentrated in repeated provenance at extreme scale contractions: repeated roots carry less than `7.7%` of occurrence-weighted root mass but generate more than `94.8%` of retained descendant mass. Every contraction of at least eight binary orders is repeated provenance.
-
-The next task is to construct a stored parent capacity whose release is triggered by repeated provenance crossing a dyadic-depth threshold, prove that each root label releases capacity only a bounded number of times, and connect the released charge to completion, rectangle, or future cheap-extension exclusion. Unit multiplicity, unit depth, and unit logarithmic charges are ruled out.
+The next task is to define a global terminal-sink ledger that charges each numerical or provenance-supported terminal output at most once, while propagating only recursive retained states. The scale profile remains relevant because it identifies the high-mass sinks, but unit scale charges are not the active debt.
 
 The target remains
 
 ```math
 \Delta(S)
 +
-\sum_{S'\in\operatorname{Child}_\pi(S)}
-\left(
-\operatorname{Pack}(S')+
-\Phi_{\rm obs}(S')
-\right)
+\operatorname{TermSink}(S)
++
+\sum_{S'\in\operatorname{RecChild}_\pi(S)}
+\operatorname{RecPack}(S')
 \le
-\operatorname{Pack}(S)+
+\operatorname{RecPack}(S)+
 \Phi_{\rm obs}(S)+
 \operatorname{controlled\ error}.
 ```

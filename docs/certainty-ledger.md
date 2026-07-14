@@ -97,9 +97,13 @@ Statuses marked **exact finite** are computational statements for recorded objec
 | CL-078 | Propagating the 12 fourth-generation recursive states and reapplying the same quotient produces a unique point-disjoint fifth family with 21 states and 1032 points, split into 8 terminal states with 17 points and 13 recursive states with 1015 points. `H5_rec/H4_rec` is `1.329813`-`1.329814`. Repeated-root descendant mass is exactly zero at both levels, so no finite coefficient in `H+kR` can repair this transition. Two `(u,p)` terminal collisions occur, but no `(u,p,i)` collision is recorded through generation five. | Exact finite fifth-generation repeated-root no-go and refined-token survival theorem. |
 | CL-079 | On the certified fourth recursive family, all-lexicographic deletion, all-reverse deletion, and each of the twelve single-parent lexicographic-to-reverse flips expand recursively under every maximum-total-harmonic retention tie choice. The best tested policy is `reverse_parent_82`, with ratio `1.197375982982...`; the baseline ratio is `1.329813898820...`. The two nonunique policies each have two tied optima with identical recursive mass. | Exact finite local policy-sensitivity theorem; not universal over all policies or retention rules. |
 | CL-080 | At the baseline fourth-to-fifth transition, all root provenance is unique. Of 1717 fourth recursive roots, 1015 survive recursively and 702 exit; 17 terminalize and 685 disappear from the retained family. The exact identity `H5_rec-H4_rec=G_4->5-L_4->5` has survivor scale gain `1.816777911848...`, exiting parent release `1.310139720502...`, and net recursive increase `0.506638191346...`; `1.386705<G/L<1.386706`. No root splits between recursive and terminal output and fifth retained root multiplicity is one. | Elementary root-lineage identity plus exact finite decomposition. |
+| CL-081 | At the certified fourth-to-fifth baseline transition, all `1015` recursively surviving roots are carried by minimum-translation backbone occurrences and none by middle fibers. The twelve parent minima are exactly the twelve roots with no raw descendant output. Surviving shell drops are `1,2,5,7,9,10`; classes `77,68,24` carry `87.7945%`–`87.7946%` of gain. Aggregate full translation reserve is `9.928706884742...`, retained gain is `1.816777911848...`, and minimum-anchor release is only `0.364729899662...`. | Exact finite backbone-anchor transfer theorem; fixed policy and retention. |
 
 Primary latest references:
 
+- `docs/backbone-anchor-root-transfer.md`;
+- `src/verify_root_lineage_transfer_classification.py`;
+- `src/verify_backbone_anchor_transfer.py`;
 - `docs/fourth-to-fifth-root-transfer.md`;
 - `src/verify_fourth_to_fifth_root_transfer.py`;
 - `docs/fourth-to-fifth-policy-sensitivity.md`;
@@ -165,6 +169,7 @@ Do not use without materially new hypotheses:
 40. random sampling as a finite certificate;
 41. another fitted feature without a state-independent transfer law;
 42. generation-six propagation without a predeclared conceptual test.
+43. scalar minimum-anchor mass `1/min(S)` as complete payment for all enabled backbone intervals.
 
 ---
 
@@ -211,4 +216,4 @@ H_g^{\mathrm{rec}}
 
 A new coordinate is admissible only if it has a transfer identity or one-sided recurrence, a bounded-reuse interpretation, and a telescoping role. Finite LP correlation is diagnostic only.
 
-Generation six is blocked until such a lemma exists. The next concrete tasks are to classify survivor scale gain by source/shell/immediate provenance, attach terminalized roots to first-appearance `(u,p,i)` tokens, and determine what arithmetic credit is created by the 685 dropped lineages.
+The source and shell classification is now complete on the baseline transition: all `1015` survivors are backbone translations, the twelve minimum anchors have no raw output, and three parent classes carry nearly `88%` of gain. Generation six remains blocked. The next concrete target is a state-independent transfer law for provenance-labeled anchor-survivor intervals `(u-min(S),u]`, coupled to first-appearance terminal credit and a provenance-valid classification of the `673` dropped roots that generated raw descendants.

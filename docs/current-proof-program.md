@@ -6,6 +6,41 @@ This is the authoritative overview for the four-term case of Erdős Problem #3. 
 
 The project is no longer searching for another finite-depth fitted feature. The active theorem target is a cumulative ancestor-path capacity that explains where harmonic reserve goes when provenance multiplicity disappears and unique lineages continue contracting.
 
+## Latest exact refinement: backbone-anchor transfer
+
+The fourth-to-fifth survivor classification is complete for the certified baseline transition:
+
+```text
+surviving roots              = 1,015
+surviving backbone roots     = 1,015
+surviving middle-fiber roots = 0
+minimum-anchor roots         = 12
+minimum anchors with no raw output = 12
+```
+
+For a recursive parent state `S` with `m=min(S)`, the exact prospective translation reserve is
+
+```math
+A(S)
+=
+\sum_{u\in S,\ u>m}
+\left(
+\frac1{u-m}-\frac1u
+\right).
+```
+
+Every retained survivor gain is the harmonic measure of an anchor-survivor interval `(u-m,u]`. The aggregate baseline values are
+
+```text
+sum A(S)                 = 9.928706884742...
+retained survivor gain   = 1.816777911848...
+minimum-anchor release   = 0.364729899662...
+```
+
+Thus scalar anchor mass is not complete payment. The missing state must control provenance-labeled anchor-survivor intervals, their reuse, and the release created when they terminate or are removed.
+
+Primary reference: `docs/backbone-anchor-root-transfer.md`.
+
 ---
 
 ## 1. Foundation and recorded exact path
@@ -341,11 +376,11 @@ LP correlation alone is insufficient.
 
 ## 9. Approved next targets
 
-1. Classify the certified survivor scale gain by parent state, source type, shell, and immediate provenance.
-2. Prove a reserve-transfer lemma that charges lost or created scale capacity to terminalization, discarded lineages, or arithmetic obstruction.
+1. Define a provenance-labeled anchor-survivor interval state for `(u-min(S),u]` and state exactly when that interval is created, retained, released, or reused.
+2. Test the exact translation reserve `A(S)=sum_{u>min(S)}(1/(u-min(S))-1/u)` on the existing four transitions; record either a coefficient theorem or the smallest exact no-go subsystem.
 3. Attach the 17 terminalized roots injectively to first-appearance `(u,p,i)` terminal tokens.
-4. Test whether the 685 dropped lineages create completion, rectangle, or future-extension exclusion credit.
-5. Define cumulative ancestor-path capacity only after the transfer decomposition identifies its conserved quantity.
+4. Refine the 673 dropped roots with raw descendants by provenance, distinguishing valid retained coverage from numerical coverage by unrelated lineages.
+5. Prove a bounded-reuse or obstruction-export lemma for anchor-survivor intervals.
 6. Test any proposed lemma on the existing four transitions before adding another generation.
 
 Generation six is blocked until a specific state-independent transfer lemma exists.

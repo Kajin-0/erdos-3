@@ -278,12 +278,38 @@ net recursive increase       = 0.506638191346...
 
 Of `1717` fourth recursive roots, `1015` survive and `702` exit; `17` terminalize and `685` disappear from the retained family. No root splits between recursive and terminal output.
 
+### Backbone-anchor refinement
+
+The exact source classification of the first failing transition is now complete. All `1015` recursively surviving roots continue through minimum-translation backbone occurrences; no middle-fiber root survives. The twelve minimum-anchor roots are exactly the twelve roots with no raw descendant output.
+
+For each parent state `S`, `m=min(S)`, the full prospective translation gain is
+
+```math
+A(S)
+=
+\sum_{u>m}
+\left(
+\frac1{u-m}-\frac1u
+\right).
+```
+
+Across the twelve parents,
+
+```text
+full translation reserve = 9.928706884742...
+retained survivor gain    = 1.816777911848...
+minimum-anchor release    = 0.364729899662...
+```
+
+Six parent states expand and six contract. Classes `77`, `68`, and `24` carry `87.7945%`–`87.7946%` of survivor gain. The correct local object is therefore a provenance-labeled anchor-survivor interval, not scalar minimum-anchor mass.
+
 **Decisions:**
 
 - current-generation multiplicity is not persistent reserve;
 - finite feature-LP witnesses are diagnostics, not theorem candidates without a transfer law;
 - nearby deletion-policy changes do not remove the first failing expansion, although policy remains quantitatively important;
 - the missing resource is cumulative ancestor-path scale capacity plus terminal/drop/obstruction release;
+- the baseline failing survivor family is backbone-only, and scalar minimum-anchor release is not sufficient payment for enabled translation intervals;
 - generation six is blocked until a state-independent transfer lemma is proposed;
 - a new feature is admissible only with a transition recurrence, bounded-reuse interpretation, and telescoping role.
 
@@ -343,10 +369,11 @@ Here `A_g` must be a state-independent ancestor-path capacity, `T^{first}` is ne
 
 The next exact work is to:
 
-1. classify survivor scale gain by parent state, source type, shell, and immediate provenance;
-2. attach the `17` terminalized roots injectively to first-appearance `(u,p,i)` tokens;
-3. determine what completion, rectangle, or future-extension exclusion is created by the `685` dropped lineages;
-4. formulate a transfer lemma before propagating another generation.
+1. define provenance-labeled anchor-survivor interval state and its one-step transfer semantics;
+2. test the exact minimum-translation reserve on the four existing transitions;
+3. attach the `17` terminalized roots injectively to first-appearance `(u,p,i)` tokens;
+4. distinguish provenance-valid release from numerical coverage among the `673` dropped roots with raw descendants;
+5. formulate a bounded-reuse or obstruction-export lemma before propagating another generation.
 
 No current theorem closes this gap. Generation six and further feature fitting are explicitly deferred.
 

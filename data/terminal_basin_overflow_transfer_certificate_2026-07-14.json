@@ -1,0 +1,191 @@
+{
+  "aggregate_masses": {
+    "all_pairs_activated_mass": {
+      "decimal": "32643.799345099345",
+      "fraction": "2940879883/90090",
+      "sha256": "963b5750436b1d50d5781e0f7ed6fb6ca9735a2c1846c6e1e66e3ffaf18ecb71"
+    },
+    "all_pairs_overflow_mass": {
+      "decimal": "2329.958058608059",
+      "fraction": "12721571/5460",
+      "sha256": "483335bc3fd8ad1bde98456e2a2a8b7d7979257ac08798b6f691d52bfeab2c0f"
+    },
+    "all_pairs_surplus": {
+      "decimal": "0.000000000000",
+      "fraction": "0/1",
+      "sha256": "a93875fe509ac2fae0e0939d3ec71c4d978244c7398dd7185ca68c393426a5a6"
+    },
+    "all_pairs_terminal_mass": {
+      "decimal": "30313.841286491286",
+      "fraction": "5461947923/180180",
+      "sha256": "53d8c6ace0c98c71e20847c5b41227aff2d25cd80f028f5f9e688d364bb32482"
+    },
+    "selected_edges_activated_mass": {
+      "decimal": "11988.333333333334",
+      "fraction": "35965/3",
+      "sha256": "87b18299638ac33e73364817b67bbb7d8bb357731f48a61a82cf734be624756b"
+    },
+    "selected_edges_overflow_mass": {
+      "decimal": "14.200000000000",
+      "fraction": "71/5",
+      "sha256": "985d41eced2eb52e4e20f11e6daa5b015b985dac8a5adbc9c232fa537dd0fa3f"
+    },
+    "selected_edges_surplus": {
+      "decimal": "50.466666666667",
+      "fraction": "757/15",
+      "sha256": "2d94723099331c4d37762fdb52bafed407e1b2647eda382ef314d61e90854908"
+    },
+    "selected_edges_terminal_mass": {
+      "decimal": "12024.600000000000",
+      "fraction": "60123/5",
+      "sha256": "65c1df942f27f6690db13f016a0a9072ef80a008e33adf156cac924ebb387a4d"
+    }
+  },
+  "interval": [
+    1,
+    14
+  ],
+  "maximum_overflow_witness": {
+    "activated_mass": {
+      "decimal": "11.466677766678",
+      "fraction": "1033033/90090",
+      "sha256": "ef0b7a2c787b5194fe7268a0338d1c0137697f56fb66fe08ce18d67ad5ec7b78"
+    },
+    "activated_pairs": 36,
+    "backward_targets": 6,
+    "direct_targets": 10,
+    "family": "all_pairs",
+    "initial": [
+      1,
+      2,
+      3,
+      6,
+      7,
+      8,
+      11,
+      12,
+      14
+    ],
+    "maximum_transport_path": 2,
+    "overflow_mass": {
+      "decimal": "1.915487290487",
+      "fraction": "138053/72072",
+      "sha256": "143874e63bc81533f7ff05c582ecdae05b9e5dbb187b24bc1aebcaaaabaf17fb"
+    },
+    "overflow_pairs": 14,
+    "overflow_rows_sha256": "275b38c2d364c6a802d62e16234296b7fc6c2dc586d90f4e14c841e5ee1af334",
+    "owner_distance_fibers": 5,
+    "owner_distance_shells": 7,
+    "representative_mass": {
+      "decimal": "9.551190476190",
+      "fraction": "8023/840",
+      "sha256": "87e6f44a52d110c07d3e0ddbd8d9f5d9057c823118320c5d0551ecb91336ce6a"
+    },
+    "representatives": 22,
+    "residual_targets": 6,
+    "row_rhs": {
+      "decimal": "11.466677766678",
+      "fraction": "1033033/90090",
+      "sha256": "ef0b7a2c787b5194fe7268a0338d1c0137697f56fb66fe08ce18d67ad5ec7b78"
+    },
+    "row_surplus": {
+      "decimal": "0.000000000000",
+      "fraction": "0/1",
+      "sha256": "a93875fe509ac2fae0e0939d3ec71c4d978244c7398dd7185ca68c393426a5a6"
+    },
+    "terminal_basins": 22,
+    "terminal_target_mass": {
+      "decimal": "9.551190476190",
+      "fraction": "8023/840",
+      "sha256": "87e6f44a52d110c07d3e0ddbd8d9f5d9057c823118320c5d0551ecb91336ce6a"
+    }
+  },
+  "maximum_transport_path_witness": {
+    "activated_mass": {
+      "decimal": "6.700036075036",
+      "fraction": "37145/5544",
+      "sha256": "450acf1ff33de081e02008e7d0f80ecb89ef3a43dfa4c05e81d95144df8c5e3a"
+    },
+    "activated_pairs": 21,
+    "backward_targets": 1,
+    "direct_targets": 6,
+    "family": "all_pairs",
+    "initial": [
+      1,
+      2,
+      3,
+      5,
+      8,
+      10,
+      12
+    ],
+    "maximum_transport_path": 3,
+    "overflow_mass": {
+      "decimal": "1.073845598846",
+      "fraction": "29767/27720",
+      "sha256": "9f07146c19d14dca5bb9e076477af4a0b8e731c3fbcc7ad77ac3575509669346"
+    },
+    "overflow_pairs": 8,
+    "overflow_rows_sha256": "19c8e1f07dfb147728f3f0c1970f7792aad4075f5be0afccb073dd4e6c2556b1",
+    "owner_distance_fibers": 3,
+    "owner_distance_shells": 5,
+    "representative_mass": {
+      "decimal": "5.626190476190",
+      "fraction": "2363/420",
+      "sha256": "e151171468c206f9a080c302677458033bed2e4a8c587f8f31975ca4bc489a40"
+    },
+    "representatives": 13,
+    "residual_targets": 6,
+    "row_rhs": {
+      "decimal": "6.700036075036",
+      "fraction": "37145/5544",
+      "sha256": "450acf1ff33de081e02008e7d0f80ecb89ef3a43dfa4c05e81d95144df8c5e3a"
+    },
+    "row_surplus": {
+      "decimal": "0.000000000000",
+      "fraction": "0/1",
+      "sha256": "a93875fe509ac2fae0e0939d3ec71c4d978244c7398dd7185ca68c393426a5a6"
+    },
+    "terminal_basins": 13,
+    "terminal_target_mass": {
+      "decimal": "5.626190476190",
+      "fraction": "2363/420",
+      "sha256": "e151171468c206f9a080c302677458033bed2e4a8c587f8f31975ca4bc489a40"
+    }
+  },
+  "metrics": {
+    "actions": 8815,
+    "all_pairs_activated_pairs": 98467,
+    "all_pairs_backward_targets": 11021,
+    "all_pairs_direct_targets": 17630,
+    "all_pairs_families": 7123,
+    "all_pairs_overflow_pairs": 14356,
+    "all_pairs_owner_distance_fibers": 7149,
+    "all_pairs_owner_distance_shells": 10720,
+    "all_pairs_residual_targets": 55460,
+    "all_pairs_terminal_basins": 84111,
+    "root_sets": 7123,
+    "selected_edges_activated_pairs": 26445,
+    "selected_edges_backward_targets": 843,
+    "selected_edges_direct_targets": 17630,
+    "selected_edges_families": 7123,
+    "selected_edges_overflow_pairs": 47,
+    "selected_edges_owner_distance_fibers": 47,
+    "selected_edges_owner_distance_shells": 47,
+    "selected_edges_residual_targets": 7925,
+    "selected_edges_terminal_basins": 26398
+  },
+  "payload_sha256": "8b43b6bdf26e45e91f8224271058f8f0b0dc2b2d9aaaba1a600788e496984bd6",
+  "records_sha256": "1d7dd8afa23ffd2743421f1afea1527c2e441f0a37908bdbbd8c8ea10c722be7",
+  "schema": "terminal_basin_overflow_transfer_certificate_v1",
+  "verified": {
+    "all_overflow_pairs_have_sponsor_owner": true,
+    "all_owner_distance_fibers_four_ap_free": true,
+    "deterministic_transport_terminates": true,
+    "one_representative_per_terminal_basin": true,
+    "overflow_mass_equals_fiber_mass": true,
+    "terminal_basin_overflow_row": true,
+    "terminal_targets_distinct": true,
+    "transport_weight_nondecreasing": true
+  }
+}

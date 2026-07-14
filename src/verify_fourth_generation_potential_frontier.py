@@ -83,13 +83,13 @@ EXPECTED_POTENTIAL_HASHES = {
     "secondary_ratio34": "c19f9d7acea812d6f235f8026b35597c835b4b87c6c934c522165780767008d3",
 }
 EXPECTED_UP_COLLISIONS = (
-    (61, 1_584_290),
-    (62, 1_584_291),
     (122, 1_584_351),
     (123, 1_584_352),
     (147, 1_584_356),
     (152, 1_584_361),
     (153, 1_584_362),
+    (61, 1_584_290),
+    (62, 1_584_291),
 )
 EXPECTED_NUMERICAL_HASHES = {
     "terminal_values": "2ffd618af868420ee1af41c9edb6cab743d2a8f605f2e64ea3d9fcbf3da12090",
@@ -221,7 +221,7 @@ def build_certificate() -> str:
     upi_recursive = collision_details(prior_terminal_records, fourth_recursive_records, "u_p_i")
     upis_terminal = collision_details(prior_terminal_records, fourth_terminal_records, "u_p_i_source")
     upis_recursive = collision_details(prior_terminal_records, fourth_recursive_records, "u_p_i_source")
-    observed_up = tuple(sorted(tuple(detail["signature"]) for detail in up_terminal))
+    observed_up = tuple(tuple(detail["signature"]) for detail in up_terminal)
     if observed_up != EXPECTED_UP_COLLISIONS or up_recursive:
         raise AssertionError("fourth (u,p) collision set mismatch")
     if upi_terminal or upi_recursive or upis_terminal or upis_recursive:

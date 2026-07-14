@@ -1,0 +1,21 @@
+RETAINED TERMINAL SINK IDENTITY LEDGER
+
+source_second_generation_retained_family_sha256=dbb6d888c790cf5a67f2e3a6ed86400506c93baac3701f39d15d858c19b21596
+source_full_ratio_record_bytes=1287870
+source_full_ratio_record_sha256=904b0b9f8906d196ea02369cb60153341eda5a562340ba8615dbcdb769dc92e3
+terminal_family_sha256=0aa2aca9246119f832bb3b58dcc090683c41fb85ed3c47d5c73d0b398dfc672e
+
+terminal_sink_states=13
+terminal_sink_points=43
+recursive_states=14
+recursive_points=7882
+terminal_states_have_three_term_AP=False
+terminal_state_numerical_sets_pairwise_disjoint=True
+terminal_numerical_labels_disjoint_from_recursive_labels=True
+terminal_point_tokens_u_p_unique=True
+ledger_jsonl_rows=13
+ledger_schema=state_identity_plus_pointwise_root_and_immediate_provenance
+
+conclusion: the certified second-generation retained family admits an exact 13-state terminal-sink identity ledger.
+Within this recorded family, all 43 terminal numerical labels and all (u,p) sink tokens are unique and can be charged once.
+This does not prove that an identical numerical or provenance-supported sink cannot be recreated in a different branch or later generation.

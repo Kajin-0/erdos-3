@@ -1,0 +1,30 @@
+name: First-frontier terminal correction probe
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - src/probe_first_frontier_terminal_correction.py
+      - src/summarize_first_frontier_terminal_correction.py
+      - .github/workflows/first-frontier-terminal-correction-probe.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: probe-result-writers-main
+  cancel-in-progress: false
+
+jobs:
+  probe:
+    uses: ./.github/workflows/reusable-python-probe-recorder.yml
+    with:
+      schema: first_frontier_terminal_correction_probe_v1
+      probe_script: src/probe_first_frontier_terminal_correction.py
+      probe_output: data/first_frontier_terminal_correction_probe.json
+      summary_script: src/summarize_first_frontier_terminal_correction.py
+      summary_output: data/first_frontier_terminal_correction_summary.txt
+      status_output: data/first_frontier_terminal_correction_status.txt
+      commit_message: Record first-frontier terminal correction [skip ci]

@@ -1,0 +1,122 @@
+{
+  "candidates": {
+    "immediate_tail_ge4_weight_4": {
+      "coefficient": 4,
+      "decimals": {
+        "delta12": "-0.791930903244",
+        "delta23": "-0.000710242902",
+        "generation1": "1.332747656385",
+        "generation2": "0.540816753141",
+        "generation3": "0.540106510240",
+        "margin12": "0.594209188401",
+        "margin23": "0.001313278291",
+        "ratio12": "0.405790811599",
+        "ratio13": "0.405257895335",
+        "ratio23": "0.998686721709"
+      },
+      "feature": "immediate_tail_ge4_descendant_mass",
+      "ratio_brackets_millionth": {
+        "margin12": [
+          "594209/1000000",
+          "59421/100000"
+        ],
+        "margin23": [
+          "1313/1000000",
+          "657/500000"
+        ],
+        "ratio12": [
+          "40579/100000",
+          "405791/1000000"
+        ],
+        "ratio13": [
+          "405257/1000000",
+          "202629/500000"
+        ],
+        "ratio23": [
+          "499343/500000",
+          "998687/1000000"
+        ]
+      },
+      "sha256": {
+        "delta12": "864095dca241e77cfe900749a7e26aec2f71a26e3166c941b8964d3eeb0e06de",
+        "delta23": "073bbfd3af2a0de6e4b4fe5258f3cb873e850d7c6909e546fa4b7c5df9c870d7",
+        "generation1": "0c07ecf90ec48c2cfe871c6fffda3de55eeee0a3f47df4c719991cae8fbaeba8",
+        "generation2": "a4f69bb95c5cc52ba2bda5e5ab3d4cb048e0b359fad091f46a91828afdbd8b02",
+        "generation3": "fc4313c41049a997bfc59ed34b38b1fd6449c5597cc920242b093356882a2899",
+        "margin12": "b3dff480e89443e905c69f40193efa296ee2e875af7e5f03dcccc9a7ff9b2bbe",
+        "margin23": "6b0f73dda1c41dbd43abd1673e5537c68da8f66a98066a378a013dbb06158e09",
+        "ratio12": "83ee7dcb725ba6fdaa12d1e3256d26e8f458db05b5603257cc681ebb3afabe54",
+        "ratio13": "367697aa64f0853913fe877ba6574efa72582b9589b6eff878ec04d4c3c538ad",
+        "ratio23": "4308e21de477e431ca7925c04129c1a89cbc9166b68e0422e84088a0b5f1559e"
+      },
+      "strictly_decreasing": true
+    },
+    "root_repeat_descendant_weight_2": {
+      "coefficient": 2,
+      "decimals": {
+        "delta12": "-0.228367478374",
+        "delta23": "-0.036512958434",
+        "generation1": "0.831320413049",
+        "generation2": "0.602952934675",
+        "generation3": "0.566439976241",
+        "margin12": "0.274704524019",
+        "margin23": "0.060556896458",
+        "ratio12": "0.725295475981",
+        "ratio13": "0.681373832941",
+        "ratio23": "0.939443103542"
+      },
+      "feature": "root_repeat_descendant_mass",
+      "ratio_brackets_millionth": {
+        "margin12": [
+          "17169/62500",
+          "54941/200000"
+        ],
+        "margin23": [
+          "15139/250000",
+          "60557/1000000"
+        ],
+        "ratio12": [
+          "145059/200000",
+          "45331/62500"
+        ],
+        "ratio13": [
+          "681373/1000000",
+          "340687/500000"
+        ],
+        "ratio23": [
+          "939443/1000000",
+          "234861/250000"
+        ]
+      },
+      "sha256": {
+        "delta12": "77bf8bac2c90b7f46116774b32bef5562936640f5732be30b9a9f83794d3e17b",
+        "delta23": "0e32ac13269c4d300cd60c1e90617c0d19becec6a70a98d4e05a7b5d2c9de9c9",
+        "generation1": "1951c62fa974c03d3a147308d1cee742fc54ae4bc3d022b31d5be9ee7306fd1b",
+        "generation2": "11145c7be0217c0949a12d851df828fd46fdeecad63060ce95dc6adc1e548f01",
+        "generation3": "6a9cf1cd77f7e61014c7e5b10534e6edbeaecc92376d760189c39ce1608caf1f",
+        "margin12": "116b7f5fff2136fc5c6a43c4c96cce5cc91d5f7516ca44341049a51b33e09641",
+        "margin23": "755c220ede3cc45f554f1edb28706568fd99b5620159c655b96d4fa562beb9b1",
+        "ratio12": "12ea249dde6274be7aa5d50eb0a0d358cafe3736b117134b91181569de90a4ca",
+        "ratio13": "7ef1a268f1d3c45e1eb61fd86e1df9c58835b6af45b25845a6b702a558a96fd3",
+        "ratio23": "041db455062715d6c7c6dc401dff43b9798b8886a2fc94b090d951c7aacec80c"
+      },
+      "strictly_decreasing": true
+    }
+  },
+  "family_counts": {
+    "generation1_retained": {
+      "points": 11753,
+      "states": 21
+    },
+    "generation2_recursive": {
+      "points": 7882,
+      "states": 14
+    },
+    "generation3_recursive": {
+      "points": 4789,
+      "states": 14
+    }
+  },
+  "probe_payload_sha256": "0ff39e01658edb1493f67b23cafa35a3b6fde6ee96699513218180e4bc622d09",
+  "schema": "candidate_generation_potentials_probe_v1"
+}

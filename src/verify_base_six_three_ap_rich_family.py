@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from fractions import Fraction
-from itertools import combinations, product
+from itertools import product
 import hashlib
 import json
 import sys
@@ -105,7 +105,11 @@ def main() -> int:
 
         lower_load = Fraction(5 * (4**n - 3**n), 6**n)
         if not explicit_load > lower_load:
-            raise AssertionError("strict weighted-load lower bound failed")
+            raise AssertionError("strict aggregate weighted-load bound failed")
+
+        unit_step_count = 3 ** (n - 1)
+        if total_load < unit_step_count:
+            raise AssertionError("unit-step progression load missing")
 
         base = least_power_two_at_least(6**n)
         shifted = frozenset(base + value for value in raw)
@@ -119,9 +123,12 @@ def main() -> int:
         if shifted_harmonic > harmonic_upper:
             raise AssertionError("harmonic upper bound failed")
         ratio = total_load / shifted_harmonic
-        ratio_lower = Fraction(5 * (4**n - 3**n), 3**n)
-        if not ratio > ratio_lower:
-            raise AssertionError("load/harmonic ratio lower bound failed")
+        aggregate_ratio_lower = Fraction(5 * (4**n - 3**n), 3**n)
+        linear_scale_ratio_lower = Fraction(base, 3)
+        if not ratio > aggregate_ratio_lower:
+            raise AssertionError("aggregate load/harmonic lower bound failed")
+        if ratio < linear_scale_ratio_lower:
+            raise AssertionError("linear-scale load/harmonic lower bound failed")
 
         rows.append(
             {
@@ -130,29 +137,36 @@ def main() -> int:
                 "maximum": max(raw),
                 "dyadic_base": base,
                 "four_ap_free": True,
+                "unit_step_three_ap_count": unit_step_count,
                 "explicit_three_ap_count": explicit_count,
                 "all_three_ap_count": all_count,
                 "explicit_weighted_load": fraction_record(explicit_load),
                 "total_weighted_load": fraction_record(total_load),
-                "strict_load_lower_bound": fraction_record(lower_load),
+                "strict_aggregate_load_lower_bound": fraction_record(lower_load),
+                "unit_step_load_lower_bound": fraction_record(Fraction(unit_step_count)),
                 "shifted_harmonic_mass": fraction_record(shifted_harmonic),
                 "harmonic_upper_bound": fraction_record(harmonic_upper),
                 "load_over_harmonic": fraction_record(ratio),
-                "strict_ratio_lower_bound": fraction_record(ratio_lower),
+                "strict_aggregate_ratio_lower_bound": fraction_record(
+                    aggregate_ratio_lower
+                ),
+                "linear_scale_ratio_lower_bound": fraction_record(
+                    linear_scale_ratio_lower
+                ),
                 "family_sha256": canonical_hash(sorted(raw)),
             }
         )
 
     output = {
-        "schema": "base_six_three_ap_rich_family_certificate_v1",
+        "schema": "base_six_three_ap_rich_family_certificate_v2",
         "max_n": MAX_N,
         "rows": rows,
         "verified": {
             "all_digit_families_four_ap_free": True,
             "explicit_three_ap_count_equals_4n_minus_3n": True,
-            "explicit_load_exceeds_five_times_count_over_6n": True,
+            "unit_step_three_ap_count_equals_3n_minus_1": True,
             "standard_dyadic_placement_valid": True,
-            "load_over_harmonic_lower_bound_verified": True,
+            "load_over_harmonic_at_least_dyadic_base_over_three": True,
         },
     }
     output["payload_sha256"] = canonical_hash(output)

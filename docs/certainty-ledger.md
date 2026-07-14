@@ -90,16 +90,19 @@ Statuses marked **exact finite** are computational statements for recorded objec
 | CL-071 | The 27 second-generation retained states split into 13 terminal states with 43 labels and 14 recursive states with 7882 labels. Terminal states carry `86.2%`–`86.3%` of second retained mass. Recursive mass is `93.7%`–`93.8%` of first retained mass, giving `6.2%`–`6.3%` contraction. | Exact finite terminal decomposition and recursive-contraction theorem. |
 | CL-072 | The 13 terminal states admit an exact identity export anchored to the certified retained-family and 7925-point provenance hashes. Their 43 numerical labels are pairwise unique, disjoint from recursive retained labels, and their 43 `(u,p)` point tokens are unique within the recorded family. | Exact finite terminal-sink identity theorem. |
 | CL-073 | For any fixed terminal-token map on a finite or locally finite rooted tree, assigning each token to its first node in a deterministic total order gives pairwise disjoint first-appearance ledgers whose weighted sum equals the weighted global token union. | Elementary whole-tree accounting lemma; token soundness and union bound remain open. |
+| CL-074 | Propagating only the 14 recursive second-generation states and reapplying the same global retained quotient produces a unique point-disjoint third family with 32 states and 4899 points: 18 terminal states with 110 points and 14 recursive states with 4789 points. Recursive third-generation mass is `2.011553`–`2.011554` times second-generation recursive mass and `1.886248`–`1.886249` times first retained mass. The `31/500` two-generation Bellman credit therefore does not iterate under this fixed policy and quotient. | Exact finite third-generation recursive-expansion and Bellman no-go theorem. |
+| CL-075 | The 43 second-generation terminal `(u,p)` tokens have no collision with first-generation raw or retained tokens, but `(60,1354490)` recurs as a third-generation terminal sink. Both occurrences are step-5 middle fibers; immediate provenance differs (`2810` versus `440`) and separates the collision. Numerical identity is much coarser: 28 labels and seven complete terminal numerical states recur. | Exact finite cross-generation token-collision and signature-refinement theorem. |
 
 Primary latest references:
 
+- `docs/third-generation-recursive-frontier.md`;
+- `docs/two-generation-recursive-bellman-row.md`;
 - `docs/retained-terminal-sink-identity-ledger.md`;
 - `docs/terminal-sink-first-appearance-ledger.md`;
 - `docs/retained-terminal-recursive-split.md`;
 - `docs/retained-provenance-scale-profile.md`;
-- `docs/retained-provenance-second-generation.md`;
-- `src/export_retained_terminal_sink_ledger.py`;
-- `src/verify_retained_terminal_split.py`.
+- `src/verify_third_generation_recursive_frontier.py`;
+- `src/export_retained_terminal_sink_ledger.py`.
 
 ---
 
@@ -131,46 +134,51 @@ Do not use without materially new hypotheses:
 22. lower raw harmonic occurrence mass as Bellman contraction;
 23. one-generation retention as a bound on indefinite reuse;
 24. maximum provenance multiplicity three as contraction;
-25. unit depth/log charge as repayment for total second-generation mass;
+25. unit depth/log charge as repayment for total retained mass;
 26. the full `6.828`–`6.829` ratio as recursive load;
 27. discarding terminal mass instead of charging it once;
 28. within-family terminal-token uniqueness as global uniqueness;
-29. `(u,p)` as globally collision-sound without proof;
-30. the `6.2%`–`6.3%` recursive contraction as universal;
+29. `(u,p)` as a collision-sound cross-generation terminal token;
+30. source type and source step as sufficient collision refinement;
 31. first-appearance deduplication as a bound on token-union mass;
-32. maximum-harmonic local retention as globally optimal;
-33. policy-LP feasibility as branching Bellman-LP feasibility;
-34. the tested policy family as globally optimal;
-35. random sampling as a finite certificate;
-36. the rejected depth-ten anchor reduction.
+32. the `6.2%`–`6.3%` recursive contraction or `31/500` credit as an iterating invariant;
+33. the third-generation expansion as universal over all policies or quotients;
+34. immediate provenance as globally sufficient after one finite collision test;
+35. maximum-harmonic local retention as globally optimal;
+36. policy-LP feasibility as branching Bellman-LP feasibility;
+37. the tested policy family as globally optimal;
+38. random sampling as a finite certificate;
+39. the rejected depth-ten anchor reduction.
 
 ---
 
-# Open bottleneck OB-001: terminal-token soundness and recursive propagation
+# Open bottleneck OB-001: generation-aware retained potential
 
 The adversarial local-optimum transition now has:
 
 - a legitimate point-disjoint retained-child quotient;
-- an exact two-generation terminal/recursive split;
-- `6.2%`–`6.3%` contraction on the recursively continuing branch;
-- a complete 43-point terminal identity ledger;
-- and an exact first-appearance bookkeeping lemma for any fixed token map.
+- exact terminal/recursive partitions at generations two and three;
+- a second-generation recursive contraction of `6.2%`–`6.3%`;
+- a third-generation recursive expansion of `101.1553%`–`101.1554%` over the preceding recursive mass;
+- a complete terminal identity ledger;
+- an exact first-appearance bookkeeping lemma;
+- and an explicit failure of `(u,p)` repaired locally by immediate provenance.
 
-The next theorem must determine whether `(u,p)` is collision-sound across branches and generations, or whether an affine/path signature is required. After choosing the correct token resolution, the weighted first-appearance token union must be bounded while only the 14 recursive states are propagated.
+The next theorem must construct or refute a nonnegative generation-aware potential coupling recursive harmonic mass, retained scale/generation, root provenance, immediate or path provenance, first-appearance terminal mass, and obstruction credit.
 
-The target is
+The target remains
 
 ```math
 \Delta(S)
 +
-\operatorname{TermSink}_{\rm first}(S)
+\mathrm{TermSink}_{\mathrm{first}}(S)
 +
-\sum_{S'\in\operatorname{RecChild}_\pi(S)}
-\operatorname{RecPack}(S')
+\sum_{S'\in\mathrm{RecChild}_\pi(S)}
+\mathrm{RecPack}(S')
 \le
-\operatorname{RecPack}(S)
+\mathrm{RecPack}(S)
 +
-\Phi_{\rm obs}(S)
+\Phi_{\mathrm{obs}}(S)
 +
-\operatorname{controlled\ error}.
+\mathrm{controlled\ error}.
 ```

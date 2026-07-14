@@ -1,0 +1,67 @@
+name: Fifth-generation exact probe
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - src/probe_fifth_generation_feature_frontier.py
+      - .github/workflows/fifth-generation-probe.yml
+
+permissions:
+  contents: write
+
+jobs:
+  probe:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Run exact fifth-generation probe
+        shell: bash
+        run: |
+          set +e
+          python3 src/run_exact_python.py \
+            src/probe_fifth_generation_feature_frontier.py \
+            > /tmp/fifth_generation_probe.json \
+            2> /tmp/fifth_generation_probe.err
+          status=$?
+          {
+            echo "exit_status=$status"
+            echo "commit=${GITHUB_SHA}"
+            echo "--- stderr ---"
+            cat /tmp/fifth_generation_probe.err
+          } > data/fifth_generation_probe_status.txt
+          if [[ "$status" == "0" ]]; then
+            cp /tmp/fifth_generation_probe.json \
+              data/fifth_generation_feature_frontier_probe.json
+          else
+            rm -f data/fifth_generation_feature_frontier_probe.json
+          fi
+          exit 0
+
+      - name: Commit deterministic fifth-generation result
+        if: always()
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if [[ ! -f data/fifth_generation_probe_status.txt ]]; then
+            {
+              echo "phase=workflow_failed_before_probe_status"
+              echo "commit=${GITHUB_SHA}"
+            } > data/fifth_generation_probe_status.txt
+          fi
+          git add data/fifth_generation_probe_status.txt
+          git add -A data/fifth_generation_feature_frontier_probe.json
+          if git diff --cached --quiet; then
+            echo "No fifth-generation probe output change"
+            exit 0
+          fi
+          git commit -m "Record fifth-generation exact probe result [skip ci]"
+          git push

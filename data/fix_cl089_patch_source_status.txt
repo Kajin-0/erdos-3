@@ -1,0 +1,10 @@
+schema=fix_cl089_patch_source_status_v1
+compile_fixer_exit_status=0
+repair_exit_status=0
+compile_patch_exit_status=0
+first_patch_exit_status=0
+second_patch_exit_status=0
+idempotence_exit_status=0
+source_commit=f4a5f3c11ab39fc101d1fc8af7dde8d7bfdec6f4
+workflow_run_id=29375185502
+--- stderr ---

@@ -141,7 +141,7 @@ The earlier construction propagated all twenty-one first states, including six t
 
 These historical families remain point-disjoint exact finite test objects, and all theorems stated specifically about their recorded transitions remain valid. They must not be interpreted as the terminal-stopped recursive tree or spliced onto either corrected second frontier."""
 
-OLD_MASS = """Let `H_g^rec` denote recursively continuing retained harmonic mass. The four recorded ratios are:
+OLD_MASS = r"""Let `H_g^rec` denote recursively continuing retained harmonic mass. The four recorded ratios are:
 
 ```math
 0.937
@@ -181,7 +181,7 @@ Raw recursive harmonic mass is not an iterating Bellman potential.
 
 Terminal output must be carried separately through a first-appearance ledger. It cannot be discarded, and it must not be counted as persistent recursive debt."""
 
-NEW_MASS = """Let `H_1^rec` denote the mass of the fifteen genuinely recursive first-frontier states. The corrected first transition satisfies
+NEW_MASS = r"""Let `H_1^rec` denote the mass of the fifteen genuinely recursive first-frontier states. The corrected first transition satisfies
 
 ```math
 \frac{H_{2,\rm ordinary}^{\rm rec}}{H_1^{\rm rec}}
@@ -227,7 +227,7 @@ NEW_TARGETS = """## 9. Approved next targets
 
 The desired whole-tree inequality must combine affine pair union, full-color edge capacity, terminal first appearance, and bounded completion/transport reuse. Another fitted feature or another retained generation is not an approved substitute."""
 
-README_ACTIVE = """A rigorous finite retained quotient exists, but terminal stopping changes its active first transition. The first family contains six terminal states carrying `44.4642947826%` of its mass and fifteen recursive states. Recomputing from only those recursive parents gives a corrected ordinary second recursive ratio `2.624517171606...`; residual-sponsor refinement lowers it to `2.030802800232...`.
+README_ACTIVE = r"""A rigorous finite retained quotient exists, but terminal stopping changes its active first transition. The first family contains six terminal states carrying `44.4642947826%` of its mass and fifteen recursive states. Recomputing from only those recursive parents gives a corrected ordinary second recursive ratio `2.624517171606...`; residual-sponsor refinement lowers it to `2.030802800232...`.
 
 The historical second-to-fifth retained chain remains an exact finite diagnostic of the old all-parent construction. It is not the continuation of the correctly terminal-stopped tree.
 
@@ -330,7 +330,12 @@ def patch_program() -> None:
             raise AssertionError("missing current-program insertion marker")
         text = text.replace(marker, CURRENT_INSERT + marker, 1)
     text = replace_once(text, OLD_TABLE, NEW_TABLE, "retained table")
-    text = replace_once(text, OLD_MASS, NEW_MASS, "recursive mass section")
+    text = replace_heading_section(
+        text,
+        "## 3. Recursive and terminal mass",
+        "## 4. Terminal identities",
+        "## 3. Recursive and terminal mass\n\n" + NEW_MASS,
+    )
     text = replace_heading_section(
         text,
         "## 9. Approved next targets",
@@ -358,11 +363,14 @@ def patch_readme() -> None:
     if marker not in text:
         raise AssertionError("missing README claim marker")
     text = text.replace(marker, marker + "\n".join(items) + "\n", 1)
-    start = text.find("A rigorous finite retained quotient now exists")
-    end = text.find("## Start here", start)
+    active_heading = "## Active theorem"
+    next_heading = "## Start here"
+    start = text.find(active_heading)
+    end = text.find(next_heading, start + len(active_heading))
     if start < 0 or end < 0:
-        raise AssertionError("cannot locate README active theorem")
-    text = text[:start] + README_ACTIVE.rstrip() + "\n\n" + text[end:]
+        raise AssertionError("cannot locate README active theorem section")
+    active_block = active_heading + "\n\n" + README_ACTIVE.rstrip()
+    text = text[:start] + active_block + "\n\n" + text[end:]
     link_marker = "- [`docs/residual-sponsor-backbone-refinement.md`](docs/residual-sponsor-backbone-refinement.md) — symbolic and exact finite sponsor-core refinement of the minimum backbone.\n"
     links = (
         "- [`docs/terminal-parent-stopping-lemma.md`](docs/terminal-parent-stopping-lemma.md) — structural terminal stopping and corrected first-frontier semantics.\n"

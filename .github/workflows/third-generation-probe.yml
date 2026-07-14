@@ -7,6 +7,7 @@ on:
     paths:
       - src/probe_third_generation_recursive_frontier.py
       - src/summarize_third_generation_probe.py
+      - src/probe_terminal_token_collision_signature.py
       - .github/workflows/third-generation-probe.yml
 
 permissions:
@@ -23,7 +24,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Run exact third-generation probe
+      - name: Run exact third-generation probes
         shell: bash
         run: |
           set +e
@@ -33,7 +34,9 @@ jobs:
             2> /tmp/third_generation_probe.err
           probe_status=$?
           summary_status=not_run
+          signature_status=not_run
           : > /tmp/third_generation_summary.err
+          : > /tmp/terminal_signature.err
           if [[ "$probe_status" == "0" ]]; then
             cp /tmp/third_generation_probe.json \
               data/third_generation_recursive_frontier_probe.json
@@ -48,18 +51,33 @@ jobs:
             else
               rm -f data/third_generation_recursive_frontier_summary.json
             fi
+            python3 src/run_exact_python.py \
+              src/probe_terminal_token_collision_signature.py \
+              > /tmp/terminal_signature.json \
+              2> /tmp/terminal_signature.err
+            signature_status=$?
+            if [[ "$signature_status" == "0" ]]; then
+              cp /tmp/terminal_signature.json \
+                data/terminal_token_collision_signature_probe.json
+            else
+              rm -f data/terminal_token_collision_signature_probe.json
+            fi
           else
             rm -f data/third_generation_recursive_frontier_probe.json
             rm -f data/third_generation_recursive_frontier_summary.json
+            rm -f data/terminal_token_collision_signature_probe.json
           fi
           {
             echo "probe_exit_status=$probe_status"
             echo "summary_exit_status=$summary_status"
+            echo "signature_exit_status=$signature_status"
             echo "commit=${GITHUB_SHA}"
             echo "--- probe stderr ---"
             cat /tmp/third_generation_probe.err
             echo "--- summary stderr ---"
             cat /tmp/third_generation_summary.err
+            echo "--- signature stderr ---"
+            cat /tmp/terminal_signature.err
           } > data/third_generation_probe_status.txt
           exit 0
 
@@ -69,13 +87,9 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/third_generation_probe_status.txt
-          if [[ -f data/third_generation_recursive_frontier_probe.json ]]; then
-            git add data/third_generation_recursive_frontier_probe.json
-          fi
+          git add -A data/third_generation_recursive_frontier_probe.json
           git add -A data/third_generation_recursive_frontier_summary.json
-          if [[ -f data/third_generation_recursive_frontier_summary.json ]]; then
-            git add data/third_generation_recursive_frontier_summary.json
-          fi
+          git add -A data/terminal_token_collision_signature_probe.json
           if git diff --cached --quiet; then
             echo "No probe output change"
             exit 0

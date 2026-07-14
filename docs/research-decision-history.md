@@ -400,6 +400,37 @@ Every activated sponsor pair has a monotone deletion-rank transport to a direct 
 
 The unresolved terms are transport collisions, parent-external ambient completions, genuine ambient holes, and reuse of edge capacity across retained branches.
 
+### Full-edge collision and unbounded reuse
+
+Full-edge branching closes the local edge-production coefficient: occurrence
+mass has factor `5`, and current pair-union mass has factor at least `5/2`.
+Mandatory shelling makes every latent-pair lineage finite because normalized
+gap `D/M` at least doubles.
+
+Cross-branch reuse is nevertheless unbounded. A parametric three-layer family
+produces arbitrarily many recursive side shells sharing one root progression.
+The `m=4` certificate gives four copies of all three common latent pairs in one
+transition.
+
+Fixing one transported parent witness reveals the exact collision geometry:
+all preimage child witnesses are three affine translates of their reference
+set. The correct reserve is therefore weighted three-translate exposure, not
+a uniform overlap constant.
+
+### Scale-critical three-AP transfer
+
+Completion transport preserves three-AP load after the exact type weights
+`1/2,1,2`. Dyadic shell scale then allocates one first preimage of each type
+with fractions `1/2,1/4,1/4` of one parent target. The exponent-one
+scale-weighted row is exactly critical; all higher scale moments contract
+before collision excess.
+
+Unbounded collision multiplicity is converted to a lower-scale four-AP-free
+reference-difference set. Each extra branch has an exact completion rectangle
+and aspect ratio. The unresolved object is no longer pair activation itself,
+but reuse of reference-gap and rectangle tokens across different repeated root
+configurations.
+
 **Decisions:**
 
 - current-generation multiplicity is not persistent reserve;
@@ -477,26 +508,31 @@ Do not restart these routes without explicitly identifying which obstruction is 
 
 ## 12. Active closing target
 
-The active transfer architecture is
+The active scalar row is
 
-```text
-activated affine pair
--> monotone sponsor transport
--> distinct terminal pair target + collision reuse
--> full-color progression-edge capacity
--> external ambient completion or genuine-hole obstruction export.
+```math
+\Psi_1(\text{child witnesses})
+\le
+N\mathcal L_3(P)
++
+Y(P),
 ```
 
-The immediate work is to:
+where first appearances are paid by exact role capacities `1/2,1/4,1/4` and
+`Y(P)` is the scale-critical collision excess.
 
-1. classify direct, backward, and residual transport targets on the refined certified fourth-to-fifth frontier;
-2. measure target multiplicity and first-appearance collision mass;
-3. distinguish in-parent, ambient-external, and genuinely absent completions;
-4. pack completed targets into side, doubled-side, and middle edge capacities;
-5. connect genuine holes to maximal four-AP-free completion witnesses and rectangle transport;
-6. use the corrected residual-sponsor second frontier only as a finite obstruction test, not as an invitation to propagate another generation.
+Every term of `Y(P)` has two exact exports:
 
-The historical second-to-fifth chain is retained as a diagnostic object. The active recursive tree starts from fifteen first-frontier parents. Generation six and a corrected third frontier remain blocked until a state-independent bounded-reuse inequality is fixed.
+```text
+lower-scale four-AP-free reference-difference reserve;
+completion rectangle with aspect ratio delta/D.
+```
+
+The immediate task is a first-appearance theorem for those exported tokens,
+including unused shell slack, terminal release, and ambient
+external-completion/genuine-hole separation. CL-087 must be audited before its
+finite values are used. Corrected-third-frontier and generation-six
+propagation remain blocked.
 
 ---
 

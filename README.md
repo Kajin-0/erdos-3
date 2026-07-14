@@ -73,7 +73,7 @@ The local production theorem has also strengthened. Retaining all three middle c
 
 The side token `d`, doubled side reserve `2d`, and middle token `d` form an exact weight-preserving dictionary for the three pair edges of the progression. Completed in-parent target pairs therefore pack into explicit scale-descending edge capacity.
 
-The active theorem is now a bounded-reuse transfer law for these capacities. It must control sponsor-pair transport collisions, ambient completion roots outside the current lineage, genuine ambient holes with four-AP witnesses, terminal first appearance, and dyadic boundary transport. Generation six and propagation of the corrected second frontier remain blocked until that law is specified.
+Uniform bounded reuse is false, but a scale-critical transfer row now exists. First side, middle, and doubled preimages use `1/2`, `1/4`, and `1/4` of one parent target; every extra preimage becomes a lower-scale reference-gap and rectangle-aspect token. The active theorem is global first-appearance control of this collision excess. Generation six and propagation of the corrected second frontier remain blocked.
 
 ## Start here
 

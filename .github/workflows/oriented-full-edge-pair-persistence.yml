@@ -8,6 +8,7 @@ on:
     paths:
       - src/probe_oriented_full_edge_pair_persistence.py
       - src/probe_oriented_full_edge_pair_persistence_v2.py
+      - src/probe_oriented_full_edge_pair_persistence_v3.py
       - src/summarize_oriented_full_edge_pair_persistence.py
       - .github/workflows/oriented-full-edge-pair-persistence.yml
 
@@ -22,8 +23,8 @@ jobs:
   verify:
     uses: ./.github/workflows/reusable-python-probe-recorder.yml
     with:
-      schema: oriented_full_edge_pair_persistence_probe_v2
-      probe_script: src/probe_oriented_full_edge_pair_persistence_v2.py
+      schema: oriented_full_edge_pair_persistence_probe_v3
+      probe_script: src/probe_oriented_full_edge_pair_persistence_v3.py
       probe_output: data/oriented_full_edge_pair_persistence_probe.json
       summary_script: src/summarize_oriented_full_edge_pair_persistence.py
       summary_output: data/oriented_full_edge_pair_persistence_summary.txt

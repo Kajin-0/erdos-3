@@ -7,7 +7,6 @@ on:
       - main
     paths:
       - src/patch_cl089_cl092_frontier.py
-      - src/run_cl089_cl092_frontier_patch.py
       - .github/workflows/record-cl089-cl092-frontier.yml
 
 permissions:
@@ -33,16 +32,14 @@ jobs:
           stderr_file="${RUNNER_TEMP}/cl089_cl092_frontier.err"
           : > "$stderr_file"
 
-          python3 -m py_compile \
-            src/patch_cl089_cl092_frontier.py \
-            src/run_cl089_cl092_frontier_patch.py \
+          python3 -W error -m py_compile src/patch_cl089_cl092_frontier.py \
             2>"$stderr_file"
           compile_status=$?
           patch_status=not_run
           idempotence_status=not_run
 
           if [[ "$compile_status" == "0" ]]; then
-            python3 src/run_cl089_cl092_frontier_patch.py \
+            python3 src/patch_cl089_cl092_frontier.py \
               2>>"$stderr_file"
             patch_status=$?
           fi
@@ -54,7 +51,7 @@ jobs:
               docs/current-proof-program.md \
               docs/research-decision-history.md \
               > "${RUNNER_TEMP}/cl089_cl092_first.sha256"
-            python3 src/run_cl089_cl092_frontier_patch.py \
+            python3 src/patch_cl089_cl092_frontier.py \
               2>>"$stderr_file"
             second_status=$?
             if [[ "$second_status" == "0" ]]; then
@@ -75,7 +72,7 @@ jobs:
           fi
 
           {
-            echo "schema=cl089_cl092_frontier_status_v2"
+            echo "schema=cl089_cl092_frontier_status_v3"
             echo "compile_exit_status=$compile_status"
             echo "patch_exit_status=$patch_status"
             echo "idempotence_exit_status=$idempotence_status"
@@ -130,7 +127,6 @@ jobs:
           git fetch origin main
           if ! git diff --quiet "$GITHUB_SHA" origin/main -- \
               src/patch_cl089_cl092_frontier.py \
-              src/run_cl089_cl092_frontier_patch.py \
               .github/workflows/record-cl089-cl092-frontier.yml; then
             echo "error: corrected-frontier patch source changed; refusing stale documentation" >&2
             exit 1

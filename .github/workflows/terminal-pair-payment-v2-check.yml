@@ -7,10 +7,12 @@ on:
       - 'src/probe_terminal_pair_payment_frontier_v2.py'
       - 'src/probe_sponsor_pair_transport_frontier.py'
       - 'src/probe_residual_sponsor_backbone_split.py'
+      - 'src/probe_s7_hole_support_closure.py'
       - 'src/verify_sponsor_pair_transport_small_box.py'
       - 'src/verify_canonical_hole_witness_pair_small_box.py'
       - 'src/export_s7_terminal_completion_requests.py'
       - 'src/export_s7_incremental_support_target_requests.py'
+      - 'src/export_s7_full_saturation_map.cpp'
       - 'src/classify_s7_terminal_completion_saturation.cpp'
       - 'src/summarize_s7_edge_unresolved_completion_saturation.py'
       - 'src/summarize_s7_hole_support_first_appearance.py'
@@ -35,6 +37,7 @@ jobs:
         run: |
           python3 -m py_compile \
             src/probe_terminal_pair_payment_frontier_v2.py \
+            src/probe_s7_hole_support_closure.py \
             src/verify_sponsor_pair_transport_small_box.py \
             src/verify_canonical_hole_witness_pair_small_box.py \
             src/export_s7_terminal_completion_requests.py \
@@ -46,6 +49,9 @@ jobs:
           g++ -O3 -std=c++17 \
             src/classify_s7_terminal_completion_saturation.cpp \
             -o classify_s7_terminal_completion_saturation
+          g++ -O3 -std=c++17 \
+            src/export_s7_full_saturation_map.cpp \
+            -o export_s7_full_saturation_map
 
       - name: Run independent small-box verifiers
         run: |
@@ -99,6 +105,17 @@ jobs:
             s7_incremental_support_target_payment_summary.json \
             > s7_incremental_support_target_payment_stdout.json
 
+      - name: Run fixed-frontier support closure
+        run: |
+          ./export_s7_full_saturation_map \
+            > s7_full_saturation_map.tsv \
+            2> s7_full_saturation_map_status.txt
+          python3 src/probe_s7_hole_support_closure.py \
+            terminal_pair_payment_frontier_v2.json \
+            s7_full_saturation_map.tsv \
+            s7_hole_support_closure.json \
+            > s7_hole_support_closure_stdout.json
+
       - name: Upload terminal-payment frontier
         if: always()
         uses: actions/upload-artifact@v4
@@ -122,3 +139,6 @@ jobs:
             s7_incremental_support_completion_classification.tsv
             s7_incremental_support_target_payment_summary.json
             s7_incremental_support_target_payment_stdout.json
+            s7_full_saturation_map_status.txt
+            s7_hole_support_closure.json
+            s7_hole_support_closure_stdout.json

@@ -84,7 +84,8 @@ run_check s2_zero \
 
 python3 "$ROOT/src/verify_sponsor_pair_transport_small_box.py"
 python3 "$ROOT/src/verify_canonical_hole_witness_pair_small_box.py"
+python3 "$ROOT/src/verify_completion_step_fiber_light_heavy.py"
 python3 "$ROOT/src/certified_contaminated_states.py" > /dev/null
 python3 "$ROOT/src/branching_reserve_lp.py" self-test
 
-echo "verified: genuinely lightweight exact certificates, independent sponsor-pair and hole-witness reuse checks, and LP harness"
+echo "verified: lightweight exact certificates, independent pair, hole-witness, and completion-fiber transfer checks, and LP harness"

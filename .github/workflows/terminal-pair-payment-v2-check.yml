@@ -13,6 +13,7 @@ on:
       - 'src/classify_s7_terminal_completion_saturation.cpp'
       - 'src/summarize_s7_edge_unresolved_completion_saturation.py'
       - 'src/summarize_s7_hole_support_first_appearance.py'
+      - 'src/summarize_s7_new_hole_support_transport.py'
       - 'src/verify_retained_provenance_second_generation.py'
       - 'src/verify_retained_provenance_scale_profile.py'
       - 'src/probe_third_generation_recursive_frontier.py'
@@ -36,7 +37,8 @@ jobs:
             src/verify_canonical_hole_witness_pair_small_box.py \
             src/export_s7_terminal_completion_requests.py \
             src/summarize_s7_edge_unresolved_completion_saturation.py \
-            src/summarize_s7_hole_support_first_appearance.py
+            src/summarize_s7_hole_support_first_appearance.py \
+            src/summarize_s7_new_hole_support_transport.py
           g++ -O3 -std=c++17 \
             src/classify_s7_terminal_completion_saturation.cpp \
             -o classify_s7_terminal_completion_saturation
@@ -71,6 +73,11 @@ jobs:
             s7_terminal_completion_classification.tsv \
             s7_hole_support_first_appearance_profile.json \
             > s7_hole_support_first_appearance_stdout.json
+          python3 src/summarize_s7_new_hole_support_transport.py \
+            terminal_pair_payment_frontier_v2.json \
+            s7_terminal_completion_classification.tsv \
+            s7_new_hole_support_transport_profile.json \
+            > s7_new_hole_support_transport_stdout.json
 
       - name: Upload terminal-payment frontier
         if: always()
@@ -87,3 +94,5 @@ jobs:
             s7_edge_unresolved_completion_saturation_stdout.json
             s7_hole_support_first_appearance_profile.json
             s7_hole_support_first_appearance_stdout.json
+            s7_new_hole_support_transport_profile.json
+            s7_new_hole_support_transport_stdout.json

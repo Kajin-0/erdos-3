@@ -14,6 +14,7 @@ ROOT_TRANSFER_SHA256="460bbf1a5b21a662353041b8e576fc8809a4823553fa63cc8ae7dc9ce4
 PAIR_ENERGY_SHA256="8cbda92325c346cff0e203350f55aaedc976d3995f5b4c734c3f431775bd3d2f"
 PAIR_OWNERSHIP_SHA256="d60a49d35355be9cc078bd81eb1013a6af27cc9096e083334081024ce4781b92"
 RESIDUAL_SPONSOR_SHA256="28266cae2b603b7a2490d547ef96d429e06e31cba4706ccc1f0fe0dbdc7bc986"
+SPONSOR_TRANSPORT_SHA256="d63dd46d02e7539c31f04bac6a393a585d69f25730eabe5ff4942ae1c4b5125d"
 mkdir -p "$WORK"
 
 verify_certificate() {
@@ -115,5 +116,11 @@ verify_certificate \
   "$WORK/residual_sponsor_backbone_split_certificate.txt" \
   "$RESIDUAL_SPONSOR_SHA256" \
   "residual_sponsor_backbone_split"
+verify_certificate \
+  "verify_sponsor_pair_transport_frontier.py" \
+  "sponsor_pair_transport_frontier_certificate_2026-07-14.txt" \
+  "$WORK/sponsor_pair_transport_frontier_certificate.txt" \
+  "$SPONSOR_TRANSPORT_SHA256" \
+  "sponsor_pair_transport_frontier"
 
-echo "verified: terminal identities, recursive frontiers through generation five, local policy sensitivity, root-lineage transfer, affine pair-energy Bellman contraction, exact pair-resource ownership, and residual-sponsor backbone refinement"
+echo "verified: terminal identities, recursive frontiers through generation five, local policy sensitivity, root-lineage transfer, affine pair-energy Bellman contraction, exact pair-resource ownership, residual-sponsor backbone refinement, and sponsor-pair transport classification"

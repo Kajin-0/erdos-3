@@ -15,6 +15,7 @@ on:
       - 'src/summarize_s7_edge_unresolved_completion_saturation.py'
       - 'src/summarize_s7_hole_support_first_appearance.py'
       - 'src/summarize_s7_new_hole_support_transport.py'
+      - 'src/summarize_s7_incremental_support_target_payment.py'
       - 'src/verify_retained_provenance_second_generation.py'
       - 'src/verify_retained_provenance_scale_profile.py'
       - 'src/probe_third_generation_recursive_frontier.py'
@@ -40,7 +41,8 @@ jobs:
             src/export_s7_incremental_support_target_requests.py \
             src/summarize_s7_edge_unresolved_completion_saturation.py \
             src/summarize_s7_hole_support_first_appearance.py \
-            src/summarize_s7_new_hole_support_transport.py
+            src/summarize_s7_new_hole_support_transport.py \
+            src/summarize_s7_incremental_support_target_payment.py
           g++ -O3 -std=c++17 \
             src/classify_s7_terminal_completion_saturation.cpp \
             -o classify_s7_terminal_completion_saturation
@@ -86,6 +88,16 @@ jobs:
             s7_incremental_support_completion_requests.txt \
             s7_incremental_support_targets.json \
             > s7_incremental_support_targets_stdout.json
+          ./classify_s7_terminal_completion_saturation \
+            s7_incremental_support_completion_requests.txt \
+            s7_incremental_support_completion_classification.tsv
+          python3 src/summarize_s7_incremental_support_target_payment.py \
+            s7_incremental_support_targets.json \
+            s7_incremental_support_completion_classification.tsv \
+            terminal_pair_payment_frontier_v2.json \
+            s7_terminal_completion_classification.tsv \
+            s7_incremental_support_target_payment_summary.json \
+            > s7_incremental_support_target_payment_stdout.json
 
       - name: Upload terminal-payment frontier
         if: always()
@@ -107,3 +119,6 @@ jobs:
             s7_incremental_support_completion_requests.txt
             s7_incremental_support_targets.json
             s7_incremental_support_targets_stdout.json
+            s7_incremental_support_completion_classification.tsv
+            s7_incremental_support_target_payment_summary.json
+            s7_incremental_support_target_payment_stdout.json

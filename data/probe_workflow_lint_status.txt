@@ -1,9 +1,9 @@
 schema=probe_workflow_hardening_status_v3
 lint_exit_status=0
 helper_test_exit_status=0
-source_commit=bd8c6df1478bcf7dc3e147166c5f9f41aeb35da9
+source_commit=b2658a025248dc9b89c7ee1634e8e1645a153a49
 source_ref=refs/heads/main
-workflow_run_id=29379253342
+workflow_run_id=29379490598
 workflow_run_attempt=1
 --- workflow lint ---
 writable workflow inventory:
@@ -32,6 +32,7 @@ path | name | purpose | owned files | concurrency | schema | artifact | commit h
 .github/workflows/shelled-oriented-full-edge-pair-persistence.yml | Shelled oriented full-edge pair persistence | probe trigger delegating to reusable recorder | data/shelled_oriented_full_edge_pair_persistence_probe.json,data/shelled_oriented_full_edge_pair_persistence_status.txt,data/shelled_oriented_full_edge_pair_persistence_summary.txt | probe-result-writers-main | delegated/dynamic | no | none | no
 .github/workflows/shelled-pair-reuse-gadget.yml | Shelled pair reuse gadget | probe trigger delegating to reusable recorder | data/shelled_pair_reuse_gadget_certificate_2026-07-14.json,data/shelled_pair_reuse_gadget_status.txt,data/shelled_pair_reuse_gadget_summary.txt | probe-result-writers-main | delegated/dynamic | no | none | no
 .github/workflows/sponsor-core-activation-frontier-probe.yml | Sponsor-core activation frontier probe | probe trigger delegating to reusable recorder | data/sponsor_core_activation_frontier_probe.json,data/sponsor_core_activation_frontier_status.txt,data/sponsor_core_activation_frontier_summary.txt | probe-result-writers-main | delegated/dynamic | no | none | no
+.github/workflows/sponsor-pair-transport-frontier.yml | Sponsor-pair transport frontier | probe trigger delegating to reusable recorder | data/sponsor_pair_transport_frontier_probe.json,data/sponsor_pair_transport_frontier_status.txt,data/sponsor_pair_transport_frontier_summary.txt | delegated/none | delegated/dynamic | no | none | no
 .github/workflows/terminal-basin-overflow-transfer.yml | Terminal-basin overflow transfer | probe trigger delegating to reusable recorder | data/terminal_basin_overflow_transfer_certificate_2026-07-14.json,data/terminal_basin_overflow_transfer_status.txt,data/terminal_basin_overflow_transfer_summary.txt | probe-result-writers-main | delegated/dynamic | no | none | no
 .github/workflows/unbounded-shelled-pair-reuse-instance.yml | Multiplicity-four shelled pair reuse | probe trigger delegating to reusable recorder | data/unbounded_shelled_pair_reuse_instance_certificate_2026-07-14.json,data/unbounded_shelled_pair_reuse_instance_status.txt,data/unbounded_shelled_pair_reuse_instance_summary.txt | probe-result-writers-main | delegated/dynamic | no | none | no
 .github/workflows/verify-first-frontier-terminal-correction.yml | Verify first-frontier terminal correction | probe trigger delegating to reusable recorder | data/first_frontier_terminal_correction_certificate.json,data/first_frontier_terminal_correction_certificate.txt,data/first_frontier_terminal_correction_verifier_status.txt | probe-result-writers-main | delegated/dynamic | no | none | no

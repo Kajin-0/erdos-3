@@ -5,34 +5,28 @@
 Exact finite classification and first-use ledger for terminal targets on the
 certified residual-sponsor fourth-to-fifth retained diagnostic frontier.
 
-The classification uses the correct payment hierarchy:
+The payment hierarchy is:
 
 ```text
 parent-local three-AP edge capacity;
-then any three-AP edge capacity elsewhere in S7;
-then prescribed-completion saturation;
-then completion and support-pair reuse.
+any three-AP edge capacity elsewhere in S7;
+prescribed-completion saturation;
+completion and support-pair reuse.
 ```
 
-The computation is performed inside the certified depth-seven state
+The computation uses the certified state
 
 ```math
 S_7\subseteq[1048576,2097152),
-\qquad
-|S_7|=9840,
-\qquad
-\max S_7=2021668.
+\qquad |S_7|=9840,
+\qquad \max S_7=2021668.
 ```
 
-It does not propagate a sixth retained generation.
+Generation six is not propagated.
 
 ---
 
-## 1. Why edge capacity precedes prescribed completion
-
-The terminal transport map assigns each direct, backward, or residual target a
-prescribed completion. That completion is useful for obstruction geometry, but
-it is not the only way a pair can be an edge of a three-term progression.
+## 1. Edge capacity precedes prescribed completion
 
 For a terminal pair
 
@@ -42,56 +36,36 @@ e=\{x,y\},
 \qquad D=y-x,
 ```
 
-all possible three-AP completions are
+all possible three-AP completion roots are
 
 ```math
 x-D,
-\qquad
-y+D,
-\qquad
-x+D/2
+\qquad y+D,
+\qquad x+D/2
 ```
 
 when the midpoint is integral.
 
-Therefore a target whose prescribed completion is absent may still be paid by
-the `5/2` edge capacity of another three-AP already present in `S7`.
-Saturation is applied only after this full edge test.
+The terminal transport map chooses one prescribed completion, but an absent
+prescribed completion does not imply that the pair is absent from all parent or
+`S7` three-AP edge capacity. The full edge test is performed first.
 
----
-
-## 2. Edge-first split
-
-The prescribed-completion probe initially reports
-
-```text
-38579 terminal targets
-```
-
-whose prescribed completion is outside their parent and absent from `S7`, with
-target union mass
+The prescribed-completion probe reports `38579` targets whose prescribed
+completion is outside their parent and absent from `S7`, with union mass
 
 ```math
 345.019947619801\ldots.
 ```
 
-Among them,
-
-```text
-2865 targets
-```
-
-are nevertheless edges of another three-AP already present in `S7`. Their union
-mass is
+Of these, `2865` are edges of another three-AP already present in `S7`, carrying
 
 ```math
 72.867994406210\ldots.
 ```
 
-These targets remain in the ordinary three-AP edge-capacity ledger and are not
-sent to saturation.
+They remain in the ordinary `5/2` three-AP edge-capacity ledger.
 
-The genuinely edge-unresolved family is therefore
+The actual edge-unresolved family is therefore
 
 ```text
 35714 targets
@@ -103,7 +77,7 @@ with union mass
 272.151953213591\ldots.
 ```
 
-The target-mass partition is exact:
+The partition is exact:
 
 ```math
 345.019947619801\ldots
@@ -115,33 +89,20 @@ The target-mass partition is exact:
 
 ---
 
-## 3. Completion request family
+## 2. Exhaustive S7 saturation
 
-The `35714` edge-unresolved targets request
-
-```text
-13560 distinct prescribed completion integers
-```
-
-inside the standard dyadic shell containing `S7`.
-
-Every requested integer is absent from `S7`. The saturation classifier asks
-whether adding that integer to `S7` immediately creates a four-term arithmetic
-progression using three existing `S7` points.
-
----
-
-## 4. Exhaustive S7 saturation test
+The `35714` edge-unresolved targets request `13560` distinct prescribed
+completion integers inside the standard dyadic shell containing `S7`.
 
 For a requested integer `c`, adding `c` to `S7` creates a four-term progression
-precisely when there are `a,d` and a missing position `j` such that
+precisely when
 
 ```math
 \{a,a+d,a+2d,a+3d\}\setminus\{c\}
 \subseteq S_7
 ```
 
-and `c` is the `j`-th point of that progression.
+for some `a,d`, with `c` occupying the missing position.
 
 The classifier exhausts all
 
@@ -149,50 +110,25 @@ The classifier exhausts all
 48407880
 ```
 
-unordered pairs of points in `S7`. Every possible three-of-four witness is
-covered by one of four cases:
-
-```text
-missing left endpoint;
-missing right endpoint;
-missing first interior point;
-missing second interior point.
-```
-
-Each case is reconstructed from an adjacent pair and one membership test. The
-classification is exhaustive rather than sampled.
-
----
-
-## 5. Corrected saturation split
-
-The `13560` edge-unresolved completion integers divide as follows:
+unordered pairs of `S7` points and covers all four missing positions. The result
+is exact rather than sampled:
 
 ```text
 certified S7 holes        = 8870
 S7-admissible extensions  = 4690
 ```
 
-A certified `S7` hole has an explicit four-AP witness using three points of
-`S7`. It is therefore absent from every four-AP-free ambient set containing
-`S7`.
+A certified hole has an explicit four-AP witness using three `S7` points and is
+therefore absent from every four-AP-free ambient set containing `S7`.
 
-An `S7`-admissible extension has no three-root `S7` witness and may be added to
-`S7` individually without creating a four-AP. Relative to a maximal ambient
-four-AP-free set, it remains a dichotomy:
-
-```text
-present outside the recorded lineage;
-or absent because of a witness using at least one ambient point outside S7.
-```
-
+An admissible extension may be added to `S7` individually without creating a
+four-AP. In a maximal ambient set it is either present outside the recorded
+lineage or absent because of a witness using at least one point outside `S7`.
 It is not immediate hole credit.
 
 ---
 
-## 6. Exact mass partition
-
-The edge-unresolved family has
+## 3. Exact edge-unresolved mass partition
 
 ```text
 targets                    = 35714
@@ -205,37 +141,21 @@ terminal collision mass    = 239.256370445023...
 transport amplification    = 109.113041642102...
 ```
 
-The saturation classes are:
-
-| Completion class | Integers | Targets | Target union mass | Source collision mass |
+| Completion class | Integers | Targets | Target union | Source collision |
 |---|---:|---:|---:|---:|
 | Certified `S7` hole | 8870 | 22804 | `213.607508081532...` | `98.063506377289...` |
 | `S7`-admissible extension | 4690 | 12910 | `58.544445132059...` | `32.079822425631...` |
 
-The certified-hole class carries
-
-```text
-source occurrences = 41862
-source initial mass = 303.994546790143...
-```
-
-and the admissible-extension class carries
-
-```text
-source occurrences = 23785
-source initial mass = 83.461540727830...
-```
-
-The source-weighted collision term remains strictly smaller than the
-terminal-weight collision term in both classes.
+The certified-hole class contains `22571` backward and `233` residual targets,
+with `41862` source occurrences. The admissible class contains `12746` backward
+and `164` residual targets, with `23785` source occurrences.
 
 ---
 
-## 7. Completion first appearance and reuse
+## 4. Completion first appearance
 
-Several terminal targets can request the same completion integer. For each
-completion choose one deterministic maximum-weight target as its first target.
-Then
+Several terminal targets can request the same completion integer. Choose one
+deterministic maximum-weight target per completion. Then
 
 ```math
 M_{\rm target}
@@ -245,28 +165,23 @@ M_{\rm first}
 M_{\rm completion\ reuse}.
 ```
 
-The exact split is:
+| Completion class | First-target mass | Reuse mass | Reused integers | Max targets/completion |
+|---|---:|---:|---:|---:|
+| Certified `S7` hole | `168.669469494649...` | `44.938038586882...` | 5497 | 21 |
+| `S7`-admissible extension | `42.175918639512...` | `16.368526492547...` | 2995 | 20 |
 
-| Completion class | First-target mass | Completion-reuse mass |
-|---|---:|---:|
-| Certified `S7` hole | `168.669469494649...` | `44.938038586882...` |
-| `S7`-admissible extension | `42.175918639512...` | `16.368526492547...` |
-
-This is a second reuse layer, distinct from sponsor-pair transport collision:
+This is distinct from sponsor-pair transport collision:
 
 ```text
-source pairs may merge into one terminal target;
-terminal targets may merge into one requested completion integer.
+source pairs merge into terminal targets;
+terminal targets merge into completion integers.
 ```
-
-Both must remain explicit in a whole-tree ledger.
 
 ---
 
-## 8. Witness-step aspect identity
+## 5. Witness-step aspect profile
 
-Fix a certified hole `c`. Let its recorded four-AP witness have common step `h`,
-and let a terminal target requesting `c` have pair gap `D`. Then
+For a certified hole with witness step `h` and first target gap `D`,
 
 ```math
 w_{\rm target}
@@ -276,9 +191,7 @@ w_{\rm target}
 \frac hD\frac1h.
 ```
 
-For the first target of every certified hole, the corrected profile is:
-
-| Witness regime | Completion integers | First-target mass |
+| Regime | Holes | First-target mass |
 |---|---:|---:|
 | `h <= D` | 4232 | `99.667156821497...` |
 | `D < h <= 2D` | 2483 | `29.680011410137...` |
@@ -286,78 +199,57 @@ For the first target of every certified hole, the corrected profile is:
 | `4D < h <= 8D` | 303 | `8.677362095051...` |
 | `h > 8D` | 404 | `23.130736266018...` |
 
-In the near regime,
-
-```math
-h\le D
-\quad\Longrightarrow\quad
-\frac1D\le\frac1h.
-```
-
-Thus the witness-step pair dominates the target weight pointwise. The far
-aspect class is smaller but remains a genuine weighted obligation.
+In the near regime, `1/D <= 1/h`; the canonical witness pair dominates the
+target weight pointwise. Far-aspect targets require an aspect-weighted transfer.
 
 ---
 
-## 9. Canonical support-pair reuse
+## 6. Canonical witness support pairs
 
-Assign each certified hole to the first adjacent pair of present points in its
-chosen four-AP witness. The state-independent canonical-pair theorem proves
-that one support pair serves at most two distinct holes.
+Assign each certified hole to the first adjacent present pair in its chosen
+four-AP witness. The state-independent canonical-pair theorem proves that one
+support pair serves at most two holes.
 
-On the corrected edge-unresolved frontier:
-
-```text
-certified holes                       = 8870
-distinct canonical support pairs      = 7929
-reused canonical support pairs        = 941
-maximum support-pair multiplicity     = 2
-```
-
-The support-pair masses are
+On the edge-unresolved frontier:
 
 ```text
-union mass       = 386.699243131284...
-occurrence mass  = 502.942546688386...
-reuse mass       = 116.243303557102...
+certified holes                   = 8870
+distinct canonical support pairs  = 7929
+reused support pairs              = 941
+maximum multiplicity              = 2
 ```
 
-After one maximum-weight target is chosen per support pair, only
+```text
+support-pair union mass       = 386.699243131284...
+support-pair occurrence mass  = 502.942546688386...
+support-pair reuse mass       = 116.243303557102...
+```
+
+After one maximum-weight target is selected per support pair, support-pair
+assignment reuse is only
 
 ```math
-5.523243331592\ldots
+5.523243331592\ldots.
 ```
 
-of certified-hole first-target mass remains as support-pair assignment reuse.
-
-For the near regime `h<=D`:
+For the near regime:
 
 ```text
 distinct support pairs  = 3670
 reused support pairs    = 562
 maximum multiplicity    = 2
+first-target mass       = 99.667156821497...
+assignment reuse        = 4.181354423532...
 ```
 
-with target mass
-
-```math
-99.667156821497\ldots
-```
-
-and support-pair assignment reuse
-
-```math
-4.181354423532\ldots.
-```
-
-The multiplicity problem is therefore controlled at the hole-witness support
-layer. The remaining issue is collision-sound payment of the support-pair union.
+The multiplicity problem is controlled at the hole-witness support layer. The
+remaining issue is collision-sound payment of the support-pair union.
 
 ---
 
-## 10. Consequence for the activation row
+## 7. Refined activation interface
 
-The source-weighted terminal-payment inequality is
+The source-weighted terminal-payment row is now organized as
 
 ```math
 \sum_{e\in A}w(e)
@@ -374,70 +266,28 @@ On the certified frontier,
 ```math
 M_{\rm edge\ unresolved}
 =
-M_{\rm hole}^{S_7}
-+
-M_{\rm ext/ambient},
-```
-
-where
-
-```math
-M_{\rm hole}^{S_7}
-=
 213.607508081532\ldots
++
+58.544445132059\ldots,
 ```
 
-has explicit three-root four-AP witnesses, while
+where the first term has explicit three-root `S7` witnesses and the second is
+the genuine ambient decision term.
 
-```math
-M_{\rm ext/ambient}
-=
-58.544445132059\ldots
-```
+The next theorem must combine:
 
-is the genuine ambient decision term.
-
-The edge-first correction removes an additional
-
-```math
-72.867994406210\ldots
-```
-
-from the saturation problem before any obstruction charge is used.
-
----
-
-## 11. Remaining theorem
-
-The finite frontier is now concentrated in four labeled obligations:
-
-1. source-weighted sponsor-pair collision reuse `130.143328802921...` on the
-   edge-unresolved family;
-2. completion-target reuse `44.938038586882...` within certified holes;
-3. far-aspect witness payment, especially the `h>8D` first-target mass
-   `23.130736266018...`;
-4. the `4690` individually admissible completion integers carrying target union
-   mass `58.544445132059...`.
-
-The next valid theorem should be a collision-sound support-pair first-appearance
-law keyed by
-
-```text
-terminal target pair;
-completion integer;
-canonical witness support pair;
-witness step h and target gap D;
-existing pair capacity or first appearance;
-ambient membership or first outside-S7 witness.
-```
+1. collision-sound first appearance of canonical support pairs;
+2. completion-target reuse `44.938038586882...`;
+3. far-aspect witness payment, especially `23.130736266018...` in `h>8D`;
+4. the `4690` admissible completion integers;
+5. source-weighted transport collision `130.143328802921...` on the
+   edge-unresolved family.
 
 Another retained generation is not justified.
 
 ---
 
-## 12. Reproduction
-
-The read-only PR computation uses:
+## 8. Reproduction
 
 ```text
 src/export_s7_terminal_completion_requests.py
@@ -445,15 +295,15 @@ src/classify_s7_terminal_completion_saturation.cpp
 src/summarize_s7_edge_unresolved_completion_saturation.py
 ```
 
-The corrected deterministic hashes are:
+Deterministic PR-artifact hashes:
 
 ```text
 classification TSV SHA-256:
-ed14eb2f4dc4f3fce2d03cc9da617f2f78475856110942edbcc2281a0aa2f72a
+a701bcebbd6860baf98e2f26516f6bedc13f7c68bb07d5dc29a9365ae3ca8f7b
 
 edge-unresolved assignment SHA-256:
 893e598e47e4036222bcfe27059a39954c31fc5233207cfa3dad03a83ce4555d
 
 summary payload SHA-256:
-480f7522004bdbadedb8888cc5d1f970598100718d209082ea7cbfa952cc7173
+4778f5fd934818411ec7ef7e7ec28800f2bcb3b83f20a5ccd190ef9e5be400b5
 ```

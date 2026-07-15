@@ -45,6 +45,10 @@ def harmonic(values: tuple[int, ...] | set[int]) -> Fraction:
     return sum((Fraction(1, value) for value in values), Fraction())
 
 
+def fraction_text(value: Fraction) -> str:
+    return f"{value.numerator}/{value.denominator}"
+
+
 def dyadic_band(numerator: int, denominator: int) -> int:
     if numerator <= 0 or denominator <= 0:
         raise ValueError("aspect band requires positive arguments")
@@ -235,6 +239,25 @@ def main() -> int:
         reference_multiplicity[identity] += 1
     reference_union_mass = sum(reference_union.values(), Fraction())
 
+    serial_repeated_rows = [
+        {
+            **row,
+            "state_mass": fraction_text(row["state_mass"]),  # type: ignore[arg-type]
+            "collision_mass": fraction_text(row["collision_mass"]),  # type: ignore[arg-type]
+            "reference_reserve_mass": fraction_text(row["reference_reserve_mass"]),  # type: ignore[arg-type]
+        }
+        for row in repeated_rows
+    ]
+    serial_reference_shells = [
+        (
+            reference_shell,
+            reserve_state,
+            fraction_text(mass),
+            origin,
+        )
+        for reference_shell, reserve_state, mass, origin in reference_shell_occurrences
+    ]
+
     output = {
         "schema": "s7_heavy_state_reference_reserve_profile_v1",
         "scope": "heavy completion-step shells on the refined R4_to_F5 S7 frontier",
@@ -284,8 +307,8 @@ def main() -> int:
                     for row in heavy_occurrences
                 )
             ),
-            "repeated_reference_rows": canonical_hash(repeated_rows),
-            "reference_shell_occurrences": canonical_hash(reference_shell_occurrences),
+            "repeated_reference_rows": canonical_hash(serial_repeated_rows),
+            "reference_shell_occurrences": canonical_hash(serial_reference_shells),
         },
         "checks": {
             "heavy_state_first_use_collision_identity": occurrence_mass == state_union_mass + collision_mass,

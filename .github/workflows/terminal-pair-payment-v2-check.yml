@@ -15,6 +15,7 @@ on:
       - 'src/probe_s7_capacity_aware_terminal_transfer.py'
       - 'src/probe_s7_direct_pair_discharge.py'
       - 'src/probe_s7_direct_recursive_heavy_frontier.py'
+      - 'src/probe_s7_direct_horizontal_chain_packing.py'
       - 'src/probe_s7_heavy_state_reference_reserve.py'
       - 'src/probe_s7_star_rectangle_first_appearance.py'
       - 'src/verify_sponsor_pair_transport_small_box.py'
@@ -55,6 +56,7 @@ jobs:
             src/probe_s7_capacity_aware_terminal_transfer.py \
             src/probe_s7_direct_pair_discharge.py \
             src/probe_s7_direct_recursive_heavy_frontier.py \
+            src/probe_s7_direct_horizontal_chain_packing.py \
             src/probe_s7_heavy_state_reference_reserve.py \
             src/probe_s7_star_rectangle_first_appearance.py \
             src/verify_sponsor_pair_transport_small_box.py \
@@ -166,6 +168,11 @@ jobs:
             s7_full_saturation_map.tsv \
             s7_direct_recursive_heavy_frontier.json \
             > s7_direct_recursive_heavy_frontier_stdout.json
+          python3 src/probe_s7_direct_horizontal_chain_packing.py \
+            terminal_pair_payment_frontier_v2.json \
+            s7_full_saturation_map.tsv \
+            s7_direct_horizontal_chain_packing.json \
+            > s7_direct_horizontal_chain_packing_stdout.json
           python3 src/probe_s7_hole_support_closure.py \
             terminal_pair_payment_frontier_v2.json \
             s7_full_saturation_map.tsv \
@@ -220,6 +227,8 @@ jobs:
             s7_direct_pair_discharge_stdout.json
             s7_direct_recursive_heavy_frontier.json
             s7_direct_recursive_heavy_frontier_stdout.json
+            s7_direct_horizontal_chain_packing.json
+            s7_direct_horizontal_chain_packing_stdout.json
             s7_hole_support_closure.json
             s7_hole_support_closure_stdout.json
             s7_support_transition_rank.json

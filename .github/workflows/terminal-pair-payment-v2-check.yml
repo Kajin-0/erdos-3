@@ -8,6 +8,7 @@ on:
       - 'src/probe_sponsor_pair_transport_frontier.py'
       - 'src/probe_residual_sponsor_backbone_split.py'
       - 'src/probe_s7_hole_support_closure.py'
+      - 'src/probe_s7_support_transition_rank.py'
       - 'src/verify_sponsor_pair_transport_small_box.py'
       - 'src/verify_canonical_hole_witness_pair_small_box.py'
       - 'src/export_s7_terminal_completion_requests.py'
@@ -38,6 +39,7 @@ jobs:
           python3 -m py_compile \
             src/probe_terminal_pair_payment_frontier_v2.py \
             src/probe_s7_hole_support_closure.py \
+            src/probe_s7_support_transition_rank.py \
             src/verify_sponsor_pair_transport_small_box.py \
             src/verify_canonical_hole_witness_pair_small_box.py \
             src/export_s7_terminal_completion_requests.py \
@@ -115,6 +117,11 @@ jobs:
             s7_full_saturation_map.tsv \
             s7_hole_support_closure.json \
             > s7_hole_support_closure_stdout.json
+          python3 src/probe_s7_support_transition_rank.py \
+            terminal_pair_payment_frontier_v2.json \
+            s7_full_saturation_map.tsv \
+            s7_support_transition_rank.json \
+            > s7_support_transition_rank_stdout.json
 
       - name: Upload terminal-payment frontier
         if: always()
@@ -142,3 +149,5 @@ jobs:
             s7_full_saturation_map_status.txt
             s7_hole_support_closure.json
             s7_hole_support_closure_stdout.json
+            s7_support_transition_rank.json
+            s7_support_transition_rank_stdout.json

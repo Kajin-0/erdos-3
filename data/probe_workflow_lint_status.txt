@@ -1,9 +1,9 @@
 schema=probe_workflow_hardening_status_v3
-lint_exit_status=0
+lint_exit_status=1
 helper_test_exit_status=0
-source_commit=905dbe51ed0341a66f40318fd85c7f19f7923a3c
+source_commit=29ea131778b3ae37ea0eea9b6a1b2dde9b1adbb9
 source_ref=refs/heads/main
-workflow_run_id=29377507638
+workflow_run_id=29379096641
 workflow_run_attempt=1
 --- workflow lint ---
 writable workflow inventory:
@@ -15,6 +15,7 @@ path | name | purpose | owned files | concurrency | schema | artifact | commit h
 .github/workflows/base-six-three-ap-rich-family.yml | Base-six three-AP-rich family | probe trigger delegating to reusable recorder | data/base_six_three_ap_rich_family_certificate_2026-07-14.json,data/base_six_three_ap_rich_family_status.txt,data/base_six_three_ap_rich_family_summary.txt | probe-result-writers-main | delegated/dynamic | no | none | no
 .github/workflows/exact-activated-pair-union-transfer.yml | Exact activated-pair union transfer | probe trigger delegating to reusable recorder | data/exact_activated_pair_union_transfer_probe.json,data/exact_activated_pair_union_transfer_status.txt,data/exact_activated_pair_union_transfer_summary.txt | probe-result-writers-main | delegated/dynamic | no | none | no
 .github/workflows/first-frontier-terminal-correction-probe.yml | First-frontier terminal correction probe | probe trigger delegating to reusable recorder | data/first_frontier_terminal_correction_probe.json,data/first_frontier_terminal_correction_status.txt,data/first_frontier_terminal_correction_summary.txt | probe-result-writers-main | delegated/dynamic | no | none | no
+.github/workflows/fourth-to-fifth-lineage-gain-profile.yml | Fourth-to-fifth lineage gain profile | status/result writer | data/fourth_to_fifth_lineage_gain_profile_probe.json,data/fourth_to_fifth_lineage_gain_profile_status.txt | delegated/none | delegated/dynamic | no | none | no
 .github/workflows/full-color-coordinated-branching-check.yml | Full-color coordinated branching check | probe trigger delegating to reusable recorder | data/full_color_coordinated_branching_probe.json,data/full_color_coordinated_branching_status.txt,data/full_color_coordinated_branching_summary.txt | probe-result-writers-main | delegated/dynamic | no | none | no
 .github/workflows/full-edge-coordinated-branching-check.yml | Full-edge coordinated branching check | probe trigger delegating to reusable recorder | data/full_edge_coordinated_branching_probe.json,data/full_edge_coordinated_branching_status.txt,data/full_edge_coordinated_branching_summary.txt | probe-result-writers-main | delegated/dynamic | no | none | no
 .github/workflows/oriented-full-edge-pair-persistence.yml | Oriented full-edge pair persistence | probe trigger delegating to reusable recorder | data/oriented_full_edge_pair_persistence_probe.json,data/oriented_full_edge_pair_persistence_status.txt,data/oriented_full_edge_pair_persistence_summary.txt | probe-result-writers-main | delegated/dynamic | no | none | no
@@ -34,7 +35,10 @@ path | name | purpose | owned files | concurrency | schema | artifact | commit h
 .github/workflows/sponsor-core-activation-frontier-probe.yml | Sponsor-core activation frontier probe | probe trigger delegating to reusable recorder | data/sponsor_core_activation_frontier_probe.json,data/sponsor_core_activation_frontier_status.txt,data/sponsor_core_activation_frontier_summary.txt | probe-result-writers-main | delegated/dynamic | no | none | no
 .github/workflows/terminal-basin-overflow-transfer.yml | Terminal-basin overflow transfer | probe trigger delegating to reusable recorder | data/terminal_basin_overflow_transfer_certificate_2026-07-14.json,data/terminal_basin_overflow_transfer_status.txt,data/terminal_basin_overflow_transfer_summary.txt | probe-result-writers-main | delegated/dynamic | no | none | no
 .github/workflows/unbounded-shelled-pair-reuse-instance.yml | Multiplicity-four shelled pair reuse | probe trigger delegating to reusable recorder | data/unbounded_shelled_pair_reuse_instance_certificate_2026-07-14.json,data/unbounded_shelled_pair_reuse_instance_status.txt,data/unbounded_shelled_pair_reuse_instance_summary.txt | probe-result-writers-main | delegated/dynamic | no | none | no
-.github/workflows/verify-first-frontier-terminal-correction.yml | Verify first-frontier terminal correction | probe trigger delegating to reusable recorder | data/first_frontier_terminal_correction_certificate.json,data/first_frontier_terminal_correction_certificate.txt,data/first_frontier_terminal_correction_verifier_status.txt | probe-result-writers-main | delegated/dynamic | no | none | no
-probe workflow lint passed
+.github/workflows/verify-first-frontier-terminal-correction.yml | Verify first-frontier terminal correction | probe trigger delegating to reusable recorder | data/first_frontier_terminal_correction_certificate.json,data/first_frontier_terminal_correction_certificate.txt,data/first_frontier_terminal_correction_verifier_status.txt | probe-result-writers-main | delegated/dynamic | no | none | noprobe workflow lint failed:
+- .github/workflows/fourth-to-fifth-lineage-gain-profile.yml:62: unsafe optional staging: 'git add -A data/fourth_to_fifth_lineage_gain_profile_probe.json'
+- .github/workflows/fourth-to-fifth-lineage-gain-profile.yml: writable writer must use exactly one concurrency group probe-result-writers-main; found none
+- .github/workflows/fourth-to-fifth-lineage-gain-profile.yml: direct writer must use the shared recorder or commit helper
+
 --- helper tests ---
 probe workflow helper tests passed

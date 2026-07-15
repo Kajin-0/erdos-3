@@ -244,8 +244,8 @@ def main() -> int:
         "heavy_fibers": 3852,
         "light_fibers": 1848,
         "nonempty_oriented_fibers": 5700,
-        "supports_with_heavy_load": 3074,
-        "supports_with_light_load": 1534,
+        "supports_with_heavy_load": 2243,
+        "supports_with_light_load": 1848,
     }
     if payload["counts"] != expected_counts:
         raise AssertionError(

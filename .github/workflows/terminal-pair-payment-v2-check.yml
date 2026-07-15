@@ -1,0 +1,48 @@
+name: Terminal pair payment v2 check
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/terminal-pair-payment-v2-check.yml'
+      - 'src/probe_terminal_pair_payment_frontier_v2.py'
+      - 'src/probe_sponsor_pair_transport_frontier.py'
+      - 'src/probe_residual_sponsor_backbone_split.py'
+      - 'src/verify_sponsor_pair_transport_small_box.py'
+      - 'src/verify_retained_provenance_second_generation.py'
+      - 'src/verify_retained_provenance_scale_profile.py'
+      - 'src/probe_third_generation_recursive_frontier.py'
+      - 'src/certified_contaminated_states.py'
+
+permissions:
+  contents: read
+
+jobs:
+  exact-terminal-payment:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Compile terminal-payment sources
+        run: |
+          python3 -m py_compile \
+            src/probe_terminal_pair_payment_frontier_v2.py \
+            src/verify_sponsor_pair_transport_small_box.py
+
+      - name: Run independent small-box verifier
+        run: python3 src/verify_sponsor_pair_transport_small_box.py
+
+      - name: Run terminal-payment frontier probe
+        run: |
+          python3 src/run_exact_python.py \
+            src/probe_terminal_pair_payment_frontier_v2.py \
+            > terminal_pair_payment_frontier_v2.json
+
+      - name: Upload terminal-payment frontier
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: terminal-pair-payment-v2-${{ github.run_id }}-${{ github.run_attempt }}
+          retention-days: 30
+          if-no-files-found: error
+          path: terminal_pair_payment_frontier_v2.json

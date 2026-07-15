@@ -2,6 +2,8 @@
 """Write a compact deterministic summary of the sponsor-pair transport probe."""
 from __future__ import annotations
 
+from collections import Counter, defaultdict
+from fractions import Fraction
 from pathlib import Path
 import json
 import sys
@@ -11,6 +13,15 @@ def profile_line(row: dict[str, object]) -> str:
     initial = row["initial_mass"]["decimal"]  # type: ignore[index]
     target = row["target_occurrence_mass"]["decimal"]  # type: ignore[index]
     return f"{row['key']}|count={row['count']}|initial={initial}|target={target}"
+
+
+def decimal_text(value: Fraction, places: int = 12) -> str:
+    scale = 10**places
+    rounded = (value.numerator * scale * 2 + value.denominator) // (
+        2 * value.denominator
+    )
+    whole, fractional = divmod(rounded, scale)
+    return f"{whole}.{fractional:0{places}d}"
 
 
 def main() -> int:
@@ -24,7 +35,7 @@ def main() -> int:
     masses = payload["masses"]
     checks = payload["checks"]
     lines = [
-        "sponsor_pair_transport_frontier_summary_v1",
+        "sponsor_pair_transport_frontier_summary_v2",
         f"scope={payload['scope']}",
         f"generation_six_propagated={str(payload['generation_six_propagated']).lower()}",
         f"parent_states={counts['parent_states']}",
@@ -58,6 +69,30 @@ def main() -> int:
     lines.extend(profile_line(row) for row in payload["transport_path_profile"])
     lines.append("completion_profile:")
     lines.extend(profile_line(row) for row in payload["completion_profile"])
+    lines.append("resource_signature_profile:")
+    lines.extend(profile_line(row) for row in payload["resource_signature_profile"])
+    lines.append("child_source_profile:")
+    lines.extend(profile_line(row) for row in payload["child_source_profile"])
+    lines.append("first_sponsor_side_profile:")
+    lines.extend(profile_line(row) for row in payload["first_sponsor_side_profile"])
+    lines.append("parent_profile:")
+    lines.extend(profile_line(row) for row in payload["parent_profile"])
+
+    collision_counts = Counter(
+        int(row["multiplicity"]) for row in payload["collision_targets"]
+    )
+    collision_mass: dict[int, Fraction] = defaultdict(Fraction)
+    for row in payload["collision_targets"]:
+        multiplicity = int(row["multiplicity"])
+        weight = Fraction(row["weight"]["fraction"])
+        collision_mass[multiplicity] += (multiplicity - 1) * weight
+    lines.append("collision_multiplicity_profile:")
+    for multiplicity in sorted(collision_counts):
+        lines.append(
+            f"{multiplicity}|targets={collision_counts[multiplicity]}|"
+            f"reuse_mass={decimal_text(collision_mass[multiplicity])}"
+        )
+
     lines.append(f"active_rows_sha256={payload['hashes']['active_rows']}")
     lines.append(
         f"terminal_target_counter_sha256={payload['hashes']['terminal_target_counter']}"

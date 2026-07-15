@@ -1,0 +1,63 @@
+name: Apply CL-101 sponsor-pair transport documentation
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - src/patch_cl101_sponsor_pair_transport.py
+      - .github/workflows/apply-cl101-sponsor-pair-transport.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: probe-result-writers-main
+  cancel-in-progress: false
+
+jobs:
+  patch:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Run patch atomically and capture status
+        shell: bash
+        run: |
+          bash src/run_atomic_documentation_patch.sh \
+            cl101_sponsor_pair_transport_docs_v1 \
+            data/cl101_sponsor_pair_transport_docs_status.txt \
+            "${RUNNER_TEMP}/cl101_sponsor_pair_transport_docs.err" \
+            src/patch_cl101_sponsor_pair_transport.py \
+            docs/certainty-ledger.md \
+            docs/current-proof-program.md \
+            docs/research-decision-history.md
+
+      - name: Upload diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cl101-sponsor-pair-transport-docs-${{ github.run_id }}-${{ github.run_attempt }}
+          retention-days: 30
+          path: |
+            data/cl101_sponsor_pair_transport_docs_status.txt
+            ${{ runner.temp }}/cl101_sponsor_pair_transport_docs.err
+
+      - name: Preserve status and validated documentation
+        if: always()
+        shell: bash
+        run: |
+          bash src/commit_probe_outputs.sh \
+            "Record CL-101 sponsor-pair transport frontier [skip ci]" \
+            data/cl101_sponsor_pair_transport_docs_status.txt \
+            docs/certainty-ledger.md \
+            docs/current-proof-program.md \
+            docs/research-decision-history.md
+
+      - name: Report original patch failure
+        if: always()
+        shell: bash
+        run: bash src/assert_probe_status.sh data/cl101_sponsor_pair_transport_docs_status.txt

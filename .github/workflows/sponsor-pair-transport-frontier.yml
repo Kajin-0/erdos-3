@@ -1,0 +1,25 @@
+name: Sponsor-pair transport frontier
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - src/probe_sponsor_pair_transport_frontier.py
+      - src/summarize_sponsor_pair_transport_frontier.py
+      - .github/workflows/sponsor-pair-transport-frontier.yml
+
+permissions:
+  contents: write
+
+jobs:
+  record:
+    uses: ./.github/workflows/reusable-python-probe-recorder.yml
+    with:
+      schema: sponsor_pair_transport_frontier_v1
+      probe_script: src/probe_sponsor_pair_transport_frontier.py
+      probe_output: data/sponsor_pair_transport_frontier_probe.json
+      summary_script: src/summarize_sponsor_pair_transport_frontier.py
+      summary_output: data/sponsor_pair_transport_frontier_summary.txt
+      status_output: data/sponsor_pair_transport_frontier_status.txt
+      commit_message: Record sponsor-pair transport frontier [skip ci]

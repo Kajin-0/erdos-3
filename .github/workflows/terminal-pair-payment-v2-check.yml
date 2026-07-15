@@ -10,6 +10,7 @@ on:
       - 'src/verify_sponsor_pair_transport_small_box.py'
       - 'src/verify_canonical_hole_witness_pair_small_box.py'
       - 'src/export_s7_terminal_completion_requests.py'
+      - 'src/export_s7_incremental_support_target_requests.py'
       - 'src/classify_s7_terminal_completion_saturation.cpp'
       - 'src/summarize_s7_edge_unresolved_completion_saturation.py'
       - 'src/summarize_s7_hole_support_first_appearance.py'
@@ -36,6 +37,7 @@ jobs:
             src/verify_sponsor_pair_transport_small_box.py \
             src/verify_canonical_hole_witness_pair_small_box.py \
             src/export_s7_terminal_completion_requests.py \
+            src/export_s7_incremental_support_target_requests.py \
             src/summarize_s7_edge_unresolved_completion_saturation.py \
             src/summarize_s7_hole_support_first_appearance.py \
             src/summarize_s7_new_hole_support_transport.py
@@ -78,6 +80,12 @@ jobs:
             s7_terminal_completion_classification.tsv \
             s7_new_hole_support_transport_profile.json \
             > s7_new_hole_support_transport_stdout.json
+          python3 src/export_s7_incremental_support_target_requests.py \
+            terminal_pair_payment_frontier_v2.json \
+            s7_terminal_completion_classification.tsv \
+            s7_incremental_support_completion_requests.txt \
+            s7_incremental_support_targets.json \
+            > s7_incremental_support_targets_stdout.json
 
       - name: Upload terminal-payment frontier
         if: always()
@@ -96,3 +104,6 @@ jobs:
             s7_hole_support_first_appearance_stdout.json
             s7_new_hole_support_transport_profile.json
             s7_new_hole_support_transport_stdout.json
+            s7_incremental_support_completion_requests.txt
+            s7_incremental_support_targets.json
+            s7_incremental_support_targets_stdout.json

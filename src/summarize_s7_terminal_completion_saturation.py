@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Summarize exact S7 saturation status of terminal completion requests."""
+"""Summarize exact S7 saturation and completion first-use ledgers."""
 from __future__ import annotations
 
 from collections import Counter, defaultdict
@@ -71,6 +71,41 @@ def read_classification(path: Path) -> dict[int, dict[str, object]]:
     return result
 
 
+def aspect_band(witness_step: int, target_gap: int) -> str:
+    if witness_step <= target_gap:
+        return "h_le_D"
+    if witness_step <= 2 * target_gap:
+        return "D_lt_h_le_2D"
+    if witness_step <= 4 * target_gap:
+        return "2D_lt_h_le_4D"
+    if witness_step <= 8 * target_gap:
+        return "4D_lt_h_le_8D"
+    return "h_gt_8D"
+
+
+def serialize_aspect_profile(
+    profile: dict[str, dict[str, object]],
+) -> list[dict[str, object]]:
+    order = (
+        "h_le_D",
+        "D_lt_h_le_2D",
+        "2D_lt_h_le_4D",
+        "4D_lt_h_le_8D",
+        "h_gt_8D",
+    )
+    rows = []
+    for band in order:
+        row = profile.get(band, {"count": 0, "mass": Fraction()})
+        rows.append(
+            {
+                "band": band,
+                "count": int(row["count"]),
+                "target_mass": serialize_mass(row["mass"]),
+            }
+        )
+    return rows
+
+
 def main() -> int:
     if len(sys.argv) != 4:
         raise SystemExit(
@@ -85,6 +120,7 @@ def main() -> int:
     s7 = build_s7()
 
     status_counts = Counter()
+    witness_steps: dict[int, int] = {}
     for completion, record in classifications.items():
         status = str(record["status"])
         status_counts[status] += 1
@@ -106,6 +142,7 @@ def main() -> int:
                 raise AssertionError("classification witness leaves S7")
             if completion in s7:
                 raise AssertionError("certified hole already belongs to S7")
+            witness_steps[completion] = step
         elif status == "S7_admissible_extension":
             if missing_index != -1 or witness != (0, 0, 0, 0):
                 raise AssertionError("admissible extension carries a fake witness")
@@ -128,7 +165,7 @@ def main() -> int:
         }
     )
     target_class_profile: dict[str, Counter[str]] = defaultdict(Counter)
-    completion_target_multiplicity: Counter[tuple[str, int]] = Counter()
+    completion_targets: dict[tuple[str, int], list[dict[str, object]]] = defaultdict(list)
     assignment_rows: list[tuple[object, ...]] = []
 
     unresolved_targets = 0
@@ -166,7 +203,7 @@ def main() -> int:
         aggregate["amplification"] += Fraction(row["transport_amplification_slack"])
         terminal_class = ",".join(row["terminal_classes"])
         target_class_profile[status][terminal_class] += 1
-        completion_target_multiplicity[(status, completion)] += 1
+        completion_targets[(status, completion)].append(row)
         assignment_rows.append(
             (
                 row["target"],
@@ -217,22 +254,85 @@ def main() -> int:
     if sum((row["target_occurrence"] for row in source_aggregate.values()), Fraction()) != unresolved_target_occurrence:
         raise AssertionError("source target occurrence partition failed")
 
+    completion_profile: dict[str, dict[str, object]] = defaultdict(
+        lambda: {
+            "first": Fraction(),
+            "reuse": Fraction(),
+            "singletons": 0,
+            "reused": 0,
+            "maximum": 0,
+        }
+    )
+    first_aspect: dict[str, dict[str, object]] = defaultdict(
+        lambda: {"count": 0, "mass": Fraction()}
+    )
+    all_aspect: dict[str, dict[str, object]] = defaultdict(
+        lambda: {"count": 0, "mass": Fraction()}
+    )
+    completion_rows: list[tuple[object, ...]] = []
+
+    for (status, completion), members in sorted(completion_targets.items()):
+        ordered = sorted(
+            members,
+            key=lambda row: (
+                -Fraction(row["target_weight"]),
+                tuple(int(value) for value in row["target"]),
+            ),
+        )
+        first = ordered[0]
+        first_weight = Fraction(first["target_weight"])
+        total_weight = sum((Fraction(row["target_weight"]) for row in ordered), Fraction())
+        profile = completion_profile[status]
+        profile["first"] += first_weight
+        profile["reuse"] += total_weight - first_weight
+        profile["singletons"] += len(ordered) == 1
+        profile["reused"] += len(ordered) > 1
+        profile["maximum"] = max(int(profile["maximum"]), len(ordered))
+
+        first_band = None
+        if status == "certified_S7_hole":
+            witness_step = witness_steps[completion]
+            first_target = tuple(int(value) for value in first["target"])
+            first_gap = first_target[1] - first_target[0]
+            first_band = aspect_band(witness_step, first_gap)
+            first_aspect[first_band]["count"] += 1
+            first_aspect[first_band]["mass"] += first_weight
+            for row in ordered:
+                target = tuple(int(value) for value in row["target"])
+                gap = target[1] - target[0]
+                band = aspect_band(witness_step, gap)
+                all_aspect[band]["count"] += 1
+                all_aspect[band]["mass"] += Fraction(row["target_weight"])
+
+        completion_rows.append(
+            (
+                status,
+                completion,
+                len(ordered),
+                fraction_text(total_weight),
+                tuple(first["target"]),
+                fraction_text(first_weight),
+                first_band,
+            )
+        )
+
     target_profile = []
     for status, row in target_aggregate.items():
-        multiplicities = [
-            count
-            for (candidate_status, _completion), count in completion_target_multiplicity.items()
-            if candidate_status == status
-        ]
+        completion_row = completion_profile[status]
+        if completion_row["first"] + completion_row["reuse"] != row["target_union"]:
+            raise AssertionError("completion first-use/reuse partition failed")
         target_profile.append(
             {
                 "status": status,
                 "targets": row["targets"],
                 "source_occurrences": row["source_occurrences"],
                 "distinct_completion_integers": status_counts[status],
-                "completion_integers_reused_by_targets": sum(value > 1 for value in multiplicities),
-                "maximum_targets_per_completion_integer": max(multiplicities, default=0),
+                "singleton_completion_integers": completion_row["singletons"],
+                "completion_integers_reused_by_targets": completion_row["reused"],
+                "maximum_targets_per_completion_integer": completion_row["maximum"],
                 "target_union_mass": serialize_mass(row["target_union"]),
+                "completion_first_target_mass": serialize_mass(completion_row["first"]),
+                "completion_target_reuse_mass": serialize_mass(completion_row["reuse"]),
                 "source_collision_mass": serialize_mass(row["source_collision"]),
                 "terminal_collision_mass": serialize_mass(row["terminal_collision"]),
                 "transport_amplification_slack": serialize_mass(row["amplification"]),
@@ -253,9 +353,20 @@ def main() -> int:
         )
     source_profile.sort(key=lambda row: -Fraction(row["initial_mass"]["fraction"]))
 
+    hole_first_mass = completion_profile["certified_S7_hole"]["first"]
+    hole_union_mass = target_aggregate["certified_S7_hole"]["target_union"]
+    if sum((row["mass"] for row in first_aspect.values()), Fraction()) != hole_first_mass:
+        raise AssertionError("first-target aspect mass partition failed")
+    if sum(int(row["count"]) for row in first_aspect.values()) != status_counts["certified_S7_hole"]:
+        raise AssertionError("first-target aspect count partition failed")
+    if sum((row["mass"] for row in all_aspect.values()), Fraction()) != hole_union_mass:
+        raise AssertionError("all-target aspect mass partition failed")
+    if sum(int(row["count"]) for row in all_aspect.values()) != target_aggregate["certified_S7_hole"]["targets"]:
+        raise AssertionError("all-target aspect count partition failed")
+
     classification_bytes = classification_path.read_bytes()
     output = {
-        "schema": "s7_terminal_completion_saturation_summary_v1",
+        "schema": "s7_terminal_completion_saturation_summary_v2",
         "scope": "ambient_unresolved terminal completions on certified residual-sponsor R4_to_F5 frontier",
         "generation_six_propagated": False,
         "s7": {
@@ -276,16 +387,30 @@ def main() -> int:
         },
         "target_profile": target_profile,
         "source_profile": source_profile,
+        "certified_hole_witness_aspect": {
+            "identity": "target_weight=(witness_step/target_gap)*witness_step_weight",
+            "first_target_profile": serialize_aspect_profile(first_aspect),
+            "all_target_profile": serialize_aspect_profile(all_aspect),
+        },
         "hashes": {
             "classification_tsv_sha256": hashlib.sha256(classification_bytes).hexdigest(),
             "target_assignments_sha256": canonical_hash(sorted(assignment_rows)),
+            "completion_first_use_rows_sha256": canonical_hash(completion_rows),
         },
         "checks": {
             "every_completion_classified": len(classifications) == sum(status_counts.values()),
             "target_count_partition": sum(int(row["targets"]) for row in target_profile) == unresolved_targets,
             "target_union_partition": sum((Fraction(row["target_union_mass"]["fraction"]) for row in target_profile), Fraction()) == unresolved_target_union,
+            "completion_first_use_reuse_partition": all(
+                Fraction(row["completion_first_target_mass"]["fraction"])
+                + Fraction(row["completion_target_reuse_mass"]["fraction"])
+                == Fraction(row["target_union_mass"]["fraction"])
+                for row in target_profile
+            ),
             "source_count_partition": sum(int(row["sources"]) for row in source_profile) == unresolved_sources,
             "source_initial_partition": sum((Fraction(row["initial_mass"]["fraction"]) for row in source_profile), Fraction()) == unresolved_initial,
+            "first_target_aspect_partition": sum((Fraction(row["target_mass"]["fraction"]) for row in serialize_aspect_profile(first_aspect)), Fraction()) == hole_first_mass,
+            "all_target_aspect_partition": sum((Fraction(row["target_mass"]["fraction"]) for row in serialize_aspect_profile(all_aspect)), Fraction()) == hole_union_mass,
         },
     }
     canonical = json.dumps(output, sort_keys=True, separators=(",", ":"))

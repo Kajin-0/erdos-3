@@ -1,0 +1,10 @@
+schema=sponsor_pair_transport_frontier_v1
+compile_exit_status=0
+probe_exit_status=0
+summary_exit_status=0
+verifier_exit_status=not_applicable
+source_commit=b2658a025248dc9b89c7ee1634e8e1645a153a49
+source_ref=refs/heads/main
+workflow_run_id=29379490697
+workflow_run_attempt=1
+--- stderr ---

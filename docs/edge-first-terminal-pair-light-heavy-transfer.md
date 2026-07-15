@@ -94,8 +94,7 @@ Partition the terminal targets into three disjoint classes.
 ### Three-AP edge targets
 
 Let `Z_edge` contain every target that is an edge of at least one three-term
-progression in the available parent or ambient root universe used for the
-current transfer.
+progression lying entirely in the charged root universe `P`.
 
 The full-edge capacity theorem gives
 
@@ -107,13 +106,15 @@ J(Z_{\rm edge})
 }
 ```
 
-The test uses every possible completion of the physical pair, not only the
-completion prescribed by its terminal transport class.
+The test uses every possible completion of the physical pair inside `P`, not
+only the completion prescribed by its terminal transport class. A completion
+available only outside `P` is not charged here and remains in the ambient
+remainder below.
 
 ### Certified same-shell holes
 
-After edge-supported targets are removed, let `Z_hole` contain targets assigned
-one selected completion
+After `P`-edge-supported targets are removed, let `Z_hole` contain targets
+assigned one selected completion
 
 ```math
 c\in[N,2N)\setminus P
@@ -138,7 +139,7 @@ ambient model:
 
 ```text
 admissible same-shell extensions;
-completions present outside the current parent lineage;
+completions present outside the charged root universe P;
 outside-shell completions;
 completion obligations not yet certified by a three-root hole witness.
 ```
@@ -241,7 +242,7 @@ R_{\rm src}(A).
 Every term has a distinct role:
 
 ```text
-(5/2)L3(P)             completed physical target edges;
+(5/2)L3(P)             completed physical target edges inside P;
 J(F_light)             one activation per light witness-support identity;
 H_comp                 named lower-scale four-AP-free recursive fibers;
 M_amb                  genuine ambient or cross-scale completion obligations;

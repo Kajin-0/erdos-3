@@ -8,6 +8,9 @@ on:
       - 'src/probe_sponsor_pair_transport_frontier.py'
       - 'src/probe_residual_sponsor_backbone_split.py'
       - 'src/verify_sponsor_pair_transport_small_box.py'
+      - 'src/export_s7_terminal_completion_requests.py'
+      - 'src/classify_s7_terminal_completion_saturation.cpp'
+      - 'src/summarize_s7_terminal_completion_saturation.py'
       - 'src/verify_retained_provenance_second_generation.py'
       - 'src/verify_retained_provenance_scale_profile.py'
       - 'src/probe_third_generation_recursive_frontier.py'
@@ -27,7 +30,12 @@ jobs:
         run: |
           python3 -m py_compile \
             src/probe_terminal_pair_payment_frontier_v2.py \
-            src/verify_sponsor_pair_transport_small_box.py
+            src/verify_sponsor_pair_transport_small_box.py \
+            src/export_s7_terminal_completion_requests.py \
+            src/summarize_s7_terminal_completion_saturation.py
+          g++ -O3 -std=c++17 \
+            src/classify_s7_terminal_completion_saturation.cpp \
+            -o classify_s7_terminal_completion_saturation
 
       - name: Run independent small-box verifier
         run: python3 src/verify_sponsor_pair_transport_small_box.py
@@ -39,6 +47,20 @@ jobs:
             --include-rows \
             > terminal_pair_payment_frontier_v2.json
 
+      - name: Classify S7 completion saturation
+        run: |
+          python3 src/export_s7_terminal_completion_requests.py \
+            terminal_pair_payment_frontier_v2.json \
+            s7_terminal_completion_requests.txt
+          ./classify_s7_terminal_completion_saturation \
+            s7_terminal_completion_requests.txt \
+            s7_terminal_completion_classification.tsv
+          python3 src/summarize_s7_terminal_completion_saturation.py \
+            terminal_pair_payment_frontier_v2.json \
+            s7_terminal_completion_classification.tsv \
+            s7_terminal_completion_saturation_summary.json \
+            > s7_terminal_completion_saturation_stdout.json
+
       - name: Upload terminal-payment frontier
         if: always()
         uses: actions/upload-artifact@v4
@@ -46,4 +68,9 @@ jobs:
           name: terminal-pair-payment-v2-${{ github.run_id }}-${{ github.run_attempt }}
           retention-days: 30
           if-no-files-found: error
-          path: terminal_pair_payment_frontier_v2.json
+          path: |
+            terminal_pair_payment_frontier_v2.json
+            s7_terminal_completion_requests.txt
+            s7_terminal_completion_classification.tsv
+            s7_terminal_completion_saturation_summary.json
+            s7_terminal_completion_saturation_stdout.json

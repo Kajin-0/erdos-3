@@ -8,9 +8,11 @@ on:
       - 'src/probe_sponsor_pair_transport_frontier.py'
       - 'src/probe_residual_sponsor_backbone_split.py'
       - 'src/verify_sponsor_pair_transport_small_box.py'
+      - 'src/verify_canonical_hole_witness_pair_small_box.py'
       - 'src/export_s7_terminal_completion_requests.py'
       - 'src/classify_s7_terminal_completion_saturation.cpp'
       - 'src/summarize_s7_terminal_completion_saturation.py'
+      - 'src/summarize_canonical_hole_support_pairs.py'
       - 'src/verify_retained_provenance_second_generation.py'
       - 'src/verify_retained_provenance_scale_profile.py'
       - 'src/probe_third_generation_recursive_frontier.py'
@@ -31,14 +33,18 @@ jobs:
           python3 -m py_compile \
             src/probe_terminal_pair_payment_frontier_v2.py \
             src/verify_sponsor_pair_transport_small_box.py \
+            src/verify_canonical_hole_witness_pair_small_box.py \
             src/export_s7_terminal_completion_requests.py \
-            src/summarize_s7_terminal_completion_saturation.py
+            src/summarize_s7_terminal_completion_saturation.py \
+            src/summarize_canonical_hole_support_pairs.py
           g++ -O3 -std=c++17 \
             src/classify_s7_terminal_completion_saturation.cpp \
             -o classify_s7_terminal_completion_saturation
 
-      - name: Run independent small-box verifier
-        run: python3 src/verify_sponsor_pair_transport_small_box.py
+      - name: Run independent small-box verifiers
+        run: |
+          python3 src/verify_sponsor_pair_transport_small_box.py
+          python3 src/verify_canonical_hole_witness_pair_small_box.py
 
       - name: Run terminal-payment frontier probe
         run: |
@@ -60,6 +66,11 @@ jobs:
             s7_terminal_completion_classification.tsv \
             s7_terminal_completion_saturation_summary.json \
             > s7_terminal_completion_saturation_stdout.json
+          python3 src/summarize_canonical_hole_support_pairs.py \
+            terminal_pair_payment_frontier_v2.json \
+            s7_terminal_completion_classification.tsv \
+            canonical_hole_support_pair_profile.json \
+            > canonical_hole_support_pair_stdout.json
 
       - name: Upload terminal-payment frontier
         if: always()
@@ -74,3 +85,5 @@ jobs:
             s7_terminal_completion_classification.tsv
             s7_terminal_completion_saturation_summary.json
             s7_terminal_completion_saturation_stdout.json
+            canonical_hole_support_pair_profile.json
+            canonical_hole_support_pair_stdout.json

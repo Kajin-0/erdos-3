@@ -86,7 +86,8 @@ python3 "$ROOT/src/verify_sponsor_pair_transport_small_box.py"
 python3 "$ROOT/src/verify_canonical_hole_witness_pair_small_box.py"
 python3 "$ROOT/src/verify_completion_step_fiber_light_heavy.py"
 python3 "$ROOT/src/verify_double_translate_four_ratio_exclusion.py"
+python3 "$ROOT/src/verify_global_shell_pair_batching.py"
 python3 "$ROOT/src/certified_contaminated_states.py" > /dev/null
 python3 "$ROOT/src/branching_reserve_lp.py" self-test
 
-echo "verified: lightweight exact certificates, independent pair, hole-witness, completion-fiber, and four-ratio checks, and LP harness"
+echo "verified: lightweight exact certificates, independent pair, hole-witness, completion-fiber, four-ratio, and global shell-batching checks, and LP harness"

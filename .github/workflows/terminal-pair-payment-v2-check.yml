@@ -11,8 +11,7 @@ on:
       - 'src/verify_canonical_hole_witness_pair_small_box.py'
       - 'src/export_s7_terminal_completion_requests.py'
       - 'src/classify_s7_terminal_completion_saturation.cpp'
-      - 'src/summarize_s7_terminal_completion_saturation.py'
-      - 'src/summarize_canonical_hole_support_pairs.py'
+      - 'src/summarize_s7_edge_unresolved_completion_saturation.py'
       - 'src/verify_retained_provenance_second_generation.py'
       - 'src/verify_retained_provenance_scale_profile.py'
       - 'src/probe_third_generation_recursive_frontier.py'
@@ -35,8 +34,7 @@ jobs:
             src/verify_sponsor_pair_transport_small_box.py \
             src/verify_canonical_hole_witness_pair_small_box.py \
             src/export_s7_terminal_completion_requests.py \
-            src/summarize_s7_terminal_completion_saturation.py \
-            src/summarize_canonical_hole_support_pairs.py
+            src/summarize_s7_edge_unresolved_completion_saturation.py
           g++ -O3 -std=c++17 \
             src/classify_s7_terminal_completion_saturation.cpp \
             -o classify_s7_terminal_completion_saturation
@@ -53,7 +51,7 @@ jobs:
             --include-rows \
             > terminal_pair_payment_frontier_v2.json
 
-      - name: Classify S7 completion saturation
+      - name: Classify edge-unresolved S7 completions
         run: |
           python3 src/export_s7_terminal_completion_requests.py \
             terminal_pair_payment_frontier_v2.json \
@@ -61,16 +59,11 @@ jobs:
           ./classify_s7_terminal_completion_saturation \
             s7_terminal_completion_requests.txt \
             s7_terminal_completion_classification.tsv
-          python3 src/summarize_s7_terminal_completion_saturation.py \
+          python3 src/summarize_s7_edge_unresolved_completion_saturation.py \
             terminal_pair_payment_frontier_v2.json \
             s7_terminal_completion_classification.tsv \
-            s7_terminal_completion_saturation_summary.json \
-            > s7_terminal_completion_saturation_stdout.json
-          python3 src/summarize_canonical_hole_support_pairs.py \
-            terminal_pair_payment_frontier_v2.json \
-            s7_terminal_completion_classification.tsv \
-            canonical_hole_support_pair_profile.json \
-            > canonical_hole_support_pair_stdout.json
+            s7_edge_unresolved_completion_saturation_summary.json \
+            > s7_edge_unresolved_completion_saturation_stdout.json
 
       - name: Upload terminal-payment frontier
         if: always()
@@ -83,7 +76,5 @@ jobs:
             terminal_pair_payment_frontier_v2.json
             s7_terminal_completion_requests.txt
             s7_terminal_completion_classification.tsv
-            s7_terminal_completion_saturation_summary.json
-            s7_terminal_completion_saturation_stdout.json
-            canonical_hole_support_pair_profile.json
-            canonical_hole_support_pair_stdout.json
+            s7_edge_unresolved_completion_saturation_summary.json
+            s7_edge_unresolved_completion_saturation_stdout.json

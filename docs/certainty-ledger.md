@@ -117,9 +117,13 @@ Statuses marked **exact finite** are computational statements for recorded objec
 | CL-098 | Every extra occurrence of a physical pair `e` under references `r_0,r` determines an affine completion rectangle and the exact aspect identity `w(e)=(|r-r_0|/|e|)w({r_0,r})`. Side, middle, and doubled rectangles exclude the aspect gaps `{D,4D}`, `{D/4,D}`, and `{D/2,2D}` respectively. Choosing one base reference makes extra branches injective rectangle tokens. | Symbolic pointwise collision-rectangle theorem. Whole-tree rectangle-token reuse remains open. |
 | CL-099 | For a fixed full-edge child type, completion transport preserves weighted three-AP load with coefficients `alpha_side=1/2`, `alpha_middle=1`, `alpha_double=2`: `alpha_t/d(Q)=1/h(T)`. Hence `alpha_t sum_C L_3(C) <= L_3(P)+X_t`, where `X_t=sum_T(m_t(T)-1)_+/h(T)` is exactly a first-appearance rectangle-aspect collision ledger. | State-independent type-weighted three-AP transport row. A three-type scalar allocation is supplied by CL-100. |
 | CL-100 | Weighting a child three-AP by its shell base gives one scalar first-appearance allocation. For a parent target of step `h` in base `N`, first side, middle, and doubled preimages consume at most `N/(2h)`, `N/(4h)`, and `N/(4h)`, exactly partitioning parent capacity `N/h`. Thus scale-weighted load `Psi_1=sum M(C)L_3(C)` is critical: first appearances satisfy `Psi_1<=N L_3(P)`. More generally `Psi_p<=c_pN^pL_3(P)` with `c_p=3/4^p+1/2^{p+1}`, so `c_1=1` and `c_p<1` for `p>1`; collision excess is the sole unresolved term. | Symbolic scale-critical three-AP Bellman row. Global summability of collision exposure is open. |
+| CL-101 | On the certified residual-sponsor `R_4 -> F_5` retained transition, `75247` distinct sponsor-core pair tokens are activated. Exact monotone transport terminates `72363` backward, `1513` direct, and `1371` residual. Activated initial union mass is `1181.622166508078...`; terminal target union mass is `970.461110516518...`; collision reuse is `710.942575247229...`. The family is concentrated in `74188` recursive latent pairs and `75055` sponsor-backbone resources. Of the activated pairs, `8725` have an in-parent completion and `66522` have parent-external completion status. | Exact finite sponsor-pair transport classification; fixed refined policy and retained quotient, no generation six. |
 
 Primary latest references:
 
+- `docs/sponsor-pair-transport-frontier.md`;
+- `src/verify_sponsor_pair_transport_frontier.py`;
+- `data/sponsor_pair_transport_frontier_certificate_2026-07-14.txt`;
 - `data/first_frontier_terminal_correction_certificate.txt`;
 - `src/verify_first_frontier_terminal_correction.py`;
 - `docs/full-color-coordinated-branching.md`;
@@ -232,47 +236,38 @@ Do not use without materially new hypotheses:
 
 ---
 
-# Open bottleneck OB-001: cumulative root-lineage reserve transfer
+# Open bottleneck OB-001: economical sponsor-pair activation transfer
 
-The adversarial retained construction now has:
+Universal affine closure and pair-resource containment control distinct pair tokens across descendants. The remaining issue is economical activation: pay only the pair resources actually used by recursive retained output.
 
-- legitimate point-disjoint retained families through generation five;
-- exact terminal/recursive partitions;
-- refined terminal identities and first-appearance bookkeeping;
-- exact failure of current-generation repeated-root reserve;
-- local policy sensitivity at the first failing transition;
-- and an exact root-lineage decomposition of that failure.
-
-At the baseline fourth-to-fifth transition,
-
-```math
-H_5^{\mathrm{rec}}-H_4^{\mathrm{rec}}
-=G_{4\to5}-L_{4\to5},
-```
-
-where `G` is harmonic scale gain along unique surviving root lineages and `L` is parent mass released by exiting lineages. The certified values satisfy
+On the certified residual-sponsor `R_4 -> F_5` transition:
 
 ```text
-G_4->5 = 1.816777911848...
-L_4->5 = 1.310139720502...
-G_4->5/L_4->5 = 1.386705466156...
+activated pair union mass       = 1181.622166508078...
+backward initial mass            =  760.440265648176...
+direct initial mass              =  417.530512851610...
+residual initial mass            =    3.651388008292...
+terminal target union mass       =  970.461110516518...
+transport collision reuse        =  710.942575247229...
 ```
 
-Thus the first failing transition is not driven by repeated-root branching. It is driven by scale contraction along unique surviving lineages exceeding released parent mass.
+The transport classification shows:
 
-The next theorem must define a state-independent cumulative ancestor-path capacity `A` and prove a transition inequality of the form
-
-```math
-H_{g+1}^{\mathrm{rec}}
-+A_{g+1}
-+T_{g+1}^{\mathrm{first}}
-\le
-H_g^{\mathrm{rec}}
-+A_g
-+\Phi_{\mathrm{obs},g}
-+\varepsilon_g.
+```text
+backward targets           = 72,363
+parent-external completions = 66,522
+collision targets           = 19,593
+maximum target multiplicity = 32.
 ```
 
-A new coordinate is admissible only if it has a transfer identity or one-sided recurrence, a bounded-reuse interpretation, and a telescoping role. Finite LP correlation is diagnostic only.
+The exact activation set is concentrated in recursive latent sponsor-backbone pairs. Residual termination and middle-fiber activation are negligible on this frontier.
 
-The fourth-to-fifth frontier is now closed exactly: every recursive state on both sides is affine, root and pair multiplicities are one, and `H(F_5)+J(R_5^rec)` is only `57.8189%` of `J(R_4^rec)`. Generation six remains blocked and unnecessary. The next concrete targets are the earlier transitions: certify affine coverage, measure occurrence-versus-union pair energy, and control repeated `(u,p)` pair tokens before the unique-root regime begins.
+The next theorem must combine:
+
+1. full-color edge capacity for completed in-parent targets;
+2. a first-appearance union ledger for terminal transport targets;
+3. bounded collision reuse through rectangle-aspect or reference-gap tokens;
+4. a split of external completions into ambient roots and genuine holes;
+5. completion, rectangle, or cheap-extension exclusion credit for genuine holes.
+
+The large positive slack in the raw set-valued transport inequality is not closure: it contains the unpaid backward and collision terms on the right-hand side. Generation six and additional fitted features remain blocked.

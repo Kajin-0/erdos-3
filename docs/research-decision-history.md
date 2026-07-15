@@ -400,6 +400,14 @@ Every activated sponsor pair has a monotone deletion-rank transport to a direct 
 
 The unresolved terms are transport collisions, parent-external ambient completions, genuine ambient holes, and reuse of edge capacity across retained branches.
 
+### Exact sponsor-pair transport classification
+
+The symbolic transport theorem was evaluated on the certified residual-sponsor `R_4 -> F_5` retained frontier. Of `75247` activated distinct pair tokens, `72363` terminate backward, `1513` direct, and `1371` residual. The activated family is almost entirely recursive latent sponsor-backbone capacity.
+
+Transport produces `40512` distinct terminal target pairs and `19593` collision targets. The exact collision-reuse mass is `710.942575247229...`, with maximum target multiplicity `32`. Parent-external completion status occurs for `66522` activated pairs, compared with `8725` in-parent completions.
+
+**Decision:** residual termination and middle-fiber activation are not the main frontier. The next proof effort must control backward geometry, external completions, and collision reuse with union-valued first-appearance tokens.
+
 **Decisions:**
 
 - current-generation multiplicity is not persistent reserve;

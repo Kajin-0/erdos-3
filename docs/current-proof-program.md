@@ -4,7 +4,7 @@
 
 This is the authoritative overview for the four-term case of Erdős Problem #3. The full reciprocal-sum problem remains open. Durable claims are tracked in `docs/certainty-ledger.md`.
 
-The active program now has a scale-critical three-AP transfer row. First side, middle, and doubled preimages partition one parent target with capacities `1/2,1/4,1/4`; unbounded collisions transfer to lower-scale reference-gap and rectangle-aspect tokens. The remaining theorem is global first-appearance control of the critical collision excess, plus external-completion and terminal release.
+The active program now has a scale-critical three-AP transfer row and an exact sponsor-pair transport classification on the refined retained frontier. The unresolved mass is concentrated in backward obstruction targets, parent-external completions, and terminal-target collision reuse. The next theorem is a union-valued first-appearance payment for those terms, not another retained generation or fitted feature.
 
 ## Corrected first retained frontier
 
@@ -438,6 +438,52 @@ Primary reference: `docs/residual-sponsor-backbone-refinement.md`.
 
 ---
 
+## Exact sponsor-pair transport frontier
+
+The state-independent sponsor-pair transport theorem has now been evaluated on the certified residual-sponsor `R_4 -> F_5` retained frontier.
+
+```text
+activated distinct pair tokens = 75,247
+inactive residual pairs         =     37
+backward terminal pairs         = 72,363
+direct terminal pairs           =  1,513
+residual terminal pairs         =  1,371
+```
+
+The activated union mass is `1181.622166508078...`. Transport produces `40512` distinct terminal targets and `19593` collision targets, with
+
+```text
+terminal target union mass = 970.461110516518...
+transport collision reuse  = 710.942575247229...
+maximum target multiplicity = 32.
+```
+
+The active family is almost entirely sponsor-backbone latent capacity:
+
+```text
+recursive latent pairs   = 74,188
+sponsor-backbone pairs   = 75,055
+middle-fiber-only pairs  =     15.
+```
+
+Completion status splits as
+
+```text
+in-parent completion      =  8,725 pairs
+parent-external completion = 66,522 pairs.
+```
+
+Thus the symbolic transport inequality is valid but not yet economical. The remaining payment is concentrated in:
+
+1. backward obstruction geometry;
+2. parent-external completions;
+3. terminal-target collision reuse.
+
+Residual termination and middle-fiber activation are minor on this exact frontier. No further retained generation is needed for the next test.
+
+Primary reference: `docs/sponsor-pair-transport-frontier.md`.
+---
+
 ## 1. Foundation and recorded exact path
 
 For
@@ -770,15 +816,15 @@ LP correlation alone is insufficient.
 
 ## 9. Approved next targets
 
-1. Use full-color side, doubled-side, and middle edge-capacity tokens as the local payment source for completed activated pairs.
-2. Classify sponsor-pair forward-transport targets on the certified refined fourth-to-fifth transition: direct, backward, residual, transport length, and target multiplicity.
-3. Bound transport-target collision reuse by a first-appearance or union-valued edge ledger.
-4. Split every parent-external completion into an ambient root outside the lineage and a genuine ambient hole; charge the two classes through provenance export and four-AP completion/rectangle witnesses respectively.
-5. Quantify how much of activated pair mass uses in-parent completed edges versus parent-external completions.
+1. Split the `72363` backward targets by in-parent completion versus parent-external completion, parent class, selected step, sponsor side, and first transport rank.
+2. Partition the `66522` parent-external completions into ambient roots outside the parent lineage and genuine ambient holes.
+3. Charge genuine holes through four-AP completion, rectangle-aspect, reference-gap, or cheap-extension exclusion tokens.
+4. Put the `19593` terminal collision targets in a union-valued first-appearance ledger and bound the exact reuse mass `710.942575247229...`.
+5. Exploit concentration in parent classes `93,82,77,65` and the positive sponsor side before attempting a general all-parent estimate.
 6. Treat the corrected residual-sponsor second frontier as the active early finite obstruction; do not propagate it to a third frontier until a specific transfer inequality is declared.
 7. Do not propagate generation six.
 
-The desired whole-tree inequality must combine affine pair union, full-color edge capacity, terminal first appearance, and bounded completion/transport reuse. Another fitted feature or another retained generation is not an approved substitute.
+The desired whole-tree inequality must combine affine pair union, full-color edge capacity, terminal first appearance, and bounded backward/completion/collision reuse. Another fitted feature or another retained generation is not an approved substitute.
 
 ---
 

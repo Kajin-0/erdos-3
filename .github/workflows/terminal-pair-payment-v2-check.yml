@@ -36,6 +36,7 @@ jobs:
         run: |
           python3 src/run_exact_python.py \
             src/probe_terminal_pair_payment_frontier_v2.py \
+            --include-rows \
             > terminal_pair_payment_frontier_v2.json
 
       - name: Upload terminal-payment frontier

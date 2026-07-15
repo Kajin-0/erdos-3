@@ -28,8 +28,8 @@ is `c`.
 Write `j(c)` for the missing position in `{0,1,2,3}`. Choose one witness
 deterministically when a hole has several witnesses.
 
-Every witness contains at least one adjacent pair of present points. Define the
-canonical support pair to be the first adjacent present pair:
+Every witness contains an adjacent pair of present points. Define the canonical
+support pair to be the first adjacent present pair:
 
 ```math
 f(c)=
@@ -181,65 +181,97 @@ and hence
 
 Thus certified-hole first-target mass has a bounded-reuse transport into actual
 physical pairs of the witness support. The remaining issue is not multiplicity
-at this map; it is how the support-pair union is paid or transported without
-double spending existing pair capacity.
+at this map; it is how the support-pair union is paid without double spending
+existing pair capacity.
 
 ---
 
-## 4. Certified S7 frontier profile
+## 4. Corrected S7 frontier profile
 
-For the `9334` certified `S7` holes on the terminal-payment frontier, the
-canonical assignment uses
+The finite profile is formed only after terminal targets already supported by
+any three-AP edge in `S7` have been removed. This leaves
 
 ```text
-8301 distinct support pairs;
-1033 support pairs used by two holes;
+8870 certified S7 holes
+```
+
+on the edge-unresolved terminal-payment frontier.
+
+The canonical assignment uses
+
+```text
+7929 distinct support pairs;
+ 941 support pairs used by two holes;
 maximum support-pair multiplicity = 2.
 ```
 
 The complete canonical support-pair masses are
 
 ```text
-support-pair union mass       = 392.983106001285...
-support-pair occurrence mass  = 513.150748986601...
-support-pair reuse mass       = 120.167642985316...
+support-pair union mass       = 386.699243131284...
+support-pair occurrence mass  = 502.942546688386...
+support-pair reuse mass       = 116.243303557102...
 ```
 
 The certified-hole completion-first target mass is
 
 ```math
-218.754197271041\ldots.
+168.669469494649\ldots.
 ```
 
 After choosing one maximum-weight target for every canonical support pair, only
 
 ```math
-6.230106721495\ldots
+5.523243331592\ldots
 ```
 
 of that mass is repeated at the support-pair assignment layer.
 
-In the near regime `h<=D`, the `4452` certified holes use
+In the near regime `h<=D`, the `4232` certified holes use
 
 ```text
-3847 distinct support pairs;
-605 support pairs used by two holes;
+3670 distinct support pairs;
+ 562 support pairs used by two holes;
 maximum multiplicity = 2.
 ```
 
 Their first-target mass is
 
 ```math
-128.373650251777\ldots.
+99.667156821497\ldots,
 ```
 
-The state-independent coefficient `2` is sharp on this frontier: some support
-pairs receive two near targets each having weight equal to the support-pair
-weight.
+and their support-pair assignment reuse is
+
+```math
+4.181354423532\ldots.
+```
+
+The state-independent coefficient `2` is sharp: some support pairs receive two
+near targets each having weight equal to the support-pair weight.
 
 ---
 
-## 5. Relation to existing no-go results
+## 5. Independent small-box verification
+
+The theorem is independently exhausted over all four-AP-free subsets of
+`[1,12]`, using witnesses in `[0,13]`.
+
+The verifier checks
+
+```text
+four-AP-free parents       = 2233
+certified hole checks      = 5590
+support-pair fibers        = 4371
+reused support-pair fibers = 1219
+maximum multiplicity       = 2
+```
+
+Multiplicity two is attained, so the universal bound is sharp.
+
+---
+
+## 6. Relation to existing no-go results
 
 The repository proves that recursive sponsor-pair and latent-pair multiplicity
 has no universal finite bound. The present theorem does not contradict that
@@ -259,24 +291,24 @@ certified completion hole -> canonical adjacent witness pair
 
 has multiplicity at most two by the four-point witness geometry.
 
-This is precisely why the completion layer is useful: saturation converts an
-unbounded branching object into a bounded-reuse local support object.
+Saturation converts an unbounded branching object into a bounded-reuse local
+support object.
 
 ---
 
-## 6. Remaining transfer obligation
+## 7. Remaining transfer obligation
 
 The next theorem must connect the canonical support-pair union to one of the
-already approved resources:
+approved resources:
 
-1. parent three-AP edge capacity when the support pair belongs to a completed
-   parent witness;
+1. three-AP edge capacity when the support pair already belongs to a completed
+   witness;
 2. affine pair first appearance when the support pair is already activated;
 3. rectangle-aspect or reference-gap transport when the support pair is reused;
 4. terminal first appearance when the support pair is new to the active
    lineage.
 
-The support-pair multiplicity is now controlled. What remains is a
-collision-sound first-appearance rule preventing the same physical support pair
-from paying both the original sponsor-pair ledger and the new hole-witness
-ledger without an explicit release.
+The support-pair multiplicity is controlled. What remains is a collision-sound
+first-appearance rule preventing one physical support pair from paying both the
+original sponsor-pair ledger and the hole-witness ledger without an explicit
+release.

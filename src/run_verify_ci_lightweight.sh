@@ -99,7 +99,8 @@ python3 "$ROOT/src/verify_lexicographic_retained_latent_reuse_no_go.py"
 python3 "$ROOT/src/verify_lexicographic_reserve_rank_two_no_go.py"
 python3 "$ROOT/src/verify_reserve_recursive_export.py"
 python3 "$ROOT/src/verify_coordinated_deletion_total_owner_degree_two.py"
+python3 "$ROOT/src/probe_recursive_current_latent_gadget.py" > /dev/null
 python3 "$ROOT/src/certified_contaminated_states.py" > /dev/null
 python3 "$ROOT/src/branching_reserve_lp.py" self-test
 
-echo "verified: lightweight exact certificates, independent pair, hole-witness, completion-fiber, four-ratio, global shell-batching, direct maximal-discharge, source-weighted discharge, cross-shell involution, exact-gap light-persistence, full-edge pair-incidence, affine owner-cycle, point-disjoint latent-reuse, far-aspect, policy-compatible latent-reuse, rank-two reserve no-go, recursive reserve-export, and total owner-degree checks, and LP harness"
+echo "verified: lightweight exact certificates, independent pair, hole-witness, completion-fiber, four-ratio, global shell-batching, direct maximal-discharge, source-weighted discharge, cross-shell involution, exact-gap light-persistence, full-edge pair-incidence, affine owner-cycle, point-disjoint latent-reuse, far-aspect, policy-compatible latent-reuse, rank-two reserve no-go, recursive reserve-export, total owner-degree, and sharp recursive current-latent critical no-go checks, and LP harness"

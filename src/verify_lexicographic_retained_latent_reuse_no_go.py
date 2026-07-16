@@ -43,43 +43,67 @@ def ordered_pair(left: int, right: int) -> Pair:
     return (left, right) if left < right else (right, left)
 
 
+def graph_cycle_rank(edges: tuple[tuple[Pair, Pair], ...]) -> tuple[int, int, int]:
+    vertices = {vertex for edge in edges for vertex in edge}
+    adjacency: dict[Pair, set[Pair]] = defaultdict(set)
+    for left, right in edges:
+        adjacency[left].add(right)
+        adjacency[right].add(left)
+
+    seen: set[Pair] = set()
+    components_count = 0
+    for vertex in vertices:
+        if vertex in seen:
+            continue
+        components_count += 1
+        seen.add(vertex)
+        stack = [vertex]
+        while stack:
+            current = stack.pop()
+            for target in adjacency[current]:
+                if target not in seen:
+                    seen.add(target)
+                    stack.append(target)
+    rank = len(edges) - len(vertices) + components_count
+    if rank < 0:
+        raise AssertionError("negative reserve graph cycle rank")
+    return len(vertices), components_count, rank
+
+
 def main() -> int:
     parent = (
-        25,
-        31,
+        1,
+        4,
+        5,
+        6,
+        20,
+        21,
+        22,
+        26,
+        27,
+        28,
         32,
         33,
-        68,
-        69,
-        70,
-        73,
-        74,
-        75,
-        78,
-        79,
-        80,
+        34,
     )
     if contains_four_ap(parent):
         raise AssertionError("retained latent-reuse parent contains a four-AP")
 
     selected, residual = resolve_lexicographic(frozenset(parent))
     expected_selected = (
-        (31, 32, 33, 1, 31, 33),
-        (68, 69, 70, 1, 68, 70),
-        (73, 74, 75, 1, 73, 75),
-        (78, 79, 80, 1, 78, 80),
-        (69, 74, 79, 5, 69, 79),
-        (70, 75, 80, 5, 70, 80),
+        (4, 5, 6, 1, 4, 6),
+        (20, 21, 22, 1, 20, 22),
+        (26, 27, 28, 1, 26, 28),
+        (32, 33, 34, 1, 32, 34),
+        (33, 27, 21, 6, 21, 33),
+        (34, 28, 22, 6, 22, 34),
     )
     if selected != expected_selected:
-        raise AssertionError("retained latent-reuse deletion schedule changed")
+        raise AssertionError(
+            f"retained latent-reuse deletion schedule changed: {selected}"
+        )
 
-    raw_rows = build_descendant_occurrences(
-        0,
-        parent,
-        parent,
-        selected,
-    )
+    raw_rows = build_descendant_occurrences(0, parent, parent, selected)
     occurrences = tuple(
         DescendantOccurrence(
             index=index,
@@ -113,7 +137,9 @@ def main() -> int:
     for state in retained:
         values = tuple(int(value) for value in state.values)
         roots = tuple(int(root) for root in state.representative.provenance)
-        references = {root - value for value, root in zip(values, roots, strict=True)}
+        references = {
+            root - value for value, root in zip(values, roots, strict=True)
+        }
         if len(references) != 1:
             raise AssertionError("retained no-go child is not affine")
         reference = references.pop()
@@ -195,27 +221,25 @@ def main() -> int:
 
     expected_retained_values = (
         (1,),
-        (6, 7),
-        (8,),
-        (37, 42, 47),
-        (43, 44, 45, 48, 49, 50, 53, 54, 55),
+        (3,),
+        (4, 5),
+        (16, 22, 28),
+        (19, 20, 21, 25, 26, 27, 31),
+        (32, 33),
     )
     if tuple(row["values"] for row in retained_rows) != expected_retained_values:
-        raise AssertionError("retained latent-reuse family changed")
+        raise AssertionError(
+            f"retained latent-reuse family changed: {retained_rows}"
+        )
 
-    expected_repeated = {
-        (68, 73),
-        (68, 78),
-        (69, 70),
-        (73, 78),
-    }
+    expected_repeated = {(20, 26), (20, 32), (26, 32)}
     if set(repeated) != expected_repeated:
         raise AssertionError("retained latent-reuse resource set changed")
-    if current_latent_mass != 1:
-        raise AssertionError("retained current-latent overlap changed")
-    if latent_latent_mass != Fraction(1, 2):
+    if current_latent_mass != 0:
+        raise AssertionError("clean retained witness gained current-latent overlap")
+    if latent_latent_mass != Fraction(5, 12):
         raise AssertionError("retained latent-latent residual changed")
-    if profiles != Counter({(0, 2, 2): 3, (1, 1, 2): 1}):
+    if profiles != Counter({(0, 2, 2): 3}):
         raise AssertionError("retained latent-reuse owner profiles changed")
 
     recursive_middle = next(
@@ -228,17 +252,69 @@ def main() -> int:
         for row in retained_rows
         if row["source"] == "backbone"
         and not row["terminal"]
-        and row["exponent"] == 5
+        and row["exponent"] == 4
     )
-    if recursive_middle["reference"] != 31 or recursive_backbone["reference"] != 25:
+    if recursive_middle["reference"] != 4 or recursive_backbone["reference"] != 1:
         raise AssertionError("retained latent-reuse references changed")
-    reference_gap = 6
+    if tuple(recursive_middle["roots"]) != (20, 26, 32):
+        raise AssertionError("retained middle root set changed")
+
+    reference_gap = 3
     reference_capacity = Fraction(1, reference_gap)
-    if latent_latent_mass / reference_capacity != 3:
+    if latent_latent_mass / reference_capacity != Fraction(5, 4):
         raise AssertionError("retained latent/reference ratio changed")
 
+    center_reserves = (
+        ((20, 26), (21, 27)),
+        ((20, 32), (21, 33)),
+        ((26, 32), (27, 33)),
+    )
+    opposite_reserves = (
+        ((20, 26), (22, 28)),
+        ((20, 32), (22, 34)),
+        ((26, 32), (28, 34)),
+    )
+    reserve_edges = tuple(
+        (center, opposite)
+        for (_demand, center), (_same_demand, opposite) in zip(
+            center_reserves, opposite_reserves, strict=True
+        )
+    )
+    for (demand, center), (same_demand, opposite) in zip(
+        center_reserves, opposite_reserves, strict=True
+    ):
+        if demand != same_demand:
+            raise AssertionError("reserve demand alignment failed")
+        gap = demand[1] - demand[0]
+        if center[1] - center[0] != gap or opposite[1] - opposite[0] != gap:
+            raise AssertionError("translated reserve failed gap preservation")
+        if not set(center) <= set(parent) or not set(opposite) <= set(parent):
+            raise AssertionError("translated reserve left parent")
+
+    reserve_vertices, reserve_components, reserve_cycle_rank = graph_cycle_rank(
+        reserve_edges
+    )
+    if (
+        reserve_vertices,
+        len(reserve_edges),
+        reserve_components,
+        reserve_cycle_rank,
+    ) != (6, 3, 3, 0):
+        raise AssertionError("clean reserve graph profile changed")
+
+    center_capacity = sum(
+        (Fraction(1, pair[1] - pair[0]) for _demand, pair in center_reserves),
+        Fraction(),
+    )
+    opposite_capacity = sum(
+        (Fraction(1, pair[1] - pair[0]) for _demand, pair in opposite_reserves),
+        Fraction(),
+    )
+    if center_capacity != latent_latent_mass or opposite_capacity != latent_latent_mass:
+        raise AssertionError("translated reserve capacity identity failed")
+
     output = {
-        "schema": "lexicographic_retained_latent_reuse_no_go_v1",
+        "schema": "lexicographic_retained_latent_reuse_no_go_v2",
         "parent": parent,
         "selected_schedule": selected,
         "terminal_residual": tuple(sorted(residual)),
@@ -247,28 +323,36 @@ def main() -> int:
             "exact_classes": len(classes),
             "retained_states": len(retained),
             "optimizer_components": len(optimizer_counts),
-            "nonunique_optimizer_components": sum(count > 1 for count in optimizer_counts),
+            "nonunique_optimizer_components": sum(
+                count > 1 for count in optimizer_counts
+            ),
             "repeated_parent_resources": len(repeated),
-            "current_latent_resources": 1,
+            "current_latent_resources": 0,
             "latent_latent_resources": 3,
             "maximum_owner_degree": 2,
             "maximum_latent_degree": 2,
             "child_recreation_resources": 0,
             "owner_cycle_rank": 0,
+            "reserve_graph_vertices": reserve_vertices,
+            "reserve_graph_edges": len(reserve_edges),
+            "reserve_graph_components": reserve_components,
+            "reserve_graph_cycle_rank": reserve_cycle_rank,
         },
         "masses": {
             "current_latent_overlap_fraction": str(current_latent_mass),
             "latent_latent_residual_fraction": str(latent_latent_mass),
-            "branching_excess_fraction": str(
-                current_latent_mass + latent_latent_mass
-            ),
+            "branching_excess_fraction": str(latent_latent_mass),
             "reference_pair_capacity_fraction": str(reference_capacity),
             "latent_to_reference_ratio_fraction": str(
                 latent_latent_mass / reference_capacity
             ),
+            "center_reserve_capacity_fraction": str(center_capacity),
+            "opposite_reserve_capacity_fraction": str(opposite_capacity),
         },
         "retained_states": retained_rows,
         "repeated_resources": repeated_rows,
+        "center_reserves": center_reserves,
+        "opposite_reserves": opposite_reserves,
         "profiles": [
             {
                 "current_owners": profile[0],
@@ -282,10 +366,15 @@ def main() -> int:
             "parent_four_ap_free": True,
             "actual_lexicographic_deletion": True,
             "maximum_harmonic_point_disjoint_retention": True,
-            "positive_latent_latent_residual": latent_latent_mass > 0,
+            "pure_latent_latent_residual": current_latent_mass == 0,
             "one_reference_pair_insufficient": (
                 latent_latent_mass > reference_capacity
             ),
+            "center_reserve_pays_exactly": center_capacity == latent_latent_mass,
+            "opposite_reserve_pays_exactly": (
+                opposite_capacity == latent_latent_mass
+            ),
+            "reserve_graph_is_forest": reserve_cycle_rank == 0,
         },
     }
     canonical = json.dumps(output, sort_keys=True, separators=(",", ":"))

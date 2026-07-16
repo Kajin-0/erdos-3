@@ -6,16 +6,16 @@ State-independent one-generation composition of:
 
 ```text
 the overlap-corrected affine pair-energy row;
-terminal-current stopping;
-production-compatible direct discharge of recursive current-overlap occurrences;
-recursive export of unmatched middle latent demands.
+production-compatible direct discharge of the complete parent pair potential;
+terminal/current classification;
+capacity-aware middle reserve export.
 ```
 
-The theorem preserves exact ownership of parent pair capacity and parent three-AP edge occurrences. It does not discharge the entire parent pair potential a second time.
+The parent pair energy is an intermediate Bellman potential and is eliminated completely. The free full-edge occurrence-token term prevents local three-AP production from being spent twice.
 
 ---
 
-## 1. Affine child row
+## 1. Overlap-corrected affine row
 
 Let
 
@@ -23,64 +23,46 @@ Let
 P\subseteq[N,2N)
 ```
 
-be the parent root universe, and let the point-disjoint retained affine child family satisfy
+be the parent root universe. For a point-disjoint retained affine child family, define
 
 ```math
+\operatorname{Child}(P)
+=
 \sum_i
 \left(
 H(S_{r_i}(Q_i))
 +
 \mathbf 1_{i\text{ recursive}}J(Q_i)
-\right)
+\right).
+```
+
+The overlap-corrected affine theorem gives
+
+```math
+\boxed{
+\operatorname{Child}(P)
 \le
 J(P)
 +
 W(C_{\rm current})
 +
 W(X_{\rm middle}).
+}
 ```
 
 Here:
 
 ```text
-J(P) pays child first appearances and matched center/opposite reserves;
+J(P) is the complete intermediate parent pair potential;
 C_current is the injective current-latent overlap occurrence family;
 X_middle is the unmatched duplicated-latent middle occurrence family.
 ```
 
-The physical pair identities underlying `C_current` already occur in the first-appearance union paid by `J(P)`. The term `W(C_current)` is an additional occurrence debt, not a second copy of physical pair capacity.
+The internal proof partitions `J(P)` among child first appearances, matched center/opposite reserves, and unused pair capacity. That internal partition is used only to establish the displayed inequality.
 
 ---
 
-## 2. Terminal and recursive current overlap
-
-Partition
-
-```math
-C_{\rm current}
-=
-C_{\rm term}
-\sqcup
-C_{\rm rec}
-```
-
-according to whether the unique current owner is terminal or recursive.
-
-Then
-
-```math
-W(C_{\rm current})
-=
-W(C_{\rm term})+J(C_{\rm rec}),
-```
-
-because point-disjointness makes the recursive current physical identities distinct.
-
-The terminal family leaves the recursive ledger. The recursive family is an activated occurrence-owned physical pair set and is sent through direct maximal-ambient discharge.
-
----
-
-## 3. Occurrence-token partition for recursive current overlap
+## 2. Complete parent-pair discharge
 
 Let
 
@@ -88,7 +70,7 @@ Let
 \mathscr E(P)
 ```
 
-be the complete parent full-edge occurrence-token family, of mass
+be the complete full-edge occurrence-token family of the parent, with
 
 ```math
 W(\mathscr E(P))
@@ -96,25 +78,25 @@ W(\mathscr E(P))
 \frac52\mathcal L_3(P).
 ```
 
-Apply production-compatible direct discharge to the activated set
+Activate the complete physical parent pair set
 
 ```math
-A=C_{\rm rec}.
+A=\binom P2.
 ```
 
-For every local completed pair, consume one deterministic parent edge occurrence. Let
+For every pair completed locally by a parent three-AP, consume one deterministic edge occurrence. Let
 
 ```math
 \mathscr E_{\rm free}
 ```
 
-be the remaining edge-token family.
+be the remaining parent edge-token family.
 
-The production-compatible row gives
+Apply direct maximal-ambient discharge, capacity-aware light/heavy allocation, and terminal stopping to every pair in `A`. The production-compatible row gives
 
 ```math
 \boxed{
-J(C_{\rm rec})
+J(P)
 +
 W(\mathscr E_{\rm free})
 \le
@@ -128,50 +110,37 @@ W(H_{\rm term}).
 }
 ```
 
-Here:
+The output families are:
 
 ```text
-E_new is a genuinely new physical pair union;
-H_rec is the occurrence-owned recursive heavy output;
-H_term is the terminal heavy or obstruction sink output.
+E_new: one globally disjoint physical pair union outside the entering pair set;
+H_rec: occurrence-owned recursive heavy output;
+H_term: terminal heavy, maximality, or arithmetic-obstruction output.
 ```
 
-Capacity-aware light supports are included in `E_new`, and every physical output remains subject to the global exclusion ledger.
+Light support pairs are included in `E_new`. Every local edge occurrence used to discharge `J(P)` is removed from `E_free`.
 
 ---
 
-## 4. Combined Bellman inequality
+## 3. Complete Bellman inequality
 
-Insert the direct-discharge estimate for `J(C_rec)` into the affine child row. This gives
+Add the nonnegative free-token family to the affine child row:
 
 ```math
-\begin{aligned}
-&\sum_i
-\left(
-H(S_{r_i}(Q_i))
+\operatorname{Child}(P)
 +
-\mathbf 1_{i\text{ recursive}}J(Q_i)
-\right)
-+
-W(\mathscr E_{\rm free})\\
-&\qquad\le
+W(\mathscr E_{\rm free})
+\le
 J(P)
 +
-W(C_{\rm term})
+W(\mathscr E_{\rm free})
 +
-\frac52\mathcal L_3(P)
-+
-J(E_{\rm new})
-+
-W(H_{\rm rec})
-+
-W(H_{\rm term})
+W(C_{\rm current})
 +
 W(X_{\rm middle}).
-\end{aligned}
 ```
 
-Therefore
+Substitute the complete parent-pair discharge inequality. This yields
 
 ```math
 \boxed{
@@ -180,46 +149,30 @@ Therefore
 +
 W(\mathscr E_{\rm free})
 \le{}&
-J(P)
-+
-\frac52\mathcal L_3(P)\\
-&+
-W(C_{\rm term})
+\frac52\mathcal L_3(P)
 +
 J(E_{\rm new})\\
 &+
 W(H_{\rm rec})
 +
-W(H_{\rm term})
+W(H_{\rm term})\\
+&+
+W(C_{\rm current})
 +
-W(X_{\rm middle}),
+W(X_{\rm middle}).
 \end{aligned}
 }
 ```
 
-where
+The intermediate parent pair potential `J(P)` has disappeared.
+
+Dropping the nonnegative free-token term gives the weaker production-only row
 
 ```math
-\operatorname{Child}(P)
-=
-\sum_i
-\left(
-H(S_{r_i}(Q_i))
-+
-\mathbf 1_{i\text{ recursive}}J(Q_i)
-\right).
-```
-
-Dropping the nonnegative free-token term gives the weaker but simpler row
-
-```math
+\boxed{
 \operatorname{Child}(P)
 \le
-J(P)
-+
 \frac52\mathcal L_3(P)
-+
-W(C_{\rm term})
 +
 J(E_{\rm new})
 +
@@ -227,107 +180,192 @@ W(H_{\rm rec})
 +
 W(H_{\rm term})
 +
+W(C_{\rm current})
++
 W(X_{\rm middle}).
-```
-
----
-
-## 5. Ownership audit
-
-Every resource has one role.
-
-### Parent physical pair capacity
-
-```text
-child first appearance;
-matched center/opposite latent reserve;
-unspent future affine-pivot capacity.
-```
-
-These roles are disjoint subsets of `J(P)`.
-
-### Parent full-edge occurrence capacity
-
-```text
-pay one local recursive current-overlap occurrence;
-or remain in E_free.
-```
-
-One edge occurrence cannot do both.
-
-### Additional occurrence outputs
-
-```text
-C_term: terminal current sink;
-E_new: one new physical pair lineage;
-H_rec: strictly lower-gap recursive heavy lineage;
-H_term: terminal heavy/obstruction sink;
-X_middle: strictly lower-owner-scale middle occurrence.
-```
-
-No parent physical pair is reused as both first-appearance capacity and a center/opposite reserve, because the complete first-appearance union is excluded before reserve matching.
-
----
-
-## 6. Triangular coordinates
-
-The recursive outputs have independent monotone coordinates.
-
-### New direct pair lineages
-
-`E_new` follows the direct-discharge pair-lineage theorem:
-
-```text
-physical dyadic gap never increases;
-every first-appearance lineage terminates or recreates in finite time.
-```
-
-### Recursive heavy output
-
-`H_rec` contracts physical dyadic gap by at least one level, or two levels in the outer role.
-
-### Middle export
-
-`X_middle` lies at owner scale at most `N/4`. At the critical owner-scale moment it contracts by a factor at most `1/4`.
-
-### Terminal output
-
-`C_term` and `H_term` leave the recursive ledger.
-
-Thus every correction to the affine pair-energy row is either terminal, pathwise finite, lower-gap, or lower-owner-scale.
-
----
-
-## 7. Why the parent pair potential remains
-
-The term `J(P)` is not discharged in this composition because it has already been assigned to:
-
-```text
-child first appearances;
-matched latent reserves;
-future affine pivot capacity.
-```
-
-Applying direct discharge to all of `J(P)` simultaneously would spend the same physical pair capacity twice.
-
-The remaining entry problem is therefore unchanged but sharper:
-
-```math
-\boxed{
-\text{pay the first entry into }J(P)
-\text{ once, then telescope it through the corrected affine tree.}
 }
 ```
 
 ---
 
-## 8. Remaining global theorem
+## 4. Why this does not double spend pair capacity
 
-The local current/latent overlap obstruction is closed. A complete proof must still:
+The two input inequalities use `J(P)` differently but compatibly.
 
-1. pay the initial or newly entered parent pair potential `J(P)`;
-2. pack the globally new pair union `E_new` across production owners;
-3. control terminal-sink recreation;
-4. sum direct finite lineages without losing their ownership labels;
-5. combine the `7/4` first-appearance depth release with the `1/2` current and `1/4` middle owner-scale drops;
+### Affine inequality
+
+`J(P)` is an intermediate numerical majorant for:
+
+```text
+one first occurrence of every child resource;
+matched center/opposite reserve pairs;
+unused affine pivot capacity.
+```
+
+### Direct-discharge inequality
+
+The same intermediate scalar `J(P)` is paid by exactly one partition of parent resources:
+
+```text
+one parent edge occurrence for every local completed pair;
+new physical pair output for cross-shell or light transfer;
+recursive or terminal heavy output for the remaining holes.
+```
+
+The free-token term records every parent edge occurrence not consumed by local pair payment.
+
+Combining
+
+```math
+\operatorname{Child}(P)\le J(P)+\text{corrections}
+```
+
+with
+
+```math
+J(P)+W(\mathscr E_{\rm free})\le\text{production outputs}
+```
+
+is ordinary Bellman elimination of an intermediate potential. `J(P)` is present once, then removed. No physical pair or edge occurrence appears twice in the final row.
+
+---
+
+## 5. Current-overlap classification
+
+Partition
+
+```math
+C_{\rm current}
+=
+C_{\rm term}
+\sqcup
+C_{\rm rec}.
+```
+
+### Terminal current overlap
+
+`C_term` enters the terminal sink ledger and does not recurse.
+
+### Recursive current overlap
+
+Every occurrence in `C_rec` lies in a retained child shell of base
+
+```math
+L\le\frac N2,
+```
+
+because every positive difference of two roots in `[N,2N)` is less than `N`.
+
+Thus at the critical owner-scale moment
+
+```math
+\Theta_1(f;S)=\frac S{\operatorname{gap}(f)},
+```
+
+recursive current overlap contracts by a factor at most `1/2` before it enters its next direct pair-lineage step.
+
+---
+
+## 6. Middle-export classification
+
+Every occurrence in `X_middle` lies in a retained middle shell of base
+
+```math
+L\le\frac N4.
+```
+
+Hence
+
+```math
+\Theta_1(X_{\rm middle})
+\le
+\frac14N\,W(D_{\rm export}).
+```
+
+At raw pair weight, every such export conserves its demand mass but releases at least two dyadic owner levels.
+
+For one physical parent resource, at most one recursive current-overlap occurrence and at most one unmatched middle occurrence survive. Therefore its complete overlap residue satisfies
+
+```math
+\boxed{
+\Theta_1(\text{overlap residue of }f)
+\le
+\left(\frac12+\frac14\right)
+\frac N{\operatorname{gap}(f)}
+=
+\frac34\Theta_1(f;N).
+}
+```
+
+---
+
+## 7. Other output coordinates
+
+### New pair union
+
+`E_new` enters the occurrence-owned direct pair-lineage ledger. Physical dyadic gap never increases, and every first-appearance lineage terminates or recreates in finite time.
+
+### Recursive heavy output
+
+`H_rec` contracts physical dyadic gap by at least one level, or by at least two levels in the outer role.
+
+### Terminal output
+
+`H_term` and `C_term` leave the recursive ledger.
+
+### Free edge tokens
+
+`E_free` remains on the left of the strong row. It is unused production capacity and can supply later first-appearance branching without being regenerated.
+
+---
+
+## 8. Exact resource roles
+
+Every parent object has one role.
+
+### Parent edge occurrence
+
+```text
+pay one local parent pair;
+or remain in E_free.
+```
+
+### Parent pair potential unit
+
+```text
+serve as an intermediate affine first-appearance/reserve majorant;
+then be eliminated through direct discharge.
+```
+
+### Child overlap occurrence
+
+```text
+terminal current sink;
+recursive current continuation at scale at most N/2;
+recursive middle export at scale at most N/4.
+```
+
+### Direct-discharge output
+
+```text
+new pair lineage;
+recursive lower-gap heavy lineage;
+terminal obstruction output.
+```
+
+The final inequality contains no anonymous collision or unpaid entering pair-energy term.
+
+---
+
+## 9. Remaining global theorem
+
+The local pair-energy entry problem is closed at one generation. The surviving whole-tree tasks are now:
+
+1. pack `E_new` across production owners and merge physical recreations;
+2. sum finite direct pair lineages globally rather than pathwise;
+3. control recreation of terminal current and heavy sinks;
+4. combine the exact `7/4` first-appearance depth release with the `1/2` current and `1/4` middle owner-scale contractions;
+5. preserve the free-edge occurrence ledger across generations;
 6. deduce dyadic reciprocal-density summability.
+
+The active obstruction is global first-appearance and recreation packing, not local pair-energy entry or latent activation.

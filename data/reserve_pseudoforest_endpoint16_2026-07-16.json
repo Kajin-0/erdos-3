@@ -1,0 +1,30 @@
+{
+  "checks": {
+    "all_reserve_components_pseudoforests": true,
+    "every_duplicate_is_backbone_middle": true,
+    "latent_degree_at_most_two": true,
+    "translated_reserves_preserve_gap": true
+  },
+  "counts": {
+    "cyclic_reserve_components": 0,
+    "four_ap_free_parents": 22464,
+    "maximum_duplicate_demands": 0,
+    "maximum_reserve_cycle_rank": 0,
+    "parents_with_latent_reuse": 0,
+    "rank_two_reserve_components": 0,
+    "total_duplicate_demands": 0
+  },
+  "endpoint": 16,
+  "first_rank_two_witness": null,
+  "maximum_rank_witness": null,
+  "payload_sha256": "dc6d8d933eabbdbde4073276f980a92a7026770e56d3c34ce7108a57ba10db00",
+  "profile_histogram": [
+    {
+      "duplicate_demands": 0,
+      "maximum_cycle_rank": 0,
+      "parents": 22464,
+      "reserve_components": 0
+    }
+  ],
+  "schema": "lexicographic_reserve_pseudoforest_small_box_v1"
+}

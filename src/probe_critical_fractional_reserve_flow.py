@@ -19,6 +19,7 @@ from search_lexicographic_reserve_pseudoforest_small_box import (
 from verify_retained_terminal_split import contains_three_term_ap
 
 Pair = tuple[int, int]
+Node = tuple[object, ...]
 
 
 def shell_base(values: tuple[int, ...]) -> int:
@@ -32,50 +33,52 @@ def critical_flow(
     demands: dict[Pair, tuple[Fraction, tuple[Pair, Pair]]],
     capacities: dict[Pair, Fraction],
 ) -> tuple[Fraction, dict[Pair, dict[Pair, Fraction]]]:
-    source = ("source",)
-    sink = ("sink",)
-    graph: dict[tuple[object, ...], set[tuple[object, ...]]] = defaultdict(set)
-    cap: dict[tuple[tuple[object, ...], tuple[object, ...]], Fraction] = defaultdict(Fraction)
+    source: Node = ("source",)
+    sink: Node = ("sink",)
+    graph: dict[Node, set[Node]] = defaultdict(set)
+    capacity: dict[tuple[Node, Node], Fraction] = defaultdict(Fraction)
 
-    def add_edge(left: tuple[object, ...], right: tuple[object, ...], value: Fraction) -> None:
+    def add_edge(left: Node, right: Node, value: Fraction) -> None:
         graph[left].add(right)
         graph[right].add(left)
-        cap[(left, right)] += value
+        capacity[(left, right)] += value
 
     total_demand = sum((value[0] for value in demands.values()), Fraction())
-    for demand, (amount, reserves) in demands.items():
-        dnode = ("d", *demand)
-        add_edge(source, dnode, amount)
-        for reserve in reserves:
-            rnode = ("r", *reserve)
-            add_edge(dnode, rnode, amount)
-    for reserve, amount in capacities.items():
+    for demand, (amount, reserves) in sorted(demands.items()):
+        demand_node: Node = ("d", *demand)
+        add_edge(source, demand_node, amount)
+        for reserve in sorted(reserves):
+            reserve_node: Node = ("r", *reserve)
+            add_edge(demand_node, reserve_node, amount)
+    for reserve, amount in sorted(capacities.items()):
         if amount > 0:
             add_edge(("r", *reserve), sink, amount)
 
-    flow: dict[tuple[tuple[object, ...], tuple[object, ...]], Fraction] = defaultdict(Fraction)
+    flow: dict[tuple[Node, Node], Fraction] = defaultdict(Fraction)
     value = Fraction()
     while True:
-        parent: dict[tuple[object, ...], tuple[object, ...] | None] = {source: None}
+        parent: dict[Node, Node | None] = {source: None}
         queue = deque([source])
         while queue and sink not in parent:
             current = queue.popleft()
-            for target in graph[current]:
-                residual = cap[(current, target)] - flow[(current, target)]
+            for target in sorted(graph[current], key=repr):
+                residual = capacity[(current, target)] - flow[(current, target)]
                 if residual > 0 and target not in parent:
                     parent[target] = current
                     queue.append(target)
         if sink not in parent:
             break
+
         increment: Fraction | None = None
         current = sink
         while parent[current] is not None:
             previous = parent[current]
             assert previous is not None
-            residual = cap[(previous, current)] - flow[(previous, current)]
+            residual = capacity[(previous, current)] - flow[(previous, current)]
             increment = residual if increment is None else min(increment, residual)
             current = previous
         assert increment is not None and increment > 0
+
         current = sink
         while parent[current] is not None:
             previous = parent[current]
@@ -86,11 +89,11 @@ def critical_flow(
         value += increment
 
     allocation: dict[Pair, dict[Pair, Fraction]] = defaultdict(dict)
-    for demand in demands:
-        dnode = ("d", *demand)
-        for target in graph[dnode]:
+    for demand in sorted(demands):
+        demand_node: Node = ("d", *demand)
+        for target in sorted(graph[demand_node], key=repr):
             if target and target[0] == "r":
-                amount = flow[(dnode, target)]
+                amount = flow[(demand_node, target)]
                 if amount > 0:
                     allocation[demand][(int(target[1]), int(target[2]))] = amount
     if value > total_demand:
@@ -101,7 +104,7 @@ def critical_flow(
 def profile(name: str, parent: tuple[int, ...]) -> dict[str, object]:
     if contains_four_ap(parent):
         raise AssertionError(f"{name}: parent contains a four-AP")
-    N = shell_base(parent)
+    parent_base = shell_base(parent)
     retained = retained_family(parent)
     owners: dict[Pair, list[dict[str, object]]] = defaultdict(list)
 
@@ -112,26 +115,37 @@ def profile(name: str, parent: tuple[int, ...]) -> dict[str, object]:
         if len(references) != 1:
             raise AssertionError(f"{name}: retained child is not affine")
         reference = references.pop()
-        L = shell_base(values)
+        child_base = shell_base(values)
         terminal = not contains_three_term_ap(values)
         source = str(state.representative.source)
         step = state.representative.source_step
+
         for root in roots:
             resource = ordered_pair(reference, root)
-            owners[resource].append({
-                "kind": "current", "source": source, "step": step,
-                "scale": L, "terminal": terminal,
-                "ratio": Fraction(L, N),
-            })
+            owners[resource].append(
+                {
+                    "kind": "current",
+                    "source": source,
+                    "step": step,
+                    "scale": child_base,
+                    "terminal": terminal,
+                    "ratio": Fraction(child_base, parent_base),
+                }
+            )
         if terminal:
             continue
         for left, right in combinations(roots, 2):
             resource = ordered_pair(left, right)
-            owners[resource].append({
-                "kind": "latent", "source": source, "step": step,
-                "scale": L, "terminal": False,
-                "ratio": Fraction(2 * L, N),
-            })
+            owners[resource].append(
+                {
+                    "kind": "latent",
+                    "source": source,
+                    "step": step,
+                    "scale": child_base,
+                    "terminal": False,
+                    "ratio": Fraction(2 * child_base, parent_base),
+                }
+            )
 
     load_ratio = {
         resource: sum((Fraction(row["ratio"]) for row in rows), Fraction())
@@ -144,28 +158,36 @@ def profile(name: str, parent: tuple[int, ...]) -> dict[str, object]:
 
     latent_demands: dict[Pair, tuple[Fraction, tuple[Pair, Pair]]] = {}
     current_excess: dict[Pair, Fraction] = {}
-    current_excess_terminal = Fraction()
-    current_excess_recursive = Fraction()
+    terminal_current_excess = Fraction()
+    recursive_current_excess = Fraction()
     candidate_reserves: set[Pair] = set()
 
     for resource, rows in owners.items():
         current = [row for row in rows if row["kind"] == "current"]
         latent = [row for row in rows if row["kind"] == "latent"]
         excess = max(Fraction(), load_ratio[resource] - 1)
+
         if current and latent:
             current_excess[resource] = excess
             gap = resource[1] - resource[0]
-            weighted = Fraction(N, gap) * excess
+            weighted = Fraction(parent_base, gap) * excess
             if bool(current[0]["terminal"]):
-                current_excess_terminal += weighted
+                terminal_current_excess += weighted
             else:
-                current_excess_recursive += weighted
+                recursive_current_excess += weighted
+
         if len(latent) == 2:
             middle = next(row for row in latent if row["source"] == "middle_fiber")
             step = int(middle["step"])
             sign = orientation(step)
-            center = ordered_pair(resource[0] + sign * step, resource[1] + sign * step)
-            opposite = ordered_pair(resource[0] + 2 * sign * step, resource[1] + 2 * sign * step)
+            center = ordered_pair(
+                resource[0] + sign * step,
+                resource[1] + sign * step,
+            )
+            opposite = ordered_pair(
+                resource[0] + 2 * sign * step,
+                resource[1] + 2 * sign * step,
+            )
             if not set(center) <= set(parent) or not set(opposite) <= set(parent):
                 raise AssertionError(f"{name}: reserve left parent support")
             candidate_reserves.update((center, opposite))
@@ -181,12 +203,15 @@ def profile(name: str, parent: tuple[int, ...]) -> dict[str, object]:
     unallocated_ratio = total_latent_demand - flow_value
 
     latent_demand_mass = sum(
-        (Fraction(N, demand[1] - demand[0]) * row[0] for demand, row in latent_demands.items()),
+        (
+            Fraction(parent_base, demand[1] - demand[0]) * row[0]
+            for demand, row in latent_demands.items()
+        ),
         Fraction(),
     )
     allocated_mass = sum(
         (
-            Fraction(N, demand[1] - demand[0]) * amount
+            Fraction(parent_base, demand[1] - demand[0]) * amount
             for demand, rows in allocation.items()
             for amount in rows.values()
         ),
@@ -196,7 +221,7 @@ def profile(name: str, parent: tuple[int, ...]) -> dict[str, object]:
     return {
         "name": name,
         "parent": parent,
-        "parent_base": N,
+        "parent_base": parent_base,
         "counts": {
             "retained_states": len(retained),
             "owner_resources": len(owners),
@@ -225,19 +250,23 @@ def profile(name: str, parent: tuple[int, ...]) -> dict[str, object]:
             "latent_excess_demand": str(latent_demand_mass),
             "allocated_latent_excess": str(allocated_mass),
             "unallocated_latent_excess": str(latent_demand_mass - allocated_mass),
-            "terminal_current_excess": str(current_excess_terminal),
-            "recursive_current_excess": str(current_excess_recursive),
+            "terminal_current_excess": str(terminal_current_excess),
+            "recursive_current_excess": str(recursive_current_excess),
         },
         "current_excess": [
             {"resource": resource, "ratio": str(value)}
-            for resource, value in sorted(current_excess.items()) if value > 0
+            for resource, value in sorted(current_excess.items())
+            if value > 0
         ],
         "latent_demands": [
             {
                 "resource": resource,
                 "ratio": str(row[0]),
                 "reserves": row[1],
-                "allocation": allocation.get(resource, {}),
+                "allocation": [
+                    {"reserve": reserve, "ratio": str(amount)}
+                    for reserve, amount in sorted(allocation.get(resource, {}).items())
+                ],
             }
             for resource, row in sorted(latent_demands.items())
         ],
@@ -258,14 +287,63 @@ def main() -> int:
     if len(sys.argv) != 2:
         raise SystemExit("usage: probe_critical_fractional_reserve_flow.py OUTPUT")
 
-    clean = shifted((1,4,5,6,20,21,22,26,27,28,32,33,34), 64)
-    current_no_go = (65,97,98,99,113,114,115,119,120,121,125,126,127)
+    clean = shifted((1, 4, 5, 6, 20, 21, 22, 26, 27, 28, 32, 33, 34), 64)
+    current_no_go = (
+        65,
+        97,
+        98,
+        99,
+        113,
+        114,
+        115,
+        119,
+        120,
+        121,
+        125,
+        126,
+        127,
+    )
     rank_two_raw = (
-        1,9194,9200,9206,10595,10600,10605,11296,11300,11304,
-        11599,11600,11601,11996,11997,11999,12000,12001,12004,
-        12005,12006,12012,12046,12047,12049,12050,12051,12054,
-        12055,12056,12062,12096,12097,12099,12100,12101,12104,
-        12105,12106,12112,
+        1,
+        9194,
+        9200,
+        9206,
+        10595,
+        10600,
+        10605,
+        11296,
+        11300,
+        11304,
+        11599,
+        11600,
+        11601,
+        11996,
+        11997,
+        11999,
+        12000,
+        12001,
+        12004,
+        12005,
+        12006,
+        12012,
+        12046,
+        12047,
+        12049,
+        12050,
+        12051,
+        12054,
+        12055,
+        12056,
+        12062,
+        12096,
+        12097,
+        12099,
+        12100,
+        12101,
+        12104,
+        12105,
+        12106,
+        12112,
     )
     rank_two = shifted(rank_two_raw, 16384)
 
@@ -274,27 +352,34 @@ def main() -> int:
         profile("recursive_current_latent_no_go", current_no_go),
         profile("rank_two_raw_reserve_no_go", rank_two),
     ]
+    checks = {
+        "clean_latent_reuse_has_zero_critical_excess": (
+            profiles[0]["ratios"]["total_latent_excess_demand"] == "0"
+        ),
+        "recursive_current_no_go_keeps_current_excess": (
+            Fraction(profiles[1]["masses"]["recursive_current_excess"]) > 0
+        ),
+        "rank_two_raw_no_go_closed_fractionally": (
+            profiles[2]["ratios"]["unallocated_latent_excess"] == "0"
+        ),
+    }
+    if not checks["clean_latent_reuse_has_zero_critical_excess"]:
+        raise AssertionError("clean latent-reuse critical profile changed")
+    if not checks["recursive_current_no_go_keeps_current_excess"]:
+        raise AssertionError("recursive current-latent critical no-go disappeared")
+
     output = {
         "schema": "critical_fractional_reserve_flow_v1",
         "profiles": profiles,
-        "checks": {
-            "clean_latent_reuse_has_zero_critical_excess": (
-                profiles[0]["ratios"]["total_latent_excess_demand"] == "0"
-            ),
-            "recursive_current_no_go_keeps_current_excess": (
-                Fraction(profiles[1]["masses"]["recursive_current_excess"]) > 0
-            ),
-            "rank_two_raw_no_go_closed_fractionally": (
-                profiles[2]["ratios"]["unallocated_latent_excess"] == "0"
-            ),
-        },
+        "checks": checks,
     }
-    if not all(output["checks"].values()):
-        raise AssertionError(f"critical fractional reserve profile changed: {output['checks']}")
-    canonical = json.dumps(output, sort_keys=True, separators=(",", ":"), default=str)
+    canonical = json.dumps(output, sort_keys=True, separators=(",", ":"))
     output["payload_sha256"] = hashlib.sha256(canonical.encode()).hexdigest()
-    Path(sys.argv[1]).write_text(json.dumps(output, sort_keys=True, indent=2, default=str) + "\n", encoding="utf-8")
-    print(json.dumps(output, sort_keys=True, indent=2, default=str))
+    Path(sys.argv[1]).write_text(
+        json.dumps(output, sort_keys=True, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    print(json.dumps(output, sort_keys=True, indent=2))
     return 0
 
 

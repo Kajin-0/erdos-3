@@ -22,6 +22,7 @@ on:
       - 'src/probe_s7_direct_offdiagonal_cross_flow.py'
       - 'src/probe_s7_direct_alternate_route_flow.py'
       - 'src/verify_s7_direct_alternate_route_no_go.py'
+      - 'src/probe_s7_alternate_cut_primary_repair.py'
       - 'src/s7_direct_chain_instance.py'
       - 'src/probe_s7_heavy_state_reference_reserve.py'
       - 'src/probe_s7_star_rectangle_first_appearance.py'
@@ -70,6 +71,7 @@ jobs:
             src/probe_s7_direct_offdiagonal_cross_flow.py \
             src/probe_s7_direct_alternate_route_flow.py \
             src/verify_s7_direct_alternate_route_no_go.py \
+            src/probe_s7_alternate_cut_primary_repair.py \
             src/s7_direct_chain_instance.py \
             src/probe_s7_heavy_state_reference_reserve.py \
             src/probe_s7_star_rectangle_first_appearance.py \
@@ -207,6 +209,11 @@ jobs:
             s7_full_saturation_map.tsv \
             s7_direct_alternate_route_flow.json \
             > s7_direct_alternate_route_flow_stdout.json
+          python3 src/probe_s7_alternate_cut_primary_repair.py \
+            terminal_pair_payment_frontier_v2.json \
+            s7_full_saturation_map.tsv \
+            s7_alternate_cut_primary_repair.json \
+            > s7_alternate_cut_primary_repair_stdout.json
           python3 src/probe_s7_hole_support_closure.py \
             terminal_pair_payment_frontier_v2.json \
             s7_full_saturation_map.tsv \
@@ -271,6 +278,8 @@ jobs:
             s7_direct_offdiagonal_cross_flow_stdout.json
             s7_direct_alternate_route_flow.json
             s7_direct_alternate_route_flow_stdout.json
+            s7_alternate_cut_primary_repair.json
+            s7_alternate_cut_primary_repair_stdout.json
             s7_hole_support_closure.json
             s7_hole_support_closure_stdout.json
             s7_support_transition_rank.json

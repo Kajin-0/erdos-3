@@ -2,154 +2,65 @@
 
 ## Status
 
-State-independent macrostep theorem for occurrence-owned source-weighted direct pair lineages.
+Transport-only macrostep theorem for occurrence-owned source-weighted direct pair lineages.
 
-Every source occurrence is followed through deterministic direct discharge until it is locally paid, reaches a terminal sink, or repeats a physical pair identity already seen on that same lineage. The complete finite path is then replaced by one terminal or recreation token without increasing source mass or physical-gap moment.
+Every source occurrence reaches a local payment, a terminal sink, or the first repeated physical pair on its own lineage after finitely many first appearances. The path may be compressed without increasing source mass or physical-gap moment.
+
+This theorem does **not** charge all later local payments to the entering shell. A later local witness uses an edge occurrence owned by the shell where that witness occurs.
 
 ---
 
-## 1. Source-owned direct lineage
+## 1. Source-owned lineage
 
-Let one activated source occurrence be
+Write one entering occurrence as
 
 ```math
 \omega_0=(o,e_0,m),
+\qquad
+0<m\le\frac1{\operatorname{gap}(e_0)}.
 ```
 
-where:
+The production owner `o` remains attached to the transported mass. Cross-shell, light, and heavy transfers carry exact inherited source load rather than full target capacity.
 
-```text
-o is the immutable production owner;
-e_0 is the entering physical pair;
-0<m<=1/gap(e_0) is the inherited source mass.
-```
-
-At every direct-discharge step, deterministic completion priority selects exactly one outcome:
-
-```text
-local parent-edge payment;
-cross-shell adjacent-root swap;
-light support transfer;
-recursive heavy transfer;
-terminal heavy or obstruction sink.
-```
-
-For a light or heavy fiber, the source mass assigned to the outgoing occurrence is the exact inherited role load. It is never replaced by full target-pair capacity.
+Stop before treating an already seen physical pair as a new first appearance.
 
 ---
 
-## 2. First-appearance path
+## 2. Finite macro-outcome
 
-Maintain the ordered list of physical pair identities
-
-```math
-e_0,e_1,\ldots.
-```
-
-If an outgoing pair identity already occurred earlier on the same lineage, stop before treating it as a new first appearance.
-
-The direct pair-lineage theorem proves that this stopping procedure is finite. Indeed:
+Physical gap never increases. Strict decreases cannot continue indefinitely. The two equal-gap mechanisms are finite:
 
 ```text
-physical gap never increases;
-strict gap decreases cannot continue indefinitely;
-cross-shell equal-gap swaps form an involution;
-equal-gap light episodes have uniformly bounded first-appearance length;
-terminal output stops immediately.
+adjacent-root swaps form an involution;
+exact-gap light episodes have uniformly bounded first-appearance length.
 ```
 
-Thus every source occurrence has a finite deterministic macro-outcome.
+Therefore every source occurrence has one finite outcome:
+
+```text
+local payment in the current shell;
+terminal occurrence token;
+recreation token recording the first repeated pair and finite cycle segment.
+```
 
 ---
 
-## 3. Macro-output classes
+## 3. Mass and gap moments
 
-Partition the source occurrence family into three classes.
+Let `mu_in` be a finite entering occurrence measure. Let `mu_term` and `mu_recreate` be its terminal and recreation macro-output measures.
 
-### Local payment
-
-The lineage reaches a locally completed pair and consumes one parent three-AP edge occurrence. No outgoing pair token remains.
-
-### Terminal output
-
-The lineage reaches a terminal heavy, maximality, or arithmetic-obstruction sink. Retain one occurrence-tagged terminal token carrying the inherited source mass.
-
-### Recreation output
-
-The lineage first attempts to enter a physical pair
-
-```math
-e_j=e_i
-```
-
-with `i<j`. Retain one recreation token
-
-```math
-(o,e_i,m,\mathcal C),
-```
-
-where `C` records the finite cycle segment
-
-```math
-e_i,e_{i+1},\ldots,e_{j-1}.
-```
-
-The repeated target is not counted as a new physical pair capacity.
-
----
-
-## 4. Source-mass conservation
-
-Let
-
-```math
-\mu_{\rm in}
-```
-
-be a finite source occurrence measure. Let
-
-```math
-\mu_{\rm term}
-```
-
-and
-
-```math
-\mu_{\rm recreate}
-```
-
-be the terminal and recreation macro-output measures.
-
-Every entering occurrence has one macro-outcome. Local payment removes its pair-lineage mass; terminal and recreation outcomes retain the inherited mass. Therefore
+Then
 
 ```math
 \boxed{
-W(\mu_{\rm term})
-+
-W(\mu_{\rm recreate})
-\le
-W(\mu_{\rm in}).
+W(\mu_{\rm term})+W(\mu_{\rm recreate})
+\le W(\mu_{\rm in}).
 }
 ```
 
-Equality holds after including the mass locally consumed by edge occurrences.
+Equality holds after adding mass consumed by local edge occurrences along the paths.
 
-Different production owners may generate the same terminal or recreation identity. Their occurrence labels remain separate, or their masses may be aggregated without changing the total source measure.
-
----
-
-## 5. Gap-moment monotonicity
-
-For
-
-```math
-\Phi_p(\mu)
-=
-\sum_e\mu(e)G(e)^p,
-\qquad p\ge0,
-```
-
-every individual direct step is nonexpanding. Consequently the macrostep is nonexpanding:
+For every `p>=0`,
 
 ```math
 \boxed{
@@ -157,115 +68,66 @@ every individual direct step is nonexpanding. Consequently the macrostep is none
 +
 \Phi_p(\mu_{\rm recreate})
 \le
-\Phi_p(\mu_{\rm in}).
+\Phi_p(\mu_{\rm in}),
 }
 ```
 
-If a lineage contains a midpoint transfer, a multiplicity-at-least-two light transfer, or a recursive heavy transfer, its macro-output has strictly smaller dyadic gap moment for every `p>0`.
-
-Only a lineage composed entirely of adjacent-root swaps and multiplicity-one light transfers can preserve dyadic gap scale.
-
----
-
-## 6. Bounded equal-gap cycle geometry
-
-An equal-gap recreation cycle has only two possible local mechanisms.
-
-### Adjacent-root cycle
-
-The cross-shell involution returns to the entering pair after at most one new physical identity. Its simple cycle has length two.
-
-### Light-support cycle
-
-The exact-gap persistence theorem bounds a nonterminal first-appearance episode by at most nine identities, or ten including a final local support. Therefore the first repeated-pair cycle has uniformly bounded simple support.
-
-Mixed equal-gap episodes remain bounded because encountering an actual-root completion invokes the involution after at most one further new identity.
-
-Thus every scale-preserving recreation token carries a finite bounded local certificate rather than an unbounded path history.
-
----
-
-## 7. Production-compatible macro row
-
-Apply source-weighted direct discharge to an economical pair set `U`, and then compress every recursive direct occurrence to its macro-outcome.
-
-Let
-
-```text
-E_free: unused parent full-edge occurrences;
-T_dir: terminal macro-output measure;
-C_dir: recreation macro-output measure.
-```
-
-Then
+where
 
 ```math
-\boxed{
+\Phi_p(\mu)=\sum_e\mu(e)G(e)^p.
+```
+
+A path containing a midpoint, multiplicity-at-least-two light transfer, or recursive heavy transfer is strictly contracting for every `p>0`.
+
+---
+
+## 4. Bounded equal-gap certificates
+
+A scale-preserving adjacent-root cycle has length two. A scale-preserving light-support cycle has uniformly bounded simple support by exact-gap persistence. Mixed equal-gap episodes remain bounded because an actual-root completion invokes the involution.
+
+Thus a recreation token needs only a bounded local certificate, not an unbounded path history.
+
+---
+
+## 5. Production-ownership boundary
+
+The one-generation identity
+
+```math
 J(U)+W(E_{\rm free})
 =
 \frac52\mathcal L_3(P)
 +
-W(T_{\rm dir})
+W(\mu_{\rm dir}^{\rm rec})
 +
-W(C_{\rm dir}),
-}
+W(\mu_{\rm dir}^{\rm term})
 ```
 
-with the convention that local payments have already been removed through the edge-token partition.
+uses edge occurrences owned by the entering shell `P` only.
 
-At parent owner scale `N`,
+After an occurrence leaves that row, a later local payment may occur in another shell. Its edge token belongs to that later shell. Hence a complete multi-shell lineage cannot be replaced by an identity involving only the entering production family.
 
-```math
-\boxed{
-NJ(U)+NW(E_{\rm free})
-=
-\frac52N\mathcal L_3(P)
-+
-NW(T_{\rm dir})
-+
-NW(C_{\rm dir}).
-}
-```
-
-No open-ended direct recursive queue remains after the macrostep.
-
----
-
-## 8. Critical Bellman interface
-
-Substituting the macro row into the critical economical activation theorem gives
-
-```math
-\boxed{
-\begin{aligned}
-\sum_i\mathcal V_i
-+
-NW(E_{\rm free})
-\le{}&
-\mathcal B(P)\\
-&+
-NW(T_{\rm dir})\\
-&+
-NW(C_{\rm dir})\\
-&+
-\mathcal R_{\rm crit}.
-\end{aligned}
-}
-```
-
-The only direct-discharge outputs are now named terminal and recreation tokens. Every long finite transport history has been eliminated.
-
----
-
-## 9. Remaining global obstruction
-
-The direct transport problem is no longer a recurrence problem. The remaining global questions are:
+The valid global construction is:
 
 ```text
-how many production owners can create the same recreation certificate;
-how terminal sink occurrences are first-appearance packed;
-how recreation and terminal tokens consume depth release;
-how free edge occurrences telescope through child production.
+one source-weighted row per owner shell;
+correct edge-token ownership at every local payment;
+macro compression only after those rows are assembled.
 ```
 
-Source-weighted path length and target collisions create no additional mass. The unresolved term is cross-owner sink multiplicity, not transport along one lineage.
+---
+
+## 6. Remaining interface
+
+The transport history can be compressed, but the global proof must still control:
+
+```text
+cross-owner recreation multiplicity;
+terminal sink multiplicity;
+production ownership across visited shells;
+free edge-token telescoping;
+critical and gap-depth release.
+```
+
+Source weighting removes target amplification. It does not remove the need to assign every local payment to its actual owner shell.

@@ -1,0 +1,50 @@
+name: Reserve pseudoforest small-box
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/reserve-pseudoforest-small-box.yml'
+      - 'src/search_lexicographic_reserve_pseudoforest_small_box.py'
+      - 'src/verify_retained_provenance_second_generation.py'
+      - 'src/verify_retained_terminal_split.py'
+
+permissions:
+  contents: read
+
+jobs:
+  exact-reserve-pseudoforest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Compile reserve search
+        run: |
+          python3 -m py_compile \
+            src/search_lexicographic_reserve_pseudoforest_small_box.py \
+            src/verify_retained_provenance_second_generation.py \
+            src/verify_retained_terminal_split.py
+
+      - name: Search endpoint 16
+        run: |
+          set +e
+          python3 src/search_lexicographic_reserve_pseudoforest_small_box.py \
+            16 reserve_pseudoforest_endpoint16.json \
+            > reserve_pseudoforest_endpoint16_stdout.json
+          status=$?
+          set -e
+          printf '%s\n' "$status" > reserve_pseudoforest_endpoint16_exit_status.txt
+          if [[ "$status" -ne 0 && "$status" -ne 2 ]]; then
+            exit "$status"
+          fi
+
+      - name: Upload reserve search
+        uses: actions/upload-artifact@v4
+        with:
+          name: reserve-pseudoforest-${{ github.run_id }}-${{ github.run_attempt }}
+          retention-days: 30
+          if-no-files-found: error
+          path: |
+            reserve_pseudoforest_endpoint16.json
+            reserve_pseudoforest_endpoint16_stdout.json
+            reserve_pseudoforest_endpoint16_exit_status.txt

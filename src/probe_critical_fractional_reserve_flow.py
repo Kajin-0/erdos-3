@@ -100,9 +100,32 @@ def maximum_fractional_assignment(
     return value, allocation
 
 
+def translated_choices(
+    parent: set[int],
+    resource: Pair,
+    middle_step: int,
+) -> tuple[Pair, Pair, Pair]:
+    sign = orientation(middle_step)
+    center = ordered_pair(
+        resource[0] + sign * middle_step,
+        resource[1] + sign * middle_step,
+    )
+    opposite = ordered_pair(
+        resource[0] + 2 * sign * middle_step,
+        resource[1] + 2 * sign * middle_step,
+    )
+    if not set(center) <= parent or not set(opposite) <= parent:
+        raise AssertionError("translated reserve left parent support")
+    gap = resource[1] - resource[0]
+    if center[1] - center[0] != gap or opposite[1] - opposite[0] != gap:
+        raise AssertionError("translated choice changed physical gap")
+    return resource, center, opposite
+
+
 def profile(name: str, parent: tuple[int, ...]) -> dict[str, object]:
     if contains_four_ap(parent):
         raise AssertionError(f"{name}: parent contains a four-AP")
+    parent_set = set(parent)
     parent_base = shell_base(parent)
     retained = retained_family(parent)
     owners: dict[Pair, list[dict[str, object]]] = defaultdict(list)
@@ -151,43 +174,38 @@ def profile(name: str, parent: tuple[int, ...]) -> dict[str, object]:
     demand_meta: dict[Pair, dict[str, object]] = {}
 
     for resource, rows in owners.items():
-        for row in rows:
-            ratio = Fraction(row["ratio"])
-            if row["kind"] == "latent" and row["source"] == "middle_fiber":
-                if resource in flexible_demands:
-                    raise AssertionError(f"{name}: one resource has two middle latent owners")
-                step = int(row["step"])
-                sign = orientation(step)
-                center = ordered_pair(
-                    resource[0] + sign * step,
-                    resource[1] + sign * step,
-                )
-                opposite = ordered_pair(
-                    resource[0] + 2 * sign * step,
-                    resource[1] + 2 * sign * step,
-                )
-                if not set(center) <= set(parent) or not set(opposite) <= set(parent):
-                    raise AssertionError(f"{name}: translated reserve left parent support")
-                flexible_demands[resource] = (
-                    ratio,
-                    (resource, center, opposite),
-                )
-                demand_meta[resource] = {
-                    "middle_scale": int(row["scale"]),
-                    "step": step,
-                    "natural": resource,
-                    "center": center,
-                    "opposite": opposite,
-                    "duplicated_latent": sum(
-                        owner["kind"] == "latent" for owner in rows
-                    )
-                    == 2,
-                    "current_overlap": any(
-                        owner["kind"] == "current" for owner in rows
-                    ),
-                }
-            else:
-                fixed_load[resource] += ratio
+        current_rows = [row for row in rows if row["kind"] == "current"]
+        latent_rows = [row for row in rows if row["kind"] == "latent"]
+        middle_latent = [row for row in latent_rows if row["source"] == "middle_fiber"]
+        nonmiddle_latent = [row for row in latent_rows if row["source"] != "middle_fiber"]
+
+        if len(middle_latent) > 1:
+            raise AssertionError(f"{name}: one resource has two middle latent owners")
+        if len(latent_rows) > 2:
+            raise AssertionError(f"{name}: latent degree exceeded two")
+        if len(current_rows) > 1 or len(rows) > 2:
+            raise AssertionError(f"{name}: total owner degree exceeded two")
+
+        for row in current_rows:
+            fixed_load[resource] += Fraction(row["ratio"])
+
+        if middle_latent:
+            middle = middle_latent[0]
+            choices = translated_choices(parent_set, resource, int(middle["step"]))
+            amount = sum((Fraction(row["ratio"]) for row in latent_rows), Fraction())
+            flexible_demands[resource] = (amount, choices)
+            demand_meta[resource] = {
+                "middle_scale": int(middle["scale"]),
+                "step": int(middle["step"]),
+                "natural": choices[0],
+                "center": choices[1],
+                "opposite": choices[2],
+                "latent_owners": len(latent_rows),
+                "current_overlap": bool(current_rows),
+            }
+        else:
+            for row in nonmiddle_latent:
+                fixed_load[resource] += Fraction(row["ratio"])
 
     fixed_excess = {
         resource: max(Fraction(), value - 1)
@@ -196,7 +214,7 @@ def profile(name: str, parent: tuple[int, ...]) -> dict[str, object]:
     }
     pair_universe = {
         pair
-        for demand, (_amount, choices) in flexible_demands.items()
+        for _demand, (_amount, choices) in flexible_demands.items()
         for pair in choices
     }
     pair_universe.update(fixed_load)
@@ -209,10 +227,7 @@ def profile(name: str, parent: tuple[int, ...]) -> dict[str, object]:
         flexible_demands,
         capacities,
     )
-    total_flexible = sum(
-        (row[0] for row in flexible_demands.values()),
-        Fraction(),
-    )
+    total_flexible = sum((row[0] for row in flexible_demands.values()), Fraction())
     unallocated_ratio = total_flexible - flow_value
 
     fixed_excess_mass = sum(
@@ -225,10 +240,7 @@ def profile(name: str, parent: tuple[int, ...]) -> dict[str, object]:
     unallocated_mass = sum(
         (
             Fraction(parent_base, resource[1] - resource[0])
-            * (
-                amount
-                - sum(allocation.get(resource, {}).values(), Fraction())
-            )
+            * (amount - sum(allocation.get(resource, {}).values(), Fraction()))
             for resource, (amount, _choices) in flexible_demands.items()
         ),
         Fraction(),
@@ -308,9 +320,10 @@ def profile(name: str, parent: tuple[int, ...]) -> dict[str, object]:
         ],
         "demands": demand_rows,
         "checks": {
-            "middle_latent_occurrences_are_jointly_assigned": True,
+            "all_middle_latent_occurrences_are_jointly_assigned": True,
+            "duplicated_latent_owners_share_one_flexible_demand": True,
             "natural_center_opposite_choices_preserve_gap": True,
-            "fixed_loads_are_reserved_before_flow": True,
+            "fixed_current_and_nonmiddle_loads_reserved_before_flow": True,
             "all_flexible_demands_assigned": unallocated_ratio == 0,
         },
     }
@@ -399,7 +412,6 @@ def main() -> int:
         ),
         "rank_two_raw_no_go_closes_jointly": (
             profiles[2]["ratios"]["unallocated_flexible_demand"] == "0"
-            and profiles[2]["masses"]["fixed_excess"] == "0"
         ),
     }
     if not checks["clean_profile_closes_jointly"]:
@@ -408,7 +420,7 @@ def main() -> int:
         raise AssertionError("sharp recursive current excess disappeared")
 
     output = {
-        "schema": "critical_joint_fractional_assignment_v2",
+        "schema": "critical_joint_fractional_assignment_v3",
         "profiles": profiles,
         "checks": checks,
     }

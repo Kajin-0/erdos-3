@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Test whether primary-chain incidences repair the exact alternate-route min cut."""
+"""Repair the exact alternate-route min cut with a sparse primary-chain witness."""
 from __future__ import annotations
 
 from collections import Counter, defaultdict
@@ -144,26 +144,50 @@ def main() -> int:
 
     mixed = solve(states, tuple(mixed_resources), light_usage)
     mixed_unmet = mixed.total_demand - mixed.maximum_flow
+    if mixed_unmet != 0:
+        raise AssertionError("primary augmentation of the alternate cut is infeasible")
 
-    route_mass = defaultdict(Fraction)
+    route_mass: dict[str, Fraction] = defaultdict(Fraction)
     route_edges = Counter()
     primary_states: set[int] = set()
     primary_pairs: set[Pair] = set()
+    primary_usage_by_pair: dict[Pair, dict[int, Fraction]] = defaultdict(
+        lambda: defaultdict(Fraction)
+    )
+    primary_usage_by_state: dict[int, dict[Pair, Fraction]] = defaultdict(
+        lambda: defaultdict(Fraction)
+    )
+
     for state_index, pair, allocated in mixed.allocations:
         alt_set = set(alternate[state_index])
         primary_set = set(states[state_index].chain) if state_index in cut_set else set()
         if pair in primary_set and pair not in alt_set:
             route = "primary_only"
-            primary_states.add(state_index)
-            primary_pairs.add(pair)
         elif pair in primary_set and pair in alt_set:
             route = "shared"
-            primary_states.add(state_index)
-            primary_pairs.add(pair)
         else:
             route = "alternate_only"
+
+        if route in {"primary_only", "shared"}:
+            primary_states.add(state_index)
+            primary_pairs.add(pair)
+            primary_usage_by_pair[pair][state_index] += allocated
+            primary_usage_by_state[state_index][pair] += allocated
         route_mass[route] += allocated
         route_edges[route] += 1
+
+    # The positive primary edges used by one deterministic maximum flow already
+    # form a complete sparse repair certificate.  Re-solve after deleting every
+    # unused primary incidence to verify this directly.
+    sparse_resources: list[tuple[Pair, ...]] = []
+    for index in range(len(states)):
+        row = list(alternate[index])
+        row.extend(sorted(primary_usage_by_state.get(index, {})))
+        sparse_resources.append(tuple(dict.fromkeys(row)))
+    sparse = solve(states, tuple(sparse_resources), light_usage)
+    sparse_unmet = sparse.total_demand - sparse.maximum_flow
+    if sparse_unmet != 0:
+        raise AssertionError("positive primary repair support did not remain feasible")
 
     primary_candidate_pairs = {
         pair for index in cut_states for pair in states[index].chain
@@ -177,9 +201,47 @@ def main() -> int:
     size_profile = Counter(len(states[index].state) for index in cut_states)
 
     cut_rows = [state_record(index, states[index]) for index in cut_states]
+    primary_pair_rows = []
+    for pair in sorted(primary_usage_by_pair):
+        users = primary_usage_by_pair[pair]
+        total = sum(users.values(), Fraction())
+        available = pair_weight(pair) - light_usage.get(pair, Fraction())
+        primary_pair_rows.append(
+            {
+                "pair": pair,
+                "gap": pair[1] - pair[0],
+                "available_capacity": str(available),
+                "allocated": str(total),
+                "utilization": str(total / available),
+                "state_allocations": [
+                    {"state_index": index, "allocated": str(users[index])}
+                    for index in sorted(users)
+                ],
+            }
+        )
+
+    primary_state_rows = []
+    for index in sorted(primary_usage_by_state):
+        state = states[index]
+        usage = primary_usage_by_state[index]
+        primary_state_rows.append(
+            {
+                "state_index": index,
+                "role": state.role,
+                "shell_base": state.shell_base,
+                "state": state.state,
+                "debt": str(state.debt),
+                "primary_allocated": str(sum(usage.values(), Fraction())),
+                "pairs": [
+                    {"pair": pair, "allocated": str(usage[pair])}
+                    for pair in sorted(usage)
+                ],
+            }
+        )
+
     output = {
-        "schema": "s7_alternate_cut_primary_repair_v1",
-        "scope": "primary-chain augmentation restricted to the exact alternate-route min cut",
+        "schema": "s7_alternate_cut_primary_repair_v2",
+        "scope": "sparse primary-chain augmentation of the exact alternate-route min cut",
         "maximal_ambient_assumed": False,
         "generation_six_propagated": False,
         "counts": {
@@ -192,6 +254,7 @@ def main() -> int:
             "mixed_positive_allocation_edges": len(mixed.allocations),
             "states_using_primary_route": len(primary_states),
             "primary_pairs_used": len(primary_pairs),
+            "sparse_positive_allocation_edges": len(sparse.allocations),
         },
         "masses": {
             "total_recursive_demand": serialize_mass(mixed.total_demand),
@@ -206,6 +269,18 @@ def main() -> int:
             ),
             "mixed_primary_only_allocation": serialize_mass(route_mass["primary_only"]),
             "mixed_shared_allocation": serialize_mass(route_mass["shared"]),
+            "sparse_maximum_flow": serialize_mass(sparse.maximum_flow),
+            "sparse_unmet_demand": serialize_mass(sparse_unmet),
+            "repair_overhead_above_cut_deficit": serialize_mass(
+                route_mass["primary_only"] + route_mass["shared"] - alternate_unmet
+            ),
+        },
+        "repair_ratio": {
+            "fraction": str(
+                (route_mass["primary_only"] + route_mass["shared"])
+                / alternate_unmet
+            ),
+            "decimal": f"{float((route_mass['primary_only'] + route_mass['shared']) / alternate_unmet):.12f}",
         },
         "cut_profiles": {
             "role": [
@@ -221,6 +296,8 @@ def main() -> int:
                 for size in sorted(size_profile)
             ],
         },
+        "primary_pair_usage": primary_pair_rows,
+        "primary_state_usage": primary_state_rows,
         "cut_states": cut_rows,
         "hashes": {
             "cut_states": hashlib.sha256(
@@ -230,11 +307,19 @@ def main() -> int:
             ).hexdigest(),
             "mixed_allocations": hashlib.sha256(
                 json.dumps(
-                    [
-                        (index, pair, str(value))
-                        for index, pair, value in mixed.allocations
-                    ],
+                    [(index, pair, str(value)) for index, pair, value in mixed.allocations],
                     separators=(",", ":"),
+                ).encode("utf-8")
+            ).hexdigest(),
+            "sparse_allocations": hashlib.sha256(
+                json.dumps(
+                    [(index, pair, str(value)) for index, pair, value in sparse.allocations],
+                    separators=(",", ":"),
+                ).encode("utf-8")
+            ).hexdigest(),
+            "primary_pair_usage": hashlib.sha256(
+                json.dumps(
+                    primary_pair_rows, sort_keys=True, separators=(",", ":")
                 ).encode("utf-8")
             ).hexdigest(),
         },
@@ -242,10 +327,16 @@ def main() -> int:
             "alternate_exact_min_cut": cut_demand - cut_capacity == alternate_unmet,
             "primary_augmentation_restricted_to_cut": True,
             "mixed_flow_feasible": mixed_unmet == 0,
+            "sparse_repair_flow_feasible": sparse_unmet == 0,
             "mixed_allocation_mass_identity": sum(
                 (value for _index, _pair, value in mixed.allocations), Fraction()
             )
             == mixed.maximum_flow,
+            "primary_usage_is_sparse_support": all(
+                pair in states[index].chain
+                for index, row in primary_usage_by_state.items()
+                for pair in row
+            ),
         },
     }
     canonical = json.dumps(output, sort_keys=True, separators=(",", ":"))

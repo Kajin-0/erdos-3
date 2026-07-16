@@ -9,10 +9,7 @@ import hashlib
 import json
 import sys
 
-from probe_s7_direct_pair_discharge import (
-    completion_candidates,
-    harmonic,
-)
+from probe_s7_direct_pair_discharge import completion_candidates, harmonic
 from probe_s7_hole_support_closure import (
     build_s7,
     canonical_pair,
@@ -117,6 +114,14 @@ def main() -> int:
         if reconstructed < raw_mass:
             raise AssertionError("moment-depth interpolation failed on heavy shell")
         slack = reconstructed - raw_mass
+        required_depth = max(
+            Fraction(),
+            (raw_mass - Fraction(5, 2) * normalized_moment)
+            / Fraction(3, 5),
+        )
+        utilization = (
+            required_depth / excess_depth if excess_depth else Fraction()
+        )
         rows.append(
             {
                 "kind": kind,
@@ -125,6 +130,8 @@ def main() -> int:
                 "raw_mass": serialize_mass(raw_mass),
                 "normalized_p0_moment": serialize_mass(normalized_moment),
                 "excess_depth_mass": serialize_mass(excess_depth),
+                "required_excess_depth_mass": serialize_mass(required_depth),
+                "required_depth_utilization": serialize_mass(utilization),
                 "reconstructed_raw_bound": serialize_mass(reconstructed),
                 "interpolation_slack": serialize_mass(slack),
             }
@@ -145,8 +152,34 @@ def main() -> int:
     if totals["reconstructed_raw_bound"] < totals["raw_mass"]:
         raise AssertionError("aggregate heavy interpolation failed")
 
+    diagnostics: dict[str, dict[str, dict[str, str]]] = {}
+    for prefix in ("", "terminal_", "recursive_"):
+        label = "all" if not prefix else prefix[:-1]
+        raw_mass = totals[f"{prefix}raw_mass"]
+        normalized_moment = totals[f"{prefix}normalized_p0_moment"]
+        excess_depth = totals[f"{prefix}excess_depth_mass"]
+        required_depth = max(
+            Fraction(),
+            (raw_mass - Fraction(5, 2) * normalized_moment)
+            / Fraction(3, 5),
+        )
+        utilization = (
+            required_depth / excess_depth if excess_depth else Fraction()
+        )
+        coverage = (
+            excess_depth / required_depth if required_depth else Fraction()
+        )
+        if required_depth > excess_depth:
+            raise AssertionError(f"{label} heavy depth budget is insufficient")
+        diagnostics[label] = {
+            "required_excess_depth_mass": serialize_mass(required_depth),
+            "available_excess_depth_mass": serialize_mass(excess_depth),
+            "required_depth_utilization": serialize_mass(utilization),
+            "available_to_required_depth_ratio": serialize_mass(coverage),
+        }
+
     output = {
-        "schema": "s7_heavy_moment_depth_profile_v1",
+        "schema": "s7_heavy_moment_depth_profile_v2",
         "scope": "certified S7 direct heavy shell outputs only",
         "parent_base": parent_base,
         "boundary_exponent": "log_2(5/2)",
@@ -160,12 +193,14 @@ def main() -> int:
         "totals": {
             name: serialize_mass(value) for name, value in sorted(totals.items())
         },
+        "depth_diagnostics": diagnostics,
         "rows": rows,
         "checks": {
             "every_heavy_shell_descends": True,
             "terminal_recursive_partition_exact": True,
             "rowwise_moment_depth_interpolation": True,
             "aggregate_moment_depth_interpolation": True,
+            "available_depth_exceeds_required_depth": True,
             "light_and_direct_pair_outputs_excluded": True,
         },
     }

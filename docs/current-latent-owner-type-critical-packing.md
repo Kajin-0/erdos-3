@@ -1,23 +1,28 @@
-# Current-latent owner-type critical packing
+# Current-latent owner-scale bounds
 
 ## Status
 
-State-independent critical-scale refinement for one repeated parent pair with exactly one current owner and one recursive latent owner in the coordinated-deletion output architecture.
+Corrected state-independent owner-scale bound for one parent pair with exactly one current owner and one recursive latent owner.
 
-The source type determines the sharp correction:
+The former orientation-specific zero/quarter theorem depended on the false claim that every coordinated middle child has shell base at most `N/4`. The correct universal bound is
 
-```text
-backbone current + middle latent -> zero correction;
-middle current + backbone latent -> correction at most one quarter.
+```math
+L_{\rm current},L_{\rm latent}\le\frac N2.
 ```
 
-The second coefficient is sharp under the actual lexicographic deletion and point-disjoint retained policy.
+Therefore at owner exponent one the current-latent residual is at most one half of the parent pair unit. A shell-valid retained-policy example attains residual one quarter; sharpness of the universal one-half bound is not asserted here.
 
 ---
 
 ## 1. Setup
 
-Let a parent state lie in a standard dyadic shell of base `N`. Fix one physical parent resource
+Let
+
+```math
+P\subseteq[N,2N)
+```
+
+and fix a parent pair
 
 ```math
 f=\{x,y\},
@@ -31,166 +36,107 @@ one current owner;
 one recursive latent owner.
 ```
 
-For a current child shell of base `L_cur`, the current occurrence contributes
+At owner exponent `p`, the current occurrence contributes
 
 ```math
-\frac{L_{\rm cur}}g
+\frac{L_{\rm cur}^p}{g}
 ```
 
-to the critical harmonic coordinate.
-
-For a recursive latent child shell of base `L_lat`, the latent occurrence contributes
+and the latent occurrence contributes to the doubled pair coordinate
 
 ```math
-\frac{2L_{\rm lat}}g
+\frac{2L_{\rm lat}^p}{g}.
 ```
 
-to the doubled critical pair coordinate.
-
-The parent critical pair unit is
+The parent pair capacity is
 
 ```math
-\frac Ng.
+\frac{N^p}{g}.
 ```
 
 ---
 
-## 2. Output-scale bounds
+## 2. Correct universal bound
 
-The coordinated-deletion geometry gives:
-
-```text
-backbone child shell base <= N/2;
-middle-fiber child shell base <= N/4.
-```
-
-These are the same scale bounds used by the full-edge critical majorant.
-
----
-
-## 3. Backbone current and middle latent
-
-If the current owner is a backbone child and the latent owner is a middle child, then
+Every child label is a positive difference of two roots in `[N,2N)`, so every child shell base satisfies
 
 ```math
-L_{\rm cur}\le\frac N2,
-\qquad
-L_{\rm lat}\le\frac N4.
+L\le\frac N2.
 ```
 
-Therefore
+Hence
 
 ```math
-L_{\rm cur}+2L_{\rm lat}
+\frac{L_{\rm cur}^p+2L_{\rm lat}^p}{N^p}
 \le
-\frac N2+2\frac N4
-=N.
+3\,2^{-p}.
 ```
 
-Hence the one parent pair unit pays both owners:
+At `p=1`,
 
 ```math
 \boxed{
-\frac{L_{\rm cur}}g+
-\frac{2L_{\rm lat}}g
+\operatorname{Load}_{\rm cur-lat}
 \le
-\frac Ng.
+\frac32\frac Ng.
 }
 ```
 
-No current-latent correction is required in this orientation.
-
----
-
-## 4. Middle current and backbone latent
-
-If the current owner is a middle child and the latent owner is a backbone child, then
-
-```math
-L_{\rm cur}\le\frac N4,
-\qquad
-L_{\rm lat}\le\frac N2.
-```
-
-Thus
-
-```math
-L_{\rm cur}+2L_{\rm lat}
-\le
-\frac N4+N
-=
-\frac54N.
-```
-
-After the parent unit pays the backbone latent occurrence, the only possible residual is the middle current occurrence:
+After one parent unit is assigned, the universal residual is
 
 ```math
 \boxed{
 \operatorname{Res}_{\rm cur-lat}(f)
 \le
-\frac14\frac Ng.
+\frac12\frac Ng.
 }
 ```
 
-This improves the previous source-blind estimate `1/2`.
+No source orientation gives a better state-independent bound using owner scale alone.
+
+At `p=2`,
+
+```math
+3\,2^{-2}=\frac34,
+```
+
+so the complete current-latent owner pair fits strictly inside one quadratic parent pair unit.
 
 ---
 
-## 5. Sharp shell-valid counterexample
+## 3. Exact recursive example with residual one quarter
 
-Consider
+The parent
 
 ```math
-P=
 \{65,97,98,99,113,114,115,119,120,121,125,126,127\}
-\subset[64,128).
+\subset[64,128)
 ```
 
-The set is four-AP-free. Under the actual lexicographic deletion and maximum-harmonic point-disjoint retained policy, it keeps:
+is four-AP-free and, under the actual retained policy, has three resources that are:
 
 ```text
-recursive middle child:
-  reference 97
-  roots     {113,119,125}
-  values    {16,22,28}
-  shell base 16
-
-recursive backbone child:
-  reference 65
-  roots     {97,98,99,113,114,115,119,120,121,125,126,127}
-  values    {32,33,34,48,49,50,54,55,56,60,61,62}
-  shell base 32
+current in a recursive middle child of shell base 16;
+latent in a recursive backbone child of shell base 32.
 ```
 
-The three resources
-
-```text
-{97,113}, {97,119}, {97,125}
-```
-
-are current in the recursive middle child and latent in the recursive backbone child.
-
-For each resource,
-
-```math
-N=64,
-\qquad
-L_{\rm cur}=16,
-\qquad
-L_{\rm lat}=32.
-```
-
-Therefore
+Thus
 
 ```math
 \frac{L_{\rm cur}+2L_{\rm lat}}N
 =
 \frac{16+64}{64}
 =
-\boxed{\frac54}.
+\frac54.
 ```
 
-The zero-correction conjecture fails, and the residual coefficient `1/4` is attained exactly.
+Each resource leaves residual
+
+```math
+\frac14\frac Ng.
+```
+
+This disproves zero correction. It does not prove that `1/4` is the universal maximum.
 
 Primary executable:
 
@@ -200,15 +146,18 @@ src/probe_recursive_current_latent_gadget.py
 
 ---
 
-## 6. Certified retained-chain comparison
+## 4. Certified retained-chain comparison
 
-Across the four recorded retained transitions through the split fifth frontier, every current-latent current owner is terminal. Their maximum complete ratio is only
+Across the four recorded transitions through the split fifth frontier:
 
-```math
-\frac{33}{64}.
+```text
+current-latent repeated resources  33
+terminal current owners            33
+recursive current owners            0
+maximum combined ratio          33/64
 ```
 
-Thus the recorded chain has zero recursive current-latent correction, but this is not universal.
+Thus the recorded chain has no recursive current-latent correction. This finite fact is compatible with, but much stronger than, the universal bound.
 
 Primary reference:
 
@@ -218,20 +167,26 @@ docs/certified-current-latent-critical-packing.md
 
 ---
 
-## 7. Updated overlap coefficients
+## 5. Correct coefficient hierarchy
 
-The critical overlap row now has the exact source-type hierarchy:
+At exponent one:
 
 ```text
-current-latent:
-  backbone current / middle latent  -> 0
-  middle current / backbone latent  -> at most 1/4, sharp
-
-latent-latent:
-  matched center/opposite reserve   -> 0
-  unmatched middle export           -> at most 1/2
+current-latent residual <= 1/2;
+latent-latent residual  <= 1, sharp.
 ```
 
-Because the current-latent and latent-latent profiles are mutually exclusive for one parent pair, the complete universal overlap coefficient remains `1/2`, but only the unmatched latent-latent case can attain that value.
+At exponent two:
 
-The current-latent component should henceforth use `1/4`, not `1/2`.
+```text
+current-latent complete load <= 3/4;
+latent-latent complete load  <= 1.
+```
+
+Therefore exponent two eliminates all owner-multiplicity correction, while exponent one requires a separate occurrence/depth mechanism.
+
+Primary correction:
+
+```text
+docs/coordinated-middle-half-scale-critical-no-go.md
+```

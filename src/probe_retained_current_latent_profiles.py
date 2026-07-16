@@ -235,9 +235,6 @@ def main() -> int:
         )
 
     retained_first, retained_second = reconstruct_retained_families()
-    recursive_first = tuple(
-        state for state in retained_first if contains_three_term_ap(state.values)
-    )
     recursive_second = tuple(
         state for state in retained_second if contains_three_term_ap(state.values)
     )
@@ -261,7 +258,7 @@ def main() -> int:
         raise AssertionError("split fifth retained frontier changed")
 
     transitions = [
-        classify_transition("R1_to_F2", recursive_first, retained_second),
+        classify_transition("historical_F1_to_F2", retained_first, retained_second),
         classify_transition("R2_to_F3", recursive_second, retained_third),
         classify_transition("R3_to_F4", recursive_third, retained_fourth),
         classify_transition("R4_to_F5_split", recursive_fourth, retained_fifth),
@@ -269,7 +266,7 @@ def main() -> int:
 
     output = {
         "schema": "retained_current_latent_profiles_v1",
-        "scope": "four certified point-disjoint retained transitions",
+        "scope": "four certified point-disjoint retained transitions; first row is historical pre-terminal-stopping",
         "generation_six_propagated": False,
         "transitions": transitions,
         "aggregate": {

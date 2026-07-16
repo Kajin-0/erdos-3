@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Exhaust the affine owner-incidence cycle identity through [1,12]."""
+"""Exhaust affine owner-incidence cycles and rectangle tokens through [1,12]."""
 from __future__ import annotations
 
-from collections import defaultdict
+from collections import defaultdict, deque
 from fractions import Fraction
 from itertools import combinations
 import hashlib
@@ -10,6 +10,7 @@ import json
 
 Pair = tuple[int, int]
 OwnerEdge = tuple[Pair, Pair, tuple[int, int]]
+Node = tuple[str, Pair]
 
 
 def contains_four_ap(values: tuple[int, ...]) -> bool:
@@ -54,7 +55,7 @@ def component_count(
     right_vertices: set[Pair],
     edges: list[OwnerEdge],
 ) -> int:
-    adjacency: dict[tuple[str, Pair], set[tuple[str, Pair]]] = defaultdict(set)
+    adjacency: dict[Node, set[Node]] = defaultdict(set)
     for left, right, _owner in edges:
         left_node = ("L", left)
         right_node = ("R", right)
@@ -65,7 +66,7 @@ def component_count(
         *(("L", pair) for pair in left_vertices),
         *(("R", pair) for pair in right_vertices),
     }
-    seen: set[tuple[str, Pair]] = set()
+    seen: set[Node] = set()
     components = 0
     for vertex in vertices:
         if vertex in seen:
@@ -80,6 +81,106 @@ def component_count(
                     seen.add(target)
                     stack.append(target)
     return components
+
+
+class DisjointSet:
+    def __init__(self) -> None:
+        self.parent: dict[Node, Node] = {}
+        self.rank: dict[Node, int] = {}
+
+    def find(self, value: Node) -> Node:
+        if value not in self.parent:
+            self.parent[value] = value
+            self.rank[value] = 0
+        if self.parent[value] != value:
+            self.parent[value] = self.find(self.parent[value])
+        return self.parent[value]
+
+    def union(self, left: Node, right: Node) -> bool:
+        first = self.find(left)
+        second = self.find(right)
+        if first == second:
+            return False
+        if self.rank[first] < self.rank[second]:
+            first, second = second, first
+        self.parent[second] = first
+        if self.rank[first] == self.rank[second]:
+            self.rank[first] += 1
+        return True
+
+
+def fundamental_cycle_tokens(
+    gap: int, edges: list[OwnerEdge]
+) -> list[dict[str, object]]:
+    ordered = sorted(edges, key=lambda edge: (edge[0], edge[1], edge[2]))
+    disjoint = DisjointSet()
+    forest: list[OwnerEdge] = []
+    nonforest: list[OwnerEdge] = []
+    for edge in ordered:
+        left_node = ("L", edge[0])
+        right_node = ("R", edge[1])
+        if disjoint.union(left_node, right_node):
+            forest.append(edge)
+        else:
+            nonforest.append(edge)
+
+    adjacency: dict[Node, list[tuple[Node, OwnerEdge]]] = defaultdict(list)
+    for edge in forest:
+        left_node = ("L", edge[0])
+        right_node = ("R", edge[1])
+        adjacency[left_node].append((right_node, edge))
+        adjacency[right_node].append((left_node, edge))
+    for rows in adjacency.values():
+        rows.sort(key=lambda row: (row[0], row[1]))
+
+    tokens: list[dict[str, object]] = []
+    for edge in nonforest:
+        start = ("L", edge[0])
+        target = ("R", edge[1])
+        queue = deque([start])
+        previous: dict[Node, Node | None] = {start: None}
+        previous_edge: dict[Node, OwnerEdge] = {}
+        while queue:
+            current = queue.popleft()
+            if current == target:
+                break
+            for neighbor, tree_edge in adjacency[current]:
+                if neighbor not in previous:
+                    previous[neighbor] = current
+                    previous_edge[neighbor] = tree_edge
+                    queue.append(neighbor)
+        if target not in previous:
+            raise AssertionError("nonforest edge endpoints disconnected in forest")
+
+        path: list[OwnerEdge] = []
+        current = target
+        while previous[current] is not None:
+            path.append(previous_edge[current])
+            current = previous[current]  # type: ignore[assignment]
+        path.reverse()
+        if not path or path[0][0] != edge[0]:
+            raise AssertionError("fundamental path did not begin at parent vertex")
+
+        reference = edge[2][0]
+        base_reference = path[0][2][0]
+        delta = abs(reference - base_reference)
+        if delta <= 0:
+            raise AssertionError("fundamental cycle reference pair is degenerate")
+        if Fraction(1, gap) != Fraction(delta, gap) * Fraction(1, delta):
+            raise AssertionError("cycle rectangle aspect identity failed")
+
+        tokens.append(
+            {
+                "nonforest_edge": edge,
+                "base_forest_edge": path[0],
+                "cycle_length": len(path) + 1,
+                "reference_pair": tuple(sorted((reference, base_reference))),
+                "reference_gap": delta,
+                "aspect_fraction": str(Fraction(delta, gap)),
+                "near": delta <= gap,
+            }
+        )
+    return tokens
 
 
 def graph_record(gap: int, edges: list[OwnerEdge]) -> dict[str, object]:
@@ -108,12 +209,24 @@ def graph_record(gap: int, edges: list[OwnerEdge]) -> dict[str, object]:
         if left[1] - left[0] != gap or right[1] - right[0] != gap:
             raise AssertionError("affine incidence failed gap preservation")
 
+    cycle_tokens = fundamental_cycle_tokens(gap, edges)
+    if len(cycle_tokens) != cycle_rank:
+        raise AssertionError("nonforest edge count differs from cycle rank")
+    if sum((Fraction(1, gap) for _token in cycle_tokens), Fraction()) != cycle_mass:
+        raise AssertionError("cycle token mass differs from weighted cycle rank")
+
     return {
         "edges": len(edges),
         "left_vertices": len(left_vertices),
         "right_vertices": len(right_vertices),
         "components": components,
         "cycle_rank": cycle_rank,
+        "near_cycle_tokens": sum(bool(token["near"]) for token in cycle_tokens),
+        "far_cycle_tokens": sum(not bool(token["near"]) for token in cycle_tokens),
+        "maximum_aspect": max(
+            (Fraction(str(token["aspect_fraction"])) for token in cycle_tokens),
+            default=Fraction(),
+        ),
     }
 
 
@@ -131,6 +244,10 @@ def main() -> int:
     maximum_combined_rank = 0
     maximum_combined_edges = 0
     maximum_combined_witness: dict[str, object] | None = None
+    combined_cycle_tokens = 0
+    combined_near_tokens = 0
+    combined_far_tokens = 0
+    maximum_cycle_aspect = Fraction()
 
     separated_graphs = 0
     separated_cyclic = 0
@@ -152,6 +269,12 @@ def main() -> int:
             combined_graphs += 1
             maximum_combined_edges = max(maximum_combined_edges, int(record["edges"]))
             rank = int(record["cycle_rank"])
+            combined_cycle_tokens += rank
+            combined_near_tokens += int(record["near_cycle_tokens"])
+            combined_far_tokens += int(record["far_cycle_tokens"])
+            maximum_cycle_aspect = max(
+                maximum_cycle_aspect, Fraction(record["maximum_aspect"])
+            )
             if rank > 0:
                 combined_cyclic += 1
             if rank > maximum_combined_rank:
@@ -219,6 +342,10 @@ def main() -> int:
         "combined_cyclic": 5004,
         "maximum_combined_rank": 18,
         "maximum_combined_edges": 30,
+        "combined_cycle_tokens": 12132,
+        "combined_near_tokens": 3848,
+        "combined_far_tokens": 8284,
+        "maximum_cycle_aspect": "11",
         "separated_graphs": 21578,
         "separated_cyclic": 632,
         "maximum_separated_rank": 5,
@@ -229,6 +356,10 @@ def main() -> int:
         "combined_cyclic": combined_cyclic,
         "maximum_combined_rank": maximum_combined_rank,
         "maximum_combined_edges": maximum_combined_edges,
+        "combined_cycle_tokens": combined_cycle_tokens,
+        "combined_near_tokens": combined_near_tokens,
+        "combined_far_tokens": combined_far_tokens,
+        "maximum_cycle_aspect": str(maximum_cycle_aspect),
         "separated_graphs": separated_graphs,
         "separated_cyclic": separated_cyclic,
         "maximum_separated_rank": maximum_separated_rank,
@@ -240,7 +371,7 @@ def main() -> int:
         raise AssertionError("expected affine cycle witnesses were not found")
 
     output = {
-        "schema": "affine_owner_incidence_cycles_small_box_v1",
+        "schema": "affine_owner_incidence_cycles_small_box_v2",
         "endpoint": endpoint,
         "counts": actual,
         "smallest_parallel_witness": smallest_parallel_witness,

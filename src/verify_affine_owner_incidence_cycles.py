@@ -215,6 +215,10 @@ def graph_record(gap: int, edges: list[OwnerEdge]) -> dict[str, object]:
     if sum((Fraction(1, gap) for _token in cycle_tokens), Fraction()) != cycle_mass:
         raise AssertionError("cycle token mass differs from weighted cycle rank")
 
+    maximum_aspect = max(
+        (Fraction(str(token["aspect_fraction"])) for token in cycle_tokens),
+        default=Fraction(),
+    )
     return {
         "edges": len(edges),
         "left_vertices": len(left_vertices),
@@ -223,10 +227,7 @@ def graph_record(gap: int, edges: list[OwnerEdge]) -> dict[str, object]:
         "cycle_rank": cycle_rank,
         "near_cycle_tokens": sum(bool(token["near"]) for token in cycle_tokens),
         "far_cycle_tokens": sum(not bool(token["near"]) for token in cycle_tokens),
-        "maximum_aspect": max(
-            (Fraction(str(token["aspect_fraction"])) for token in cycle_tokens),
-            default=Fraction(),
-        ),
+        "maximum_aspect": str(maximum_aspect),
     }
 
 
@@ -273,7 +274,7 @@ def main() -> int:
             combined_near_tokens += int(record["near_cycle_tokens"])
             combined_far_tokens += int(record["far_cycle_tokens"])
             maximum_cycle_aspect = max(
-                maximum_cycle_aspect, Fraction(record["maximum_aspect"])
+                maximum_cycle_aspect, Fraction(str(record["maximum_aspect"]))
             )
             if rank > 0:
                 combined_cyclic += 1

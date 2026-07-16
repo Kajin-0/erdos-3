@@ -2,21 +2,9 @@
 
 ## Status
 
-State-independent local resource theorem and proposed universal packing target for recursive completion-step shells.
+State-independent **local** resource theorem for recursively continuing completion-step shells.
 
-Every recursive state has two independently sufficient physical pair routes chosen to address complementary extremal obstructions:
-
-```text
-adjacent role:
-  first-copy horizontal chain;
-  off-diagonal staircase.
-
-outer role:
-  horizontal chain in the left copy;
-  horizontal chain in the right copy.
-```
-
-The theorem proves singleton capacity and scale behavior. A universal two-route Hall theorem is not yet proved.
+Every recursive state has two independently sufficient canonical pair routes, but neither local surplus nor the union of the two route neighborhoods implies a universal Hall packing theorem. The universal two-route Hall target is false, and the corrected alternate route already has an exact 19-state min-cut obstruction on `S7`.
 
 ---
 
@@ -25,68 +13,41 @@ The theorem proves singleton capacity and scale behavior. A universal two-route 
 Let
 
 ```math
-T=\{d_1<\cdots<d_n\}\subseteq[M,2M)
+T=\{d_1<\cdots<d_n\}\subseteq[M,2M),
+\qquad n\ge3,
 ```
 
-be recursively continuing, so `n>=3`.
-
-Let the role-weighted debt be
+and let
 
 ```math
-\operatorname{debt}(T)
-=
-\alpha H(T),
+\operatorname{debt}(T)=\alpha H(T),
 ```
 
-with
-
-```math
-\alpha=1
-```
-
-for adjacent roles and
-
-```math
-\alpha=1/2
-```
-
-for the outer role.
+where `alpha=1` for adjacent roles and `alpha=1/2` for the outer role.
 
 ---
 
-## 2. Adjacent role: route one
+## 2. Primary route: first-copy horizontal chain
 
-The first affine copy is
-
-```math
-X=\{c+\sigma d_i\}.
-```
-
-Its adjacent horizontal chain has gaps
+In one unscaled affine copy, use adjacent pairs with gaps
 
 ```math
-r_i=d_{i+1}-d_i,
+r_i=d_{i+1}-d_i.
 ```
 
-with total span less than `M`. Therefore
+Then
 
 ```math
-\boxed{
-J(R_1(T))
-=
-\sum_{i=1}^{n-1}\frac1{r_i}
->
-H(T).
-}
+\sum_{i=1}^{n-1}\frac1{r_i}>H(T)\ge\operatorname{debt}(T).
 ```
 
-Every route-one gap is strictly below `M`; this is shell-scale descent.
+Every gap is below `M`, so the primary route has strict dyadic shell descent.
 
 ---
 
-## 3. Adjacent role: route two
+## 3. Adjacent alternate route: corrected staircase
 
-Write the two copies as
+For an adjacent role write
 
 ```math
 x_i=c+\sigma d_i,
@@ -94,177 +55,138 @@ x_i=c+\sigma d_i,
 y_i=c+2\sigma d_i.
 ```
 
-The canonical off-diagonal staircase consists of
+Use
 
 ```math
-\{x_{i+1},y_i\},
-\qquad1\le i<n,
+\{x_{i+1},y_i\},\qquad1\le i<n,
 ```
 
-and
+and close with
 
 ```math
-\{x_1,y_2\}.
+\{x_n,y_1\}.
 ```
 
-After reflection if necessary, its gaps are
+The first `n-1` gaps are
 
 ```math
-2d_i-d_{i+1}
-<d_i
+2d_i-d_{i+1},
 ```
 
-for `i<n`, and
+which lie in `(0,d_i)`. The closing gap is
 
 ```math
-2d_2-d_1
-<d_n
+2d_1-d_n,
 ```
 
-for the final pair. Consequently
+which lies in `(0,d_n)` because `d_1>=M` and `d_n<2M`.
+
+Hence each harmonic term has its own strictly smaller-gap unmatched cross-copy pair, and
 
 ```math
-\boxed{
 J(R_2(T))>H(T).
-}
 ```
 
-Every route-two pair has gap pointwise smaller than the harmonic term assigned to it. The dyadic gap shell may remain the same, but the integer gap strictly decreases.
+The former closing pair `{x_1,y_2}` was incorrect: on a three-term progression its gap can equal `d_n`.
 
 ---
 
-## 4. Outer role: two internal routes
+## 4. Outer alternate route
 
-The outer copies are
-
-```math
-X=\{c-d_i\}
-```
-
-and
+For an outer role, the two copies are
 
 ```math
-Y=\{c+d_i\}.
-```
-
-Both are unscaled copies of `T`. Their horizontal chains have the same adjacent gaps `r_i`, and each satisfies
-
-```math
-J(R_j(T))
->
-H(T)
->
-\frac12H(T)
-=
-\operatorname{debt}(T),
-\qquad j\in\{1,2\}.
-```
-
-Both routes have shell-scale gap descent.
-
----
-
-## 5. Singleton Hall inequalities
-
-For every recursive embedded state `s`, define its two physical pair neighborhoods
-
-```math
-R_1(s),
+c-T,
 \qquad
-R_2(s)
+c+T.
 ```
 
-as above. Then
+Either copy has the same adjacent horizontal-chain capacity as `T`, so either route satisfies
 
 ```math
-\boxed{
+J(R_j(T))>H(T)>\frac12H(T)=\operatorname{debt}(T).
+```
+
+Both outer routes have strict dyadic shell descent.
+
+---
+
+## 5. What the local theorem proves
+
+For every one embedded recursive state `s`,
+
+```math
 J(R_1(s))>\operatorname{debt}(s)
-}
 ```
 
 and
 
 ```math
-\boxed{
 J(R_2(s))>\operatorname{debt}(s).
-}
 ```
 
-The two routes are not treated as two copies of spendable capacity. They are alternative neighborhoods in a capacitated assignment problem.
+These are singleton inequalities. They do not make the two routes independent copies of spendable physical capacity.
 
 ---
 
-## 6. Why both routes are necessary
+## 6. Exact `S7` comparison
 
-### Complete-bipartite translation grid
-
-Many states share one first-copy chain. The off-diagonal staircase remains state-specific across the first-copy/second-copy incidence grid and supplies quadratic capacity.
-
-### Carry-free digit grid
-
-The complete off-diagonal physical grid has insufficient capacity. The digit layers contain abundant short internal horizontal pairs, so the internal-chain route supplies the missing reserve.
-
-Thus the known extremal families defeat opposite routes.
-
----
-
-## 7. Proposed universal Hall target
-
-For every finite family `mathcal F` of recursive states emitted by direct maximal-ambient discharge, let
-
-```math
-\mathcal R(\mathcal F)
-=
-\bigcup_{s\in\mathcal F}
-(R_1(s)\cup R_2(s)).
-```
-
-After subtracting earlier physical pair allocations, the desired theorem is a fractional assignment satisfying every state demand using capacities on its two route neighborhoods.
-
-Equivalently, every subfamily should satisfy
-
-```math
-\boxed{
-\sum_{s\in\mathcal F}\operatorname{debt}(s)
-\le
-J_{\rm residual}(\mathcal R(\mathcal F)).
-}
-```
-
-This statement is not established. It is narrower and better motivated than the false projected-copy or off-diagonal-only Hall targets.
-
----
-
-## 8. Scale-aware alternative
-
-If the unweighted Hall inequality fails, the route structure still supplies a scale-aware transition:
+The primary route packs the complete certified recursive frontier:
 
 ```text
-internal chain:
-  dyadic gap shell drops;
-
-adjacent staircase:
-  individual integer gap drops;
-
-outer second chain:
-  dyadic gap shell drops.
+states                     278
+demand          2.365133143358...
+maximum flow    2.365133143358...
+unmet demand               0
 ```
 
-A valid potential may therefore orient each state to the route that gives the better local scale decrease, while recording collisions as affine incidence tokens.
+The corrected alternate route does not:
+
+```text
+maximum flow    2.361437656917...
+unmet demand    0.003695486441...
+min-cut states             19
+min-cut pairs             176
+```
+
+Thus local route sufficiency does not determine a globally feasible orientation.
+
+Primary reference: `docs/s7-direct-gap-triangular-packing.md`.  
+Alternate no-go: `docs/s7-alternate-route-min-cut-no-go.md`.
 
 ---
 
-## 9. Exact S7 interface
+## 7. Universal physical-union no-go
 
-The certified `S7` frontier already packs completely using only route one:
+The high-digit carry-free construction proves that even the union of the primary chains and corrected adjacent staircases can have insufficient physical capacity for all recursive state demands. For sufficiently large dimension,
 
-```text
-278 recursive state demands;
-991 first-copy chain pairs;
-206 allocated lower-gap pairs;
-unmet demand zero.
+```math
+\sum_s\operatorname{debt}(s)
+>
+J\!\left(\bigcup_s(R_1(s)\cup R_2(s))\right).
 ```
 
-A separate exact probe should test the union of both canonical routes with entering-pair capacity treated as lower-gap Bellman child capacity, not as a new disjoint reserve.
+Therefore the proposed universal two-route Hall theorem is false.
 
-The test is diagnostic for the recorded frontier. Universal validity remains open.
+Primary reference: `docs/high-digit-two-route-hall-no-go.md`.
+
+---
+
+## 8. Surviving use of the routes
+
+The routes remain valuable as **lineage transitions**:
+
+```text
+primary chain:
+  strict dyadic gap-shell descent;
+
+corrected adjacent staircase:
+  strict pointwise integer-gap descent;
+
+outer alternate chain:
+  strict dyadic gap-shell descent.
+```
+
+A valid global potential may orient production-owned occurrences through these routes while retaining lineage labels. It may not collapse all occurrences to one unlabelled physical pair union.
+
+The exact next object is the mixed-route incidence cut, not another locally sufficient route family.

@@ -5,6 +5,7 @@ on:
     paths:
       - '.github/workflows/recursive-current-latent-small-box.yml'
       - 'src/search_recursive_current_latent_small_box.py'
+      - 'src/probe_recursive_current_latent_gadget.py'
       - 'src/search_lexicographic_reserve_pseudoforest_small_box.py'
       - 'src/verify_retained_provenance_second_generation.py'
       - 'src/verify_retained_terminal_split.py'
@@ -23,7 +24,13 @@ jobs:
         run: |
           python3 -m py_compile \
             src/search_recursive_current_latent_small_box.py \
+            src/probe_recursive_current_latent_gadget.py \
             src/search_lexicographic_reserve_pseudoforest_small_box.py
+
+      - name: Verify structured recursive gadget
+        run: |
+          python3 src/probe_recursive_current_latent_gadget.py \
+            > recursive_current_latent_gadget.json
 
       - name: Search endpoint 20
         run: |
@@ -45,6 +52,7 @@ jobs:
           retention-days: 30
           if-no-files-found: error
           path: |
+            recursive_current_latent_gadget.json
             recursive_current_latent_endpoint20.json
             recursive_current_latent_endpoint20_stdout.json
             recursive_current_latent_endpoint20_exit_status.txt

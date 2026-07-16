@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Exact fractional critical-capacity flow for repeated affine resources."""
+"""Exact joint critical-capacity assignment for affine child resources."""
 from __future__ import annotations
 
 from collections import defaultdict, deque
@@ -25,12 +25,12 @@ Node = tuple[object, ...]
 def shell_base(values: tuple[int, ...]) -> int:
     base = 1 << (min(values).bit_length() - 1)
     if any(value < base or value >= 2 * base for value in values):
-        raise AssertionError(f"parent crosses standard shell: {values}")
+        raise AssertionError(f"state crosses standard shell: {values}")
     return base
 
 
-def critical_flow(
-    demands: dict[Pair, tuple[Fraction, tuple[Pair, Pair]]],
+def maximum_fractional_assignment(
+    demands: dict[Pair, tuple[Fraction, tuple[Pair, ...]]],
     capacities: dict[Pair, Fraction],
 ) -> tuple[Fraction, dict[Pair, dict[Pair, Fraction]]]:
     source: Node = ("source",)
@@ -43,16 +43,15 @@ def critical_flow(
         graph[right].add(left)
         capacity[(left, right)] += value
 
-    total_demand = sum((value[0] for value in demands.values()), Fraction())
-    for demand, (amount, reserves) in sorted(demands.items()):
+    total_demand = sum((row[0] for row in demands.values()), Fraction())
+    for demand, (amount, choices) in sorted(demands.items()):
         demand_node: Node = ("d", *demand)
         add_edge(source, demand_node, amount)
-        for reserve in sorted(reserves):
-            reserve_node: Node = ("r", *reserve)
-            add_edge(demand_node, reserve_node, amount)
-    for reserve, amount in sorted(capacities.items()):
+        for choice in sorted(set(choices)):
+            add_edge(demand_node, ("p", *choice), amount)
+    for pair, amount in sorted(capacities.items()):
         if amount > 0:
-            add_edge(("r", *reserve), sink, amount)
+            add_edge(("p", *pair), sink, amount)
 
     flow: dict[tuple[Node, Node], Fraction] = defaultdict(Fraction)
     value = Fraction()
@@ -92,12 +91,12 @@ def critical_flow(
     for demand in sorted(demands):
         demand_node: Node = ("d", *demand)
         for target in sorted(graph[demand_node], key=repr):
-            if target and target[0] == "r":
+            if target and target[0] == "p":
                 amount = flow[(demand_node, target)]
                 if amount > 0:
                     allocation[demand][(int(target[1]), int(target[2]))] = amount
     if value > total_demand:
-        raise AssertionError("critical reserve flow exceeds demand")
+        raise AssertionError("critical assignment exceeds demand")
     return value, allocation
 
 
@@ -147,76 +146,126 @@ def profile(name: str, parent: tuple[int, ...]) -> dict[str, object]:
                 }
             )
 
-    load_ratio = {
-        resource: sum((Fraction(row["ratio"]) for row in rows), Fraction())
-        for resource, rows in owners.items()
+    fixed_load: dict[Pair, Fraction] = defaultdict(Fraction)
+    flexible_demands: dict[Pair, tuple[Fraction, tuple[Pair, ...]]] = {}
+    demand_meta: dict[Pair, dict[str, object]] = {}
+
+    for resource, rows in owners.items():
+        for row in rows:
+            ratio = Fraction(row["ratio"])
+            if row["kind"] == "latent" and row["source"] == "middle_fiber":
+                if resource in flexible_demands:
+                    raise AssertionError(f"{name}: one resource has two middle latent owners")
+                step = int(row["step"])
+                sign = orientation(step)
+                center = ordered_pair(
+                    resource[0] + sign * step,
+                    resource[1] + sign * step,
+                )
+                opposite = ordered_pair(
+                    resource[0] + 2 * sign * step,
+                    resource[1] + 2 * sign * step,
+                )
+                if not set(center) <= set(parent) or not set(opposite) <= set(parent):
+                    raise AssertionError(f"{name}: translated reserve left parent support")
+                flexible_demands[resource] = (
+                    ratio,
+                    (resource, center, opposite),
+                )
+                demand_meta[resource] = {
+                    "middle_scale": int(row["scale"]),
+                    "step": step,
+                    "natural": resource,
+                    "center": center,
+                    "opposite": opposite,
+                    "duplicated_latent": sum(
+                        owner["kind"] == "latent" for owner in rows
+                    )
+                    == 2,
+                    "current_overlap": any(
+                        owner["kind"] == "current" for owner in rows
+                    ),
+                }
+            else:
+                fixed_load[resource] += ratio
+
+    fixed_excess = {
+        resource: max(Fraction(), value - 1)
+        for resource, value in fixed_load.items()
+        if value > 1
     }
-    residual_capacity = {
-        resource: max(Fraction(), 1 - ratio)
-        for resource, ratio in load_ratio.items()
+    pair_universe = {
+        pair
+        for demand, (_amount, choices) in flexible_demands.items()
+        for pair in choices
+    }
+    pair_universe.update(fixed_load)
+    capacities = {
+        pair: max(Fraction(), 1 - fixed_load.get(pair, Fraction()))
+        for pair in pair_universe
     }
 
-    latent_demands: dict[Pair, tuple[Fraction, tuple[Pair, Pair]]] = {}
-    current_excess: dict[Pair, Fraction] = {}
-    terminal_current_excess = Fraction()
+    flow_value, allocation = maximum_fractional_assignment(
+        flexible_demands,
+        capacities,
+    )
+    total_flexible = sum(
+        (row[0] for row in flexible_demands.values()),
+        Fraction(),
+    )
+    unallocated_ratio = total_flexible - flow_value
+
+    fixed_excess_mass = sum(
+        (
+            Fraction(parent_base, resource[1] - resource[0]) * ratio
+            for resource, ratio in fixed_excess.items()
+        ),
+        Fraction(),
+    )
+    unallocated_mass = sum(
+        (
+            Fraction(parent_base, resource[1] - resource[0])
+            * (
+                amount
+                - sum(allocation.get(resource, {}).values(), Fraction())
+            )
+            for resource, (amount, _choices) in flexible_demands.items()
+        ),
+        Fraction(),
+    )
+
     recursive_current_excess = Fraction()
-    candidate_reserves: set[Pair] = set()
-
+    terminal_current_excess = Fraction()
     for resource, rows in owners.items():
         current = [row for row in rows if row["kind"] == "current"]
         latent = [row for row in rows if row["kind"] == "latent"]
-        excess = max(Fraction(), load_ratio[resource] - 1)
+        if not current or not latent:
+            continue
+        total = sum((Fraction(row["ratio"]) for row in rows), Fraction())
+        excess = max(Fraction(), total - 1)
+        weighted = Fraction(parent_base, resource[1] - resource[0]) * excess
+        if bool(current[0]["terminal"]):
+            terminal_current_excess += weighted
+        else:
+            recursive_current_excess += weighted
 
-        if current and latent:
-            current_excess[resource] = excess
-            gap = resource[1] - resource[0]
-            weighted = Fraction(parent_base, gap) * excess
-            if bool(current[0]["terminal"]):
-                terminal_current_excess += weighted
-            else:
-                recursive_current_excess += weighted
-
-        if len(latent) == 2:
-            middle = next(row for row in latent if row["source"] == "middle_fiber")
-            step = int(middle["step"])
-            sign = orientation(step)
-            center = ordered_pair(
-                resource[0] + sign * step,
-                resource[1] + sign * step,
-            )
-            opposite = ordered_pair(
-                resource[0] + 2 * sign * step,
-                resource[1] + 2 * sign * step,
-            )
-            if not set(center) <= set(parent) or not set(opposite) <= set(parent):
-                raise AssertionError(f"{name}: reserve left parent support")
-            candidate_reserves.update((center, opposite))
-            if excess > 0:
-                latent_demands[resource] = (excess, (center, opposite))
-
-    reserve_capacity = {
-        reserve: residual_capacity.get(reserve, Fraction(1))
-        for reserve in candidate_reserves
-    }
-    flow_value, allocation = critical_flow(latent_demands, reserve_capacity)
-    total_latent_demand = sum((row[0] for row in latent_demands.values()), Fraction())
-    unallocated_ratio = total_latent_demand - flow_value
-
-    latent_demand_mass = sum(
-        (
-            Fraction(parent_base, demand[1] - demand[0]) * row[0]
-            for demand, row in latent_demands.items()
-        ),
-        Fraction(),
-    )
-    allocated_mass = sum(
-        (
-            Fraction(parent_base, demand[1] - demand[0]) * amount
-            for demand, rows in allocation.items()
-            for amount in rows.values()
-        ),
-        Fraction(),
-    )
+    demand_rows = []
+    for resource, (amount, choices) in sorted(flexible_demands.items()):
+        assigned = sum(allocation.get(resource, {}).values(), Fraction())
+        demand_rows.append(
+            {
+                "resource": resource,
+                "ratio": str(amount),
+                "assigned_ratio": str(assigned),
+                "unassigned_ratio": str(amount - assigned),
+                "choices": choices,
+                "allocation": [
+                    {"pair": pair, "ratio": str(value)}
+                    for pair, value in sorted(allocation.get(resource, {}).items())
+                ],
+                **demand_meta[resource],
+            }
+        )
 
     return {
         "name": name,
@@ -225,6 +274,10 @@ def profile(name: str, parent: tuple[int, ...]) -> dict[str, object]:
         "counts": {
             "retained_states": len(retained),
             "owner_resources": len(owners),
+            "fixed_resources": len(fixed_load),
+            "flexible_middle_latent_demands": len(flexible_demands),
+            "fixed_excess_resources": len(fixed_excess),
+            "capacity_pairs": len(capacities),
             "current_latent_resources": sum(
                 any(row["kind"] == "current" for row in rows)
                 and any(row["kind"] == "latent" for row in rows)
@@ -234,47 +287,31 @@ def profile(name: str, parent: tuple[int, ...]) -> dict[str, object]:
                 sum(row["kind"] == "latent" for row in rows) == 2
                 for rows in owners.values()
             ),
-            "positive_latent_excess_demands": len(latent_demands),
-            "candidate_reserves": len(candidate_reserves),
         },
         "ratios": {
-            "total_latent_excess_demand": str(total_latent_demand),
-            "allocated_latent_excess": str(flow_value),
-            "unallocated_latent_excess": str(unallocated_ratio),
-            "maximum_owner_load": str(max(load_ratio.values(), default=Fraction())),
-            "minimum_candidate_reserve_capacity": str(
-                min(reserve_capacity.values(), default=Fraction())
-            ),
+            "total_flexible_demand": str(total_flexible),
+            "assigned_flexible_demand": str(flow_value),
+            "unallocated_flexible_demand": str(unallocated_ratio),
+            "maximum_fixed_load": str(max(fixed_load.values(), default=Fraction())),
+            "minimum_pair_capacity": str(min(capacities.values(), default=Fraction())),
         },
         "masses": {
-            "latent_excess_demand": str(latent_demand_mass),
-            "allocated_latent_excess": str(allocated_mass),
-            "unallocated_latent_excess": str(latent_demand_mass - allocated_mass),
+            "fixed_excess": str(fixed_excess_mass),
+            "unallocated_flexible": str(unallocated_mass),
+            "total_critical_residual": str(fixed_excess_mass + unallocated_mass),
             "terminal_current_excess": str(terminal_current_excess),
             "recursive_current_excess": str(recursive_current_excess),
         },
-        "current_excess": [
+        "fixed_excess": [
             {"resource": resource, "ratio": str(value)}
-            for resource, value in sorted(current_excess.items())
-            if value > 0
+            for resource, value in sorted(fixed_excess.items())
         ],
-        "latent_demands": [
-            {
-                "resource": resource,
-                "ratio": str(row[0]),
-                "reserves": row[1],
-                "allocation": [
-                    {"reserve": reserve, "ratio": str(amount)}
-                    for reserve, amount in sorted(allocation.get(resource, {}).items())
-                ],
-            }
-            for resource, row in sorted(latent_demands.items())
-        ],
+        "demands": demand_rows,
         "checks": {
-            "critical_loads_use_actual_child_scales": True,
-            "only_local_excess_is_routed": True,
-            "reserve_flow_respects_residual_capacity": True,
-            "all_latent_excess_allocated": unallocated_ratio == 0,
+            "middle_latent_occurrences_are_jointly_assigned": True,
+            "natural_center_opposite_choices_preserve_gap": True,
+            "fixed_loads_are_reserved_before_flow": True,
+            "all_flexible_demands_assigned": unallocated_ratio == 0,
         },
     }
 
@@ -353,23 +390,25 @@ def main() -> int:
         profile("rank_two_raw_reserve_no_go", rank_two),
     ]
     checks = {
-        "clean_latent_reuse_has_zero_critical_excess": (
-            profiles[0]["ratios"]["total_latent_excess_demand"] == "0"
+        "clean_profile_closes_jointly": (
+            profiles[0]["ratios"]["unallocated_flexible_demand"] == "0"
+            and profiles[0]["masses"]["fixed_excess"] == "0"
         ),
-        "recursive_current_no_go_keeps_current_excess": (
-            Fraction(profiles[1]["masses"]["recursive_current_excess"]) > 0
+        "recursive_current_no_go_retains_fixed_excess": (
+            Fraction(profiles[1]["masses"]["fixed_excess"]) > 0
         ),
-        "rank_two_raw_no_go_closed_fractionally": (
-            profiles[2]["ratios"]["unallocated_latent_excess"] == "0"
+        "rank_two_raw_no_go_closes_jointly": (
+            profiles[2]["ratios"]["unallocated_flexible_demand"] == "0"
+            and profiles[2]["masses"]["fixed_excess"] == "0"
         ),
     }
-    if not checks["clean_latent_reuse_has_zero_critical_excess"]:
-        raise AssertionError("clean latent-reuse critical profile changed")
-    if not checks["recursive_current_no_go_keeps_current_excess"]:
-        raise AssertionError("recursive current-latent critical no-go disappeared")
+    if not checks["clean_profile_closes_jointly"]:
+        raise AssertionError("clean critical assignment changed")
+    if not checks["recursive_current_no_go_retains_fixed_excess"]:
+        raise AssertionError("sharp recursive current excess disappeared")
 
     output = {
-        "schema": "critical_fractional_reserve_flow_v1",
+        "schema": "critical_joint_fractional_assignment_v2",
         "profiles": profiles,
         "checks": checks,
     }

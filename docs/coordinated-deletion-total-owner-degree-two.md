@@ -2,57 +2,49 @@
 
 ## Status
 
-State-independent ownership theorem for the coordinated-deletion output architecture consisting of dyadically resolved backbone children and selected middle-fiber children.
+State-independent ownership theorem for the coordinated-deletion output architecture.
 
-For every physical parent root pair, the total number of retained current and recursive latent owners is at most two.
+For every physical parent root pair, the total number of retained current and recursive latent owners is at most two:
+
+```math
+\boxed{c_f+\ell_f\le2.}
+```
+
+The ownership theorem is unchanged. Its former scale-critical corollary is corrected: coordinated middle children may occur at parent half-scale, so the exponent-one latent-latent residual can equal one full parent pair unit.
 
 ---
 
 ## 1. Output architecture
 
-Fix one completed coordinated deletion schedule on a finite parent root set `P`.
-
-Let
+Fix one completed coordinated deletion schedule on a finite parent root set `P`, and let
 
 ```math
 a=\min P.
 ```
 
-The output architecture has two child types.
-
 ### Backbone children
 
-Every backbone child has reference root `a`. The remaining parent roots are partitioned by role and dyadic shell before retention. Consequently one parent root belongs to at most one retained backbone root set.
+Every backbone child has affine reference `a`. Shelling and retention place one parent root in at most one retained backbone root set.
 
 ### Middle-fiber children
 
-Every selected action has one sponsor root. A root sponsors at most one selected action because it is deleted immediately after selection.
+Every selected action has one sponsor root. A sponsor is removed immediately after selection and therefore sponsors at most one action. The base sponsor is the affine reference of its middle fiber and is omitted from that middle root set. Every other sponsor at the same step appears at most once, followed by shell resolution and retention.
 
-For one selected step `d`, choose the deterministic base action used to translate its centers. The base sponsor is the affine reference of the middle fiber and is omitted from the middle child root set. Every other sponsor at step `d` appears once as a middle child root, subject to shell resolution and retention.
-
-Sponsor uniqueness therefore implies:
-
-```math
-\boxed{
-\text{one parent root belongs to at most one middle child root set.}
-}
-```
+Hence one parent root belongs to at most one middle child root set.
 
 ---
 
 ## 2. Current and latent ownership
 
-Fix one physical parent pair
+For one physical parent pair
 
 ```math
-f=\{r,p\}.
+f=\{r,p\},
 ```
 
-A current owner of `f` is an affine child with reference `r` and root `p`.
+a current owner is an affine child with reference `r` and root `p`. A latent owner is a recursive child whose root set contains both endpoints.
 
-A latent owner is a recursive child whose root set contains both `r` and `p`.
-
-Point-disjoint numerical child supports imply that `f` has at most one current owner:
+Point-disjoint numerical child supports imply
 
 ```math
 c_f\le1.
@@ -64,97 +56,64 @@ The latent degree theorem gives
 \ell_f\le2,
 ```
 
-with equality possible only for one backbone owner and one middle owner.
-
-The remaining question is whether one current owner can coexist with two latent owners.
+with equality possible only for one backbone latent owner and one middle latent owner.
 
 ---
 
 ## 3. Current backbone owner
 
-Suppose the current owner is a backbone child. Then its reference is
+If the current owner is a backbone child, its reference is the pivot `a`.
 
-```math
-r=a.
-```
-
-The pivot root `a` is omitted from every backbone child root set, so no backbone child can own `f` latently.
-
-The root `a` can sponsor at most one selected action and hence can belong to at most one middle child root set. Therefore
-
-```math
-\ell_f\le1.
-```
+The pivot is omitted from every backbone child root set, so no backbone child owns the pair latently. The pivot can sponsor at most one selected action and therefore belongs to at most one middle root set.
 
 Thus
 
 ```math
 c_f=1
 \quad\Longrightarrow\quad
-c_f+\ell_f\le2
+\ell_f\le1.
 ```
-
-in the backbone-current case.
 
 ---
 
 ## 4. Current middle owner
 
-Suppose the current owner is a middle-fiber child generated at step `d`. Then `r` is the base sponsor for that step.
+If the current owner is a middle child, its reference is that step fiber's base sponsor.
 
-The base sponsor is omitted from its own middle child root set. Since one root sponsors at most one selected action, `r` cannot belong to any other middle child root set.
+The base sponsor is omitted from its own middle root set and cannot sponsor a second action. It may occur in at most one retained backbone root set.
 
-The root `r` may belong to one retained backbone root set, but the backbone partition places it in at most one such child. Hence again
-
-```math
-\ell_f\le1.
-```
-
-Therefore
+Again,
 
 ```math
 c_f=1
 \quad\Longrightarrow\quad
-c_f+\ell_f\le2
+\ell_f\le1.
 ```
-
-in the middle-current case.
 
 ---
 
 ## 5. Total owner theorem
 
-If `c_f=0`, the latent degree theorem gives `ell_f<=2`.
+If `c_f=0`, the latent degree theorem gives `ell_f<=2`. If `c_f=1`, the previous cases give `ell_f<=1`.
 
-If `c_f=1`, the preceding case analysis gives `ell_f<=1`.
-
-Hence for every physical parent pair,
+Therefore
 
 ```math
-\boxed{
-c_f+\ell_f\le2.
-}
+\boxed{c_f+\ell_f\le2.}
 ```
 
-Equivalently, the only repeated-owner profiles are
+The only repeated profiles are:
 
 ```text
-one current + one latent;
-or
-one backbone latent + one middle latent.
+one current owner + one latent owner;
+one backbone latent owner + one middle latent owner.
 ```
 
-The profile
-
-```text
-one current + two latent
-```
-
-is impossible.
+One current owner plus two latent owners is impossible.
 
 ---
 
-## 6. Exact branching consequence
+## 6. Raw branching consequence
 
 The row-star branching excess count is
 
@@ -162,7 +121,7 @@ The row-star branching excess count is
 (c_f+\ell_f-1)_+.
 ```
 
-The total degree theorem implies
+Hence
 
 ```math
 \boxed{
@@ -170,64 +129,93 @@ The total degree theorem implies
 }
 ```
 
-Thus one physical parent resource creates at most one additional occurrence after first appearance.
+One physical parent resource creates at most one additional raw occurrence after first appearance.
 
-Moreover, the two possible extra occurrences are mutually exclusive:
+The two possible extra occurrences are mutually exclusive:
 
 ```text
-current-latent profile: one current occurrence;
-latent-latent profile: one middle occurrence if no reserve is matched.
+current-latent profile -> one additional current occurrence;
+latent-latent profile  -> one additional middle occurrence unless a reserve pays it.
 ```
 
 ---
 
-## 7. Critical owner-scale contraction
+## 7. Correct owner-exponent coefficients
 
-Let the parent shell base be `N`.
-
-### Current-latent profile
-
-The extra current occurrence lies in a child shell of base at most `N/2`. Therefore
+Let the parent shell base be `N` and define
 
 ```math
-\Theta_1(\text{extra current})
-\le
-\frac12\Theta_1(f;N).
+\Theta_p(f;N)=\frac{N^p}{\operatorname{gap}(f)}.
 ```
 
-### Latent-latent profile
-
-If a center/opposite reserve pays the duplicate, no occurrence recurses. Otherwise the extra original middle occurrence lies at scale at most `N/4`, so
+Every child shell base satisfies only
 
 ```math
-\Theta_1(\text{middle export})
-\le
-\frac14\Theta_1(f;N).
+L\le\frac N2.
 ```
 
-Since the profiles cannot occur together,
+Therefore:
+
+```text
+one current occurrence coefficient <= 2^{-p};
+one latent occurrence coefficient  <= 2^{1-p}.
+```
+
+For the two repeated profiles,
 
 ```math
-\boxed{
-\Theta_1(\text{complete overlap residue of }f)
-\le
-\frac12\Theta_1(f;N).
-}
+q_{\rm cur-lat}(p)\le3\,2^{-p},
 ```
 
-This improves the coarse `3/4` bound obtained by treating the two residual types as simultaneously possible.
+and
+
+```math
+q_{\rm lat-lat}(p)\le2^{2-p}.
+```
+
+At exponent one:
+
+```text
+current-latent complete load <= 3/2;
+latent-latent complete load  <= 2;
+current-latent residual      <= 1/2;
+latent-latent residual       <= 1.
+```
+
+The latent-latent residual coefficient one is attained by an exact retained-policy witness.
+
+At exponent two:
+
+```text
+current-latent complete load <= 3/4;
+latent-latent complete load  <= 1.
+```
+
+Thus all owner multiplicity fits inside the original parent pair capacity at exponent two.
+
+Primary correction:
+
+```text
+docs/coordinated-middle-half-scale-critical-no-go.md
+```
 
 ---
 
 ## 8. Strategic consequence
 
-The economical activation row has a binary local structure:
+The local ownership architecture is binary, but not critical-contracting at exponent one:
 
 ```text
 no extra owner;
-one current continuation at half owner scale;
-one middle continuation at quarter owner scale;
+one current continuation at scale at most N/2;
+one middle continuation at scale at most N/2;
 or physical reserve termination.
 ```
 
-No physical pair can branch into both a current-overlap lineage and a middle-export lineage. The remaining global first-appearance tree therefore has residual critical reproduction coefficient at most `1/2` per physical parent resource.
+The exact threshold for collision-free owner packing is
+
+```math
+\boxed{p=2.}
+```
+
+Any exponent-one proof must therefore use an additional occurrence, depth, terminal, or arithmetic-obstruction ledger. The total owner theorem alone does not provide a subcritical critical coefficient.

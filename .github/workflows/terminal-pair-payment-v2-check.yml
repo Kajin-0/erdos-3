@@ -8,6 +8,7 @@ on:
       - 'src/probe_sponsor_pair_transport_frontier.py'
       - 'src/probe_residual_sponsor_backbone_split.py'
       - 'src/probe_s7_affine_owner_incidence_graph.py'
+      - 'src/probe_s7_terminal_current_branch_absorption.py'
       - 'src/probe_s7_hole_support_closure.py'
       - 'src/probe_s7_support_transition_rank.py'
       - 'src/probe_s7_support_rewrite_potential.py'
@@ -58,6 +59,7 @@ jobs:
           python3 -m py_compile \
             src/probe_terminal_pair_payment_frontier_v2.py \
             src/probe_s7_affine_owner_incidence_graph.py \
+            src/probe_s7_terminal_current_branch_absorption.py \
             src/probe_s7_hole_support_closure.py \
             src/probe_s7_support_transition_rank.py \
             src/probe_s7_support_rewrite_potential.py \
@@ -108,6 +110,9 @@ jobs:
           python3 src/probe_s7_affine_owner_incidence_graph.py \
             s7_affine_owner_incidence_graph.json \
             > s7_affine_owner_incidence_graph_stdout.json
+          python3 src/probe_s7_terminal_current_branch_absorption.py \
+            s7_terminal_current_branch_absorption.json \
+            > s7_terminal_current_branch_absorption_stdout.json
 
       - name: Classify edge-unresolved S7 completions
         run: |
@@ -246,6 +251,8 @@ jobs:
             terminal_pair_payment_frontier_v2.json
             s7_affine_owner_incidence_graph.json
             s7_affine_owner_incidence_graph_stdout.json
+            s7_terminal_current_branch_absorption.json
+            s7_terminal_current_branch_absorption_stdout.json
             s7_terminal_completion_requests.txt
             s7_terminal_completion_classification.tsv
             s7_edge_unresolved_completion_saturation_summary.json

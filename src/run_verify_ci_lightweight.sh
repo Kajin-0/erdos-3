@@ -91,7 +91,8 @@ python3 "$ROOT/src/verify_direct_maximal_pair_discharge.py"
 python3 "$ROOT/src/verify_cross_shell_edge_swap_involution.py"
 python3 "$ROOT/src/verify_exact_gap_light_persistence.py"
 python3 "$ROOT/src/verify_full_edge_incidence_pair_energy_bound.py"
+python3 "$ROOT/src/verify_affine_owner_incidence_cycles.py"
 python3 "$ROOT/src/certified_contaminated_states.py" > /dev/null
 python3 "$ROOT/src/branching_reserve_lp.py" self-test
 
-echo "verified: lightweight exact certificates, independent pair, hole-witness, completion-fiber, four-ratio, global shell-batching, direct maximal-discharge, cross-shell involution, exact-gap light-persistence, and full-edge pair-incidence checks, and LP harness"
+echo "verified: lightweight exact certificates, independent pair, hole-witness, completion-fiber, four-ratio, global shell-batching, direct maximal-discharge, cross-shell involution, exact-gap light-persistence, full-edge pair-incidence, and affine owner-cycle checks, and LP harness"

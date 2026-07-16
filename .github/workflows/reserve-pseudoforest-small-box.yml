@@ -7,6 +7,7 @@ on:
       - 'src/search_lexicographic_reserve_pseudoforest_small_box.py'
       - 'src/verify_retained_provenance_second_generation.py'
       - 'src/verify_retained_terminal_split.py'
+      - 'data/reserve_pseudoforest_endpoint16_2026-07-16.json'
 
 permissions:
   contents: read
@@ -25,18 +26,15 @@ jobs:
             src/verify_retained_provenance_second_generation.py \
             src/verify_retained_terminal_split.py
 
-      - name: Search endpoint 16
+      - name: Regenerate endpoint-16 certificate
         run: |
-          set +e
           python3 src/search_lexicographic_reserve_pseudoforest_small_box.py \
             16 reserve_pseudoforest_endpoint16.json \
             > reserve_pseudoforest_endpoint16_stdout.json
-          status=$?
-          set -e
-          printf '%s\n' "$status" > reserve_pseudoforest_endpoint16_exit_status.txt
-          if [[ "$status" -ne 0 && "$status" -ne 2 ]]; then
-            exit "$status"
-          fi
+          printf '0\n' > reserve_pseudoforest_endpoint16_exit_status.txt
+          cmp \
+            data/reserve_pseudoforest_endpoint16_2026-07-16.json \
+            reserve_pseudoforest_endpoint16.json
 
       - name: Upload reserve search
         uses: actions/upload-artifact@v4

@@ -6,6 +6,7 @@ on:
       - '.github/workflows/critical-fractional-reserve-flow.yml'
       - 'src/probe_critical_fractional_reserve_flow.py'
       - 'src/probe_sharp_latent_latent_critical_no_go.py'
+      - 'src/search_sharp_latent_latent_critical_gadget.py'
       - 'src/search_lexicographic_reserve_pseudoforest_small_box.py'
       - 'src/verify_retained_provenance_second_generation.py'
       - 'src/verify_retained_terminal_split.py'
@@ -25,6 +26,7 @@ jobs:
           python3 -m py_compile \
             src/probe_critical_fractional_reserve_flow.py \
             src/probe_sharp_latent_latent_critical_no_go.py \
+            src/search_sharp_latent_latent_critical_gadget.py \
             src/search_lexicographic_reserve_pseudoforest_small_box.py
 
       - name: Run exact fractional reserve flow
@@ -38,6 +40,12 @@ jobs:
           python3 src/probe_sharp_latent_latent_critical_no_go.py \
             > sharp_latent_latent_critical_candidate.json
 
+      - name: Search structured sharp gadgets
+        run: |
+          python3 src/search_sharp_latent_latent_critical_gadget.py \
+            sharp_latent_latent_critical_gadget_search.json \
+            > sharp_latent_latent_critical_gadget_search_stdout.json
+
       - name: Upload exact flow certificate
         uses: actions/upload-artifact@v4
         with:
@@ -48,3 +56,5 @@ jobs:
             critical_fractional_reserve_flow.json
             critical_fractional_reserve_flow_stdout.json
             sharp_latent_latent_critical_candidate.json
+            sharp_latent_latent_critical_gadget_search.json
+            sharp_latent_latent_critical_gadget_search_stdout.json

@@ -4,7 +4,7 @@
 
 Explicit 13-point counterexample showing that the actual lexicographic coordinated-deletion output followed by maximum-harmonic point-disjoint retention can retain two recursive children sharing latent parent-pair resources.
 
-This is stronger than the arbitrary affine no-go. It occurs inside the repository's deletion and retention semantics.
+The example has pure latent-latent reuse: no current-latent term is involved in the obstruction. It also defeats payment by one unweighted reference pair.
 
 ---
 
@@ -15,7 +15,7 @@ Let
 ```math
 P
 =
-\{25,31,32,33,68,69,70,73,74,75,78,79,80\}.
+\{1,4,5,6,20,21,22,26,27,28,32,33,34\}.
 ```
 
 Direct exhaustive verification shows that `P` is four-AP-free.
@@ -23,15 +23,15 @@ Direct exhaustive verification shows that `P` is four-AP-free.
 The lexicographic coordinated-deletion schedule selects:
 
 ```text
-(31,32,33), step 1;
-(68,69,70), step 1;
-(73,74,75), step 1;
-(78,79,80), step 1;
-(69,74,79), step 5;
-(70,75,80), step 5.
+(4,5,6), step 1;
+(20,21,22), step 1;
+(26,27,28), step 1;
+(32,33,34), step 1;
+(21,27,33), step 6, sponsor 33;
+(22,28,34), step 6, sponsor 34.
 ```
 
-For both steps, the parity rule selects the left endpoint as sponsor.
+At step `1`, the parity rule selects the left endpoint as sponsor. At step `6`, it selects the right endpoint.
 
 ---
 
@@ -40,31 +40,31 @@ For both steps, the parity rule selects the left endpoint as sponsor.
 The four selected step-one centers are
 
 ```math
-32,69,74,79
+5,21,27,33
 ```
 
 with sponsors
 
 ```math
-31,68,73,78.
+4,20,26,32.
 ```
 
-After subtracting the minimum center `32`, the middle fiber contains
+After subtracting the minimum center `5`, the middle fiber contains
 
 ```math
-\{37,42,47\}.
+\{16,22,28\}.
 ```
 
 Its affine reference is the minimum sponsor
 
 ```math
-r_M=31,
+r_M=4,
 ```
 
 and its root set is
 
 ```math
-Q_M=\{68,73,78\}.
+Q_M=\{20,26,32\}.
 ```
 
 Indeed
@@ -72,10 +72,10 @@ Indeed
 ```math
 Q_M-r_M
 =
-\{37,42,47\}.
+\{16,22,28\}.
 ```
 
-This is a three-term progression of step `5`, so the middle child is recursive.
+This is a three-term progression of step `6`, so the middle child is recursive.
 
 ---
 
@@ -84,59 +84,59 @@ This is a three-term progression of step `5`, so the middle child is recursive.
 The minimum parent root is
 
 ```math
-r_B=25.
+r_B=1.
 ```
 
-The high backbone shell contains labels
+The relevant backbone shell contains labels
 
 ```math
-\{43,44,45,48,49,50,53,54,55\}
+\{19,20,21,25,26,27,31\}
 ```
 
 with roots
 
 ```math
-\{68,69,70,73,74,75,78,79,80\}.
+\{20,21,22,26,27,28,32\}.
 ```
 
 It is recursive; for example
 
 ```math
-43,48,53
+19,25,31
 ```
 
-is a three-term progression of step `5`.
+is a three-term progression of step `6`.
 
-The middle child and backbone child are numerically point-disjoint:
+The middle and backbone children are point-disjoint:
 
 ```math
-\{37,42,47\}
+\{16,22,28\}
 \cap
-\{43,44,45,48,49,50,53,54,55\}
+\{19,20,21,25,26,27,31\}
 =
 \varnothing.
 ```
 
-Both therefore survive the point-disjoint retained quotient. The backbone has larger harmonic weight than every conflicting alternative and the exact maximum-weight selection is deterministic.
+Both survive the exact maximum-harmonic point-disjoint retained quotient.
 
 ---
 
 ## 4. Shared latent root pairs
 
-The recursive children share the root set
+The two recursive children share the root set
 
 ```math
-Q=\{68,73,78\}.
+Q=\{20,26,32\}.
 ```
 
-Hence the parent latent resources
+Thus the parent resources
 
 ```math
-\{68,73\},
+\{20,26\},
 \qquad
-\{68,78\},
+\{20,32\},
 \qquad
-\{73,78\}
+\{26,32\}
 ```
 
 have two recursive latent owners and no current owner.
@@ -144,94 +144,112 @@ have two recursive latent owners and no current owner.
 Their gaps are
 
 ```text
-5, 10, 5.
+6, 12, 6.
 ```
 
-The genuine latent-latent activation residual is therefore
+The genuine latent-latent residual is
 
 ```math
 \begin{aligned}
 R_{\rm latent-latent}
 &=
-\frac15+rac1{10}+rac15\\
+\frac16+
+\frac1{12}+
+\frac16\\
 &=
-\boxed{\frac12}.
+\boxed{\frac5{12}}.
 \end{aligned}
 ```
 
-This residual survives current-latent reclassification.
+No current-latent reclassification is available.
 
 ---
 
-## 5. Reference pair is insufficient
+## 5. One reference pair is insufficient
 
-The two child references are
+The child references are
 
 ```math
-r_B=25,
+r_B=1,
 \qquad
-r_M=31,
+r_M=4,
 ```
 
-so the reference separation is
+so
 
 ```math
-\delta=6.
+\delta=3.
 ```
 
 The reference-pair capacity is
 
 ```math
-\frac1\delta=\frac16.
+\frac1\delta=\frac13.
 ```
 
-Thus
+Therefore
 
 ```math
 \boxed{
 R_{\rm latent-latent}
 =
-\frac12
+\frac5{12}
 >
-\frac16.
+\frac13.
 }
 ```
 
-The ratio is exactly `3`.
-
-The three rectangle aspects are
+The exact ratio is
 
 ```math
-\frac65,
-\qquad
-\frac6{10},
-\qquad
-\frac65.
+\frac{5/12}{1/3}
+=
+\boxed{\frac54}.
 ```
 
-Two are far and one is near. The complete aspect identity remains exact, but one unweighted reference pair cannot pay the shared pair energy.
+The rectangle aspects are
+
+```math
+\frac36,
+\qquad
+\frac3{12},
+\qquad
+\frac36.
+```
+
+All are near in the pointwise sense `delta<=D`, but three demands reuse the same reference-pair identity. One physical reference capacity still cannot pay their union.
+
+This distinguishes aspect control from reference-token reuse.
 
 ---
 
-## 6. Additional current-latent overlap
+## 6. Two translated reserve copies
 
-The same retained family also contains a terminal middle child
-
-```math
-\{1\}
-```
-
-with reference `69` and root `70`. Its current resource
+The duplicated middle fiber has selected step `d=1`. Its center-copy reserve pairs are
 
 ```math
-\{69,70\}
+\{21,27\},
+\qquad
+\{21,33\},
+\qquad
+\{27,33\},
 ```
 
-is latent in the recursive backbone child.
+and its opposite-copy reserve pairs are
 
-That degree-two current-latent overlap has mass `1` and is absorbed by the terminal current term as in `docs/current-latent-overlap-decomposition.md`.
+```math
+\{22,28\},
+\qquad
+\{22,34\},
+\qquad
+\{28,34\}.
+```
 
-It is separate from the latent-latent residual `1/2`.
+Every reserve pair has the same gap and reciprocal weight as its duplicated sponsor pair.
+
+The reserve graph is three disjoint edges. Hence the full latent residual packs exactly into either the three center-copy pairs or the three opposite-copy pairs.
+
+The example defeats one-reference payment but is closed by the two-choice translated reserve.
 
 ---
 
@@ -240,37 +258,42 @@ It is separate from the latent-latent residual `1/2`.
 The retained output has:
 
 ```text
-retained child states          = 5
-repeated parent resources      = 4
-current-latent resources       = 1
+retained child states          = 6
+repeated parent resources      = 3
+current-latent resources       = 0
 latent-latent resources        = 3
 maximum owner degree           = 2
 maximum latent degree          = 2
-current-latent mass            = 1
-latent-latent residual         = 1/2
-complete branching excess      = 3/2
+current-latent mass            = 0
+latent-latent residual         = 5/12
+complete branching excess      = 5/12
+reserve graph vertices         = 6
+reserve graph edges            = 3
+reserve graph cycle rank       = 0
 ```
 
-The child-side resource identities remain point-disjoint, so:
-
-```text
-child recreation mass = 0;
-owner cycle rank       = 0.
-```
+The child-side resources remain point-disjoint, so child recreation and owner cycle mass are zero.
 
 ---
 
 ## 8. Consequence
 
-The following stronger structural conjecture is false:
+The conjecture
 
 ```text
-coordinated deletion plus maximum-harmonic point-disjoint retention always gives ell_f <= 1.
+coordinated deletion plus maximum-harmonic point-disjoint retention always gives ell_f<=1
 ```
 
-It holds on every recorded retained transition through `F5` but not universally.
+is false.
 
-The active theorem must pay shared recursive root intersections using a scale- and aspect-sensitive resource. Neither point disjointness, current-latent reclassification, nor one reference-pair capacity is sufficient.
+The recorded retained chain through `F5` has zero latent-latent residual, but this is not universal. The correct architecture is:
+
+```text
+latent degree at most two;
+one backbone-middle duplicate;
+two equal-gap translated reserve options;
+pseudoforest Hall criterion.
+```
 
 Verifier:
 

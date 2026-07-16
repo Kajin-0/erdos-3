@@ -1,0 +1,54 @@
+name: Source-weighted sink overflow
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/source-weighted-sink-overflow.yml'
+      - 'src/probe_s7_source_weighted_sink_overflow.py'
+      - 'src/probe_terminal_pair_payment_frontier_v2.py'
+      - 'src/probe_sponsor_pair_transport_frontier.py'
+      - 'src/probe_residual_sponsor_backbone_split.py'
+      - 'src/verify_retained_provenance_second_generation.py'
+      - 'src/verify_retained_provenance_scale_profile.py'
+      - 'src/probe_third_generation_recursive_frontier.py'
+      - 'src/certified_contaminated_states.py'
+
+permissions:
+  contents: read
+
+jobs:
+  exact-source-weighted-sink-overflow:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Compile exact probes
+        run: |
+          python3 -m py_compile \
+            src/probe_terminal_pair_payment_frontier_v2.py \
+            src/probe_s7_source_weighted_sink_overflow.py
+
+      - name: Build exact terminal frontier
+        run: |
+          python3 src/run_exact_python.py \
+            src/probe_terminal_pair_payment_frontier_v2.py \
+            --include-rows \
+            > terminal_pair_payment_frontier_v2.json
+
+      - name: Profile source-weighted sink overflow
+        run: |
+          python3 src/probe_s7_source_weighted_sink_overflow.py \
+            terminal_pair_payment_frontier_v2.json \
+            s7_source_weighted_sink_overflow.json \
+            > s7_source_weighted_sink_overflow_stdout.json
+
+      - name: Upload exact sink certificate
+        uses: actions/upload-artifact@v4
+        with:
+          name: source-weighted-sink-overflow-${{ github.run_id }}-${{ github.run_attempt }}
+          retention-days: 30
+          if-no-files-found: error
+          path: |
+            s7_source_weighted_sink_overflow.json
+            s7_source_weighted_sink_overflow_stdout.json

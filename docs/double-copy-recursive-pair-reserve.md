@@ -6,7 +6,7 @@ State-independent pair-energy theorem for every recursively continuing completio
 
 A recursive heavy shell has two affine physical copies in the ambient root set. Each copy, considered with the appropriate affine scaling, contains enough internal pair energy to pay the complete recursive shell debt by itself.
 
-This converts the universal packing question into a two-choice capacitated orientation problem on physical pair resources. The full ordered pair of copies is injective even when either projected copy is reused.
+This gives two legitimate local resource choices. It does **not** imply a global two-choice Hall theorem: a complete-bipartite affine construction has quadratically many states and only linearly many projected copy resources.
 
 ---
 
@@ -192,7 +192,7 @@ Both copies have strict gap descent.
 
 ---
 
-## 5. Two-choice resource formulation
+## 5. Two local resource choices
 
 For every recursive embedded state `s`, define two physical pair sets:
 
@@ -223,7 +223,7 @@ and
 J(E_2(s))>\operatorname{debt}(s).
 ```
 
-Thus every recursive state has two independently sufficient resource neighborhoods.
+Thus every recursive state has two independently sufficient local resource neighborhoods.
 
 ---
 
@@ -256,53 +256,68 @@ But they cannot share the same ordered pair of copies.
 
 ---
 
-## 7. Universal Hall target
+## 7. Unrestricted Hall inference is false
 
-Let `mathcal S` be any finite family of recursive embedded states. Construct a capacitated incidence system in which each state may send its demand to physical pairs in either `E_1(s)` or `E_2(s)`, with every physical pair receiving at most its one reciprocal-gap capacity after earlier allocations are subtracted.
-
-The desired theorem is the Hall inequality
+It is tempting to infer
 
 ```math
-\boxed{
 \sum_{s\in\mathcal F}\operatorname{debt}(s)
 \le
 J\!\left(
 \bigcup_{s\in\mathcal F}
 (E_1(s)\cup E_2(s))
 \right)
-}
 ```
 
-for every subfamily `mathcal F`, under the four-AP-free double-affine geometry.
+for every subfamily `mathcal F`. This statement is false under double-affine four-AP-free geometry alone.
 
-The present theorem proves all singleton Hall inequalities with strict surplus and proves injectivity before projection. What remains is to use four-AP-freeness to control simultaneous collisions of both projections.
-
----
-
-## 8. Relation to known unbounded reuse
-
-The unbounded latent-pair construction permits arbitrarily many child states to share one latent root configuration. In double-copy language this creates high multiplicity in one projection, while the reflected or translated second copies vary with the references.
-
-Therefore unbounded one-copy reuse is not a counterexample to the two-choice formulation. It is the motivating extremal case:
+The complete-bipartite construction in
 
 ```text
-shared first copy
-    -> distinct second copies carrying the repeated demand.
+docs/complete-bipartite-double-copy-hall-no-go.md
 ```
 
-A genuine counterexample must force simultaneous capacity congestion in both affine projections.
+produces, for every `k>=29`:
+
+```text
+k first-copy resources;
+k second-copy resources;
+k^2 distinct recursive embedded states;
+a four-AP-free parent contained in one dyadic block.
+```
+
+The total state debt is strictly larger than the complete internal pair-energy union of all `2k` projected copies.
+
+Thus singleton surplus and ordered-lift injectivity do not imply aggregate capacity.
 
 ---
 
-## 9. Strategic consequence
+## 8. Relation to unbounded reuse
 
-The universal recursive-heavy problem is narrower than a general path-packing problem. It is a two-choice affine pair-energy orientation problem with:
+The earlier unbounded latent-pair construction creates a star-like incidence pattern:
 
-1. two individually sufficient resource neighborhoods per state;
-2. strict gap descent in the first copy;
-3. nonincreasing gap scale in the adjacent second copy;
-4. an injective ordered double lift;
-5. forbidden four-AP rectangle ratios;
-6. lower-scale reference-difference reserves whenever one projection repeats.
+```text
+one shared projection;
+many varying opposite projections.
+```
 
-The exact `S7` frontier already packs using only first-copy horizontal pairs. The universal theorem may use the second copy precisely where first-copy Hall fails.
+Such a star can be oriented to its leaves. The complete-bipartite construction is stronger: it forces high degree in both projections simultaneously.
+
+Therefore a successful theorem must distinguish the actual direct-discharge family from arbitrary double-affine incidence. Four-AP-freeness of the two projected layers is insufficient.
+
+---
+
+## 9. Admissible stronger targets
+
+The local two-copy reserve remains useful, but it must be combined with additional resources or hypotheses. Possible valid targets include:
+
+1. maximality-hole witness pair energy;
+2. parent full-edge production-token ownership;
+3. cross-copy and vertical pair resources;
+4. restrictions imposed by the actual activated-pair generation mechanism;
+5. a higher-order rectangle or grid potential that charges complete bipartite incidence;
+6. first-appearance terminal credit created by the witness gadgets required to keep all completions absent.
+
+The exact `S7` frontier still packs using only first-copy horizontal pairs. That is a finite theorem about the recorded activated family, not evidence for unrestricted double-copy Hall.
+
+The next universal theorem must explain why a maximal direct-discharge family cannot realize the complete-bipartite no-go without exporting compensating witness or production capacity.

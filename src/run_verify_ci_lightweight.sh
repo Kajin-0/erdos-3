@@ -93,6 +93,7 @@ python3 "$ROOT/src/verify_cross_shell_edge_swap_involution.py"
 python3 "$ROOT/src/verify_exact_gap_light_persistence.py"
 python3 "$ROOT/src/verify_full_edge_incidence_pair_energy_bound.py"
 python3 "$ROOT/src/verify_full_edge_incidence_five_quarter_bound.py"
+python3 "$ROOT/src/verify_five_quarter_owner_exponent_threshold.py"
 python3 "$ROOT/src/verify_affine_owner_incidence_cycles.py"
 python3 "$ROOT/src/verify_point_disjoint_latent_reuse_no_go.py"
 python3 "$ROOT/src/verify_far_aspect_latent_reuse_no_go.py"
@@ -105,4 +106,4 @@ python3 "$ROOT/src/verify_sharp_latent_latent_critical_no_go.py" > /dev/null
 python3 "$ROOT/src/certified_contaminated_states.py" > /dev/null
 python3 "$ROOT/src/branching_reserve_lp.py" self-test
 
-echo "verified: lightweight exact certificates, direct/source-weighted discharge, physical-gap termination, five-quarter full-edge incidence, affine owner degree, raw and critical reserve no-gos, sharp current/latent overlap witnesses, and LP harness"
+echo "verified: lightweight exact certificates, five-quarter full-edge incidence and owner threshold, direct/source-weighted discharge, physical-gap termination, affine owner degree, raw and critical reserve no-gos, sharp overlap witnesses, and LP harness"

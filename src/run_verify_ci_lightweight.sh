@@ -92,6 +92,7 @@ python3 "$ROOT/src/verify_source_weighted_direct_discharge.py"
 python3 "$ROOT/src/verify_cross_shell_edge_swap_involution.py"
 python3 "$ROOT/src/verify_exact_gap_light_persistence.py"
 python3 "$ROOT/src/verify_full_edge_incidence_pair_energy_bound.py"
+python3 "$ROOT/src/verify_full_edge_incidence_five_quarter_bound.py"
 python3 "$ROOT/src/verify_affine_owner_incidence_cycles.py"
 python3 "$ROOT/src/verify_point_disjoint_latent_reuse_no_go.py"
 python3 "$ROOT/src/verify_far_aspect_latent_reuse_no_go.py"
@@ -100,7 +101,8 @@ python3 "$ROOT/src/verify_lexicographic_reserve_rank_two_no_go.py"
 python3 "$ROOT/src/verify_reserve_recursive_export.py"
 python3 "$ROOT/src/verify_coordinated_deletion_total_owner_degree_two.py"
 python3 "$ROOT/src/probe_recursive_current_latent_gadget.py" > /dev/null
+python3 "$ROOT/src/verify_sharp_latent_latent_critical_no_go.py" > /dev/null
 python3 "$ROOT/src/certified_contaminated_states.py" > /dev/null
 python3 "$ROOT/src/branching_reserve_lp.py" self-test
 
-echo "verified: lightweight exact certificates, independent pair, hole-witness, completion-fiber, four-ratio, global shell-batching, direct maximal-discharge, source-weighted discharge, cross-shell involution, exact-gap light-persistence, full-edge pair-incidence, affine owner-cycle, point-disjoint latent-reuse, far-aspect, policy-compatible latent-reuse, rank-two reserve no-go, recursive reserve-export, total owner-degree, and sharp recursive current-latent critical no-go checks, and LP harness"
+echo "verified: lightweight exact certificates, direct/source-weighted discharge, physical-gap termination, five-quarter full-edge incidence, affine owner degree, raw and critical reserve no-gos, sharp current/latent overlap witnesses, and LP harness"

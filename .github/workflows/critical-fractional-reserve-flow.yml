@@ -6,6 +6,7 @@ on:
       - '.github/workflows/critical-fractional-reserve-flow.yml'
       - 'src/probe_critical_fractional_reserve_flow.py'
       - 'src/probe_sharp_latent_latent_critical_no_go.py'
+      - 'src/verify_sharp_latent_latent_critical_no_go.py'
       - 'src/search_sharp_latent_latent_critical_gadget.py'
       - 'src/search_lexicographic_reserve_pseudoforest_small_box.py'
       - 'src/verify_retained_provenance_second_generation.py'
@@ -26,6 +27,7 @@ jobs:
           python3 -m py_compile \
             src/probe_critical_fractional_reserve_flow.py \
             src/probe_sharp_latent_latent_critical_no_go.py \
+            src/verify_sharp_latent_latent_critical_no_go.py \
             src/search_sharp_latent_latent_critical_gadget.py \
             src/search_lexicographic_reserve_pseudoforest_small_box.py
 
@@ -39,6 +41,11 @@ jobs:
         run: |
           python3 src/probe_sharp_latent_latent_critical_no_go.py \
             > sharp_latent_latent_critical_candidate.json
+
+      - name: Verify sharp latent-latent no-go
+        run: |
+          python3 src/verify_sharp_latent_latent_critical_no_go.py \
+            > sharp_latent_latent_critical_no_go.json
 
       - name: Search structured sharp gadgets
         run: |
@@ -56,5 +63,6 @@ jobs:
             critical_fractional_reserve_flow.json
             critical_fractional_reserve_flow_stdout.json
             sharp_latent_latent_critical_candidate.json
+            sharp_latent_latent_critical_no_go.json
             sharp_latent_latent_critical_gadget_search.json
             sharp_latent_latent_critical_gadget_search_stdout.json

@@ -23,6 +23,8 @@ from verify_retained_terminal_split import contains_three_term_ap
 Pair = tuple[int, int]
 LeftVertex = tuple[int, int, int]
 RightVertex = Pair
+StatePair = tuple[int, int]
+OwnerRow = tuple[int, int, RightVertex, str]
 
 
 def ordered_pair(left: int, right: int) -> Pair:
@@ -64,6 +66,52 @@ def connected_components(
     return components
 
 
+def simple_graph_profile(edges: set[StatePair]) -> dict[str, int]:
+    vertices = {value for edge in edges for value in edge}
+    adjacency: dict[int, set[int]] = defaultdict(set)
+    for left, right in edges:
+        adjacency[left].add(right)
+        adjacency[right].add(left)
+    seen: set[int] = set()
+    components = 0
+    for vertex in vertices:
+        if vertex in seen:
+            continue
+        components += 1
+        seen.add(vertex)
+        stack = [vertex]
+        while stack:
+            current = stack.pop()
+            for target in adjacency[current]:
+                if target not in seen:
+                    seen.add(target)
+                    stack.append(target)
+    cycle_rank = len(edges) - len(vertices) + components
+    if cycle_rank < 0:
+        raise AssertionError("negative state-overlap graph cycle rank")
+    return {
+        "vertices": len(vertices),
+        "edges": len(edges),
+        "components": components,
+        "cycle_rank": cycle_rank,
+        "maximum_degree": max((len(adjacency[v]) for v in vertices), default=0),
+    }
+
+
+def resource_mass(resources: set[LeftVertex]) -> Fraction:
+    return sum(
+        (Fraction(1, right - left) for _parent, left, right in resources),
+        Fraction(),
+    )
+
+
+def complete_pair_set(parent_class: int, values: set[int]) -> set[LeftVertex]:
+    return {
+        (parent_class, left, right)
+        for left, right in combinations(sorted(values), 2)
+    }
+
+
 def canonical_hash(value: object) -> str:
     return hashlib.sha256(
         json.dumps(value, sort_keys=True, separators=(",", ":")).encode("utf-8")
@@ -87,8 +135,10 @@ def main() -> int:
     edges_by_gap: dict[
         int, list[tuple[LeftVertex, RightVertex, int, int, str]]
     ] = defaultdict(list)
-    left_owners: dict[LeftVertex, list[tuple[int, int, RightVertex, str]]] = defaultdict(list)
+    left_owners: dict[LeftVertex, list[OwnerRow]] = defaultdict(list)
     right_owners: dict[RightVertex, list[tuple[LeftVertex, int, int, str]]] = defaultdict(list)
+    state_resources: dict[int, set[LeftVertex]] = {}
+    state_meta: dict[int, dict[str, object]] = {}
 
     for state in retained:
         parent_class = int(state.representative.parent_class)
@@ -101,6 +151,7 @@ def main() -> int:
             raise AssertionError("affine root/value alignment changed")
 
         terminal = not contains_three_term_ap(values)
+        resources: set[LeftVertex] = set()
         for value, root in zip(values, roots, strict=True):
             root_pair = ordered_pair(reference, root)
             child_pair = (0, value)
@@ -112,20 +163,32 @@ def main() -> int:
             edges_by_gap[gap].append(edge)
             left_owners[left].append((state.index, reference, child_pair, "current"))
             right_owners[child_pair].append((left, state.index, reference, "current"))
+            resources.add(left)
 
-        if terminal:
-            continue
-        for first, second in combinations(range(len(values)), 2):
-            root_pair = ordered_pair(roots[first], roots[second])
-            child_pair = ordered_pair(values[first], values[second])
-            gap = child_pair[1] - child_pair[0]
-            if root_pair[1] - root_pair[0] != gap:
-                raise AssertionError("latent affine owner failed gap preservation")
-            left = (parent_class, root_pair[0], root_pair[1])
-            edge = (left, child_pair, state.index, reference, "latent")
-            edges_by_gap[gap].append(edge)
-            left_owners[left].append((state.index, reference, child_pair, "latent"))
-            right_owners[child_pair].append((left, state.index, reference, "latent"))
+        if not terminal:
+            for first, second in combinations(range(len(values)), 2):
+                root_pair = ordered_pair(roots[first], roots[second])
+                child_pair = ordered_pair(values[first], values[second])
+                gap = child_pair[1] - child_pair[0]
+                if root_pair[1] - root_pair[0] != gap:
+                    raise AssertionError("latent affine owner failed gap preservation")
+                left = (parent_class, root_pair[0], root_pair[1])
+                edge = (left, child_pair, state.index, reference, "latent")
+                edges_by_gap[gap].append(edge)
+                left_owners[left].append((state.index, reference, child_pair, "latent"))
+                right_owners[child_pair].append((left, state.index, reference, "latent"))
+                resources.add(left)
+
+        augmented = {reference, *roots}
+        if not terminal and resources != complete_pair_set(parent_class, augmented):
+            raise AssertionError("recursive resource universe is not complete augmented graph")
+        state_resources[state.index] = resources
+        state_meta[state.index] = {
+            "parent_class": parent_class,
+            "reference": reference,
+            "terminal": terminal,
+            "augmented": augmented,
+        }
 
     occurrence_mass = Fraction()
     parent_first_mass = Fraction()
@@ -204,6 +267,8 @@ def main() -> int:
         raise AssertionError("exact recreation excess identity failed")
 
     rectangle_token_usage: Counter[tuple[int, Pair]] = Counter()
+    reference_token_state_pairs: dict[tuple[int, Pair], set[StatePair]] = defaultdict(set)
+    assigned_by_state_pair: dict[StatePair, set[LeftVertex]] = defaultdict(set)
     rectangle_rows: list[dict[str, object]] = []
     rectangle_collision_mass = Fraction()
     reference_pair_occurrence_mass = Fraction()
@@ -211,21 +276,25 @@ def main() -> int:
     far_collision_mass = Fraction()
 
     for left, rows in sorted(repeated_parent_vertices.items()):
-        references = sorted({reference for _state, reference, _child, _kind in rows})
-        if len(references) != len(rows):
+        ordered_rows = sorted(rows, key=lambda row: (row[1], row[0], row[2], row[3]))
+        references = [reference for _state, reference, _child, _kind in ordered_rows]
+        if len(set(references)) != len(rows):
             raise AssertionError(
                 "one retained reference emitted the same parent resource twice"
             )
-        base = references[0]
+        base_state, base_reference, _base_child, _base_kind = ordered_rows[0]
         gap = left[2] - left[1]
-        for state_index, reference, child_pair, kind in sorted(rows):
-            if reference == base:
-                continue
-            reference_pair = ordered_pair(base, reference)
+        for state_index, reference, child_pair, kind in ordered_rows[1:]:
+            reference_pair = ordered_pair(base_reference, reference)
             if not set(reference_pair) <= parent_roots[left[0]]:
                 raise AssertionError("reference rectangle left parent root universe")
             delta = reference_pair[1] - reference_pair[0]
+            state_pair = ordered_pair(base_state, state_index)
+            if left in assigned_by_state_pair[state_pair]:
+                raise AssertionError("one resource assigned twice to one state pair")
+            assigned_by_state_pair[state_pair].add(left)
             rectangle_token_usage[(left[0], reference_pair)] += 1
+            reference_token_state_pairs[(left[0], reference_pair)].add(state_pair)
             rectangle_collision_mass += Fraction(1, gap)
             reference_pair_occurrence_mass += Fraction(1, delta)
             if delta <= gap:
@@ -235,7 +304,9 @@ def main() -> int:
             rectangle_rows.append(
                 {
                     "parent_resource": left,
+                    "base_state_index": base_state,
                     "state_index": state_index,
+                    "state_pair": state_pair,
                     "reference_pair": reference_pair,
                     "child_pair": child_pair,
                     "resource_kind": kind,
@@ -251,10 +322,7 @@ def main() -> int:
         raise AssertionError("near/far rectangle split failed")
 
     reference_pair_union_mass = sum(
-        (
-            pair_weight(pair)
-            for _parent_class, pair in rectangle_token_usage
-        ),
+        (pair_weight(pair) for _parent_class, pair in rectangle_token_usage),
         Fraction(),
     )
     repeated_reference_tokens = sum(
@@ -263,6 +331,84 @@ def main() -> int:
     maximum_reference_token_reuse = max(
         rectangle_token_usage.values(), default=0
     )
+    reference_tokens_across_multiple_state_pairs = sum(
+        len(pairs) > 1 for pairs in reference_token_state_pairs.values()
+    )
+    maximum_state_pairs_per_reference_token = max(
+        (len(pairs) for pairs in reference_token_state_pairs.values()), default=0
+    )
+
+    state_pair_rows: list[dict[str, object]] = []
+    assigned_state_pair_mass = Fraction()
+    assigned_pair_overlap_envelope = Fraction()
+    maximum_assigned_resources_per_state_pair = 0
+    maximum_common_augmented_roots = 0
+    for state_pair, assigned in sorted(assigned_by_state_pair.items()):
+        first, second = state_pair
+        meta_first = state_meta[first]
+        meta_second = state_meta[second]
+        if meta_first["parent_class"] != meta_second["parent_class"]:
+            raise AssertionError("assigned state pair crosses parent classes")
+        intersection = state_resources[first] & state_resources[second]
+        if not assigned <= intersection:
+            raise AssertionError("assigned branching resource left state overlap")
+        assigned_mass = resource_mass(assigned)
+        overlap_mass = resource_mass(intersection)
+        if assigned_mass > overlap_mass:
+            raise AssertionError("assigned state-pair mass exceeds complete overlap")
+
+        common_augmented = set(meta_first["augmented"]) & set(meta_second["augmented"])
+        complete_common = complete_pair_set(
+            int(meta_first["parent_class"]), common_augmented
+        )
+        both_recursive = not bool(meta_first["terminal"]) and not bool(meta_second["terminal"])
+        if both_recursive and intersection != complete_common:
+            raise AssertionError("recursive state overlap is not common augmented pair energy")
+        if not intersection <= complete_common:
+            raise AssertionError("terminal state overlap left common augmented graph")
+
+        assigned_state_pair_mass += assigned_mass
+        assigned_pair_overlap_envelope += overlap_mass
+        maximum_assigned_resources_per_state_pair = max(
+            maximum_assigned_resources_per_state_pair, len(assigned)
+        )
+        maximum_common_augmented_roots = max(
+            maximum_common_augmented_roots, len(common_augmented)
+        )
+        reference_pair = ordered_pair(
+            int(meta_first["reference"]), int(meta_second["reference"])
+        )
+        state_pair_rows.append(
+            {
+                "state_pair": state_pair,
+                "parent_class": meta_first["parent_class"],
+                "reference_pair": reference_pair,
+                "terminal_profile": (
+                    bool(meta_first["terminal"]), bool(meta_second["terminal"])
+                ),
+                "assigned_resources": len(assigned),
+                "complete_overlap_resources": len(intersection),
+                "common_augmented_roots": len(common_augmented),
+                "assigned_mass": serialize_mass(assigned_mass),
+                "complete_overlap_mass": serialize_mass(overlap_mass),
+            }
+        )
+
+    if assigned_state_pair_mass != branching_excess:
+        raise AssertionError("state-pair assignment does not equal branching excess")
+
+    global_pairwise_overlap_mass = Fraction()
+    global_pairwise_overlap_pairs = 0
+    state_indices = sorted(state_meta)
+    for first, second in combinations(state_indices, 2):
+        if state_meta[first]["parent_class"] != state_meta[second]["parent_class"]:
+            continue
+        intersection = state_resources[first] & state_resources[second]
+        if intersection:
+            global_pairwise_overlap_pairs += 1
+            global_pairwise_overlap_mass += resource_mass(intersection)
+
+    overlap_graph = simple_graph_profile(set(assigned_by_state_pair))
 
     # Point-disjoint retained states make every numerical child resource unique.
     if maximum_child_degree != 1 or recreated_child_vertices:
@@ -273,7 +419,7 @@ def main() -> int:
         raise AssertionError("owner forest components no longer equal parent resources")
 
     output = {
-        "schema": "s7_affine_owner_incidence_graph_v1",
+        "schema": "s7_affine_owner_incidence_graph_v2",
         "scope": "certified residual-sponsor split R4-to-F5 retained family",
         "generation_six_propagated": False,
         "counts": {
@@ -294,6 +440,23 @@ def main() -> int:
             "distinct_reference_pair_tokens": len(rectangle_token_usage),
             "repeated_reference_pair_tokens": repeated_reference_tokens,
             "maximum_reference_pair_reuse": maximum_reference_token_reuse,
+            "reference_tokens_across_multiple_state_pairs": (
+                reference_tokens_across_multiple_state_pairs
+            ),
+            "maximum_state_pairs_per_reference_token": (
+                maximum_state_pairs_per_reference_token
+            ),
+            "assigned_state_pairs": len(assigned_by_state_pair),
+            "global_pairwise_overlap_pairs": global_pairwise_overlap_pairs,
+            "maximum_assigned_resources_per_state_pair": (
+                maximum_assigned_resources_per_state_pair
+            ),
+            "maximum_common_augmented_roots": maximum_common_augmented_roots,
+            "state_overlap_graph_vertices": overlap_graph["vertices"],
+            "state_overlap_graph_edges": overlap_graph["edges"],
+            "state_overlap_graph_components": overlap_graph["components"],
+            "state_overlap_graph_cycle_rank": overlap_graph["cycle_rank"],
+            "state_overlap_graph_maximum_degree": overlap_graph["maximum_degree"],
         },
         "masses": {
             "occurrence_resource_mass": serialize_mass(occurrence_mass),
@@ -307,11 +470,20 @@ def main() -> int:
             "far_rectangle_collision_mass": serialize_mass(far_collision_mass),
             "reference_pair_occurrence_mass": serialize_mass(reference_pair_occurrence_mass),
             "reference_pair_union_mass": serialize_mass(reference_pair_union_mass),
+            "assigned_state_pair_mass": serialize_mass(assigned_state_pair_mass),
+            "assigned_pair_overlap_envelope": serialize_mass(
+                assigned_pair_overlap_envelope
+            ),
+            "global_pairwise_overlap_mass": serialize_mass(
+                global_pairwise_overlap_mass
+            ),
         },
         "gap_rows": gap_rows,
+        "state_pair_rows": state_pair_rows,
         "hashes": {
             "gap_rows": canonical_hash(gap_rows),
             "rectangle_rows": canonical_hash(rectangle_rows),
+            "state_pair_rows": canonical_hash(state_pair_rows),
             "reference_token_usage": canonical_hash(
                 [
                     (parent_class, pair, count)
@@ -333,6 +505,12 @@ def main() -> int:
             "no_child_resource_recreation": maximum_child_degree == 1,
             "rectangle_mass_equals_branching_excess": (
                 rectangle_collision_mass == branching_excess
+            ),
+            "state_pair_mass_equals_branching_excess": (
+                assigned_state_pair_mass == branching_excess
+            ),
+            "assigned_state_pair_overlap_bound": (
+                assigned_state_pair_mass <= assigned_pair_overlap_envelope
             ),
         },
     }

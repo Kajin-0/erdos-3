@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Pack direct S7 recursive debt into unmatched cross-copy physical pairs."""
+"""Certify that S7 off-diagonal cross pairs are latent, not new capacity."""
 from __future__ import annotations
 
 from collections import defaultdict
@@ -106,7 +106,9 @@ def main() -> int:
     available_capacity: dict[Pair, Fraction] = {}
     entering_overlaps: set[Pair] = set()
     light_overlaps: set[Pair] = set()
+    latent_union_capacity = Fraction()
     for pair in pairs:
+        latent_union_capacity += pair_weight(pair)
         if pair in activated:
             entering_overlaps.add(pair)
             available = Fraction()
@@ -134,17 +136,6 @@ def main() -> int:
                 allocated_by_pair[pair] += allocated
                 allocation_rows.append((state_index, pair, str(allocated)))
 
-    saturated_pairs: set[Pair] = set()
-    maximum_utilization = Fraction()
-    for pair, allocated in allocated_by_pair.items():
-        available = available_capacity[pair]
-        if allocated > available:
-            raise AssertionError("off-diagonal flow exceeds physical pair capacity")
-        if available > 0:
-            maximum_utilization = max(maximum_utilization, allocated / available)
-        if available > 0 and allocated == available:
-            saturated_pairs.add(pair)
-
     cut_states = [
         index
         for index in range(len(recursive_states))
@@ -162,50 +153,57 @@ def main() -> int:
         (available_capacity[pair] for pair in cut_pairs), Fraction()
     )
 
+    occurrence_count = sum(len(row) for row in state_pairs)
+    expected_counts = {
+        "recursive_states": 278,
+        "offdiagonal_pair_occurrences": 19_226,
+        "distinct_offdiagonal_pairs": 13_547,
+        "entering_activated_overlaps": 13_547,
+        "light_support_overlaps": 0,
+        "allocated_pairs": 0,
+        "min_cut_states": 278,
+        "min_cut_pairs": 13_547,
+    }
+    actual_counts = {
+        "recursive_states": len(recursive_states),
+        "offdiagonal_pair_occurrences": occurrence_count,
+        "distinct_offdiagonal_pairs": len(pairs),
+        "entering_activated_overlaps": len(entering_overlaps),
+        "light_support_overlaps": len(light_overlaps),
+        "allocated_pairs": len(allocated_by_pair),
+        "min_cut_states": len(cut_states),
+        "min_cut_pairs": len(cut_pairs),
+    }
+    if actual_counts != expected_counts:
+        raise AssertionError(f"off-diagonal no-go profile changed: {actual_counts}")
+    if entering_overlaps != pair_universe:
+        raise AssertionError("some off-diagonal pair is not already activated")
+    if any(available_capacity.values()):
+        raise AssertionError("strict-new off-diagonal capacity unexpectedly appeared")
+    if maximum_flow != 0 or unmet != total_demand:
+        raise AssertionError("strict-new off-diagonal no-go changed")
+    if cut_demand != total_demand or cut_capacity != 0:
+        raise AssertionError("off-diagonal min-cut certificate changed")
+
     output = {
-        "schema": "s7_direct_offdiagonal_cross_flow_v1",
-        "scope": "exact rational packing into unmatched cross-copy pairs",
+        "schema": "s7_direct_offdiagonal_latent_capacity_no_go_v1",
+        "scope": "strict-new unmatched cross-copy capacity on the direct S7 recursive frontier",
         "maximal_ambient_assumed": False,
         "generation_six_propagated": False,
-        "counts": {
-            "recursive_states": len(recursive_states),
-            "offdiagonal_pair_occurrences": sum(len(row) for row in state_pairs),
-            "distinct_offdiagonal_pairs": len(pairs),
-            "entering_activated_overlaps": len(entering_overlaps),
-            "light_support_overlaps": len(light_overlaps),
-            "allocated_pairs": len(allocated_by_pair),
-            "saturated_pairs": len(saturated_pairs),
-            "min_cut_states": len(cut_states),
-            "min_cut_pairs": len(cut_pairs),
-        },
+        "counts": expected_counts,
         "masses": {
             "total_recursive_demand": serialize_mass(total_demand),
-            "available_new_offdiagonal_capacity": serialize_mass(
-                sum(available_capacity.values(), Fraction())
+            "latent_offdiagonal_pair_union_capacity": serialize_mass(
+                latent_union_capacity
             ),
-            "maximum_flow": serialize_mass(maximum_flow),
+            "available_new_offdiagonal_capacity": serialize_mass(Fraction()),
+            "maximum_strict_new_flow": serialize_mass(maximum_flow),
             "unmet_demand": serialize_mass(unmet),
-            "allocated_capacity": serialize_mass(
-                sum(allocated_by_pair.values(), Fraction())
-            ),
-            "unused_capacity_on_allocated_pairs": serialize_mass(
-                sum(
-                    (
-                        available_capacity[pair] - allocated_by_pair[pair]
-                        for pair in allocated_by_pair
-                    ),
-                    Fraction(),
-                )
-            ),
             "minimum_state_offdiagonal_surplus": serialize_mass(
                 min(state_surpluses)
             ),
             "min_cut_state_demand": serialize_mass(cut_demand),
-            "min_cut_pair_capacity": serialize_mass(cut_capacity),
-        },
-        "maximum_pair_utilization": {
-            "fraction": str(maximum_utilization),
-            "decimal": f"{float(maximum_utilization):.12f}",
+            "min_cut_new_pair_capacity": serialize_mass(cut_capacity),
         },
         "hashes": {
             "pair_universe": hashlib.sha256(
@@ -217,13 +215,17 @@ def main() -> int:
         },
         "checks": {
             "statewise_offdiagonal_domination": min(state_surpluses) > 0,
-            "exact_new_offdiagonal_flow_feasible": unmet == 0,
-            "all_allocations_within_capacity": all(
-                allocated_by_pair[pair] <= available_capacity[pair]
-                for pair in allocated_by_pair
+            "all_offdiagonal_pairs_are_entering_activated_pairs": (
+                entering_overlaps == pair_universe
             ),
-            "entering_pairs_reserved": all(
-                available_capacity[pair] == 0 for pair in entering_overlaps
+            "strict_new_offdiagonal_capacity_is_zero": not any(
+                available_capacity.values()
+            ),
+            "exact_no_go_min_cut": (
+                maximum_flow == 0
+                and unmet == total_demand
+                and cut_demand == total_demand
+                and cut_capacity == 0
             ),
         },
     }
@@ -233,7 +235,8 @@ def main() -> int:
         json.dumps(output, sort_keys=True, indent=2) + "\n", encoding="utf-8"
     )
     print(json.dumps(output, sort_keys=True, indent=2))
-    return 0 if unmet == 0 else 2
+    print("verified: off-diagonal surplus is entirely latent entering pair energy")
+    return 0
 
 
 if __name__ == "__main__":

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Pack direct S7 recursive debt using only the alternate canonical pair route."""
+"""Pack direct S7 recursive debt using the alternate canonical pair route."""
 from __future__ import annotations
 
 from collections import defaultdict
@@ -21,6 +21,12 @@ def ordered_pair(left: int, right: int) -> Pair:
 
 
 def adjacent_staircase(state: RecursiveChainState) -> tuple[Pair, ...]:
+    """Return n unmatched cross-copy pairs with pointwise gap descent.
+
+    For T={d_1<...<d_n}, use {x_{i+1},y_i} for i<n and close the
+    staircase with {x_n,y_1}.  The closing gap is 2*d_1-d_n, which is
+    positive because T lies in one dyadic shell and is strictly below d_n.
+    """
     steps = state.state
     completion = state.completion
     if state.role == "right_adjacent":
@@ -36,18 +42,17 @@ def adjacent_staircase(state: RecursiveChainState) -> tuple[Pair, ...]:
         ordered_pair(first[index + 1], second[index])
         for index in range(len(steps) - 1)
     ]
-    pairs.append(ordered_pair(first[0], second[1]))
+    pairs.append(ordered_pair(first[-1], second[0]))
     if len(pairs) != len(set(pairs)):
         raise AssertionError("alternate staircase contains duplicate pairs")
 
-    # Pointwise domination and gap decrease.
     for index in range(len(steps) - 1):
         gap = pairs[index][1] - pairs[index][0]
         if not (0 < gap < steps[index]):
             raise AssertionError("staircase pair failed assigned gap decrease")
     final_gap = pairs[-1][1] - pairs[-1][0]
     if not (0 < final_gap < steps[-1]):
-        raise AssertionError("final staircase pair failed assigned gap decrease")
+        raise AssertionError("closing staircase pair failed assigned gap decrease")
     return tuple(pairs)
 
 
@@ -120,14 +125,12 @@ def main() -> int:
         row: list[tuple[Pair, tuple[int, int]]] = []
         for pair in resources:
             pair_node = first_pair + pair_index[pair]
-            row.append(
-                (pair, network.add_edge(state_node, pair_node, state.debt))
-            )
+            row.append((pair, network.add_edge(state_node, pair_node, state.debt)))
         handles.append(row)
 
     available_capacity: dict[Pair, Fraction] = {}
-    activated_pairs = set()
-    light_pairs = set()
+    activated_pairs: set[Pair] = set()
+    light_pairs: set[Pair] = set()
     for pair in pairs:
         available = pair_weight(pair) - light_usage.get(pair, Fraction())
         if available < 0:
@@ -186,8 +189,8 @@ def main() -> int:
     )
 
     output = {
-        "schema": "s7_direct_alternate_route_flow_v1",
-        "scope": "exact rational packing by adjacent staircases and outer opposite-copy chains",
+        "schema": "s7_direct_alternate_route_flow_v2",
+        "scope": "exact rational packing by corrected adjacent staircases and outer opposite-copy chains",
         "maximal_ambient_assumed": False,
         "generation_six_propagated": False,
         "counts": {
@@ -223,9 +226,7 @@ def main() -> int:
                     Fraction(),
                 )
             ),
-            "minimum_state_alternate_surplus": serialize_mass(
-                min(state_surpluses)
-            ),
+            "minimum_state_alternate_surplus": serialize_mass(min(state_surpluses)),
             "min_cut_state_demand": serialize_mass(cut_demand),
             "min_cut_pair_capacity": serialize_mass(cut_capacity),
         },
@@ -249,6 +250,7 @@ def main() -> int:
                 for pair in allocated_by_pair
             ),
             "pointwise_or_shell_gap_decrease": True,
+            "corrected_closing_edge": True,
         },
     }
     canonical = json.dumps(output, sort_keys=True, separators=(",", ":"))

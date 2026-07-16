@@ -4,21 +4,27 @@
 
 State-independent one-generation theorem replacing the false conjecture that every center/opposite reserve graph is a pseudoforest.
 
-Every duplicated backbone-middle latent pair is either assigned to one unused equal-gap physical reserve or retained as its original sponsor-owned pair occurrence in a lower-scale middle shell. Reserve matching failure therefore becomes recursive descent rather than unmatched scalar debt.
+Every duplicated backbone-middle latent pair is either assigned to one unused equal-gap physical reserve or retained as its original sponsor-owned middle occurrence. The raw reciprocal-pair identity is exact for arbitrary reserve graphs and arbitrary prior reserve deletion.
+
+The corrected universal owner-scale descent is one dyadic level:
+
+```math
+L_{\rm middle}\le\frac N2.
+```
+
+The earlier quarter-scale claim was false.
 
 ---
 
 ## 1. Duplicated demand occurrences
 
-Fix one parent shell
+Fix
 
 ```math
 P\subseteq[N,2N)
 ```
 
-and a completed coordinated deletion schedule.
-
-Let `D` be a family of duplicated recursive latent pair occurrences. By the latent degree-two theorem, every demand
+and one completed coordinated deletion schedule. By the latent degree-two theorem, every duplicated latent pair
 
 ```math
 f=\{p,q\}
@@ -31,7 +37,7 @@ one recursive backbone owner;
 one recursive middle-fiber owner.
 ```
 
-Let the middle owner be generated at step `d` and orientation `epsilon`. Its two equal-gap physical reserves are
+If the middle owner is generated at step `d` and orientation `epsilon`, define
 
 ```math
 C_d(f)=\{p+\epsilon d,q+\epsilon d\}
@@ -43,302 +49,199 @@ and
 O_d(f)=\{p+2\epsilon d,q+2\epsilon d\}.
 ```
 
-Both lie in the parent and satisfy
+Both are physical parent pairs with
 
 ```math
 w(C_d(f))=w(O_d(f))=w(f).
 ```
 
-The middle child also contains the sponsor-owned numerical pair occurrence corresponding affinely to `f`. Denote that occurrence by
-
-```math
-\widetilde f.
-```
-
-It has the same physical gap and weight as `f`.
+Let `tilde f` be the original middle-owned numerical pair occurrence. It also has weight `w(f)`.
 
 ---
 
-## 2. Full two-choice reserve graph
+## 2. Full reserve graph
 
-First suppose that every center and opposite reserve is available.
-
-For each fixed physical gap `g`, form the multigraph `G_g`:
+For one physical gap `g`, construct the multigraph
 
 ```text
-vertices: physical reserve-pair identities of gap g;
+vertices: center/opposite physical reserve identities of gap g;
 edge f:   joins C_d(f) to O_d(f).
 ```
 
-A demand is paid physically exactly when its edge is assigned to one incident vertex, with no reserve vertex assigned twice.
+For a connected component with `m` demand edges and `n` reserve vertices:
 
-Let `K` be a connected component with
-
-```math
-m=|E(K)|,
-\qquad
-n=|V(K)|.
+```text
+m <= n: all demands admit an injective reserve assignment;
+m > n:  exactly m-n demands must remain as middle occurrences.
 ```
 
-### Tree regime
-
-If `m=n-1`, choose a root and assign each edge to its child endpoint. Every edge is paid.
-
-### Unicyclic regime
-
-If `m=n`, orient the unique cycle cyclically and orient every attached tree away from the cycle. Every edge is paid.
-
-### Excess-cycle regime
-
-If `m>n`, choose a connected spanning unicyclic subgraph with exactly `n` edges. Assign those edges injectively as above and export every remaining edge.
-
-Thus
+Equivalently, if
 
 ```math
-E(K)=E_{\rm reserve}(K)\sqcup E_{\rm export}(K)
+\beta=m-n+1
 ```
 
-with
-
-```math
-|E_{\rm reserve}(K)|=\min(m,n)
-```
-
-and
-
-```math
-|E_{\rm export}(K)|=\max(0,m-n).
-```
-
-Because
-
-```math
-\beta(K)=m-n+1,
-```
-
-the full-availability export count is
+is the component cycle rank, then under full reserve availability
 
 ```math
 \boxed{
-|E_{\rm export}(K)|=\max(0,\beta(K)-1).
+|E_{\rm export}|=\max(0,\beta-1).
 }
 ```
 
+This follows by retaining a spanning tree plus at most one cycle and exporting every additional edge.
+
 ---
 
-## 3. Capacity-aware incidence matching
+## 3. Capacity-aware matching
 
-Other parts of the accounting ledger may already own some physical reserve pairs. Let
+Earlier accounting operations may already own some reserve pairs. Let `R_avail` be the remaining physical reserve set.
 
-```math
-R_{\rm avail}
-```
-
-be the remaining physical reserve-pair set.
-
-For each fixed gap, form the bipartite incidence graph
-
-```math
-\mathcal B_g=(D_g,R_{{\rm avail},g};\sim),
-```
-
-where
+Construct the demand-to-reserve bipartite incidence graph with
 
 ```math
 f\sim r
+\quad\Longleftrightarrow\quad
+r\in\{C_d(f),O_d(f)\}\cap R_{\rm avail}.
 ```
 
-exactly when
-
-```math
-r\in\{C_d(f),O_d(f)\}.
-```
-
-A demand may therefore have zero, one, or two available neighbors.
-
-Choose a maximum matching
-
-```math
-\mathcal M_g\subseteq D_g\times R_{{\rm avail},g}.
-```
-
-Define
+Choose a maximum matching and define:
 
 ```text
-D_match = demands covered by the matching;
-D_export = unmatched demands;
-R_used = matched physical reserve vertices.
+D_match  = matched duplicated demands;
+D_export = unmatched duplicated demands;
+R_used   = matched physical reserve union;
+X_rec    = {tilde f : f in D_export}.
 ```
 
-Then:
-
-```text
-every matched demand uses one incident equal-gap reserve;
-no physical reserve is used more than once;
-every unmatched demand retains its original middle-owner occurrence.
-```
-
-No closed formula in terms of cycle rank alone is asserted after reserve deletion. Hall deficiencies created by unavailable vertices are handled exactly by the matching.
+Every physical reserve is used at most once, and `R_used` is disjoint from all previously reserved physical capacity.
 
 ---
 
-## 4. Exact weighted identity
+## 4. Exact raw-weight identity
 
-For each matched pair `(f,r)`,
-
-```math
-w(f)=w(r),
-```
-
-and for every unmatched demand,
-
-```math
-w(f)=w(\widetilde f).
-```
-
-Therefore, summing over all gaps,
+Matched reserves and unmatched middle occurrences preserve the exact physical gap. Therefore
 
 ```math
 \boxed{
-W(D)=J(R_{\rm used})+W(X_{\rm rec}),
+W(D)=J(R_{\rm used})+W(X_{\rm rec}).
 }
 ```
 
-where
+This is an exact conservation identity. Reserve deletion changes only the partition between physical termination and recursive continuation; it does not create scalar error or duplicate an occurrence.
 
-```text
-R_used is a physical pair union;
-X_rec is the occurrence-tagged family {tilde f : f in D_export};
-R_used is disjoint from all physical capacity reserved before matching.
-```
-
-This is an exact conservation identity. No fitted coefficient and no unmatched scalar error remain.
-
-Under full availability, the contribution from one connected component is
+Under full availability, one component of gap `g` contributes recursive mass
 
 ```math
-\frac{\min(m,n)}g
-+
-\frac{\max(0,m-n)}g,
-```
-
-so its recursive-export mass is exactly
-
-```math
-\frac{\max(0,\beta(K)-1)}g.
+\frac{\max(0,\beta-1)}g.
 ```
 
 ---
 
-## 5. Strict owner-scale descent
+## 5. Corrected owner-scale descent
 
-Let an exported pair occurrence lie in a retained middle shell
+An exported middle occurrence lies in a shell
 
 ```math
 M\subseteq[L,2L).
 ```
 
-The standard middle-output geometry gives
+Every middle label is a positive difference of two parent roots in `[N,2N)`, so it is strictly below `N`. Hence
 
 ```math
-L\le\frac N4.
+\boxed{L\le\frac N2.}
 ```
 
-For the owner-scale moment
+For
 
 ```math
 \Theta_p(f;S)=\frac{S^p}{\operatorname{gap}(f)},
-\qquad p>0,
 ```
 
-moving `f` from parent owner scale `N` to child owner scale `L` gives
-
-```math
-\Theta_p(\widetilde f;L)
-\le
-4^{-p}\Theta_p(f;N).
-```
-
-Consequently
+one obtains
 
 ```math
 \boxed{
 \Theta_p(X_{\rm rec})
 \le
-4^{-p}\Theta_p(D_{\rm export};N).
+2^{-p}\Theta_p(D_{\rm export};N).
 }
 ```
 
-Physical reserve matches terminate locally. Every unmatched demand descends strictly in owner scale.
+At raw exponent zero, mass is conserved. At every positive owner exponent, exported occurrences contract. In dyadic-depth form, every export releases at least one owner level.
 
-At raw reciprocal exponent zero the row is conservative. At every positive owner-scale moment the recursively exported part contracts.
+The former claims
+
+```text
+L_middle <= N/4;
+owner contraction 4^{-p};
+depth release at least two levels
+```
+
+are withdrawn. They confused coordinated affine middle shells with outer-role direct heavy-fiber geometry.
 
 ---
 
-## 6. Rank-two counterexample
+## 6. Sharp half-scale obstruction
 
-The example in
+The parent
 
-```text
-docs/lexicographic-reserve-rank-two-no-go.md
+```math
+\{65,67,68,69,99,100,101,105,106,107,111,112,113\}
+\subset[64,128)
 ```
 
-has three full-availability components:
+is four-AP-free and, under the actual retained policy, has shared backbone-middle latent pairs with both child shell bases equal to `32=N/2`.
+
+Thus the half-scale middle bound is sharp. At owner exponent one, one unmatched middle occurrence may carry one full parent critical pair unit after the backbone occurrence has already used the natural pair capacity.
+
+Primary reference:
 
 ```text
-gap 50:  5 edges, 4 vertices;
-gap 100: 5 edges, 4 vertices;
-gap 50:  5 edges, 4 vertices.
+docs/coordinated-middle-half-scale-critical-no-go.md
 ```
 
-A maximum incidence matching uses four physical reserves in each component and leaves one demand unmatched. The three unmatched demands retain their original middle-owner occurrences.
+---
 
-Their raw mass is
+## 7. Rank-two raw reserve example
+
+The policy-compatible rank-two example has three full-availability components:
+
+```text
+gap 50:  5 demands, 4 reserve vertices;
+gap 100: 5 demands, 4 reserve vertices;
+gap 50:  5 demands, 4 reserve vertices.
+```
+
+A maximum raw matching exports one middle occurrence from each component, of total mass
 
 ```math
 \frac1{50}+\frac1{100}+\frac1{50}=\frac1{20}.
 ```
 
-Those three exported occurrences are the complete pair ledger of one lower-scale coordinate three-AP. The product factorization in
-
-```text
-docs/reserve-pattern-product-factorization.md
-```
-
-explains this equality.
+The exact joint critical assignment does not eliminate the middle residual: the translated alternatives are saturated by other fixed owner loads.
 
 ---
 
-## 7. Production compatibility
+## 8. Production compatibility
 
 The theorem never creates an occurrence:
 
 ```text
-a matched demand consumes one previously available physical reserve;
-an unmatched demand keeps its original middle-owned occurrence.
+matched demand  -> consumes one previously available physical reserve;
+unmatched demand -> keeps its original middle-owned occurrence.
 ```
 
-Thus every duplicated occurrence has exactly one continuation:
-
-```text
-physical reserve termination;
-or recursive sponsor continuation.
-```
-
-This remains valid after arbitrary prior capacity reservations. Removing physical reserves can only reduce the matching and move additional original occurrences into `X_rec`; it cannot cause double use or destroy the exact identity.
+Every duplicated occurrence has one continuation, and arbitrary prior reserve consumption is handled by the same matching.
 
 ---
 
-## 8. Remaining global interface
+## 9. Remaining interface
 
-The false pseudoforest conjecture is no longer needed. The one-generation reserve allocation is exact for arbitrary reserve graphs and arbitrary previously unavailable reserve sets.
+The local raw reserve obstruction is classified. The corrected treewise tasks are:
 
-The remaining work is treewise:
-
-1. combine owner-scale contraction of unmatched sponsor occurrences with the exact `7/4` critical depth release;
-2. impose one global ownership order for direct discharge, terminal absorption, and reserve matching;
-3. merge terminal sponsor exports with terminal-current absorption;
-4. prove global summability of recursively exported occurrence mass;
-5. return from the occurrence ledger to the original reciprocal mass.
-
-The local reserve-cycle obstruction is therefore classified rather than left as an unmatched Hall deficit.
+1. telescope middle exports with one-level owner descent;
+2. retain their production ownership;
+3. coordinate reserve matching with direct edge/support allocation;
+4. preserve terminal and recreation occurrence value;
+5. combine the exact raw identity with an owner exponent or depth potential strong enough to absorb the sharp half-scale examples.

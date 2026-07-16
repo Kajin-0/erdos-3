@@ -4,9 +4,9 @@
 
 State-independent occurrence-flow accounting theorem for source-weighted direct pair transport.
 
-The theorem separates numerical sink multiplicity from actual source mass. Terminal value is indexed by the already-paid source occurrence. A same-source recreation cycle has zero net transport divergence and is removed from the recursive flow rather than charged as a new physical pair.
+Terminal value is indexed by the already-paid source occurrence. A same-source recreation closes a zero-divergence cycle, but the mass entering that recurrent class remains once as a cycle-reserve token. It is not charged again on every traversal.
 
-This theorem does **not** authorize repeated use of one destination edge occurrence or one physical support capacity. Local edge and support capacities must be allocated before an occurrence is declared absorbed.
+This theorem does **not** authorize repeated use of one destination edge occurrence or physical support capacity. Such capacities must be allocated before an occurrence is declared locally absorbed.
 
 ---
 
@@ -18,30 +18,23 @@ Let
 \Omega=\{\omega\}
 ```
 
-be a finite family of source occurrence atoms. Each atom carries:
+be a finite family of source occurrence atoms. Each atom carries an immutable production owner, an entering physical pair, and mass `m(omega)>=0`. Its mass has already been paid by an economical activation row.
 
-```text
-an immutable production owner;
-an entering physical pair;
-a nonnegative mass m(omega);
-optional path and branch metadata.
-```
+A transport step may split one atom into finitely many subatoms whose masses sum to the entering mass. Every descendant retains the original source identifier and a branch identifier.
 
-The mass has already been paid by an economical activation row. Different atoms may have the same numerical physical pair.
-
-A transport step may split one atom into finitely many subatoms, provided their masses sum to the entering mass. Every descendant retains the original source identifier together with a branch identifier.
+Different atoms may have the same numerical physical pair.
 
 ---
 
 ## 2. Valid transport outcomes
 
-After all required physical capacities have been reserved, each source subatom has one of four outcomes:
+After all required physical capacities have been reserved, each source branch has one of four macro-outcomes:
 
 ```text
 local absorption:     consumes allocated edge-occurrence capacity;
 terminal absorption:  enters a terminal or obstruction accumulator;
 recursive frontier:   remains an outgoing source-owned occurrence;
-recreation:           returns to a state already visited by the same subatom.
+recreation reserve:   reaches a state already visited by the same branch.
 ```
 
 Numerically equal outcomes belonging to different source atoms remain distinct occurrence records. Their masses are never replaced by several copies of full target-pair capacity.
@@ -50,27 +43,26 @@ Numerically equal outcomes belonging to different source atoms remain distinct o
 
 ## 3. Source-indexed terminal token
 
-For one terminalized subatom, define
+For one terminalized branch define
 
 ```math
 \tau_{\rm term}=(\omega,b,t),
 ```
 
-where `omega` is the immutable source, `b` is its branch identifier, and `t` is terminal metadata such as the numerical target and witness class.
+where `omega` is the immutable source, `b` is the branch identifier, and `t` is terminal metadata. Give the token exactly the transported branch mass.
 
-Give this token exactly the transported submass.
+Because every source branch has at most one terminal outcome, these tokens are injective in `(omega,b)`.
 
-Because every source branch has at most one terminal outcome, the terminal tokens are injective in `(omega,b)`. Hence
+Let:
 
-```math
-\boxed{
-W(T_{\rm source})
-\le
-W(\Omega).
-}
+```text
+A_local = locally absorbed source mass;
+T_source = source-indexed terminal mass;
+F_rec = ordinary recursive-frontier mass;
+C_cyc = one representative mass for each recreated source branch.
 ```
 
-More generally, including locally absorbed and recursive-frontier mass gives
+Then
 
 ```math
 \boxed{
@@ -79,14 +71,16 @@ W(A_{\rm local})
 W(T_{\rm source})
 +
 W(F_{\rm rec})
++
+W(C_{\rm cyc})
 \le
 W(\Omega).
 }
 ```
 
-Equality holds when every source branch has one of these three outcomes after recreation cycles are removed.
+Equality holds when every source branch has one of these four outcomes and no mass is discarded.
 
-This is an occurrence statement. It makes no claim that the numerical terminal target union has enough physical pair capacity to hold all terminal mass.
+This is an occurrence identity. It makes no claim that the numerical terminal target union has enough physical capacity to hold all terminal mass.
 
 ---
 
@@ -95,67 +89,50 @@ This is an occurrence statement. It makes no claim that the numerical terminal t
 Fix one source branch and suppose its transport states are
 
 ```math
-z_0,z_1,\ldots,z_j
-```
-
-with
-
-```math
+z_0,z_1,\ldots,z_j,
+\qquad
 z_j=z_i
 ```
 
-for some first repetition `i<j`.
+for a first repetition `i<j`.
 
-The segment
+The closed segment
 
 ```math
 z_i\to z_{i+1}\to\cdots\to z_j=z_i
 ```
 
-has zero net source-flow divergence. Removing that closed segment preserves:
+has zero net transport divergence. Remove the repeated cycle edges and retain one representative occurrence at `z_i` in `C_cyc`.
 
-```text
-source injection;
-local absorbed mass;
-terminal mass;
-recursive frontier mass.
-```
+Thus recreation contributes one already-paid recurrent reserve, not a new physical pair and not a terminal value. Repeated traversal of the same cycle contributes nothing further.
 
-Thus a same-source recreation is not a new pair debt and is not terminal value. It is a zero-divergence cycle certificate.
-
-For a finite occurrence network, the standard path-cycle decomposition removes all directed cycle flow and leaves only paths from source injections to local, terminal, or frontier outcomes.
+For a finite occurrence network, standard path-cycle decomposition leaves paths from source injections to local, terminal, ordinary-frontier, or cycle-reserve outcomes.
 
 ---
 
 ## 5. Numerical sink collisions
 
-Several source atoms may terminate at the same numerical pair `e`. Write their transported masses as
+Several source atoms may terminate at the same numerical pair `e`, with masses
 
 ```math
 m_1,\ldots,m_k.
 ```
 
-The numerical target capacity is only
+The physical target capacity is only
 
 ```math
-w(e)=\frac1{\operatorname{gap}(e)}.
+w(e)=\frac1{\operatorname{gap}(e)},
 ```
 
-It may happen that
+and it may happen that
 
 ```math
 \sum_i m_i>w(e).
 ```
 
-The source-indexed terminal ledger records the exact value
+The source-indexed terminal ledger records the exact value `sum_i m_i` without claiming `k` copies of `w(e)` or even one target copy for every source.
 
-```math
-\sum_i m_i
-```
-
-without claiming `k` copies of `w(e)` or even one physical target copy for every source.
-
-If a proof instead wants to use the target as physical capacity, it must separately split
+A proof that instead uses the target as physical capacity must split
 
 ```math
 \sum_i m_i
@@ -165,19 +142,23 @@ If a proof instead wants to use the target as physical capacity, it must separat
 \left(\sum_i m_i-w(e)\right)_+
 ```
 
-and provide a transfer law for the overflow. The occurrence ledger avoids that unnecessary projection when the target is only terminal metadata.
+and provide a separate overflow transfer law.
 
 ---
 
 ## 6. Relation to terminal first appearance
 
-The older numerical first-appearance terminal ledger remains valid when a collision-sound physical token is needed. The source-indexed ledger answers a different question:
+The numerical first-appearance terminal ledger answers:
 
 ```text
-How much already-paid occurrence mass reaches terminal output?
+Which physical terminal tokens appear globally for the first time?
 ```
 
-Its token is intentionally finer because its total mass is controlled by source injection, not by a new numerical-token union bound.
+The source-indexed ledger answers:
+
+```text
+How much already-paid source occurrence mass reaches terminal output?
+```
 
 Therefore:
 
@@ -186,7 +167,7 @@ physical terminal first appearance -> union-capacity coordinate;
 source-indexed terminal value       -> occurrence-flow coordinate.
 ```
 
-They must not be conflated.
+The source token is finer, but its total mass is controlled by source injection rather than by a new physical-token union estimate.
 
 ---
 
@@ -207,7 +188,7 @@ cross-parent numerical targets              0
 The numerical target-capacity overflow is
 
 ```math
-227.822626207390\ldots
+227.822626207390\ldots,
 ```
 
 and the largest source-mass / target-capacity ratio is
@@ -216,8 +197,6 @@ and the largest source-mass / target-capacity ratio is
 29.989556157022\ldots.
 ```
 
-Therefore numerical target capacity is not a valid complete terminal ledger even after source weighting.
-
 The overflow splits as
 
 ```text
@@ -225,7 +204,7 @@ anchored at a path-zero source sink  221.724011504502...
 unanchored external sink               6.098614702889...
 ```
 
-The source-target functional graph has fixed points and external sinks only; it has no nontrivial source-to-source cycle on this exact frontier.
+Thus numerical target capacity is not a complete terminal ledger even after source weighting. The source-target functional graph has fixed points and external sinks only; it has no nontrivial source-to-source cycle on this exact frontier.
 
 Primary executable:
 
@@ -237,25 +216,21 @@ src/probe_s7_source_weighted_sink_overflow.py
 
 ## 8. Bellman use
 
-For one valid source-weighted transport row, place
+For one valid source-weighted transport row:
 
-```math
-W(T_{\rm source})
-```
+- place `W(T_source)` on the terminal-value side;
+- retain `W(F_rec)` as ordinary recursive occurrence mass;
+- retain `W(C_cyc)` once as recurrent reserve;
+- never regenerate `C_cyc` by traversing its certified cycle again.
 
-on the terminal-value side of the Bellman inequality and retain
+This removes numerical sink multiplicity and repeated cycle traversal as scalar error terms.
 
-```math
-W(F_{\rm rec})
-```
-
-as the recursive occurrence measure. Recreation cycles are removed from both sides as zero-divergence flow.
-
-This eliminates numerical sink multiplicity as a scalar error term. The remaining global requirements are:
+The remaining global requirements are:
 
 1. coordinate destination edge/support capacities across owner shells;
-2. telescope recursive source-owned occurrences at their actual destination scales;
-3. preserve unused edge-occurrence capacity;
-4. convert accumulated terminal source value and released depth into the original reciprocal-density bound.
+2. telescope ordinary recursive occurrences at their actual destination scales;
+3. carry cycle reserves once without regeneration;
+4. preserve unused edge-occurrence capacity;
+5. convert accumulated terminal source value and released depth into the original reciprocal-density bound.
 
 The unresolved problem is global capacity scheduling and critical telescoping, not numerical terminal-target multiplicity itself.

@@ -1,0 +1,52 @@
+name: Current-latent critical scale
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/current-latent-critical-scale.yml'
+      - 'src/probe_current_latent_critical_scale.py'
+      - 'src/probe_retained_current_latent_profiles.py'
+      - 'src/probe_residual_sponsor_backbone_split.py'
+      - 'src/probe_third_generation_recursive_frontier.py'
+      - 'src/verify_retained_provenance_scale_profile.py'
+      - 'src/verify_retained_terminal_split.py'
+
+permissions:
+  contents: read
+
+jobs:
+  exact-current-latent-critical-scale:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Compile critical-scale probe
+        run: |
+          python3 -m py_compile \
+            src/probe_current_latent_critical_scale.py \
+            src/probe_retained_current_latent_profiles.py
+
+      - name: Run critical-scale probe
+        run: |
+          set +e
+          python3 src/probe_current_latent_critical_scale.py \
+            current_latent_critical_scale.json \
+            > current_latent_critical_scale_stdout.json
+          status=$?
+          set -e
+          printf '%s\n' "$status" > current_latent_critical_scale_exit_status.txt
+          if [[ "$status" -ne 0 && "$status" -ne 2 ]]; then
+            exit "$status"
+          fi
+
+      - name: Upload exact critical-scale profile
+        uses: actions/upload-artifact@v4
+        with:
+          name: current-latent-critical-scale-${{ github.run_id }}-${{ github.run_attempt }}
+          retention-days: 30
+          if-no-files-found: error
+          path: |
+            current_latent_critical_scale.json
+            current_latent_critical_scale_stdout.json
+            current_latent_critical_scale_exit_status.txt

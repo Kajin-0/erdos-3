@@ -1,0 +1,48 @@
+name: Reserve pseudoforest small-box
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/reserve-pseudoforest-small-box.yml'
+      - 'src/search_lexicographic_reserve_pseudoforest_small_box.py'
+      - 'src/verify_retained_provenance_second_generation.py'
+      - 'src/verify_retained_terminal_split.py'
+      - 'data/reserve_pseudoforest_endpoint16_2026-07-16.json'
+
+permissions:
+  contents: read
+
+jobs:
+  exact-reserve-pseudoforest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Compile reserve search
+        run: |
+          python3 -m py_compile \
+            src/search_lexicographic_reserve_pseudoforest_small_box.py \
+            src/verify_retained_provenance_second_generation.py \
+            src/verify_retained_terminal_split.py
+
+      - name: Regenerate endpoint-16 certificate
+        run: |
+          python3 src/search_lexicographic_reserve_pseudoforest_small_box.py \
+            16 reserve_pseudoforest_endpoint16.json \
+            > reserve_pseudoforest_endpoint16_stdout.json
+          printf '0\n' > reserve_pseudoforest_endpoint16_exit_status.txt
+          cmp \
+            data/reserve_pseudoforest_endpoint16_2026-07-16.json \
+            reserve_pseudoforest_endpoint16.json
+
+      - name: Upload reserve search
+        uses: actions/upload-artifact@v4
+        with:
+          name: reserve-pseudoforest-${{ github.run_id }}-${{ github.run_attempt }}
+          retention-days: 30
+          if-no-files-found: error
+          path: |
+            reserve_pseudoforest_endpoint16.json
+            reserve_pseudoforest_endpoint16_stdout.json
+            reserve_pseudoforest_endpoint16_exit_status.txt

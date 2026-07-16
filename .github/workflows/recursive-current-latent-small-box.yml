@@ -1,0 +1,58 @@
+name: Recursive current-latent small-box
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/recursive-current-latent-small-box.yml'
+      - 'src/search_recursive_current_latent_small_box.py'
+      - 'src/probe_recursive_current_latent_gadget.py'
+      - 'src/search_lexicographic_reserve_pseudoforest_small_box.py'
+      - 'src/verify_retained_provenance_second_generation.py'
+      - 'src/verify_retained_terminal_split.py'
+
+permissions:
+  contents: read
+
+jobs:
+  exact-recursive-current-latent-search:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Compile search
+        run: |
+          python3 -m py_compile \
+            src/search_recursive_current_latent_small_box.py \
+            src/probe_recursive_current_latent_gadget.py \
+            src/search_lexicographic_reserve_pseudoforest_small_box.py
+
+      - name: Verify structured recursive gadget
+        run: |
+          python3 src/probe_recursive_current_latent_gadget.py \
+            > recursive_current_latent_gadget.json
+
+      - name: Search endpoint 20
+        run: |
+          set +e
+          python3 src/search_recursive_current_latent_small_box.py \
+            20 recursive_current_latent_endpoint20.json \
+            > recursive_current_latent_endpoint20_stdout.json
+          status=$?
+          set -e
+          printf '%s\n' "$status" > recursive_current_latent_endpoint20_exit_status.txt
+          if [[ "$status" -ne 0 && "$status" -ne 2 ]]; then
+            exit "$status"
+          fi
+
+      - name: Upload exact search
+        uses: actions/upload-artifact@v4
+        with:
+          name: recursive-current-latent-${{ github.run_id }}-${{ github.run_attempt }}
+          retention-days: 30
+          if-no-files-found: error
+          path: |
+            recursive_current_latent_gadget.json
+            recursive_current_latent_endpoint20.json
+            recursive_current_latent_endpoint20_stdout.json
+            recursive_current_latent_endpoint20_exit_status.txt

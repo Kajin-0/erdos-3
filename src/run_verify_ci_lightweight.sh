@@ -84,7 +84,27 @@ run_check s2_zero \
 
 python3 "$ROOT/src/verify_sponsor_pair_transport_small_box.py"
 python3 "$ROOT/src/verify_canonical_hole_witness_pair_small_box.py"
+python3 "$ROOT/src/verify_completion_step_fiber_light_heavy.py"
+python3 "$ROOT/src/verify_double_translate_four_ratio_exclusion.py"
+python3 "$ROOT/src/verify_global_shell_pair_batching.py"
+python3 "$ROOT/src/verify_direct_maximal_pair_discharge.py"
+python3 "$ROOT/src/verify_source_weighted_direct_discharge.py"
+python3 "$ROOT/src/verify_cross_shell_edge_swap_involution.py"
+python3 "$ROOT/src/verify_exact_gap_light_persistence.py"
+python3 "$ROOT/src/verify_full_edge_incidence_pair_energy_bound.py"
+python3 "$ROOT/src/verify_full_edge_incidence_five_quarter_bound.py"
+python3 "$ROOT/src/verify_five_quarter_owner_exponent_threshold.py"
+python3 "$ROOT/src/verify_dyadic_owner_moment_depth_interpolation.py"
+python3 "$ROOT/src/verify_affine_owner_incidence_cycles.py"
+python3 "$ROOT/src/verify_point_disjoint_latent_reuse_no_go.py"
+python3 "$ROOT/src/verify_far_aspect_latent_reuse_no_go.py"
+python3 "$ROOT/src/verify_lexicographic_retained_latent_reuse_no_go.py"
+python3 "$ROOT/src/verify_lexicographic_reserve_rank_two_no_go.py"
+python3 "$ROOT/src/verify_reserve_recursive_export.py"
+python3 "$ROOT/src/verify_coordinated_deletion_total_owner_degree_two.py"
+python3 "$ROOT/src/probe_recursive_current_latent_gadget.py" > /dev/null
+python3 "$ROOT/src/verify_sharp_latent_latent_critical_no_go.py" > /dev/null
 python3 "$ROOT/src/certified_contaminated_states.py" > /dev/null
 python3 "$ROOT/src/branching_reserve_lp.py" self-test
 
-echo "verified: genuinely lightweight exact certificates, independent sponsor-pair and hole-witness reuse checks, and LP harness"
+echo "verified: lightweight exact certificates, five-quarter incidence and owner threshold, dyadic moment-depth interpolation, direct/source-weighted discharge, physical-gap termination, affine owner degree, sharp overlap no-gos, and LP harness"

@@ -1,0 +1,37 @@
+name: Source-weighted direct discharge
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/source-weighted-direct-discharge-check.yml'
+      - 'src/verify_source_weighted_direct_discharge.py'
+      - 'src/verify_direct_maximal_pair_discharge.py'
+
+permissions:
+  contents: read
+
+jobs:
+  exact-source-weighted-discharge:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Compile verifier
+        run: |
+          python3 -m py_compile \
+            src/verify_source_weighted_direct_discharge.py \
+            src/verify_direct_maximal_pair_discharge.py
+
+      - name: Run source-weighted profile
+        run: |
+          python3 src/verify_source_weighted_direct_discharge.py \
+            > source_weighted_direct_discharge_small_box.json
+
+      - name: Upload source-weighted profile
+        uses: actions/upload-artifact@v4
+        with:
+          name: source-weighted-direct-discharge-${{ github.run_id }}-${{ github.run_attempt }}
+          retention-days: 30
+          if-no-files-found: error
+          path: source_weighted_direct_discharge_small_box.json

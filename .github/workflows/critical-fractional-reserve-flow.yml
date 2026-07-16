@@ -1,0 +1,68 @@
+name: Critical fractional reserve flow
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/critical-fractional-reserve-flow.yml'
+      - 'src/probe_critical_fractional_reserve_flow.py'
+      - 'src/probe_sharp_latent_latent_critical_no_go.py'
+      - 'src/verify_sharp_latent_latent_critical_no_go.py'
+      - 'src/search_sharp_latent_latent_critical_gadget.py'
+      - 'src/search_lexicographic_reserve_pseudoforest_small_box.py'
+      - 'src/verify_retained_provenance_second_generation.py'
+      - 'src/verify_retained_terminal_split.py'
+
+permissions:
+  contents: read
+
+jobs:
+  exact-critical-fractional-reserve-flow:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Compile exact flow probes
+        run: |
+          python3 -m py_compile \
+            src/probe_critical_fractional_reserve_flow.py \
+            src/probe_sharp_latent_latent_critical_no_go.py \
+            src/verify_sharp_latent_latent_critical_no_go.py \
+            src/search_sharp_latent_latent_critical_gadget.py \
+            src/search_lexicographic_reserve_pseudoforest_small_box.py
+
+      - name: Run exact fractional reserve flow
+        run: |
+          python3 src/probe_critical_fractional_reserve_flow.py \
+            critical_fractional_reserve_flow.json \
+            > critical_fractional_reserve_flow_stdout.json
+
+      - name: Run sharp latent-latent candidate
+        run: |
+          python3 src/probe_sharp_latent_latent_critical_no_go.py \
+            > sharp_latent_latent_critical_candidate.json
+
+      - name: Verify sharp latent-latent no-go
+        run: |
+          python3 src/verify_sharp_latent_latent_critical_no_go.py \
+            > sharp_latent_latent_critical_no_go.json
+
+      - name: Search structured sharp gadgets
+        run: |
+          python3 src/search_sharp_latent_latent_critical_gadget.py \
+            sharp_latent_latent_critical_gadget_search.json \
+            > sharp_latent_latent_critical_gadget_search_stdout.json
+
+      - name: Upload exact flow certificate
+        uses: actions/upload-artifact@v4
+        with:
+          name: critical-fractional-reserve-flow-${{ github.run_id }}-${{ github.run_attempt }}
+          retention-days: 30
+          if-no-files-found: error
+          path: |
+            critical_fractional_reserve_flow.json
+            critical_fractional_reserve_flow_stdout.json
+            sharp_latent_latent_critical_candidate.json
+            sharp_latent_latent_critical_no_go.json
+            sharp_latent_latent_critical_gadget_search.json
+            sharp_latent_latent_critical_gadget_search_stdout.json

@@ -2,77 +2,71 @@
 
 ## Status
 
-State-independent upper bound connecting full-edge three-AP production to physical pair energy in every four-AP-free state.
+Historical coefficient-two incidence theorem, retained for its elementary local-multiplicity proof.
 
-Every physical pair belongs to at most two three-term progressions: at most one as an adjacent edge and at most one as an outer edge. Consequently the complete full-edge occurrence load is at most twice the pair-energy union.
+The bound
+
+```math
+\frac52\mathcal L_3(P)\le2J(P)
+```
+
+is valid but superseded by the stronger state-independent theorem
+
+```math
+\boxed{
+\frac52\mathcal L_3(P)\le\frac54J(P).
+}
+```
+
+Primary current reference:
+
+```text
+docs/five-quarter-full-edge-incidence-bound.md
+```
 
 ---
 
 ## 1. Physical pair energy
 
-Let
-
-```math
-P\subseteq\mathbb Z
-```
-
-be finite and four-AP-free. Define
+For a finite four-AP-free set `P`, define
 
 ```math
 J(P)
 =
-\sum_{x<y,\ x,y\in P}
+\sum_{x<y\atop x,y\in P}
 \frac1{y-x}.
 ```
 
-For one physical pair
+For a physical pair
 
 ```math
 e=\{x,y\},
-\qquad x<y,
 \qquad D=y-x,
 ```
 
-write `m_3(e)` for the number of three-term progressions in `P` containing both endpoints.
+let `m_3(e)` be the number of three-term progressions in `P` containing `e` as an edge.
 
 ---
 
-## 2. Possible three-AP completions
+## 2. Pair incidence is at most two
 
-There are at most three candidate roots completing `e` to a three-AP.
+The possible completion roots are:
 
-### Left adjacent completion
-
-```math
-x-D.
+```text
+x-D;
+y+D;
+x+D/2, when D is even.
 ```
 
-### Right adjacent completion
+The two adjacent endpoint completions cannot both lie in `P`, because
 
 ```math
-y+D.
+x-D,\ x,\ y,\ y+D
 ```
 
-### Midpoint completion
+would form a four-term progression.
 
-When `D` is even,
-
-```math
-x+\frac D2.
-```
-
-The two adjacent completion roots cannot both belong to `P`, because then
-
-```math
-x-D,
-\quad x,
-\quad y,
-\quad y+D
-```
-
-would form a four-term arithmetic progression of step `D`.
-
-Therefore `e` belongs to:
+Therefore one pair belongs to:
 
 ```text
 at most one adjacent-edge three-AP;
@@ -92,30 +86,18 @@ Hence
 For one three-AP
 
 ```math
-Q=\{a,a+d,a+2d\},
+\{a,a+d,a+2d\},
 ```
 
-the complete physical edge load is
+the three physical edge weights sum to
 
 ```math
-\frac1d
-+
-\frac1d
-+
-\frac1{2d}
+\frac1d+\frac1d+\frac1{2d}
 =
 \frac5{2d}.
 ```
 
-Thus, writing
-
-```math
-\mathcal L_3(P)
-=
-\sum_{Q\in\operatorname{AP}_3(P)}\frac1{d(Q)},
-```
-
-one has the exact double-counting identity
+Thus
 
 ```math
 \boxed{
@@ -126,13 +108,11 @@ one has the exact double-counting identity
 }
 ```
 
-Every three-AP contributes its three physical pair edges, each with reciprocal physical gap.
-
 ---
 
-## 4. Pair-energy upper bound
+## 4. Historical coefficient-two bound
 
-Using `m_3(e)<=2`,
+Using only `m_3(e)<=2`,
 
 ```math
 \begin{aligned}
@@ -150,67 +130,65 @@ Therefore
 
 ```math
 \boxed{
+\frac52\mathcal L_3(P)\le2J(P).
+}
+```
+
+This remains a valid immediate corollary of the pair-incidence multiplicity theorem.
+
+---
+
+## 5. Why the coefficient is superseded
+
+The coefficient-two proof treats every multiplicity-two pair independently. Four-AP-freeness imposes additional compatibility among those duplicated pairs.
+
+A duplicated pair must be one adjacent edge and one outer edge. Mapping each duplicated outer pair to its two adjacent half pairs is globally injective. The two half pairs have four times the duplicated pair's energy, so duplicated incidence energy is at most one quarter of `J(P)`.
+
+This yields
+
+```math
 \frac52\mathcal L_3(P)
 \le
-2J(P).
-}
+J(P)+\frac14J(P)
+=
+\frac54J(P).
 ```
 
-Equivalently,
-
-```math
-\boxed{
-\mathcal L_3(P)
-\le
-\frac45J(P).
-}
-```
-
-No dyadic-shell assumption is required.
-
----
-
-## 5. Equality structure
-
-Equality in the coefficient-two bound would require every physical pair in `P` to belong to exactly two three-APs. This is highly restrictive and is not claimed to occur.
-
-The theorem uses only the universal incidence multiplicity bound. Improving the constant requires global compatibility among midpoint and adjacent completions, not merely local pair counting.
-
----
-
-## 6. Bellman interface
-
-The full-color/full-edge branching theorem produces exact occurrence capacity
-
-```math
-\frac52\mathcal L_3(P).
-```
-
-The present theorem places that complete production below the entering physical pair potential:
-
-```math
-\boxed{
-\text{full-edge occurrence production}
-\le
-2J(P).
-}
-```
-
-This does not solve the entering-pair-energy problem: a factor two is not a contraction. It supplies a universal finite branching bound compatible with the pair-lineage ledger.
-
-Combined with direct pair-lineage termination, the remaining global problem becomes:
+See:
 
 ```text
-control how the factor-two occurrence production is distributed among
-finite terminating lineages and how recreation merges their ownership.
+docs/five-quarter-full-edge-incidence-bound.md
+src/verify_full_edge_incidence_five_quarter_bound.py
 ```
 
 ---
 
-## 7. Scope
+## 6. Bellman consequence
 
-The theorem is an upper production bound, not a reciprocal-sum theorem. It does not imply that `J(P)` is summable over dyadic shells and does not control pair-energy recreation across different parents.
+The historical coefficient two required pair coefficient `lambda>=2` to pay complete future production. Combined with two half-scale latent owners, that forced the simple monomial owner exponent to satisfy `p>=2`.
 
-Its role is to connect the exact full-edge production operator to the same physical pair-energy coordinate used by the affine Bellman and direct-discharge theorems.
+The improved coefficient `5/4` lowers the certified monomial requirement to
 
-**Verifier:** `src/verify_full_edge_incidence_pair_energy_bound.py`.
+```math
+\lambda=\frac54,
+\qquad
+p\ge\log_2\!\left(\frac52\right).
+```
+
+Thus the coefficient-two threshold should no longer be used in the active proof program.
+
+---
+
+## 7. Validation
+
+Historical verifier:
+
+```text
+src/verify_full_edge_incidence_pair_energy_bound.py
+```
+
+Current stronger verifier:
+
+```text
+src/verify_full_edge_incidence_five_quarter_bound.py
+```

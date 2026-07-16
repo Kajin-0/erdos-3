@@ -1,21 +1,26 @@
-# Source-weighted critical economical Bellman row
+# Owner-exponent economical Bellman rows
 
 ## Status
 
-Scale-critical refinement of economical pair activation and source-weighted direct discharge.
+Corrected state-independent owner-scale analysis for economical affine activation and source-weighted direct discharge.
 
-The child potential includes twice the child pair energy. That coefficient pays the complete next-generation full-edge production because every physical pair belongs to at most two three-term progressions.
+The former universal claim that coordinated middle children satisfy `L <= N/4` was false. The correct bound for every retained affine child is
 
-Direct transport carries exact inherited source mass rather than full target-pair capacity. The complete overlap correction has coefficient at most `1/2`, but the owner-type refinement is sharper:
-
-```text
-current-latent overlap -> at most 1/4, sharp;
-unmatched latent-latent export -> at most 1/2.
+```math
+L\le\frac N2.
 ```
+
+Consequently the scale-critical `p=1` overlap coefficient may equal one full parent pair unit. The first exponent at which all current/latent owner multiplicity fits into the original parent pair capacity is
+
+```math
+\boxed{p=2.}
+```
+
+This yields a collision-free quadratic owner-scale Bellman row. It does not by itself prove raw reciprocal summability.
 
 ---
 
-## 1. Critical node quantities
+## 1. Owner-exponent node quantities
 
 Let
 
@@ -23,17 +28,17 @@ Let
 P\subseteq[N,2N)
 ```
 
-be a parent root universe in a standard dyadic shell.
-
-Define parent production capacity
+be a parent root state. For `p>0`, define parent full-edge production capacity
 
 ```math
 \boxed{
-\mathcal B(P)=\frac52N\mathcal L_3(P).
+\mathcal B_p(P)
+=
+\frac52N^p\mathcal L_3(P).
 }
 ```
 
-For a retained affine child
+For one retained affine child
 
 ```math
 S_{r_i}(Q_i)\subseteq[L_i,2L_i),
@@ -43,110 +48,83 @@ define
 
 ```math
 \boxed{
-\mathcal V_i
+\mathcal V_{p,i}
 =
-L_iH(S_{r_i}(Q_i))
+L_i^p H(S_{r_i}(Q_i))
 +
-2L_i\mathbf 1_{i\text{ recursive}}J(Q_i).
+2L_i^p\mathbf 1_{i\text{ recursive}}J(Q_i).
 }
 ```
 
-The first term is critical current mass. The second is future recursive production capacity.
-
----
-
-## 2. The coefficient two pays future production
-
-Every physical pair in a four-AP-free root set belongs to at most two three-APs. Therefore
+The harmonic term records current resource occurrences. The doubled pair term pays complete future full-edge production because
 
 ```math
 \frac52\mathcal L_3(Q_i)\le2J(Q_i).
 ```
 
-Multiplying by the child shell base gives
+Hence
 
 ```math
 \boxed{
-\mathcal B(Q_i)
-=
-\frac52L_i\mathcal L_3(Q_i)
+\mathcal B_p(Q_i)
 \le
-2L_iJ(Q_i)
+2L_i^pJ(Q_i)
 \le
-\mathcal V_i.
+\mathcal V_{p,i}.
 }
 ```
 
-Thus the left side of the Bellman row already contains enough capacity for the complete next generation of every recursive child.
+---
+
+## 2. Correct universal child scale
+
+Every current label and every latent pair endpoint difference is built from differences of parent roots in `[N,2N)`. Therefore every positive child label is below `N`, and standard dyadic shelling gives
+
+```math
+\boxed{L_i\le\frac N2.}
+```
+
+This bound applies to backbone and middle-fiber children and is sharp for both.
+
+The quarter-scale bound for outer-role direct heavy fibers concerns physical source-gap geometry. It is not an owner-scale bound for coordinated retained middle children.
 
 ---
 
-## 3. Economical physical pair set
+## 3. Per-owner coefficients
 
-Let `F` be the physical first-appearance union of child current and recursive latent resources. Mark every pair in `F` unavailable before latent-reserve matching.
-
-Let
+Fix one parent physical pair
 
 ```math
-R_{\rm used}
-```
-
-be the matched center/opposite reserve union. Then
-
-```math
-\mathcal F\cap R_{\rm used}=\varnothing.
-```
-
-Define the economical activated set
-
-```math
-\boxed{U=\mathcal F\sqcup R_{\rm used}.}
-```
-
-Only pairs in `U` are activated. The unused quadratic pair universe is never prepaid.
-
----
-
-## 4. Critical resource assignment
-
-Fix one parent pair
-
-```math
-f=\{p,q\},
+f=\{x,y\},
 \qquad
-g=\operatorname{gap}(f).
+g=y-x.
 ```
 
-Its parent critical capacity is
+Its parent owner-exponent capacity is
 
 ```math
-\Theta_1(f;N)=\frac Ng.
+\Theta_p(f;N)=\frac{N^p}{g}.
 ```
+
+### Current owner
 
 A current occurrence in a child shell of base `L` contributes
 
 ```math
-\frac Lg.
+\frac{L^p}{g}
+\le
+2^{-p}\Theta_p(f;N).
 ```
 
-A recursive latent occurrence contributes to the doubled pair term with mass
+### Latent owner
+
+A recursive latent occurrence contributes to the doubled pair coordinate
 
 ```math
-\frac{2L}g.
+\frac{2L^p}{g}
+\le
+2^{1-p}\Theta_p(f;N).
 ```
-
-The output-scale bounds are
-
-```text
-backbone child base <= N/2;
-middle child base   <= N/4.
-```
-
-Hence one parent pair pays one backbone latent occurrence, one assigned current occurrence, or one matched duplicate at its actual critical child weight.
-
----
-
-## 5. Owner-oriented current-latent packing
 
 The total-owner theorem gives
 
@@ -154,311 +132,256 @@ The total-owner theorem gives
 c_f+\ell_f\le2.
 ```
 
-Suppose `f` has one current and one latent owner.
-
-### Backbone current and middle latent
-
-Here
+Thus the two repeated profiles satisfy
 
 ```math
-L_{\rm cur}\le\frac N2,
-\qquad
-L_{\rm lat}\le\frac N4.
-```
-
-Therefore
-
-```math
-L_{\rm cur}+2L_{\rm lat}\le N,
-```
-
-and one parent pair unit pays both occurrences. The correction is zero.
-
-### Middle current and backbone latent
-
-Here
-
-```math
-L_{\rm cur}\le\frac N4,
-\qquad
-L_{\rm lat}\le\frac N2.
-```
-
-Thus
-
-```math
-L_{\rm cur}+2L_{\rm lat}\le\frac54N.
-```
-
-After the parent pair pays the backbone latent occurrence, the residual is only the middle current occurrence:
-
-```math
-\boxed{
-\mathcal R_{\rm cur-lat}(f)
+q_{\rm cur-lat}(p)
 \le
-\frac14\frac Ng.
-}
+3\,2^{-p}
 ```
 
-This coefficient is sharp. The shell-valid parent
+and
 
 ```math
-\{65,97,98,99,113,114,115,119,120,121,125,126,127\}
-\subset[64,128)
+q_{\rm lat-lat}(p)
+\le
+2^{2-p}.
 ```
 
-retains a recursive middle current owner at scale `16` and a recursive backbone latent owner at scale `32`, giving
+The latent-latent coefficient is the larger one. Therefore the universal owner reproduction coefficient is
 
 ```math
-\frac{16+2(32)}{64}=\frac54.
+\boxed{q_p=2^{2-p}.}
 ```
 
-Primary reference:
+---
+
+## 4. Critical exponent one
+
+At `p=1`,
+
+```math
+q_{\rm cur-lat}(1)\le\frac32,
+\qquad
+q_{\rm lat-lat}(1)\le2.
+```
+
+After one parent pair unit pays a first owner, the possible residual coefficients are
+
+```text
+current-latent residual <= 1/2;
+latent-latent residual  <= 1.
+```
+
+Both the earlier universal `1/4` current-latent bound and the earlier universal `1/2` complete-overlap bound are withdrawn.
+
+A shell-valid recursive current-latent example attains residual `1/4`, but it is not a universal extremizer. A separate shell-valid latent-latent example attains residual `1` exactly.
+
+Primary references:
 
 ```text
 docs/current-latent-owner-type-critical-packing.md
+docs/coordinated-middle-half-scale-critical-no-go.md
 ```
+
+Raw center/opposite reserve matching can reduce the residual in particular configurations. Exact joint fractional reassignment does not give a universal improvement: the translated alternatives may already be saturated by fixed current or non-middle latent loads.
 
 ---
 
-## 6. Backbone-middle latent reuse
+## 5. Quadratic exponent two
 
-Suppose `f` has one backbone latent owner and one middle latent owner.
-
-One occurrence is assigned to `f in F`. If a center/opposite reserve is matched, the second occurrence is assigned to `R_used` and no residue remains.
-
-If no reserve is matched, one original middle occurrence remains. Its doubled critical pair mass is at most
+At `p=2`,
 
 ```math
-2\frac{N/4}{g}
-=
-\frac12\frac Ng.
+q_{\rm cur-lat}(2)\le\frac34,
+\qquad
+q_{\rm lat-lat}(2)\le1.
 ```
 
-Therefore
+Therefore one parent pair unit pays the complete owner family of that pair:
 
 ```math
 \boxed{
-\mathcal R_{\rm lat-lat}(f)
+\sum_{\text{current and recursive latent owners of }f}
+\operatorname{Load}_2(f)
 \le
-\frac12\frac Ng.
+\frac{N^2}{g}.
 }
 ```
 
-The current-latent and latent-latent profiles are mutually exclusive. Hence the complete overlap residue satisfies
+No center/opposite reserve, collision correction, or recursive duplicate export is needed at exponent two.
+
+Let
+
+```math
+\mathcal F
+```
+
+be the physical union of parent pair resources actually exposed by the retained child family. Summing the preceding per-pair inequality gives
 
 ```math
 \boxed{
-\mathcal R_{\rm crit}(f)
+\sum_i\mathcal V_{2,i}
 \le
-\frac12\Theta_1(f;N),
+N^2J(\mathcal F).
 }
 ```
 
-but only unmatched latent-latent export can attain the coefficient `1/2`.
+This is the collision-free quadratic affine activation row.
 
-Summing gives
-
-```math
-\boxed{
-\mathcal R_{\rm crit}
-\le
-\frac12N J(\mathcal F_{\rm repeated})
-\le
-\frac12N J(U).
-}
-```
+For every `p>2`, the same row is strictly contracting on every repeated owner profile.
 
 ---
 
-## 7. Critical affine activation row
+## 6. Source-weighted direct discharge at exponent two
 
-Summing assigned resource capacities gives
+Activate only the economical physical pair set `F`. Let `E_free` be the parent full-edge occurrence tokens not consumed by local pair payment.
 
-```math
-\boxed{
-\sum_i\mathcal V_i
-\le
-NJ(U)+\mathcal R_{\rm crit}.
-}
-```
-
-The residue hierarchy is
-
-```text
-backbone current / middle latent -> 0;
-middle current / backbone latent -> <= 1/4;
-matched backbone-middle latent   -> 0;
-unmatched middle latent export   -> <= 1/2.
-```
-
----
-
-## 8. Source-weighted direct discharge
-
-Let `E(P)` be the complete parent full-edge occurrence family and let `E_free` be its unused part after locally completed pairs in `U` consume their deterministic edge occurrences.
-
-Apply source-weighted direct discharge to `U`. Let
+Source-weighted direct discharge gives the exact raw-mass identity
 
 ```math
-\mu_{\rm dir}^{\rm rec}
-```
-
-be the recursive outgoing occurrence measure and
-
-```math
-\mu_{\rm dir}^{\rm term}
-```
-
-be the terminal outgoing occurrence measure.
-
-The exact raw identity is
-
-```math
-J(U)+W(\mathscr E_{\rm free})
+J(\mathcal F)
++
+W(\mathscr E_{\rm free})
 =
 \frac52\mathcal L_3(P)
 +
 W(\mu_{\rm dir}^{\rm rec})
 +
-W(\mu_{\rm dir}^{\rm term}).
+W(\mu_{\rm dir}^{\rm term}),
 ```
 
-Multiplying by the parent owner scale gives
+where every outgoing occurrence carries inherited source mass rather than full target capacity.
+
+Multiplying by the immutable parent owner factor `N^2` gives
 
 ```math
 \boxed{
-NJ(U)+NW(\mathscr E_{\rm free})
+N^2J(\mathcal F)
++
+N^2W(\mathscr E_{\rm free})
 =
-\mathcal B(P)
+\mathcal B_2(P)
 +
-NW(\mu_{\rm dir}^{\rm rec})
+N^2W(\mu_{\rm dir}^{\rm rec})
 +
-NW(\mu_{\rm dir}^{\rm term}).
+N^2W(\mu_{\rm dir}^{\rm term}).
 }
 ```
 
-No full target-pair capacity appears. Every outgoing occurrence carries mass inherited from one economical source pair.
-
----
-
-## 9. Complete critical Bellman row
-
-Combining affine activation with source-weighted direct discharge gives
+Combining with quadratic affine activation yields
 
 ```math
 \boxed{
 \begin{aligned}
-\sum_i\mathcal V_i
+\sum_i\mathcal V_{2,i}
 +
-NW(\mathscr E_{\rm free})
+N^2W(\mathscr E_{\rm free})
 \le{}&
-\mathcal B(P)\\
-&+NW(\mu_{\rm dir}^{\rm rec})\\
-&+NW(\mu_{\rm dir}^{\rm term})\\
-&+\mathcal R_{\rm crit}.
+\mathcal B_2(P)\\
+&+
+N^2W(\mu_{\rm dir}^{\rm rec})\\
+&+
+N^2W(\mu_{\rm dir}^{\rm term}).
 \end{aligned}
 }
 ```
 
-The row contains:
-
-```text
-one copy of parent production;
-exact inherited direct-lineage mass;
-source-indexed terminal mass;
-owner-oriented overlap residue;
-unused parent edge occurrences on the left;
-complete future child production inside the child potentials.
-```
+This is the corrected collision-free local Bellman row.
 
 ---
 
-## 10. Exact retained-chain refinement
+## 7. First-appearance scale coefficient
 
-Across the four certified retained transitions through the split fifth frontier:
-
-```text
-current-latent repeated resources  33
-terminal current owners            33
-recursive current owners            0
-maximum combined ratio          33/64
-```
-
-Thus the recorded chain has no recursive current-latent correction. Each terminal current occurrence and its recursive latent partner fit inside one parent pair critical unit.
-
-Primary reference:
-
-```text
-docs/certified-current-latent-critical-packing.md
-```
-
-This finite strengthening does not replace the universal `1/4` theorem because the shell-valid gadget above produces recursive current-latent reuse.
-
----
-
-## 11. Direct-lineage coordinates
-
-The recursive direct measure preserves production ownership. For the dyadic physical-gap moment
+The established first-appearance scale majorant is
 
 ```math
-\Phi_p(\mu)=\sum_e\mu(e)G(e)^p,
+c_p
+=
+\frac3{4^p}
++
+\frac1{2^{p+1}}.
 ```
 
-one has
+At exponent two,
 
 ```math
-\Phi_p(\mu_{\rm dir}^{\rm rec})
-\le
-\Phi_p(\mu_{\rm in}|_{U_{\rm nonlocal}}).
+\boxed{c_2=\frac5{16}.}
 ```
 
-Every mechanism except adjacent cross-shell swaps and multiplicity-one light support contracts or terminates. The two equality mechanisms have finite first-appearance episodes. Therefore one source-owned direct lineage terminates or recreates after finitely many identities.
+Thus first-appearance production is strongly subcritical at the same exponent where owner multiplicity is merely nonexpanding.
 
-Colliding numerical targets do not create mass. Occurrence labels retain the exact inherited measure.
+This does not remove the source-owned direct output terms. Their owner factor remains the entering parent scale until they are absorbed, terminalized, or placed in a recreation reserve with correct destination-shell accounting.
 
 ---
 
-## 12. Depth release
+## 8. Exact no-go diagnostics
 
-First-appearance production is critical at owner-scale exponent one and releases exactly
-
-```math
-\frac74
-```
-
-dyadic owner levels per unit of parent critical production capacity.
-
-The overlap outputs have additional descent:
+The critical joint-assignment workflow verifies:
 
 ```text
-middle-current residual: scale <= N/4;
-unmatched middle latent export: scale <= N/4 before pair coefficient two;
-complete critical overlap coefficient: <= 1/2.
+clean latent-reuse gadget:
+  complete quadratic assignment closes;
+
+recursive current-latent gadget:
+  p=1 fixed current excess remains;
+
+rank-two raw reserve gadget:
+  p=1 translated alternatives remain saturated;
+  middle latent residual survives;
+
+sharp half-scale latent gadget:
+  p=1 latent-latent residual coefficient 1 is attained.
 ```
 
-Source-weighted direct transport creates no target-amplified pair mass. Strict gap drops, terminal outcomes, and unused edge occurrences provide additional release.
+Primary executables:
+
+```text
+src/probe_critical_fractional_reserve_flow.py
+src/verify_sharp_latent_latent_critical_no_go.py
+src/search_sharp_latent_latent_critical_gadget.py
+```
 
 ---
 
-## 13. Remaining global theorem
+## 9. What exponent two does and does not solve
 
-The local critical coefficient and target-amplification problems are closed:
+The exponent-two row closes:
 
 ```text
-future production is paid by 2LJ;
-only economical physical pairs are activated;
-direct transport carries exact source mass;
-current-latent correction is at most 1/4;
-complete overlap reproduction is at most 1/2;
-unused edge occurrences remain explicit.
+current/latent pair multiplicity;
+raw reserve-cycle defects;
+critical target-capacity amplification;
+future full-edge production inside affine children.
 ```
 
-The surviving whole-tree tasks are:
+It does **not** yet close:
 
-1. telescope source-owned direct flow across actual owner shells;
-2. retain each recreation cycle once without regeneration;
-3. coordinate destination edge and support capacities;
-4. preserve the free-edge occurrence ledger across generations;
-5. combine the `7/4` first-appearance release with gap and owner-scale descent;
-6. convert the resulting critical/depth estimate into summability of raw dyadic reciprocal densities.
+```text
+source-owned direct occurrences across changing owner shells;
+terminal and recreation occurrence accumulation;
+free edge-token telescoping;
+the conversion from an N^2-weighted potential to raw dyadic harmonic mass.
+```
+
+The last item is decisive. A bounded or telescoping quadratic owner potential is much stronger than the desired raw reciprocal coordinate, but a direct implication has not been proved.
+
+---
+
+## 10. Remaining global theorem
+
+A complete proof must now either:
+
+1. derive a valid bridge from the quadratic owner-scale Bellman row to summability of raw dyadic reciprocal densities; or
+2. combine the exact `p=1` depth release with a separate occurrence ledger capable of paying the sharp coefficient-one latent overlap; or
+3. interpolate between the collision-free `p=2` row and the critical `p=1` first-appearance row without losing source ownership.
+
+The local owner-multiplicity threshold is now exact:
+
+```math
+\boxed{
+q_p=2^{2-p},
+\qquad
+p_{\rm collision\text{-}free}=2.
+}
+```

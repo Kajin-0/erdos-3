@@ -1,0 +1,47 @@
+name: Retained current-latent profiles
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/retained-current-latent-check.yml'
+      - 'src/probe_retained_current_latent_profiles.py'
+      - 'src/verify_retained_provenance_second_generation.py'
+      - 'src/verify_retained_provenance_scale_profile.py'
+      - 'src/probe_third_generation_recursive_frontier.py'
+      - 'src/probe_residual_sponsor_backbone_split.py'
+      - 'src/verify_retained_terminal_split.py'
+
+permissions:
+  contents: read
+
+jobs:
+  exact-retained-current-latent:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Compile profile sources
+        run: |
+          python3 -m py_compile \
+            src/probe_retained_current_latent_profiles.py \
+            src/verify_retained_provenance_second_generation.py \
+            src/verify_retained_provenance_scale_profile.py \
+            src/probe_third_generation_recursive_frontier.py \
+            src/probe_residual_sponsor_backbone_split.py
+
+      - name: Run exact retained-chain profile
+        run: |
+          python3 src/probe_retained_current_latent_profiles.py \
+            retained_current_latent_profiles.json \
+            > retained_current_latent_profiles_stdout.json
+
+      - name: Upload retained-chain profile
+        uses: actions/upload-artifact@v4
+        with:
+          name: retained-current-latent-${{ github.run_id }}-${{ github.run_attempt }}
+          retention-days: 30
+          if-no-files-found: error
+          path: |
+            retained_current_latent_profiles.json
+            retained_current_latent_profiles_stdout.json

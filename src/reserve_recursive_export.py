@@ -15,7 +15,7 @@ def maximum_incidence_matching(
     """Match as many demands as possible to distinct incident reserves.
 
     The implementation is the standard augmenting-path algorithm for bipartite
-    matching.  Iteration is canonical under ``repr`` so exact certificates are
+    matching. Iteration is canonical under ``repr`` so exact certificates are
     reproducible for tuple-valued pair identities.
     """
 
@@ -35,8 +35,6 @@ def maximum_incidence_matching(
             if owner is None or augment(owner, seen):
                 reserve_owner[reserve] = demand
                 demand_reserve[demand] = reserve
-                if owner is not None and owner != demand:
-                    demand_reserve.pop(owner, None)
                 return True
         return False
 

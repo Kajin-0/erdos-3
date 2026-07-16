@@ -1,10 +1,10 @@
-# Reserve pseudoforest with recursive export
+# Reserve matching with recursive export
 
 ## Status
 
-State-independent one-generation theorem replacing the false conjecture that every center/opposite reserve graph is itself a pseudoforest.
+State-independent one-generation theorem replacing the false conjecture that every center/opposite reserve graph is a pseudoforest.
 
-Every duplicated backbone-middle latent pair is either assigned to one unused equal-gap physical reserve or retained as its original sponsor-owned pair occurrence in a lower-scale middle shell. Reserve cycle excess therefore becomes recursive descent rather than unmatched scalar debt.
+Every duplicated backbone-middle latent pair is either assigned to one unused equal-gap physical reserve or retained as its original sponsor-owned pair occurrence in a lower-scale middle shell. Reserve matching failure therefore becomes recursive descent rather than unmatched scalar debt.
 
 ---
 
@@ -34,17 +34,13 @@ one recursive middle-fiber owner.
 Let the middle owner be generated at step `d` and orientation `epsilon`. Its two equal-gap physical reserves are
 
 ```math
-C_d(f)
-=
-\{p+\epsilon d,q+\epsilon d\},
+C_d(f)=\{p+\epsilon d,q+\epsilon d\}
 ```
 
 and
 
 ```math
-O_d(f)
-=
-\{p+2\epsilon d,q+2\epsilon d\}.
+O_d(f)=\{p+2\epsilon d,q+2\epsilon d\}.
 ```
 
 Both lie in the parent and satisfy
@@ -63,26 +59,20 @@ It has the same physical gap and weight as `f`.
 
 ---
 
-## 2. Available-reserve graph
+## 2. Full two-choice reserve graph
 
-Some physical pairs may already be reserved by another part of the accounting ledger. Delete those unavailable reserve vertices before constructing the graph.
+First suppose that every center and opposite reserve is available.
 
-For each fixed physical gap `g`, form a multigraph `G_g`:
+For each fixed physical gap `g`, form the multigraph `G_g`:
 
 ```text
-vertices: available physical reserve-pair identities of gap g;
-edge f:   joins C_d(f) to O_d(f) when both are available.
+vertices: physical reserve-pair identities of gap g;
+edge f:   joins C_d(f) to O_d(f).
 ```
 
-If exactly one reserve is available, treat `f` as a pendant edge to that one vertex and a private null endpoint. If neither reserve is available, send `f` directly to recursive export.
+A demand is paid physically exactly when its edge is assigned to one incident vertex, with no reserve vertex assigned twice.
 
-The null endpoints are occurrence-private and are never counted as physical capacity. Equivalently, one may first separate the zero-choice and one-choice demands and apply the graph theorem only to two-choice demands.
-
----
-
-## 3. Component pseudoforest extraction
-
-Let `K` be a connected two-choice component with
+Let `K` be a connected component with
 
 ```math
 m=|E(K)|,
@@ -92,44 +82,20 @@ n=|V(K)|.
 
 ### Tree regime
 
-If
-
-```math
-m=n-1,
-```
-
-orient every tree edge toward its child after choosing one root. Every physical vertex receives at most one edge.
+If `m=n-1`, choose a root and assign each edge to its child endpoint. Every edge is paid.
 
 ### Unicyclic regime
 
-If
-
-```math
-m=n,
-```
-
-orient the unique cycle cyclically and orient every attached tree away from the cycle. Again every physical vertex receives exactly one or zero edges.
+If `m=n`, orient the unique cycle cyclically and orient every attached tree away from the cycle. Every edge is paid.
 
 ### Excess-cycle regime
 
-If
+If `m>n`, choose a connected spanning unicyclic subgraph with exactly `n` edges. Assign those edges injectively as above and export every remaining edge.
+
+Thus
 
 ```math
-m>n,
-```
-
-choose a connected spanning unicyclic subgraph with exactly `n` edges. Such a subgraph exists because `K` contains a spanning tree and at least one additional edge.
-
-Orient this unicyclic subgraph injectively as above. Export every remaining edge.
-
-Thus every connected component admits a partition
-
-```math
-E(K)
-=
-E_{\rm reserve}(K)
-\sqcup
-E_{\rm export}(K)
+E(K)=E_{\rm reserve}(K)\sqcup E_{\rm export}(K)
 ```
 
 with
@@ -144,84 +110,127 @@ and
 |E_{\rm export}(K)|=\max(0,m-n).
 ```
 
-The reserve edges are assigned injectively to physical vertices.
+Because
+
+```math
+\beta(K)=m-n+1,
+```
+
+the full-availability export count is
+
+```math
+\boxed{
+|E_{\rm export}(K)|=\max(0,\beta(K)-1).
+}
+```
+
+---
+
+## 3. Capacity-aware incidence matching
+
+Other parts of the accounting ledger may already own some physical reserve pairs. Let
+
+```math
+R_{\rm avail}
+```
+
+be the remaining physical reserve-pair set.
+
+For each fixed gap, form the bipartite incidence graph
+
+```math
+\mathcal B_g=(D_g,R_{{\rm avail},g};\sim),
+```
+
+where
+
+```math
+f\sim r
+```
+
+exactly when
+
+```math
+r\in\{C_d(f),O_d(f)\}.
+```
+
+A demand may therefore have zero, one, or two available neighbors.
+
+Choose a maximum matching
+
+```math
+\mathcal M_g\subseteq D_g\times R_{{\rm avail},g}.
+```
+
+Define
+
+```text
+D_match = demands covered by the matching;
+D_export = unmatched demands;
+R_used = matched physical reserve vertices.
+```
+
+Then:
+
+```text
+every matched demand uses one incident equal-gap reserve;
+no physical reserve is used more than once;
+every unmatched demand retains its original middle-owner occurrence.
+```
+
+No closed formula in terms of cycle rank alone is asserted after reserve deletion. Hall deficiencies created by unavailable vertices are handled exactly by the matching.
 
 ---
 
 ## 4. Exact weighted identity
 
-All edges and vertices in one component have the same gap `g` and weight `1/g`. Therefore
+For each matched pair `(f,r)`,
 
 ```math
-\begin{aligned}
-W(E(K))
-&=
-\frac m g\\
-&=
-\frac{\min(m,n)}g
-+
-\frac{\max(0,m-n)}g.
-\end{aligned}
+w(f)=w(r),
 ```
 
-The first term is the mass of the injectively used physical reserve union. For every exported edge `f`, retain its original sponsor-owned occurrence `tilde f`. Hence the second term is exactly the exported occurrence mass.
+and for every unmatched demand,
 
-Summing over all components and all gaps gives
+```math
+w(f)=w(\widetilde f).
+```
+
+Therefore, summing over all gaps,
 
 ```math
 \boxed{
-W(D)
-=
-J(R_{\rm used})
-+
-W(X_{\rm rec}),
+W(D)=J(R_{\rm used})+W(X_{\rm rec}),
 }
 ```
 
-where:
+where
 
 ```text
 R_used is a physical pair union;
-X_rec is an occurrence-tagged recursive pair family;
-R_used uses every physical reserve at most once;
-every exported token is one original middle-owner occurrence.
+X_rec is the occurrence-tagged family {tilde f : f in D_export};
+R_used is disjoint from all physical capacity reserved before matching.
 ```
 
-No fitted constant and no scalar error term appear.
+This is an exact conservation identity. No fitted coefficient and no unmatched scalar error remain.
+
+Under full availability, the contribution from one connected component is
+
+```math
+\frac{\min(m,n)}g
++
+\frac{\max(0,m-n)}g,
+```
+
+so its recursive-export mass is exactly
+
+```math
+\frac{\max(0,\beta(K)-1)}g.
+```
 
 ---
 
-## 5. Relation to cycle rank
-
-For a connected component,
-
-```math
-\beta(K)=m-n+1.
-```
-
-Therefore the exported occurrence count is
-
-```math
-\boxed{
-|E_{\rm export}(K)|
-=
-\max(0,\beta(K)-1).
-}
-```
-
-The previous two-choice defect formula is not discarded. It is reinterpreted exactly as the number of sponsor-owned occurrences that must continue recursively.
-
-In particular, the rank-two no-go components have
-
-```math
-\beta=2,
-```
-
-so each exports exactly one pair occurrence per physical gap component.
-
----
-
-## 6. Strict shell descent
+## 5. Strict owner-scale descent
 
 Let an exported pair occurrence lie in a retained middle shell
 
@@ -229,20 +238,16 @@ Let an exported pair occurrence lie in a retained middle shell
 M\subseteq[L,2L).
 ```
 
-The standard full-edge scale geometry gives
+The standard middle-output geometry gives
 
 ```math
-L\le\frac N4
+L\le\frac N4.
 ```
-
-for a middle output.
 
 For the owner-scale moment
 
 ```math
-\Theta_p(f;S)
-=
-\frac{S^p}{\operatorname{gap}(f)},
+\Theta_p(f;S)=\frac{S^p}{\operatorname{gap}(f)},
 \qquad p>0,
 ```
 
@@ -260,17 +265,17 @@ Consequently
 \boxed{
 \Theta_p(X_{\rm rec})
 \le
-4^{-p}\Theta_p(E_{\rm export};N).
+4^{-p}\Theta_p(D_{\rm export};N).
 }
 ```
 
-Reserve-matched edges terminate locally as physical capacity; every unmatched cycle edge descends strictly in owner scale.
+Physical reserve matches terminate locally. Every unmatched demand descends strictly in owner scale.
 
-At raw reciprocal exponent zero the identity is conservative. At every positive owner-scale moment, the recursive residue contracts.
+At raw reciprocal exponent zero the row is conservative. At every positive owner-scale moment the recursively exported part contracts.
 
 ---
 
-## 7. Rank-two counterexample
+## 6. Rank-two counterexample
 
 The example in
 
@@ -278,7 +283,7 @@ The example in
 docs/lexicographic-reserve-rank-two-no-go.md
 ```
 
-has three bad components:
+has three full-availability components:
 
 ```text
 gap 50:  5 edges, 4 vertices;
@@ -286,17 +291,15 @@ gap 100: 5 edges, 4 vertices;
 gap 50:  5 edges, 4 vertices.
 ```
 
-The hybrid theorem matches four demands in each component to physical reserves and exports one sponsor-owned pair occurrence.
+A maximum incidence matching uses four physical reserves in each component and leaves one demand unmatched. The three unmatched demands retain their original middle-owner occurrences.
 
-The exported raw mass is
+Their raw mass is
 
 ```math
-\frac1{50}+rac1{100}+rac1{50}
-=
-\frac1{20}.
+\frac1{50}+\frac1{100}+\frac1{50}=\frac1{20}.
 ```
 
-Those three exported pairs are the complete pair ledger of one lower-scale coordinate three-AP. The product factorization in
+Those three exported occurrences are the complete pair ledger of one lower-scale coordinate three-AP. The product factorization in
 
 ```text
 docs/reserve-pattern-product-factorization.md
@@ -306,34 +309,34 @@ explains this equality.
 
 ---
 
-## 8. Production compatibility
+## 7. Production compatibility
 
-The theorem does not create a new occurrence:
+The theorem never creates an occurrence:
 
 ```text
-the reserve-matched branch consumes one available physical reserve;
-the exported branch keeps the original middle-owned occurrence.
+a matched demand consumes one previously available physical reserve;
+an unmatched demand keeps its original middle-owned occurrence.
 ```
 
-Thus an occurrence has exactly one continuation:
+Thus every duplicated occurrence has exactly one continuation:
 
 ```text
 physical reserve termination;
 or recursive sponsor continuation.
 ```
 
-This is compatible with the production-owned token partition. It also remains valid after arbitrary physical reserve vertices are removed as already spent: removing capacity can only move more original occurrences into the recursive export family.
+This remains valid after arbitrary prior capacity reservations. Removing physical reserves can only reduce the matching and move additional original occurrences into `X_rec`; it cannot cause double use or destroy the exact identity.
 
 ---
 
-## 9. Remaining global interface
+## 8. Remaining global interface
 
-The false pseudoforest conjecture is no longer needed. The one-generation activation row is exact for arbitrary reserve graphs.
+The false pseudoforest conjecture is no longer needed. The one-generation reserve allocation is exact for arbitrary reserve graphs and arbitrary previously unavailable reserve sets.
 
 The remaining work is treewise:
 
-1. combine owner-scale contraction of exported cycle tokens with the exact `7/4` critical depth release;
-2. prevent the same physical reserve from being used by another discharge ledger;
+1. combine owner-scale contraction of unmatched sponsor occurrences with the exact `7/4` critical depth release;
+2. impose one global ownership order for direct discharge, terminal absorption, and reserve matching;
 3. merge terminal sponsor exports with terminal-current absorption;
 4. prove global summability of recursively exported occurrence mass;
 5. return from the occurrence ledger to the original reciprocal mass.
